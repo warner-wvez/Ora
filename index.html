@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<title>Illinois Traffic Cameras</title>
+<title>Ora — Live Traffic Cameras</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <style>
@@ -23,9 +23,18 @@
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     max-width: 320px;
   }
-  #topbar h1 { font-size: 15px; font-weight: 600; margin: 0 0 2px; color: #1c1c1e; }
+  #topbar h1 { font-size: 15px; font-weight: 600; margin: 0 0 8px; color: #1c1c1e; }
   #topbar p { font-size: 12px; margin: 0; color: #6e6e73; }
   #count { font-weight: 600; color: #007aff; }
+
+  .city-switch {
+    display: flex; gap: 2px; background: #f2f2f7; border-radius: 8px; padding: 2px; margin-bottom: 8px;
+  }
+  .city-btn {
+    flex: 1; font-size: 12px; font-weight: 600; padding: 5px 8px; border: none; border-radius: 6px;
+    background: transparent; color: #6e6e73; cursor: pointer;
+  }
+  .city-btn.active { background: #fff; color: #007aff; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
 
   .maplibregl-popup-content {
     border-radius: 14px;
@@ -60,50 +69,76 @@
 <body>
 <div id="map"></div>
 <div id="topbar">
-  <h1>Illinois Traffic Cameras</h1>
-  <p><span id="count">-</span> live camera locations, statewide</p>
+  <div class="city-switch">
+    <button class="city-btn" data-city="il">Illinois</button>
+    <button class="city-btn" data-city="nyc">New York City</button>
+  </div>
+  <h1 id="title">Illinois Traffic Cameras</h1>
+  <p><span id="count">-</span> <span id="subtitle">live camera locations, statewide</span></p>
 </div>
 
 <script>
+const CITIES = {
+  il: {
+    label: 'Illinois Traffic Cameras',
+    subtitle: 'camera locations, statewide (refreshes every 15-300s at the source)',
+    file: 'cameras.json',
+    center: [-88.5, 41.6],
+    zoom: 8,
+    refreshMs: 15000,
+    snapshotUrl: (dir) => dir.snapshot
+  },
+  nyc: {
+    label: 'NYC Traffic Cameras',
+    subtitle: 'camera locations citywide (live, refreshes every 2s)',
+    file: 'cameras-nyc.json',
+    center: [-73.95, 40.75],
+    zoom: 11,
+    refreshMs: 2000,
+    snapshotUrl: (dir) => `https://webcams.nyctmc.org/api/cameras/${dir.camId}/image?t=${Date.now()}`
+  }
+};
+
+let currentCity = 'il';
+let layersAdded = false;
+let popup = null;
+
 const map = new maplibregl.Map({
   container: 'map',
   style: 'https://tiles.openfreemap.org/styles/positron',
-  center: [-88.5, 41.6],
-  zoom: 8,
+  center: CITIES.il.center,
+  zoom: CITIES.il.zoom,
   pitch: 0
 });
 
 map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
-let popup = null;
-
-function refreshImg(imgEl, baseUrl) {
-  imgEl.src = baseUrl + (baseUrl.includes('?') ? '&' : '?') + 't=' + Date.now();
+function refreshImg(imgEl, dir) {
+  imgEl.src = CITIES[currentCity].snapshotUrl(dir);
 }
 
 function buildPopupHTML(props) {
   const dirs = props.directions;
   const first = dirs[0];
+  const showDirButtons = dirs.length > 1 && dirs[0].direction;
+  const refreshLabel = currentCity === 'nyc' ? 'refreshes every 2s (live)' : 'refreshes every 15s';
   return `
     <div class="popup-inner">
-      <img id="popup-img" src="${first.snapshot}" alt="${props.name}">
+      <img id="popup-img" src="${CITIES[currentCity].snapshotUrl(first)}" alt="${props.name}">
       <div class="popup-body">
         <h3>${props.name}</h3>
-        <div class="popup-dirs">
+        ${showDirButtons ? `<div class="popup-dirs">
           ${dirs.map((d,i) => `<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.direction || '?'}</button>`).join('')}
-        </div>
-        <div class="popup-age">refreshes every 15s</div>
+        </div>` : ''}
+        <div class="popup-age">${refreshLabel}</div>
       </div>
     </div>
   `;
 }
 
-map.on('load', async () => {
-  const res = await fetch('cameras.json');
-  const data = await res.json();
-  document.getElementById('count').textContent = data.features.length.toLocaleString();
-
-  map.addSource('cameras', { type: 'geojson', data, cluster: true, clusterMaxZoom: 12, clusterRadius: 40 });
+function ensureLayers() {
+  if (layersAdded) return;
+  layersAdded = true;
 
   map.addLayer({
     id: 'clusters', type: 'circle', source: 'cameras', filter: ['has', 'point_count'],
@@ -157,13 +192,13 @@ map.on('load', async () => {
     const wireUp = () => {
       const el = popup.getElement();
       const img = el.querySelector('#popup-img');
-      intervalId = setInterval(() => refreshImg(img, props.directions[currentIdx].snapshot), 15000);
+      intervalId = setInterval(() => refreshImg(img, props.directions[currentIdx]), CITIES[currentCity].refreshMs);
       el.querySelectorAll('.dir-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           currentIdx = parseInt(btn.dataset.idx, 10);
           el.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          refreshImg(img, props.directions[currentIdx].snapshot);
+          refreshImg(img, props.directions[currentIdx]);
         });
       });
     };
@@ -176,7 +211,38 @@ map.on('load', async () => {
   map.on('mouseleave', 'cam-points', () => map.getCanvas().style.cursor = '');
   map.on('mouseenter', 'clusters', () => map.getCanvas().style.cursor = 'pointer');
   map.on('mouseleave', 'clusters', () => map.getCanvas().style.cursor = '');
+}
+
+async function loadCity(key) {
+  currentCity = key;
+  const cfg = CITIES[key];
+
+  document.querySelectorAll('.city-btn').forEach(b => b.classList.toggle('active', b.dataset.city === key));
+  document.getElementById('title').textContent = cfg.label;
+  document.getElementById('subtitle').textContent = cfg.subtitle;
+
+  if (popup) { popup.remove(); popup = null; }
+
+  const res = await fetch(cfg.file);
+  const data = await res.json();
+  document.getElementById('count').textContent = data.features.length.toLocaleString();
+
+  const src = map.getSource('cameras');
+  if (src) {
+    src.setData(data);
+  } else {
+    map.addSource('cameras', { type: 'geojson', data, cluster: true, clusterMaxZoom: 12, clusterRadius: 40 });
+  }
+  ensureLayers();
+
+  map.easeTo({ center: cfg.center, zoom: cfg.zoom });
+}
+
+document.querySelectorAll('.city-btn').forEach(btn => {
+  btn.addEventListener('click', () => loadCity(btn.dataset.city));
 });
+
+map.on('load', () => loadCity('il'));
 </script>
 </body>
 </html>
