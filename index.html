@@ -165,13 +165,15 @@ function ensureLayers() {
     }
   });
 
-  map.on('click', 'clusters', (e) => {
+  map.on('click', 'clusters', async (e) => {
     const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
     const clusterId = features[0].properties.cluster_id;
-    map.getSource('cameras').getClusterExpansionZoom(clusterId, (err, zoom) => {
-      if (err) return;
-      map.easeTo({ center: features[0].geometry.coordinates, zoom });
-    });
+    const source = map.getSource('cameras');
+    const leaves = await source.getClusterLeaves(clusterId, Infinity, 0);
+    if (!leaves.length) return;
+    const bounds = new maplibregl.LngLatBounds();
+    leaves.forEach(leaf => bounds.extend(leaf.geometry.coordinates));
+    map.fitBounds(bounds, { padding: 60, maxZoom: 17, duration: 600 });
   });
 
   map.on('click', 'cam-points', (e) => {
