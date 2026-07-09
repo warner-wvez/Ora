@@ -36,13 +36,24 @@
   }
   .city-btn.active { background: #fff; color: #007aff; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
 
+  .color-switch { display: none; gap: 2px; background: #f2f2f7; border-radius: 8px; padding: 2px; margin-top: 10px; }
+  .color-switch.show { display: flex; }
+  .color-btn { flex: 1; font-size: 11px; font-weight: 600; padding: 4px 8px; border: none; border-radius: 6px;
+    background: transparent; color: #6e6e73; cursor: pointer; }
+  .color-btn.active { background: #fff; color: #1c1c1e; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+
   #legend { margin-top: 10px; display: none; }
   #legend.show { display: block; }
   #legend .row { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #3c3c43; margin-top: 4px; }
-  #legend .dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.15); }
+  #legend .dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.15); flex: none; }
   #legend .dot.rl { background: #ff3b30; }
   #legend .dot.sp { background: #ff9500; }
-  #legend .sizes { display: flex; align-items: flex-end; gap: 8px; margin-top: 6px; }
+  #legend .dot.justified { background: #34c759; }
+  #legend .dot.revenue { background: #ff2d55; }
+  #legend .dot.gap { background: #ff9500; }
+  #legend .dot.quiet { background: #b0b0b5; }
+  #legend .row .sub { color: #a0a0a5; }
+  #legend .sizes { display: flex; align-items: flex-end; gap: 8px; margin-top: 8px; }
   #legend .sizewrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   #legend .sizedot { border-radius: 50%; background: #b0b0b5; }
   #legend .sizelbl { font-size: 9px; color: #8e8e93; }
@@ -69,16 +80,35 @@
   .popup-age { font-size: 10px; color: #8e8e93; margin-top: 6px; }
 
   /* enforcement popup */
-  .enf { width: 230px; padding: 12px 14px 14px; }
+  .enf { width: 258px; padding: 12px 14px 14px; }
   .enf-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .02em;
-    text-transform: uppercase; padding: 3px 8px; border-radius: 999px; color: #fff; margin-bottom: 8px; }
+    text-transform: uppercase; padding: 3px 8px; border-radius: 999px; color: #fff; margin-right: 5px; }
   .enf-badge.rl { background: #ff3b30; }
   .enf-badge.sp { background: #ff9500; }
+  .enf-tophdr { margin-bottom: 8px; }
   .enf h3 { font-size: 14px; margin: 0 0 10px; color: #1c1c1e; line-height: 1.3; }
-  .enf-big { font-size: 26px; font-weight: 700; color: #1c1c1e; line-height: 1; }
-  .enf-big span { font-size: 12px; font-weight: 500; color: #6e6e73; }
-  .enf-sub { font-size: 12px; color: #6e6e73; margin-top: 6px; }
-  .enf-meta { font-size: 11px; color: #8e8e93; margin-top: 8px; padding-top: 8px; border-top: 1px solid #ececf0; }
+
+  /* verdict banner */
+  .enf-verdict { border-radius: 10px; padding: 8px 10px; margin-bottom: 10px; }
+  .enf-verdict.justified { background: #e7f8ed; }
+  .enf-verdict.revenue   { background: #ffe9ee; }
+  .enf-verdict.gap       { background: #fff2e0; }
+  .enf-verdict.quiet     { background: #f2f2f7; }
+  .enf-vlabel { font-size: 13px; font-weight: 700; }
+  .enf-verdict.justified .enf-vlabel { color: #1a8a3c; }
+  .enf-verdict.revenue   .enf-vlabel { color: #d81b45; }
+  .enf-verdict.gap       .enf-vlabel { color: #c26a00; }
+  .enf-verdict.quiet     .enf-vlabel { color: #6e6e73; }
+  .enf-vwhy { font-size: 11px; color: #3c3c43; margin-top: 3px; line-height: 1.35; }
+
+  /* stat rows: the numbers the verdict is built from */
+  .enf-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px; }
+  .enf-stat { background: #f7f7f9; border-radius: 8px; padding: 7px 9px; }
+  .enf-stat .num { font-size: 18px; font-weight: 700; color: #1c1c1e; line-height: 1.1; }
+  .enf-stat .lbl { font-size: 10px; color: #6e6e73; margin-top: 2px; line-height: 1.25; }
+  .enf-stat .cmp { font-size: 9px; color: #a0a0a5; margin-top: 2px; }
+  .enf-stat.hi .num { color: #d81b45; }
+  .enf-meta { font-size: 11px; color: #8e8e93; margin-top: 9px; padding-top: 8px; border-top: 1px solid #ececf0; }
 </style>
 </head>
 <body>
@@ -91,16 +121,11 @@
   </div>
   <h1 id="title">Illinois Traffic Cameras</h1>
   <p><span id="count">-</span> <span id="subtitle">live camera locations, statewide</span></p>
-  <div id="legend">
-    <div class="row"><span class="dot rl"></span> Red light camera</div>
-    <div class="row"><span class="dot sp"></span> Speed camera</div>
-    <div class="sizes">
-      <div class="sizewrap"><span class="sizedot" style="width:7px;height:7px"></span><span class="sizelbl">few</span></div>
-      <div class="sizewrap"><span class="sizedot" style="width:16px;height:16px"></span><span class="sizelbl">more</span></div>
-      <div class="sizewrap"><span class="sizedot" style="width:28px;height:28px"></span><span class="sizelbl">most</span></div>
-      <span class="sizelbl" style="margin-bottom:2px">violations, last 90 days</span>
-    </div>
+  <div id="colormode" class="color-switch">
+    <button class="color-btn active" data-mode="verdict">Safety verdict</button>
+    <button class="color-btn" data-mode="type">Camera type</button>
   </div>
+  <div id="legend"></div>
 </div>
 
 <script>
@@ -126,15 +151,29 @@ const CITIES = {
   chi: {
     type: 'enforcement',
     label: 'Chicago Enforcement Cameras',
-    subtitle: 'red light + speed cameras, sized by violations (last 90 days)',
+    subtitle: 'is each camera on real danger, or just ticketing? (tap one)',
     file: 'cameras-chicago-enforcement.json',
     center: [-87.72, 41.84], zoom: 10.3
   }
 };
 
+// verdict definitions: how each camera's ticket volume lines up with nearby injury crashes
+const VERDICT = {
+  justified: { color: '#34c759', label: 'On real danger',
+    line: 'Heavy ticketing AND a high injury-crash count nearby, this camera sits where the risk is.' },
+  revenue:   { color: '#ff2d55', label: 'Ticket-heavy, low crash',
+    line: 'Among the busiest ticketing cameras, yet few injury crashes nearby, volume outruns the safety need.' },
+  gap:       { color: '#ff9500', label: 'Crashes, light enforcement',
+    line: 'A high injury-crash count nearby but below-median ticketing, a spot the cameras are not catching.' },
+  quiet:     { color: '#b0b0b5', label: 'Quiet on both',
+    line: 'Below-median on both ticketing and nearby injury crashes.' }
+};
+
 let currentCity = 'il';
 let popup = null;
 let handlersBound = false;
+let enfColorMode = 'verdict';   // 'verdict' | 'type'
+let enfMeta = null;             // thresholds loaded from the enforcement geojson
 
 const map = new maplibregl.Map({
   container: 'map',
@@ -166,26 +205,93 @@ function buildLivePopup(props) {
     </div>`;
 }
 
-/* ---------- enforcement popup ---------- */
+/* ---------- enforcement popup: verdict + the stats behind it ---------- */
 function buildEnfPopup(props) {
   const isRL = props.kind === 'redlight';
-  const approaches = typeof props.approaches === 'string' ? JSON.parse(props.approaches || '[]') : (props.approaches || []);
   const fmt = (n) => Number(n).toLocaleString();
-  let meta = '';
-  if (!isRL) {
-    const bits = [];
-    if (approaches.length) bits.push('Watches: ' + approaches.join(', '));
-    if (props.goLive) bits.push('Live since ' + props.goLive);
-    if (bits.length) meta = `<div class="enf-meta">${bits.join('<br>')}</div>`;
-  }
+  const v = VERDICT[props.quad] || VERDICT.quiet;
+  const vMed = enfMeta ? enfMeta.vMedian : 855;
+  const cMed = enfMeta ? enfMeta.crashMedian : 24;
+
+  // relative language for the reasoning line
+  const ticketsVs = props.v90 >= vMed ? 'above' : 'below';
+  const crashVs   = props.crash_injury >= cMed ? 'above' : 'below';
+  const causeLabel = isRL ? 'ran the light' : 'were speeding';
+
+  const approaches = typeof props.approaches === 'string' ? JSON.parse(props.approaches || '[]') : (props.approaches || []);
+  const metaBits = [];
+  if (!isRL && approaches.length) metaBits.push('Watches: ' + approaches.join(', '));
+  if (!isRL && props.goLive) metaBits.push('Live since ' + props.goLive);
+  metaBits.push(`Injury crashes counted within ${enfMeta ? enfMeta.radius_m : 150} m, since 2023`);
+
   return `
     <div class="enf">
-      <span class="enf-badge ${isRL ? 'rl' : 'sp'}">${isRL ? 'Red Light' : 'Speed'}</span>
+      <div class="enf-tophdr">
+        <span class="enf-badge ${isRL ? 'rl' : 'sp'}">${isRL ? 'Red Light' : 'Speed'}</span>
+      </div>
       <h3>${props.name}</h3>
-      <div class="enf-big">${fmt(props.v90)} <span>violations, last 90 days</span></div>
-      <div class="enf-sub">${fmt(props.vtot)} total since 2014</div>
-      ${meta}
+
+      <div class="enf-verdict ${props.quad}">
+        <div class="enf-vlabel">${v.label}</div>
+        <div class="enf-vwhy">
+          ${fmt(props.v90)} tickets in 90 days (${ticketsVs} the ${fmt(vMed)} citywide median)
+          &middot; ${fmt(props.crash_injury)} injury crashes nearby (${crashVs} the ${fmt(cMed)} median).
+        </div>
+      </div>
+
+      <div class="enf-stats">
+        <div class="enf-stat ${props.v90 >= vMed ? 'hi' : ''}">
+          <div class="num">${fmt(props.v90)}</div>
+          <div class="lbl">tickets, last 90 days</div>
+          <div class="cmp">${fmt(props.vtot)} since 2014</div>
+        </div>
+        <div class="enf-stat ${props.crash_injury >= cMed ? 'hi' : ''}">
+          <div class="num">${fmt(props.crash_injury)}</div>
+          <div class="lbl">injury crashes since 2023</div>
+          <div class="cmp">${fmt(props.crash_hurt)} people hurt${props.crash_fatal ? `, ${props.crash_fatal} killed` : ''}</div>
+        </div>
+      </div>
+      <div class="enf-vwhy" style="margin-top:8px">
+        ${props.crash_cause} of those crashes happened because drivers ${causeLabel} &mdash; exactly what this camera targets.
+      </div>
+
+      <div class="enf-meta">${metaBits.join('<br>')}</div>
     </div>`;
+}
+
+/* color expression + legend depend on the active color mode */
+function enfColorExpr() {
+  if (enfColorMode === 'type')
+    return ['match', ['get', 'kind'], 'redlight', '#ff3b30', 'speed', '#ff9500', '#8e8e93'];
+  return ['match', ['get', 'quad'],
+    'justified', VERDICT.justified.color,
+    'revenue',   VERDICT.revenue.color,
+    'gap',       VERDICT.gap.color,
+    'quiet',     VERDICT.quiet.color, '#b0b0b5'];
+}
+
+function renderLegend() {
+  const el = document.getElementById('legend');
+  const sizeRow = `
+    <div class="sizes">
+      <div class="sizewrap"><span class="sizedot" style="width:7px;height:7px"></span><span class="sizelbl">few</span></div>
+      <div class="sizewrap"><span class="sizedot" style="width:16px;height:16px"></span><span class="sizelbl">more</span></div>
+      <div class="sizewrap"><span class="sizedot" style="width:28px;height:28px"></span><span class="sizelbl">most</span></div>
+      <span class="sizelbl" style="margin-bottom:2px">tickets, last 90 days</span>
+    </div>`;
+  if (enfColorMode === 'type') {
+    el.innerHTML = `
+      <div class="row"><span class="dot rl"></span> Red light camera</div>
+      <div class="row"><span class="dot sp"></span> Speed camera</div>
+      ${sizeRow}`;
+  } else {
+    el.innerHTML = `
+      <div class="row"><span class="dot justified"></span> On real danger <span class="sub">&nbsp;tickets + crashes</span></div>
+      <div class="row"><span class="dot revenue"></span> Ticket-heavy, low crash</div>
+      <div class="row"><span class="dot gap"></span> Crashes, light enforcement</div>
+      <div class="row"><span class="dot quiet"></span> Quiet on both</div>
+      ${sizeRow}`;
+  }
 }
 
 /* ---------- layer building ---------- */
@@ -222,10 +328,10 @@ function buildEnfLayers(data) {
   map.addLayer({
     id: 'enf-points', type: 'circle', source: 'cameras',
     paint: {
-      'circle-color': ['match', ['get', 'kind'], 'redlight', '#ff3b30', 'speed', '#ff9500', '#8e8e93'],
+      'circle-color': enfColorExpr(),
       'circle-radius': ['interpolate', ['linear'], ['get', 'v90'],
         0, 3, 50, 5, 300, 8, 1500, 13, 6000, 20, 16000, 28, 33000, 36],
-      'circle-opacity': 0.72, 'circle-stroke-width': 1.2, 'circle-stroke-color': '#fff'
+      'circle-opacity': 0.78, 'circle-stroke-width': 1.2, 'circle-stroke-color': '#fff'
     }
   });
 }
@@ -291,21 +397,24 @@ function bindHandlers() {
 async function loadCity(key) {
   currentCity = key;
   const cfg = CITIES[key];
+  const isEnf = cfg.type === 'enforcement';
 
   document.querySelectorAll('.city-btn').forEach(b => b.classList.toggle('active', b.dataset.city === key));
   document.getElementById('title').textContent = cfg.label;
   document.getElementById('subtitle').textContent = cfg.subtitle;
-  document.getElementById('legend').classList.toggle('show', cfg.type === 'enforcement');
-  document.getElementById('count').style.color = cfg.type === 'enforcement' ? '#ff3b30' : '#007aff';
+  document.getElementById('legend').classList.toggle('show', isEnf);
+  document.getElementById('colormode').classList.toggle('show', isEnf);
+  document.getElementById('count').style.color = isEnf ? '#ff3b30' : '#007aff';
 
   if (popup) { popup.remove(); popup = null; }
 
   const res = await fetch(cfg.file);
   const data = await res.json();
   document.getElementById('count').textContent = data.features.length.toLocaleString();
+  if (isEnf) { enfMeta = data.meta || null; renderLegend(); }
 
   teardown();
-  if (cfg.type === 'enforcement') buildEnfLayers(data);
+  if (isEnf) buildEnfLayers(data);
   else buildLiveLayers(data);
   bindHandlers();
 
@@ -314,6 +423,16 @@ async function loadCity(key) {
 
 document.querySelectorAll('.city-btn').forEach(btn => {
   btn.addEventListener('click', () => loadCity(btn.dataset.city));
+});
+
+/* color-mode toggle (enforcement only) */
+document.querySelectorAll('.color-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    enfColorMode = btn.dataset.mode;
+    document.querySelectorAll('.color-btn').forEach(b => b.classList.toggle('active', b === btn));
+    if (map.getLayer('enf-points')) map.setPaintProperty('enf-points', 'circle-color', enfColorExpr());
+    renderLegend();
+  });
 });
 
 map.on('load', () => loadCity('il'));

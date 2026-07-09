@@ -6,7 +6,22 @@ A mode switcher offers three views:
 
 - **Illinois** (live cameras) — 1,328 camera locations statewide (IDOT, Lake County, DuPage County, Kane County, and the Illinois Tollway). Click a pin for its current live snapshot.
 - **New York City** (live cameras) — 957 camera locations citywide (NYC DOT), refreshing every 2 seconds — genuinely live-feeling, unlike Illinois's much slower source cadence.
-- **Chicago Tickets** (enforcement) — 396 automated enforcement cameras (183 red light intersections + 213 speed cameras), plotted as graduated circles sized by violations in the last 90 days and colored by type. This is a static, data-driven layer, not live video: it answers "where does Chicago ticket you the most," not "what does traffic look like right now." Click a pin for its recent and all-time violation counts (plus, for speed cameras, which directions it watches and when it went live).
+- **Chicago Tickets** (enforcement) — 396 automated enforcement cameras (183 red light intersections + 213 speed cameras), plotted as graduated circles sized by violations in the last 90 days. This is a static, data-driven layer, not live video. Two color modes:
+  - **Safety verdict** (default) — each camera is cross-referenced against nearby injury crashes to answer "is this camera on real danger, or just ticketing?" See below.
+  - **Camera type** — red for red light, orange for speed.
+
+  Click a pin for its verdict and the exact statistics behind it: recent + all-time ticket volume, injury crashes within 150 m since 2023, people hurt/killed, and how many of those crashes were caused by the specific behavior the camera targets. Speed cameras also show approach directions and go-live date.
+
+### The safety-vs-revenue verdict
+
+For every enforcement camera, injury crashes within 150 m (2023–present) are counted and compared against the camera's ticket volume. Each camera is median-split into a quadrant:
+
+- **On real danger** (green) — above-median tickets AND above-median injury crashes. The camera sits where the risk actually is.
+- **Ticket-heavy, low crash** (red) — among the busiest ticketing cameras, but few injury crashes nearby. Volume outruns the safety need. (Example: 3358 S Ashland, 32,533 tickets in 90 days but only 4 injury crashes nearby.)
+- **Crashes, light enforcement** (orange) — high injury-crash count but below-median ticketing. (Example: Jeffery & 95th, 57 injury crashes but 831 tickets.)
+- **Quiet on both** (gray) — below-median on both.
+
+This is the one insight the whole stack uniquely enables: enforcement cameras and crashes sit on the same intersections, so they can be joined directly. Note it is a **cross-sectional** correlation (does the danger match the ticketing right now), not a causal before/after claim.
 
 ## Data sources
 
@@ -22,8 +37,11 @@ Neither live city is true video (no RTSP/HLS/codec) — both are just repeatedly
 - [Red Light Camera Violations](https://data.cityofchicago.org/d/spqx-js37) — daily violation counts per camera since 2014; aggregated here to the intersection level.
 - [Speed Camera Locations](https://data.cityofchicago.org/d/4i42-qv3h) — addresses, approach directions, and go-live dates.
 - [Speed Camera Violations](https://data.cityofchicago.org/d/hhkd-xvj4) — daily violation counts per speed camera since 2014; joined to the locations by camera ID.
+- [Traffic Crashes - Crashes](https://data.cityofchicago.org/d/85ca-t3if) — 1M+ geolocated crash records, each tagged with injuries, fatalities, and primary cause. Injury crashes since 2023 are spatially joined to each camera (150 m radius) to produce the safety verdict.
 
 These are ticketing/enforcement cameras, not traffic-viewing cameras — they have no public live image, only violation history.
+
+`build-chicago-enforcement.py` regenerates `cameras-chicago-enforcement.json` end to end from these four datasets (fetch, aggregate, spatial-join, classify). Run `python3 build-chicago-enforcement.py` to refresh it.
 
 ## Stack
 
