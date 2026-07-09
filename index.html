@@ -55,6 +55,14 @@
   .lyr .live-tag { font-size: 8.5px; font-weight: 800; letter-spacing: .03em; color: #fff; background: #ff2d55; padding: 1px 4px; border-radius: 3px; }
   .lyr .cnt { font-size: 10px; color: #a0a0a5; }
 
+  /* Illinois nested block with the Chicago ticket map under it */
+  .il-block { border-radius: 8px; }
+  .il-toggle { font-size: 12px; color: #007aff; cursor: pointer; padding: 3px 2px 4px 25px; display: flex; align-items: center; gap: 5px; user-select: none; }
+  .il-toggle .caret { font-size: 9px; transition: transform .15s; }
+  .il-block.open .il-toggle .caret { transform: rotate(90deg); }
+  .il-sub { margin: 2px 0 4px 12px; padding-left: 10px; border-left: 2px solid #ececf0; }
+  .il-sub.collapsed { display: none; }
+
   .btn-row { display: flex; gap: 6px; margin-top: 4px; }
   .mini-btn { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 5px 9px; cursor: pointer; }
   .mini-btn:hover { background: #e0ecff; }
@@ -178,7 +186,7 @@
 
 <div id="panel">
   <div class="brand-row"><div class="brand">Ora</div><button id="share" title="Copy a link to exactly this view">Copy link</button></div>
-  <div class="tag">Toggle states on and off. Stack as many as you like.</div>
+  <div class="tag">Live traffic cameras across the US. Check a state to see its cameras.</div>
 
   <div class="search-wrap">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -187,11 +195,11 @@
   </div>
 
   <div class="grp" data-region="cams">
-    <div class="grp-h"><span>Traffic cameras</span><span class="caret">&#9660;</span></div>
+    <div class="grp-h"><span>States</span><span class="caret">&#9660;</span></div>
     <div class="grp-body"><div id="camList"></div></div>
   </div>
 
-  <div class="grp" data-region="routes">
+  <div class="grp collapsed" data-region="routes">
     <div class="grp-h"><span>My routes</span><span class="caret">&#9660;</span></div>
     <div class="grp-body">
       <div id="routeList"></div>
@@ -199,27 +207,26 @@
     </div>
   </div>
 
-  <div class="grp collapsed" data-region="tickets">
-    <div class="grp-h"><span>Chicago tickets</span><span class="caret">&#9660;</span></div>
+  <div class="grp collapsed" data-region="mapstyle">
+    <div class="grp-h"><span>Map style</span><span class="caret">&#9660;</span></div>
     <div class="grp-body">
-      <label class="lyr"><input type="checkbox" data-layer="chi-enf"><span class="swatch enf"></span><span class="nm">Enforcement cameras</span><span class="cnt" id="cnt-chi-enf"></span></label>
-      <div class="enf-controls" id="enfControls">
-        <div class="hd">Color by</div>
-        <div class="color-switch"><button class="color-btn active" data-mode="verdict">Safety verdict</button><button class="color-btn" data-mode="type">Camera type</button></div>
-        <div id="legend"></div>
-        <div class="hd" style="margin-top:12px">Show only</div>
-        <div class="filters" id="fltVerdict">
-          <span class="fchip on" data-v="justified">On danger</span><span class="fchip on" data-v="revenue">Ticket-heavy</span>
-          <span class="fchip on" data-v="gap">Under-enforced</span><span class="fchip on" data-v="quiet">Quiet</span>
-        </div>
-        <div class="filters" id="fltType" style="margin-top:6px"><span class="fchip on" data-t="redlight">Red light</span><span class="fchip on" data-t="speed">Speed</span></div>
-      </div>
+      <div class="color-switch"><button class="color-btn active" data-base="light">Map</button><button class="color-btn" data-base="satellite">Satellite</button></div>
     </div>
   </div>
 
-  <div class="basemap">
-    <div class="hd">Base map</div>
-    <div class="color-switch"><button class="color-btn active" data-base="light">Map</button><button class="color-btn" data-base="satellite">Satellite</button></div>
+  <!-- enforcement controls live here at parse time (so handlers wire), then get moved under Illinois -->
+  <div id="enfHolder" style="display:none">
+    <div class="enf-controls" id="enfControls">
+      <div class="hd">Color by</div>
+      <div class="color-switch"><button class="color-btn active" data-mode="verdict">Safety verdict</button><button class="color-btn" data-mode="type">Camera type</button></div>
+      <div id="legend"></div>
+      <div class="hd" style="margin-top:12px">Show only</div>
+      <div class="filters" id="fltVerdict">
+        <span class="fchip on" data-v="justified">On danger</span><span class="fchip on" data-v="revenue">Ticket-heavy</span>
+        <span class="fchip on" data-v="gap">Under-enforced</span><span class="fchip on" data-v="quiet">Quiet</span>
+      </div>
+      <div class="filters" id="fltType" style="margin-top:6px"><span class="fchip on" data-t="redlight">Red light</span><span class="fchip on" data-t="speed">Speed</span></div>
+    </div>
   </div>
 </div>
 
@@ -245,7 +252,8 @@ let addingTo=null;   // route id currently collecting cameras
 const enfFilter={ verdicts:new Set(['justified','revenue','gap','quiet']), types:new Set(['redlight','speed']) };
 let searchIndex=[], kbdIdx=-1;
 
-const map=new maplibregl.Map({ container:'map', style:'https://tiles.openfreemap.org/styles/positron', center:LAYERS['chi-enf'].center, zoom:LAYERS['chi-enf'].zoom, pitch:0 });
+const US_VIEW={ center:[-96,38.5], zoom:3.7 };
+const map=new maplibregl.Map({ container:'map', style:'https://tiles.openfreemap.org/styles/positron', center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0 });
 map.addControl(new maplibregl.NavigationControl(),'top-right');
 const srcId=(k)=>`src-${k}`;
 
@@ -365,7 +373,8 @@ function renderLegend(){
   el.innerHTML=(enfColorMode==='type')?`<div class="row"><span class="dot rl"></span> Red light camera</div><div class="row"><span class="dot sp"></span> Speed camera</div>${sz}`:
     `<div class="row"><span class="dot justified"></span> On real danger <span class="sub">&nbsp;tickets + crashes</span></div><div class="row"><span class="dot revenue"></span> Ticket-heavy, low crash</div><div class="row"><span class="dot gap"></span> Crashes, light enforcement</div><div class="row"><span class="dot quiet"></span> Quiet on both</div>${sz}`;
 }
-function syncEnfControls(){ document.getElementById('enfControls').classList.toggle('show', active.has('chi-enf')); if(active.has('chi-enf')) renderLegend(); }
+function expandIlSub(){ const b=document.getElementById('ilBlock'), s=document.getElementById('ilSub'); if(b) b.classList.add('open'); if(s) s.classList.remove('collapsed'); }
+function syncEnfControls(){ document.getElementById('enfControls').classList.toggle('show', active.has('chi-enf')); if(active.has('chi-enf')){ renderLegend(); expandIlSub(); } }
 
 /* ---------- basemap ---------- */
 function applyContrast(k){ const w=basemap==='satellite';
@@ -493,7 +502,7 @@ function findFeatureByCoords(k,lng,lat){ const d=dataCache[k]; if(!d) return nul
   for(const f of d.features){ const [fl,fa]=f.geometry.coordinates; const dd=Math.abs(fl-lng)+Math.abs(fa-lat); if(dd<bd){bd=dd;best=f;} } return bd<0.0006?best:null; }
 async function restoreState(){
   const p=new URLSearchParams(location.hash.slice(1)); const has=[...p.keys()].length>0;
-  const layers=(p.get('l')||(has?'':'chi-enf')).split(',').filter(k=>LAYERS[k]);
+  const layers=(p.get('l')||'').split(',').filter(k=>LAYERS[k]);
   if(p.get('cm')==='type') enfColorMode='type'; if(p.get('b')==='satellite') basemap='satellite';
   if(p.has('fv')) enfFilter.verdicts=new Set(p.get('fv').split(',').filter(Boolean));
   if(p.has('ft')) enfFilter.types=new Set(p.get('ft').split(',').filter(Boolean));
@@ -501,26 +510,39 @@ async function restoreState(){
   document.querySelectorAll('.color-btn[data-base]').forEach(b=>b.classList.toggle('active',b.dataset.base===basemap));
   document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.classList.toggle('on',enfFilter.verdicts.has(ch.dataset.v)));
   document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.classList.toggle('on',enfFilter.types.has(ch.dataset.t)));
-  if(layers.includes('chi-enf')) document.querySelector('.grp[data-region="tickets"]').classList.remove('collapsed');
+  if(layers.includes('chi-enf')) expandIlSub();
   for(const k of layers) await enableLayer(k,false);
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr());
   syncEnfControls(); setBasemap(basemap);
   if(p.has('c')&&p.has('z')){ const [lng,lat]=p.get('c').split(',').map(Number); map.jumpTo({center:[lng,lat],zoom:Number(p.get('z'))}); }
-  else map.jumpTo({center:LAYERS['chi-enf'].center,zoom:LAYERS['chi-enf'].zoom});
+  else map.jumpTo({center:US_VIEW.center,zoom:US_VIEW.zoom});
   if(p.has('s')){ const [sk,slng,slat]=p.get('s').split(','); const f=findFeatureByCoords(sk,Number(slng),Number(slat)); if(f) selectFeature(sk,f); }
 }
 
-/* ---------- build camera list ---------- */
+/* ---------- build camera list (states A-Z; Illinois nests the Chicago ticket map) ---------- */
 function renderCamList(){
   const keys=Object.keys(LAYERS).filter(k=>LAYERS[k].kind==='live').sort((a,b)=>LAYERS[a].name.localeCompare(LAYERS[b].name));
+  const rowFor=(k)=>{ const c=LAYERS[k];
+    return `<label class="lyr"><input type="checkbox" data-layer="${k}"><span class="swatch"></span><span class="nm">${c.name}</span>${c.hasVideo?'<span class="live-tag">LIVE</span>':''}<span class="cnt" id="cnt-${k}"></span></label>`; };
   document.getElementById('camList').innerHTML=keys.map(k=>{
-    const c=LAYERS[k];
-    return `<label class="lyr"><input type="checkbox" data-layer="${k}"><span class="swatch"></span><span class="nm">${c.name}</span>${c.hasVideo?'<span class="live-tag">LIVE</span>':''}<span class="cnt" id="cnt-${k}"></span></label>`;
+    if(k!=='il-cam') return rowFor(k);
+    return `<div class="il-block" id="ilBlock">
+      ${rowFor('il-cam')}
+      <div class="il-toggle" id="ilToggle"><span class="caret">&#9656;</span> Chicago ticket &amp; crash map</div>
+      <div class="il-sub collapsed" id="ilSub">
+        <label class="lyr"><input type="checkbox" data-layer="chi-enf"><span class="swatch enf"></span><span class="nm">Show ticket map</span><span class="cnt" id="cnt-chi-enf"></span></label>
+        <div id="enfMount"></div>
+      </div></div>`;
   }).join('');
-  document.querySelectorAll('#camList .lyr input, .lyr input[data-layer="chi-enf"]').forEach(cb=>{
-    if(cb._wired) return; cb._wired=true;
-    cb.addEventListener('change',async ()=>{ const k=cb.dataset.layer; if(cb.checked) await enableLayer(k); else disableLayer(k); writeUrl(); });
-  });
+  // move the enforcement controls under Illinois
+  const enf=document.getElementById('enfControls'), mount=document.getElementById('enfMount');
+  if(enf&&mount) mount.appendChild(enf);
+  // Illinois sub toggle
+  const t=document.getElementById('ilToggle');
+  if(t) t.addEventListener('click',()=>{ document.getElementById('ilBlock').classList.toggle('open'); document.getElementById('ilSub').classList.toggle('collapsed'); });
+  // wire all camera + chi-enf checkboxes
+  document.querySelectorAll('#camList .lyr input').forEach(cb=>{ if(cb._wired) return; cb._wired=true;
+    cb.addEventListener('change',async ()=>{ const k=cb.dataset.layer; if(cb.checked) await enableLayer(k); else disableLayer(k); writeUrl(); }); });
 }
 
 /* ---------- UI wiring ---------- */
