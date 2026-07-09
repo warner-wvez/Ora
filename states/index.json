@@ -218,5 +218,16 @@
   ],
   "zoom": 7.5,
   "video": false
+ },
+ "CA": {
+  "name": "California",
+  "file": "states/CA.json",
+  "count": 2047,
+  "center": [
+   -119.6,
+   37.3
+  ],
+  "zoom": 5.2,
+  "video": false
  }
 }
