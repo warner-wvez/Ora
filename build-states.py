@@ -43,6 +43,16 @@ def fetch(url, timeout=45, tries=4):
             if i==tries-1: raise
             time.sleep(1.5*(i+1))
 
+def video_plays(url):
+    """Video is only usable in-browser if its host allows cross-origin playback."""
+    if not url: return False
+    try:
+        req=urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0','Origin':'http://localhost'})
+        with urllib.request.urlopen(req, timeout=12) as r:
+            return r.headers.get('Access-Control-Allow-Origin') in ('*','http://localhost')
+    except Exception:
+        return False
+
 def page(host, start, length=100):
     q={"draw":1,"columns":[{"data":str(i),"name":"","searchable":True,"orderable":True,"search":{"value":"","regex":False}} for i in range(8)],
        "order":[{"column":0,"dir":"asc"}],"start":start,"length":length,"search":{"value":"","regex":False}}
@@ -91,7 +101,10 @@ def main():
         code,cfg=item
         try:
             feats=build_state(code,cfg)
-            vids=sum(1 for f in feats for d in f['properties']['directions'] if d['video'])
+            # a state counts as "video" only if a sample stream actually allows cross-origin playback
+            sample_vid=next((d['video'] for f in feats for d in f['properties']['directions'] if d['video']), None)
+            plays=video_plays(sample_vid)
+            vids=sum(1 for f in feats for d in f['properties']['directions'] if d['video']) if plays else 0
             json.dump({'type':'FeatureCollection','features':feats}, open(f'states/{code}.json','w'))
             return code,cfg,len(feats),vids,None
         except Exception as e:

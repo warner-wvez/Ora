@@ -6,7 +6,7 @@ A layer panel lets you toggle states on and off independently and **stack them**
 
 ## Coverage
 
-- **13 states via one shared "511" platform** (~17,000 cameras): Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska. Seven of these (FL, GA, PA, NC, NV, WI, LA — ~12,000 cameras) expose CORS-open **HLS live video** that plays right in the browser.
+- **13 states via one shared "511" platform** (~17,000 cameras): Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska. Six of these (FL, PA, NC, NV, WI, LA — ~7,900 cameras) expose CORS-open **HLS live video** that plays right in the browser. Georgia carries video too, but its stream host requires auth (401), so Georgia is snapshot-only.
 - **Illinois** — 1,328 cameras (IDOT / Travel Midwest), snapshot only.
 - **New York City** — 957 cameras (NYC DOT), snapshot refreshing every 2 seconds.
 
@@ -22,15 +22,7 @@ Group the cameras on your commute into a saved **route** and scroll through all 
   - **Safety verdict** (default) — each camera is cross-referenced against nearby injury crashes to answer "is this camera on real danger, or just ticketing?" See below.
   - **Camera type** — red for red light, orange for speed.
 
-  Click a pin for its verdict and the exact statistics behind it: recent + all-time ticket volume, injury crashes within 150 m since 2023, people hurt/killed, and how many of those crashes were caused by the specific behavior the camera targets. Speed cameras also show approach directions and go-live date.
-- **Chicago tickets** (enforcement) — 396 automated enforcement cameras (183 red light intersections + 213 speed cameras), plotted as graduated circles sized by violations in the last 90 days. This is a static, data-driven layer, not live video. Two color modes:
-  - **Safety verdict** (default) — each camera is cross-referenced against nearby injury crashes to answer "is this camera on real danger, or just ticketing?" See below.
-  - **Camera type** — red for red light, orange for speed.
-
-  Click a pin for its verdict and the exact statistics behind it: recent + all-time ticket volume, injury crashes within 150 m since 2023, people hurt/killed, and how many of those crashes were caused by the specific behavior the camera targets. Speed cameras also show approach directions and go-live date.
-
-**New York City**
-- **Traffic cameras** (live) — 957 camera locations citywide (NYC DOT), refreshing every 2 seconds — genuinely live-feeling, unlike Illinois's much slower source cadence.
+  Click a pin for its verdict and the exact statistics behind it: recent + all-time ticket volume, injury crashes within 150 m since 2023, people hurt/killed, and how many of those crashes were caused by the specific behavior the camera targets. Speed cameras also show approach directions and go-live date. In the sidebar, the Chicago ticket map is nested under Illinois.
 
 ### The safety-vs-revenue verdict
 
@@ -49,9 +41,11 @@ This is the one insight the whole stack uniquely enables: enforcement cameras an
 - **Base map toggle** — switch between the clean light style and satellite imagery (Esri World Imagery). Satellite is especially useful here: you can see the actual road and intersection each camera watches. Pin outlines thicken on satellite so they stay visible.
 - **Hover + selection feedback** — hovering a pin shows a ring and a name tooltip (a preview of what you'll get). The selected pin stays ringed even as you pan/zoom away, and a "Back to selection" button flies you back to it.
 - **In-layer filters** (Chicago tickets) — filter the enforcement layer by verdict (e.g. show only the 115 "ticket-heavy, low crash" cameras) and by camera type (red light / speed), so the layer works as an investigative tool, not just a picture.
-- **Shareable links** — the URL always reflects exactly what you're looking at (active layers, map position, color mode, base map, filters, and the selected camera). "Copy link" grabs it; opening someone's link restores that precise view, popup and all. The app opens on the Chicago enforcement verdict layer by default (the most distinctive view), not a generic dot field.
+- **Shareable links** — the URL always reflects exactly what you're looking at (active layers, map position, color mode, base map, filters, and the selected camera). "Copy link" grabs it; opening someone's link restores that precise view, popup and all.
+- **Coverage overview** — the app opens zoomed out on a map of the whole US with a labeled, clickable marker for every covered state. Click a marker (or a checkbox) to load that state and fly in; "Show all states" returns to the overview and "Clear" turns everything off. So a first-time visitor immediately sees which states have footage and can pick one.
+- **Instant feed loading** — video cameras show their snapshot as a poster the moment you click, then the live video fades in over it, so there's never a blank loading box. Ora also preconnects to each state's media hosts when you load the state, warming the connection before your first click. (Preloading every stream up front would overload both the browser and the DOT servers — poster + preconnect gets the perceived speed without the cost.)
 
-These follow the map-UI principles in [Eleken's map UI design guide](https://www.eleken.co/blog-posts/map-ui-design): working search, style options for different backgrounds, clear hover/selection states with a return-to-selection helper, and filters to focus on just what matters.
+These follow the map-UI principles in [Eleken's](https://www.eleken.co/blog-posts/map-ui-design) and [Dura Digital's](https://www.duradigital.com/post/the-pathway-to-great-user-interface-design-for-maps) map UI design guides: working search, a neutral base map, distinct/clickable markers, style options for different backgrounds, clear hover/selection states, and a reset-view ("Show all states") helper so users never get lost.
 
 ## Data sources
 

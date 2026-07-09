@@ -45,6 +45,8 @@
   .grp.collapsed .caret { transform: rotate(-90deg); }
   .grp.collapsed .grp-body { display: none; }
   .grp-body { padding-bottom: 6px; }
+  .cam-tools { display: flex; gap: 6px; margin: 0 0 6px; }
+  .cam-tools .mini-btn { flex: 1; text-align: center; }
   #camList { max-height: 210px; overflow-y: auto; margin: -2px -4px 0; padding: 0 4px; }
 
   .lyr { display: flex; align-items: center; gap: 8px; padding: 4px 2px; cursor: pointer; font-size: 13px; color: #3c3c43; }
@@ -137,6 +139,9 @@
   .popup-inner { width: 264px; }
   .popup-imgwrap { position: relative; width: 100%; height: 150px; background: #eef0f2; }
   .popup-inner img, .popup-inner video { width: 100%; height: 150px; object-fit: cover; display: block; background: #eee; }
+  .popup-imgwrap .vid { position: absolute; inset: 0; opacity: 0; transition: opacity .35s; z-index: 1; }
+  .popup-imgwrap.ready .vid { opacity: 1; }
+  .popup-imgwrap.err .poster { display: none; }
   .popup-imgwrap .live-badge { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; z-index: 2; }
   .popup-imgwrap .img-offline { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: #9a9aa0; font-size: 12px; font-weight: 600; }
   .popup-imgwrap.err img, .popup-imgwrap.err video { display: none; }
@@ -196,7 +201,10 @@
 
   <div class="grp" data-region="cams">
     <div class="grp-h"><span>States</span><span class="caret">&#9660;</span></div>
-    <div class="grp-body"><div id="camList"></div></div>
+    <div class="grp-body">
+      <div class="cam-tools"><button class="mini-btn grey" id="showAll">Show all states</button><button class="mini-btn grey" id="clearAll">Clear</button></div>
+      <div id="camList"></div>
+    </div>
   </div>
 
   <div class="grp collapsed" data-region="routes">
@@ -234,8 +242,8 @@
 /* ---------- layer catalog (states injected at load from states/index.json) ---------- */
 const cb = (u)=> u + (u.includes('?')?'&':'?') + 't=' + Date.now();
 const LAYERS = {
-  'il-cam':  { kind:'live', name:'Illinois', file:'cameras.json', center:[-88.5,41.6], zoom:8, refreshMs:30000, hasVideo:false, snap:(d)=>cb(d.snapshot), age:'source updates every 1–10 min' },
-  'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, snap:(d)=>`https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}`, age:'refreshes every 2s' },
+  'il-cam':  { kind:'live', name:'Illinois', file:'cameras.json', center:[-88.5,41.6], zoom:8, refreshMs:30000, hasVideo:false, count:1328, snap:(d)=>cb(d.snapshot), age:'source updates every 1–10 min' },
+  'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, count:957, snap:(d)=>`https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}`, age:'refreshes every 2s' },
   'chi-enf': { kind:'enforcement', name:'Chicago tickets', file:'cameras-chicago-enforcement.json', center:[-87.72,41.84], zoom:10.3 }
 };
 const VERDICT = {
@@ -253,7 +261,9 @@ const enfFilter={ verdicts:new Set(['justified','revenue','gap','quiet']), types
 let searchIndex=[], kbdIdx=-1;
 
 const US_VIEW={ center:[-96,38.5], zoom:3.7 };
+const OVERVIEW_BOUNDS=[[-124.5,24.5],[-67,48.5]]; // frames the lower-48 states we cover (Alaska reachable from the list)
 const map=new maplibregl.Map({ container:'map', style:'https://tiles.openfreemap.org/styles/positron', center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0 });
+function showOverview(){ map.fitBounds(OVERVIEW_BOUNDS,{padding:{top:40,right:40,bottom:40,left:280},duration:700}); }
 map.addControl(new maplibregl.NavigationControl(),'top-right');
 const srcId=(k)=>`src-${k}`;
 
@@ -264,9 +274,15 @@ function uid(){ return 'r'+Math.random().toString(36).slice(2,9); }
 
 /* ---------- live popup (snapshot or HLS video) ---------- */
 function destroyPopupHls(){ if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
+// video only plays where the state's stream host allows cross-origin playback (cfg.hasVideo)
+function canPlayVideo(dir, cfg){ return !!(dir.video && cfg.hasVideo && window.Hls && Hls.isSupported()); }
 function mediaHTML(dir, cfg){
-  const live = dir.video && window.Hls && Hls.isSupported();
-  if(live) return `<div class="popup-imgwrap"><span class="live-badge">● LIVE</span><video id="popup-vid" muted autoplay playsinline></video><div class="img-offline">&#9888;<span>Offline</span></div></div>`;
+  const live = canPlayVideo(dir, cfg);
+  // video cameras show the snapshot instantly as a poster, then the live video fades in over it
+  if(live) return `<div class="popup-imgwrap"><span class="live-badge">● LIVE</span>
+    <img class="poster" src="${cfg.snap(dir)}" onerror="this.parentElement.classList.add('err')">
+    <video id="popup-vid" class="vid" muted autoplay playsinline></video>
+    <div class="img-offline">&#9888;<span>Camera offline</span></div></div>`;
   return `<div class="popup-imgwrap"><img id="popup-img" src="${cfg.snap(dir)}" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div></div>`;
 }
 function buildLivePopup(props, cfg){
@@ -282,12 +298,13 @@ function playDir(dir, cfg){
   destroyPopupHls();
   const el=popup.getElement();
   const wrap=el.querySelector('.popup-imgwrap');
-  const live=dir.video && window.Hls && Hls.isSupported();
+  const live=canPlayVideo(dir, cfg);
   if(live){
     const vid=el.querySelector('#popup-vid');
-    popupHls=new Hls({maxBufferLength:10});
+    popupHls=new Hls({maxBufferLength:8, startFragPrefetch:true, maxMaxBufferLength:20});
     popupHls.loadSource(dir.video); popupHls.attachMedia(vid);
-    popupHls.on(Hls.Events.ERROR,(e,d)=>{ if(d.fatal){ wrap.classList.add('err'); destroyPopupHls(); } });
+    popupHls.on(Hls.Events.FRAG_LOADED,()=>wrap.classList.add('ready')); // video fades in over the poster
+    popupHls.on(Hls.Events.ERROR,(e,d)=>{ if(d.fatal){ destroyPopupHls(); } }); // keep the poster snapshot on failure
   } else {
     const img=el.querySelector('#popup-img'); if(img) img.src=cfg.snap(dir);
   }
@@ -300,12 +317,12 @@ function wireLivePopup(props, cfg){
     wrap.outerHTML=mediaHTML(props.directions[idx],cfg);
     playDir(props.directions[idx],cfg);
     if(timer) clearInterval(timer);
-    if(!(props.directions[idx].video && window.Hls && Hls.isSupported())){
+    if(!canPlayVideo(props.directions[idx],cfg)){
       timer=setInterval(()=>{ const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(props.directions[idx]); }, cfg.refreshMs||30000);
     }
   };
   playDir(props.directions[0],cfg);
-  if(!(props.directions[0].video && window.Hls && Hls.isSupported()))
+  if(!canPlayVideo(props.directions[0],cfg))
     timer=setInterval(()=>{ const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(props.directions[0]); }, cfg.refreshMs||30000);
   el.querySelectorAll('.dir-btn').forEach(btn=>btn.addEventListener('click',()=>{
     idx=parseInt(btn.dataset.idx,10);
@@ -394,17 +411,36 @@ function addEnfLayers(k,data){ map.addSource(srcId(k),{type:'geojson',data});
   map.addLayer({id:`${k}__circle`,type:'circle',source:srcId(k),filter:enfFilterExpr(),paint:{'circle-color':enfColorExpr(),'circle-radius':['interpolate',['linear'],['get','v90'],0,3,50,5,300,8,1500,13,6000,20,16000,28,33000,36],'circle-opacity':0.78,'circle-stroke-width':1.2,'circle-stroke-color':'#fff'}});
 }
 function removeLayer(k){ [`${k}__clusters`,`${k}__cluster-count`,`${k}__points`,`${k}__circle`].forEach(id=>{ if(map.getLayer(id)) map.removeLayer(id); }); if(map.getSource(srcId(k))) map.removeSource(srcId(k)); }
+// warm TCP/TLS to the snapshot + video hosts so the first click connects instantly (no feed fetched)
+function preconnectFor(data){
+  const hosts=new Set();
+  for(const f of data.features.slice(0,60)){ const d=f.properties.directions?.[0]||{};
+    [d.snapshot,d.video].forEach(u=>{ if(u){ try{ hosts.add(new URL(u).origin); }catch(e){} } }); }
+  hosts.forEach(origin=>{ if(document.querySelector(`link[data-pc="${CSS.escape(origin)}"]`)) return;
+    const l=document.createElement('link'); l.rel='preconnect'; l.href=origin; l.crossOrigin=''; l.dataset.pc=origin; document.head.appendChild(l); });
+}
 async function enableLayer(k,fly=true){
   const cfg=LAYERS[k];
   if(!dataCache[k]){ dataCache[k]=await (await fetch(cfg.file)).json(); const c=document.getElementById('cnt-'+k); if(c) c.textContent=dataCache[k].features.length.toLocaleString(); }
   const data=dataCache[k];
+  if(cfg.kind==='live') preconnectFor(data);
   if(cfg.kind==='enforcement'){ enfMeta=data.meta||null; addEnfLayers(k,data); } else addLiveLayers(k,data);
-  active.add(k); bindLayerHandlers(k); applyContrast(k); raiseHighlights(); syncEnfControls(); rebuildSearchIndex();
+  active.add(k); bindLayerHandlers(k); applyContrast(k); raiseHighlights(); syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=true;
   if(fly) map.easeTo({center:cfg.center,zoom:cfg.zoom,duration:700});
 }
-function disableLayer(k){ removeLayer(k); active.delete(k); if(popup){ popup.remove(); popup=null; } syncEnfControls(); rebuildSearchIndex();
+function disableLayer(k){ removeLayer(k); active.delete(k); if(popup){ popup.remove(); popup=null; } syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false; }
+
+/* coverage overview markers (one per covered state) */
+function buildCoverage(){
+  const feats=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live'&&c.center).map(([k,c])=>({
+    type:'Feature', geometry:{type:'Point',coordinates:c.center},
+    properties:{k, label:c.name} }));
+  if(map.getSource('coverage')) map.getSource('coverage').setData({type:'FeatureCollection',features:feats});
+}
+function updateCoverage(){ const show=active.size===0;
+  ['coverage-dot','coverage-label'].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',show?'visible':'none'); }); }
 
 /* ---------- search ---------- */
 function rebuildSearchIndex(){ searchIndex=[]; active.forEach(k=>{ const d=dataCache[k]; if(!d) return;
@@ -515,7 +551,7 @@ async function restoreState(){
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr());
   syncEnfControls(); setBasemap(basemap);
   if(p.has('c')&&p.has('z')){ const [lng,lat]=p.get('c').split(',').map(Number); map.jumpTo({center:[lng,lat],zoom:Number(p.get('z'))}); }
-  else map.jumpTo({center:US_VIEW.center,zoom:US_VIEW.zoom});
+  else showOverview();
   if(p.has('s')){ const [sk,slng,slat]=p.get('s').split(','); const f=findFeatureByCoords(sk,Number(slng),Number(slat)); if(f) selectFeature(sk,f); }
 }
 
@@ -555,6 +591,8 @@ document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener(
 document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.classList.contains('on')?enfFilter.types.add(t):enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
 document.getElementById('share').addEventListener('click',async ()=>{ const b=document.getElementById('share'); try{ await navigator.clipboard.writeText(location.href); }catch(e){} const t=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=t,1300); });
 document.getElementById('recenter').addEventListener('click',()=>{ if(lastSelected) map.flyTo({center:lastSelected.coords,zoom:15,duration:700}); });
+document.getElementById('showAll').addEventListener('click',()=>{ if(popup){popup.remove();popup=null;} showOverview(); });
+document.getElementById('clearAll').addEventListener('click',()=>{ [...active].forEach(disableLayer); showOverview(); writeUrl(); });
 document.getElementById('newRoute').addEventListener('click',()=>{ const name=prompt('Name this route (e.g. Work commute)'); if(!name) return; const routes=loadRoutes(); const id=uid(); routes.push({id,name:name.trim(),cams:[]}); saveRoutes(routes); renderRouteList(); startAddMode(id); });
 document.getElementById('addDone').addEventListener('click',stopAddMode);
 document.getElementById('rvClose').addEventListener('click',closeRouteView);
@@ -580,12 +618,20 @@ map.on('load', async ()=>{
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});
   map.addLayer({id:'hl-select',type:'circle',source:'hl-select',paint:{'circle-radius':['+',['get','r'],1],'circle-color':'rgba(0,122,255,0.10)','circle-stroke-color':'#007aff','circle-stroke-width':3}});
 
+  // coverage overview markers: one clickable pin per covered state (shown when nothing is selected)
+  map.addSource('coverage',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+  map.addLayer({id:'coverage-dot',type:'circle',source:'coverage',paint:{'circle-radius':['interpolate',['linear'],['zoom'],3,6,6,11],'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':2.5}});
+  map.addLayer({id:'coverage-label',type:'symbol',source:'coverage',layout:{'text-field':['get','label'],'text-size':11,'text-font':['Noto Sans Bold'],'text-offset':[0,1.2],'text-anchor':'top','text-allow-overlap':false},paint:{'text-color':'#1c1c1e','text-halo-color':'#fff','text-halo-width':1.6}});
+  map.on('click','coverage-dot',(e)=>{ const k=e.features[0].properties.k; enableLayer(k).then(writeUrl); });
+  map.on('mouseenter','coverage-dot',()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave','coverage-dot',()=>map.getCanvas().style.cursor='');
+
   // inject states from index
   try{
     const idx=await (await fetch('states/index.json')).json();
-    Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, snap:(d)=>cb(d.snapshot), age: s.video?'live video where available':'snapshot, updates every few min' }; });
+    Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, count:s.count, snap:(d)=>cb(d.snapshot), age: s.video?'live video where available':'snapshot, updates every few min' }; });
   }catch(e){ console.warn('states index failed', e); }
-  renderCamList(); renderRouteList();
+  renderCamList(); renderRouteList(); buildCoverage();
 
   restoring=true; await restoreState(); restoring=false; writeUrl();
   map.on('moveend', writeUrl);
