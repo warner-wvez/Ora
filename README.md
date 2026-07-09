@@ -1,11 +1,28 @@
 # Ora
 
-A live map of public traffic cameras, styled like Apple Maps.
+A live map of public traffic cameras across the US, styled like Apple Maps. **~19,000 cameras across 15 states** — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
 
-A layer panel lets you toggle data sets on and off independently and **stack them** — e.g. see the live Illinois traffic cameras and the Chicago ticket-enforcement data on the same map at once. Layers are grouped by region (collapsible), and each remembers its own state:
+A layer panel lets you toggle states on and off independently and **stack them**. Turn on any combination — states, NYC, and the Chicago ticket-enforcement layer — on one map.
 
-**Illinois**
-- **Traffic cameras** (live) — 1,328 camera locations statewide (IDOT, Lake County, DuPage County, Kane County, and the Illinois Tollway). Click a pin for its current live snapshot.
+## Coverage
+
+- **13 states via one shared "511" platform** (~17,000 cameras): Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska. Seven of these (FL, GA, PA, NC, NV, WI, LA — ~12,000 cameras) expose CORS-open **HLS live video** that plays right in the browser.
+- **Illinois** — 1,328 cameras (IDOT / Travel Midwest), snapshot only.
+- **New York City** — 957 cameras (NYC DOT), snapshot refreshing every 2 seconds.
+
+`build-states.py` regenerates the per-state data (`states/*.json` + `states/index.json`) from the platform. Run `python3 build-states.py`.
+
+## Routes
+
+Group the cameras on your commute into a saved **route** and scroll through all their live feeds at once, instead of clicking pins one at a time. Make a route, tap cameras on the map to add them, then open the route to see the whole drive as a vertical stack of live video/snapshots. Routes are saved locally (no account, no sign-in). Inspired by the [511 Wisconsin app](https://apps.apple.com/us/app/511-wisconsin-traffic-cameras/id6446508226) whose users called this feature "gold."
+
+## Chicago tickets (enforcement analysis)
+
+- **Chicago tickets** — 396 automated enforcement cameras (183 red light intersections + 213 speed cameras), plotted as graduated circles sized by violations in the last 90 days. This is a static, data-driven layer, not live video. Two color modes:
+  - **Safety verdict** (default) — each camera is cross-referenced against nearby injury crashes to answer "is this camera on real danger, or just ticketing?" See below.
+  - **Camera type** — red for red light, orange for speed.
+
+  Click a pin for its verdict and the exact statistics behind it: recent + all-time ticket volume, injury crashes within 150 m since 2023, people hurt/killed, and how many of those crashes were caused by the specific behavior the camera targets. Speed cameras also show approach directions and go-live date.
 - **Chicago tickets** (enforcement) — 396 automated enforcement cameras (183 red light intersections + 213 speed cameras), plotted as graduated circles sized by violations in the last 90 days. This is a static, data-driven layer, not live video. Two color modes:
   - **Safety verdict** (default) — each camera is cross-referenced against nearby injury crashes to answer "is this camera on real danger, or just ticketing?" See below.
   - **Camera type** — red for red light, orange for speed.
