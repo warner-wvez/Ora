@@ -251,5 +251,16 @@
   ],
   "zoom": 6.3,
   "video": false
+ },
+ "OH": {
+  "name": "Ohio",
+  "file": "states/OH.json",
+  "count": 1121,
+  "center": [
+   -82.8,
+   40.3
+  ],
+  "zoom": 6.3,
+  "video": false
  }
 }
