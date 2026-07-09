@@ -240,5 +240,16 @@
   ],
   "zoom": 6,
   "video": false
+ },
+ "VA": {
+  "name": "Virginia",
+  "file": "states/VA.json",
+  "count": 1670,
+  "center": [
+   -78.7,
+   37.9
+  ],
+  "zoom": 6.3,
+  "video": false
  }
 }
