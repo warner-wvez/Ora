@@ -2,15 +2,18 @@
 
 A live map of public traffic cameras, styled like Apple Maps.
 
-A mode switcher offers three views:
+A layer panel lets you toggle data sets on and off independently and **stack them** — e.g. see the live Illinois traffic cameras and the Chicago ticket-enforcement data on the same map at once. Layers are grouped by region (collapsible), and each remembers its own state:
 
-- **Illinois** (live cameras) — 1,328 camera locations statewide (IDOT, Lake County, DuPage County, Kane County, and the Illinois Tollway). Click a pin for its current live snapshot.
-- **New York City** (live cameras) — 957 camera locations citywide (NYC DOT), refreshing every 2 seconds — genuinely live-feeling, unlike Illinois's much slower source cadence.
-- **Chicago Tickets** (enforcement) — 396 automated enforcement cameras (183 red light intersections + 213 speed cameras), plotted as graduated circles sized by violations in the last 90 days. This is a static, data-driven layer, not live video. Two color modes:
+**Illinois**
+- **Traffic cameras** (live) — 1,328 camera locations statewide (IDOT, Lake County, DuPage County, Kane County, and the Illinois Tollway). Click a pin for its current live snapshot.
+- **Chicago tickets** (enforcement) — 396 automated enforcement cameras (183 red light intersections + 213 speed cameras), plotted as graduated circles sized by violations in the last 90 days. This is a static, data-driven layer, not live video. Two color modes:
   - **Safety verdict** (default) — each camera is cross-referenced against nearby injury crashes to answer "is this camera on real danger, or just ticketing?" See below.
   - **Camera type** — red for red light, orange for speed.
 
   Click a pin for its verdict and the exact statistics behind it: recent + all-time ticket volume, injury crashes within 150 m since 2023, people hurt/killed, and how many of those crashes were caused by the specific behavior the camera targets. Speed cameras also show approach directions and go-live date.
+
+**New York City**
+- **Traffic cameras** (live) — 957 camera locations citywide (NYC DOT), refreshing every 2 seconds — genuinely live-feeling, unlike Illinois's much slower source cadence.
 
 ### The safety-vs-revenue verdict
 
