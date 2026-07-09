@@ -141,5 +141,82 @@
   ],
   "zoom": 5,
   "video": false
+ },
+ "MN": {
+  "name": "Minnesota",
+  "file": "states/MN.json",
+  "count": 1527,
+  "center": [
+   -94.3,
+   46.3
+  ],
+  "zoom": 5.8,
+  "video": true
+ },
+ "CO": {
+  "name": "Colorado",
+  "file": "states/CO.json",
+  "count": 987,
+  "center": [
+   -105.5,
+   39.0
+  ],
+  "zoom": 6,
+  "video": true
+ },
+ "IA": {
+  "name": "Iowa",
+  "file": "states/IA.json",
+  "count": 844,
+  "center": [
+   -93.5,
+   42.0
+  ],
+  "zoom": 6.5,
+  "video": true
+ },
+ "NE": {
+  "name": "Nebraska",
+  "file": "states/NE.json",
+  "count": 353,
+  "center": [
+   -99.8,
+   41.5
+  ],
+  "zoom": 6,
+  "video": false
+ },
+ "IN": {
+  "name": "Indiana",
+  "file": "states/IN.json",
+  "count": 740,
+  "center": [
+   -86.3,
+   39.9
+  ],
+  "zoom": 6.5,
+  "video": false
+ },
+ "KS": {
+  "name": "Kansas",
+  "file": "states/KS.json",
+  "count": 588,
+  "center": [
+   -98.3,
+   38.5
+  ],
+  "zoom": 6,
+  "video": true
+ },
+ "MA": {
+  "name": "Massachusetts",
+  "file": "states/MA.json",
+  "count": 304,
+  "center": [
+   -71.8,
+   42.2
+  ],
+  "zoom": 7.5,
+  "video": false
  }
 }

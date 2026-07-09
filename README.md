@@ -6,11 +6,17 @@ A layer panel lets you toggle states on and off independently and **stack them**
 
 ## Coverage
 
-- **13 states via one shared "511" platform** (~17,000 cameras): Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska. Six of these (FL, PA, NC, NV, WI, LA — ~7,900 cameras) expose CORS-open **HLS live video** that plays right in the browser. Georgia carries video too, but its stream host requires auth (401), so Georgia is snapshot-only.
+**~22,000 cameras across 20 states**, from state DOT "511" systems that run on two shared vendor platforms:
+
+- **Older DataTables platform (13 states)**: Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska. Built by `build-states.py`.
+- **Newer GraphQL platform (7 states)**: Minnesota, Colorado, Iowa, Nebraska, Indiana, Kansas, Massachusetts. Built by `build-states-graphql.py` (one `listCameraViewsQuery` per state returns every camera with a bbox, snapshot URL, and HLS sources).
+
+**Ten of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, KS. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks a sample stream and sets the flag.
+
 - **Illinois** — 1,328 cameras (IDOT / Travel Midwest), snapshot only.
 - **New York City** — 957 cameras (NYC DOT), snapshot refreshing every 2 seconds.
 
-`build-states.py` regenerates the per-state data (`states/*.json` + `states/index.json`) from the platform. Run `python3 build-states.py`.
+Both `build-states*.py` scripts write `states/<code>.json` and merge into `states/index.json`, which the app reads at load to populate the state list and coverage markers.
 
 ## Routes
 
