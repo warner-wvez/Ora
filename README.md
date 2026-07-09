@@ -26,6 +26,15 @@ For every enforcement camera, injury crashes within 150 m (2023–present) are c
 
 This is the one insight the whole stack uniquely enables: enforcement cameras and crashes sit on the same intersections, so they can be joined directly. Note it is a **cross-sectional** correlation (does the danger match the ticketing right now), not a causal before/after claim.
 
+## Navigation & interaction
+
+- **Search** — an instant, client-side search over every loaded camera name, intersection, and address (no API/key). Type a place, pick a suggestion, and the map flies there and selects it. Searches only the layers you have turned on.
+- **Base map toggle** — switch between the clean light style and satellite imagery (Esri World Imagery). Satellite is especially useful here: you can see the actual road and intersection each camera watches. Pin outlines thicken on satellite so they stay visible.
+- **Hover + selection feedback** — hovering a pin shows a ring and a name tooltip (a preview of what you'll get). The selected pin stays ringed even as you pan/zoom away, and a "Back to selection" button flies you back to it.
+- **In-layer filters** (Chicago tickets) — filter the enforcement layer by verdict (e.g. show only the 115 "ticket-heavy, low crash" cameras) and by camera type (red light / speed), so the layer works as an investigative tool, not just a picture.
+
+These follow the map-UI principles in [Eleken's map UI design guide](https://www.eleken.co/blog-posts/map-ui-design): working search, style options for different backgrounds, clear hover/selection states with a return-to-selection helper, and filters to focus on just what matters.
+
 ## Data sources
 
 ### Live cameras
