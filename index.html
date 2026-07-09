@@ -613,6 +613,10 @@ map.on('load', async ()=>{
   map.addSource('sat',{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics'});
   const firstSymbol=(map.getStyle().layers.find(l=>l.type==='symbol')||{}).id;
   map.addLayer({id:'sat-layer',type:'raster',source:'sat',layout:{visibility:'none'}}, firstSymbol);
+  // crisp US state boundaries (Positron's are missing/broken at low zoom) — below labels, above land
+  map.addSource('us-states',{type:'geojson',data:'states-outline.json'});
+  map.addLayer({id:'state-lines',type:'line',source:'us-states',
+    paint:{'line-color':'#9aa1ac','line-width':['interpolate',['linear'],['zoom'],3,0.7,5,1.1,8,1.5],'line-opacity':['interpolate',['linear'],['zoom'],3,0.8,8,0.35]}}, firstSymbol);
   map.addSource('hl-hover',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addSource('hl-select',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});
