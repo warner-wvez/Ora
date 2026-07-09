@@ -13,37 +13,50 @@
   html, body { margin: 0; height: 100%; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; }
   #map { position: absolute; inset: 0; }
 
-  #topbar {
+  #panel {
     position: absolute; top: 12px; left: 12px; z-index: 10;
     background: rgba(255,255,255,0.85);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 12px;
-    padding: 10px 16px;
+    padding: 12px 14px 14px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    max-width: 340px;
+    width: 246px;
   }
-  #topbar h1 { font-size: 15px; font-weight: 600; margin: 0 0 8px; color: #1c1c1e; }
-  #topbar p { font-size: 12px; margin: 0; color: #6e6e73; }
-  #count { font-weight: 600; color: #007aff; }
+  #panel .brand { font-size: 15px; font-weight: 700; color: #1c1c1e; margin-bottom: 2px; }
+  #panel .tag { font-size: 11px; color: #8e8e93; margin-bottom: 10px; }
 
-  .city-switch {
-    display: flex; gap: 2px; background: #f2f2f7; border-radius: 8px; padding: 2px; margin-bottom: 8px;
+  /* collapsible region group */
+  .grp { border-top: 1px solid #ececf0; }
+  .grp:first-of-type { border-top: none; }
+  .grp-h {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; font-weight: 600; color: #1c1c1e; cursor: pointer;
+    padding: 8px 0 6px;
   }
-  .city-btn {
-    flex: 1; font-size: 12px; font-weight: 600; padding: 5px 8px; border: none; border-radius: 6px;
-    background: transparent; color: #6e6e73; cursor: pointer; white-space: nowrap;
-  }
-  .city-btn.active { background: #fff; color: #007aff; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+  .grp-h .caret { font-size: 10px; color: #8e8e93; transition: transform .15s; }
+  .grp.collapsed .caret { transform: rotate(-90deg); }
+  .grp.collapsed .grp-body { display: none; }
+  .grp-body { padding-bottom: 6px; }
 
-  .color-switch { display: none; gap: 2px; background: #f2f2f7; border-radius: 8px; padding: 2px; margin-top: 10px; }
-  .color-switch.show { display: flex; }
+  .lyr { display: flex; align-items: center; gap: 8px; padding: 4px 2px; cursor: pointer; font-size: 13px; color: #3c3c43; }
+  .lyr input { accent-color: #007aff; width: 15px; height: 15px; cursor: pointer; flex: none; }
+  .lyr .swatch { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .lyr .swatch.live { background: #007aff; }
+  .lyr .swatch.enf { background: linear-gradient(135deg, #34c759 50%, #ff2d55 50%); }
+  .lyr .nm { flex: 1; }
+  .lyr .cnt { font-size: 10px; color: #a0a0a5; }
+
+  /* enforcement controls (color mode + legend) */
+  .enf-controls { margin-top: 8px; border-top: 1px solid #ececf0; padding-top: 10px; display: none; }
+  .enf-controls.show { display: block; }
+  .enf-controls .hd { font-size: 11px; font-weight: 600; color: #6e6e73; margin-bottom: 6px; }
+  .color-switch { display: flex; gap: 2px; background: #f2f2f7; border-radius: 8px; padding: 2px; }
   .color-btn { flex: 1; font-size: 11px; font-weight: 600; padding: 4px 8px; border: none; border-radius: 6px;
     background: transparent; color: #6e6e73; cursor: pointer; }
   .color-btn.active { background: #fff; color: #1c1c1e; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
 
-  #legend { margin-top: 10px; display: none; }
-  #legend.show { display: block; }
+  #legend { margin-top: 10px; }
   #legend .row { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #3c3c43; margin-top: 4px; }
   #legend .dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.15); flex: none; }
   #legend .dot.rl { background: #ff3b30; }
@@ -58,24 +71,13 @@
   #legend .sizedot { border-radius: 50%; background: #b0b0b5; }
   #legend .sizelbl { font-size: 9px; color: #8e8e93; }
 
-  .maplibregl-popup-content {
-    border-radius: 14px;
-    padding: 0;
-    overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
-  }
+  .maplibregl-popup-content { border-radius: 14px; padding: 0; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
   .popup-inner { width: 260px; }
-  .popup-inner img {
-    width: 100%; height: 150px; object-fit: cover; display: block; background: #eee;
-  }
+  .popup-inner img { width: 100%; height: 150px; object-fit: cover; display: block; background: #eee; }
   .popup-body { padding: 10px 12px 12px; }
   .popup-body h3 { font-size: 13px; margin: 0 0 4px; color: #1c1c1e; line-height: 1.3; }
   .popup-dirs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-  .dir-btn {
-    font-size: 11px; padding: 3px 8px; border-radius: 999px;
-    background: #f2f2f7; color: #007aff; border: none; cursor: pointer;
-    font-weight: 600;
-  }
+  .dir-btn { font-size: 11px; padding: 3px 8px; border-radius: 999px; background: #f2f2f7; color: #007aff; border: none; cursor: pointer; font-weight: 600; }
   .dir-btn.active { background: #007aff; color: #fff; }
   .popup-age { font-size: 10px; color: #8e8e93; margin-top: 6px; }
 
@@ -87,8 +89,6 @@
   .enf-badge.sp { background: #ff9500; }
   .enf-tophdr { margin-bottom: 8px; }
   .enf h3 { font-size: 14px; margin: 0 0 10px; color: #1c1c1e; line-height: 1.3; }
-
-  /* verdict banner */
   .enf-verdict { border-radius: 10px; padding: 8px 10px; margin-bottom: 10px; }
   .enf-verdict.justified { background: #e7f8ed; }
   .enf-verdict.revenue   { background: #ffe9ee; }
@@ -100,8 +100,6 @@
   .enf-verdict.gap       .enf-vlabel { color: #c26a00; }
   .enf-verdict.quiet     .enf-vlabel { color: #6e6e73; }
   .enf-vwhy { font-size: 11px; color: #3c3c43; margin-top: 3px; line-height: 1.35; }
-
-  /* stat rows: the numbers the verdict is built from */
   .enf-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px; }
   .enf-stat { background: #f7f7f9; border-radius: 8px; padding: 7px 9px; }
   .enf-stat .num { font-size: 18px; font-weight: 700; color: #1c1c1e; line-height: 1.1; }
@@ -113,124 +111,114 @@
 </head>
 <body>
 <div id="map"></div>
-<div id="topbar">
-  <div class="city-switch">
-    <button class="city-btn" data-city="il">Illinois</button>
-    <button class="city-btn" data-city="nyc">New York City</button>
-    <button class="city-btn" data-city="chi">Chicago Tickets</button>
+<div id="panel">
+  <div class="brand">Ora</div>
+  <div class="tag">Toggle layers on and off. Stack as many as you like.</div>
+
+  <div class="grp" data-region="il">
+    <div class="grp-h"><span>Illinois</span><span class="caret">&#9660;</span></div>
+    <div class="grp-body">
+      <label class="lyr"><input type="checkbox" data-layer="il-cam" checked><span class="swatch live"></span><span class="nm">Traffic cameras</span><span class="cnt" id="cnt-il-cam"></span></label>
+      <label class="lyr"><input type="checkbox" data-layer="chi-enf"><span class="swatch enf"></span><span class="nm">Chicago tickets</span><span class="cnt" id="cnt-chi-enf"></span></label>
+    </div>
   </div>
-  <h1 id="title">Illinois Traffic Cameras</h1>
-  <p><span id="count">-</span> <span id="subtitle">live camera locations, statewide</span></p>
-  <div id="colormode" class="color-switch">
-    <button class="color-btn active" data-mode="verdict">Safety verdict</button>
-    <button class="color-btn" data-mode="type">Camera type</button>
+
+  <div class="grp collapsed" data-region="nyc">
+    <div class="grp-h"><span>New York City</span><span class="caret">&#9660;</span></div>
+    <div class="grp-body">
+      <label class="lyr"><input type="checkbox" data-layer="nyc-cam"><span class="swatch live"></span><span class="nm">Traffic cameras</span><span class="cnt" id="cnt-nyc-cam"></span></label>
+    </div>
   </div>
-  <div id="legend"></div>
+
+  <div class="enf-controls" id="enfControls">
+    <div class="hd">Chicago tickets: color by</div>
+    <div class="color-switch">
+      <button class="color-btn active" data-mode="verdict">Safety verdict</button>
+      <button class="color-btn" data-mode="type">Camera type</button>
+    </div>
+    <div id="legend"></div>
+  </div>
 </div>
 
 <script>
-const CITIES = {
-  il: {
-    type: 'live',
-    label: 'Illinois Traffic Cameras',
-    subtitle: 'live camera locations, statewide (source refreshes every 15-300s)',
-    file: 'cameras.json',
-    center: [-88.5, 41.6], zoom: 8,
-    refreshMs: 15000,
-    snapshotUrl: (dir) => dir.snapshot
+/* ---------- layer catalog ---------- */
+const LAYERS = {
+  'il-cam': {
+    region: 'il', kind: 'live', file: 'cameras.json',
+    center: [-88.5, 41.6], zoom: 8, refreshMs: 15000,
+    snapshotUrl: (dir) => dir.snapshot,
+    refreshLabel: 'refreshes every 15s'
   },
-  nyc: {
-    type: 'live',
-    label: 'NYC Traffic Cameras',
-    subtitle: 'live camera locations citywide (refreshes every 2s)',
-    file: 'cameras-nyc.json',
-    center: [-73.95, 40.75], zoom: 11,
-    refreshMs: 2000,
-    snapshotUrl: (dir) => `https://webcams.nyctmc.org/api/cameras/${dir.camId}/image?t=${Date.now()}`
+  'nyc-cam': {
+    region: 'nyc', kind: 'live', file: 'cameras-nyc.json',
+    center: [-73.95, 40.75], zoom: 11, refreshMs: 2000,
+    snapshotUrl: (dir) => `https://webcams.nyctmc.org/api/cameras/${dir.camId}/image?t=${Date.now()}`,
+    refreshLabel: 'refreshes every 2s (live)'
   },
-  chi: {
-    type: 'enforcement',
-    label: 'Chicago Enforcement Cameras',
-    subtitle: 'is each camera on real danger, or just ticketing? (tap one)',
-    file: 'cameras-chicago-enforcement.json',
+  'chi-enf': {
+    region: 'il', kind: 'enforcement', file: 'cameras-chicago-enforcement.json',
     center: [-87.72, 41.84], zoom: 10.3
   }
 };
 
-// verdict definitions: how each camera's ticket volume lines up with nearby injury crashes
 const VERDICT = {
-  justified: { color: '#34c759', label: 'On real danger',
-    line: 'Heavy ticketing AND a high injury-crash count nearby, this camera sits where the risk is.' },
-  revenue:   { color: '#ff2d55', label: 'Ticket-heavy, low crash',
-    line: 'Among the busiest ticketing cameras, yet few injury crashes nearby, volume outruns the safety need.' },
-  gap:       { color: '#ff9500', label: 'Crashes, light enforcement',
-    line: 'A high injury-crash count nearby but below-median ticketing, a spot the cameras are not catching.' },
-  quiet:     { color: '#b0b0b5', label: 'Quiet on both',
-    line: 'Below-median on both ticketing and nearby injury crashes.' }
+  justified: { color: '#34c759', label: 'On real danger' },
+  revenue:   { color: '#ff2d55', label: 'Ticket-heavy, low crash' },
+  gap:       { color: '#ff9500', label: 'Crashes, light enforcement' },
+  quiet:     { color: '#b0b0b5', label: 'Quiet on both' }
 };
 
-let currentCity = 'il';
+const dataCache = {};        // key -> parsed geojson
+const active = new Set();     // active layer keys
+let enfColorMode = 'verdict';
+let enfMeta = null;
 let popup = null;
-let handlersBound = false;
-let enfColorMode = 'verdict';   // 'verdict' | 'type'
-let enfMeta = null;             // thresholds loaded from the enforcement geojson
 
 const map = new maplibregl.Map({
   container: 'map',
   style: 'https://tiles.openfreemap.org/styles/positron',
-  center: CITIES.il.center,
-  zoom: CITIES.il.zoom,
-  pitch: 0
+  center: LAYERS['il-cam'].center, zoom: LAYERS['il-cam'].zoom, pitch: 0
 });
 map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
-/* ---------- live-camera popup ---------- */
-function refreshImg(imgEl, dir) { imgEl.src = CITIES[currentCity].snapshotUrl(dir); }
+const srcId = (k) => `src-${k}`;
 
-function buildLivePopup(props) {
+/* ---------- popups ---------- */
+function buildLivePopup(props, cfg) {
   const dirs = props.directions;
   const first = dirs[0];
   const showDirButtons = dirs.length > 1 && dirs[0].direction;
-  const refreshLabel = CITIES[currentCity].refreshMs <= 2000 ? 'refreshes every 2s (live)' : 'refreshes every 15s';
   return `
     <div class="popup-inner">
-      <img id="popup-img" src="${CITIES[currentCity].snapshotUrl(first)}" alt="${props.name}">
+      <img id="popup-img" src="${cfg.snapshotUrl(first)}" alt="${props.name}">
       <div class="popup-body">
         <h3>${props.name}</h3>
         ${showDirButtons ? `<div class="popup-dirs">
           ${dirs.map((d,i) => `<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.direction || '?'}</button>`).join('')}
         </div>` : ''}
-        <div class="popup-age">${refreshLabel}</div>
+        <div class="popup-age">${cfg.refreshLabel}</div>
       </div>
     </div>`;
 }
 
-/* ---------- enforcement popup: verdict + the stats behind it ---------- */
 function buildEnfPopup(props) {
   const isRL = props.kind === 'redlight';
   const fmt = (n) => Number(n).toLocaleString();
   const v = VERDICT[props.quad] || VERDICT.quiet;
   const vMed = enfMeta ? enfMeta.vMedian : 855;
   const cMed = enfMeta ? enfMeta.crashMedian : 24;
-
-  // relative language for the reasoning line
   const ticketsVs = props.v90 >= vMed ? 'above' : 'below';
   const crashVs   = props.crash_injury >= cMed ? 'above' : 'below';
   const causeLabel = isRL ? 'ran the light' : 'were speeding';
-
   const approaches = typeof props.approaches === 'string' ? JSON.parse(props.approaches || '[]') : (props.approaches || []);
   const metaBits = [];
   if (!isRL && approaches.length) metaBits.push('Watches: ' + approaches.join(', '));
   if (!isRL && props.goLive) metaBits.push('Live since ' + props.goLive);
   metaBits.push(`Injury crashes counted within ${enfMeta ? enfMeta.radius_m : 150} m, since 2023`);
-
   return `
     <div class="enf">
-      <div class="enf-tophdr">
-        <span class="enf-badge ${isRL ? 'rl' : 'sp'}">${isRL ? 'Red Light' : 'Speed'}</span>
-      </div>
+      <div class="enf-tophdr"><span class="enf-badge ${isRL ? 'rl' : 'sp'}">${isRL ? 'Red Light' : 'Speed'}</span></div>
       <h3>${props.name}</h3>
-
       <div class="enf-verdict ${props.quad}">
         <div class="enf-vlabel">${v.label}</div>
         <div class="enf-vwhy">
@@ -238,7 +226,6 @@ function buildEnfPopup(props) {
           &middot; ${fmt(props.crash_injury)} injury crashes nearby (${crashVs} the ${fmt(cMed)} median).
         </div>
       </div>
-
       <div class="enf-stats">
         <div class="enf-stat ${props.v90 >= vMed ? 'hi' : ''}">
           <div class="num">${fmt(props.v90)}</div>
@@ -254,22 +241,18 @@ function buildEnfPopup(props) {
       <div class="enf-vwhy" style="margin-top:8px">
         ${props.crash_cause} of those crashes happened because drivers ${causeLabel} &mdash; exactly what this camera targets.
       </div>
-
       <div class="enf-meta">${metaBits.join('<br>')}</div>
     </div>`;
 }
 
-/* color expression + legend depend on the active color mode */
+/* ---------- color + legend ---------- */
 function enfColorExpr() {
   if (enfColorMode === 'type')
     return ['match', ['get', 'kind'], 'redlight', '#ff3b30', 'speed', '#ff9500', '#8e8e93'];
   return ['match', ['get', 'quad'],
-    'justified', VERDICT.justified.color,
-    'revenue',   VERDICT.revenue.color,
-    'gap',       VERDICT.gap.color,
-    'quiet',     VERDICT.quiet.color, '#b0b0b5'];
+    'justified', VERDICT.justified.color, 'revenue', VERDICT.revenue.color,
+    'gap', VERDICT.gap.color, 'quiet', VERDICT.quiet.color, '#b0b0b5'];
 }
-
 function renderLegend() {
   const el = document.getElementById('legend');
   const sizeRow = `
@@ -279,163 +262,142 @@ function renderLegend() {
       <div class="sizewrap"><span class="sizedot" style="width:28px;height:28px"></span><span class="sizelbl">most</span></div>
       <span class="sizelbl" style="margin-bottom:2px">tickets, last 90 days</span>
     </div>`;
-  if (enfColorMode === 'type') {
-    el.innerHTML = `
+  el.innerHTML = (enfColorMode === 'type') ? `
       <div class="row"><span class="dot rl"></span> Red light camera</div>
-      <div class="row"><span class="dot sp"></span> Speed camera</div>
-      ${sizeRow}`;
-  } else {
-    el.innerHTML = `
+      <div class="row"><span class="dot sp"></span> Speed camera</div>${sizeRow}` : `
       <div class="row"><span class="dot justified"></span> On real danger <span class="sub">&nbsp;tickets + crashes</span></div>
       <div class="row"><span class="dot revenue"></span> Ticket-heavy, low crash</div>
       <div class="row"><span class="dot gap"></span> Crashes, light enforcement</div>
-      <div class="row"><span class="dot quiet"></span> Quiet on both</div>
-      ${sizeRow}`;
-  }
+      <div class="row"><span class="dot quiet"></span> Quiet on both</div>${sizeRow}`;
+}
+function syncEnfControls() {
+  document.getElementById('enfControls').classList.toggle('show', active.has('chi-enf'));
+  if (active.has('chi-enf')) renderLegend();
 }
 
-/* ---------- layer building ---------- */
-function teardown() {
-  ['clusters','cluster-count','cam-points','enf-points'].forEach(id => {
+/* ---------- add / remove layers ---------- */
+function addLiveLayers(k, data) {
+  const s = srcId(k);
+  map.addSource(s, { type: 'geojson', data, cluster: true, clusterMaxZoom: 12, clusterRadius: 40 });
+  map.addLayer({ id: `${k}__clusters`, type: 'circle', source: s, filter: ['has', 'point_count'],
+    paint: { 'circle-color': '#007aff', 'circle-radius': ['step', ['get', 'point_count'], 14, 25, 18, 100, 24],
+             'circle-opacity': 0.85, 'circle-stroke-width': 2, 'circle-stroke-color': '#fff' } });
+  map.addLayer({ id: `${k}__cluster-count`, type: 'symbol', source: s, filter: ['has', 'point_count'],
+    layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-size': 12, 'text-font': ['Noto Sans Bold'] },
+    paint: { 'text-color': '#fff' } });
+  map.addLayer({ id: `${k}__points`, type: 'circle', source: s, filter: ['!', ['has', 'point_count']],
+    paint: { 'circle-color': '#007aff', 'circle-radius': 6, 'circle-stroke-width': 2, 'circle-stroke-color': '#fff' } });
+}
+function addEnfLayers(k, data) {
+  map.addSource(srcId(k), { type: 'geojson', data });
+  map.addLayer({ id: `${k}__circle`, type: 'circle', source: srcId(k),
+    paint: { 'circle-color': enfColorExpr(),
+      'circle-radius': ['interpolate', ['linear'], ['get', 'v90'], 0, 3, 50, 5, 300, 8, 1500, 13, 6000, 20, 16000, 28, 33000, 36],
+      'circle-opacity': 0.78, 'circle-stroke-width': 1.2, 'circle-stroke-color': '#fff' } });
+}
+function removeLayer(k) {
+  [`${k}__clusters`, `${k}__cluster-count`, `${k}__points`, `${k}__circle`].forEach(id => {
     if (map.getLayer(id)) map.removeLayer(id);
   });
-  if (map.getSource('cameras')) map.removeSource('cameras');
+  if (map.getSource(srcId(k))) map.removeSource(srcId(k));
 }
 
-function buildLiveLayers(data) {
-  map.addSource('cameras', { type: 'geojson', data, cluster: true, clusterMaxZoom: 12, clusterRadius: 40 });
-  map.addLayer({
-    id: 'clusters', type: 'circle', source: 'cameras', filter: ['has', 'point_count'],
-    paint: {
-      'circle-color': '#007aff',
-      'circle-radius': ['step', ['get', 'point_count'], 14, 25, 18, 100, 24],
-      'circle-opacity': 0.85, 'circle-stroke-width': 2, 'circle-stroke-color': '#fff'
-    }
-  });
-  map.addLayer({
-    id: 'cluster-count', type: 'symbol', source: 'cameras', filter: ['has', 'point_count'],
-    layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-size': 12, 'text-font': ['Noto Sans Bold'] },
-    paint: { 'text-color': '#fff' }
-  });
-  map.addLayer({
-    id: 'cam-points', type: 'circle', source: 'cameras', filter: ['!', ['has', 'point_count']],
-    paint: { 'circle-color': '#007aff', 'circle-radius': 6, 'circle-stroke-width': 2, 'circle-stroke-color': '#fff' }
-  });
+async function enableLayer(k, fly = true) {
+  const cfg = LAYERS[k];
+  if (!dataCache[k]) {
+    const res = await fetch(cfg.file);
+    dataCache[k] = await res.json();
+    const cnt = document.getElementById('cnt-' + k);
+    if (cnt) cnt.textContent = dataCache[k].features.length.toLocaleString();
+  }
+  const data = dataCache[k];
+  if (cfg.kind === 'enforcement') { enfMeta = data.meta || null; addEnfLayers(k, data); }
+  else addLiveLayers(k, data);
+  active.add(k);
+  syncEnfControls();
+  if (fly) map.easeTo({ center: cfg.center, zoom: cfg.zoom, duration: 700 });
 }
-
-function buildEnfLayers(data) {
-  map.addSource('cameras', { type: 'geojson', data });
-  map.addLayer({
-    id: 'enf-points', type: 'circle', source: 'cameras',
-    paint: {
-      'circle-color': enfColorExpr(),
-      'circle-radius': ['interpolate', ['linear'], ['get', 'v90'],
-        0, 3, 50, 5, 300, 8, 1500, 13, 6000, 20, 16000, 28, 33000, 36],
-      'circle-opacity': 0.78, 'circle-stroke-width': 1.2, 'circle-stroke-color': '#fff'
-    }
-  });
-}
-
-/* ---------- event handlers (bound once) ---------- */
-function bindHandlers() {
-  if (handlersBound) return;
-  handlersBound = true;
-
-  map.on('click', 'clusters', async (e) => {
-    const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
-    const clusterId = features[0].properties.cluster_id;
-    const source = map.getSource('cameras');
-    const leaves = await source.getClusterLeaves(clusterId, Infinity, 0);
-    if (!leaves.length) return;
-    const bounds = new maplibregl.LngLatBounds();
-    leaves.forEach(leaf => bounds.extend(leaf.geometry.coordinates));
-    map.fitBounds(bounds, { padding: 60, maxZoom: 17, duration: 600 });
-  });
-
-  map.on('click', 'cam-points', (e) => {
-    const feature = e.features[0];
-    const props = JSON.parse(JSON.stringify(feature.properties));
-    props.directions = typeof props.directions === 'string' ? JSON.parse(props.directions) : props.directions;
-    const coords = feature.geometry.coordinates.slice();
-    if (popup) popup.remove();
-    popup = new maplibregl.Popup({ closeButton: true, maxWidth: '280px' })
-      .setLngLat(coords).setHTML(buildLivePopup(props)).addTo(map);
-
-    let currentIdx = 0, intervalId = null;
-    setTimeout(() => {
-      const el = popup.getElement();
-      const img = el.querySelector('#popup-img');
-      intervalId = setInterval(() => refreshImg(img, props.directions[currentIdx]), CITIES[currentCity].refreshMs);
-      el.querySelectorAll('.dir-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          currentIdx = parseInt(btn.dataset.idx, 10);
-          el.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          refreshImg(img, props.directions[currentIdx]);
-        });
-      });
-    }, 0);
-    popup.on('close', () => { if (intervalId) clearInterval(intervalId); });
-  });
-
-  map.on('click', 'enf-points', (e) => {
-    const feature = e.features[0];
-    const props = feature.properties;
-    const coords = feature.geometry.coordinates.slice();
-    if (popup) popup.remove();
-    popup = new maplibregl.Popup({ closeButton: true, maxWidth: '260px' })
-      .setLngLat(coords).setHTML(buildEnfPopup(props)).addTo(map);
-  });
-
-  ['cam-points','clusters','enf-points'].forEach(id => {
-    map.on('mouseenter', id, () => map.getCanvas().style.cursor = 'pointer');
-    map.on('mouseleave', id, () => map.getCanvas().style.cursor = '');
-  });
-}
-
-/* ---------- mode switching ---------- */
-async function loadCity(key) {
-  currentCity = key;
-  const cfg = CITIES[key];
-  const isEnf = cfg.type === 'enforcement';
-
-  document.querySelectorAll('.city-btn').forEach(b => b.classList.toggle('active', b.dataset.city === key));
-  document.getElementById('title').textContent = cfg.label;
-  document.getElementById('subtitle').textContent = cfg.subtitle;
-  document.getElementById('legend').classList.toggle('show', isEnf);
-  document.getElementById('colormode').classList.toggle('show', isEnf);
-  document.getElementById('count').style.color = isEnf ? '#ff3b30' : '#007aff';
-
+function disableLayer(k) {
+  removeLayer(k);
+  active.delete(k);
   if (popup) { popup.remove(); popup = null; }
-
-  const res = await fetch(cfg.file);
-  const data = await res.json();
-  document.getElementById('count').textContent = data.features.length.toLocaleString();
-  if (isEnf) { enfMeta = data.meta || null; renderLegend(); }
-
-  teardown();
-  if (isEnf) buildEnfLayers(data);
-  else buildLiveLayers(data);
-  bindHandlers();
-
-  map.easeTo({ center: cfg.center, zoom: cfg.zoom });
+  syncEnfControls();
 }
 
-document.querySelectorAll('.city-btn').forEach(btn => {
-  btn.addEventListener('click', () => loadCity(btn.dataset.city));
-});
+/* ---------- click / hover handlers (bound once per known layer id) ---------- */
+function bindHandlers() {
+  Object.keys(LAYERS).forEach(k => {
+    const cfg = LAYERS[k];
+    if (cfg.kind === 'live') {
+      map.on('click', `${k}__clusters`, async (e) => {
+        const f = map.queryRenderedFeatures(e.point, { layers: [`${k}__clusters`] })[0];
+        const leaves = await map.getSource(srcId(k)).getClusterLeaves(f.properties.cluster_id, Infinity, 0);
+        if (!leaves.length) return;
+        const b = new maplibregl.LngLatBounds();
+        leaves.forEach(l => b.extend(l.geometry.coordinates));
+        map.fitBounds(b, { padding: 60, maxZoom: 17, duration: 600 });
+      });
+      map.on('click', `${k}__points`, (e) => {
+        const feature = e.features[0];
+        const props = JSON.parse(JSON.stringify(feature.properties));
+        props.directions = typeof props.directions === 'string' ? JSON.parse(props.directions) : props.directions;
+        if (popup) popup.remove();
+        popup = new maplibregl.Popup({ closeButton: true, maxWidth: '280px' })
+          .setLngLat(feature.geometry.coordinates.slice()).setHTML(buildLivePopup(props, cfg)).addTo(map);
+        let idx = 0, timer = null;
+        setTimeout(() => {
+          const el = popup.getElement();
+          const img = el.querySelector('#popup-img');
+          timer = setInterval(() => { img.src = cfg.snapshotUrl(props.directions[idx]); }, cfg.refreshMs);
+          el.querySelectorAll('.dir-btn').forEach(btn => btn.addEventListener('click', () => {
+            idx = parseInt(btn.dataset.idx, 10);
+            el.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            img.src = cfg.snapshotUrl(props.directions[idx]);
+          }));
+        }, 0);
+        popup.on('close', () => { if (timer) clearInterval(timer); });
+      });
+      map.on('mouseenter', `${k}__clusters`, () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', `${k}__clusters`, () => map.getCanvas().style.cursor = '');
+      map.on('mouseenter', `${k}__points`, () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', `${k}__points`, () => map.getCanvas().style.cursor = '');
+    } else {
+      map.on('click', `${k}__circle`, (e) => {
+        const feature = e.features[0];
+        if (popup) popup.remove();
+        popup = new maplibregl.Popup({ closeButton: true, maxWidth: '260px' })
+          .setLngLat(feature.geometry.coordinates.slice()).setHTML(buildEnfPopup(feature.properties)).addTo(map);
+      });
+      map.on('mouseenter', `${k}__circle`, () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', `${k}__circle`, () => map.getCanvas().style.cursor = '');
+    }
+  });
+}
 
-/* color-mode toggle (enforcement only) */
+/* ---------- wire up UI ---------- */
+document.querySelectorAll('.grp-h').forEach(h => {
+  h.addEventListener('click', () => h.parentElement.classList.toggle('collapsed'));
+});
+document.querySelectorAll('.lyr input').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const k = cb.dataset.layer;
+    if (cb.checked) enableLayer(k); else disableLayer(k);
+  });
+});
 document.querySelectorAll('.color-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     enfColorMode = btn.dataset.mode;
     document.querySelectorAll('.color-btn').forEach(b => b.classList.toggle('active', b === btn));
-    if (map.getLayer('enf-points')) map.setPaintProperty('enf-points', 'circle-color', enfColorExpr());
+    if (map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle', 'circle-color', enfColorExpr());
     renderLegend();
   });
 });
 
-map.on('load', () => loadCity('il'));
+map.on('load', () => {
+  bindHandlers();
+  enableLayer('il-cam', false);  // default layer, no fly
+});
 </script>
 </body>
 </html>
