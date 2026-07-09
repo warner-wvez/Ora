@@ -32,6 +32,7 @@ This is the one insight the whole stack uniquely enables: enforcement cameras an
 - **Base map toggle** — switch between the clean light style and satellite imagery (Esri World Imagery). Satellite is especially useful here: you can see the actual road and intersection each camera watches. Pin outlines thicken on satellite so they stay visible.
 - **Hover + selection feedback** — hovering a pin shows a ring and a name tooltip (a preview of what you'll get). The selected pin stays ringed even as you pan/zoom away, and a "Back to selection" button flies you back to it.
 - **In-layer filters** (Chicago tickets) — filter the enforcement layer by verdict (e.g. show only the 115 "ticket-heavy, low crash" cameras) and by camera type (red light / speed), so the layer works as an investigative tool, not just a picture.
+- **Shareable links** — the URL always reflects exactly what you're looking at (active layers, map position, color mode, base map, filters, and the selected camera). "Copy link" grabs it; opening someone's link restores that precise view, popup and all. The app opens on the Chicago enforcement verdict layer by default (the most distinctive view), not a generic dot field.
 
 These follow the map-UI principles in [Eleken's map UI design guide](https://www.eleken.co/blog-posts/map-ui-design): working search, style options for different backgrounds, clear hover/selection states with a return-to-selection helper, and filters to focus on just what matters.
 
