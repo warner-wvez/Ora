@@ -1,0 +1,145 @@
+{
+ "FL": {
+  "name": "Florida",
+  "file": "states/FL.json",
+  "count": 4905,
+  "center": [
+   -81.7,
+   28.2
+  ],
+  "zoom": 6,
+  "video": true
+ },
+ "GA": {
+  "name": "Georgia",
+  "file": "states/GA.json",
+  "count": 4043,
+  "center": [
+   -83.6,
+   32.8
+  ],
+  "zoom": 6.5,
+  "video": true
+ },
+ "UT": {
+  "name": "Utah",
+  "file": "states/UT.json",
+  "count": 2059,
+  "center": [
+   -111.7,
+   39.9
+  ],
+  "zoom": 6,
+  "video": false
+ },
+ "PA": {
+  "name": "Pennsylvania",
+  "file": "states/PA.json",
+  "count": 1414,
+  "center": [
+   -77.7,
+   40.9
+  ],
+  "zoom": 6.5,
+  "video": true
+ },
+ "NC": {
+  "name": "North Carolina",
+  "file": "states/NC.json",
+  "count": 1115,
+  "center": [
+   -79.4,
+   35.5
+  ],
+  "zoom": 6.5,
+  "video": true
+ },
+ "NV": {
+  "name": "Nevada",
+  "file": "states/NV.json",
+  "count": 648,
+  "center": [
+   -116.9,
+   39.3
+  ],
+  "zoom": 5.8,
+  "video": true
+ },
+ "AZ": {
+  "name": "Arizona",
+  "file": "states/AZ.json",
+  "count": 644,
+  "center": [
+   -111.9,
+   34.3
+  ],
+  "zoom": 6,
+  "video": false
+ },
+ "WI": {
+  "name": "Wisconsin",
+  "file": "states/WI.json",
+  "count": 482,
+  "center": [
+   -89.7,
+   44.5
+  ],
+  "zoom": 6.5,
+  "video": true
+ },
+ "ID": {
+  "name": "Idaho",
+  "file": "states/ID.json",
+  "count": 457,
+  "center": [
+   -114.5,
+   44.4
+  ],
+  "zoom": 5.8,
+  "video": false
+ },
+ "NE-ENG": {
+  "name": "New England (ME/NH/VT)",
+  "file": "states/NE-ENG.json",
+  "count": 404,
+  "center": [
+   -71.5,
+   44.0
+  ],
+  "zoom": 6.5,
+  "video": false
+ },
+ "CT": {
+  "name": "Connecticut",
+  "file": "states/CT.json",
+  "count": 347,
+  "center": [
+   -72.7,
+   41.6
+  ],
+  "zoom": 8.5,
+  "video": false
+ },
+ "LA": {
+  "name": "Louisiana",
+  "file": "states/LA.json",
+  "count": 336,
+  "center": [
+   -92.0,
+   31.0
+  ],
+  "zoom": 6.5,
+  "video": true
+ },
+ "AK": {
+  "name": "Alaska",
+  "file": "states/AK.json",
+  "count": 123,
+  "center": [
+   -149.6,
+   61.2
+  ],
+  "zoom": 5,
+  "video": false
+ }
+}
