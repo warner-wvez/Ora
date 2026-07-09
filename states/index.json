@@ -229,5 +229,16 @@
   ],
   "zoom": 5.2,
   "video": false
+ },
+ "OR": {
+  "name": "Oregon",
+  "file": "states/OR.json",
+  "count": 1127,
+  "center": [
+   -120.5,
+   44.0
+  ],
+  "zoom": 6,
+  "video": false
  }
 }
