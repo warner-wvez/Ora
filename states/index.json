@@ -318,5 +318,27 @@
   "zoom": 6.2,
   "video": false,
   "imgproxy": "wsrv"
+ },
+ "TN": {
+  "name": "Tennessee",
+  "file": "states/TN.json",
+  "count": 667,
+  "center": [
+   -86.3,
+   35.8
+  ],
+  "zoom": 6.4,
+  "video": true
+ },
+ "OK": {
+  "name": "Oklahoma",
+  "file": "states/OK.json",
+  "count": 135,
+  "center": [
+   -97.5,
+   35.5
+  ],
+  "zoom": 6.4,
+  "video": true
  }
 }
