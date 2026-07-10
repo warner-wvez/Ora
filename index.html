@@ -308,8 +308,9 @@ function mediaHTML(dir, cfg){
     <video id="popup-vid" class="vid" muted autoplay playsinline></video>
     <div class="img-offline">&#9888;<span>Camera offline</span></div>
     <button class="enlarge-btn" title="Enlarge" data-enlarge>&#10530;</button></div>`;
-  // a video-only camera in a browser that cannot play HLS has nothing to fall back to
-  if(!dir.snapshot) return `<div class="popup-imgwrap err"><div class="img-offline">&#9888;<span>Live video unsupported here</span></div></div>`;
+  // no still to fall back on: either a video-only camera this browser cannot play, or a
+  // location-only pin (camera exists, no feed published) — say which, do not imply it is broken
+  if(!dir.snapshot) return `<div class="popup-imgwrap err noposter"><div class="img-offline">&#9888;<span>${dir.video?'Live video unsupported here':'No live image at this camera'}</span></div></div>`;
   return `<div class="popup-imgwrap"><img id="popup-img" src="${cfg.snap(dir)}" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div>
     <button class="enlarge-btn" title="Enlarge" data-enlarge>&#10530;</button></div>`;
 }
