@@ -262,5 +262,16 @@
   ],
   "zoom": 6.3,
   "video": false
+ },
+ "TX": {
+  "name": "Texas",
+  "file": "states/TX.json",
+  "count": 3429,
+  "center": [
+   -99.3,
+   31.3
+  ],
+  "zoom": 5.4,
+  "video": true
  }
 }
