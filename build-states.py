@@ -120,7 +120,8 @@ def build_state(code, cfg):
                 'video': im.get('videoUrl') or None,
                 'label': (im.get('description') or '').strip()
             })
-        if not imgs: continue
+        # location-first: a camera whose every view is disabled/blocked still marks a spot
+        if not imgs: imgs=[{'snapshot':None,'video':None,'label':''}]
         # where the feed says which way the camera looks, hang it on the view,
         # same shape Washington uses. 'Unknown' and 'Inbound' get no chip.
         facing=FACING.get((r.get('direction') or '').strip().lower())

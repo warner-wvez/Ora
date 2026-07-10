@@ -15,10 +15,11 @@ def main():
     feats=[]
     for f in d['features']:
         a=f['attributes']; lat,lng,fn=a.get('latitude'),a.get('longitude'),a.get('filename')
-        if not lat or not lng or not fn: continue
+        if not lat or not lng: continue   # location-first: keep image-less cams, drop only no-coordinate rows
+        snap=f'https://tripcheck.com/RoadCams/cams/{fn}' if fn else None
         feats.append({'type':'Feature','geometry':{'type':'Point','coordinates':[lng,lat]},
             'properties':{'name':(a.get('title') or 'Camera').strip(),'kind':'live',
-                'directions':[{'snapshot':f'https://tripcheck.com/RoadCams/cams/{fn}','video':None,'label':''}],
+                'directions':[{'snapshot':snap,'video':None,'label':''}],
                 'roadway':(a.get('route') or '').strip(),'county':''}})
     os.makedirs('states', exist_ok=True)
     json.dump({'type':'FeatureCollection','features':feats}, open('states/OR.json','w'))
