@@ -86,7 +86,8 @@ def build(code, cfg):
             c['dirs'].append({'snapshot':v.get('url'),'video':vid,'label':(v.get('category') or '').title()})
     feats=[]
     for c in cams.values():
-        if not c['coords'] or not c['dirs']: continue
+        if not c['coords']: continue                                             # no location -> cannot place a pin
+        if not c['dirs']: c['dirs']=[{'snapshot':None,'video':None,'label':''}]   # location-first: keep feed-less cameras
         feats.append({'type':'Feature','geometry':{'type':'Point','coordinates':c['coords']},
             'properties':{'name':c['name'] or 'Camera','kind':'live','directions':c['dirs'],'roadway':'','county':''}})
     # video flag: do any of several sampled streams allow cross-origin playback?
