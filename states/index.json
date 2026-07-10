@@ -273,5 +273,16 @@
   ],
   "zoom": 5.4,
   "video": true
+ },
+ "WA": {
+  "name": "Washington",
+  "file": "states/WA.json",
+  "count": 1516,
+  "center": [
+   -120.5,
+   47.4
+  ],
+  "zoom": 6.3,
+  "video": false
  }
 }

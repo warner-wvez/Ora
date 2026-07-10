@@ -1,0 +1,7652 @@
+{
+ "measured_at": "2026-07-10T03:11:46Z",
+ "window_sec": 844,
+ "passes": 9,
+ "cameras": {
+  "9248": {
+   "refresh_sec": 377,
+   "changes": 2,
+   "samples": 9
+  },
+  "9833": {
+   "stale_since": "2003-09-02T23:05:50Z"
+  },
+  "9908": {
+   "refresh_sec": 244,
+   "changes": 3,
+   "samples": 9
+  },
+  "1237": {
+   "refresh_sec": 247,
+   "changes": 3,
+   "samples": 9
+  },
+  "9909": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "9906": {
+   "refresh_sec": 320,
+   "changes": 2,
+   "samples": 9
+  },
+  "10145": {
+   "refresh_sec": 322,
+   "changes": 2,
+   "samples": 9
+  },
+  "10146": {
+   "refresh_sec": 319,
+   "changes": 2,
+   "samples": 9
+  },
+  "10149": {
+   "refresh_sec": 242,
+   "changes": 3,
+   "samples": 9
+  },
+  "10151": {
+   "stale_since": "2003-09-02T23:05:50Z"
+  },
+  "1350": {
+   "refresh_sec": 80,
+   "changes": 8,
+   "samples": 9
+  },
+  "3083": {
+   "refresh_sec": 54,
+   "changes": 8,
+   "samples": 9
+  },
+  "3081": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "3082": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9419": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "4010": {
+   "refresh_sec": 418,
+   "changes": 2,
+   "samples": 9
+  },
+  "4011": {
+   "refresh_sec": 418,
+   "changes": 2,
+   "samples": 9
+  },
+  "4008": {
+   "refresh_sec": 418,
+   "changes": 2,
+   "samples": 9
+  },
+  "4009": {
+   "refresh_sec": 418,
+   "changes": 2,
+   "samples": 9
+  },
+  "9040": {
+   "refresh_sec": 239,
+   "changes": 3,
+   "samples": 9
+  },
+  "9477": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "9476": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "9478": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9479": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "9692": {
+   "refresh_sec": 250,
+   "changes": 3,
+   "samples": 9
+  },
+  "9693": {
+   "refresh_sec": 249,
+   "changes": 3,
+   "samples": 9
+  },
+  "10112": {
+   "refresh_sec": 248,
+   "changes": 3,
+   "samples": 9
+  },
+  "10113": {
+   "refresh_sec": 209,
+   "changes": 4,
+   "samples": 9
+  },
+  "9741": {
+   "refresh_sec": 256,
+   "changes": 3,
+   "samples": 9
+  },
+  "9742": {
+   "refresh_sec": 257,
+   "changes": 3,
+   "samples": 9
+  },
+  "1233": {
+   "refresh_sec": 242,
+   "changes": 3,
+   "samples": 9
+  },
+  "9502": {
+   "refresh_sec": 243,
+   "changes": 3,
+   "samples": 9
+  },
+  "9163": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "9688": {
+   "refresh_sec": 246,
+   "changes": 3,
+   "samples": 9
+  },
+  "9689": {
+   "refresh_sec": 247,
+   "changes": 3,
+   "samples": 9
+  },
+  "9162": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9161": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9728": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9173": {
+   "refresh_sec": 237,
+   "changes": 3,
+   "samples": 9
+  },
+  "9394": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9944": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9164": {
+   "refresh_sec": 230,
+   "changes": 3,
+   "samples": 9
+  },
+  "9166": {
+   "refresh_sec": 238,
+   "changes": 3,
+   "samples": 9
+  },
+  "9175": {
+   "refresh_sec": 209,
+   "changes": 4,
+   "samples": 9
+  },
+  "9174": {
+   "refresh_sec": 238,
+   "changes": 3,
+   "samples": 9
+  },
+  "9172": {
+   "refresh_sec": 238,
+   "changes": 3,
+   "samples": 9
+  },
+  "9035": {
+   "stale_since": "2003-09-08T17:55:29Z"
+  },
+  "9037": {
+   "refresh_sec": 239,
+   "changes": 3,
+   "samples": 9
+  },
+  "9169": {
+   "refresh_sec": 262,
+   "changes": 3,
+   "samples": 9
+  },
+  "9170": {
+   "refresh_sec": 263,
+   "changes": 3,
+   "samples": 9
+  },
+  "9038": {
+   "refresh_sec": 266,
+   "changes": 3,
+   "samples": 9
+  },
+  "9402": {
+   "refresh_sec": 266,
+   "changes": 3,
+   "samples": 9
+  },
+  "9403": {
+   "refresh_sec": 264,
+   "changes": 3,
+   "samples": 9
+  },
+  "9404": {
+   "refresh_sec": 264,
+   "changes": 3,
+   "samples": 9
+  },
+  "9813": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9151": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "10266": {
+   "refresh_sec": 58,
+   "changes": 8,
+   "samples": 9
+  },
+  "9154": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9152": {
+   "refresh_sec": 261,
+   "changes": 3,
+   "samples": 9
+  },
+  "9153": {
+   "refresh_sec": 260,
+   "changes": 3,
+   "samples": 9
+  },
+  "9167": {
+   "refresh_sec": 257,
+   "changes": 3,
+   "samples": 9
+  },
+  "9168": {
+   "refresh_sec": 256,
+   "changes": 3,
+   "samples": 9
+  },
+  "9039": {
+   "refresh_sec": 233,
+   "changes": 3,
+   "samples": 9
+  },
+  "9391": {
+   "refresh_sec": 233,
+   "changes": 3,
+   "samples": 9
+  },
+  "9045": {
+   "stale_since": "2003-09-08T17:55:29Z"
+  },
+  "9717": {
+   "refresh_sec": 230,
+   "changes": 3,
+   "samples": 9
+  },
+  "9044": {
+   "refresh_sec": 209,
+   "changes": 4,
+   "samples": 9
+  },
+  "9043": {
+   "refresh_sec": 208,
+   "changes": 4,
+   "samples": 9
+  },
+  "9042": {
+   "stale_since": "2003-09-08T17:55:29Z"
+  },
+  "9041": {
+   "stale_since": "2003-09-08T17:55:29Z"
+  },
+  "9159": {
+   "refresh_sec": 238,
+   "changes": 3,
+   "samples": 9
+  },
+  "9160": {
+   "refresh_sec": 237,
+   "changes": 3,
+   "samples": 9
+  },
+  "9155": {
+   "refresh_sec": 237,
+   "changes": 3,
+   "samples": 9
+  },
+  "9157": {
+   "refresh_sec": 236,
+   "changes": 3,
+   "samples": 9
+  },
+  "9048": {
+   "refresh_sec": 242,
+   "changes": 3,
+   "samples": 9
+  },
+  "9049": {
+   "refresh_sec": 244,
+   "changes": 3,
+   "samples": 9
+  },
+  "9047": {
+   "refresh_sec": 244,
+   "changes": 3,
+   "samples": 9
+  },
+  "10068": {
+   "refresh_sec": 346,
+   "changes": 2,
+   "samples": 9
+  },
+  "9241": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "9452": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9242": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3059": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3058": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3057": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3056": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3055": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3054": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3053": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3052": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3051": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3008": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3007": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3003": {
+   "refresh_sec": 364,
+   "changes": 2,
+   "samples": 9
+  },
+  "3002": {
+   "refresh_sec": 366,
+   "changes": 2,
+   "samples": 9
+  },
+  "3001": {
+   "refresh_sec": 367,
+   "changes": 2,
+   "samples": 9
+  },
+  "1128": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "1264": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1263": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10115": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9696": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "1352": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1349": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10053": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10114": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10054": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9694": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9695": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9788": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "3062": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10055": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "10116": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9938": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "9420": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1347": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1348": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10117": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9939": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9421": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9372": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9373": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9456": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10119": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10265": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1361": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9081": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1060": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1362": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9082": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10008": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1061": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "1363": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "9624": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9625": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9626": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10009": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "1062": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10011": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1063": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10010": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1064": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1366": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "1065": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "1066": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1367": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "1067": {
+   "refresh_sec": 113,
+   "changes": 7,
+   "samples": 9
+  },
+  "1368": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1068": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1069": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1369": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1371": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1070": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1370": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9627": {
+   "refresh_sec": 126,
+   "changes": 6,
+   "samples": 9
+  },
+  "9628": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1071": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9084": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1072": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9083": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "10178": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10179": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1375": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1376": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "10012": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10013": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "1073": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9630": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9631": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "1377": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9632": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9633": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1196": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10014": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1379": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "10015": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10016": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1075": {
+   "refresh_sec": 127,
+   "changes": 6,
+   "samples": 9
+  },
+  "1380": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10017": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9691": {
+   "refresh_sec": 209,
+   "changes": 4,
+   "samples": 9
+  },
+  "10180": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10019": {
+   "stale_since": "2026-05-10T18:27:09Z"
+  },
+  "10021": {
+   "stale_since": "2026-05-10T18:25:13Z"
+  },
+  "10022": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "1381": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10023": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9634": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1077": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "1078": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10024": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10263": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "10264": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "9635": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1382": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "10025": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "1079": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10267": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "1080": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1383": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10028": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10026": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10027": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1082": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10029": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1384": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10030": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1385": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9636": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1387": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "10031": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1388": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1389": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10032": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9085": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10033": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "1085": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "10035": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "1084": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "10034": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "1390": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10036": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1086": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "3026": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "3023": {
+   "refresh_sec": 373,
+   "changes": 2,
+   "samples": 9
+  },
+  "3025": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "9926": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10051": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1266": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1267": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9928": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9927": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1265": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10120": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10140": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10141": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10142": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1346": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9929": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9930": {
+   "refresh_sec": 104,
+   "changes": 8,
+   "samples": 9
+  },
+  "10143": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10144": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1003": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9963": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10050": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9931": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "4021": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1273": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10049": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "1274": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9287": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9288": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "4020": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1275": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9371": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9289": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9290": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1360": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9787": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9411": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1357": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1356": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9188": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9189": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9412": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9755": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9754": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1351": {
+   "refresh_sec": 342,
+   "changes": 2,
+   "samples": 9
+  },
+  "9932": {
+   "refresh_sec": 351,
+   "changes": 2,
+   "samples": 9
+  },
+  "10186": {
+   "refresh_sec": 348,
+   "changes": 2,
+   "samples": 9
+  },
+  "10187": {
+   "refresh_sec": 391,
+   "changes": 2,
+   "samples": 9
+  },
+  "10188": {
+   "refresh_sec": 366,
+   "changes": 2,
+   "samples": 9
+  },
+  "10189": {
+   "refresh_sec": 359,
+   "changes": 2,
+   "samples": 9
+  },
+  "10190": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "10191": {
+   "refresh_sec": 398,
+   "changes": 2,
+   "samples": 9
+  },
+  "10192": {
+   "refresh_sec": 392,
+   "changes": 2,
+   "samples": 9
+  },
+  "10193": {
+   "refresh_sec": 362,
+   "changes": 2,
+   "samples": 9
+  },
+  "10194": {
+   "refresh_sec": 409,
+   "changes": 2,
+   "samples": 9
+  },
+  "10195": {
+   "refresh_sec": 368,
+   "changes": 2,
+   "samples": 9
+  },
+  "10133": {
+   "stale_since": "2026-05-13T16:19:15Z"
+  },
+  "9305": {
+   "refresh_sec": 391,
+   "changes": 2,
+   "samples": 9
+  },
+  "9306": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9378": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9933": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1542": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "1543": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1541": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1540": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9790": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9379": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10210": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10211": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10212": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10213": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10214": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10215": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9247": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9934": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9910": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9912": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9911": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9913": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10061": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9296": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9297": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9338": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9339": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9340": {
+   "refresh_sec": 92,
+   "changes": 8,
+   "samples": 9
+  },
+  "9341": {
+   "stale_since": "2026-06-09T21:51:12Z"
+  },
+  "9342": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9343": {
+   "refresh_sec": 56,
+   "changes": 8,
+   "samples": 9
+  },
+  "3077": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "1287": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9924": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "3078": {
+   "refresh_sec": 57,
+   "changes": 8,
+   "samples": 9
+  },
+  "1286": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "3079": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "10255": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "3080": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9480": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9968": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9278": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9482": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "10247": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "4036": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9483": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9485": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9484": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "10204": {
+   "refresh_sec": 70,
+   "changes": 8,
+   "samples": 9
+  },
+  "10225": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "10197": {
+   "refresh_sec": 70,
+   "changes": 8,
+   "samples": 9
+  },
+  "9486": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "10226": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "10198": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "10234": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "10248": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "10235": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "10246": {
+   "refresh_sec": 65,
+   "changes": 7,
+   "samples": 8
+  },
+  "10249": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9283": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "10224": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9284": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9969": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "10074": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9798": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9220": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9947": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9949": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9948": {
+   "refresh_sec": 58,
+   "changes": 8,
+   "samples": 9
+  },
+  "9970": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1220": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "10073": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "1219": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "9489": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "1221": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9797": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "1004": {
+   "refresh_sec": 70,
+   "changes": 8,
+   "samples": 9
+  },
+  "10250": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9221": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "10063": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1005": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "9222": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "1006": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "10062": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "10233": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1007": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9923": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9224": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "10232": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9806": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1009": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "1008": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9816": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9817": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9799": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "10096": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "9690": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "10064": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "1011": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9215": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "10284": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9314": {
+   "refresh_sec": 167,
+   "changes": 5,
+   "samples": 9
+  },
+  "1392": {
+   "stale_since": "2026-07-02T13:32:32Z"
+  },
+  "1393": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "10285": {
+   "refresh_sec": 70,
+   "changes": 8,
+   "samples": 9
+  },
+  "1310": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9273": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "1313": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9503": {
+   "refresh_sec": 140,
+   "changes": 6,
+   "samples": 9
+  },
+  "9504": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1309": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1394": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1012": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1395": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "1396": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "1397": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1013": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1398": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "1014": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1399": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1015": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10274": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "10277": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10172": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10173": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1016": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "10280": {
+   "refresh_sec": 105,
+   "changes": 8,
+   "samples": 9
+  },
+  "10281": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9976": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1017": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9977": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "1018": {
+   "refresh_sec": 127,
+   "changes": 6,
+   "samples": 9
+  },
+  "1401": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9978": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9507": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9054": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1402": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1020": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9979": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1021": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9274": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9508": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9509": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1022": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9510": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9511": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1023": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9512": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "1403": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9513": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9514": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9980": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9981": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1024": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9055": {
+   "refresh_sec": 210,
+   "changes": 4,
+   "samples": 9
+  },
+  "9515": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9056": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9982": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9355": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1025": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9356": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9516": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1026": {
+   "refresh_sec": 269,
+   "changes": 3,
+   "samples": 9
+  },
+  "9057": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "9517": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1028": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9518": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9984": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "9519": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9520": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9521": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9522": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9523": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9524": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9525": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9526": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9527": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9528": {
+   "refresh_sec": 137,
+   "changes": 6,
+   "samples": 9
+  },
+  "9529": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9530": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9531": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9532": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9533": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "1029": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9534": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "9535": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "9366": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9365": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9536": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9367": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9537": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9538": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1030": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9539": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9540": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9541": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1031": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9542": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "9299": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9543": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9544": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9545": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1406": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1032": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9060": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9546": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9401": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9400": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "9972": {
+   "refresh_sec": 127,
+   "changes": 6,
+   "samples": 9
+  },
+  "1033": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9547": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1034": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9548": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "9549": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9550": {
+   "refresh_sec": 140,
+   "changes": 6,
+   "samples": 9
+  },
+  "1409": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9985": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1035": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9551": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "9552": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10067": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "1411": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "1036": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9973": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10282": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "9553": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "1037": {
+   "refresh_sec": 137,
+   "changes": 6,
+   "samples": 9
+  },
+  "9554": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1038": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9555": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1039": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1040": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9986": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9556": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9557": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1338": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "9447": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "9558": {
+   "refresh_sec": 137,
+   "changes": 6,
+   "samples": 9
+  },
+  "9559": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1042": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1412": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1043": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9068": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1044": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9069": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "1045": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1413": {
+   "refresh_sec": 127,
+   "changes": 6,
+   "samples": 9
+  },
+  "1046": {
+   "refresh_sec": 140,
+   "changes": 6,
+   "samples": 9
+  },
+  "1047": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9070": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "1416": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1048": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1417": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1418": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "1419": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1420": {
+   "refresh_sec": 140,
+   "changes": 6,
+   "samples": 9
+  },
+  "1421": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "1422": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1423": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1424": {
+   "refresh_sec": 140,
+   "changes": 6,
+   "samples": 9
+  },
+  "1425": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1426": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "1427": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "1428": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "1429": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9071": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1430": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10174": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1431": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9560": {
+   "refresh_sec": 132,
+   "changes": 6,
+   "samples": 9
+  },
+  "9275": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9276": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9561": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10238": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "10239": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9270": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9562": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9235": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9563": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9236": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9752": {
+   "refresh_sec": 168,
+   "changes": 5,
+   "samples": 9
+  },
+  "9237": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9345": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9238": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9344": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1433": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "9271": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9564": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9239": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9240": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "5021": {
+   "refresh_sec": 137,
+   "changes": 6,
+   "samples": 9
+  },
+  "9568": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "5020": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "8104": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "8105": {
+   "stale_since": "2026-05-06T02:44:05Z"
+  },
+  "5018": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "8059": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1316": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9383": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "8060": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "1054": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "1322": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "1526": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9336": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9337": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1323": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "1324": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "1325": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "1326": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9347": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "1329": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "9569": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9323": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9324": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "1328": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "9348": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9349": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9325": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9326": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "9327": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9328": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9329": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9330": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9332": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9331": {
+   "refresh_sec": 262,
+   "changes": 3,
+   "samples": 9
+  },
+  "9333": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9334": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9335": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "1055": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "1330": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "1056": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "1210": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9072": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "1058": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "1281": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "1057": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "3050": {
+   "refresh_sec": 399,
+   "changes": 2,
+   "samples": 9
+  },
+  "3041": {
+   "refresh_sec": 280,
+   "changes": 3,
+   "samples": 9
+  },
+  "3040": {
+   "refresh_sec": 280,
+   "changes": 3,
+   "samples": 9
+  },
+  "3049": {
+   "refresh_sec": 398,
+   "changes": 2,
+   "samples": 9
+  },
+  "3048": {
+   "refresh_sec": 280,
+   "changes": 3,
+   "samples": 9
+  },
+  "3047": {
+   "refresh_sec": 280,
+   "changes": 3,
+   "samples": 9
+  },
+  "3039": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3046": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3037": {
+   "refresh_sec": 401,
+   "changes": 2,
+   "samples": 9
+  },
+  "3045": {
+   "refresh_sec": 398,
+   "changes": 2,
+   "samples": 9
+  },
+  "3044": {
+   "refresh_sec": 400,
+   "changes": 2,
+   "samples": 9
+  },
+  "3036": {
+   "refresh_sec": 403,
+   "changes": 2,
+   "samples": 9
+  },
+  "3043": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3035": {
+   "refresh_sec": 393,
+   "changes": 2,
+   "samples": 9
+  },
+  "3042": {
+   "refresh_sec": 280,
+   "changes": 3,
+   "samples": 9
+  },
+  "3020": {
+   "refresh_sec": 280,
+   "changes": 3,
+   "samples": 9
+  },
+  "3021": {
+   "refresh_sec": 280,
+   "changes": 3,
+   "samples": 9
+  },
+  "3022": {
+   "refresh_sec": 408,
+   "changes": 2,
+   "samples": 9
+  },
+  "3027": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3028": {
+   "refresh_sec": 280,
+   "changes": 3,
+   "samples": 9
+  },
+  "3030": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3014": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3031": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3032": {
+   "refresh_sec": 402,
+   "changes": 2,
+   "samples": 9
+  },
+  "3033": {
+   "refresh_sec": 404,
+   "changes": 2,
+   "samples": 9
+  },
+  "1001": {
+   "refresh_sec": 406,
+   "changes": 2,
+   "samples": 9
+  },
+  "1002": {
+   "refresh_sec": 396,
+   "changes": 2,
+   "samples": 9
+  },
+  "3034": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "1127": {
+   "refresh_sec": 382,
+   "changes": 2,
+   "samples": 9
+  },
+  "4022": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "9244": {
+   "refresh_sec": 251,
+   "changes": 3,
+   "samples": 9
+  },
+  "1345": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "9094": {
+   "refresh_sec": 319,
+   "changes": 2,
+   "samples": 9
+  },
+  "8061": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "10111": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "10139": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "4029": {
+   "refresh_sec": 267,
+   "changes": 3,
+   "samples": 9
+  },
+  "4027": {
+   "refresh_sec": 248,
+   "changes": 3,
+   "samples": 9
+  },
+  "4028": {
+   "refresh_sec": 402,
+   "changes": 2,
+   "samples": 9
+  },
+  "9751": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "8096": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "8077": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "4031": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "3017": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "3013": {
+   "refresh_sec": 402,
+   "changes": 2,
+   "samples": 9
+  },
+  "3012": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3011": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3066": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3016": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "3010": {
+   "stale_since": "2025-03-17T19:12:31Z"
+  },
+  "3009": {
+   "refresh_sec": 404,
+   "changes": 2,
+   "samples": 9
+  },
+  "3006": {
+   "refresh_sec": 404,
+   "changes": 2,
+   "samples": 9
+  },
+  "3069": {
+   "refresh_sec": 404,
+   "changes": 2,
+   "samples": 9
+  },
+  "3004": {
+   "refresh_sec": 406,
+   "changes": 2,
+   "samples": 9
+  },
+  "3005": {
+   "refresh_sec": 402,
+   "changes": 2,
+   "samples": 9
+  },
+  "9580": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1434": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9581": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1435": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1088": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "9582": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "1437": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1436": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9073": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1089": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9583": {
+   "refresh_sec": 132,
+   "changes": 6,
+   "samples": 9
+  },
+  "1438": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "9989": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9584": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9990": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1090": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9586": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9587": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1091": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "1444": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9991": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9588": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1445": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9757": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "1446": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "1448": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9252": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "9589": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1449": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9590": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9591": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9992": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1092": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9592": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "9405": {
+   "refresh_sec": 132,
+   "changes": 6,
+   "samples": 9
+  },
+  "1094": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9053": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9993": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9593": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1450": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9994": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1095": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1451": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1096": {
+   "refresh_sec": 113,
+   "changes": 7,
+   "samples": 9
+  },
+  "1452": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1453": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1296": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1454": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1455": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "1456": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9594": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9995": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "9753": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "10231": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9425": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "10222": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "9433": {
+   "refresh_sec": 169,
+   "changes": 5,
+   "samples": 9
+  },
+  "9029": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "9426": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "9427": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "1099": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "1100": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "9428": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "1102": {
+   "refresh_sec": 269,
+   "changes": 3,
+   "samples": 9
+  },
+  "10070": {
+   "refresh_sec": 271,
+   "changes": 3,
+   "samples": 9
+  },
+  "10296": {
+   "refresh_sec": 250,
+   "changes": 3,
+   "samples": 9
+  },
+  "10242": {
+   "refresh_sec": 278,
+   "changes": 3,
+   "samples": 9
+  },
+  "9434": {
+   "refresh_sec": 260,
+   "changes": 3,
+   "samples": 9
+  },
+  "9914": {
+   "refresh_sec": 240,
+   "changes": 3,
+   "samples": 9
+  },
+  "9915": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "9916": {
+   "refresh_sec": 274,
+   "changes": 3,
+   "samples": 9
+  },
+  "9918": {
+   "refresh_sec": 253,
+   "changes": 3,
+   "samples": 9
+  },
+  "9919": {
+   "refresh_sec": 244,
+   "changes": 3,
+   "samples": 9
+  },
+  "9917": {
+   "refresh_sec": 263,
+   "changes": 3,
+   "samples": 9
+  },
+  "9920": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "10289": {
+   "refresh_sec": 270,
+   "changes": 3,
+   "samples": 9
+  },
+  "10129": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "1103": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "8205": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "9429": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "10130": {
+   "refresh_sec": 169,
+   "changes": 5,
+   "samples": 9
+  },
+  "10223": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "8094": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "10243": {
+   "refresh_sec": 270,
+   "changes": 3,
+   "samples": 9
+  },
+  "9028": {
+   "refresh_sec": 282,
+   "changes": 3,
+   "samples": 9
+  },
+  "10290": {
+   "refresh_sec": 261,
+   "changes": 3,
+   "samples": 9
+  },
+  "9430": {
+   "refresh_sec": 374,
+   "changes": 2,
+   "samples": 9
+  },
+  "1104": {
+   "refresh_sec": 358,
+   "changes": 2,
+   "samples": 9
+  },
+  "8201": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "1105": {
+   "refresh_sec": 311,
+   "changes": 2,
+   "samples": 9
+  },
+  "9431": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "10244": {
+   "refresh_sec": 393,
+   "changes": 2,
+   "samples": 9
+  },
+  "1355": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "10245": {
+   "refresh_sec": 378,
+   "changes": 2,
+   "samples": 9
+  },
+  "10297": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "9795": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "1106": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "9686": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1107": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1108": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1109": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "8076": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1110": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "8310": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "8311": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "8312": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "8313": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "8314": {
+   "refresh_sec": 421,
+   "changes": 2,
+   "samples": 9
+  },
+  "8315": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "8316": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "8317": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "4015": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "10107": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "4014": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "4016": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "10108": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "4017": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1113": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "4019": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "3076": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "10109": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "4005": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "4006": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "4004": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1115": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1116": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1289": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1290": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1117": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1291": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1119": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1292": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "1293": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "3071": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "3072": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "3073": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "3074": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "9227": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "9393": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "9228": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "9229": {
+   "refresh_sec": 421,
+   "changes": 2,
+   "samples": 9
+  },
+  "9230": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "9231": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "9232": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "3038": {
+   "stale_since": "2025-03-19T21:06:15Z"
+  },
+  "3068": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "9286": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1174": {
+   "refresh_sec": 58,
+   "changes": 8,
+   "samples": 9
+  },
+  "9206": {
+   "refresh_sec": 248,
+   "changes": 3,
+   "samples": 9
+  },
+  "9207": {
+   "refresh_sec": 211,
+   "changes": 4,
+   "samples": 9
+  },
+  "9432": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9208": {
+   "refresh_sec": 70,
+   "changes": 8,
+   "samples": 9
+  },
+  "1175": {
+   "refresh_sec": 70,
+   "changes": 8,
+   "samples": 9
+  },
+  "9076": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9607": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9608": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9609": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9610": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10069": {
+   "refresh_sec": 379,
+   "changes": 2,
+   "samples": 9
+  },
+  "8053": {
+   "refresh_sec": 422,
+   "changes": 2,
+   "samples": 9
+  },
+  "9783": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9784": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9179": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "9413": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9180": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1354": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9785": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9786": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1268": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1269": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10131": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9177": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9395": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "9708": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9709": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9710": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9396": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9711": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "9397": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9398": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "9399": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9936": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1154": {
+   "refresh_sec": 377,
+   "changes": 2,
+   "samples": 9
+  },
+  "9409": {
+   "refresh_sec": 362,
+   "changes": 2,
+   "samples": 9
+  },
+  "8070": {
+   "refresh_sec": 357,
+   "changes": 2,
+   "samples": 9
+  },
+  "9410": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "9941": {
+   "refresh_sec": 281,
+   "changes": 3,
+   "samples": 9
+  },
+  "9308": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9313": {
+   "refresh_sec": 58,
+   "changes": 8,
+   "samples": 9
+  },
+  "9216": {
+   "refresh_sec": 71,
+   "changes": 8,
+   "samples": 9
+  },
+  "1156": {
+   "refresh_sec": 58,
+   "changes": 8,
+   "samples": 9
+  },
+  "1339": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "10286": {
+   "refresh_sec": 71,
+   "changes": 8,
+   "samples": 9
+  },
+  "9146": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "10254": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "1157": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9149": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1158": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "1159": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "10086": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9957": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9958": {
+   "refresh_sec": 57,
+   "changes": 8,
+   "samples": 9
+  },
+  "10087": {
+   "refresh_sec": 57,
+   "changes": 8,
+   "samples": 9
+  },
+  "9148": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9217": {
+   "refresh_sec": 56,
+   "changes": 8,
+   "samples": 9
+  },
+  "10088": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9959": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9147": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "1333": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "1334": {
+   "refresh_sec": 74,
+   "changes": 8,
+   "samples": 9
+  },
+  "1335": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "10072": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "1336": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "1337": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "10065": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "10066": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "1458": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1459": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10288": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "10090": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "10091": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "1176": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "10093": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "10092": {
+   "refresh_sec": 72,
+   "changes": 8,
+   "samples": 9
+  },
+  "9226": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9997": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "9998": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "9737": {
+   "refresh_sec": 212,
+   "changes": 4,
+   "samples": 9
+  },
+  "9738": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9739": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9740": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9406": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10256": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9407": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9735": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9736": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1461": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1177": {
+   "refresh_sec": 137,
+   "changes": 6,
+   "samples": 9
+  },
+  "9733": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9734": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "1462": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9732": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "10257": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10262": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1178": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "1463": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1179": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "10258": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "1180": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1464": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1181": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1465": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "10260": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10261": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9611": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9999": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10000": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1182": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1466": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10001": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10003": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "10004": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10005": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10002": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10006": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9613": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10007": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9614": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9615": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9616": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9617": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9302": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "9714": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9715": {
+   "refresh_sec": 112,
+   "changes": 7,
+   "samples": 9
+  },
+  "9716": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9390": {
+   "refresh_sec": 236,
+   "changes": 3,
+   "samples": 9
+  },
+  "9272": {
+   "refresh_sec": 212,
+   "changes": 4,
+   "samples": 9
+  },
+  "1160": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9713": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1468": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1470": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "1469": {
+   "refresh_sec": 127,
+   "changes": 6,
+   "samples": 9
+  },
+  "1471": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1472": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1473": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "1474": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "1475": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9743": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "9573": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9253": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9254": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9574": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9575": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9251": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9576": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9577": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9578": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "5010": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "10275": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10276": {
+   "refresh_sec": 137,
+   "changes": 6,
+   "samples": 9
+  },
+  "10278": {
+   "refresh_sec": 212,
+   "changes": 4,
+   "samples": 9
+  },
+  "9618": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9619": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9620": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9491": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9492": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9493": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9494": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "9495": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9496": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "9497": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9791": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9498": {
+   "refresh_sec": 272,
+   "changes": 3,
+   "samples": 9
+  },
+  "9499": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9500": {
+   "refresh_sec": 132,
+   "changes": 6,
+   "samples": 9
+  },
+  "9501": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "9730": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9385": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9988": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9731": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "9386": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9300": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9096": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9210": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9301": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "9687": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "4030": {
+   "refresh_sec": 111,
+   "changes": 7,
+   "samples": 9
+  },
+  "9921": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9621": {
+   "refresh_sec": 128,
+   "changes": 6,
+   "samples": 9
+  },
+  "9622": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10177": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1476": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1477": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1478": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "1479": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9950": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9255": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1481": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9951": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9952": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9953": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "10125": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10126": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "10127": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10128": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9623": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "8099": {
+   "refresh_sec": 282,
+   "changes": 3,
+   "samples": 9
+  },
+  "8081": {
+   "refresh_sec": 380,
+   "changes": 2,
+   "samples": 9
+  },
+  "9034": {
+   "refresh_sec": 258,
+   "changes": 3,
+   "samples": 9
+  },
+  "9033": {
+   "refresh_sec": 212,
+   "changes": 4,
+   "samples": 9
+  },
+  "8082": {
+   "refresh_sec": 282,
+   "changes": 3,
+   "samples": 9
+  },
+  "10124": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "9243": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "9453": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "9435": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "9382": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9767": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9769": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9770": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9771": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9772": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9773": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9774": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9775": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9768": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9776": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9777": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "9778": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "9779": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9780": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9781": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9782": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9457": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "1167": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9359": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9361": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9360": {
+   "refresh_sec": 111,
+   "changes": 7,
+   "samples": 9
+  },
+  "9362": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "9363": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1295": {
+   "refresh_sec": 248,
+   "changes": 3,
+   "samples": 9
+  },
+  "9697": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9381": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9415": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1166": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9416": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "5016": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "4012": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9030": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "3084": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9814": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9815": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9190": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "9193": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9194": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9196": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9198": {
+   "refresh_sec": 58,
+   "changes": 8,
+   "samples": 9
+  },
+  "9200": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9202": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "10089": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9424": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "10251": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "10240": {
+   "refresh_sec": 238,
+   "changes": 3,
+   "samples": 9
+  },
+  "10241": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "1251": {
+   "refresh_sec": 404,
+   "changes": 2,
+   "samples": 9
+  },
+  "10052": {
+   "refresh_sec": 408,
+   "changes": 2,
+   "samples": 9
+  },
+  "10122": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "10094": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "10153": {
+   "refresh_sec": 71,
+   "changes": 8,
+   "samples": 9
+  },
+  "10154": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "10152": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "10196": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "10155": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "10037": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10291": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10292": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10293": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10294": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "10295": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10056": {
+   "refresh_sec": 387,
+   "changes": 2,
+   "samples": 9
+  },
+  "10060": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "10057": {
+   "refresh_sec": 347,
+   "changes": 2,
+   "samples": 9
+  },
+  "10058": {
+   "refresh_sec": 349,
+   "changes": 2,
+   "samples": 9
+  },
+  "10059": {
+   "refresh_sec": 284,
+   "changes": 3,
+   "samples": 9
+  },
+  "9307": {
+   "refresh_sec": 141,
+   "changes": 6,
+   "samples": 9
+  },
+  "10134": {
+   "stale_since": "2025-07-30T21:07:44Z"
+  },
+  "10135": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "10136": {
+   "refresh_sec": 396,
+   "changes": 2,
+   "samples": 9
+  },
+  "10137": {
+   "refresh_sec": 376,
+   "changes": 2,
+   "samples": 9
+  },
+  "10138": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "1252": {
+   "refresh_sec": 393,
+   "changes": 2,
+   "samples": 9
+  },
+  "10199": {
+   "refresh_sec": 376,
+   "changes": 2,
+   "samples": 9
+  },
+  "10200": {
+   "refresh_sec": 384,
+   "changes": 2,
+   "samples": 9
+  },
+  "10201": {
+   "refresh_sec": 379,
+   "changes": 2,
+   "samples": 9
+  },
+  "10202": {
+   "refresh_sec": 376,
+   "changes": 2,
+   "samples": 9
+  },
+  "10203": {
+   "refresh_sec": 373,
+   "changes": 2,
+   "samples": 9
+  },
+  "9375": {
+   "refresh_sec": 141,
+   "changes": 6,
+   "samples": 9
+  },
+  "9376": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9490": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1254": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9940": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "10121": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "1255": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10171": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "3063": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9707": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10157": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10158": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10159": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "10160": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9760": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9761": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9762": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9763": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9764": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "9765": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9766": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1358": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "1359": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9720": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9721": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9722": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9723": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "10161": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "10162": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10163": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10164": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "10165": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10166": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10167": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "10168": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10169": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10170": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9698": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9789": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "9699": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "9700": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9701": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9702": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9703": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "9704": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9705": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "9706": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10132": {
+   "refresh_sec": 394,
+   "changes": 2,
+   "samples": 9
+  },
+  "4037": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9946": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "9925": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9346": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "10181": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10182": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10185": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10183": {
+   "refresh_sec": 133,
+   "changes": 6,
+   "samples": 9
+  },
+  "9637": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9638": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9218": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9219": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9960": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "10252": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "10253": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9961": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "10095": {
+   "refresh_sec": 58,
+   "changes": 8,
+   "samples": 9
+  },
+  "9639": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9641": {
+   "refresh_sec": 140,
+   "changes": 6,
+   "samples": 9
+  },
+  "9642": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "9643": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1189": {
+   "refresh_sec": 131,
+   "changes": 6,
+   "samples": 9
+  },
+  "9644": {
+   "refresh_sec": 130,
+   "changes": 6,
+   "samples": 9
+  },
+  "9645": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9646": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9086": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9087": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9647": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9088": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9089": {
+   "refresh_sec": 129,
+   "changes": 6,
+   "samples": 9
+  },
+  "1303": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9090": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10184": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9080": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10268": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9967": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1484": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1486": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1191": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "10038": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1192": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10269": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10270": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1487": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1489": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1193": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9650": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9651": {
+   "refresh_sec": 139,
+   "changes": 6,
+   "samples": 9
+  },
+  "9653": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9654": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1491": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9655": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9656": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9657": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9422": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "9658": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9659": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1194": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9660": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "9662": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "9663": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9664": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9665": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9666": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "10039": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1195": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9667": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "1197": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9668": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1492": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1493": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1198": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "10040": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10271": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1494": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10272": {
+   "refresh_sec": 137,
+   "changes": 6,
+   "samples": 9
+  },
+  "1200": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9669": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10273": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1199": {
+   "refresh_sec": 134,
+   "changes": 6,
+   "samples": 9
+  },
+  "9670": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9671": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "1201": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9672": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9673": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9674": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1202": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "1497": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "1203": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1498": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9675": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "9676": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1499": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9677": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "9077": {
+   "refresh_sec": 140,
+   "changes": 6,
+   "samples": 9
+  },
+  "9291": {
+   "refresh_sec": 132,
+   "changes": 6,
+   "samples": 9
+  },
+  "10041": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9079": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1304": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "1502": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1503": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9744": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9745": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9746": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9747": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9748": {
+   "refresh_sec": 116,
+   "changes": 7,
+   "samples": 9
+  },
+  "9749": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "1504": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1505": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "10042": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9678": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "1506": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1173": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1332": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1507": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1508": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "1509": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1331": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10043": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10044": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "9983": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "10045": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10046": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9091": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10047": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1308": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1514": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1515": {
+   "refresh_sec": 136,
+   "changes": 6,
+   "samples": 9
+  },
+  "1516": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9679": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9680": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9681": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9316": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9317": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10236": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10237": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10048": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1019": {
+   "refresh_sec": 117,
+   "changes": 7,
+   "samples": 9
+  },
+  "9468": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9469": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10076": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9470": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9471": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9472": {
+   "refresh_sec": 137,
+   "changes": 6,
+   "samples": 9
+  },
+  "5004": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9187": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "5005": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "5006": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "5007": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "5008": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "5013": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9682": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9389": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9414": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "9436": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9438": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9439": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9440": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9441": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1527": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9092": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1528": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "9442": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9443": {
+   "refresh_sec": 70,
+   "changes": 8,
+   "samples": 9
+  },
+  "9444": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "1529": {
+   "refresh_sec": 87,
+   "changes": 8,
+   "samples": 9
+  },
+  "9466": {
+   "refresh_sec": 83,
+   "changes": 8,
+   "samples": 9
+  },
+  "1209": {
+   "refresh_sec": 86,
+   "changes": 8,
+   "samples": 9
+  },
+  "1211": {
+   "refresh_sec": 62,
+   "changes": 8,
+   "samples": 9
+  },
+  "1213": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "1283": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "1214": {
+   "refresh_sec": 68,
+   "changes": 8,
+   "samples": 9
+  },
+  "1530": {
+   "refresh_sec": 59,
+   "changes": 8,
+   "samples": 9
+  },
+  "1517": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1519": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9683": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "4038": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "9370": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9935": {
+   "refresh_sec": 404,
+   "changes": 2,
+   "samples": 9
+  },
+  "9417": {
+   "refresh_sec": 54,
+   "changes": 8,
+   "samples": 9
+  },
+  "9956": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "9955": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9954": {
+   "refresh_sec": 66,
+   "changes": 8,
+   "samples": 9
+  },
+  "10123": {
+   "refresh_sec": 60,
+   "changes": 8,
+   "samples": 9
+  },
+  "1151": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "4024": {
+   "refresh_sec": 112,
+   "changes": 7,
+   "samples": 9
+  },
+  "4023": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9458": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9459": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9460": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9461": {
+   "refresh_sec": 279,
+   "changes": 3,
+   "samples": 9
+  },
+  "9462": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9257": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9258": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9259": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9262": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9256": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9261": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9260": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9570": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10075": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9987": {
+   "refresh_sec": 112,
+   "changes": 7,
+   "samples": 9
+  },
+  "9310": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9309": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9311": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9312": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9571": {
+   "refresh_sec": 250,
+   "changes": 3,
+   "samples": 9
+  },
+  "9712": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "1152": {
+   "refresh_sec": 69,
+   "changes": 8,
+   "samples": 9
+  },
+  "9445": {
+   "refresh_sec": 64,
+   "changes": 8,
+   "samples": 9
+  },
+  "9446": {
+   "refresh_sec": 61,
+   "changes": 8,
+   "samples": 9
+  },
+  "9684": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1520": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9093": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9685": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9595": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9596": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9075": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9074": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9597": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "10287": {
+   "refresh_sec": 57,
+   "changes": 8,
+   "samples": 9
+  },
+  "9964": {
+   "refresh_sec": 54,
+   "changes": 8,
+   "samples": 9
+  },
+  "9598": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9599": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1521": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9600": {
+   "refresh_sec": 141,
+   "changes": 6,
+   "samples": 9
+  },
+  "9601": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9602": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9603": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1170": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1171": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9811": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9812": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9264": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9996": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9604": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9800": {
+   "refresh_sec": 112,
+   "changes": 7,
+   "samples": 9
+  },
+  "9801": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9808": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "9809": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "9803": {
+   "refresh_sec": 114,
+   "changes": 7,
+   "samples": 9
+  },
+  "9810": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9263": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9802": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9807": {
+   "refresh_sec": 120,
+   "changes": 7,
+   "samples": 9
+  },
+  "9804": {
+   "refresh_sec": 138,
+   "changes": 6,
+   "samples": 9
+  },
+  "10176": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9605": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9606": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "8069": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10228": {
+   "refresh_sec": 56,
+   "changes": 8,
+   "samples": 9
+  },
+  "10230": {
+   "refresh_sec": 57,
+   "changes": 8,
+   "samples": 9
+  },
+  "8051": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8075": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "10227": {
+   "refresh_sec": 58,
+   "changes": 8,
+   "samples": 9
+  },
+  "10156": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "8052": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "1353": {
+   "refresh_sec": 63,
+   "changes": 8,
+   "samples": 9
+  },
+  "10229": {
+   "refresh_sec": 67,
+   "changes": 8,
+   "samples": 9
+  },
+  "10205": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "10206": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "10207": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "10208": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "10209": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9369": {
+   "refresh_sec": 358,
+   "changes": 2,
+   "samples": 9
+  },
+  "10081": {
+   "refresh_sec": 366,
+   "changes": 2,
+   "samples": 9
+  },
+  "9464": {
+   "refresh_sec": 284,
+   "changes": 3,
+   "samples": 9
+  },
+  "8100": {
+   "refresh_sec": 388,
+   "changes": 2,
+   "samples": 9
+  },
+  "9467": {
+   "refresh_sec": 348,
+   "changes": 2,
+   "samples": 9
+  },
+  "10082": {
+   "refresh_sec": 284,
+   "changes": 3,
+   "samples": 9
+  },
+  "10083": {
+   "refresh_sec": 366,
+   "changes": 2,
+   "samples": 9
+  },
+  "10084": {
+   "refresh_sec": 284,
+   "changes": 3,
+   "samples": 9
+  },
+  "10085": {
+   "refresh_sec": 268,
+   "changes": 3,
+   "samples": 9
+  },
+  "9358": {
+   "refresh_sec": 284,
+   "changes": 3,
+   "samples": 9
+  },
+  "8078": {
+   "refresh_sec": 212,
+   "changes": 4,
+   "samples": 9
+  },
+  "1135": {
+   "refresh_sec": 277,
+   "changes": 2,
+   "samples": 9
+  },
+  "8032": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "4033": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "9451": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "9450": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9449": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "9448": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "9318": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9319": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9320": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9321": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9974": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1525": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1131": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9357": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9455": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9265": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9213": {
+   "refresh_sec": 119,
+   "changes": 7,
+   "samples": 9
+  },
+  "5000": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9975": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "5001": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "5002": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "5003": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9050": {
+   "refresh_sec": 247,
+   "changes": 3,
+   "samples": 9
+  },
+  "9051": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9052": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9298": {
+   "refresh_sec": 118,
+   "changes": 7,
+   "samples": 9
+  },
+  "9380": {
+   "refresh_sec": 142,
+   "changes": 6,
+   "samples": 9
+  },
+  "9145": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9437": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "8062": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "8063": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9718": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "9719": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9303": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9032": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9758": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "8072": {
+   "refresh_sec": 122,
+   "changes": 7,
+   "samples": 9
+  },
+  "1343": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9245": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9267": {
+   "refresh_sec": 236,
+   "changes": 3,
+   "samples": 9
+  },
+  "9250": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9285": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1279": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "1280": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "10102": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "10103": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "10104": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "10105": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "8071": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "10106": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "3024": {
+   "refresh_sec": 398,
+   "changes": 2,
+   "samples": 9
+  },
+  "3067": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "3018": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "3019": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "8031": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "9942": {
+   "refresh_sec": 212,
+   "changes": 4,
+   "samples": 9
+  },
+  "9945": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "9392": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "10097": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "10098": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8240": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8241": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "8242": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8243": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8244": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8245": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "8246": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8247": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "4035": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "8234": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "8230": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8231": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "8232": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8233": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "8235": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8236": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "8237": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "10100": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "10101": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9322": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "10099": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "4045": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "4046": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "4047": {
+   "refresh_sec": 424,
+   "changes": 2,
+   "samples": 9
+  },
+  "4044": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "4042": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "4043": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "10110": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9292": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9293": {
+   "refresh_sec": 425,
+   "changes": 2,
+   "samples": 9
+  },
+  "9294": {
+   "refresh_sec": 426,
+   "changes": 2,
+   "samples": 9
+  },
+  "1136": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "1137": {
+   "refresh_sec": 387,
+   "changes": 2,
+   "samples": 9
+  },
+  "8095": {
+   "refresh_sec": 170,
+   "changes": 5,
+   "samples": 9
+  },
+  "10283": {
+   "refresh_sec": 283,
+   "changes": 3,
+   "samples": 9
+  },
+  "1138": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "8068": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9013": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "8091": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9792": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "9793": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "1139": {
+   "refresh_sec": 260,
+   "changes": 3,
+   "samples": 9
+  },
+  "9024": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9025": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9022": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  },
+  "9023": {
+   "refresh_sec": 106,
+   "changes": 8,
+   "samples": 9
+  },
+  "9014": {
+   "refresh_sec": 121,
+   "changes": 7,
+   "samples": 9
+  }
+ }
+}

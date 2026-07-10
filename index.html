@@ -154,8 +154,11 @@
   .popup-dirs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
   .dir-btn { font-size: 11px; padding: 3px 8px; border-radius: 999px; background: #f2f2f7; color: #007aff; border: none; cursor: pointer; font-weight: 600; }
   .dir-btn.active { background: #007aff; color: #fff; }
+  .popup-facing { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: #f2f2f7; color: #48484a; }
+  .popup-facing .arrow { font-size: 12px; line-height: 1; color: #8e8e93; }
   .popup-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
   .popup-age { font-size: 10px; color: #8e8e93; }
+  .popup-age.stale { color: #b25000; font-weight: 600; }
   .popup-add { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
 
   .enf { width: 258px; padding: 12px 14px 14px; }
@@ -291,12 +294,33 @@ function mediaHTML(dir, cfg){
   if(!dir.snapshot) return `<div class="popup-imgwrap err"><div class="img-offline">&#9888;<span>Live video unsupported here</span></div></div>`;
   return `<div class="popup-imgwrap"><img id="popup-img" src="${cfg.snap(dir)}" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div></div>`;
 }
+// WSDOT is the only source that publishes which way a camera looks, and the only one
+// whose image timestamps let us measure how often it actually changes. Both belong to
+// a single view rather than the location: one ferry terminal aims three cameras at
+// one holding lane, each pointing a different way.
+const FACING_ARROW={'Northbound':'↑','Southbound':'↓','Eastbound':'→','Westbound':'←','Both directions':'↕'};
+function camAge(dir, cfg){
+  if(dir.stale_since) return `no new image since ${new Date(dir.stale_since).toLocaleDateString(undefined,{month:'short',year:'numeric'})}`;
+  if(!dir.refresh_sec) return cfg.age||'snapshot';
+  return dir.refresh_sec<90 ? 'new image about every minute'
+                            : `new image about every ${Math.round(dir.refresh_sec/60)} min`;
+}
+// polling faster than the source updates just burns requests on an identical JPEG
+function refreshMsFor(dir, cfg){
+  if(dir.stale_since) return 300000;          // frozen years ago; it will not change now
+  if(!dir.refresh_sec) return cfg.refreshMs||30000;
+  return Math.min(300000, Math.max(15000, dir.refresh_sec*1000));
+}
+function facingHTML(dir){
+  return dir.facing ? `<div class="popup-facing"><span class="arrow">${FACING_ARROW[dir.facing]||'•'}</span>${dir.facing}</div>` : '';
+}
 function buildLivePopup(props, cfg){
   const dirs=props.directions, showDir=dirs.length>1;
   return `<div class="popup-inner">${mediaHTML(dirs[0],cfg)}
       <div class="popup-body"><h3>${props.name}</h3>
-        ${showDir?`<div class="popup-dirs">${dirs.map((d,i)=>`<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.label||d.direction||('View '+(i+1))}</button>`).join('')}</div>`:''}
-        <div class="popup-foot"><span class="popup-age">${cfg.age||'snapshot'}</span>
+        ${showDir?`<div class="popup-dirs">${dirs.map((d,i)=>`<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.label||d.facing||('View '+(i+1))}</button>`).join('')}</div>`:''}
+        <div class="popup-meta">${facingHTML(dirs[0])}</div>
+        <div class="popup-foot"><span class="popup-age${dirs[0].stale_since?' stale':''}">${camAge(dirs[0],cfg)}</span>
           <button class="popup-add" data-add>+ Route</button></div>
       </div></div>`;
 }
@@ -323,17 +347,22 @@ function wireLivePopup(props, cfg){
   const el=popup.getElement();
   let idx=0, timer=null;
   const render=()=>{ // rebuild media element for current dir
+    const dir=props.directions[idx];
     const wrap=el.querySelector('.popup-imgwrap');
-    wrap.outerHTML=mediaHTML(props.directions[idx],cfg);
-    playDir(props.directions[idx],cfg);
+    wrap.outerHTML=mediaHTML(dir,cfg);
+    playDir(dir,cfg);
+    // facing and refresh belong to the view, so they change with it
+    el.querySelector('.popup-meta').innerHTML=facingHTML(dir);
+    const age=el.querySelector('.popup-age');
+    age.textContent=camAge(dir,cfg); age.classList.toggle('stale',!!dir.stale_since);
     if(timer) clearInterval(timer);
-    if(!canPlayVideo(props.directions[idx],cfg)){
-      timer=setInterval(()=>{ const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(props.directions[idx]); }, cfg.refreshMs||30000);
+    if(!canPlayVideo(dir,cfg)){
+      timer=setInterval(()=>{ const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg));
     }
   };
   playDir(props.directions[0],cfg);
   if(!canPlayVideo(props.directions[0],cfg))
-    timer=setInterval(()=>{ const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(props.directions[0]); }, cfg.refreshMs||30000);
+    timer=setInterval(()=>{ const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(props.directions[0]); }, refreshMsFor(props.directions[0],cfg));
   el.querySelectorAll('.dir-btn').forEach(btn=>btn.addEventListener('click',()=>{
     idx=parseInt(btn.dataset.idx,10);
     el.querySelectorAll('.dir-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
