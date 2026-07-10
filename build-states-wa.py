@@ -98,8 +98,9 @@ def main():
     for c in cams:
         url = c.get('ImageURL') or ''
         lng, lat = c.get('DisplayLongitude'), c.get('DisplayLatitude')
-        if not url or not c.get('IsActive') or lat is None or lng is None:
-            drop['inactive'] += 1; continue
+        # location-first: keep inactive and image-less cameras; drop only rows with no coordinate
+        if lat is None or lng is None:
+            drop['nocoord'] += 1; continue
         if 'tripcheck.com' in url.lower():
             drop['oregon'] += 1; continue
         if c['CameraLocation'].get('RoadName') == 'Airports':
@@ -126,7 +127,7 @@ def main():
                                for n in names], facings)
         dirs = []
         for c, facing, label in zip(group, facings, labels):
-            d = {'snapshot': c['ImageURL'], 'video': None, 'label': label}
+            d = {'snapshot': c.get('ImageURL') or None, 'video': None, 'label': label}
             if facing:
                 d['facing'] = facing
             m = rates.get(str(c['CameraID']), {})
@@ -154,7 +155,7 @@ def main():
     print(f'Washington: {len(keep)} cameras at {len(feats)} locations '
           f'({faced} with a facing, {timed} with a measured refresh, {stale} stale)')
     print(f'  dropped: {drop["oregon"]} ODOT/tripcheck, {drop["airport"]} airport, '
-          f'{drop["bbox"]} out of bbox, {drop["inactive"]} inactive/no image')
+          f'{drop["bbox"]} out of bbox, {drop["nocoord"]} without coordinates')
     if not rates:
         print('  no states/WA-refresh.json yet; run measure-refresh-wa.py, then rebuild')
 
