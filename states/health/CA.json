@@ -1,0 +1,13 @@
+{
+"checked_at": "2026-07-10T04:48:44Z",
+"cameras": 2047,
+"counts": {
+"offline": 2,
+"frozen": 1
+},
+"status": {
+"https://cwwp2.dot.ca.gov/data/d3/cctv/image/hwy99ateeatonrd1/hwy99ateeatonrd1.jpg": "offline",
+"https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv975i80e80manuelcampospkwy/tv975i80e80manuelcampospkwy.jpg": "frozen",
+"https://cwwp2.dot.ca.gov/data/d7/cctv/image/us101944socaliforniast/us101944socaliforniast.jpg": "offline"
+}
+}

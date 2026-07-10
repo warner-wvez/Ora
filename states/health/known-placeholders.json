@@ -1,0 +1,52 @@
+{
+ "15136:918b7708c61e": {
+  "sha": "e608c39b77e5480c",
+  "first_seen": "2026-07-10T04:42:11Z",
+  "state": "NY"
+ },
+ "49783:607020c9e1ab": {
+  "sha": "4ec5b923ec73aa44",
+  "first_seen": "2026-07-10T04:43:42Z",
+  "state": "WA"
+ },
+ "15542:e0807c95d287": {
+  "sha": "55d2476f4f66e98a",
+  "first_seen": "2026-07-10T04:43:42Z",
+  "state": "WA"
+ },
+ "1484:d59875f9dc30": {
+  "sha": "23f87fa28f6f815c",
+  "first_seen": "2026-07-10T05:38:20Z",
+  "state": "OH"
+ },
+ "None:104d912df3b0": {
+  "sha": "a13c5c15dab02f58",
+  "first_seen": "2026-07-10T05:40:55Z",
+  "state": "VA"
+ },
+ "21107:104d912df3b0": {
+  "sha": "a13c5c15dab02f58",
+  "first_seen": "2026-07-10T05:40:55Z",
+  "state": "VA"
+ },
+ "62989:1cb0c094ad6e": {
+  "sha": "6f70c481d04bdadd",
+  "first_seen": "2026-07-10T05:41:29Z",
+  "state": "WI"
+ },
+ "63219:1cb0c094ad6e": {
+  "sha": "15002a9d206c4c7d",
+  "first_seen": "2026-07-10T05:41:29Z",
+  "state": "WI"
+ },
+ "63175:1cb0c094ad6e": {
+  "sha": "77fbed77ec5cf9f8",
+  "first_seen": "2026-07-10T05:41:29Z",
+  "state": "WI"
+ },
+ "63289:1cb0c094ad6e": {
+  "sha": "61754346915bcb2b",
+  "first_seen": "2026-07-10T05:41:29Z",
+  "state": "WI"
+ }
+}

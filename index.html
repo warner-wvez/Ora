@@ -146,6 +146,8 @@
   .popup-imgwrap.noposter { background: #15151a; }
   .popup-imgwrap.err .poster { display: none; }
   .popup-imgwrap .live-badge { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; z-index: 2; }
+  /* the stream attached but the picture is not moving, so the badge stops claiming it is */
+  .popup-imgwrap.notlive .live-badge { background: #8e8e93; }
   .popup-imgwrap .img-offline { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: #9a9aa0; font-size: 12px; font-weight: 600; }
   .popup-imgwrap.err img, .popup-imgwrap.err video { display: none; }
   .popup-imgwrap.err .img-offline { display: flex; }
@@ -156,9 +158,11 @@
   .dir-btn.active { background: #007aff; color: #fff; }
   .popup-facing { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: #f2f2f7; color: #48484a; }
   .popup-facing .arrow { font-size: 12px; line-height: 1; color: #8e8e93; }
-  .popup-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
-  .popup-age { font-size: 10px; color: #8e8e93; }
+  .popup-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+  /* the offline line is long enough to wrap; it must never reflow under the button */
+  .popup-age { font-size: 10px; color: #8e8e93; flex: 1; min-width: 0; line-height: 1.35; }
   .popup-age.stale { color: #b25000; font-weight: 600; }
+  .popup-add { flex: 0 0 auto; white-space: nowrap; }
   .popup-add { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
 
   .enf { width: 258px; padding: 12px 14px 14px; }
@@ -261,7 +265,7 @@ function enfRadius(v90){ v90=Number(v90)||0; const s=ENF_STOPS; if(v90<=s[0][0])
   for(let i=1;i<s.length;i++){ if(v90<=s[i][0]){ const [x0,y0]=s[i-1],[x1,y1]=s[i]; return y0+(y1-y0)*(v90-x0)/(x1-x0);} } return s[s.length-1][1]; }
 
 const dataCache={}, active=new Set(), bound=new Set();
-let enfColorMode='verdict', enfMeta=null, popup=null, popupHls=null, popupWatch=null, hoverTip=null, lastSelected=null, basemap='light', restoring=false;
+let enfColorMode='verdict', enfMeta=null, popup=null, popupHls=null, popupWatch=null, popupLive=null, hoverTip=null, lastSelected=null, basemap='light', restoring=false;
 let addingTo=null;   // route id currently collecting cameras
 const enfFilter={ verdicts:new Set(['justified','revenue','gap','quiet']), types:new Set(['redlight','speed']) };
 let searchIndex=[], kbdIdx=-1;
@@ -279,7 +283,7 @@ function saveRoutes(r){ localStorage.setItem('ora-routes', JSON.stringify(r)); }
 function uid(){ return 'r'+Math.random().toString(36).slice(2,9); }
 
 /* ---------- live popup (snapshot or HLS video) ---------- */
-function destroyPopupHls(){ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
+function destroyPopupHls(){ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } if(popupLive){ clearTimeout(popupLive); popupLive=null; } if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
 // video only plays where the state's stream host allows cross-origin playback (cfg.hasVideo)
 function canPlayVideo(dir, cfg){ return !!(dir.video && cfg.hasVideo && window.Hls && Hls.isSupported()); }
 function mediaHTML(dir, cfg){
@@ -299,7 +303,22 @@ function mediaHTML(dir, cfg){
 // a single view rather than the location: one ferry terminal aims three cameras at
 // one holding lane, each pointing a different way.
 const FACING_ARROW={'Northbound':'↑','Southbound':'↓','Eastbound':'→','Westbound':'←','Both directions':'↕'};
+/* probe-health.py checks every snapshot on a schedule. A camera can report itself
+   healthy and still serve a "camera unavailable" card: Hawaii says status OK on all
+   52 of them. These three verdicts come from what the image actually was. */
+const HEALTH_TEXT={offline:'image not loading', placeholder:'reported offline', frozen:'image frozen 24h+'};
+function ago(iso){
+  if(!iso) return 'recently';
+  const h=(Date.now()-new Date(iso).getTime())/3.6e6;
+  if(h<1.5) return 'just now';
+  return h<48 ? `${Math.round(h)}h ago` : `${Math.round(h/24)}d ago`;
+}
+// health describes the snapshot. Where a live stream is what you actually watch,
+// the runtime liveness check is the authority, so do not contradict it here.
+function shownHealth(dir, cfg){ return (dir.video && cfg.hasVideo) ? null : dir.health; }
 function camAge(dir, cfg){
+  const h=shownHealth(dir,cfg);
+  if(h) return `${HEALTH_TEXT[h]||'not live'} · checked ${ago(cfg.healthAt)}`;
   if(dir.stale_since) return `no new image since ${new Date(dir.stale_since).toLocaleDateString(undefined,{month:'short',year:'numeric'})}`;
   if(!dir.refresh_sec) return cfg.age||'snapshot';
   return dir.refresh_sec<90 ? 'new image about every minute'
@@ -318,11 +337,45 @@ function buildLivePopup(props, cfg){
   const dirs=props.directions, showDir=dirs.length>1;
   return `<div class="popup-inner">${mediaHTML(dirs[0],cfg)}
       <div class="popup-body"><h3>${props.name}</h3>
-        ${showDir?`<div class="popup-dirs">${dirs.map((d,i)=>`<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.label||d.facing||('View '+(i+1))}</button>`).join('')}</div>`:''}
+        ${showDir?`<div class="popup-dirs">${dirs.map((d,i)=>`<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.label||d.facing||d.direction||('View '+(i+1))}</button>`).join('')}</div>`:''}
         <div class="popup-meta">${facingHTML(dirs[0])}</div>
-        <div class="popup-foot"><span class="popup-age${dirs[0].stale_since?' stale':''}">${camAge(dirs[0],cfg)}</span>
+        <div class="popup-foot"><span class="popup-age${(dirs[0].stale_since||shownHealth(dirs[0],cfg))?' stale':''}">${camAge(dirs[0],cfg)}</span>
           <button class="popup-add" data-add>+ Route</button></div>
       </div></div>`;
+}
+/* A stream can attach, buffer and still show you nothing: the clock runs while the
+   picture is a frozen frame or a "camera unavailable" card baked into the encoder.
+   hls.js feeds the video through MSE from a blob: URL, which is same-origin, so
+   unlike a cross-origin <img> the canvas is not tainted and we can read the pixels.
+   Sample the picture twice; if it never changes, stop calling it live. */
+// the badge stops claiming a stream is live the moment we can tell it is not.
+// the poster snapshot stays visible if there is one, because a recent still beats nothing.
+function markNotLive(wrap){
+  if(!popup) return;
+  wrap.classList.add('notlive'); wrap.classList.remove('ready');
+  const b=wrap.querySelector('.live-badge'); if(b) b.textContent='● NOT LIVE';
+  if(!wrap.querySelector('.poster')) wrap.classList.add('err');
+}
+function watchLiveness(vid, wrap){
+  const cv=document.createElement('canvas'); cv.width=48; cv.height=36;
+  const cx=cv.getContext('2d',{willReadFrequently:true});
+  const frame=()=>{ try{ cx.drawImage(vid,0,0,48,36); return cx.getImageData(0,0,48,36).data; }catch(e){ return null; } };
+  const delta=(a,b)=>{ let s=0; for(let i=0;i<a.length;i+=4) s+=Math.abs(a[i]-b[i]); return s/(a.length/4); };
+  let f0=null, t0=0, still=0;
+  const tick=()=>{
+    if(!popup || !vid.isConnected) return;
+    const f=frame();
+    if(!f) return;                                     // pixels unreadable; say nothing
+    if(f0){
+      if(vid.currentTime-t0 <= 0.3){ markNotLive(wrap); return; }   // the clock stopped
+      // a real sensor is never perfectly still: exact repetition means a synthetic frame
+      still = delta(f0,f) < 0.02 ? still+1 : 0;
+      if(still>=2){ markNotLive(wrap); return; }        // two consecutive identical samples
+    }
+    f0=f; t0=vid.currentTime;
+    popupLive=setTimeout(tick,3500);
+  };
+  popupLive=setTimeout(tick,3500);
 }
 function playDir(dir, cfg){
   destroyPopupHls();
@@ -333,12 +386,14 @@ function playDir(dir, cfg){
     const vid=el.querySelector('#popup-vid');
     popupHls=new Hls({maxBufferLength:8, startFragPrefetch:true, maxMaxBufferLength:20});
     popupHls.loadSource(dir.video); popupHls.attachMedia(vid);
-    popupHls.on(Hls.Events.FRAG_LOADED,()=>{ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } wrap.classList.add('ready'); }); // video fades in over the poster
-    // keep the poster snapshot on failure; with no poster there is nothing to keep, so show the offline state
-    popupHls.on(Hls.Events.ERROR,(e,d)=>{ if(d.fatal){ destroyPopupHls(); if(!dir.snapshot) wrap.classList.add('err'); } });
-    // a dead SkyVDN stream stalls without hls.js ever reporting a fatal error, so a poster-less popup
-    // would otherwise sit blank behind a LIVE badge forever
-    if(!dir.snapshot) popupWatch=setTimeout(()=>{ if(!wrap.classList.contains('ready')){ destroyPopupHls(); wrap.classList.add('err'); } }, 12000);
+    popupHls.on(Hls.Events.FRAG_LOADED,()=>{ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; }
+      if(!wrap.classList.contains('ready')){ wrap.classList.add('ready'); watchLiveness(vid,wrap); } }); // video fades in over the poster
+    // keep the poster snapshot on failure, but stop the badge insisting it is live
+    popupHls.on(Hls.Events.ERROR,(e,d)=>{ if(d.fatal){ destroyPopupHls(); markNotLive(wrap); } });
+    // a dead SkyVDN stream stalls without hls.js ever reporting a fatal error. Roughly 5% of
+    // streams are down, and behind a poster that reads as a live camera that has simply stopped
+    // moving, which is the whole complaint. Watch every video camera, poster or not.
+    popupWatch=setTimeout(()=>{ if(!wrap.classList.contains('ready')){ destroyPopupHls(); markNotLive(wrap); } }, 12000);
   } else {
     const img=el.querySelector('#popup-img'); if(img) img.src=cfg.snap(dir);
   }
@@ -354,7 +409,7 @@ function wireLivePopup(props, cfg){
     // facing and refresh belong to the view, so they change with it
     el.querySelector('.popup-meta').innerHTML=facingHTML(dir);
     const age=el.querySelector('.popup-age');
-    age.textContent=camAge(dir,cfg); age.classList.toggle('stale',!!dir.stale_since);
+    age.textContent=camAge(dir,cfg); age.classList.toggle('stale',!!(dir.stale_since||shownHealth(dir,cfg)));
     if(timer) clearInterval(timer);
     if(!canPlayVideo(dir,cfg)){
       timer=setInterval(()=>{ const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg));
@@ -444,12 +499,41 @@ function addLiveLayers(k,data){ const s=srcId(k);
   map.addSource(s,{type:'geojson',data,cluster:true,clusterMaxZoom:12,clusterRadius:44});
   map.addLayer({id:`${k}__clusters`,type:'circle',source:s,filter:['has','point_count'],paint:{'circle-color':'#007aff','circle-radius':['step',['get','point_count'],13,25,17,150,22,1000,28],'circle-opacity':0.85,'circle-stroke-width':2,'circle-stroke-color':'#fff'}});
   map.addLayer({id:`${k}__cluster-count`,type:'symbol',source:s,filter:['has','point_count'],layout:{'text-field':['get','point_count_abbreviated'],'text-size':11,'text-font':['Noto Sans Bold']},paint:{'text-color':'#fff'}});
-  map.addLayer({id:`${k}__points`,type:'circle',source:s,filter:['!',['has','point_count']],paint:{'circle-color':'#007aff','circle-radius':6,'circle-stroke-width':2,'circle-stroke-color':'#fff'}});
+  // a camera the health sweep found dead reads as dead before you spend a click on it
+  map.addLayer({id:`${k}__points`,type:'circle',source:s,filter:['!',['has','point_count']],paint:{'circle-color':['case',['==',['get','dead'],1],'#b4b4b9','#007aff'],'circle-radius':6,'circle-stroke-width':2,'circle-stroke-color':'#fff'}});
 }
 function addEnfLayers(k,data){ map.addSource(srcId(k),{type:'geojson',data});
   map.addLayer({id:`${k}__circle`,type:'circle',source:srcId(k),filter:enfFilterExpr(),paint:{'circle-color':enfColorExpr(),'circle-radius':['interpolate',['linear'],['get','v90'],0,3,50,5,300,8,1500,13,6000,20,16000,28,33000,36],'circle-opacity':0.78,'circle-stroke-width':1.2,'circle-stroke-color':'#fff'}});
 }
 function removeLayer(k){ [`${k}__clusters`,`${k}__cluster-count`,`${k}__points`,`${k}__circle`].forEach(id=>{ if(map.getLayer(id)) map.removeLayer(id); }); if(map.getSource(srcId(k))) map.removeSource(srcId(k)); }
+/* ---------- camera health (states/health/<CODE>.json, refreshed by probe-health.py) ---------- */
+const healthCache={};
+function healthCode(k){ return k.startsWith('st-') ? k.slice(3) : (k==='il-cam' ? 'IL' : null); }
+async function loadHealth(k, data){
+  if(k in healthCache) return healthCache[k];
+  const code=healthCode(k); healthCache[k]=null;
+  if(!code) return null;
+  let h=null;
+  try{ const r=await fetch(`states/health/${code}.json`); if(r.ok) h=await r.json(); }catch(e){}
+  if(!h) return null;                                  // no sweep for this layer yet; say nothing
+  healthCache[k]=h; LAYERS[k].healthAt=h.checked_at;
+  const st=h.status||{}, hasVideo=!!LAYERS[k].hasVideo;
+  let deadCams=0;
+  for(const f of data.features){
+    let dead=0;
+    for(const d of f.properties.directions){
+      const s=d.snapshot ? st[d.snapshot.split('?')[0]] : undefined;
+      if(!s) continue;
+      d.health=s;
+      if(!(d.video && hasVideo)) dead++;                // a working stream outranks a dead snapshot
+    }
+    if(dead){ deadCams+=dead;
+      // grey the pin only when every view at this location is dead
+      if(dead===f.properties.directions.length) f.properties.dead=1; }
+  }
+  LAYERS[k].deadCount=deadCams;
+  return h;
+}
 // warm TCP/TLS to the snapshot + video hosts so the first click connects instantly (no feed fetched)
 function preconnectFor(data){
   const hosts=new Set();
@@ -460,8 +544,11 @@ function preconnectFor(data){
 }
 async function enableLayer(k,fly=true){
   const cfg=LAYERS[k];
-  if(!dataCache[k]){ dataCache[k]=await (await fetch(cfg.file)).json(); const c=document.getElementById('cnt-'+k); if(c) c.textContent=dataCache[k].features.length.toLocaleString(); }
+  if(!dataCache[k]){ dataCache[k]=await (await fetch(cfg.file)).json(); }
   const data=dataCache[k];
+  if(cfg.kind==='live') await loadHealth(k,data);      // must annotate before the source is added
+  const c=document.getElementById('cnt-'+k);
+  if(c) c.textContent=data.features.length.toLocaleString()+(cfg.deadCount?` · ${cfg.deadCount.toLocaleString()} offline`:'');
   if(cfg.kind==='live') preconnectFor(data);
   if(cfg.kind==='enforcement'){ enfMeta=data.meta||null; addEnfLayers(k,data); } else addLiveLayers(k,data);
   active.add(k); bindLayerHandlers(k); applyContrast(k); raiseHighlights(); syncEnfControls(); rebuildSearchIndex(); updateCoverage();
