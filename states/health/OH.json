@@ -1,13 +1,12 @@
 {
-"checked_at": "2026-07-10T05:38:20Z",
+"checked_at": "2026-07-10T06:10:26Z",
 "cameras": 1121,
 "counts": {
-"offline": 2,
 "frozen": 17,
+"offline": 1,
 "placeholder": 3
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D11/D11-004.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
