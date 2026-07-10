@@ -2,31 +2,39 @@
 
 **Live at [warner-wvez.github.io/Ora](https://warner-wvez.github.io/Ora/)**
 
-A live map of public traffic cameras across the US, styled like Apple Maps. **~33,200 cameras across 26 states** — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
+A live map of public traffic cameras across the US, styled like Apple Maps. **~35,100 cameras across 27 states** — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
 
 A layer panel lets you toggle states on and off independently and **stack them**. Turn on any combination — states, NYC, and the Chicago ticket-enforcement layer — on one map.
 
 ## Coverage
 
-**~33,200 cameras across 26 states**, from state DOT "511" systems that run on a handful of shared vendor platforms:
+**~35,100 cameras across 27 states**, from state DOT "511" systems that run on a handful of shared vendor platforms:
 
-- **Older DataTables platform (13 states)**: Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska. Built by `build-states.py`.
+- **Older DataTables platform (14 states)**: Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska, New York. Built by `build-states.py` (`python3 build-states.py NY` rebuilds one state; it merges into the index rather than overwriting it).
 - **Newer GraphQL platform (7 states)**: Minnesota, Colorado, Iowa, Nebraska, Indiana, Kansas, Massachusetts. Built by `build-states-graphql.py` (one `listCameraViewsQuery` per state returns every camera with a bbox, snapshot URL, and HLS sources).
 - **MapLarge platform (Texas)**: 3,430 cameras from TxDOT's drivetexas.org. Built by `build-states-tx.py`. Texas is the one **video-only** state — it publishes no snapshot at all, so its popups play the HLS stream over a dark backdrop instead of a poster image.
 - **WSDOT REST API (Washington)**: 1,516 cameras. Built by `build-states-wa.py` against WSDOT's Traveler Information API (free key, `WSDOT_API_KEY`). Snapshot-only, and the one state that also carries **which way each camera looks** and **how often its image really changes**. See below.
 
-**Ten of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, TX. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks a sample stream and sets the flag.
+**Eleven of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, TX, NY. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks sampled streams and sets the flag.
 
-A CORS check alone is not enough. Kansas and Massachusetts hand out stream URLs carrying a signed JWT with a **300 second** lifetime, which passes the check at build time and is dead five minutes after the file is written. Kansas shipped a red LIVE badge over 184 permanently-401 cameras until 2026-07-09. `video_plays()` now refuses any URL with a `token=` parameter, because a short-lived credential cannot live in a static JSON file. Both states are honest snapshot states instead, and their snapshots are fine.
+New York deserves its own line: **1,907 cameras, 1,553 with live video**, the largest live-video state after Florida and Texas. 511ny also serves 324 Connecticut and 66 New Jersey cameras on shared roads, which a bounding box cannot separate, since Connecticut sits inside any New York bbox and Ora already carries Connecticut from ctroads.org. The feed labels every row with its own `state`, so the build believes that instead and uses the bbox only to catch three null-island rows and one camera whose longitude lost its minus sign. Roughly a fifth of the 354 video-less cameras currently serve NYSDOT's "No live camera feed at this time" placeholder: a real outage, not a parsing failure, and it explains itself to the reader.
+
+Deciding that flag is subtler than it looks, and it has been wrong twice.
+
+**One camera cannot speak for a state.** `video_plays_any()` samples eight streams and accepts the state if any plays. It used to test exactly the first camera, which is a coin flip: about 5% of DOT cameras are down at any moment (measured, 19 of 20 New York streams alive). New York's first camera, `R5_007`, happens to be one of the dead ones, so the old check marked the whole state snapshot-only and silently discarded 1,553 working live feeds. Nothing errored.
+
+**A CORS check alone is not enough.** Kansas and Massachusetts hand out stream URLs carrying a signed JWT with a **300 second** lifetime, which passes the check at build time and is dead five minutes after the file is written. Kansas shipped a red LIVE badge over 184 permanently-401 cameras until 2026-07-09. `video_plays()` now refuses any URL with a `token=` parameter, because a short-lived credential cannot live in a static JSON file. Both states are honest snapshot states instead, and their snapshots are fine.
 
 - **Illinois** — 1,328 cameras (IDOT / Travel Midwest), snapshot only.
 - **New York City** — 957 cameras (NYC DOT), snapshot refreshing every 2 seconds.
 
 Both `build-states*.py` scripts write `states/<code>.json` and merge into `states/index.json`, which the app reads at load to populate the state list and coverage markers.
 
-## Direction and refresh rate (Washington)
+## Direction and refresh rate
 
-Most DOTs publish a camera's name and a URL. WSDOT publishes more, so Washington's popups say more.
+Most DOTs publish a camera's name and a URL. WSDOT and NYSDOT publish more, so their popups say more.
+
+New York's feed carries a `direction` column ("Northbound", "Both Directions", and 623 rows of "Unknown"), so 1,291 of its cameras get the same compass chip Washington introduced. Everything else below is Washington-only, because refresh rate had to be measured and only WSDOT's images expose the timestamps to measure it with.
 
 **Which way the camera looks.** `CameraLocation.Direction` is a single letter (`N`, `S`, `E`, `W`, `B`, `O`). WSDOT's own road-alert feed spells the identical vocabulary out in full — "Northbound", "Both Directions" — so the expansion is theirs, not a guess. The popup shows it as a chip with an arrow. It is the direction of travel the camera covers, not a compass bearing.
 
