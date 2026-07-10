@@ -127,6 +127,8 @@
   .rv-tile .rv-media img, .rv-tile .rv-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .rv-tile .rv-off { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; color: #9a9aa0; font-size: 12px; font-weight: 600; }
   .rv-tile .rv-media.err img { display: none; } .rv-tile .rv-media.err .rv-off { display: flex; }
+  .rv-tile .rv-media .rv-nosnap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px; color: #8e8e93; font-size: 12px; font-weight: 600; }
+  .rv-tile .rv-media .rv-nosnap span { font-size: 10px; font-weight: 500; color: #aeaeb2; }
   .rv-live { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; }
   .rv-tile .rv-cap { display: flex; align-items: center; gap: 8px; padding: 8px 11px; }
   .rv-tile .rv-nm { flex: 1; font-size: 12.5px; font-weight: 600; color: #1c1c1e; }
@@ -141,6 +143,7 @@
   .popup-inner img, .popup-inner video { width: 100%; height: 150px; object-fit: cover; display: block; background: #eee; }
   .popup-imgwrap .vid { position: absolute; inset: 0; opacity: 0; transition: opacity .35s; z-index: 1; }
   .popup-imgwrap.ready .vid { opacity: 1; }
+  .popup-imgwrap.noposter { background: #15151a; }
   .popup-imgwrap.err .poster { display: none; }
   .popup-imgwrap .live-badge { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; z-index: 2; }
   .popup-imgwrap .img-offline { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: #9a9aa0; font-size: 12px; font-weight: 600; }
@@ -240,7 +243,7 @@
 
 <script>
 /* ---------- layer catalog (states injected at load from states/index.json) ---------- */
-const cb = (u)=> u + (u.includes('?')?'&':'?') + 't=' + Date.now();
+const cb = (u)=> !u ? '' : u + (u.includes('?')?'&':'?') + 't=' + Date.now();
 const LAYERS = {
   'il-cam':  { kind:'live', name:'Illinois', file:'cameras.json', center:[-88.5,41.6], zoom:8, refreshMs:30000, hasVideo:false, count:1328, snap:(d)=>cb(d.snapshot), age:'source updates every 1–10 min' },
   'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, count:957, snap:(d)=>`https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}`, age:'refreshes every 2s' },
@@ -255,7 +258,7 @@ function enfRadius(v90){ v90=Number(v90)||0; const s=ENF_STOPS; if(v90<=s[0][0])
   for(let i=1;i<s.length;i++){ if(v90<=s[i][0]){ const [x0,y0]=s[i-1],[x1,y1]=s[i]; return y0+(y1-y0)*(v90-x0)/(x1-x0);} } return s[s.length-1][1]; }
 
 const dataCache={}, active=new Set(), bound=new Set();
-let enfColorMode='verdict', enfMeta=null, popup=null, popupHls=null, hoverTip=null, lastSelected=null, basemap='light', restoring=false;
+let enfColorMode='verdict', enfMeta=null, popup=null, popupHls=null, popupWatch=null, hoverTip=null, lastSelected=null, basemap='light', restoring=false;
 let addingTo=null;   // route id currently collecting cameras
 const enfFilter={ verdicts:new Set(['justified','revenue','gap','quiet']), types:new Set(['redlight','speed']) };
 let searchIndex=[], kbdIdx=-1;
@@ -273,16 +276,19 @@ function saveRoutes(r){ localStorage.setItem('ora-routes', JSON.stringify(r)); }
 function uid(){ return 'r'+Math.random().toString(36).slice(2,9); }
 
 /* ---------- live popup (snapshot or HLS video) ---------- */
-function destroyPopupHls(){ if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
+function destroyPopupHls(){ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
 // video only plays where the state's stream host allows cross-origin playback (cfg.hasVideo)
 function canPlayVideo(dir, cfg){ return !!(dir.video && cfg.hasVideo && window.Hls && Hls.isSupported()); }
 function mediaHTML(dir, cfg){
   const live = canPlayVideo(dir, cfg);
   // video cameras show the snapshot instantly as a poster, then the live video fades in over it
-  if(live) return `<div class="popup-imgwrap"><span class="live-badge">● LIVE</span>
-    <img class="poster" src="${cfg.snap(dir)}" onerror="this.parentElement.classList.add('err')">
+  // Texas streams have no snapshot at all, so the video fades in over a dark backdrop instead
+  if(live) return `<div class="popup-imgwrap${dir.snapshot?'':' noposter'}"><span class="live-badge">● LIVE</span>
+    ${dir.snapshot?`<img class="poster" src="${cfg.snap(dir)}" onerror="this.parentElement.classList.add('err')">`:''}
     <video id="popup-vid" class="vid" muted autoplay playsinline></video>
     <div class="img-offline">&#9888;<span>Camera offline</span></div></div>`;
+  // a video-only camera in a browser that cannot play HLS has nothing to fall back to
+  if(!dir.snapshot) return `<div class="popup-imgwrap err"><div class="img-offline">&#9888;<span>Live video unsupported here</span></div></div>`;
   return `<div class="popup-imgwrap"><img id="popup-img" src="${cfg.snap(dir)}" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div></div>`;
 }
 function buildLivePopup(props, cfg){
@@ -303,8 +309,12 @@ function playDir(dir, cfg){
     const vid=el.querySelector('#popup-vid');
     popupHls=new Hls({maxBufferLength:8, startFragPrefetch:true, maxMaxBufferLength:20});
     popupHls.loadSource(dir.video); popupHls.attachMedia(vid);
-    popupHls.on(Hls.Events.FRAG_LOADED,()=>wrap.classList.add('ready')); // video fades in over the poster
-    popupHls.on(Hls.Events.ERROR,(e,d)=>{ if(d.fatal){ destroyPopupHls(); } }); // keep the poster snapshot on failure
+    popupHls.on(Hls.Events.FRAG_LOADED,()=>{ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } wrap.classList.add('ready'); }); // video fades in over the poster
+    // keep the poster snapshot on failure; with no poster there is nothing to keep, so show the offline state
+    popupHls.on(Hls.Events.ERROR,(e,d)=>{ if(d.fatal){ destroyPopupHls(); if(!dir.snapshot) wrap.classList.add('err'); } });
+    // a dead SkyVDN stream stalls without hls.js ever reporting a fatal error, so a poster-less popup
+    // would otherwise sit blank behind a LIVE badge forever
+    if(!dir.snapshot) popupWatch=setTimeout(()=>{ if(!wrap.classList.contains('ready')){ destroyPopupHls(); wrap.classList.add('err'); } }, 12000);
   } else {
     const img=el.querySelector('#popup-img'); if(img) img.src=cfg.snap(dir);
   }
@@ -493,7 +503,8 @@ function openRouteView(id){
   else body.innerHTML=r.cams.map((c,i)=>{
     const src = c.k==='nyc-cam' ? `https://webcams.nyctmc.org/api/cameras/${c.camId}/image` : c.snapshot;
     return `<div class="rv-tile"><div class="rv-media" data-src="${src||''}">${c.video?'<span class="rv-live">● LIVE</span>':''}
-      <img loading="lazy" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')">
+      ${src?`<img loading="lazy" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')">`
+           :`<div class="rv-nosnap">Live video<span>open on the map to watch</span></div>`}
       <div class="rv-off">&#9888; Offline</div></div>
       <div class="rv-cap"><span class="rv-nm">${c.name}</span><span class="rv-rm" data-i="${i}" title="Remove">&times;</span></div></div>`;
   }).join('') + `<div class="btn-row" style="justify-content:center"><button class="mini-btn" id="rvAdd">+ Add cameras</button></div>`;

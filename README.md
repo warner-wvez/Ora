@@ -1,17 +1,18 @@
 # Ora
 
-A live map of public traffic cameras across the US, styled like Apple Maps. **~19,000 cameras across 15 states** — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
+A live map of public traffic cameras across the US, styled like Apple Maps. **~31,700 cameras across 25 states** — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
 
 A layer panel lets you toggle states on and off independently and **stack them**. Turn on any combination — states, NYC, and the Chicago ticket-enforcement layer — on one map.
 
 ## Coverage
 
-**~22,000 cameras across 20 states**, from state DOT "511" systems that run on two shared vendor platforms:
+**~31,700 cameras across 25 states**, from state DOT "511" systems that run on a handful of shared vendor platforms:
 
 - **Older DataTables platform (13 states)**: Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska. Built by `build-states.py`.
 - **Newer GraphQL platform (7 states)**: Minnesota, Colorado, Iowa, Nebraska, Indiana, Kansas, Massachusetts. Built by `build-states-graphql.py` (one `listCameraViewsQuery` per state returns every camera with a bbox, snapshot URL, and HLS sources).
+- **MapLarge platform (Texas)**: 3,430 cameras from TxDOT's drivetexas.org. Built by `build-states-tx.py`. Texas is the one **video-only** state — it publishes no snapshot at all, so its popups play the HLS stream over a dark backdrop instead of a poster image.
 
-**Ten of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, KS. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks a sample stream and sets the flag.
+**Eleven of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, KS, TX. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks a sample stream and sets the flag.
 
 - **Illinois** — 1,328 cameras (IDOT / Travel Midwest), snapshot only.
 - **New York City** — 957 cameras (NYC DOT), snapshot refreshing every 2 seconds.
@@ -49,7 +50,7 @@ This is the one insight the whole stack uniquely enables: enforcement cameras an
 - **In-layer filters** (Chicago tickets) — filter the enforcement layer by verdict (e.g. show only the 115 "ticket-heavy, low crash" cameras) and by camera type (red light / speed), so the layer works as an investigative tool, not just a picture.
 - **Shareable links** — the URL always reflects exactly what you're looking at (active layers, map position, color mode, base map, filters, and the selected camera). "Copy link" grabs it; opening someone's link restores that precise view, popup and all.
 - **Coverage overview** — the app opens zoomed out on a map of the whole US with a labeled, clickable marker for every covered state. Click a marker (or a checkbox) to load that state and fly in; "Show all states" returns to the overview and "Clear" turns everything off. So a first-time visitor immediately sees which states have footage and can pick one.
-- **Instant feed loading** — video cameras show their snapshot as a poster the moment you click, then the live video fades in over it, so there's never a blank loading box. Ora also preconnects to each state's media hosts when you load the state, warming the connection before your first click. (Preloading every stream up front would overload both the browser and the DOT servers — poster + preconnect gets the perceived speed without the cost.)
+- **Instant feed loading** — video cameras show their snapshot as a poster the moment you click, then the live video fades in over it, so there's never a blank loading box. (Texas publishes no snapshot, so its video fades in over a dark backdrop; a stream that never starts falls back to the offline state after 12s.) Ora also preconnects to each state's media hosts when you load the state, warming the connection before your first click. (Preloading every stream up front would overload both the browser and the DOT servers — poster + preconnect gets the perceived speed without the cost.)
 
 These follow the map-UI principles in [Eleken's](https://www.eleken.co/blog-posts/map-ui-design) and [Dura Digital's](https://www.duradigital.com/post/the-pathway-to-great-user-interface-design-for-maps) map UI design guides: working search, a neutral base map, distinct/clickable markers, style options for different backgrounds, clear hover/selection states, and a reset-view ("Show all states") helper so users never get lost.
 
