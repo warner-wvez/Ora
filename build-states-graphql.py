@@ -45,6 +45,12 @@ def input_all(limit=6000):
 
 def video_plays(url):
     if not url: return False
+    # A signed token cannot be baked into a static JSON file. Kansas hands out
+    # KDOT stream URLs carrying a JWT with a 300 second TTL: it CORS-checks green
+    # here at build time, then every one of them 401s five minutes later, and the
+    # map cheerfully shows a red LIVE badge over 184 dead cameras. Massachusetts
+    # (trafficland.com) does the same. Refuse them at the source, not in index.json.
+    if 'token=' in url: return False
     try:
         req=urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0','Origin':'http://localhost'})
         with urllib.request.urlopen(req, timeout=12) as r:

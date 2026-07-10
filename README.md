@@ -15,7 +15,9 @@ A layer panel lets you toggle states on and off independently and **stack them**
 - **MapLarge platform (Texas)**: 3,430 cameras from TxDOT's drivetexas.org. Built by `build-states-tx.py`. Texas is the one **video-only** state — it publishes no snapshot at all, so its popups play the HLS stream over a dark backdrop instead of a poster image.
 - **WSDOT REST API (Washington)**: 1,516 cameras. Built by `build-states-wa.py` against WSDOT's Traveler Information API (free key, `WSDOT_API_KEY`). Snapshot-only, and the one state that also carries **which way each camera looks** and **how often its image really changes**. See below.
 
-**Eleven of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, KS, TX. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks a sample stream and sets the flag.
+**Ten of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, TX. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks a sample stream and sets the flag.
+
+A CORS check alone is not enough. Kansas and Massachusetts hand out stream URLs carrying a signed JWT with a **300 second** lifetime, which passes the check at build time and is dead five minutes after the file is written. Kansas shipped a red LIVE badge over 184 permanently-401 cameras until 2026-07-09. `video_plays()` now refuses any URL with a `token=` parameter, because a short-lived credential cannot live in a static JSON file. Both states are honest snapshot states instead, and their snapshots are fine.
 
 - **Illinois** — 1,328 cameras (IDOT / Travel Midwest), snapshot only.
 - **New York City** — 957 cameras (NYC DOT), snapshot refreshing every 2 seconds.
