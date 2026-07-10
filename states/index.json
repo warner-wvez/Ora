@@ -295,5 +295,16 @@
   ],
   "zoom": 6.3,
   "video": true
+ },
+ "DE": {
+  "name": "Delaware",
+  "file": "states/DE.json",
+  "count": 358,
+  "center": [
+   -75.45,
+   39.1
+  ],
+  "zoom": 7.8,
+  "video": true
  }
 }
