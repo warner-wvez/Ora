@@ -2,17 +2,18 @@
 
 **Live at [warner-wvez.github.io/Ora](https://warner-wvez.github.io/Ora/)**
 
-A live map of public traffic cameras across the US, styled like Apple Maps. **~31,700 cameras across 25 states** — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
+A live map of public traffic cameras across the US, styled like Apple Maps. **~33,200 cameras across 26 states** — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
 
 A layer panel lets you toggle states on and off independently and **stack them**. Turn on any combination — states, NYC, and the Chicago ticket-enforcement layer — on one map.
 
 ## Coverage
 
-**~31,700 cameras across 25 states**, from state DOT "511" systems that run on a handful of shared vendor platforms:
+**~33,200 cameras across 26 states**, from state DOT "511" systems that run on a handful of shared vendor platforms:
 
 - **Older DataTables platform (13 states)**: Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska. Built by `build-states.py`.
 - **Newer GraphQL platform (7 states)**: Minnesota, Colorado, Iowa, Nebraska, Indiana, Kansas, Massachusetts. Built by `build-states-graphql.py` (one `listCameraViewsQuery` per state returns every camera with a bbox, snapshot URL, and HLS sources).
 - **MapLarge platform (Texas)**: 3,430 cameras from TxDOT's drivetexas.org. Built by `build-states-tx.py`. Texas is the one **video-only** state — it publishes no snapshot at all, so its popups play the HLS stream over a dark backdrop instead of a poster image.
+- **WSDOT REST API (Washington)**: 1,516 cameras. Built by `build-states-wa.py` against WSDOT's Traveler Information API (free key, `WSDOT_API_KEY`). Snapshot-only, and the one state that also carries **which way each camera looks** and **how often its image really changes**. See below.
 
 **Eleven of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, KS, TX. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks a sample stream and sets the flag.
 
@@ -20,6 +21,22 @@ A layer panel lets you toggle states on and off independently and **stack them**
 - **New York City** — 957 cameras (NYC DOT), snapshot refreshing every 2 seconds.
 
 Both `build-states*.py` scripts write `states/<code>.json` and merge into `states/index.json`, which the app reads at load to populate the state list and coverage markers.
+
+## Direction and refresh rate (Washington)
+
+Most DOTs publish a camera's name and a URL. WSDOT publishes more, so Washington's popups say more.
+
+**Which way the camera looks.** `CameraLocation.Direction` is a single letter (`N`, `S`, `E`, `W`, `B`, `O`). WSDOT's own road-alert feed spells the identical vocabulary out in full — "Northbound", "Both Directions" — so the expansion is theirs, not a guess. The popup shows it as a chip with an arrow. It is the direction of travel the camera covers, not a compass bearing.
+
+**How often the image actually changes.** WSDOT publishes this *nowhere*: not in the REST API, not in the map's `appconfig.json`, not on the cameras page. But every JPEG carries a `Last-Modified` header. `measure-refresh-wa.py` polls `HEAD` on a cadence, watches that timestamp move, and writes `states/WA-refresh.json`, which the build folds in. Ages are computed against the server's own `Date` header, so a skewed clock (a couple of these images live on a ski lodge and a Park Service host) cannot corrupt anything but itself.
+
+Two estimators, because either alone fails predictably. `window / changes` is right for cameras slower than the polling cadence and overestimates faster ones, since refreshes slip between passes. `max(observed age)` cannot be fooled by that aliasing, because an image's age at a random moment is roughly uniform on `[0, T]`. Both err upward, so the build takes the smaller. A camera has to be caught refreshing **twice** to get a number: one refresh only tells you the interval is somewhere between "the oldest age we saw" and "forever".
+
+As measured on 2026-07-09: median **2 minutes**, 232 cameras at about a minute, the slowest rated one at 7 minutes. 143 cameras refresh slower than the 14-minute run could pin down and simply fall back to the generic wording. The popup polls at the measured rate instead of a flat 30s, which stops it re-fetching an identical JPEG twenty times.
+
+**Cameras that are not actually live.** 11 Washington cameras return `IsActive: true` from the API while serving an image that has not changed in over a day. Four ferry cameras have served the same bytes since **September 2003**. Those get an amber "no new image since ..." instead of a refresh rate, and stop being polled every 30 seconds.
+
+Washington also aims several cameras at one spot: 188 cameras sit on 47 shared coordinates, and stacked map pins are unclickable, so the build collapses each coordinate into one feature with a tabbed row of views. Both fields above therefore hang off each view, not off the location, and the chip updates as you switch tabs.
 
 ## Routes
 
