@@ -1,0 +1,44 @@
+name: Camera health sweep
+
+# Feeds recover. A camera dead this week is fine next week, so a one-off sweep
+# rots into a different kind of lie than the one it fixed. Re-check every 6h.
+on:
+  schedule:
+    - cron: '17 */6 * * *'   # offset off the hour: every DOT scraper on earth runs at :00
+  workflow_dispatch:
+
+concurrency:
+  group: camera-health
+  cancel-in-progress: false   # a half-finished sweep would publish a half-truth
+
+permissions:
+  contents: write
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Range requests keep this near 42MB against 27 state governments' servers,
+      # rather than the 1.4GB it would cost to pull whole JPEGs.
+      - name: Probe every camera
+        run: python3 probe-health.py
+
+      - name: Commit the verdicts
+        run: |
+          git config user.name  'ora-health-bot'
+          git config user.email 'ora-health-bot@users.noreply.github.com'
+          git add states/health
+          if git diff --cached --quiet; then
+            echo 'no change in camera health'
+            exit 0
+          fi
+          summary=$(python3 -c "import json,glob,collections;t=collections.Counter();[t.update(json.load(open(p)).get('counts',{})) for p in glob.glob('states/health/*.json') if 'known-placeholders' not in p];print(', '.join(f'{v} {k}' for k,v in sorted(t.items())) or 'all clear')")
+          git commit -m "Camera health: $summary"
+          git push

@@ -48,6 +48,26 @@ As measured on 2026-07-09: median **2 minutes**, 232 cameras at about a minute, 
 
 Washington also aims several cameras at one spot: 188 cameras sit on 47 shared coordinates, and stacked map pins are unclickable, so the build collapses each coordinate into one feature with a tabbed row of views. Both fields above therefore hang off each view, not off the location, and the chip updates as you switch tabs.
 
+## Is this camera actually showing me anything?
+
+Roughly one in ten of Ora's snapshot cameras is not showing a live view, and every map of these feeds, including this one until now, presented those identically to the ones that work. A camera can fail three ways, and the source is no help. Hawaii's API reports `status: "OK"` on all 52 cameras serving its "Image Temporarily Unavailable" card. WSDOT reports `IsActive: true` on ferry cameras frozen since 2003. Kansas served a red LIVE badge over 184 streams that answer 401.
+
+Two failures, two different solutions, because of one browser rule.
+
+**A snapshot that is not a camera.** `probe-health.py` sweeps every camera and classifies it `offline` (the image will not load), `placeholder` (a "camera unavailable" card), or `frozen` (a real image, unchanged for over a day).
+
+Detecting a placeholder needs no per-state list of what placeholders look like. Two cameras cannot see the same scene byte for byte, so **any image served by three or more cameras at once is not a camera view**. The rule calibrates itself, and it found Hawaii's card without being told Hawaii exists. Clusters are confirmed by pulling two full bodies and checking they really are identical, and confirmed fingerprints are remembered in `known-placeholders.json`, which is what catches the same card later when only one camera is down.
+
+It is cheap, too. `Range: bytes=0-1023` returns the first 1KB *and* the true total size in `Content-Range`, so a camera fingerprints as `(total_size, sha256(first 1KB))` for about 1.2KB of traffic. Every DOT host honours it. That matters: pulling 35,000 whole JPEGs four times a day would be 1.4GB per run off the servers of 27 state governments. This is 42MB. Do not "optimise" it into a `HEAD` request, because Georgia and North Carolina answer `HEAD` with `Content-Length: 0`.
+
+A [GitHub Actions workflow](.github/workflows/camera-health.yml) re-runs the sweep every 6 hours and commits the verdicts, because feeds recover: a camera dead this week is fine next week, and a one-off sweep would rot into a different kind of lie than the one it fixed. Dead cameras get a grey pin, so you learn before you spend the click, and the popup says which way it failed and when that was last checked.
+
+**A video stream that is not moving.** This one the browser can settle by itself, at runtime, with no data files. hls.js feeds video through MSE from a `blob:` URL, which is same-origin, so unlike a cross-origin `<img>` the canvas is **not** tainted and the pixels are readable. Ora samples the picture every 3.5s and asks two questions: is `currentTime` advancing, and is the picture actually changing? A real sensor is never perfectly still, so two consecutive identical frames mean a synthetic one. Either failure and the red LIVE badge turns grey and reads NOT LIVE, keeping the poster snapshot, since a recent still beats a lie.
+
+That covers the case where you click a camera expecting live video and get a still: a dead stream behind a poster used to look exactly like a live camera on an empty road.
+
+Snapshots cannot get the same treatment. A cross-origin `<img>` throws `SecurityError` on `getImageData`, and DOT image hosts send no CORS header, so only its dimensions survive. That is the whole reason the snapshot half has to be precomputed by a script and shipped.
+
 ## Routes
 
 Group the cameras on your commute into a saved **route** and scroll through all their live feeds at once, instead of clicking pins one at a time. Make a route, tap cameras on the map to add them, then open the route to see the whole drive as a vertical stack of live video/snapshots. Routes are saved locally (no account, no sign-in). Inspired by the [511 Wisconsin app](https://apps.apple.com/us/app/511-wisconsin-traffic-cameras/id6446508226) whose users called this feature "gold."
