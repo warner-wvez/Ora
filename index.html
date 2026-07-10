@@ -139,7 +139,7 @@
   .maplibregl-popup.tip .maplibregl-popup-tip { display: none; }
   .maplibregl-popup-content { border-radius: 14px; padding: 0; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
   .popup-inner { width: 264px; }
-  .popup-imgwrap { position: relative; width: 100%; height: 150px; background: #eef0f2; }
+  .popup-imgwrap { position: relative; width: 100%; height: 150px; background: #eef0f2; cursor: zoom-in; }
   .popup-inner img, .popup-inner video { width: 100%; height: 150px; object-fit: cover; display: block; background: #eee; }
   .popup-imgwrap .vid { position: absolute; inset: 0; opacity: 0; transition: opacity .35s; z-index: 1; }
   .popup-imgwrap.ready .vid { opacity: 1; }
@@ -151,6 +151,14 @@
   .popup-imgwrap .img-offline { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: #9a9aa0; font-size: 12px; font-weight: 600; }
   .popup-imgwrap.err img, .popup-imgwrap.err video { display: none; }
   .popup-imgwrap.err .img-offline { display: flex; }
+  .popup-rwis { margin: 4px 0 2px; font-size: 11px; line-height: 1.35; color: #1c6e4a; font-weight: 600; }
+  .enlarge-btn { position: absolute; bottom: 8px; right: 8px; z-index: 3; width: 26px; height: 26px; border: none; border-radius: 5px; background: rgba(0,0,0,.5); color: #fff; font-size: 13px; line-height: 1; cursor: zoom-in; display: flex; align-items: center; justify-content: center; }
+  .enlarge-btn:hover { background: rgba(0,0,0,.8); }
+  .enlarge-ov { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,.82); display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .enlarge-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 96vw; max-height: 92vh; }
+  .enlarge-media { max-width: 96vw; max-height: 84vh; width: auto; height: auto; border-radius: 8px; background: #000; box-shadow: 0 12px 44px rgba(0,0,0,.55); }
+  .enlarge-cap { color: #f2f2f5; font-size: 13px; text-align: center; max-width: 90vw; }
+  .enlarge-close { position: absolute; top: -14px; right: -14px; width: 32px; height: 32px; border-radius: 50%; border: none; background: #fff; color: #111; font-size: 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
   .popup-body { padding: 10px 12px 12px; }
   .popup-body h3 { font-size: 13px; margin: 0 0 4px; color: #1c1c1e; line-height: 1.3; }
   .popup-dirs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
@@ -251,6 +259,11 @@
 <script>
 /* ---------- layer catalog (states injected at load from states/index.json) ---------- */
 const cb = (u)=> !u ? '' : u + (u.includes('?')?'&':'?') + 't=' + Date.now();
+// New Mexico's snapshot host (ss.nmroads.com) serves http only, which an https page blocks as
+// mixed content. States flagged imgproxy route their images through an https proxy at render time,
+// with the cache buster inside the proxied URL so the proxy refetches the origin instead of caching.
+const wsrv = (u)=> !u ? '' : 'https://wsrv.nl/?url=' + encodeURIComponent(u.replace(/^https?:\/\//,'') + (u.includes('?')?'&':'?') + 't=' + Date.now());
+const snapFor = (s)=> s.imgproxy==='wsrv' ? ((d)=>wsrv(d.snapshot)) : ((d)=>cb(d.snapshot));
 const LAYERS = {
   'il-cam':  { kind:'live', name:'Illinois', file:'cameras.json', center:[-88.5,41.6], zoom:8, refreshMs:30000, hasVideo:false, count:1328, snap:(d)=>cb(d.snapshot), age:'source updates every 1–10 min' },
   'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, count:957, snap:(d)=>`https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}`, age:'refreshes every 2s' },
@@ -293,10 +306,12 @@ function mediaHTML(dir, cfg){
   if(live) return `<div class="popup-imgwrap${dir.snapshot?'':' noposter'}"><span class="live-badge">● LIVE</span>
     ${dir.snapshot?`<img class="poster" src="${cfg.snap(dir)}" onerror="this.parentElement.classList.add('err')">`:''}
     <video id="popup-vid" class="vid" muted autoplay playsinline></video>
-    <div class="img-offline">&#9888;<span>Camera offline</span></div></div>`;
+    <div class="img-offline">&#9888;<span>Camera offline</span></div>
+    <button class="enlarge-btn" title="Enlarge" data-enlarge>&#10530;</button></div>`;
   // a video-only camera in a browser that cannot play HLS has nothing to fall back to
   if(!dir.snapshot) return `<div class="popup-imgwrap err"><div class="img-offline">&#9888;<span>Live video unsupported here</span></div></div>`;
-  return `<div class="popup-imgwrap"><img id="popup-img" src="${cfg.snap(dir)}" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div></div>`;
+  return `<div class="popup-imgwrap"><img id="popup-img" src="${cfg.snap(dir)}" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div>
+    <button class="enlarge-btn" title="Enlarge" data-enlarge>&#10530;</button></div>`;
 }
 // WSDOT is the only source that publishes which way a camera looks, and the only one
 // whose image timestamps let us measure how often it actually changes. Both belong to
@@ -337,6 +352,7 @@ function buildLivePopup(props, cfg){
   const dirs=props.directions, showDir=dirs.length>1;
   return `<div class="popup-inner">${mediaHTML(dirs[0],cfg)}
       <div class="popup-body"><h3>${props.name}</h3>
+        ${props.rwis?`<div class="popup-rwis">${props.rwis}</div>`:''}
         ${showDir?`<div class="popup-dirs">${dirs.map((d,i)=>`<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.label||d.facing||d.direction||('View '+(i+1))}</button>`).join('')}</div>`:''}
         <div class="popup-meta">${facingHTML(dirs[0])}</div>
         <div class="popup-foot"><span class="popup-age${(dirs[0].stale_since||shownHealth(dirs[0],cfg))?' stale':''}">${camAge(dirs[0],cfg)}</span>
@@ -425,7 +441,48 @@ function wireLivePopup(props, cfg){
   }));
   const addBtn=el.querySelector('[data-add]');
   if(addBtn) addBtn.addEventListener('click',()=>addCameraToRoute(lastSelected.k, props, lastSelected.coords));
-  popup.on('close',()=>{ if(timer) clearInterval(timer); destroyPopupHls(); });
+  // click the picture (or its expand button) to open the same view full-screen
+  el.addEventListener('click',(e)=>{
+    if(e.target.closest('.dir-btn')||e.target.closest('[data-add]')) return;
+    if(e.target.closest('[data-enlarge]')||e.target.closest('.popup-imgwrap')) openEnlarge(props.directions[idx], cfg, props);
+  });
+  popup.on('close',()=>{ if(timer) clearInterval(timer); destroyPopupHls(); closeEnlarge(); });
+}
+
+/* ---------- full-screen enlarge (snapshot or HLS video), shared by every layer ---------- */
+let enlargeState=null;
+function closeEnlarge(){
+  if(!enlargeState) return;
+  const {ov, hls, timer, onkey}=enlargeState;
+  if(timer) clearInterval(timer);
+  if(hls){ try{ hls.destroy(); }catch(e){} }
+  document.removeEventListener('keydown', onkey);
+  ov.remove(); enlargeState=null;
+}
+function openEnlarge(dir, cfg, props){
+  if(!dir) return;
+  closeEnlarge();
+  const canVid=canPlayVideo(dir,cfg);
+  if(!canVid && !dir.snapshot) return;                 // nothing to show
+  const ov=document.createElement('div'); ov.className='enlarge-ov';
+  const media=canVid ? `<video class="enlarge-media" muted autoplay playsinline></video>`
+                     : `<img class="enlarge-media" src="${cfg.snap(dir)}">`;
+  ov.innerHTML=`<div class="enlarge-box">${media}
+      <button class="enlarge-close" title="Close">&#10005;</button>
+      <div class="enlarge-cap"><b>${props.name}</b>${props.rwis?` &middot; ${props.rwis}`:''}</div></div>`;
+  document.body.appendChild(ov);
+  let hls=null, timer=null;
+  if(canVid){
+    const v=ov.querySelector('video');
+    hls=new Hls({maxBufferLength:8, maxMaxBufferLength:20}); hls.loadSource(dir.video); hls.attachMedia(v);
+  } else {
+    const im=ov.querySelector('img');
+    timer=setInterval(()=>{ im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg));
+  }
+  const onkey=(e)=>{ if(e.key==='Escape') closeEnlarge(); };
+  document.addEventListener('keydown', onkey);
+  ov.addEventListener('click',(e)=>{ if(e.target===ov || e.target.closest('.enlarge-close')) closeEnlarge(); });
+  enlargeState={ov, hls, timer, onkey};
 }
 
 /* ---------- enforcement popup ---------- */
@@ -760,7 +817,7 @@ map.on('load', async ()=>{
   // inject states from index
   try{
     const idx=await (await fetch('states/index.json')).json();
-    Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, count:s.count, snap:(d)=>cb(d.snapshot), age: s.video?'live video where available':'snapshot, updates every few min' }; });
+    Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, count:s.count, snap:snapFor(s), age: s.video?'live video where available':'snapshot, updates every few min' }; });
   }catch(e){ console.warn('states index failed', e); }
   renderCamList(); renderRouteList(); buildCoverage();
 

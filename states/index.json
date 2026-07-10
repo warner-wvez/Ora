@@ -306,5 +306,17 @@
   ],
   "zoom": 7.8,
   "video": true
+ },
+ "NM": {
+  "name": "New Mexico",
+  "file": "states/NM.json",
+  "count": 183,
+  "center": [
+   -106.1,
+   34.4
+  ],
+  "zoom": 6.2,
+  "video": false,
+  "imgproxy": "wsrv"
  }
 }
