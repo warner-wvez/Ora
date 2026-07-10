@@ -222,7 +222,7 @@
  "CA": {
   "name": "California",
   "file": "states/CA.json",
-  "count": 2047,
+  "count": 3197,
   "center": [
    -119.6,
    37.3
@@ -244,7 +244,7 @@
  "VA": {
   "name": "Virginia",
   "file": "states/VA.json",
-  "count": 1670,
+  "count": 1684,
   "center": [
    -78.7,
    37.9
@@ -266,7 +266,7 @@
  "TX": {
   "name": "Texas",
   "file": "states/TX.json",
-  "count": 3429,
+  "count": 3426,
   "center": [
    -99.3,
    31.3

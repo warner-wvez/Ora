@@ -57,8 +57,9 @@ def main():
     feats, skipped = [], 0
     for r in rows(table_id()):
         m = POINT.match(r['XY'] or '')
-        # Paris_test_WWD is a TxDOT test feed, not a road camera
-        if not m or not r['httpsurl'] or not r['active'] or not r['name'].startswith('TX_'):
+        # location-first: keep inactive and stream-less cameras (their pin marks the spot);
+        # still drop rows with no coordinate and the Paris_test_WWD test feed (not a road camera)
+        if not m or not r['name'].startswith('TX_'):
             skipped += 1; continue
         lng, lat = float(m.group(1)), float(m.group(2))
         if not (BBOX[0] <= lng <= BBOX[2] and BBOX[1] <= lat <= BBOX[3]):
@@ -68,7 +69,7 @@ def main():
                       'geometry': {'type': 'Point', 'coordinates': [lng, lat]},
                       'properties': {'name': (r['description'] or r['name']).strip(),
                                      'kind': 'live',
-                                     'directions': [{'snapshot': None, 'video': r['httpsurl'], 'label': label}],
+                                     'directions': [{'snapshot': None, 'video': r['httpsurl'] or None, 'label': label}],
                                      'roadway': (r['route'] or '').strip(),
                                      'county': (r['jurisdiction'] or '').strip()}})
     os.makedirs('states', exist_ok=True)
