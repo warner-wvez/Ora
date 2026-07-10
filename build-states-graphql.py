@@ -8,7 +8,7 @@ see build-states.py). One listCameraViewsQuery returns every camera with a bbox
 Writes states/<code>.json for each and merges them into states/index.json.
 Usage: python3 build-states-graphql.py
 """
-import urllib.request, json, gzip, re, os, time, concurrent.futures
+import urllib.request, json, gzip, re, os, time, random, concurrent.futures
 from collections import defaultdict
 
 STATES = {
@@ -57,6 +57,13 @@ def video_plays(url):
             return r.headers.get('Access-Control-Allow-Origin') in ('*','http://localhost')
     except Exception: return False
 
+def video_plays_any(urls, n=8):
+    """One dead camera must not decide a whole state: roughly 5% of DOT streams are
+    down at any moment, so testing a single stream is a coin flip."""
+    urls=[u for u in urls if u]
+    if not urls: return False
+    return any(video_plays(u) for u in random.sample(urls, min(n, len(urls))))
+
 def build(code, cfg):
     host=cfg['host']
     d=gql(host, input_all())
@@ -82,9 +89,9 @@ def build(code, cfg):
         if not c['coords'] or not c['dirs']: continue
         feats.append({'type':'Feature','geometry':{'type':'Point','coordinates':c['coords']},
             'properties':{'name':c['name'] or 'Camera','kind':'live','directions':c['dirs'],'roadway':'','county':''}})
-    # video flag: does a sample stream allow cross-origin playback?
-    sample=next((di['video'] for f in feats for di in f['properties']['directions'] if di['video']), None)
-    plays=video_plays(sample)
+    # video flag: do any of several sampled streams allow cross-origin playback?
+    all_vid=[di['video'] for f in feats for di in f['properties']['directions'] if di['video']]
+    plays=video_plays_any(all_vid)
     return feats, plays
 
 def main():

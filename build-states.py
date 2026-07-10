@@ -8,12 +8,20 @@ Each state exposes:
   /map/Cctv/<imageId>     -> the live JPEG snapshot
   images[].videoUrl       -> an HLS (.m3u8) live stream on some states
 
-Writes states/<code>.json (one FeatureCollection each) + states/index.json.
-Usage: python3 build-states.py
-"""
-import urllib.request, json, gzip, zlib, urllib.parse, re, os, time, concurrent.futures
+Writes states/<code>.json (one FeatureCollection each) and merges them into
+states/index.json, leaving states built by the other scripts alone.
 
-# host + display + map framing per state on the platform
+Usage: python3 build-states.py            # every state below
+       python3 build-states.py NY CT      # just these
+"""
+import urllib.request, json, gzip, zlib, urllib.parse, re, os, sys, time, random, concurrent.futures
+
+# Optional per-state keys:
+#   bbox        (w, s, e, n). Rows outside it are dropped.
+#   only_state  drop any row whose own `state` column names a different state.
+# 511ny carries 324 Connecticut and 66 New Jersey cameras on shared roads, and a
+# bbox cannot separate them: Connecticut sits inside any New York bbox, and Ora
+# already has Connecticut from ctroads.org. The feed labels them, so believe it.
 STATES = {
   'FL': {'host':'fl511.com',            'name':'Florida',        'center':[-81.7,28.2],'zoom':6},
   'GA': {'host':'511ga.org',            'name':'Georgia',        'center':[-83.6,32.8],'zoom':6.5},
@@ -28,7 +36,13 @@ STATES = {
   'CT': {'host':'ctroads.org',          'name':'Connecticut',    'center':[-72.7,41.6],'zoom':8.5},
   'LA': {'host':'511la.org',            'name':'Louisiana',      'center':[-92.0,31.0],'zoom':6.5},
   'AK': {'host':'511.alaska.gov',       'name':'Alaska',         'center':[-149.6,61.2],'zoom':5},
+  'NY': {'host':'511ny.org',            'name':'New York',       'center':[-75.5,42.9],'zoom':6.3,
+         'bbox':(-79.77,40.47,-71.85,45.02), 'only_state':'New York'},
 }
+
+# the popup renders a compass chip from this; anything else ('Unknown', 'Inbound') gets none
+FACING = {'northbound':'Northbound', 'southbound':'Southbound', 'eastbound':'Eastbound',
+          'westbound':'Westbound', 'both directions':'Both directions'}
 
 def fetch(url, timeout=45, tries=4):
     for i in range(tries):
@@ -46,12 +60,26 @@ def fetch(url, timeout=45, tries=4):
 def video_plays(url):
     """Video is only usable in-browser if its host allows cross-origin playback."""
     if not url: return False
+    # a signed token cannot be baked into a static JSON file; it dies minutes later
+    if 'token=' in url: return False
     try:
         req=urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0','Origin':'http://localhost'})
         with urllib.request.urlopen(req, timeout=12) as r:
             return r.headers.get('Access-Control-Allow-Origin') in ('*','http://localhost')
     except Exception:
         return False
+
+def video_plays_any(urls, n=8):
+    """One dead camera must not decide a whole state.
+
+    Roughly 5% of DOT cameras are down at any moment, so testing the single first
+    stream is a coin flip. New York's first camera (R5_007) is one of the dead
+    ones: sampling it alone marks the state snapshot-only and throws away 1,553
+    working live feeds, with nothing logged and nothing raised.
+    """
+    urls=[u for u in urls if u]
+    if not urls: return False
+    return any(video_plays(u) for u in random.sample(urls, min(n, len(urls))))
 
 def page(host, start, length=100):
     q={"draw":1,"columns":[{"data":str(i),"name":"","searchable":True,"orderable":True,"search":{"value":"","regex":False}} for i in range(8)],
@@ -73,10 +101,14 @@ def build_state(code, cfg):
     start=100
     while start<rec:
         rows+=page(host,start).get('data',[]); start+=100
-    feats=[]
+    feats=[]; bbox=cfg.get('bbox'); only=cfg.get('only_state')
     for r in rows:
         c=coords(r)
         if not c: continue
+        # a neighbouring state's cameras on a shared road, labelled as theirs
+        if only and r.get('state') and r.get('state')!=only: continue
+        # null island, and one camera whose longitude lost its minus sign
+        if bbox and not (bbox[0]<=c[0]<=bbox[2] and bbox[1]<=c[1]<=bbox[3]): continue
         name=(r.get('location') or r.get('roadway') or 'Camera')
         imgs=[]
         for im in r.get('images',[]):
@@ -89,6 +121,11 @@ def build_state(code, cfg):
                 'label': (im.get('description') or '').strip()
             })
         if not imgs: continue
+        # where the feed says which way the camera looks, hang it on the view,
+        # same shape Washington uses. 'Unknown' and 'Inbound' get no chip.
+        facing=FACING.get((r.get('direction') or '').strip().lower())
+        if facing:
+            for im in imgs: im['facing']=facing
         feats.append({'type':'Feature','geometry':{'type':'Point','coordinates':c},
             'properties':{'name':name,'kind':'live','directions':imgs,
                           'roadway':r.get('roadway') or '','county':r.get('county') or ''}})
@@ -96,21 +133,26 @@ def build_state(code, cfg):
 
 def main():
     os.makedirs('states', exist_ok=True)
-    index={}
+    want={c.upper() for c in sys.argv[1:]}
+    todo={k:v for k,v in STATES.items() if not want or k in want}
+    if want-set(STATES): raise SystemExit(f'unknown state(s): {sorted(want-set(STATES))}')
+    # merge, never clobber: California, Texas, Washington and the rest live in here too
+    index=json.load(open('states/index.json')) if os.path.exists('states/index.json') else {}
     def run(item):
         code,cfg=item
         try:
             feats=build_state(code,cfg)
-            # a state counts as "video" only if a sample stream actually allows cross-origin playback
-            sample_vid=next((d['video'] for f in feats for d in f['properties']['directions'] if d['video']), None)
-            plays=video_plays(sample_vid)
-            vids=sum(1 for f in feats for d in f['properties']['directions'] if d['video']) if plays else 0
+            # a state counts as "video" only if a stream actually allows cross-origin
+            # playback. Sample several: any single one of them may simply be broken.
+            all_vid=[d['video'] for f in feats for d in f['properties']['directions'] if d['video']]
+            plays=video_plays_any(all_vid)
+            vids=len(all_vid) if plays else 0
             json.dump({'type':'FeatureCollection','features':feats}, open(f'states/{code}.json','w'))
             return code,cfg,len(feats),vids,None
         except Exception as e:
             return code,cfg,0,0,str(e)[:80]
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
-        for code,cfg,n,vids,err in ex.map(run, STATES.items()):
+        for code,cfg,n,vids,err in ex.map(run, todo.items()):
             if err: print(f'  [FAIL] {code}: {err}'); continue
             index[code]={'name':cfg['name'],'file':f'states/{code}.json','count':n,
                          'center':cfg['center'],'zoom':cfg['zoom'],'video':vids>0}

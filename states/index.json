@@ -284,5 +284,16 @@
   ],
   "zoom": 6.3,
   "video": false
+ },
+ "NY": {
+  "name": "New York",
+  "file": "states/NY.json",
+  "count": 1907,
+  "center": [
+   -75.5,
+   42.9
+  ],
+  "zoom": 6.3,
+  "video": true
  }
 }
