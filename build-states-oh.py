@@ -34,7 +34,7 @@ def main():
             for v in (c.get('cameraViews') or []):
                 u=v.get('largeUrl') or v.get('smallUrl')
                 if u: dirs.append({'snapshot':u,'video':None,'label':(v.get('direction') or '').strip()})
-            if not dirs: continue
+            if not dirs: dirs=[{'snapshot':None,'video':None,'label':''}]   # location-first: keep image-less cameras
             feats.append({'type':'Feature','geometry':{'type':'Point','coordinates':[lng,lat]},
                 'properties':{'name':(c.get('location') or c.get('description') or 'Camera').strip(),
                               'kind':'live','directions':dirs,'roadway':'','county':''}})
