@@ -21,11 +21,11 @@ def main():
     feats=[]
     for it in items:
         p=it['properties']; coords=(it.get('geometry') or {}).get('coordinates')
-        if not coords or not p.get('active') or not p.get('image_url'): continue
+        if not coords: continue   # location-first: keep inactive + image-less cams, drop only no-coordinate rows
         nm=(p.get('description') or '').strip() or 'Traffic camera'
         rd=((p.get('route') or '').strip()+' '+(p.get('direction') or '').strip()).strip()
         feats.append({'type':'Feature','geometry':{'type':'Point','coordinates':coords},
-            'properties':{'name':nm,'kind':'live','directions':[{'snapshot':p['image_url'],'video':None,'label':''}],
+            'properties':{'name':nm,'kind':'live','directions':[{'snapshot':p.get('image_url') or None,'video':None,'label':''}],
                 'roadway':rd,'county':(p.get('jurisdiction') or '').strip()}})
     os.makedirs('states', exist_ok=True)
     json.dump({'type':'FeatureCollection','features':feats}, open('states/VA.json','w'))
