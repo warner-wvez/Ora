@@ -106,9 +106,6 @@
   .basemap { margin-top: 10px; border-top: 1px solid #ececf0; padding-top: 10px; }
   .basemap .hd { font-size: 11px; font-weight: 600; color: #6e6e73; margin-bottom: 6px; }
 
-  #recenter { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 10; display: none; align-items: center; gap: 6px; background: #1c1c1e; color: #fff; font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 999px; box-shadow: 0 3px 12px rgba(0,0,0,0.3); cursor: pointer; border: none; }
-  #recenter.show { display: inline-flex; }
-
   /* add-to-route banner */
   #addBanner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15; display: none; align-items: center; gap: 12px; background: #007aff; color: #fff; font-size: 13px; font-weight: 600; padding: 9px 10px 9px 16px; border-radius: 999px; box-shadow: 0 3px 14px rgba(0,0,0,0.3); }
   #addBanner.show { display: flex; }
@@ -196,7 +193,6 @@
 </head>
 <body>
 <div id="map"></div>
-<button id="recenter">&#8634; Back to selection</button>
 <div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
 
 <div id="routeView">
@@ -285,7 +281,8 @@ let searchIndex=[], kbdIdx=-1;
 
 const US_VIEW={ center:[-96,38.5], zoom:3.7 };
 const OVERVIEW_BOUNDS=[[-124.5,24.5],[-67,48.5]]; // frames the lower-48 states we cover (Alaska reachable from the list)
-const map=new maplibregl.Map({ container:'map', style:'https://tiles.openfreemap.org/styles/positron', center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0 });
+const MAPTILER_KEY='JY0TQOOHXi1TLxg5VnnQ'; // restrict this key by allowed origin in the MapTiler dashboard
+const map=new maplibregl.Map({ container:'map', style:`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`, center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0 });
 function showOverview(){ map.fitBounds(OVERVIEW_BOUNDS,{padding:{top:40,right:40,bottom:40,left:280},duration:700}); }
 map.addControl(new maplibregl.NavigationControl(),'top-right');
 const srcId=(k)=>`src-${k}`;
@@ -511,7 +508,7 @@ function setHighlight(kind,coords,r){ map.getSource('hl-'+kind).setData({type:'F
 function clearHighlight(kind){ map.getSource('hl-'+kind).setData({type:'FeatureCollection',features:[]}); }
 function showTip(coords,name){ if(!hoverTip) hoverTip=new maplibregl.Popup({closeButton:false,closeOnClick:false,className:'tip',offset:12}); hoverTip.setLngLat(coords).setHTML(name).addTo(map); }
 function hideTip(){ if(hoverTip) hoverTip.remove(); }
-function raiseHighlights(){ ['hl-hover','hl-select'].forEach(id=>{ if(map.getLayer(id)) map.moveLayer(id); }); }
+function raiseHighlights(){ if(map.getLayer('hl-hover')) map.moveLayer('hl-hover'); }
 
 /* ---------- selection ---------- */
 function selectFeature(k, feature){
@@ -519,8 +516,10 @@ function selectFeature(k, feature){
   const props=(typeof feature.properties.directions==='string')
     ? {...feature.properties, directions:JSON.parse(feature.properties.directions)} : feature.properties;
   if(addingTo){ addCameraToRoute(k, props, coords); return; }  // add-to-route mode
-  const r=(cfg.kind==='enforcement'?enfRadius(props.v90)+3:9);
-  setHighlight('select',coords,r); lastSelected={coords,k}; document.getElementById('recenter').classList.add('show'); writeUrl();
+  // a map click only opens the camera's popup — it never becomes a sticky selection or a
+  // shared-link filter. Only the side panel governs what the map shows. lastSelected is a
+  // transient handle so the popup's "+ Route" button knows which camera it is on.
+  lastSelected={coords,k};
   if(popup) popup.remove(); destroyPopupHls();
   if(cfg.kind==='live'){
     popup=new maplibregl.Popup({closeButton:true,maxWidth:'288px'}).setLngLat(coords).setHTML(buildLivePopup(props,cfg)).addTo(map);
@@ -528,7 +527,7 @@ function selectFeature(k, feature){
   } else {
     popup=new maplibregl.Popup({closeButton:true,maxWidth:'260px'}).setLngLat(coords).setHTML(buildEnfPopup(props)).addTo(map);
   }
-  popup.on('close',()=>{ clearHighlight('select'); document.getElementById('recenter').classList.remove('show'); lastSelected=null; destroyPopupHls(); writeUrl(); });
+  popup.on('close',()=>{ lastSelected=null; destroyPopupHls(); });
 }
 
 /* ---------- color/legend/filter (enforcement) ---------- */
@@ -547,18 +546,19 @@ function syncEnfControls(){ document.getElementById('enfControls').classList.tog
 
 /* ---------- basemap ---------- */
 function applyContrast(k){ const w=basemap==='satellite';
-  if(map.getLayer(`${k}__points`)) map.setPaintProperty(`${k}__points`,'circle-stroke-width', w?2.6:2);
-  if(map.getLayer(`${k}__clusters`)) map.setPaintProperty(`${k}__clusters`,'circle-stroke-width', w?2.6:2);
-  if(map.getLayer(`${k}__circle`)) map.setPaintProperty(`${k}__circle`,'circle-stroke-width', w?2:1.2); }
+  if(map.getLayer(`${k}__points`)) map.setPaintProperty(`${k}__points`,'circle-stroke-width', w?3:2.5);
+  if(map.getLayer(`${k}__clusters`)) map.setPaintProperty(`${k}__clusters`,'circle-stroke-width', w?3:2.5);
+  if(map.getLayer(`${k}__circle`)) map.setPaintProperty(`${k}__circle`,'circle-stroke-width', w?2:1.5); }
 function setBasemap(mode){ basemap=mode; map.setLayoutProperty('sat-layer','visibility', mode==='satellite'?'visible':'none'); active.forEach(applyContrast); }
 
 /* ---------- layer add/remove ---------- */
 function addLiveLayers(k,data){ const s=srcId(k);
   map.addSource(s,{type:'geojson',data,cluster:true,clusterMaxZoom:12,clusterRadius:44});
-  map.addLayer({id:`${k}__clusters`,type:'circle',source:s,filter:['has','point_count'],paint:{'circle-color':'#007aff','circle-radius':['step',['get','point_count'],13,25,17,150,22,1000,28],'circle-opacity':0.85,'circle-stroke-width':2,'circle-stroke-color':'#fff'}});
+  map.addLayer({id:`${k}__clusters`,type:'circle',source:s,filter:['has','point_count'],paint:{'circle-color':'#007aff','circle-radius':['step',['get','point_count'],14,25,18,150,24,1000,30],'circle-opacity':0.9,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
   map.addLayer({id:`${k}__cluster-count`,type:'symbol',source:s,filter:['has','point_count'],layout:{'text-field':['get','point_count_abbreviated'],'text-size':11,'text-font':['Noto Sans Bold']},paint:{'text-color':'#fff'}});
-  // a camera the health sweep found dead reads as dead before you spend a click on it
-  map.addLayer({id:`${k}__points`,type:'circle',source:s,filter:['!',['has','point_count']],paint:{'circle-color':['case',['==',['get','dead'],1],'#b4b4b9','#007aff'],'circle-radius':6,'circle-stroke-width':2,'circle-stroke-color':'#fff'}});
+  // a camera the health sweep found dead reads as dead before you spend a click on it.
+  // radius + white halo sized so the dot stays the top layer over coloured street basemaps
+  map.addLayer({id:`${k}__points`,type:'circle',source:s,filter:['!',['has','point_count']],paint:{'circle-color':['case',['==',['get','dead'],1],'#b4b4b9','#007aff'],'circle-radius':7,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
 }
 function addEnfLayers(k,data){ map.addSource(srcId(k),{type:'geojson',data});
   map.addLayer({id:`${k}__circle`,type:'circle',source:srcId(k),filter:enfFilterExpr(),paint:{'circle-color':enfColorExpr(),'circle-radius':['interpolate',['linear'],['get','v90'],0,3,50,5,300,8,1500,13,6000,20,16000,28,33000,36],'circle-opacity':0.78,'circle-stroke-width':1.2,'circle-stroke-color':'#fff'}});
@@ -602,16 +602,28 @@ function preconnectFor(data){
 }
 async function enableLayer(k,fly=true){
   const cfg=LAYERS[k];
-  if(!dataCache[k]){ dataCache[k]=await (await fetch(cfg.file)).json(); }
+  if(!dataCache[k]){
+    try{ dataCache[k]=await (await fetch(cfg.file)).json(); }
+    catch(err){                                          // a feed file that fails must not leave a checked box with an empty map
+      console.warn('camera layer failed to load', k, err);
+      const c=document.getElementById('cnt-'+k); if(c) c.textContent='could not load';
+      const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false;
+      return;
+    }
+  }
   const data=dataCache[k];
-  if(cfg.kind==='live') await loadHealth(k,data);      // must annotate before the source is added
   const c=document.getElementById('cnt-'+k);
-  if(c) c.textContent=data.features.length.toLocaleString()+(cfg.deadCount?` · ${cfg.deadCount.toLocaleString()} offline`:'');
-  if(cfg.kind==='live') preconnectFor(data);
+  const setCount=()=>{ if(c) c.textContent=data.features.length.toLocaleString()+(cfg.deadCount?` · ${cfg.deadCount.toLocaleString()} offline`:''); };
+  setCount();
   if(cfg.kind==='enforcement'){ enfMeta=data.meta||null; addEnfLayers(k,data); } else addLiveLayers(k,data);
   active.add(k); bindLayerHandlers(k); applyContrast(k); raiseHighlights(); syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=true;
   if(fly) map.easeTo({center:cfg.center,zoom:cfg.zoom,duration:700});
+  if(cfg.kind==='live'){
+    preconnectFor(data);
+    // pins paint right away; the health sweep greys the dead ones a moment later, off the critical path
+    loadHealth(k,data).then(h=>{ if(h && map.getSource(srcId(k))){ map.getSource(srcId(k)).setData(data); setCount(); } });
+  }
 }
 function disableLayer(k){ removeLayer(k); active.delete(k); if(popup){ popup.remove(); popup=null; } syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false; }
@@ -695,9 +707,13 @@ function closeRouteView(){ document.getElementById('routeView').classList.remove
 function bindLayerHandlers(k){
   if(bound.has(k)) return; bound.add(k); const cfg=LAYERS[k];
   if(cfg.kind==='live'){
-    map.on('click',`${k}__clusters`, async (e)=>{ const f=map.queryRenderedFeatures(e.point,{layers:[`${k}__clusters`]})[0];
-      const leaves=await map.getSource(srcId(k)).getClusterLeaves(f.properties.cluster_id,Infinity,0); if(!leaves.length) return;
-      const b=new maplibregl.LngLatBounds(); leaves.forEach(l=>b.extend(l.geometry.coordinates)); map.fitBounds(b,{padding:60,maxZoom:17,duration:600}); });
+    // click a cluster to break it apart: zoom to exactly where supercluster splits it into
+    // children, centred on the cluster. Every click produces a visible split, instead of the
+    // old fit-all-leaves that overshot small clusters and left state-wide ones still clustered.
+    map.on('click',`${k}__clusters`, async (e)=>{ const f=e.features[0]; if(!f) return;
+      const src=map.getSource(srcId(k)); let z;
+      try{ z=await src.getClusterExpansionZoom(f.properties.cluster_id); }catch(err){ return; }
+      map.easeTo({center:f.geometry.coordinates, zoom:z, duration:500}); });
     map.on('click',`${k}__points`, (e)=>selectFeature(k,e.features[0]));
     map.on('mousemove',`${k}__points`, (e)=>{ const f=e.features[0]; map.getCanvas().style.cursor='pointer'; setHighlight('hover',f.geometry.coordinates.slice(),9); showTip(f.geometry.coordinates.slice(),f.properties.name); });
     map.on('mouseleave',`${k}__points`, ()=>{ map.getCanvas().style.cursor=''; clearHighlight('hover'); hideTip(); });
@@ -716,11 +732,8 @@ function serializeState(){ const p=new URLSearchParams();
   p.set('c',`${c.lng.toFixed(5)},${c.lat.toFixed(5)}`); p.set('z',map.getZoom().toFixed(2));
   if(enfColorMode!=='verdict') p.set('cm',enfColorMode); if(basemap!=='light') p.set('b',basemap);
   if(enfFilter.verdicts.size<4) p.set('fv',[...enfFilter.verdicts].join(',')); if(enfFilter.types.size<2) p.set('ft',[...enfFilter.types].join(','));
-  if(lastSelected) p.set('s',`${lastSelected.k},${lastSelected.coords[0].toFixed(5)},${lastSelected.coords[1].toFixed(5)}`);
   return p.toString(); }
 function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+serializeState()); }
-function findFeatureByCoords(k,lng,lat){ const d=dataCache[k]; if(!d) return null; let best=null,bd=Infinity;
-  for(const f of d.features){ const [fl,fa]=f.geometry.coordinates; const dd=Math.abs(fl-lng)+Math.abs(fa-lat); if(dd<bd){bd=dd;best=f;} } return bd<0.0006?best:null; }
 async function restoreState(){
   const p=new URLSearchParams(location.hash.slice(1)); const has=[...p.keys()].length>0;
   const layers=(p.get('l')||'').split(',').filter(k=>LAYERS[k]);
@@ -737,7 +750,6 @@ async function restoreState(){
   syncEnfControls(); setBasemap(basemap);
   if(p.has('c')&&p.has('z')){ const [lng,lat]=p.get('c').split(',').map(Number); map.jumpTo({center:[lng,lat],zoom:Number(p.get('z'))}); }
   else showOverview();
-  if(p.has('s')){ const [sk,slng,slat]=p.get('s').split(','); const f=findFeatureByCoords(sk,Number(slng),Number(slat)); if(f) selectFeature(sk,f); }
 }
 
 /* ---------- build camera list (states A-Z; Illinois nests the Chicago ticket map) ---------- */
@@ -775,7 +787,6 @@ document.querySelectorAll('.color-btn[data-base]').forEach(btn=>btn.addEventList
 document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const v=ch.dataset.v; ch.classList.toggle('on'); ch.classList.contains('on')?enfFilter.verdicts.add(v):enfFilter.verdicts.delete(v); applyEnfFilter(); writeUrl(); }));
 document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.classList.contains('on')?enfFilter.types.add(t):enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
 document.getElementById('share').addEventListener('click',async ()=>{ const b=document.getElementById('share'); try{ await navigator.clipboard.writeText(location.href); }catch(e){} const t=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=t,1300); });
-document.getElementById('recenter').addEventListener('click',()=>{ if(lastSelected) map.flyTo({center:lastSelected.coords,zoom:15,duration:700}); });
 document.getElementById('showAll').addEventListener('click',()=>{ if(popup){popup.remove();popup=null;} showOverview(); });
 document.getElementById('clearAll').addEventListener('click',()=>{ [...active].forEach(disableLayer); showOverview(); writeUrl(); });
 document.getElementById('newRoute').addEventListener('click',()=>{ const name=prompt('Name this route (e.g. Work commute)'); if(!name) return; const routes=loadRoutes(); const id=uid(); routes.push({id,name:name.trim(),cams:[]}); saveRoutes(routes); renderRouteList(); startAddMode(id); });
@@ -803,17 +814,13 @@ map.on('load', async ()=>{
   map.addLayer({id:'state-lines',type:'line',source:'us-states',
     paint:{'line-color':'#9aa1ac','line-width':['interpolate',['linear'],['zoom'],3,0.7,5,1.1,8,1.5],'line-opacity':['interpolate',['linear'],['zoom'],3,0.8,8,0.35]}}, firstSymbol);
   map.addSource('hl-hover',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
-  map.addSource('hl-select',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});
-  map.addLayer({id:'hl-select',type:'circle',source:'hl-select',paint:{'circle-radius':['+',['get','r'],1],'circle-color':'rgba(0,122,255,0.10)','circle-stroke-color':'#007aff','circle-stroke-width':3}});
 
-  // coverage overview markers: one clickable pin per covered state (shown when nothing is selected)
+  // coverage overview markers: one label per covered state, shown when nothing is active.
+  // Informational only — a state is turned on from its side-panel checkbox, never from a map click.
   map.addSource('coverage',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'coverage-dot',type:'circle',source:'coverage',paint:{'circle-radius':['interpolate',['linear'],['zoom'],3,6,6,11],'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':2.5}});
   map.addLayer({id:'coverage-label',type:'symbol',source:'coverage',layout:{'text-field':['get','label'],'text-size':11,'text-font':['Noto Sans Bold'],'text-offset':[0,1.2],'text-anchor':'top','text-allow-overlap':false},paint:{'text-color':'#1c1c1e','text-halo-color':'#fff','text-halo-width':1.6}});
-  map.on('click','coverage-dot',(e)=>{ const k=e.features[0].properties.k; enableLayer(k).then(writeUrl); });
-  map.on('mouseenter','coverage-dot',()=>map.getCanvas().style.cursor='pointer');
-  map.on('mouseleave','coverage-dot',()=>map.getCanvas().style.cursor='');
 
   // inject states from index
   try{
