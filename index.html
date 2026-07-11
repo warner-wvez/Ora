@@ -286,7 +286,7 @@ let searchIndex=[], kbdIdx=-1;
 
 const US_VIEW={ center:[-96,38.5], zoom:3.7 };
 const OVERVIEW_BOUNDS=[[-124.5,24.5],[-67,48.5]]; // frames the lower-48 states we cover (Alaska reachable from the list)
-const MAPTILER_KEY='JY0TQOOHXi1TLxg5VnnQ'; // restrict this key by allowed origin in the MapTiler dashboard
+const MAPTILER_KEY='mxMrdP1TuXOrf8E7a9mb'; // origin-locked to warner-wvez.github.io + localhost in the MapTiler dashboard
 const map=new maplibregl.Map({ container:'map', style:`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`, center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0 });
 function showOverview(){ map.fitBounds(OVERVIEW_BOUNDS,{padding:{top:40,right:40,bottom:40,left:280},duration:700}); }
 map.addControl(new maplibregl.NavigationControl(),'top-right');
