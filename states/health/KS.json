@@ -1,12 +1,15 @@
 {
-"checked_at": "2026-07-10T20:11:20Z",
-"cameras": 578,
+"checked_at": "2026-07-11T14:16:27Z",
+"cameras": 591,
 "counts": {
-"offline": 8,
-"placeholder": 12
+"offline": 9,
+"frozen": 1,
+"placeholder": 14
 },
 "status": {
 "": "offline",
+"https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
+"https://kscam.carsprogram.org/snapshots/GEN_5-135-0119-2-I-135atI-235.jpeg": "frozen",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K007SBC-02.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K010EBIPC-01.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBC-05T.jpg": "placeholder",
@@ -16,13 +19,15 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-22.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-26.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-42.jpg": "offline",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-48.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-52.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-58.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-60.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-68.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M035SBC-01.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M435NBC-56.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M435NBC-57.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M435NBC-58.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0022-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0024-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0045-LQ.jpg": "offline"

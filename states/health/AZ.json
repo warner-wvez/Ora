@@ -1,14 +1,15 @@
 {
-"checked_at": "2026-07-10T19:57:02Z",
+"checked_at": "2026-07-11T13:59:26Z",
 "cameras": 678,
 "counts": {
-"placeholder": 68
+"placeholder": 71
 },
 "status": {
 "https://az511.com/map/Cctv/1010": "placeholder",
 "https://az511.com/map/Cctv/1011": "placeholder",
 "https://az511.com/map/Cctv/1013": "placeholder",
 "https://az511.com/map/Cctv/1014": "placeholder",
+"https://az511.com/map/Cctv/1034": "placeholder",
 "https://az511.com/map/Cctv/1035": "placeholder",
 "https://az511.com/map/Cctv/1041": "placeholder",
 "https://az511.com/map/Cctv/1042": "placeholder",
@@ -28,6 +29,8 @@
 "https://az511.com/map/Cctv/1259": "placeholder",
 "https://az511.com/map/Cctv/1358": "placeholder",
 "https://az511.com/map/Cctv/1422": "placeholder",
+"https://az511.com/map/Cctv/1429": "placeholder",
+"https://az511.com/map/Cctv/1431": "placeholder",
 "https://az511.com/map/Cctv/1443": "placeholder",
 "https://az511.com/map/Cctv/1444": "placeholder",
 "https://az511.com/map/Cctv/1445": "placeholder",

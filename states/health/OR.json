@@ -1,6 +1,10 @@
 {
-"checked_at": "2026-07-10T20:18:00Z",
+"checked_at": "2026-07-11T14:26:13Z",
 "cameras": 1127,
-"counts": {},
-"status": {}
+"counts": {
+"offline": 1
+},
+"status": {
+"https://tripcheck.com/RoadCams/cams/US26 at Sandy Maintenance EB_pid4505.jpg": "offline"
+}
 }
