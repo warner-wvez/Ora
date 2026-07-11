@@ -170,6 +170,8 @@
   .popup-age.stale { color: #b25000; font-weight: 600; }
   .popup-add { flex: 0 0 auto; white-space: nowrap; }
   .popup-add { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
+  .rp-menu { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; align-items: center; }
+  .rp-menu .rp-hd { width: 100%; font-size: 10px; font-weight: 600; color: #8e8e93; }
 
   .enf { width: 258px; padding: 12px 14px 14px; }
   .enf-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; color: #fff; margin-right: 5px; }
@@ -444,7 +446,11 @@ function wireLivePopup(props, cfg){
     render();
   }));
   const addBtn=el.querySelector('[data-add]');
-  if(addBtn) addBtn.addEventListener('click',()=>addCameraToRoute(lastSelected.k, props, lastSelected.coords));
+  const selK=lastSelected?lastSelected.k:null, selCoords=lastSelected?lastSelected.coords.slice():null;
+  if(addBtn) addBtn.addEventListener('click',()=>{
+    if(addingTo){ addCameraToRoute(selK, props, selCoords); return; }   // banner add-mode, as before
+    toggleRoutePicker(el, selK, props, selCoords);
+  });
   // click the picture (or its expand button) to open the same view full-screen
   el.addEventListener('click',(e)=>{
     if(e.target.closest('.dir-btn')||e.target.closest('[data-add]')) return;
@@ -529,8 +535,10 @@ function selectFeature(k, feature){
   // a map click only opens the camera's popup — it never becomes a sticky selection or a
   // shared-link filter. Only the side panel governs what the map shows. lastSelected is a
   // transient handle so the popup's "+ Route" button knows which camera it is on.
-  lastSelected={coords,k};
+  // The old popup must close BEFORE lastSelected is set: its close handler nulls
+  // lastSelected, and the wrong order wiped every selection after the first.
   if(popup) popup.remove(); destroyPopupHls();
+  lastSelected={coords,k};
   if(cfg.kind==='live'){
     popup=new maplibregl.Popup({closeButton:true,maxWidth:'288px'}).setLngLat(coords).setHTML(buildLivePopup(props,cfg)).addTo(map);
     const mine=popup;
@@ -564,7 +572,10 @@ function setBasemap(mode){ basemap=mode; map.setLayoutProperty('sat-layer','visi
 
 /* ---------- layer add/remove ---------- */
 function addLiveLayers(k,data){ const s=srcId(k);
-  map.addSource(s,{type:'geojson',data,cluster:true,clusterMaxZoom:12,clusterRadius:44});
+  // progressive split, the way Apple/Google do it: clusters form only where pins genuinely
+  // overlap (32px), pairs are never clustered (a "2" bubble is worse than 2 pins), and
+  // everything is individual pins from zoom 12 up. Zooming alone reveals the spread.
+  map.addSource(s,{type:'geojson',data,cluster:true,clusterMaxZoom:11,clusterRadius:32,clusterMinPoints:3});
   map.addLayer({id:`${k}__clusters`,type:'circle',source:s,filter:['has','point_count'],paint:{'circle-color':'#007aff','circle-radius':['step',['get','point_count'],14,25,18,150,24,1000,30],'circle-opacity':0.9,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
   map.addLayer({id:`${k}__cluster-count`,type:'symbol',source:s,filter:['has','point_count'],layout:{'text-field':['get','point_count_abbreviated'],'text-size':11,'text-font':['Noto Sans Bold']},paint:{'text-color':'#fff'}});
   // a camera the health sweep found dead reads as dead before you spend a click on it.
@@ -691,14 +702,43 @@ function startAddMode(id){ addingTo=id; const r=loadRoutes().find(x=>x.id===id);
   document.getElementById('addBanner').classList.add('show');
   if(popup){ popup.remove(); popup=null; } }
 function stopAddMode(){ addingTo=null; document.getElementById('addBanner').classList.remove('show'); }
-function addCameraToRoute(k, props, coords){
-  const routes=loadRoutes(), r=routes.find(x=>x.id===addingTo); if(!r) return;
-  if(r.cams.some(c=>Math.abs(c.coords[0]-coords[0])<1e-6 && Math.abs(c.coords[1]-coords[1])<1e-6)) return; // dedupe
-  const d=props.directions[0]||{};
+function addCameraToRoute(k, props, coords, routeId){
+  if(!coords) return false;
+  const id=routeId||addingTo;
+  const routes=loadRoutes(), r=routes.find(x=>x.id===id); if(!r) return false;
+  if(r.cams.some(c=>Math.abs(c.coords[0]-coords[0])<1e-6 && Math.abs(c.coords[1]-coords[1])<1e-6)) return 'dup';
+  const d=(props.directions&&props.directions[0])||{};
   // camId is what NYC route tiles rebuild their image URL from, so it must be saved at add time
   r.cams.push({k, name:props.name, coords, snapshot:d.snapshot||null, video:d.video||null, camId:d.camId||null});
   saveRoutes(routes); renderRouteList();
-  document.getElementById('addBannerTxt').textContent=`Added ${r.cams.length} — keep tapping “${r.name}”`;
+  if(id===addingTo) document.getElementById('addBannerTxt').textContent=`Added ${r.cams.length} — keep tapping “${r.name}”`;
+  return true;
+}
+/* "+ Route" in a popup works on its own, the way Save works in Google Maps: pick an
+   existing route or make a new one right there. The old behavior silently did nothing
+   unless you had first started add-mode from the routes panel. */
+function toggleRoutePicker(el, k, props, coords){
+  const old=el.querySelector('.rp-menu'); if(old){ old.remove(); return; }
+  const routes=loadRoutes();
+  const menu=document.createElement('div'); menu.className='rp-menu';
+  menu.innerHTML=`<div class="rp-hd">Save to</div>`
+    + routes.map(r=>`<button class="mini-btn rp-item" data-rid="${r.id}">${r.name}</button>`).join('')
+    + `<button class="mini-btn grey rp-item" data-rid="__new">+ New route</button>`;
+  el.querySelector('.popup-body').appendChild(menu);
+  menu.addEventListener('click',(e)=>{
+    const b=e.target.closest('.rp-item'); if(!b) return;
+    let rid=b.dataset.rid;
+    if(rid==='__new'){
+      const name=prompt('Name this route (e.g. Work commute)'); if(!name) return;
+      const rs=loadRoutes(), nid=uid(); rs.push({id:nid,name:name.trim(),cams:[]}); saveRoutes(rs); rid=nid;
+    }
+    const res=addCameraToRoute(k, props, coords, rid);
+    const r=loadRoutes().find(x=>x.id===rid);
+    menu.remove();
+    const btn=el.querySelector('[data-add]');
+    if(btn && r){ btn.textContent = res==='dup' ? `Already in ${r.name}` : `Saved to ${r.name} ✓`;
+      setTimeout(()=>{ btn.textContent='+ Route'; },1800); }
+  });
 }
 function openRouteView(id){
   const r=loadRoutes().find(x=>x.id===id); if(!r) return;
