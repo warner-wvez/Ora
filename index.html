@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/supercluster@8.0.1/dist/supercluster.min.js"></script>
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
@@ -565,30 +566,97 @@ function expandIlSub(){ const b=document.getElementById('ilBlock'), s=document.g
 function syncEnfControls(){ document.getElementById('enfControls').classList.toggle('show', active.has('chi-enf')); if(active.has('chi-enf')){ renderLegend(); expandIlSub(); } }
 
 /* ---------- basemap ---------- */
-function applyContrast(k){ const w=basemap==='satellite';
-  if(map.getLayer(`${k}__points`)) map.setPaintProperty(`${k}__points`,'circle-stroke-width', w?3:2.5);
-  if(map.getLayer(`${k}__clusters`)) map.setPaintProperty(`${k}__clusters`,'circle-stroke-width', w?3:2.5);
-  if(map.getLayer(`${k}__circle`)) map.setPaintProperty(`${k}__circle`,'circle-stroke-width', w?2:1.5); }
-function setBasemap(mode){ basemap=mode; map.setLayoutProperty('sat-layer','visibility', mode==='satellite'?'visible':'none'); active.forEach(applyContrast); }
+function applyContrast(){ const w=basemap==='satellite';
+  ['cams__points','cams__clusters'].forEach(id=>{ if(map.getLayer(id)) map.setPaintProperty(id,'circle-stroke-width', w?3:2.5); });
+  if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-stroke-width', w?2:1.5); }
+function setBasemap(mode){ basemap=mode; map.setLayoutProperty('sat-layer','visibility', mode==='satellite'?'visible':'none'); applyContrast(); }
 
-/* ---------- layer add/remove ---------- */
-function addLiveLayers(k,data){ const s=srcId(k);
-  // progressive split, the way Apple/Google do it: clusters form only where pins genuinely
-  // overlap (32px), pairs are never clustered (a "2" bubble is worse than 2 pins), and
-  // everything is individual pins from zoom 12 up. Zooming alone reveals the spread.
-  map.addSource(s,{type:'geojson',data,cluster:true,clusterMaxZoom:11,clusterRadius:32,clusterMinPoints:3});
-  map.addLayer({id:`${k}__clusters`,type:'circle',source:s,filter:['has','point_count'],paint:{'circle-color':'#007aff','circle-radius':['step',['get','point_count'],14,25,18,150,24,1000,30],'circle-opacity':0.9,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
-  map.addLayer({id:`${k}__cluster-count`,type:'symbol',source:s,filter:['has','point_count'],layout:{'text-field':['get','point_count_abbreviated'],'text-size':11,'text-font':['Noto Sans Bold']},paint:{'text-color':'#fff'}});
+/* ---------- one morphing camera pipeline (all live layers share it) ----------
+   All active states feed one supercluster index rendered into one source, and on
+   every integer-zoom crossing the transition is animated: on the way in, children
+   slide out of the cluster that held them; on the way out, they glide back in and
+   the merged bubble takes over. Same deterministic engine and identical counts as
+   the built-in clustering, plus 34 sources / ~100 layers collapse into 1 / 3. */
+const CAMS_SRC='src-cams';
+let camsIndex=null, camsZ=null, camsAnim=null, camsRebuildT=null;
+function camsBbox(){ const b=map.getBounds(); const w=b.getWest(),e=b.getEast(),s=b.getSouth(),n=b.getNorth();
+  const px=(e-w)*0.5, py=(n-s)*0.5;                    // pad half a viewport so pans don't reveal blanks
+  return [w-px, Math.max(-85,s-py), e+px, Math.min(85,n+py)]; }
+function camsGet(z){ return camsIndex.getClusters(camsBbox(), Math.max(0,z)); }
+function camsSet(features){ const s=map.getSource(CAMS_SRC); if(s) s.setData({type:'FeatureCollection',features}); }
+function camsKey(f){ const p=f.properties; return p.cluster ? 'c'+p.cluster_id : 'p'+p.k+'/'+p.i; }
+function scheduleCamsRebuild(){ clearTimeout(camsRebuildT); camsRebuildT=setTimeout(buildCamsIndex,120); }
+function buildCamsIndex(){
+  const pts=[];
+  active.forEach(k=>{ if(LAYERS[k].kind!=='live') return; const d=dataCache[k]; if(!d) return;
+    d.features.forEach((f,i)=>pts.push({type:'Feature',geometry:f.geometry,properties:{k,i,name:f.properties.name,dead:f.properties.dead||0}})); });
+  stopCamsAnim(); camsZ=Math.floor(map.getZoom());
+  if(!pts.length){ camsIndex=null; camsSet([]); return; }
+  if(!window.Supercluster){ camsIndex=null; camsSet(pts); return; }   // CDN failed: raw pins beat nothing
+  camsIndex=new Supercluster({radius:32,maxZoom:11,minPoints:3}).load(pts);
+  camsSet(camsGet(camsZ));
+}
+function stopCamsAnim(){ if(camsAnim){ cancelAnimationFrame(camsAnim.raf); camsSet(camsAnim.final); camsZ=camsAnim.toZ; camsAnim=null; } }
+function camsRender(){ if(!camsIndex) return; const z=Math.floor(map.getZoom());
+  if(z===camsZ){ if(!camsAnim) camsSet(camsGet(z)); return; }
+  if(Math.abs(z-camsZ)!==1){ stopCamsAnim(); camsZ=z; camsSet(camsGet(z)); return; }  // fast multi-level jump: no morph
+  startCamsMorph(camsZ,z);
+}
+function startCamsMorph(z1,z2){
+  stopCamsAnim();
+  const zoomIn=z2>z1, from=camsGet(z1), to=camsGet(z2);
+  // children of a cluster are the items it splits into one level down; that mapping is
+  // the whole animation. Items present at both levels (same key) simply stay put.
+  const link={};
+  for(const f of (zoomIn?from:to)){ if(!f.properties.cluster) continue;
+    let ch=[]; try{ ch=camsIndex.getChildren(f.properties.cluster_id); }catch(e){}
+    for(const c of ch) link[camsKey(c)]=f.geometry.coordinates; }
+  const stay=new Set((zoomIn?from:to).map(camsKey));
+  let animated=0;
+  const frames=(zoomIn?to:from).map(f=>{
+    const own=f.geometry.coordinates, other=stay.has(camsKey(f))?null:link[camsKey(f)];
+    if(other) animated++;
+    return zoomIn ? {p:f.properties, a:other||own, b:own} : {p:f.properties, a:own, b:other||own};
+  });
+  if(!animated){ camsZ=z2; camsSet(to); return; }
+  window._lastMorph={from:z1,to:z2,animated};
+  const t0=performance.now(), DUR=260, anim={final:to, toZ:z2};
+  const tick=(now)=>{
+    const t=Math.min(1,(now-t0)/DUR), e=1-Math.pow(1-t,3);
+    camsSet(frames.map(({p,a,b})=>({type:'Feature',properties:p,
+      geometry:{type:'Point',coordinates:[a[0]+(b[0]-a[0])*e, a[1]+(b[1]-a[1])*e]}})));
+    if(t<1) anim.raf=requestAnimationFrame(tick);
+    else { camsAnim=null; camsZ=z2; camsSet(to); }
+  };
+  camsAnim=anim; anim.raf=requestAnimationFrame(tick);
+}
+function addCamsLayers(){
+  map.addSource(CAMS_SRC,{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+  map.addLayer({id:'cams__clusters',type:'circle',source:CAMS_SRC,filter:['has','point_count'],paint:{'circle-color':'#007aff','circle-radius':['step',['get','point_count'],14,25,18,150,24,1000,30,10000,38],'circle-opacity':0.9,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
+  map.addLayer({id:'cams__cluster-count',type:'symbol',source:CAMS_SRC,filter:['has','point_count'],layout:{'text-field':['get','point_count_abbreviated'],'text-size':11,'text-font':['Noto Sans Bold'],'text-allow-overlap':true},paint:{'text-color':'#fff'}});
   // a camera the health sweep found dead reads as dead before you spend a click on it.
   // radius + white halo sized so the dot stays the top layer over coloured street basemaps
-  map.addLayer({id:`${k}__points`,type:'circle',source:s,filter:['!',['has','point_count']],paint:{'circle-color':['case',['==',['get','dead'],1],'#b4b4b9','#007aff'],'circle-radius':7,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
+  map.addLayer({id:'cams__points',type:'circle',source:CAMS_SRC,filter:['!',['has','point_count']],paint:{'circle-color':['case',['==',['get','dead'],1],'#b4b4b9','#007aff'],'circle-radius':7,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
+}
+function bindCamsHandlers(){
+  map.on('zoom', camsRender);
+  map.on('moveend', ()=>{ if(camsIndex && !camsAnim) camsSet(camsGet(camsZ)); });
+  map.on('click','cams__clusters',(e)=>{ const f=e.features[0]; if(!camsIndex||!f) return;
+    let z; try{ z=camsIndex.getClusterExpansionZoom(f.properties.cluster_id); }catch(err){ return; }
+    map.easeTo({center:f.geometry.coordinates, zoom:z, duration:500}); });
+  map.on('click','cams__points',(e)=>{ const p=e.features[0].properties;
+    const orig=dataCache[p.k]&&dataCache[p.k].features[p.i]; if(orig) selectFeature(p.k,orig); });
+  map.on('mousemove','cams__points',(e)=>{ const f=e.features[0]; map.getCanvas().style.cursor='pointer'; setHighlight('hover',f.geometry.coordinates.slice(),9); showTip(f.geometry.coordinates.slice(),f.properties.name); });
+  map.on('mouseleave','cams__points',()=>{ map.getCanvas().style.cursor=''; clearHighlight('hover'); hideTip(); });
+  map.on('mouseenter','cams__clusters',()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave','cams__clusters',()=>map.getCanvas().style.cursor='');
 }
 function addEnfLayers(k,data){ map.addSource(srcId(k),{type:'geojson',data});
   map.addLayer({id:`${k}__circle`,type:'circle',source:srcId(k),filter:enfFilterExpr(),paint:{'circle-color':enfColorExpr(),'circle-radius':['interpolate',['linear'],['get','v90'],0,3,50,5,300,8,1500,13,6000,20,16000,28,33000,36],'circle-opacity':0.78,'circle-stroke-width':1.2,'circle-stroke-color':'#fff'}});
 }
 // toggling a layer flips visibility rather than destroying it, so pin stacking stays identical
 // no matter what order states are turned on and off. Source + layers are built once, on first enable.
-function setLayerVis(k,vis){ [`${k}__clusters`,`${k}__cluster-count`,`${k}__points`,`${k}__circle`].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',vis); }); }
+function setLayerVis(k,vis){ if(map.getLayer(`${k}__circle`)) map.setLayoutProperty(`${k}__circle`,'visibility',vis); }
 /* ---------- camera health (states/health/<CODE>.json, refreshed by probe-health.py) ---------- */
 const healthCache={};
 function healthCode(k){ return k.startsWith('st-') ? k.slice(3) : (k==='il-cam' ? 'IL' : null); }
@@ -640,23 +708,24 @@ async function enableLayer(k,fly=true){
   const c=document.getElementById('cnt-'+k);
   const setCount=()=>{ if(c) c.textContent=data.features.length.toLocaleString()+(cfg.deadCount?` · ${cfg.deadCount.toLocaleString()} offline`:''); };
   setCount();
-  if(!created.has(k)){
-    if(cfg.kind==='enforcement'){ enfMeta=data.meta||null; addEnfLayers(k,data); } else addLiveLayers(k,data);
-    created.add(k);
-  } else {
-    if(cfg.kind==='enforcement') enfMeta=data.meta||null;   // popups read enfMeta; refresh it on re-enable
-    setLayerVis(k,'visible');
-  }
-  active.add(k); bindLayerHandlers(k); applyContrast(k); raiseHighlights(); syncEnfControls(); rebuildSearchIndex(); updateCoverage();
+  active.add(k);
+  if(cfg.kind==='enforcement'){
+    enfMeta=data.meta||null;
+    if(!created.has(k)){ addEnfLayers(k,data); created.add(k); } else setLayerVis(k,'visible');
+    bindLayerHandlers(k);
+  } else scheduleCamsRebuild();                        // live cameras all render through the one morphing index
+  applyContrast(); raiseHighlights(); syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=true; syncMaster();
   if(fly) map.easeTo({center:cfg.center,zoom:cfg.zoom,duration:700});
   if(cfg.kind==='live'){
     preconnectFor(data);
     // pins paint right away; the health sweep greys the dead ones a moment later, off the critical path
-    loadHealth(k,data).then(h=>{ if(h && map.getSource(srcId(k))){ map.getSource(srcId(k)).setData(data); setCount(); } });
+    loadHealth(k,data).then(h=>{ if(h){ scheduleCamsRebuild(); setCount(); } });
   }
 }
-function disableLayer(k){ setLayerVis(k,'none'); active.delete(k); if(popup){ popup.remove(); popup=null; } syncEnfControls(); rebuildSearchIndex(); updateCoverage();
+function disableLayer(k){ active.delete(k);
+  if(LAYERS[k].kind==='live') scheduleCamsRebuild(); else setLayerVis(k,'none');
+  if(popup){ popup.remove(); popup=null; } syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false; syncMaster(); }
 
 /* the master "All states" checkbox is a true tri-state, the way Gmail/Sheets do it:
@@ -800,21 +869,9 @@ function closeRouteView(){ document.getElementById('routeView').classList.remove
 
 /* ---------- handlers ---------- */
 function bindLayerHandlers(k){
-  if(bound.has(k)) return; bound.add(k); const cfg=LAYERS[k];
-  if(cfg.kind==='live'){
-    // click a cluster to break it apart: zoom to exactly where supercluster splits it into
-    // children, centred on the cluster. Every click produces a visible split, instead of the
-    // old fit-all-leaves that overshot small clusters and left state-wide ones still clustered.
-    map.on('click',`${k}__clusters`, async (e)=>{ const f=e.features[0]; if(!f) return;
-      const src=map.getSource(srcId(k)); let z;
-      try{ z=await src.getClusterExpansionZoom(f.properties.cluster_id); }catch(err){ return; }
-      map.easeTo({center:f.geometry.coordinates, zoom:z, duration:500}); });
-    map.on('click',`${k}__points`, (e)=>selectFeature(k,e.features[0]));
-    map.on('mousemove',`${k}__points`, (e)=>{ const f=e.features[0]; map.getCanvas().style.cursor='pointer'; setHighlight('hover',f.geometry.coordinates.slice(),9); showTip(f.geometry.coordinates.slice(),f.properties.name); });
-    map.on('mouseleave',`${k}__points`, ()=>{ map.getCanvas().style.cursor=''; clearHighlight('hover'); hideTip(); });
-    map.on('mouseenter',`${k}__clusters`, ()=>map.getCanvas().style.cursor='pointer');
-    map.on('mouseleave',`${k}__clusters`, ()=>map.getCanvas().style.cursor='');
-  } else {
+  if(LAYERS[k].kind!=='enforcement') return;   // live layers share the cams handlers, bound once at boot
+  if(bound.has(k)) return; bound.add(k);
+  {
     map.on('click',`${k}__circle`, (e)=>selectFeature(k,e.features[0]));
     map.on('mousemove',`${k}__circle`, (e)=>{ const f=e.features[0]; map.getCanvas().style.cursor='pointer'; setHighlight('hover',f.geometry.coordinates.slice(),enfRadius(f.properties.v90)+3); showTip(f.geometry.coordinates.slice(),f.properties.name); });
     map.on('mouseleave',`${k}__circle`, ()=>{ map.getCanvas().style.cursor=''; clearHighlight('hover'); hideTip(); });
@@ -909,6 +966,7 @@ map.on('load', async ()=>{
   map.addSource('us-states',{type:'geojson',data:'states-outline.json'});
   map.addLayer({id:'state-lines',type:'line',source:'us-states',
     paint:{'line-color':'#9aa1ac','line-width':['interpolate',['linear'],['zoom'],3,0.7,5,1.1,8,1.5],'line-opacity':['interpolate',['linear'],['zoom'],3,0.8,8,0.35]}}, firstSymbol);
+  addCamsLayers(); bindCamsHandlers();
   map.addSource('hl-hover',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});
 
