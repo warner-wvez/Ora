@@ -45,8 +45,9 @@
   .grp.collapsed .caret { transform: rotate(-90deg); }
   .grp.collapsed .grp-body { display: none; }
   .grp-body { padding-bottom: 6px; }
-  .cam-tools { display: flex; gap: 6px; margin: 0 0 6px; }
-  .cam-tools .mini-btn { flex: 1; text-align: center; }
+  .cam-tools { display: flex; gap: 6px; margin: 0 0 6px; align-items: center; }
+  .cam-tools .master-row { flex: 1; font-weight: 600; }
+  .cam-tools .mini-btn { flex: none; }
   #camList { max-height: 210px; overflow-y: auto; margin: -2px -4px 0; padding: 0 4px; }
 
   .lyr { display: flex; align-items: center; gap: 8px; padding: 4px 2px; cursor: pointer; font-size: 13px; color: #3c3c43; }
@@ -219,7 +220,7 @@
   <div class="grp" data-region="cams">
     <div class="grp-h"><span>States</span><span class="caret">&#9660;</span></div>
     <div class="grp-body">
-      <div class="cam-tools"><button class="mini-btn grey" id="showAll">Show all states</button><button class="mini-btn grey" id="clearAll">Clear</button></div>
+      <div class="cam-tools"><label class="lyr master-row"><input type="checkbox" id="masterAll"><span class="nm">All states</span><span class="cnt" id="cnt-all"></span></label><button class="mini-btn grey" id="clearAll">Clear</button></div>
       <div id="camList"></div>
     </div>
   </div>
@@ -647,7 +648,7 @@ async function enableLayer(k,fly=true){
     setLayerVis(k,'visible');
   }
   active.add(k); bindLayerHandlers(k); applyContrast(k); raiseHighlights(); syncEnfControls(); rebuildSearchIndex(); updateCoverage();
-  const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=true;
+  const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=true; syncMaster();
   if(fly) map.easeTo({center:cfg.center,zoom:cfg.zoom,duration:700});
   if(cfg.kind==='live'){
     preconnectFor(data);
@@ -656,17 +657,41 @@ async function enableLayer(k,fly=true){
   }
 }
 function disableLayer(k){ setLayerVis(k,'none'); active.delete(k); if(popup){ popup.remove(); popup=null; } syncEnfControls(); rebuildSearchIndex(); updateCoverage();
-  const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false; }
+  const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false; syncMaster(); }
 
-/* coverage overview markers (one per covered state) */
+/* the master "All states" checkbox is a true tri-state, the way Gmail/Sheets do it:
+   unchecked = none on, indeterminate dash = some on, checked = all on. It reflects the
+   active set, never guesses. Clicking from none/some selects all (the ARIA convention),
+   from all deselects all. The enforcement overlay is not a state and is not counted. */
+function liveKeys(){ return Object.keys(LAYERS).filter(k=>LAYERS[k].kind==='live'); }
+function syncMaster(){
+  const m=document.getElementById('masterAll'); if(!m) return;
+  const keys=liveKeys(), on=keys.filter(k=>active.has(k)).length;
+  m.checked = on>0 && on===keys.length;
+  m.indeterminate = on>0 && on<keys.length;
+  const lbl=document.getElementById('cnt-all');
+  if(lbl) lbl.textContent = on===0 ? `${keys.length} states` : `${on} of ${keys.length} on`;
+}
+async function setAllStates(on){
+  const m=document.getElementById('masterAll'); m.disabled=true;   // no double-fire mid-load
+  const keys=liveKeys();
+  if(on) await Promise.allSettled(keys.map(k=>active.has(k)?null:enableLayer(k,false)));
+  else keys.forEach(k=>{ if(active.has(k)) disableLayer(k); });
+  m.disabled=false; showOverview(); writeUrl(); syncMaster();
+}
+
+/* coverage overview markers (one per covered state), sized by and labelled with the
+   actual camera count so the zoomed-out map reads as data, not just dots */
 function buildCoverage(){
-  const feats=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live'&&c.center).map(([k,c])=>({
-    type:'Feature', geometry:{type:'Point',coordinates:c.center},
-    properties:{k, label:c.name} }));
+  const feats=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live'&&c.center).map(([k,c])=>{
+    const n=dataCache[k]?dataCache[k].features.length:(c.count||0);
+    return { type:'Feature', geometry:{type:'Point',coordinates:c.center},
+      properties:{k, label:c.name, n, nLabel: n>=1000 ? (Math.round(n/100)/10)+'k' : String(n)} };
+  });
   if(map.getSource('coverage')) map.getSource('coverage').setData({type:'FeatureCollection',features:feats});
 }
 function updateCoverage(){ const show=active.size===0;
-  ['coverage-dot','coverage-label'].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',show?'visible':'none'); }); }
+  ['coverage-dot','coverage-label','coverage-count'].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',show?'visible':'none'); }); }
 
 /* ---------- search ---------- */
 function rebuildSearchIndex(){ searchIndex=[]; active.forEach(k=>{ const d=dataCache[k]; if(!d) return;
@@ -820,6 +845,7 @@ async function restoreState(){
   syncEnfControls(); setBasemap(basemap);
   if(p.has('c')&&p.has('z')){ const [lng,lat]=p.get('c').split(',').map(Number); map.jumpTo({center:[lng,lat],zoom:Number(p.get('z'))}); }
   else showOverview();
+  syncMaster();
 }
 
 /* ---------- build camera list (states A-Z; Illinois nests the Chicago ticket map) ---------- */
@@ -857,7 +883,7 @@ document.querySelectorAll('.color-btn[data-base]').forEach(btn=>btn.addEventList
 document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const v=ch.dataset.v; ch.classList.toggle('on'); ch.classList.contains('on')?enfFilter.verdicts.add(v):enfFilter.verdicts.delete(v); applyEnfFilter(); writeUrl(); }));
 document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.classList.contains('on')?enfFilter.types.add(t):enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
 document.getElementById('share').addEventListener('click',async ()=>{ const b=document.getElementById('share'); try{ await navigator.clipboard.writeText(location.href); }catch(e){} const t=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=t,1300); });
-document.getElementById('showAll').addEventListener('click',()=>{ if(popup){popup.remove();popup=null;} showOverview(); });
+document.getElementById('masterAll').addEventListener('change',e=>setAllStates(e.target.checked));
 document.getElementById('clearAll').addEventListener('click',()=>{ [...active].forEach(disableLayer); showOverview(); writeUrl(); });
 document.getElementById('newRoute').addEventListener('click',()=>{ const name=prompt('Name this route (e.g. Work commute)'); if(!name) return; const routes=loadRoutes(); const id=uid(); routes.push({id,name:name.trim(),cams:[]}); saveRoutes(routes); renderRouteList(); startAddMode(id); });
 document.getElementById('addDone').addEventListener('click',stopAddMode);
@@ -889,8 +915,9 @@ map.on('load', async ()=>{
   // coverage overview markers: one label per covered state, shown when nothing is active.
   // Informational only — a state is turned on from its side-panel checkbox, never from a map click.
   map.addSource('coverage',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
-  map.addLayer({id:'coverage-dot',type:'circle',source:'coverage',paint:{'circle-radius':['interpolate',['linear'],['zoom'],3,6,6,11],'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':2.5}});
-  map.addLayer({id:'coverage-label',type:'symbol',source:'coverage',layout:{'text-field':['get','label'],'text-size':11,'text-font':['Noto Sans Bold'],'text-offset':[0,1.2],'text-anchor':'top','text-allow-overlap':false},paint:{'text-color':'#1c1c1e','text-halo-color':'#fff','text-halo-width':1.6}});
+  map.addLayer({id:'coverage-dot',type:'circle',source:'coverage',paint:{'circle-radius':['interpolate',['linear'],['get','n'],50,9,500,12,1500,16,3500,21],'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':2.5}});
+  map.addLayer({id:'coverage-count',type:'symbol',source:'coverage',layout:{'text-field':['get','nLabel'],'text-size':10,'text-font':['Noto Sans Bold'],'text-allow-overlap':true},paint:{'text-color':'#fff'}});
+  map.addLayer({id:'coverage-label',type:'symbol',source:'coverage',layout:{'text-field':['get','label'],'text-size':11,'text-font':['Noto Sans Bold'],'text-offset':[0,1.9],'text-anchor':'top','text-allow-overlap':false},paint:{'text-color':'#1c1c1e','text-halo-color':'#fff','text-halo-width':1.6}});
 
   // inject states from index
   try{
