@@ -274,7 +274,7 @@ const wsrv = (u)=> !u ? '' : 'https://wsrv.nl/?url=' + encodeURIComponent(u.repl
 const snapFor = (s)=> s.imgproxy==='wsrv' ? ((d)=>wsrv(d.snapshot)) : ((d)=>cb(d.snapshot));
 const LAYERS = {
   'il-cam':  { kind:'live', name:'Illinois', file:'cameras.json', center:[-88.5,41.6], zoom:8, refreshMs:30000, hasVideo:false, count:1328, snap:(d)=>cb(d.snapshot), age:'source updates every 1–10 min' },
-  'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, count:957, snap:(d)=>`https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}`, age:'refreshes every 2s' },
+  'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, count:957, snap:(d)=> d.camId ? `https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}` : '', age:'refreshes every 2s' },
   'chi-enf': { kind:'enforcement', name:'Chicago tickets', file:'cameras-chicago-enforcement.json', center:[-87.72,41.84], zoom:10.3 }
 };
 const VERDICT = {
@@ -362,19 +362,22 @@ function canPlayVideo(dir, cfg){
   const live = dir.status ? dir.status==='live' : !!(dir.video && cfg && cfg.hasVideo);
   return !!(live && window.Hls && Hls.isSupported());
 }
+// whether a view has a still image is the layer's call (NYC builds its URL from camId
+// at render time and stores snapshot:null), so ask cfg.snap, never the raw field
+function snapSrc(dir, cfg){ return (dir && cfg && cfg.snap) ? (cfg.snap(dir)||'') : ''; }
 function mediaHTML(dir, cfg){
-  const live = canPlayVideo(dir, cfg);
+  const live = canPlayVideo(dir, cfg), src = snapSrc(dir, cfg);
   // video cameras show the snapshot instantly as a poster, then the live video fades in over it
   // Texas streams have no snapshot at all, so the video fades in over a dark backdrop instead
-  if(live) return `<div class="popup-imgwrap${dir.snapshot?'':' noposter'}"><span class="live-badge">● LIVE</span>
-    ${dir.snapshot?`<img class="poster" src="${cfg.snap(dir)}" onerror="this.parentElement.classList.add('err')">`:''}
+  if(live) return `<div class="popup-imgwrap${src?'':' noposter'}"><span class="live-badge">● LIVE</span>
+    ${src?`<img class="poster" src="${src}" onerror="this.parentElement.classList.add('err')">`:''}
     <video id="popup-vid" class="vid" muted autoplay playsinline></video>
     <div class="img-offline">&#9888;<span>Camera offline</span></div>
     <button class="enlarge-btn" title="Enlarge" data-enlarge>&#10530;</button></div>`;
   // no still to fall back on: either a video-only camera this browser cannot play, or a
   // location-only pin (camera exists, no feed published) — say which, do not imply it is broken
-  if(!dir.snapshot) return `<div class="popup-imgwrap err noposter"><div class="img-offline">&#9888;<span>${dir.video?'Live video unsupported here':'No live image at this camera'}</span></div></div>`;
-  return `<div class="popup-imgwrap"><img id="popup-img" src="${cfg.snap(dir)}" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div>
+  if(!src) return `<div class="popup-imgwrap err noposter"><div class="img-offline">&#9888;<span>${dir.video?'Live video unsupported here':'No live image at this camera'}</span></div></div>`;
+  return `<div class="popup-imgwrap"><img id="popup-img" src="${src}" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div>
     <button class="enlarge-btn" title="Enlarge" data-enlarge>&#10530;</button></div>`;
 }
 // WSDOT is the only source that publishes which way a camera looks, and the only one
@@ -525,7 +528,7 @@ function wireLivePopup(props, cfg){
 let enlargeState=null;
 function openEnlarge(dir, cfg, props){
   if(!dir) return;
-  if(!canPlayVideo(dir,cfg) && !dir.snapshot) return;  // nothing to show
+  if(!canPlayVideo(dir,cfg) && !snapSrc(dir,cfg)) return;  // nothing to show
   switchMode('media-enlarged',{dir,cfg,props,returnTo:{name:store.mode,ctx:modeCtx}});
 }
 function closeEnlarge(){ if(store.mode==='media-enlarged') switchMode(modeCtx.returnTo.name, modeCtx.returnTo.ctx); }
