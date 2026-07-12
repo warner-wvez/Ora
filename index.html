@@ -113,16 +113,20 @@
   #addBanner.show { display: flex; }
   #addBanner button { background: #fff; color: #007aff; border: none; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
-  /* route viewer overlay */
-  #routeView { position: absolute; top: 0; right: 0; bottom: 0; width: 380px; max-width: 90vw; z-index: 25; background: #f5f5f7; box-shadow: -4px 0 24px rgba(0,0,0,0.2); display: none; flex-direction: column; }
-  #routeView.show { display: flex; }
-  #routeView .rv-head { padding: 14px 16px; background: #fff; border-bottom: 1px solid #e5e5ea; display: flex; align-items: center; justify-content: space-between; }
+  /* route viewer overlay: slides in and out instead of snapping */
+  #routeView { position: absolute; top: 0; right: 0; bottom: 0; width: 380px; max-width: 90vw; z-index: 25; background: #f5f5f7; box-shadow: -4px 0 24px rgba(0,0,0,0.2); display: flex; flex-direction: column;
+    transform: translateX(calc(100% + 28px)); visibility: hidden; transition: transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s .26s; }
+  #routeView.show { transform: translateX(0); visibility: visible; transition: transform .26s cubic-bezier(.2,.8,.2,1); }
+  #routeView .rv-head { padding: 14px 16px; background: #fff; border-bottom: 1px solid #e5e5ea; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  #routeView .rv-headtxt { min-width: 0; }
+  #routeView .rv-actions { display: flex; gap: 6px; align-items: center; flex: none; }
   #routeView .rv-title { font-size: 16px; font-weight: 700; color: #1c1c1e; }
   #routeView .rv-sub { font-size: 11px; color: #8e8e93; margin-top: 1px; }
   #routeView .rv-close { border: none; background: #f2f2f7; border-radius: 8px; width: 30px; height: 30px; font-size: 16px; cursor: pointer; color: #3c3c43; }
   #routeView .rv-body { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
   /* flex:none so tiles keep their natural height and the list scrolls, instead of the flex column squashing them */
-  .rv-tile { flex: none; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 5px rgba(0,0,0,0.08); }
+  .rv-tile { flex: none; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 5px rgba(0,0,0,0.08); cursor: pointer; }
+  .rv-tile:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
   .rv-tile .rv-media { position: relative; width: 100%; aspect-ratio: 16/10; background: #e7e7ec; }
   .rv-tile .rv-media img, .rv-tile .rv-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .rv-tile .rv-off { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; color: #9a9aa0; font-size: 12px; font-weight: 600; }
@@ -130,6 +134,7 @@
   .rv-tile .rv-media .rv-nosnap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px; color: #8e8e93; font-size: 12px; font-weight: 600; }
   .rv-tile .rv-media .rv-nosnap span { font-size: 10px; font-weight: 500; color: #aeaeb2; }
   .rv-live { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; }
+  .rv-live.rv-dead { background: #8e8e93; }
   .rv-tile .rv-cap { display: flex; align-items: center; gap: 8px; padding: 8px 11px; }
   .rv-tile .rv-nm { flex: 1; font-size: 12.5px; font-weight: 600; color: #1c1c1e; }
   .rv-tile .rv-rm { color: #c0c0c5; cursor: pointer; font-size: 15px; } .rv-tile .rv-rm:hover { color: #ff3b30; }
@@ -240,8 +245,8 @@
 
 <div id="routeView">
   <div class="rv-head">
-    <div><div class="rv-title" id="rvTitle"></div><div class="rv-sub" id="rvSub"></div></div>
-    <button class="rv-close" id="rvClose">&times;</button>
+    <div class="rv-headtxt"><div class="rv-title" id="rvTitle"></div><div class="rv-sub" id="rvSub"></div></div>
+    <div class="rv-actions"><button class="mini-btn" id="rvAdd">+ Add cameras</button><button class="rv-close" id="rvClose">&times;</button></div>
   </div>
   <div class="rv-body" id="rvBody"></div>
 </div>
@@ -639,7 +644,7 @@ function openEnlarge(dir, cfg, props){
   if(!canPlayVideo(dir,cfg) && !snapSrc(dir,cfg)) return;  // nothing to show
   switchMode('media-enlarged',{dir,cfg,props,returnTo:{name:store.mode,ctx:modeCtx}});
 }
-function closeEnlarge(){ if(store.mode==='media-enlarged') switchMode(modeCtx.returnTo.name, modeCtx.returnTo.ctx); }
+function closeEnlarge(){ if(store.mode==='media-enlarged') switchMode(modeCtx.returnTo.name, {...modeCtx.returnTo.ctx, resume:true}); }
 function teardownEnlarge(){
   if(!enlargeState) return;
   const {ov, hls, timer, onkey}=enlargeState;
@@ -842,14 +847,21 @@ function setLayerVis(k,vis){ if(map.getLayer(`${k}__circle`)) map.setLayoutPrope
 /* ---------- camera health (states/health/<CODE>.json, refreshed by probe-health.py) ---------- */
 const healthCache={};
 function healthCode(k){ return k.startsWith('st-') ? k.slice(3) : (k==='il-cam' ? 'IL' : null); }
-async function loadHealth(k, data){
+// fetch a layer's sweep verdicts without needing its camera data loaded — the route
+// view reads health for layers that may be off
+async function fetchHealthRaw(k){
   if(k in healthCache) return healthCache[k];
-  const code=healthCode(k); healthCache[k]=null;
+  const code=healthCode(k); healthCache[k]=null;       // marks the fetch as attempted
   if(!code) return null;
   let h=null;
   try{ const r=await fetch(`states/health/${code}.json`); if(r.ok) h=await r.json(); }catch(e){}
-  if(!h) return null;                                  // no sweep for this layer yet; say nothing
-  healthCache[k]=h; LAYERS[k].healthAt=h.checked_at;
+  if(h) healthCache[k]=h;
+  return h;                                            // null: no sweep for this layer yet; say nothing
+}
+async function loadHealth(k, data){
+  const h=await fetchHealthRaw(k);
+  if(!h) return null;
+  LAYERS[k].healthAt=h.checked_at;
   const st=h.status||{};
   for(const f of data.features){
     for(const d of f.properties.directions){
@@ -1027,27 +1039,112 @@ function toggleRoutePicker(el, k, props, coords){
       setTimeout(()=>{ btn.textContent='+ Route'; },1800); }
   });
 }
-let rvIO=null, rvTimer=null;   // owned by route-view mode: installed on enter, removed on exit
+let rvIO=null, rvTimer=null, rvRenderedFor=null;   // owned by route-view mode: installed on enter, removed on exit
 function openRouteView(id){ switchMode('route-view',{routeId:id}); }
 function closeRouteView(){ if(store.mode==='route-view') switchMode('browse'); }
+// a route camera's status, from the same health sweep the map pins use. Live-video
+// cams count as up: runtime playback is the authority there, the sweep judges snapshots.
+function routeCamStatus(c){
+  const cfg=LAYERS[c.k];
+  if(c.video && cfg && cfg.hasVideo) return 'live';
+  const h=healthCache[c.k];
+  const s=(h && h.status && c.snapshot) ? h.status[snapKey(c.snapshot)] : null;
+  return s ? (s==='frozen'?'frozen':'offline') : 'snapshot';
+}
+// the glanceable answer to "can I trust this route right now": how many cameras,
+// how many down, and how fresh that verdict is
+function renderRouteHeader(r){
+  document.getElementById('rvTitle').textContent=r.name;
+  const n=r.cams.length;
+  let sub;
+  if(!n) sub='No cameras yet';
+  else {
+    const layers=[...new Set(r.cams.map(c=>c.k))];
+    const checked=layers.map(k=>healthCache[k]&&healthCache[k].checked_at).filter(Boolean).sort().pop();
+    const down=r.cams.filter(c=>['offline','frozen'].includes(routeCamStatus(c))).length;
+    sub = checked ? `${n} camera${n!==1?'s':''} · ${down?`${down} down right now`:'all up'} · checked ${ago(checked)}`
+                  : `${n} camera${n!==1?'s':''} · scroll your whole route`;
+  }
+  document.getElementById('rvSub').textContent=sub;
+}
+// dead cameras read as dead before the image even tries to load
+function applyRvBadges(id){
+  const r=loadRoutes().find(x=>x.id===id); if(!r) return;
+  [...document.getElementById('rvBody').querySelectorAll('.rv-tile')].forEach((tile,i)=>{
+    const c=r.cams[i]; if(!c) return;
+    const st=routeCamStatus(c);
+    const old=tile.querySelector('.rv-badge'); if(old) old.remove();
+    if(st==='offline'||st==='frozen'){
+      const b=document.createElement('span'); b.className='rv-live rv-dead rv-badge';
+      b.textContent = st==='frozen' ? 'FROZEN' : 'OFFLINE';
+      tile.querySelector('.rv-media').appendChild(b);
+    }
+  });
+}
+// tap a tile and the map takes you to that camera with its popup/sheet open. If its
+// state layer is off it is enabled silently: the map flies to the tapped camera only,
+// never to the state, even though the checkbox path normally flies.
+async function jumpToRouteCam(c){
+  const k=c.k;
+  if(LAYERS[k] && !store.activeLayers.has(k)) await enableLayer(k,false);
+  const d=dataCache[k];
+  const feat=d && d.features.find(f=>Math.abs(f.geometry.coordinates[0]-c.coords[0])<1e-6 && Math.abs(f.geometry.coordinates[1]-c.coords[1])<1e-6);
+  // the tap is the request to go there; offset keeps the pin out from under the route panel
+  map.easeTo({center:c.coords, zoom:Math.max(map.getZoom(),14), duration:600, offset:isMobile()?[0,0]:[-190,0]});
+  if(feat) selectFeature(k,feat);
+  else selectFeature(k,{geometry:{type:'Point',coordinates:c.coords.slice()},
+    properties:{name:c.name, directions:[{snapshot:c.snapshot, video:c.video, camId:c.camId,
+      status:(c.video&&LAYERS[k]&&LAYERS[k].hasVideo)?'live':'snapshot'}]}});  // camera no longer in the feed: show what we saved
+}
 function renderRouteView(ctx){
   const id=ctx.routeId;
   const r=loadRoutes().find(x=>x.id===id); if(!r) return;
-  document.getElementById('rvTitle').textContent=r.name;
-  document.getElementById('rvSub').textContent=`${r.cams.length} camera${r.cams.length!==1?'s':''} · scroll your whole route`;
   const body=document.getElementById('rvBody');
-  if(!r.cams.length){ body.innerHTML=`<div class="rv-empty">Empty route.<br>Use “Add cameras” below, then tap cameras on the map.</div>`; }
-  else body.innerHTML=r.cams.map((c,i)=>{
-    // legacy routes saved before camId was persisted fall back to any stored snapshot, else the placeholder
-    const src = c.k==='nyc-cam' ? (c.camId ? `https://webcams.nyctmc.org/api/cameras/${c.camId}/image` : (c.snapshot||null)) : c.snapshot;
-    return `<div class="rv-tile"><div class="rv-media" data-src="${src||''}">${c.video?'<span class="rv-live">● LIVE</span>':''}
-      ${src?`<img loading="lazy" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')">`
-           :`<div class="rv-nosnap">Live video<span>open on the map to watch</span></div>`}
-      <div class="rv-off">&#9888; Offline</div></div>
-      <div class="rv-cap"><span class="rv-nm">${c.name}</span><span class="rv-rm" data-i="${i}" title="Remove">&times;</span></div></div>`;
-  }).join('') + `<div class="btn-row" style="justify-content:center"><button class="mini-btn" id="rvAdd">+ Add cameras</button></div>`;
+  // returning from an overlay (enlarge) re-shows the existing DOM so scroll survives;
+  // only the behavior (observers, timers) is reinstalled
+  const resume = ctx.resume && rvRenderedFor===id && body.children.length;
+  renderRouteHeader(r);
+  if(!resume){
+    if(!r.cams.length){ body.innerHTML=`<div class="rv-empty">Empty route.<br>Tap “+ Add cameras” above, then tap cameras on the map.</div>`; }
+    else body.innerHTML=r.cams.map((c)=>{
+      // legacy routes saved before camId was persisted fall back to any stored snapshot, else the placeholder
+      const src = c.k==='nyc-cam' ? (c.camId ? `https://webcams.nyctmc.org/api/cameras/${c.camId}/image` : (c.snapshot||null)) : c.snapshot;
+      return `<div class="rv-tile" title="Show on the map"><div class="rv-media" data-src="${src||''}">${c.video?'<span class="rv-live">● LIVE</span>':''}
+        ${src?`<img loading="lazy" onload="this.parentElement.classList.remove('err')" onerror="this.parentElement.classList.add('err')">`
+             :`<div class="rv-nosnap">Live video<span>tap to watch on the map</span></div>`}
+        <div class="rv-off">&#9888; Offline</div></div>
+        <div class="rv-cap"><span class="rv-nm">${c.name}</span><span class="rv-rm" title="Remove">&times;</span></div></div>`;
+    }).join('');
+    rvRenderedFor=id;
+    // tiles look up their camera by DOM position at tap time, so removals cannot skew indexes
+    const tileIdx=(tile)=>[...body.querySelectorAll('.rv-tile')].indexOf(tile);
+    body.querySelectorAll('.rv-tile').forEach(tile=>{
+      tile.addEventListener('click',(e)=>{
+        if(e.target.closest('.rv-rm')) return;
+        const cams=(loadRoutes().find(z=>z.id===id)||{cams:[]}).cams;
+        const c=cams[tileIdx(tile)]; if(c) jumpToRouteCam(c);
+      });
+      tile.querySelector('.rv-rm').addEventListener('click',()=>{
+        const i=tileIdx(tile);
+        const routes=loadRoutes(); const rr=routes.find(z=>z.id===id); if(!rr) return;
+        rr.cams.splice(i,1); saveRoutes(routes); renderRouteList();
+        tile.remove(); renderRouteHeader(rr);            // surgical removal: the list keeps its scroll position
+        if(!rr.cams.length) body.innerHTML=`<div class="rv-empty">Empty route.<br>Tap “+ Add cameras” above, then tap cameras on the map.</div>`;
+      });
+    });
+  }
   document.getElementById('routeView').classList.add('show');   // panel must be laid out before the observer measures tiles
-  // only tiles actually on screen load or refresh (deferred otherwise), and never more than 6 in flight
+  installRvLoader(body);
+  // the health verdicts for this route's layers may not be fetched yet; the header
+  // and tile badges fill in when they land, off the critical path
+  const layers=[...new Set(r.cams.map(c=>c.k))];
+  Promise.allSettled(layers.map(fetchHealthRaw)).then(()=>{
+    if(store.openRoute!==id) return;
+    renderRouteHeader(loadRoutes().find(x=>x.id===id)||r); applyRvBadges(id);
+  });
+}
+// only tiles actually on screen load or refresh (deferred otherwise), and never more than 6 in flight
+function installRvLoader(body){
   const bust=(m)=>{ const s=m.dataset.src, img=m.querySelector('img'); if(s&&img) img.src=s+(s.includes('?')?'&':'?')+'t='+Date.now(); };
   const visible=new Set(), queue=[]; let inFlight=0;
   const pump=()=>{ while(inFlight<6 && queue.length){ const m=queue.shift(), img=m.querySelector('img'); if(!img) continue;
@@ -1059,8 +1156,6 @@ function renderRouteView(ctx){
   rvIO=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ visible.add(e.target); enqueue(e.target); } else visible.delete(e.target); }), {rootMargin:'150px'});
   body.querySelectorAll('.rv-media[data-src]').forEach(m=>rvIO.observe(m));
   clearInterval(rvTimer); rvTimer=setInterval(refresh,30000);
-  body.querySelectorAll('.rv-rm').forEach(x=>x.addEventListener('click',()=>{ const routes=loadRoutes(); const rr=routes.find(z=>z.id===id); rr.cams.splice(+x.dataset.i,1); saveRoutes(routes); renderRouteList(); openRouteView(id); }));
-  const add=document.getElementById('rvAdd'); if(add) add.addEventListener('click',()=>startAddMode(id));   // switchMode exits route-view first
 }
 function teardownRouteView(){ document.getElementById('routeView').classList.remove('show'); clearInterval(rvTimer); rvTimer=null; if(rvIO){ rvIO.disconnect(); rvIO=null; } }
 
@@ -1142,6 +1237,7 @@ document.getElementById('clearAll').addEventListener('click',()=>{ [...store.act
 document.getElementById('newRoute').addEventListener('click',()=>{ const name=prompt('Name this route (e.g. Work commute)'); if(!name) return; const routes=loadRoutes(); const id=uid(); routes.push({id,name:name.trim(),cams:[]}); saveRoutes(routes); renderRouteList(); startAddMode(id); });
 document.getElementById('addDone').addEventListener('click',stopAddMode);
 document.getElementById('rvClose').addEventListener('click',closeRouteView);
+document.getElementById('rvAdd').addEventListener('click',()=>{ if(store.openRoute) startAddMode(store.openRoute); });
 wireSheet();
 document.getElementById('panelToggle').addEventListener('click',()=>document.getElementById('panel').classList.toggle('expanded'));
 // touching the map puts the drawer away, the way every phone map app does
