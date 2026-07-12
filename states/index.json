@@ -417,5 +417,16 @@
   ],
   "zoom": 7,
   "video": true
+ },
+ "MO": {
+  "name": "Missouri",
+  "file": "states/MO.json",
+  "count": 879,
+  "center": [
+   -92.5,
+   38.5
+  ],
+  "zoom": 6.3,
+  "video": true
  }
 }
