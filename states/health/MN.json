@@ -1,8 +1,9 @@
 {
-"checked_at": "2026-07-12T04:30:10Z",
+"checked_at": "2026-07-12T09:18:52Z",
 "cameras": 1918,
 "counts": {
-"offline": 38
+"offline": 38,
+"frozen": 1
 },
 "status": {
 "/images/icon-camera-closed-fill-solid-padded.svg": "offline",
@@ -34,6 +35,7 @@
 "https://public.carsprogram.org/cameras/MN/C30662": "offline",
 "https://public.carsprogram.org/cameras/MN/C30701": "offline",
 "https://public.carsprogram.org/cameras/MN/C646": "offline",
+"https://public.carsprogram.org/cameras/MN/C808": "frozen",
 "https://public.carsprogram.org/cameras/MN/C9010": "offline",
 "https://public.carsprogram.org/cameras/MN/C902": "offline",
 "https://public.carsprogram.org/cameras/MN/C9020": "offline",
