@@ -25,7 +25,7 @@ browser can play, so Wyoming is honestly snapshot-only.
 If WYDOT rotates the Msg-*.pbf filename (the geometry URL is content-addressed),
 re-read it from the running map: it is layer id `webcameras`'s `geometryURL`.
 """
-import os, json, base64, struct, urllib.request
+import os, re, json, base64, struct, urllib.request
 
 FEED = 'https://map.wyoroad.info/wti511map-data/Msg-FFBK373B.pbf'
 HDRS = {'User-Agent': 'Mozilla/5.0', 'Referer': 'https://map.wyoroad.info/511-map/'}
@@ -45,6 +45,18 @@ def dexor(s):
         return ''
     b = base64.b64decode(s)
     return bytes(b[i] ^ KEY[i % len(KEY)] for i in range(len(b))).decode('utf-8', 'replace')
+
+
+ROUTE = re.compile(r'^\s*(I|US|WYO|WY|Loop|Bus|Alt)\s*0*(\d+[A-Za-z]?)', re.I)
+
+
+def route_of(title):
+    """Lift the leading highway designator from a view title ("I 80 Summit - West"
+    -> "I-80") so Wyoming is searchable by road, the way its own map is organized."""
+    m = ROUTE.match(title or '')
+    if not m:
+        return ''
+    return f'{m.group(1).upper()}-{m.group(2).upper()}'
 
 
 def _varint(b, i):
@@ -102,10 +114,15 @@ def main():
                     images.append({'title': title, 'url': url})
         if lon is None or lat is None or not (BBOX[0] <= lon <= BBOX[2] and BBOX[1] <= lat <= BBOX[3]):
             skipped += 1; continue
+        roadway = ''
         dirs = []
         for im in images:
-            # the view title is "<route> <site> - <lens>"; keep just the lens
+            # the view title is "<route> <site> - <lens>"; keep just the lens for the
+            # tab, and lift the leading route designator once so the state is
+            # searchable by highway ("I-80"), which the site is organized around.
             lbl = im['title']
+            if not roadway:
+                roadway = route_of(lbl)
             if ' - ' in lbl:
                 lbl = lbl.rsplit(' - ', 1)[1]
             elif name and lbl.startswith(name):
@@ -117,7 +134,7 @@ def main():
         feats.append({'type': 'Feature',
                       'geometry': {'type': 'Point', 'coordinates': [lon, lat]},
                       'properties': {'name': name or 'Camera', 'kind': 'live',
-                                     'directions': dirs, 'roadway': '', 'county': ''}})
+                                     'directions': dirs, 'roadway': roadway, 'county': ''}})
 
     os.makedirs('states', exist_ok=True)
     json.dump({'type': 'FeatureCollection', 'features': feats}, open('states/WY.json', 'w'))

@@ -25,6 +25,7 @@ south."), not a compass token, so we surface it as the camera's caption rather
 than trying to force it into the Northbound/Southbound chip vocabulary.
 """
 import os, re, json, html, urllib.request, concurrent.futures
+from collections import OrderedDict
 
 ALLFORMAP = 'https://mdotjboss.state.mi.us/MiDrive/camera/AllForMap/'
 DETAIL = 'https://mdotjboss.state.mi.us/MiDrive/camera/getCameraInformation/{}'
@@ -65,10 +66,15 @@ def detail(cam):
 
 def main():
     cams = get(ALLFORMAP)
-    feats, skipped, rwis_cams = [], 0, 0
+    skipped, rwis_cams = 0, 0
     with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex:
         details = list(ex.map(detail, cams))
 
+    # Mi Drive lists some cameras twice ("I-275 @ M-14" and "I-275 @ M14") on one
+    # coordinate; stacked map pins are unclickable, so group by location and keep one
+    # view per distinct snapshot -- a true duplicate collapses to one, a genuinely
+    # co-located pair becomes a tabbed pin.
+    groups = OrderedDict()
     for base, det in zip(cams, details):
         d = det or base
         lat, lon = d.get('latitude'), d.get('longitude')
@@ -80,15 +86,26 @@ def main():
         # strip the ?item=/?random= cache-buster; the app re-adds one at render time
         if snap:
             snap = snap.split('?')[0]
-        title = (d.get('title') or 'Camera').strip()
+        key = (round(lon, 6), round(lat, 6))
+        groups.setdefault(key, []).append(d)
+
+    feats = []
+    for (lon, lat), members in groups.items():
+        dirs, seen, rwis = [], set(), None
+        for d in members:
+            snap = (d.get('link') or '').strip() or None
+            if snap:
+                snap = snap.split('?')[0]
+            if snap in seen:
+                continue
+            seen.add(snap)
+            dirs.append({'snapshot': snap, 'video': None, 'label': (d.get('orientation') or '').strip()})
+            rwis = rwis or rwis_text(d.get('weatherText'))
+        title = (members[0].get('title') or 'Camera').strip()
         roadway = title.split('@')[0].strip() if '@' in title else ''
-        label = (d.get('orientation') or '').strip()
-        props = {'name': title, 'kind': 'live',
-                 'directions': [{'snapshot': snap, 'video': None, 'label': label}],
-                 'roadway': roadway, 'county': ''}
-        wx = rwis_text(d.get('weatherText'))
-        if wx:
-            props['rwis'] = wx
+        props = {'name': title, 'kind': 'live', 'directions': dirs, 'roadway': roadway, 'county': ''}
+        if rwis:
+            props['rwis'] = rwis
             rwis_cams += 1
         feats.append({'type': 'Feature',
                       'geometry': {'type': 'Point', 'coordinates': [lon, lat]},
@@ -100,7 +117,7 @@ def main():
     idx['MI'] = {'name': 'Michigan', 'file': 'states/MI.json', 'count': len(feats),
                  'center': [-85.4, 44.3], 'zoom': 6, 'video': False}
     json.dump(idx, open('states/index.json', 'w'), indent=1)
-    print(f'Michigan: {len(feats)} cameras ({skipped} skipped); {rwis_cams} with RWIS weather')
+    print(f'Michigan: {len(feats)} pins ({skipped} skipped); {rwis_cams} with RWIS weather')
 
 
 if __name__ == '__main__':

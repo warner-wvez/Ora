@@ -19,18 +19,35 @@ carries its own `updateTime`, but a lone "how old is this image now" sample cann
 honestly become a refresh cadence (see site_feature), so we leave the wording
 generic. No HLS is published anywhere, so South Dakota is honestly snapshot-only.
 """
-import os, json, urllib.request
+import os, json, gzip, zlib, time, urllib.request
 
 CAMERAS = 'https://sd.cdn.iteris-atis.com/geojson/icons/metadata/icons.cameras.geojson'
 RWIS = 'https://sd.cdn.iteris-atis.com/geojson/icons/metadata/icons.rwis.geojson'
-HDRS = {'User-Agent': 'Mozilla/5.0', 'Referer': 'https://www.sd511.org/'}
+HDRS = {'User-Agent': 'Mozilla/5.0', 'Referer': 'https://www.sd511.org/', 'Accept-Encoding': 'gzip, deflate'}
 # reject any pin that lands outside South Dakota rather than trusting a bad coordinate
 BBOX = (-104.6, 42.4, -96.3, 46.0)  # lon_min, lat_min, lon_max, lat_max
 
 
-def get(url, timeout=60):
-    with urllib.request.urlopen(urllib.request.Request(url, headers=HDRS), timeout=timeout) as r:
-        return json.loads(r.read().decode('utf-8', 'replace'))
+def get(url, timeout=60, tries=4):
+    # the iteris CDN serves these geojsons gzipped (urllib does not auto-inflate) and
+    # has been seen serving a truncated 45,056-byte body from a bad edge cache; a
+    # partial body is invalid JSON, so we retry rather than ship half a state.
+    last = None
+    for i in range(tries):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=HDRS), timeout=timeout) as r:
+                b = r.read()
+                enc = r.headers.get('Content-Encoding', '')
+                if enc == 'gzip' or b[:2] == b'\x1f\x8b':
+                    b = gzip.decompress(b)
+                elif enc == 'deflate':
+                    b = zlib.decompress(b)
+                return json.loads(b.decode('utf-8', 'replace'))
+        except Exception as e:
+            last = e
+            if i < tries - 1:
+                time.sleep(2 * (i + 1))
+    raise RuntimeError(f'SD feed unreadable after {tries} tries (source truncation/outage?): {last}')
 
 
 def val(node, key):
@@ -64,7 +81,9 @@ def views_for(cams):
     dirs = []
     for c in cams or []:
         img = (c.get('image') or '').strip()
-        if not img:
+        # a lens the feed itself points at the "camera unavailable" card is not a
+        # camera view -- its real identity is gone, so it could never recover; drop it
+        if not img or img.rsplit('/', 1)[-1].lower().startswith('camera_unavailable'):
             continue
         label = (c.get('name') or '').replace('Camera Looking', '').strip() or (c.get('name') or '')
         dirs.append({'snapshot': img, 'video': None, 'label': label})
