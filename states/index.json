@@ -494,5 +494,16 @@
   ],
   "zoom": 6.9,
   "video": false
+ },
+ "HI": {
+  "name": "Hawaii",
+  "file": "states/HI.json",
+  "count": 361,
+  "center": [
+   -157.7,
+   21.1
+  ],
+  "zoom": 7,
+  "video": true
  }
 }
