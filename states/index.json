@@ -355,7 +355,7 @@
  "MI": {
   "name": "Michigan",
   "file": "states/MI.json",
-  "count": 806,
+  "count": 783,
   "center": [
    -85.4,
    44.3
@@ -377,7 +377,7 @@
  "SD": {
   "name": "South Dakota",
   "file": "states/SD.json",
-  "count": 175,
+  "count": 170,
   "center": [
    -100.3,
    44.4
@@ -421,7 +421,7 @@
  "MO": {
   "name": "Missouri",
   "file": "states/MO.json",
-  "count": 879,
+  "count": 737,
   "center": [
    -92.5,
    38.5

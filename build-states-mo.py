@@ -23,6 +23,16 @@ Two stream-URL shapes, both CORS-open and both token-free *as stored*:
 We keep both as-is, refuse any URL that already carries a `token=`, and only set
 video=True after sampling real streams and seeing one play. Cameras sharing an
 exact coordinate collapse into one pin with a view each, so pins stay clickable.
+
+KANSAS CITY IS BI-STATE. MoDOT's feed is the joint KC Scout system, so it carries
+the Kansas-side metro cameras too (Johnson/Wyandotte county: I-35, I-435, I-635,
+US-69, K-7, K-10). Those are geographically Kansas and Ora already carries them
+from kandrive.gov, so leaving them in Missouri both mislabels them and double-pins
+the metro. A bbox cannot cut them out because Platte County, MO juts west of the
+state-line meridian along I-29 (the border follows the Missouri River here), so we
+reject by an actual point-in-Missouri test against states-outline.json, scoped to
+the western border region (lon < -94) to avoid the coarse outline nicking a legit
+Mississippi-riverfront camera on the far side of the state.
 """
 import os, json, random, urllib.request
 from collections import defaultdict
@@ -31,11 +41,31 @@ FEED = 'https://traveler.modot.org/timconfig/feed/desktop/StreamingCams2.json'
 HDRS = {'User-Agent': 'Mozilla/5.0', 'Referer': 'https://traveler.modot.org/'}
 # reject any pin that lands outside Missouri rather than trusting a bad coordinate
 BBOX = (-95.9, 35.9, -88.9, 40.7)  # lon_min, lat_min, lon_max, lat_max
+# a camera west of here is dropped only if it also falls outside the MO polygon
+KC_KANSAS_LON = -94.0
 
 
 def get(url, timeout=60):
     with urllib.request.urlopen(urllib.request.Request(url, headers=HDRS), timeout=timeout) as r:
         return json.loads(r.read().decode('utf-8', 'replace'))
+
+
+def missouri_polygon():
+    o = json.load(open('states-outline.json'))
+    geom = next(f['geometry'] for f in o['features'] if f['properties']['name'] == 'Missouri')
+    return geom['coordinates'] if geom['type'] == 'Polygon' else [r for p in geom['coordinates'] for r in p]
+
+
+def in_polygon(lon, lat, rings):
+    inside = False
+    for ring in rings:
+        n = len(ring); j = n - 1
+        for i in range(n):
+            xi, yi = ring[i]; xj, yj = ring[j]
+            if ((yi > lat) != (yj > lat)) and (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi):
+                inside = not inside
+            j = i
+    return inside
 
 
 def video_plays(url):
@@ -66,8 +96,9 @@ def titlecase(s):
 
 def main():
     rows = get(FEED)
+    mo_poly = missouri_polygon()
     groups = defaultdict(list)
-    skipped = 0
+    skipped = kansas = 0
     for c in rows:
         u = (c.get('html') or '').strip()
         try:
@@ -76,6 +107,9 @@ def main():
             skipped += 1; continue
         if not u or 'token=' in u.lower() or not (BBOX[0] <= lon <= BBOX[2] and BBOX[1] <= lat <= BBOX[3]):
             skipped += 1; continue
+        # KC Scout's Kansas-side cameras: geographically Kansas, already in KS.json
+        if lon < KC_KANSAS_LON and not in_polygon(lon, lat, mo_poly):
+            kansas += 1; continue
         groups[(round(lon, 5), round(lat, 5))].append((titlecase(c.get('location')), u))
 
     feats, all_streams = [], []
@@ -100,7 +134,8 @@ def main():
     idx['MO'] = {'name': 'Missouri', 'file': 'states/MO.json', 'count': len(feats),
                  'center': [-92.5, 38.5], 'zoom': 6.3, 'video': plays}
     json.dump(idx, open('states/index.json', 'w'), indent=1)
-    print(f'Missouri: {len(feats)} pins ({len(all_streams)} streams, {skipped} skipped), video={plays}')
+    print(f'Missouri: {len(feats)} pins ({len(all_streams)} streams, {skipped} skipped, '
+          f'{kansas} Kansas-side dropped), video={plays}')
 
 
 if __name__ == '__main__':
