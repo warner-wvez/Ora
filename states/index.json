@@ -98,17 +98,6 @@
   "zoom": 5.8,
   "video": false
  },
- "NE-ENG": {
-  "name": "New England (ME/NH/VT)",
-  "file": "states/NE-ENG.json",
-  "count": 404,
-  "center": [
-   -71.5,
-   44.0
-  ],
-  "zoom": 6.5,
-  "video": false
- },
  "CT": {
   "name": "Connecticut",
   "file": "states/CT.json",
@@ -471,6 +460,39 @@
    41.65
   ],
   "zoom": 8.6,
+  "video": false
+ },
+ "ME": {
+  "name": "Maine",
+  "file": "states/ME.json",
+  "count": 151,
+  "center": [
+   -69.2,
+   45.2
+  ],
+  "zoom": 6.2,
+  "video": false
+ },
+ "NH": {
+  "name": "New Hampshire",
+  "file": "states/NH.json",
+  "count": 181,
+  "center": [
+   -71.6,
+   43.8
+  ],
+  "zoom": 6.8,
+  "video": false
+ },
+ "VT": {
+  "name": "Vermont",
+  "file": "states/VT.json",
+  "count": 89,
+  "center": [
+   -72.7,
+   44.1
+  ],
+  "zoom": 6.9,
   "video": false
  }
 }
