@@ -175,6 +175,38 @@
   .rp-menu { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; align-items: center; }
   .rp-menu .rp-hd { width: 100%; font-size: 10px; font-weight: 600; color: #8e8e93; }
 
+  /* ---------- bottom sheet (mobile selection container) ----------
+     Same content as the desktop popup, presented the way every phone map app does:
+     slides up from the bottom, peek and expanded detents, swipe-down or X to dismiss,
+     map stays visible and interactive above it. Desktop keeps the floating popup. */
+  #sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: none; flex-direction: column;
+    background: #fff; border-radius: 16px 16px 0 0; box-shadow: 0 -6px 28px rgba(0,0,0,0.22);
+    max-height: 85vh; max-height: 85dvh; transform: translateY(100%);
+    transition: transform .24s cubic-bezier(.2,.8,.2,1); }
+  #sheet.dragging { transition: none; }
+  .sheet-grip { flex: none; padding: 8px 0 6px; display: flex; justify-content: center; cursor: grab; touch-action: none; }
+  .grip-bar { width: 36px; height: 4px; border-radius: 2px; background: #d1d1d6; }
+  .sheet-close { position: absolute; top: 10px; right: 10px; z-index: 5; width: 28px; height: 28px; border: none; border-radius: 50%;
+    background: rgba(0,0,0,0.45); color: #fff; font-size: 14px; line-height: 1; cursor: pointer; }
+  #sheetContent { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
+  #sheetContent .popup-inner { width: 100%; }
+  #sheetContent .popup-imgwrap { height: min(56vw, 260px); }
+  #sheetContent .popup-inner img, #sheetContent .popup-inner video { height: 100%; }
+  #sheetContent .popup-imgwrap img, #sheetContent .popup-imgwrap video { height: min(56vw, 260px); }
+  #sheetContent .enf { width: 100%; }
+
+  #panelToggle { display: none; font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+
+  /* ---------- small viewports: the panel collapses to its header + search and expands
+     on demand, so the map is not permanently covered on a phone ---------- */
+  @media (max-width: 640px) {
+    #panel { top: 10px; left: 10px; right: 10px; width: auto; max-height: 86px; overflow: hidden; transition: max-height .22s ease; }
+    #panel.expanded { max-height: calc(100vh - 140px); max-height: calc(100dvh - 140px); overflow-y: auto; }
+    #panel .tag { display: none; }
+    #panelToggle { display: inline-block; }
+    #addBanner { top: 104px; max-width: calc(100vw - 20px); }
+  }
+
   .enf { width: 258px; padding: 12px 14px 14px; }
   .enf-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; color: #fff; margin-right: 5px; }
   .enf-badge.rl { background: #ff3b30; } .enf-badge.sp { background: #ff9500; }
@@ -200,6 +232,12 @@
 <div id="map"></div>
 <div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
 
+<div id="sheet">
+  <div class="sheet-grip"><div class="grip-bar"></div></div>
+  <button class="sheet-close" id="sheetClose" title="Close">&#10005;</button>
+  <div id="sheetContent"></div>
+</div>
+
 <div id="routeView">
   <div class="rv-head">
     <div><div class="rv-title" id="rvTitle"></div><div class="rv-sub" id="rvSub"></div></div>
@@ -209,7 +247,7 @@
 </div>
 
 <div id="panel">
-  <div class="brand-row"><div class="brand">Ora</div><button id="share" title="Copy a link to exactly this view">Copy link</button></div>
+  <div class="brand-row"><div class="brand">Ora</div><div style="display:flex;gap:6px"><button id="panelToggle" title="Show states, routes and map style">Layers &#9662;</button><button id="share" title="Copy a link to exactly this view">Copy link</button></div></div>
   <div class="tag">Live traffic cameras across the US. Check a state to see its cameras.</div>
 
   <div class="search-wrap">
@@ -327,7 +365,7 @@ let modeCtx=null;
 const MODES={
   'browse': { enter(){}, exit(){} },
   'add-to-route': {
-    enter(ctx){ store.addingTo=ctx.routeId; renderAddBanner(); if(popup){ popup.remove(); popup=null; } },
+    enter(ctx){ store.addingTo=ctx.routeId; renderAddBanner(); clearSelection(); },
     exit(){ store.addingTo=null; document.getElementById('addBanner').classList.remove('show'); }
   },
   'route-view': {
@@ -350,6 +388,76 @@ function renderAddBanner(){
   document.getElementById('addBannerTxt').textContent = r.cams.length
     ? `Added ${r.cams.length} — keep tapping “${r.name}”` : `Tap cameras to add to “${r.name}”`;
   document.getElementById('addBanner').classList.add('show');
+}
+
+/* ---------- selection containers: floating popup on desktop, bottom sheet on mobile ---------- */
+const mqMobile = window.matchMedia('(max-width: 640px)');
+function isMobile(){ return mqMobile.matches; }
+// a selection survives only while its token matches; every new selection bumps it,
+// which is the same race guard the popup already used, generalized to both containers
+function selectionAlive(token){ return !!(store.selected && store.selected.token===token); }
+function selContainer(){
+  if(popup) return popup.getElement()||null;
+  const s=document.getElementById('sheet');
+  return s.classList.contains('open') ? document.getElementById('sheetContent') : null;
+}
+/* one teardown path for whatever holds the selected camera: media first, then both
+   containers, then the store. Everything that closes a selection routes through here. */
+function clearSelection(){
+  destroyPopupHls(); closeEnlarge();
+  if(popup){ const p=popup; popup=null; p.remove(); }
+  closeSheet();
+  store.selected=null;
+}
+
+/* ---------- bottom sheet ---------- */
+let sheetDetent='peek';
+function sheetPeekOffset(){
+  const s=document.getElementById('sheet'), c=document.getElementById('sheetContent');
+  const media=c.querySelector('.popup-imgwrap'), head=c.querySelector('.popup-body h3, .enf h3');
+  // peek shows the grip, the picture and the title line; the rest waits below the fold
+  const visible=22 + (media?media.offsetHeight:0) + (head?head.offsetHeight+64:120);
+  return Math.max(0, s.offsetHeight - Math.min(visible, s.offsetHeight));
+}
+function setSheetDetent(d){
+  sheetDetent=d;
+  document.getElementById('sheet').style.transform = d==='expanded' ? 'translateY(0)' : `translateY(${sheetPeekOffset()}px)`;
+}
+function openSheet(html){
+  const s=document.getElementById('sheet');
+  document.getElementById('sheetContent').innerHTML=html;
+  const wasOpen=s.classList.contains('open');
+  if(!wasOpen){ s.style.display='flex'; void s.offsetHeight; s.classList.add('open'); }  // reflow so the slide-up animates
+  requestAnimationFrame(()=>setSheetDetent(wasOpen?sheetDetent:'peek'));
+}
+function closeSheet(){
+  const s=document.getElementById('sheet');
+  if(!s.classList.contains('open')) return;
+  s.classList.remove('open'); s.style.transform='';   // base translateY(100%) slides it out
+  setTimeout(()=>{ if(!s.classList.contains('open')){ s.style.display='none'; document.getElementById('sheetContent').innerHTML=''; } },280);
+}
+function wireSheet(){
+  const s=document.getElementById('sheet'), grip=s.querySelector('.sheet-grip');
+  document.getElementById('sheetClose').addEventListener('click',clearSelection);
+  let startY=0, startT=0, curT=0, t0=0, dragging=false;
+  const getT=()=>{ const m=/translateY\(([-\d.]+)px\)/.exec(s.style.transform); return m?parseFloat(m[1]):0; };
+  grip.addEventListener('pointerdown',(e)=>{ dragging=true; startY=e.clientY; startT=getT(); curT=startT; t0=performance.now();
+    s.classList.add('dragging'); grip.setPointerCapture(e.pointerId); });
+  grip.addEventListener('pointermove',(e)=>{ if(!dragging) return;
+    curT=Math.max(0, startT+(e.clientY-startY)); s.style.transform=`translateY(${curT}px)`; });
+  const settle=(e)=>{
+    if(!dragging) return; dragging=false; s.classList.remove('dragging');
+    const v=(e.clientY-startY)/Math.max(1,performance.now()-t0);          // px per ms, + is downward
+    const peekY=sheetPeekOffset(), h=s.offsetHeight;
+    let d;
+    if(v>0.4) d = curT>peekY+18 ? 'dismiss' : 'peek';                     // a flick follows the finger
+    else if(v<-0.4) d = 'expanded';
+    else { const opts=[{y:0,d:'expanded'},{y:peekY,d:'peek'},{y:h,d:'dismiss'}];  // otherwise snap to nearest
+      d=opts.reduce((a,b)=>Math.abs(curT-b.y)<Math.abs(curT-a.y)?b:a).d; }
+    if(d==='dismiss') clearSelection(); else setSheetDetent(d);
+  };
+  grip.addEventListener('pointerup',settle);
+  grip.addEventListener('pointercancel',()=>{ if(dragging){ dragging=false; s.classList.remove('dragging'); setSheetDetent(sheetDetent); } });
 }
 
 /* ---------- live popup (snapshot or HLS video) ---------- */
@@ -435,7 +543,7 @@ function buildLivePopup(props, cfg){
 // the badge stops claiming a stream is live the moment we can tell it is not.
 // the poster snapshot stays visible if there is one, because a recent still beats nothing.
 function markNotLive(wrap){
-  if(!popup || !popup.getElement().contains(wrap)) return;   // bail if this popup was already replaced
+  if(!wrap.isConnected) return;   // bail if this selection's media was already replaced
   wrap.classList.add('notlive'); wrap.classList.remove('ready');
   const b=wrap.querySelector('.live-badge'); if(b) b.textContent='● NOT LIVE';
   if(!wrap.querySelector('.poster')) wrap.classList.add('err');
@@ -447,7 +555,7 @@ function watchLiveness(vid, wrap){
   const delta=(a,b)=>{ let s=0; for(let i=0;i<a.length;i+=4) s+=Math.abs(a[i]-b[i]); return s/(a.length/4); };
   let f0=null, t0=0, still=0;
   const tick=()=>{
-    if(!popup || !vid.isConnected) return;
+    if(!vid.isConnected) return;
     const f=frame();
     if(!f) return;                                     // pixels unreadable; say nothing
     if(f0){
@@ -461,10 +569,9 @@ function watchLiveness(vid, wrap){
   };
   popupLive=setTimeout(tick,3500);
 }
-function playDir(dir, cfg){
-  if(!popup) return;
+function playDir(dir, cfg, el, token){
+  if(!selectionAlive(token)) return;
   destroyPopupHls();
-  const el=popup.getElement();
   const wrap=el.querySelector('.popup-imgwrap');
   const live=canPlayVideo(dir, cfg);
   if(live){
@@ -483,27 +590,29 @@ function playDir(dir, cfg){
     const img=el.querySelector('#popup-img'); if(img) img.src=cfg.snap(dir);
   }
 }
-function wireLivePopup(props, cfg){
-  const mine=popup; if(!mine) return;                   // this wiring belongs to exactly one popup instance
-  const el=mine.getElement();
+// wires the selected camera's UI inside whatever container holds it: the desktop
+// popup's element or the sheet's fresh .popup-inner node. The token is the race
+// guard: any wiring, timer tick or render belonging to a replaced selection no-ops.
+function wireCameraUI(el, props, cfg, token){
+  if(!el || !selectionAlive(token)) return;             // this wiring belongs to exactly one selection
   let idx=0;
   // snapshot refresh runs through the single global popupTimer that destroyPopupHls owns
   const snapLoop=(dir)=>{ if(canPlayVideo(dir,cfg)) return;
-    popupTimer=setInterval(()=>{ if(popup!==mine) return; const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg)); };
+    popupTimer=setInterval(()=>{ if(!selectionAlive(token)) return; const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg)); };
   const render=()=>{ // rebuild media element for current dir
-    if(popup!==mine) return;                            // a newer click owns the popup now
+    if(!selectionAlive(token)) return;                  // a newer tap owns the selection now
     const dir=props.directions[idx];
     destroyPopupHls();                                  // tear media down before its element is swapped out
     const wrap=el.querySelector('.popup-imgwrap');
     wrap.outerHTML=mediaHTML(dir,cfg);
-    playDir(dir,cfg);
+    playDir(dir,cfg,el,token);
     // facing and refresh belong to the view, so they change with it
     el.querySelector('.popup-meta').innerHTML=facingHTML(dir);
     const age=el.querySelector('.popup-age');
     age.textContent=camAge(dir,cfg); age.classList.toggle('stale',!!(dir.stale_since||shownHealth(dir,cfg)));
     snapLoop(dir);
   };
-  playDir(props.directions[0],cfg);
+  playDir(props.directions[0],cfg,el,token);
   snapLoop(props.directions[0]);
   el.querySelectorAll('.dir-btn').forEach(btn=>btn.addEventListener('click',()=>{
     idx=parseInt(btn.dataset.idx,10);
@@ -521,7 +630,6 @@ function wireLivePopup(props, cfg){
     if(e.target.closest('.dir-btn')||e.target.closest('[data-add]')) return;
     if(e.target.closest('[data-enlarge]')||e.target.closest('.popup-imgwrap')) openEnlarge(props.directions[idx], cfg, props);
   });
-  mine.on('close',()=>{ destroyPopupHls(); closeEnlarge(); });
 }
 
 /* ---------- full-screen enlarge (snapshot or HLS video), shared by every layer ---------- */
@@ -539,9 +647,8 @@ function teardownEnlarge(){
   if(hls){ try{ hls.destroy(); }catch(e){} }
   document.removeEventListener('keydown', onkey);
   ov.remove(); enlargeState=null;
-  // resume the popup's own video, paused on open so two copies were not decoding at once
-  // (getElement() is undefined once a popup has been removed, so guard both hops)
-  const pel=popup&&popup.getElement(); const pv=pel&&pel.querySelector('#popup-vid');
+  // resume the selection's own video, paused on open so two copies were not decoding at once
+  const cont=selContainer(); const pv=cont&&cont.querySelector('#popup-vid');
   if(pv) pv.play().catch(()=>{});
 }
 function buildEnlarge({dir, cfg, props}){
@@ -553,8 +660,8 @@ function buildEnlarge({dir, cfg, props}){
       <button class="enlarge-close" title="Close">&#10005;</button>
       <div class="enlarge-cap"><b>${props.name}</b>${props.rwis?` &middot; ${props.rwis}`:''}</div></div>`;
   document.body.appendChild(ov);
-  // pause the popup's video so it is not decoding the same stream behind the overlay
-  const pel0=popup&&popup.getElement(); const pv=pel0&&pel0.querySelector('#popup-vid'); if(pv) pv.pause();
+  // pause the selection's video so it is not decoding the same stream behind the overlay
+  const cont0=selContainer(); const pv=cont0&&cont0.querySelector('#popup-vid'); if(pv) pv.pause();
   let hls=null, timer=null;
   if(canVid){
     const v=ov.querySelector('video');
@@ -607,16 +714,23 @@ function selectFeature(k, feature){
   // transient handle so the popup's "+ Route" button knows which camera it is on.
   // The old popup must close BEFORE store.selected is set: its close handler nulls
   // store.selected, and the wrong order wiped every selection after the first.
-  if(popup) popup.remove(); destroyPopupHls();
+  // the old container closes BEFORE the new selection is installed; the token guard
+  // makes any stale async wiring a no-op either way
+  if(popup){ const p=popup; popup=null; p.remove(); }
+  destroyPopupHls();
   store.selected={coords,k,props,token:++selToken};
-  if(cfg.kind==='live'){
-    popup=new maplibregl.Popup({closeButton:true,maxWidth:'288px'}).setLngLat(coords).setHTML(buildLivePopup(props,cfg)).addTo(map);
-    const mine=popup;
-    setTimeout(()=>{ if(popup===mine) wireLivePopup(props,cfg); },0);   // skip if a newer click already replaced the popup
+  const token=selToken;
+  const html = cfg.kind==='live' ? buildLivePopup(props,cfg) : buildEnfPopup(props);
+  if(isMobile()){
+    // phones get the bottom sheet: map stays visible and interactive above it
+    openSheet(html);
+    if(cfg.kind==='live') wireCameraUI(document.getElementById('sheetContent').firstElementChild, props, cfg, token);
   } else {
-    popup=new maplibregl.Popup({closeButton:true,maxWidth:'260px'}).setLngLat(coords).setHTML(buildEnfPopup(props)).addTo(map);
+    popup=new maplibregl.Popup({closeButton:true,maxWidth:cfg.kind==='live'?'288px':'260px'}).setLngLat(coords).setHTML(html).addTo(map);
+    const mine=popup;
+    if(cfg.kind==='live') setTimeout(()=>{ if(popup===mine && selectionAlive(token)) wireCameraUI(mine.getElement(), props, cfg, token); },0);
+    mine.on('close',()=>{ if(selectionAlive(token)) store.selected=null; destroyPopupHls(); closeEnlarge(); });
   }
-  popup.on('close',()=>{ store.selected=null; destroyPopupHls(); });
 }
 
 /* ---------- color/legend/filter (enforcement) ---------- */
@@ -807,7 +921,7 @@ async function enableLayer(k,fly=true){
 }
 function disableLayer(k){ store.activeLayers.delete(k);
   if(LAYERS[k].kind==='live') scheduleCamsRebuild(); else setLayerVis(k,'none');
-  if(popup){ popup.remove(); popup=null; } syncEnfControls(); rebuildSearchIndex(); updateCoverage();
+  clearSelection(); syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false; syncMaster(); }
 
 /* the master "All states" checkbox is a true tri-state, the way Gmail/Sheets do it:
@@ -1028,10 +1142,15 @@ document.getElementById('clearAll').addEventListener('click',()=>{ [...store.act
 document.getElementById('newRoute').addEventListener('click',()=>{ const name=prompt('Name this route (e.g. Work commute)'); if(!name) return; const routes=loadRoutes(); const id=uid(); routes.push({id,name:name.trim(),cams:[]}); saveRoutes(routes); renderRouteList(); startAddMode(id); });
 document.getElementById('addDone').addEventListener('click',stopAddMode);
 document.getElementById('rvClose').addEventListener('click',closeRouteView);
+wireSheet();
+document.getElementById('panelToggle').addEventListener('click',()=>document.getElementById('panel').classList.toggle('expanded'));
+// touching the map puts the drawer away, the way every phone map app does
+map.getCanvas().addEventListener('pointerdown',()=>{ if(isMobile()) document.getElementById('panel').classList.remove('expanded'); });
 // search + keyboard nav
 const sEl=document.getElementById('search');
 sEl.addEventListener('input',e=>runSearch(e.target.value));
-sEl.addEventListener('focus',e=>{ if(e.target.value.trim().length>=2) runSearch(e.target.value); });
+sEl.addEventListener('focus',e=>{ if(isMobile()) document.getElementById('panel').classList.add('expanded');   // results need room below the collapsed fold
+  if(e.target.value.trim().length>=2) runSearch(e.target.value); });
 sEl.addEventListener('keydown',e=>{ const items=[...document.querySelectorAll('.sr-item')]; if(!items.length) return;
   if(e.key==='ArrowDown'){ e.preventDefault(); kbdIdx=Math.min(kbdIdx+1,items.length-1); }
   else if(e.key==='ArrowUp'){ e.preventDefault(); kbdIdx=Math.max(kbdIdx-1,0); }
