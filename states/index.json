@@ -461,5 +461,16 @@
   ],
   "zoom": 6.8,
   "video": true
+ },
+ "RI": {
+  "name": "Rhode Island",
+  "file": "states/RI.json",
+  "count": 135,
+  "center": [
+   -71.55,
+   41.65
+  ],
+  "zoom": 8.6,
+  "video": false
  }
 }
