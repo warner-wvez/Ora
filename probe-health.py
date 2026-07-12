@@ -105,13 +105,29 @@ def parse_lm(s):
         return None
 
 
+# Every state but Wyoming appends a bare-digit timestamp cache-buster to its
+# snapshot URL and keeps the camera's identity in the path, so the query is noise
+# to be dropped. Wyoming (map.wyoroad.info) instead puts the identity in ?ref=, so
+# a *named* query is identity and must be kept, or all 757 cameras collapse to one
+# key. Strip only an empty, bare-number, or known cache-buster query.
+CACHEBUST = {'t', '_', 'ts', 'nocache', 'cb', 'rand', 'random', 'v'}
+
+
+def snap_key(u):
+    base, _, q = u.partition('?')
+    if not q:
+        return u
+    name = q.split('=', 1)[0] if '=' in q else ''
+    return base if (not name or name in CACHEBUST) else u
+
+
 def snapshots_for(path):
     d = json.load(open(path))
     urls = set()
     for f in d['features']:
         for x in f['properties']['directions']:
             if x.get('snapshot'):
-                urls.add(x['snapshot'].split('?')[0])
+                urls.add(snap_key(x['snapshot']))
     return sorted(urls)
 
 

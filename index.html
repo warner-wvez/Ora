@@ -260,6 +260,13 @@
 <script>
 /* ---------- layer catalog (states injected at load from states/index.json) ---------- */
 const cb = (u)=> !u ? '' : u + (u.includes('?')?'&':'?') + 't=' + Date.now();
+// Canonical health key for a snapshot URL, matching probe-health.py's snap_key. Every
+// state but Wyoming keeps a camera's identity in the path and appends a bare-digit
+// timestamp cache-buster, so the query is dropped; Wyoming's identity is in ?ref=, a
+// named query that must be kept or all its cameras collapse to one health status.
+const CACHEBUST = new Set(['t','_','ts','nocache','cb','rand','random','v']);
+const snapKey = (u)=>{ const i=u.indexOf('?'); if(i<0) return u; const q=u.slice(i+1);
+  const name=q.includes('=')?q.slice(0,q.indexOf('=')):''; return (!name||CACHEBUST.has(name))?u.slice(0,i):u; };
 // New Mexico's snapshot host (ss.nmroads.com) serves http only, which an https page blocks as
 // mixed content. States flagged imgproxy route their images through an https proxy at render time,
 // with the cache buster inside the proxied URL so the proxy refetches the origin instead of caching.
@@ -673,7 +680,7 @@ async function loadHealth(k, data){
   for(const f of data.features){
     let dead=0;
     for(const d of f.properties.directions){
-      const s=d.snapshot ? st[d.snapshot.split('?')[0]] : undefined;
+      const s=d.snapshot ? st[snapKey(d.snapshot)] : undefined;
       if(!s) continue;
       d.health=s;
       if(!(d.video && hasVideo)) dead++;                // a working stream outranks a dead snapshot
