@@ -450,5 +450,16 @@
   ],
   "zoom": 6.5,
   "video": false
+ },
+ "SC": {
+  "name": "South Carolina",
+  "file": "states/SC.json",
+  "count": 763,
+  "center": [
+   -80.9,
+   33.9
+  ],
+  "zoom": 6.8,
+  "video": true
  }
 }
