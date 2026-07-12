@@ -285,11 +285,23 @@ const ENF_STOPS = [[0,3],[50,5],[300,8],[1500,13],[6000,20],[16000,28],[33000,36
 function enfRadius(v90){ v90=Number(v90)||0; const s=ENF_STOPS; if(v90<=s[0][0])return s[0][1];
   for(let i=1;i<s.length;i++){ if(v90<=s[i][0]){ const [x0,y0]=s[i-1],[x1,y1]=s[i]; return y0+(y1-y0)*(v90-x0)/(x1-x0);} } return s[s.length-1][1]; }
 
-const dataCache={}, active=new Set(), bound=new Set(), created=new Set();
-let enfColorMode='verdict', enfMeta=null, popup=null, popupHls=null, popupWatch=null, popupLive=null, popupTimer=null, hoverTip=null, lastSelected=null, basemap='light', restoring=false;
-let addingTo=null;   // route id currently collecting cameras
-const enfFilter={ verdicts:new Set(['justified','revenue','gap','quiet']), types:new Set(['redlight','speed']) };
-let searchIndex=[], kbdIdx=-1;
+/* ---------- state store ----------
+   Every piece of UI state lives here, and every write goes through a mutator or a
+   mode transition. Renderers read the store, never a local copy of it. */
+const store = {
+  mode: 'browse',                 // exactly one of MODES is active at any time
+  activeLayers: new Set(),        // layer keys currently on
+  selected: null,                 // {k, props, coords, token} of the open camera, or null
+  openRoute: null,                // route id whose viewer is open (route-view mode)
+  addingTo: null,                 // route id collecting cameras (add-to-route mode)
+  basemap: 'light',
+  enfColorMode: 'verdict',
+  enfFilter: { verdicts:new Set(['justified','revenue','gap','quiet']), types:new Set(['redlight','speed']) },
+};
+/* derived caches and media resources — owned by lifecycles below, not UI state */
+const dataCache={}, bound=new Set(), created=new Set();
+let enfMeta=null, popup=null, popupHls=null, popupWatch=null, popupLive=null, popupTimer=null, hoverTip=null, restoring=false, selToken=0;
+let searchIndex=[], kbdIdx=-1, searchHits=[];
 
 const US_VIEW={ center:[-96,38.5], zoom:3.7 };
 const OVERVIEW_BOUNDS=[[-124.5,24.5],[-67,48.5]]; // frames the lower-48 states we cover (Alaska reachable from the list)
@@ -304,12 +316,52 @@ function loadRoutes(){ try{ return JSON.parse(localStorage.getItem('ora-routes')
 function saveRoutes(r){ localStorage.setItem('ora-routes', JSON.stringify(r)); }
 function uid(){ return 'r'+Math.random().toString(36).slice(2,9); }
 
+/* ---------- modes (the iD pattern) ----------
+   Each mode's enter() installs everything it needs — listeners, timers, UI — and its
+   exit() removes all of it. Every transition goes through switchMode(), which always
+   exits the old mode before entering the new one, so exactly one mode is active and
+   nothing can orphan a timer or a listener by construction.
+   Camera selection (the popup/sheet) is deliberately NOT a mode: browse and
+   add-to-route both allow it, and it is torn down through its own single owner. */
+let modeCtx=null;
+const MODES={
+  'browse': { enter(){}, exit(){} },
+  'add-to-route': {
+    enter(ctx){ store.addingTo=ctx.routeId; renderAddBanner(); if(popup){ popup.remove(); popup=null; } },
+    exit(){ store.addingTo=null; document.getElementById('addBanner').classList.remove('show'); }
+  },
+  'route-view': {
+    enter(ctx){ store.openRoute=ctx.routeId; renderRouteView(ctx); },
+    exit(){ store.openRoute=null; teardownRouteView(); }
+  },
+  'media-enlarged': {
+    enter(ctx){ buildEnlarge(ctx); },
+    exit(){ teardownEnlarge(); }
+  }
+};
+function switchMode(name, ctx){
+  if(!MODES[name]) return;
+  MODES[store.mode].exit();
+  store.mode=name; modeCtx=ctx||{};
+  MODES[name].enter(modeCtx);
+}
+function renderAddBanner(){
+  const r=loadRoutes().find(x=>x.id===store.addingTo); if(!r) return;
+  document.getElementById('addBannerTxt').textContent = r.cams.length
+    ? `Added ${r.cams.length} — keep tapping “${r.name}”` : `Tap cameras to add to “${r.name}”`;
+  document.getElementById('addBanner').classList.add('show');
+}
+
 /* ---------- live popup (snapshot or HLS video) ---------- */
 // one media owner, one teardown path: clears the snapshot interval, the liveness/watch
 // timers and the HLS instance. Everything that starts media must route its timer here.
 function destroyPopupHls(){ if(popupTimer){ clearInterval(popupTimer); popupTimer=null; } if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } if(popupLive){ clearTimeout(popupLive); popupLive=null; } if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
-// video only plays where the state's stream host allows cross-origin playback (cfg.hasVideo)
-function canPlayVideo(dir, cfg){ return !!(dir.video && cfg.hasVideo && window.Hls && Hls.isSupported()); }
+// video only plays where the state's stream host allows cross-origin playback; that
+// fact lives in the view's status ('live'), computed once in applyStatus
+function canPlayVideo(dir, cfg){
+  const live = dir.status ? dir.status==='live' : !!(dir.video && cfg && cfg.hasVideo);
+  return !!(live && window.Hls && Hls.isSupported());
+}
 function mediaHTML(dir, cfg){
   const live = canPlayVideo(dir, cfg);
   // video cameras show the snapshot instantly as a poster, then the live video fades in over it
@@ -342,7 +394,8 @@ function ago(iso){
 }
 // health describes the snapshot. Where a live stream is what you actually watch,
 // the runtime liveness check is the authority, so do not contradict it here.
-function shownHealth(dir, cfg){ return (dir.video && cfg.hasVideo) ? null : dir.health; }
+// (applyStatus already encodes that outranking: a playable view is status 'live'.)
+function shownHealth(dir, cfg){ return (dir.status==='offline'||dir.status==='frozen') ? dir.health : null; }
 function camAge(dir, cfg){
   const h=shownHealth(dir,cfg);
   if(h) return `${HEALTH_TEXT[h]||'not live'} · checked ${ago(cfg.healthAt)}`;
@@ -455,9 +508,9 @@ function wireLivePopup(props, cfg){
     render();
   }));
   const addBtn=el.querySelector('[data-add]');
-  const selK=lastSelected?lastSelected.k:null, selCoords=lastSelected?lastSelected.coords.slice():null;
+  const selK=store.selected?store.selected.k:null, selCoords=store.selected?store.selected.coords.slice():null;
   if(addBtn) addBtn.addEventListener('click',()=>{
-    if(addingTo){ addCameraToRoute(selK, props, selCoords); return; }   // banner add-mode, as before
+    if(store.addingTo){ addCameraToRoute(selK, props, selCoords); return; }   // banner add-mode, as before
     toggleRoutePicker(el, selK, props, selCoords);
   });
   // click the picture (or its expand button) to open the same view full-screen
@@ -470,7 +523,13 @@ function wireLivePopup(props, cfg){
 
 /* ---------- full-screen enlarge (snapshot or HLS video), shared by every layer ---------- */
 let enlargeState=null;
-function closeEnlarge(){
+function openEnlarge(dir, cfg, props){
+  if(!dir) return;
+  if(!canPlayVideo(dir,cfg) && !dir.snapshot) return;  // nothing to show
+  switchMode('media-enlarged',{dir,cfg,props,returnTo:{name:store.mode,ctx:modeCtx}});
+}
+function closeEnlarge(){ if(store.mode==='media-enlarged') switchMode(modeCtx.returnTo.name, modeCtx.returnTo.ctx); }
+function teardownEnlarge(){
   if(!enlargeState) return;
   const {ov, hls, timer, onkey}=enlargeState;
   if(timer) clearInterval(timer);
@@ -478,13 +537,12 @@ function closeEnlarge(){
   document.removeEventListener('keydown', onkey);
   ov.remove(); enlargeState=null;
   // resume the popup's own video, paused on open so two copies were not decoding at once
-  if(popup){ const pv=popup.getElement().querySelector('#popup-vid'); if(pv) pv.play().catch(()=>{}); }
+  // (getElement() is undefined once a popup has been removed, so guard both hops)
+  const pel=popup&&popup.getElement(); const pv=pel&&pel.querySelector('#popup-vid');
+  if(pv) pv.play().catch(()=>{});
 }
-function openEnlarge(dir, cfg, props){
-  if(!dir) return;
-  closeEnlarge();
+function buildEnlarge({dir, cfg, props}){
   const canVid=canPlayVideo(dir,cfg);
-  if(!canVid && !dir.snapshot) return;                 // nothing to show
   const ov=document.createElement('div'); ov.className='enlarge-ov';
   const media=canVid ? `<video class="enlarge-media" muted autoplay playsinline></video>`
                      : `<img class="enlarge-media" src="${cfg.snap(dir)}">`;
@@ -493,7 +551,7 @@ function openEnlarge(dir, cfg, props){
       <div class="enlarge-cap"><b>${props.name}</b>${props.rwis?` &middot; ${props.rwis}`:''}</div></div>`;
   document.body.appendChild(ov);
   // pause the popup's video so it is not decoding the same stream behind the overlay
-  const pv=popup&&popup.getElement().querySelector('#popup-vid'); if(pv) pv.pause();
+  const pel0=popup&&popup.getElement(); const pv=pel0&&pel0.querySelector('#popup-vid'); if(pv) pv.pause();
   let hls=null, timer=null;
   if(canVid){
     const v=ov.querySelector('video');
@@ -540,14 +598,14 @@ function selectFeature(k, feature){
   const cfg=LAYERS[k], coords=feature.geometry.coordinates.slice();
   const props=(typeof feature.properties.directions==='string')
     ? {...feature.properties, directions:JSON.parse(feature.properties.directions)} : feature.properties;
-  if(addingTo){ addCameraToRoute(k, props, coords); return; }  // add-to-route mode
+  if(store.addingTo){ addCameraToRoute(k, props, coords); return; }  // add-to-route mode
   // a map click only opens the camera's popup — it never becomes a sticky selection or a
-  // shared-link filter. Only the side panel governs what the map shows. lastSelected is a
+  // shared-link filter. Only the side panel governs what the map shows. store.selected is a
   // transient handle so the popup's "+ Route" button knows which camera it is on.
-  // The old popup must close BEFORE lastSelected is set: its close handler nulls
-  // lastSelected, and the wrong order wiped every selection after the first.
+  // The old popup must close BEFORE store.selected is set: its close handler nulls
+  // store.selected, and the wrong order wiped every selection after the first.
   if(popup) popup.remove(); destroyPopupHls();
-  lastSelected={coords,k};
+  store.selected={coords,k,props,token:++selToken};
   if(cfg.kind==='live'){
     popup=new maplibregl.Popup({closeButton:true,maxWidth:'288px'}).setLngLat(coords).setHTML(buildLivePopup(props,cfg)).addTo(map);
     const mine=popup;
@@ -555,28 +613,28 @@ function selectFeature(k, feature){
   } else {
     popup=new maplibregl.Popup({closeButton:true,maxWidth:'260px'}).setLngLat(coords).setHTML(buildEnfPopup(props)).addTo(map);
   }
-  popup.on('close',()=>{ lastSelected=null; destroyPopupHls(); });
+  popup.on('close',()=>{ store.selected=null; destroyPopupHls(); });
 }
 
 /* ---------- color/legend/filter (enforcement) ---------- */
-function enfColorExpr(){ if(enfColorMode==='type') return ['match',['get','kind'],'redlight','#ff3b30','speed','#ff9500','#8e8e93'];
+function enfColorExpr(){ if(store.enfColorMode==='type') return ['match',['get','kind'],'redlight','#ff3b30','speed','#ff9500','#8e8e93'];
   return ['match',['get','quad'],'justified',VERDICT.justified.color,'revenue',VERDICT.revenue.color,'gap',VERDICT.gap.color,'quiet',VERDICT.quiet.color,'#b0b0b5']; }
-function enfFilterExpr(){ return ['all',['in',['get','quad'],['literal',[...enfFilter.verdicts]]],['in',['get','kind'],['literal',[...enfFilter.types]]]]; }
+function enfFilterExpr(){ return ['all',['in',['get','quad'],['literal',[...store.enfFilter.verdicts]]],['in',['get','kind'],['literal',[...store.enfFilter.types]]]]; }
 function applyEnfFilter(){ if(map.getLayer('chi-enf__circle')) map.setFilter('chi-enf__circle',enfFilterExpr()); }
 function renderLegend(){
   const el=document.getElementById('legend');
   const sz=`<div class="sizes"><div class="sizewrap"><span class="sizedot" style="width:7px;height:7px"></span><span class="sizelbl">few</span></div><div class="sizewrap"><span class="sizedot" style="width:16px;height:16px"></span><span class="sizelbl">more</span></div><div class="sizewrap"><span class="sizedot" style="width:28px;height:28px"></span><span class="sizelbl">most</span></div><span class="sizelbl" style="margin-bottom:2px">tickets, last 90 days</span></div>`;
-  el.innerHTML=(enfColorMode==='type')?`<div class="row"><span class="dot rl"></span> Red light camera</div><div class="row"><span class="dot sp"></span> Speed camera</div>${sz}`:
+  el.innerHTML=(store.enfColorMode==='type')?`<div class="row"><span class="dot rl"></span> Red light camera</div><div class="row"><span class="dot sp"></span> Speed camera</div>${sz}`:
     `<div class="row"><span class="dot justified"></span> On real danger <span class="sub">&nbsp;tickets + crashes</span></div><div class="row"><span class="dot revenue"></span> Ticket-heavy, low crash</div><div class="row"><span class="dot gap"></span> Crashes, light enforcement</div><div class="row"><span class="dot quiet"></span> Quiet on both</div>${sz}`;
 }
 function expandIlSub(){ const b=document.getElementById('ilBlock'), s=document.getElementById('ilSub'); if(b) b.classList.add('open'); if(s) s.classList.remove('collapsed'); }
-function syncEnfControls(){ document.getElementById('enfControls').classList.toggle('show', active.has('chi-enf')); if(active.has('chi-enf')){ renderLegend(); expandIlSub(); } }
+function syncEnfControls(){ document.getElementById('enfControls').classList.toggle('show', store.activeLayers.has('chi-enf')); if(store.activeLayers.has('chi-enf')){ renderLegend(); expandIlSub(); } }
 
 /* ---------- basemap ---------- */
-function applyContrast(){ const w=basemap==='satellite';
+function applyContrast(){ const w=store.basemap==='satellite';
   ['cams__points','cams__clusters'].forEach(id=>{ if(map.getLayer(id)) map.setPaintProperty(id,'circle-stroke-width', w?3:2.5); });
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-stroke-width', w?2:1.5); }
-function setBasemap(mode){ basemap=mode; map.setLayoutProperty('sat-layer','visibility', mode==='satellite'?'visible':'none'); applyContrast(); }
+function setBasemap(mode){ store.basemap=mode; map.setLayoutProperty('sat-layer','visibility', mode==='satellite'?'visible':'none'); applyContrast(); }
 
 /* ---------- one morphing camera pipeline (all live layers share it) ----------
    All active states feed one supercluster index rendered into one source, and on
@@ -595,8 +653,8 @@ function camsKey(f){ const p=f.properties; return p.cluster ? 'c'+p.cluster_id :
 function scheduleCamsRebuild(){ clearTimeout(camsRebuildT); camsRebuildT=setTimeout(buildCamsIndex,120); }
 function buildCamsIndex(){
   const pts=[];
-  active.forEach(k=>{ if(LAYERS[k].kind!=='live') return; const d=dataCache[k]; if(!d) return;
-    d.features.forEach((f,i)=>pts.push({type:'Feature',geometry:f.geometry,properties:{k,i,name:f.properties.name,dead:f.properties.dead||0}})); });
+  store.activeLayers.forEach(k=>{ if(LAYERS[k].kind!=='live') return; const d=dataCache[k]; if(!d) return;
+    d.features.forEach((f,i)=>pts.push({type:'Feature',geometry:f.geometry,properties:{k,i,name:f.properties.name,status:f.properties.status||'snapshot'}})); });
   stopCamsAnim(); camsZ=Math.floor(map.getZoom());
   if(!pts.length){ camsIndex=null; camsSet([]); return; }
   if(!window.Supercluster){ camsIndex=null; camsSet(pts); return; }   // CDN failed: raw pins beat nothing
@@ -643,7 +701,7 @@ function addCamsLayers(){
   map.addLayer({id:'cams__cluster-count',type:'symbol',source:CAMS_SRC,filter:['has','point_count'],layout:{'text-field':['get','point_count_abbreviated'],'text-size':11,'text-font':['Noto Sans Bold'],'text-allow-overlap':true},paint:{'text-color':'#fff'}});
   // a camera the health sweep found dead reads as dead before you spend a click on it.
   // radius + white halo sized so the dot stays the top layer over coloured street basemaps
-  map.addLayer({id:'cams__points',type:'circle',source:CAMS_SRC,filter:['!',['has','point_count']],paint:{'circle-color':['case',['==',['get','dead'],1],'#b4b4b9','#007aff'],'circle-radius':7,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
+  map.addLayer({id:'cams__points',type:'circle',source:CAMS_SRC,filter:['!',['has','point_count']],paint:{'circle-color':['match',['get','status'],'offline','#b4b4b9','frozen','#b4b4b9','#007aff'],'circle-radius':7,'circle-stroke-width':2.5,'circle-stroke-color':'#fff'}});
 }
 function bindCamsHandlers(){
   map.on('zoom', camsRender);
@@ -675,22 +733,35 @@ async function loadHealth(k, data){
   try{ const r=await fetch(`states/health/${code}.json`); if(r.ok) h=await r.json(); }catch(e){}
   if(!h) return null;                                  // no sweep for this layer yet; say nothing
   healthCache[k]=h; LAYERS[k].healthAt=h.checked_at;
-  const st=h.status||{}, hasVideo=!!LAYERS[k].hasVideo;
-  let deadCams=0;
+  const st=h.status||{};
   for(const f of data.features){
-    let dead=0;
     for(const d of f.properties.directions){
       const s=d.snapshot ? st[snapKey(d.snapshot)] : undefined;
-      if(!s) continue;
-      d.health=s;
-      if(!(d.video && hasVideo)) dead++;                // a working stream outranks a dead snapshot
+      if(s) d.health=s;
     }
-    if(dead){ deadCams+=dead;
-      // grey the pin only when every view at this location is dead
-      if(dead===f.properties.directions.length) f.properties.dead=1; }
   }
-  LAYERS[k].deadCount=deadCams;
+  applyStatus(k, data);
   return h;
+}
+/* the one status seam everything reads: every view and every camera gets a status in
+   {live, snapshot, offline, frozen}. Pin styling, popup badges, the age line and route
+   tiles derive from it exclusively — future incident detection plugs in right here. */
+function applyStatus(k, data){
+  const cfg=LAYERS[k], hasVideo=!!cfg.hasVideo;
+  let deadViews=0;
+  for(const f of data.features){
+    const dirs=f.properties.directions; let dead=0, frozen=0;
+    for(const d of dirs){
+      const playable=!!(d.video && hasVideo);           // a working stream outranks a dead snapshot
+      if(d.health && !playable){ d.status = d.health==='frozen' ? 'frozen' : 'offline'; dead++; if(d.status==='frozen') frozen++; }
+      else d.status = playable ? 'live' : 'snapshot';
+    }
+    deadViews+=dead;
+    // grey the pin only when every view at this location is dead
+    f.properties.status = (dirs.length && dead===dirs.length) ? (frozen===dead?'frozen':'offline')
+                        : (dirs.some(d=>d.status==='live') ? 'live' : 'snapshot');
+  }
+  cfg.deadCount=deadViews;
 }
 // warm TCP/TLS to the snapshot + video hosts so the first click connects instantly (no feed fetched)
 function preconnectFor(data){
@@ -712,10 +783,11 @@ async function enableLayer(k,fly=true){
     }
   }
   const data=dataCache[k];
+  if(cfg.kind==='live') applyStatus(k,data);   // statuses exist before the health sweep lands (live/snapshot)
   const c=document.getElementById('cnt-'+k);
   const setCount=()=>{ if(c) c.textContent=data.features.length.toLocaleString()+(cfg.deadCount?` · ${cfg.deadCount.toLocaleString()} offline`:''); };
   setCount();
-  active.add(k);
+  store.activeLayers.add(k);
   if(cfg.kind==='enforcement'){
     enfMeta=data.meta||null;
     if(!created.has(k)){ addEnfLayers(k,data); created.add(k); } else setLayerVis(k,'visible');
@@ -730,7 +802,7 @@ async function enableLayer(k,fly=true){
     loadHealth(k,data).then(h=>{ if(h){ scheduleCamsRebuild(); setCount(); } });
   }
 }
-function disableLayer(k){ active.delete(k);
+function disableLayer(k){ store.activeLayers.delete(k);
   if(LAYERS[k].kind==='live') scheduleCamsRebuild(); else setLayerVis(k,'none');
   if(popup){ popup.remove(); popup=null; } syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false; syncMaster(); }
@@ -742,7 +814,7 @@ function disableLayer(k){ active.delete(k);
 function liveKeys(){ return Object.keys(LAYERS).filter(k=>LAYERS[k].kind==='live'); }
 function syncMaster(){
   const m=document.getElementById('masterAll'); if(!m) return;
-  const keys=liveKeys(), on=keys.filter(k=>active.has(k)).length;
+  const keys=liveKeys(), on=keys.filter(k=>store.activeLayers.has(k)).length;
   m.checked = on>0 && on===keys.length;
   m.indeterminate = on>0 && on<keys.length;
   const lbl=document.getElementById('cnt-all');
@@ -751,8 +823,8 @@ function syncMaster(){
 async function setAllStates(on){
   const m=document.getElementById('masterAll'); m.disabled=true;   // no double-fire mid-load
   const keys=liveKeys();
-  if(on) await Promise.allSettled(keys.map(k=>active.has(k)?null:enableLayer(k,false)));
-  else keys.forEach(k=>{ if(active.has(k)) disableLayer(k); });
+  if(on) await Promise.allSettled(keys.map(k=>store.activeLayers.has(k)?null:enableLayer(k,false)));
+  else keys.forEach(k=>{ if(store.activeLayers.has(k)) disableLayer(k); });
   m.disabled=false; showOverview(); writeUrl(); syncMaster();
 }
 
@@ -766,18 +838,18 @@ function buildCoverage(){
   });
   if(map.getSource('coverage')) map.getSource('coverage').setData({type:'FeatureCollection',features:feats});
 }
-function updateCoverage(){ const show=active.size===0;
+function updateCoverage(){ const show=store.activeLayers.size===0;
   ['coverage-dot','coverage-label','coverage-count'].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',show?'visible':'none'); }); }
 
 /* ---------- search ---------- */
-function rebuildSearchIndex(){ searchIndex=[]; active.forEach(k=>{ const d=dataCache[k]; if(!d) return;
+function rebuildSearchIndex(){ searchIndex=[]; store.activeLayers.forEach(k=>{ const d=dataCache[k]; if(!d) return;
   d.features.forEach(f=>searchIndex.push({name:f.properties.name,road:f.properties.roadway||'',coords:f.geometry.coordinates,k,feature:f})); }); }
 function runSearch(q){
   const box=document.getElementById('search-results'); q=q.trim().toLowerCase(); kbdIdx=-1;
   if(q.length<2){ box.classList.remove('show'); box.innerHTML=''; return; }
   const hits=searchIndex.filter(e=>(e.name&&e.name.toLowerCase().includes(q))||(e.road&&e.road.toLowerCase().includes(q))).slice(0,8);
-  if(!hits.length){ box.innerHTML=`<div class="sr-empty">No matches in active layers</div>`; box.classList.add('show'); window._hits=[]; return; }
-  window._hits=hits;
+  if(!hits.length){ box.innerHTML=`<div class="sr-empty">No matches in active layers</div>`; box.classList.add('show'); searchHits=[]; return; }
+  searchHits=hits;
   const dot=(e)=> e.k==='chi-enf' ? (VERDICT[e.feature.properties.quad]||VERDICT.quiet).color : '#007aff';
   const sub=(e)=> LAYERS[e.k]?.name || e.k;
   box.innerHTML=hits.map((e,i)=>`<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:${dot(e)}"></span>${e.name}<span class="sr-sub">${sub(e)}</span></div>`).join('');
@@ -798,21 +870,18 @@ function renderRouteList(){
     it.querySelector('.rx').addEventListener('click',()=>{ if(confirm('Delete this route?')){ saveRoutes(loadRoutes().filter(r=>r.id!==id)); renderRouteList(); } });
   });
 }
-function startAddMode(id){ addingTo=id; const r=loadRoutes().find(x=>x.id===id);
-  document.getElementById('addBannerTxt').textContent=`Tap cameras to add to “${r.name}”`;
-  document.getElementById('addBanner').classList.add('show');
-  if(popup){ popup.remove(); popup=null; } }
-function stopAddMode(){ addingTo=null; document.getElementById('addBanner').classList.remove('show'); }
+function startAddMode(id){ switchMode('add-to-route',{routeId:id}); }
+function stopAddMode(){ if(store.mode==='add-to-route') switchMode('browse'); }
 function addCameraToRoute(k, props, coords, routeId){
   if(!coords) return false;
-  const id=routeId||addingTo;
+  const id=routeId||store.addingTo;
   const routes=loadRoutes(), r=routes.find(x=>x.id===id); if(!r) return false;
   if(r.cams.some(c=>Math.abs(c.coords[0]-coords[0])<1e-6 && Math.abs(c.coords[1]-coords[1])<1e-6)) return 'dup';
   const d=(props.directions&&props.directions[0])||{};
   // camId is what NYC route tiles rebuild their image URL from, so it must be saved at add time
   r.cams.push({k, name:props.name, coords, snapshot:d.snapshot||null, video:d.video||null, camId:d.camId||null});
   saveRoutes(routes); renderRouteList();
-  if(id===addingTo) document.getElementById('addBannerTxt').textContent=`Added ${r.cams.length} — keep tapping “${r.name}”`;
+  if(id===store.addingTo) renderAddBanner();
   return true;
 }
 /* "+ Route" in a popup works on its own, the way Save works in Google Maps: pick an
@@ -841,7 +910,11 @@ function toggleRoutePicker(el, k, props, coords){
       setTimeout(()=>{ btn.textContent='+ Route'; },1800); }
   });
 }
-function openRouteView(id){
+let rvIO=null, rvTimer=null;   // owned by route-view mode: installed on enter, removed on exit
+function openRouteView(id){ switchMode('route-view',{routeId:id}); }
+function closeRouteView(){ if(store.mode==='route-view') switchMode('browse'); }
+function renderRouteView(ctx){
+  const id=ctx.routeId;
   const r=loadRoutes().find(x=>x.id===id); if(!r) return;
   document.getElementById('rvTitle').textContent=r.name;
   document.getElementById('rvSub').textContent=`${r.cams.length} camera${r.cams.length!==1?'s':''} · scroll your whole route`;
@@ -865,14 +938,14 @@ function openRouteView(id){
       img.addEventListener('load',done); img.addEventListener('error',done); bust(m); } };
   const enqueue=(m)=>{ if(m.dataset.src && !queue.includes(m)) queue.push(m); pump(); };
   const refresh=()=>visible.forEach(enqueue);
-  if(window._rvIO) window._rvIO.disconnect();
-  window._rvIO=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ visible.add(e.target); enqueue(e.target); } else visible.delete(e.target); }), {rootMargin:'150px'});
-  body.querySelectorAll('.rv-media[data-src]').forEach(m=>window._rvIO.observe(m));
-  clearInterval(window._rvTimer); window._rvTimer=setInterval(refresh,30000);
+  if(rvIO) rvIO.disconnect();
+  rvIO=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ visible.add(e.target); enqueue(e.target); } else visible.delete(e.target); }), {rootMargin:'150px'});
+  body.querySelectorAll('.rv-media[data-src]').forEach(m=>rvIO.observe(m));
+  clearInterval(rvTimer); rvTimer=setInterval(refresh,30000);
   body.querySelectorAll('.rv-rm').forEach(x=>x.addEventListener('click',()=>{ const routes=loadRoutes(); const rr=routes.find(z=>z.id===id); rr.cams.splice(+x.dataset.i,1); saveRoutes(routes); renderRouteList(); openRouteView(id); }));
-  const add=document.getElementById('rvAdd'); if(add) add.addEventListener('click',()=>{ closeRouteView(); startAddMode(id); });
+  const add=document.getElementById('rvAdd'); if(add) add.addEventListener('click',()=>startAddMode(id));   // switchMode exits route-view first
 }
-function closeRouteView(){ document.getElementById('routeView').classList.remove('show'); clearInterval(window._rvTimer); if(window._rvIO){ window._rvIO.disconnect(); window._rvIO=null; } }
+function teardownRouteView(){ document.getElementById('routeView').classList.remove('show'); clearInterval(rvTimer); rvTimer=null; if(rvIO){ rvIO.disconnect(); rvIO=null; } }
 
 /* ---------- handlers ---------- */
 function bindLayerHandlers(k){
@@ -887,26 +960,26 @@ function bindLayerHandlers(k){
 
 /* ---------- shareable URL ---------- */
 function serializeState(){ const p=new URLSearchParams();
-  if(active.size) p.set('l',[...active].join(',')); const c=map.getCenter();
+  if(store.activeLayers.size) p.set('l',[...store.activeLayers].join(',')); const c=map.getCenter();
   p.set('c',`${c.lng.toFixed(5)},${c.lat.toFixed(5)}`); p.set('z',map.getZoom().toFixed(2));
-  if(enfColorMode!=='verdict') p.set('cm',enfColorMode); if(basemap!=='light') p.set('b',basemap);
-  if(enfFilter.verdicts.size<4) p.set('fv',[...enfFilter.verdicts].join(',')); if(enfFilter.types.size<2) p.set('ft',[...enfFilter.types].join(','));
+  if(store.enfColorMode!=='verdict') p.set('cm',store.enfColorMode); if(store.basemap!=='light') p.set('b',store.basemap);
+  if(store.enfFilter.verdicts.size<4) p.set('fv',[...store.enfFilter.verdicts].join(',')); if(store.enfFilter.types.size<2) p.set('ft',[...store.enfFilter.types].join(','));
   return p.toString(); }
 function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+serializeState()); }
 async function restoreState(){
   const p=new URLSearchParams(location.hash.slice(1)); const has=[...p.keys()].length>0;
   const layers=(p.get('l')||'').split(',').filter(k=>LAYERS[k]);
-  if(p.get('cm')==='type') enfColorMode='type'; if(p.get('b')==='satellite') basemap='satellite';
-  if(p.has('fv')) enfFilter.verdicts=new Set(p.get('fv').split(',').filter(Boolean));
-  if(p.has('ft')) enfFilter.types=new Set(p.get('ft').split(',').filter(Boolean));
-  document.querySelectorAll('.color-btn[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===enfColorMode));
-  document.querySelectorAll('.color-btn[data-base]').forEach(b=>b.classList.toggle('active',b.dataset.base===basemap));
-  document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.classList.toggle('on',enfFilter.verdicts.has(ch.dataset.v)));
-  document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.classList.toggle('on',enfFilter.types.has(ch.dataset.t)));
+  if(p.get('cm')==='type') store.enfColorMode='type'; if(p.get('b')==='satellite') store.basemap='satellite';
+  if(p.has('fv')) store.enfFilter.verdicts=new Set(p.get('fv').split(',').filter(Boolean));
+  if(p.has('ft')) store.enfFilter.types=new Set(p.get('ft').split(',').filter(Boolean));
+  document.querySelectorAll('.color-btn[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===store.enfColorMode));
+  document.querySelectorAll('.color-btn[data-base]').forEach(b=>b.classList.toggle('active',b.dataset.base===store.basemap));
+  document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.classList.toggle('on',store.enfFilter.verdicts.has(ch.dataset.v)));
+  document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.classList.toggle('on',store.enfFilter.types.has(ch.dataset.t)));
   if(layers.includes('chi-enf')) expandIlSub();
   for(const k of layers) await enableLayer(k,false);
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr());
-  syncEnfControls(); setBasemap(basemap);
+  syncEnfControls(); setBasemap(store.basemap);
   if(p.has('c')&&p.has('z')){ const [lng,lat]=p.get('c').split(',').map(Number); map.jumpTo({center:[lng,lat],zoom:Number(p.get('z'))}); }
   else showOverview();
   syncMaster();
@@ -940,15 +1013,15 @@ function renderCamList(){
 
 /* ---------- UI wiring ---------- */
 document.querySelectorAll('.grp-h').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('collapsed')));
-document.querySelectorAll('.color-btn[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{ enfColorMode=btn.dataset.mode;
+document.querySelectorAll('.color-btn[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{ store.enfColorMode=btn.dataset.mode;
   document.querySelectorAll('.color-btn[data-mode]').forEach(b=>b.classList.toggle('active',b===btn));
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr()); renderLegend(); writeUrl(); }));
 document.querySelectorAll('.color-btn[data-base]').forEach(btn=>btn.addEventListener('click',()=>{ document.querySelectorAll('.color-btn[data-base]').forEach(b=>b.classList.toggle('active',b===btn)); setBasemap(btn.dataset.base); writeUrl(); }));
-document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const v=ch.dataset.v; ch.classList.toggle('on'); ch.classList.contains('on')?enfFilter.verdicts.add(v):enfFilter.verdicts.delete(v); applyEnfFilter(); writeUrl(); }));
-document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.classList.contains('on')?enfFilter.types.add(t):enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
+document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const v=ch.dataset.v; ch.classList.toggle('on'); ch.classList.contains('on')?store.enfFilter.verdicts.add(v):store.enfFilter.verdicts.delete(v); applyEnfFilter(); writeUrl(); }));
+document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.classList.contains('on')?store.enfFilter.types.add(t):store.enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
 document.getElementById('share').addEventListener('click',async ()=>{ const b=document.getElementById('share'); try{ await navigator.clipboard.writeText(location.href); }catch(e){} const t=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=t,1300); });
 document.getElementById('masterAll').addEventListener('change',e=>setAllStates(e.target.checked));
-document.getElementById('clearAll').addEventListener('click',()=>{ [...active].forEach(disableLayer); showOverview(); writeUrl(); });
+document.getElementById('clearAll').addEventListener('click',()=>{ [...store.activeLayers].forEach(disableLayer); showOverview(); writeUrl(); });
 document.getElementById('newRoute').addEventListener('click',()=>{ const name=prompt('Name this route (e.g. Work commute)'); if(!name) return; const routes=loadRoutes(); const id=uid(); routes.push({id,name:name.trim(),cams:[]}); saveRoutes(routes); renderRouteList(); startAddMode(id); });
 document.getElementById('addDone').addEventListener('click',stopAddMode);
 document.getElementById('rvClose').addEventListener('click',closeRouteView);
@@ -959,7 +1032,7 @@ sEl.addEventListener('focus',e=>{ if(e.target.value.trim().length>=2) runSearch(
 sEl.addEventListener('keydown',e=>{ const items=[...document.querySelectorAll('.sr-item')]; if(!items.length) return;
   if(e.key==='ArrowDown'){ e.preventDefault(); kbdIdx=Math.min(kbdIdx+1,items.length-1); }
   else if(e.key==='ArrowUp'){ e.preventDefault(); kbdIdx=Math.max(kbdIdx-1,0); }
-  else if(e.key==='Enter'){ e.preventDefault(); const h=window._hits||[]; if(h[kbdIdx<0?0:kbdIdx]) pickSearch(h[kbdIdx<0?0:kbdIdx]); return; }
+  else if(e.key==='Enter'){ e.preventDefault(); const h=searchHits||[]; if(h[kbdIdx<0?0:kbdIdx]) pickSearch(h[kbdIdx<0?0:kbdIdx]); return; }
   else if(e.key==='Escape'){ document.getElementById('search-results').classList.remove('show'); return; }
   items.forEach((it,i)=>it.classList.toggle('kbd',i===kbdIdx)); if(items[kbdIdx]) items[kbdIdx].scrollIntoView({block:'nearest'}); });
 document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) document.getElementById('search-results').classList.remove('show'); });
