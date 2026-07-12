@@ -439,5 +439,16 @@
   ],
   "zoom": 6.3,
   "video": false
+ },
+ "KY": {
+  "name": "Kentucky",
+  "file": "states/KY.json",
+  "count": 241,
+  "center": [
+   -85.7,
+   37.6
+  ],
+  "zoom": 6.5,
+  "video": false
  }
 }
