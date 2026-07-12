@@ -362,5 +362,16 @@
   ],
   "zoom": 6,
   "video": false
+ },
+ "ND": {
+  "name": "North Dakota",
+  "file": "states/ND.json",
+  "count": 186,
+  "center": [
+   -100.5,
+   47.4
+  ],
+  "zoom": 6.3,
+  "video": false
  }
 }
