@@ -428,5 +428,16 @@
   ],
   "zoom": 6.3,
   "video": true
+ },
+ "AL": {
+  "name": "Alabama",
+  "file": "states/AL.json",
+  "count": 629,
+  "center": [
+   -86.8,
+   32.8
+  ],
+  "zoom": 6.3,
+  "video": false
  }
 }
