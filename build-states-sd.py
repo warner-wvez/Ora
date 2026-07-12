@@ -15,11 +15,11 @@ Snapshot-only. Two feeds, both camera sources, joined into one layer:
 
 Images are https://sd.cdn.iteris-atis.com/camera_images/<site>/<lens>/latest.jpg,
 a CDN that answers a ranged GET, so no proxy and no CORS special-casing. Each lens
-carries its own `updateTime` (unix seconds); the freshest lens's age drives the
-site's refresh wording, capped into the popup's 15s..5min poll range. No HLS is
-published anywhere, so South Dakota is honestly snapshot-only.
+carries its own `updateTime`, but a lone "how old is this image now" sample cannot
+honestly become a refresh cadence (see site_feature), so we leave the wording
+generic. No HLS is published anywhere, so South Dakota is honestly snapshot-only.
 """
-import os, json, time, urllib.request
+import os, json, urllib.request
 
 CAMERAS = 'https://sd.cdn.iteris-atis.com/geojson/icons/metadata/icons.cameras.geojson'
 RWIS = 'https://sd.cdn.iteris-atis.com/geojson/icons/metadata/icons.rwis.geojson'
@@ -61,17 +61,14 @@ def rwis_text(p):
 
 
 def views_for(cams):
-    dirs, newest = [], 0
+    dirs = []
     for c in cams or []:
         img = (c.get('image') or '').strip()
         if not img:
             continue
         label = (c.get('name') or '').replace('Camera Looking', '').strip() or (c.get('name') or '')
         dirs.append({'snapshot': img, 'video': None, 'label': label})
-        ut = c.get('updateTime')
-        if isinstance(ut, (int, float)):
-            newest = max(newest, ut)
-    return dirs, newest
+    return dirs
 
 
 def site_feature(feat, is_rwis):
@@ -83,19 +80,18 @@ def site_feature(feat, is_rwis):
     lon, lat = coords[0], coords[1]
     if not (BBOX[0] <= lon <= BBOX[2] and BBOX[1] <= lat <= BBOX[3]):
         return None
-    dirs, newest = views_for(p.get('cameras'))
+    dirs = views_for(p.get('cameras'))
     if not dirs:
         return None  # an RWIS station with readings but no camera is not a camera pin
     name = (p.get('name') or p.get('description') or 'Camera').strip()
     props = {'name': name + (' (RWIS)' if is_rwis else ''), 'kind': 'live',
              'directions': dirs, 'roadway': (p.get('route') or p.get('description') or '').strip(),
              'county': ''}
-    # freshest lens age -> per-view refresh hint the popup understands
-    if newest:
-        age = int(time.time()) - int(newest)
-        if 0 < age < 6 * 3600:
-            for dv in dirs:
-                dv['refresh_sec'] = max(60, age)
+    # NOTE: the feed carries a per-lens updateTime, but a single "how old is this image
+    # now" sample is a biased-low estimate of the real interval (age is ~uniform on
+    # [0, T]), so we deliberately do NOT synthesize a refresh cadence from it -- that
+    # would over-claim. Only WA's measured cadence earns a refresh number. SD falls
+    # back to the generic snapshot wording, which is honest.
     if is_rwis:
         wx = rwis_text(p)
         if wx:
