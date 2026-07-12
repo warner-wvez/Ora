@@ -505,5 +505,16 @@
   ],
   "zoom": 7,
   "video": true
+ },
+ "MD": {
+  "name": "Maryland",
+  "file": "states/MD.json",
+  "count": 553,
+  "center": [
+   -77.2,
+   39.2
+  ],
+  "zoom": 7.2,
+  "video": true
  }
 }
