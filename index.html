@@ -208,9 +208,10 @@
   /* ---------- small viewports: the panel collapses to its header + search and expands
      on demand, so the map is not permanently covered on a phone ---------- */
   @media (max-width: 640px) {
-    #panel { top: 10px; left: 10px; right: 10px; width: auto; max-height: 86px; overflow: hidden; transition: max-height .22s ease; }
+    /* collapsed still carries the one-line orientation ("check a state to see its
+       cameras") — a phone user's only explanation of what this app is */
+    #panel { top: 10px; left: 10px; right: 10px; width: auto; max-height: 118px; overflow: hidden; transition: max-height .22s ease; }
     #panel.expanded { max-height: calc(100vh - 140px); max-height: calc(100dvh - 140px); overflow-y: auto; }
-    #panel .tag { display: none; }
     #panelToggle { display: inline-block; }
     #addBanner { top: 104px; max-width: calc(100vw - 20px); }
   }
@@ -402,7 +403,13 @@ const US_VIEW={ center:[-96,38.5], zoom:3.7 };
 const OVERVIEW_BOUNDS=[[-124.5,24.5],[-67,48.5]]; // frames the lower-48 states we cover (Alaska reachable from the list)
 const MAPTILER_KEY='dtmplMa5VK2EtReQ2Ug8'; // origin-locked to warner-wvez.github.io + localhost in the MapTiler dashboard
 const map=new maplibregl.Map({ container:'map', style:`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`, center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0 });
-function showOverview(){ map.fitBounds(OVERVIEW_BOUNDS,{padding:{top:40,right:40,bottom:40,left:280},duration:700}); }
+function showOverview(){
+  // padding mirrors where the chrome actually is: desktop's panel sits left, the mobile
+  // panel sits top. 280px of left padding on a 390px phone broke fitBounds entirely
+  // (it centered the Pacific at z0.7).
+  const pad = mqMobile.matches ? {top:120,right:28,bottom:40,left:28} : {top:40,right:40,bottom:40,left:280};
+  map.fitBounds(OVERVIEW_BOUNDS,{padding:pad,duration:700});
+}
 map.addControl(new maplibregl.NavigationControl(),'top-right');
 const srcId=(k)=>`src-${k}`;
 
@@ -905,15 +912,43 @@ function addCamsLayers(){
 }
 // a tapped pin answers instantly with a ring, before any data or popup work happens
 function pressFeedback(coords, r){ setHighlight('hover', coords, r); setTimeout(()=>clearHighlight('hover'), 240); }
+// what a click on a camera feature means, shared by the layer handler and the
+// stale-render fallback below
+function camsHitAction(f){
+  if(f.properties.cluster){ if(!camsIndex) return;
+    let z; try{ z=camsIndex.getClusterExpansionZoom(f.properties.cluster_id); }catch(err){ return; }
+    map.easeTo({center:f.geometry.coordinates, zoom:z, duration:500});
+  } else { const p=f.properties;
+    const orig=dataCache[p.k]&&dataCache[p.k].features[p.i]; if(orig) selectFeature(p.k,orig); }
+}
+// hit-test the supercluster index directly: everything within a finger radius of the point
+function camsAtPoint(point){
+  if(!camsIndex) return null;
+  const p1=map.unproject([point.x-22, point.y+22]), p2=map.unproject([point.x+22, point.y-22]);
+  let cand=[]; try{ cand=camsIndex.getClusters([p1.lng, p1.lat, p2.lng, p2.lat], Math.max(0,camsZ)); }catch(e){ return null; }
+  let best=null, bd=Infinity;
+  for(const f of cand){ const px=map.project(f.geometry.coordinates);
+    const d=Math.hypot(px.x-point.x, px.y-point.y);
+    if(d<=22+(f.properties.cluster?14:0) && d<bd){ bd=d; best=f; } }
+  return best;
+}
 function bindCamsHandlers(){
   map.on('zoom', camsRender);
   map.on('moveend', ()=>{ if(camsIndex && !camsAnim) camsSet(camsGet(camsZ)); });
-  map.on('click','cams__hit',(e)=>{ const f=e.features[0]; if(!f) return;
-    if(f.properties.cluster){ if(!camsIndex) return;
-      let z; try{ z=camsIndex.getClusterExpansionZoom(f.properties.cluster_id); }catch(err){ return; }
-      map.easeTo({center:f.geometry.coordinates, zoom:z, duration:500});
-    } else { const p=f.properties;
-      const orig=dataCache[p.k]&&dataCache[p.k].features[p.i]; if(orig) selectFeature(p.k,orig); } });
+  map.on('click','cams__hit',(e)=>{ if(e.features[0]) camsHitAction(e.features[0]); });
+  // stale-render guard: rapid layer swaps during the morph's setData churn can leave
+  // MapLibre's rendered tiles behind the source, and then a cluster click hit-tests
+  // against nothing. If the tile hit-test misses but OUR index (the source of truth we
+  // render from) has a pin or cluster under the finger, trust the index and resync.
+  map.on('click',(e)=>{
+    if(!camsIndex) return;
+    const layers=['cams__hit','chi-enf__hit','coverage-hit','coverage-label'].filter(id=>map.getLayer(id));
+    if(map.queryRenderedFeatures(e.point,{layers}).length) return;   // normal per-layer handlers took it
+    const f=camsAtPoint(e.point);
+    if(!f) return;
+    camsSet(camsGet(camsZ));                                         // we just proved the renderer stale
+    camsHitAction(f);
+  });
   ['mousedown','touchstart'].forEach(ev=>map.on(ev,'cams__hit',(e)=>{ const f=e.features[0];
     if(f && !f.properties.cluster) pressFeedback(f.geometry.coordinates.slice(), 11); }));
   map.on('mousemove','cams__hit',(e)=>{ const f=e.features[0]; map.getCanvas().style.cursor='pointer';
@@ -1268,6 +1303,7 @@ function renderRouteView(ctx){
         const c=cams[tileIdx(tile)]; if(c) jumpToRouteCam(c);
       });
       tile.querySelector('.rv-rm').addEventListener('click',()=>{
+        if(!tile.isConnected) return;   // a stale handler must not eat a different camera
         const i=tileIdx(tile);
         const routes=loadRoutes(); const rr=routes.find(z=>z.id===id); if(!rr) return;
         rr.cams.splice(i,1); saveRoutes(routes); renderRouteList();
@@ -1324,8 +1360,10 @@ function serializeState(){ const p=new URLSearchParams();
   return p.toString(); }
 function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+serializeState()); }
 async function restoreState(){
-  const p=new URLSearchParams(location.hash.slice(1)); const has=[...p.keys()].length>0;
+  const p=new URLSearchParams(location.hash.slice(1));
   const layers=(p.get('l')||'').split(',').filter(k=>LAYERS[k]);
+  // reconcile, don't just add: a pasted link means exactly its layers (no-op at boot)
+  [...store.activeLayers].filter(k=>!layers.includes(k)).forEach(disableLayer);
   if(p.get('cm')==='type') store.enfColorMode='type'; if(p.get('b')==='satellite') store.basemap='satellite';
   if(p.has('fv')) store.enfFilter.verdicts=new Set(p.get('fv').split(',').filter(Boolean));
   if(p.has('ft')) store.enfFilter.types=new Set(p.get('ft').split(',').filter(Boolean));
@@ -1419,6 +1457,17 @@ sEl.addEventListener('keydown',e=>{ const items=[...document.querySelectorAll('.
   else if(e.key==='Escape'){ document.getElementById('search-results').classList.remove('show'); return; }
   items.forEach((it,i)=>it.classList.toggle('kbd',i===kbdIdx)); if(items[kbdIdx]) items[kbdIdx].scrollIntoView({block:'nearest'}); });
 document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) document.getElementById('search-results').classList.remove('show'); });
+// Escape peels the UI back one layer at a time: results, then the open camera, then
+// the route view, then add-mode. The enlarge overlay and text inputs own their own Esc.
+document.addEventListener('keydown',(e)=>{
+  if(e.key!=='Escape' || (e.target.matches && e.target.matches('input'))) return;
+  if(store.mode==='media-enlarged') return;
+  const sr=document.getElementById('search-results');
+  if(sr.classList.contains('show')){ sr.classList.remove('show'); return; }
+  if(store.selected){ clearSelection(); return; }
+  if(store.mode==='route-view'){ closeRouteView(); return; }
+  if(store.mode==='add-to-route') stopAddMode();
+});
 
 /* ---------- boot ---------- */
 map.on('load', async ()=>{
@@ -1458,6 +1507,11 @@ map.on('load', async ()=>{
 
   restoring=true; await restoreState(); restoring=false; writeUrl();
   map.on('moveend', writeUrl);
+  // a pasted deep link in the same tab (hashchange) restores like a fresh load; our own
+  // writes use replaceState, which never fires this
+  window.addEventListener('hashchange', async ()=>{
+    restoring=true; await restoreState(); restoring=false; writeUrl();
+  });
 });
 </script>
 </body>
