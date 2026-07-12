@@ -1,25 +1,23 @@
 {
-"checked_at": "2026-07-11T20:04:31Z",
+"checked_at": "2026-07-12T04:38:33Z",
 "cameras": 1384,
 "counts": {
-"placeholder": 35
+"placeholder": 31
 },
 "status": {
 "https://www.511pa.com/map/Cctv/4707": "placeholder",
 "https://www.511pa.com/map/Cctv/4727": "placeholder",
 "https://www.511pa.com/map/Cctv/4732": "placeholder",
-"https://www.511pa.com/map/Cctv/4847": "placeholder",
 "https://www.511pa.com/map/Cctv/4864": "placeholder",
 "https://www.511pa.com/map/Cctv/4874": "placeholder",
 "https://www.511pa.com/map/Cctv/4876": "placeholder",
-"https://www.511pa.com/map/Cctv/4974": "placeholder",
 "https://www.511pa.com/map/Cctv/4988": "placeholder",
-"https://www.511pa.com/map/Cctv/5003": "placeholder",
 "https://www.511pa.com/map/Cctv/5112": "placeholder",
 "https://www.511pa.com/map/Cctv/5113": "placeholder",
 "https://www.511pa.com/map/Cctv/5114": "placeholder",
 "https://www.511pa.com/map/Cctv/5115": "placeholder",
 "https://www.511pa.com/map/Cctv/5119": "placeholder",
+"https://www.511pa.com/map/Cctv/5226": "placeholder",
 "https://www.511pa.com/map/Cctv/5245": "placeholder",
 "https://www.511pa.com/map/Cctv/5272": "placeholder",
 "https://www.511pa.com/map/Cctv/5322": "placeholder",
@@ -30,15 +28,13 @@
 "https://www.511pa.com/map/Cctv/5630": "placeholder",
 "https://www.511pa.com/map/Cctv/5675": "placeholder",
 "https://www.511pa.com/map/Cctv/5731": "placeholder",
-"https://www.511pa.com/map/Cctv/5767": "placeholder",
+"https://www.511pa.com/map/Cctv/5746": "placeholder",
 "https://www.511pa.com/map/Cctv/5780": "placeholder",
 "https://www.511pa.com/map/Cctv/5816": "placeholder",
 "https://www.511pa.com/map/Cctv/5832": "placeholder",
 "https://www.511pa.com/map/Cctv/6000": "placeholder",
-"https://www.511pa.com/map/Cctv/6008": "placeholder",
 "https://www.511pa.com/map/Cctv/6024": "placeholder",
-"https://www.511pa.com/map/Cctv/6057": "placeholder",
 "https://www.511pa.com/map/Cctv/6067": "placeholder",
-"https://www.511pa.com/map/Cctv/6386": "placeholder"
+"https://www.511pa.com/map/Cctv/6331": "placeholder"
 }
 }
