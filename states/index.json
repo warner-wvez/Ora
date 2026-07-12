@@ -384,5 +384,16 @@
   ],
   "zoom": 6.3,
   "video": false
+ },
+ "AR": {
+  "name": "Arkansas",
+  "file": "states/AR.json",
+  "count": 525,
+  "center": [
+   -92.4,
+   34.8
+  ],
+  "zoom": 6.6,
+  "video": false
  }
 }
