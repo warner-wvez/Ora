@@ -373,5 +373,16 @@
   ],
   "zoom": 6.3,
   "video": false
+ },
+ "SD": {
+  "name": "South Dakota",
+  "file": "states/SD.json",
+  "count": 175,
+  "center": [
+   -100.3,
+   44.4
+  ],
+  "zoom": 6.3,
+  "video": false
  }
 }
