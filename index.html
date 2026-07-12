@@ -179,6 +179,9 @@
   .popup-add { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
   .rp-menu { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; align-items: center; }
   .rp-menu .rp-hd { width: 100%; font-size: 10px; font-weight: 600; color: #8e8e93; }
+  .rp-input, #nrName { flex: 1; min-width: 0; font-size: 12px; padding: 6px 8px; border: 1px solid #dcdce1; border-radius: 6px; outline: none; }
+  .rp-input:focus, #nrName:focus { border-color: #007aff; }
+  .rx.arm { color: #fff; background: #ff3b30; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
   /* ---------- bottom sheet (mobile selection container) ----------
      Same content as the desktop popup, presented the way every phone map app does:
@@ -675,8 +678,21 @@ function wireCameraUI(el, props, cfg, token){
   }));
   const addBtn=el.querySelector('[data-add]');
   const selK=store.selected?store.selected.k:null, selCoords=store.selected?store.selected.coords.slice():null;
+  // in add-mode the button reads as this camera's state in that route, and one tap
+  // toggles it — the undo lives exactly where the mistake happened
+  const updateAddBtn=()=>{
+    if(!addBtn) return;
+    if(!store.addingTo){ addBtn.textContent='+ Route'; return; }
+    const r=loadRoutes().find(x=>x.id===store.addingTo); if(!r) return;
+    addBtn.textContent = routeHas(store.addingTo, selCoords) ? `In “${r.name}” · remove` : `+ Add to “${r.name}”`;
+  };
+  updateAddBtn();
   if(addBtn) addBtn.addEventListener('click',()=>{
-    if(store.addingTo){ addCameraToRoute(selK, props, selCoords); return; }   // banner add-mode, as before
+    if(store.addingTo){
+      if(routeHas(store.addingTo, selCoords)) removeCameraFromRoute(store.addingTo, selCoords);
+      else addCameraToRoute(selK, props, selCoords);
+      updateAddBtn(); return;
+    }
     toggleRoutePicker(el, selK, props, selCoords);
   });
   // click the picture (or its expand button) to open the same view full-screen
@@ -764,11 +780,14 @@ function hideTip(){ if(hoverTip) hoverTip.remove(); }
 function raiseHighlights(){ if(map.getLayer('hl-hover')) map.moveLayer('hl-hover'); }
 
 /* ---------- selection ---------- */
-function selectFeature(k, feature){
+function selectFeature(k, feature, opts){
   const cfg=LAYERS[k], coords=feature.geometry.coordinates.slice();
   const props=(typeof feature.properties.directions==='string')
     ? {...feature.properties, directions:JSON.parse(feature.properties.directions)} : feature.properties;
-  if(store.addingTo){ addCameraToRoute(k, props, coords); return; }  // add-to-route mode
+  // add-to-route: a map tap adds the camera AND opens it, so you see what you just
+  // added and can undo right there — no more collecting unlabeled dots from memory.
+  // (Search picks navigate without auto-adding; the popup's Add button is one tap.)
+  if(store.addingTo && cfg.kind==='live' && !(opts&&opts.noAutoAdd)) addCameraToRoute(k, props, coords);
   // a map click only opens the camera's popup — it never becomes a sticky selection or a
   // shared-link filter. Only the side panel governs what the map shows. store.selected is a
   // transient handle so the popup's "+ Route" button knows which camera it is on.
@@ -1003,7 +1022,10 @@ async function enableLayer(k,fly=true){
 }
 function disableLayer(k){ store.activeLayers.delete(k);
   if(LAYERS[k].kind==='live') scheduleCamsRebuild(); else setLayerVis(k,'none');
-  clearSelection(); syncEnfControls(); rebuildSearchIndex(); updateCoverage();
+  // only close the open camera if it belonged to THIS layer; unrelated toggles must
+  // not take your popup away
+  if(store.selected && store.selected.k===k) clearSelection();
+  syncEnfControls(); rebuildSearchIndex(); updateCoverage();
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=false; syncMaster(); }
 
 /* the master "All states" checkbox is a true tri-state, the way Gmail/Sheets do it:
@@ -1024,7 +1046,9 @@ async function setAllStates(on){
   const keys=liveKeys();
   if(on) await Promise.allSettled(keys.map(k=>store.activeLayers.has(k)?null:enableLayer(k,false)));
   else keys.forEach(k=>{ if(store.activeLayers.has(k)) disableLayer(k); });
-  m.disabled=false; showOverview(); writeUrl(); syncMaster();
+  // asking for the whole country is the one case where the overview jump IS the request;
+  // turning things OFF moves nothing — the map stays exactly where you left it
+  m.disabled=false; if(on) showOverview(); writeUrl(); syncMaster();
 }
 
 /* coverage overview markers (one per covered state), sized by and labelled with the
@@ -1038,7 +1062,7 @@ function buildCoverage(){
   if(map.getSource('coverage')) map.getSource('coverage').setData({type:'FeatureCollection',features:feats});
 }
 function updateCoverage(){ const show=store.activeLayers.size===0;
-  ['coverage-dot','coverage-label','coverage-count'].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',show?'visible':'none'); }); }
+  ['coverage-dot','coverage-label','coverage-count','coverage-hit'].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',show?'visible':'none'); }); }
 
 /* ---------- search ---------- */
 function rebuildSearchIndex(){ searchIndex=[]; store.activeLayers.forEach(k=>{ const d=dataCache[k]; if(!d) return;
@@ -1047,7 +1071,23 @@ function runSearch(q){
   const box=document.getElementById('search-results'); q=q.trim().toLowerCase(); kbdIdx=-1;
   if(q.length<2){ box.classList.remove('show'); box.innerHTML=''; return; }
   const hits=searchIndex.filter(e=>(e.name&&e.name.toLowerCase().includes(q))||(e.road&&e.road.toLowerCase().includes(q))).slice(0,8);
-  if(!hits.length){ box.innerHTML=`<div class="sr-empty">No matches in active layers</div>`; box.classList.add('show'); searchHits=[]; return; }
+  if(!hits.length){
+    searchHits=[];
+    // the searcher knows the camera, not the layer model: when nothing matches in what's
+    // on, offer the states whose names match — one tap turns the state on and re-searches
+    const stateHits=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live' && !store.activeLayers.has(k) && c.name.toLowerCase().includes(q)).slice(0,4);
+    if(stateHits.length){
+      box.innerHTML=`<div class="sr-empty">No camera matches in the states that are on.</div>`+stateHits.map(([k,c])=>
+        `<div class="sr-item sr-state" data-k="${k}"><span class="sr-dot" style="background:#007aff"></span>Turn on ${c.name}<span class="sr-sub">${Number(c.count||0).toLocaleString()} cameras</span></div>`).join('');
+      box.classList.add('show');
+      box.querySelectorAll('.sr-state').forEach(it=>it.addEventListener('click',async ()=>{
+        await enableLayer(it.dataset.k); writeUrl();       // same request as its checkbox, fly included
+        runSearch(document.getElementById('search').value);
+      }));
+      return;
+    }
+    box.innerHTML=`<div class="sr-empty">No matches in the states that are on. Try a state name to turn one on.</div>`; box.classList.add('show'); return;
+  }
   searchHits=hits;
   const dot=(e)=> e.k==='chi-enf' ? (VERDICT[e.feature.properties.quad]||VERDICT.quiet).color : '#007aff';
   const sub=(e)=> LAYERS[e.k]?.name || e.k;
@@ -1056,7 +1096,8 @@ function runSearch(q){
   box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>pickSearch(hits[+it.dataset.i])));
 }
 function pickSearch(e){ document.getElementById('search-results').classList.remove('show'); document.getElementById('search').value=e.name;
-  map.flyTo({center:e.coords,zoom:15,duration:800}); selectFeature(e.k,e.feature); }
+  // a search pick navigates and shows — it never silently adds to a route mid-add-mode
+  map.flyTo({center:e.coords,zoom:15,duration:800}); selectFeature(e.k,e.feature,{noAutoAdd:true}); }
 
 /* ---------- routes ---------- */
 function renderRouteList(){
@@ -1066,16 +1107,38 @@ function renderRouteList(){
   el.querySelectorAll('.route-item').forEach(it=>{
     const id=it.dataset.id;
     it.querySelector('.rn').addEventListener('click',()=>openRouteView(id));
-    it.querySelector('.rx').addEventListener('click',()=>{ if(confirm('Delete this route?')){ saveRoutes(loadRoutes().filter(r=>r.id!==id)); renderRouteList(); } });
+    // two taps to delete, armed state shows in place — no blocking browser dialog
+    it.querySelector('.rx').addEventListener('click',(e)=>{
+      const x=e.currentTarget;
+      if(x.dataset.arm){ saveRoutes(loadRoutes().filter(r=>r.id!==id)); renderRouteList(); if(store.openRoute===id) closeRouteView(); return; }
+      x.dataset.arm='1'; x.textContent='Delete?'; x.classList.add('arm');
+      setTimeout(()=>{ if(x.isConnected){ delete x.dataset.arm; x.textContent='×'; x.classList.remove('arm'); } },2600);
+    });
   });
 }
-function startAddMode(id){ switchMode('add-to-route',{routeId:id}); }
-function stopAddMode(){ if(store.mode==='add-to-route') switchMode('browse'); }
+function startAddMode(id, returnTo){ switchMode('add-to-route',{routeId:id, returnTo}); }
+// Done lands you on what you just built: back to the route view when adding started
+// there (or from route creation), back to browse otherwise. No re-finding the route.
+function stopAddMode(){
+  if(store.mode!=='add-to-route') return;
+  const rid=modeCtx&&modeCtx.routeId, back=modeCtx&&modeCtx.returnTo==='route-view'&&rid;
+  clearSelection();
+  if(back) switchMode('route-view',{routeId:rid}); else switchMode('browse');
+}
+function sameCoords(a,b){ return Math.abs(a[0]-b[0])<1e-6 && Math.abs(a[1]-b[1])<1e-6; }
+function routeHas(routeId, coords){ const r=loadRoutes().find(x=>x.id===routeId); return !!(r&&coords&&r.cams.some(c=>sameCoords(c.coords,coords))); }
+function removeCameraFromRoute(routeId, coords){
+  const routes=loadRoutes(), r=routes.find(x=>x.id===routeId); if(!r||!coords) return false;
+  const i=r.cams.findIndex(c=>sameCoords(c.coords,coords)); if(i<0) return false;
+  r.cams.splice(i,1); saveRoutes(routes); renderRouteList();
+  if(routeId===store.addingTo) renderAddBanner();
+  return true;
+}
 function addCameraToRoute(k, props, coords, routeId){
   if(!coords) return false;
   const id=routeId||store.addingTo;
   const routes=loadRoutes(), r=routes.find(x=>x.id===id); if(!r) return false;
-  if(r.cams.some(c=>Math.abs(c.coords[0]-coords[0])<1e-6 && Math.abs(c.coords[1]-coords[1])<1e-6)) return 'dup';
+  if(r.cams.some(c=>sameCoords(c.coords,coords))) return 'dup';
   const d=(props.directions&&props.directions[0])||{};
   // camId is what NYC route tiles rebuild their image URL from, so it must be saved at add time
   r.cams.push({k, name:props.name, coords, snapshot:d.snapshot||null, video:d.video||null, camId:d.camId||null});
@@ -1094,19 +1157,29 @@ function toggleRoutePicker(el, k, props, coords){
     + routes.map(r=>`<button class="mini-btn rp-item" data-rid="${r.id}">${r.name}</button>`).join('')
     + `<button class="mini-btn grey rp-item" data-rid="__new">+ New route</button>`;
   el.querySelector('.popup-body').appendChild(menu);
-  menu.addEventListener('click',(e)=>{
-    const b=e.target.closest('.rp-item'); if(!b) return;
-    let rid=b.dataset.rid;
-    if(rid==='__new'){
-      const name=prompt('Name this route (e.g. Work commute)'); if(!name) return;
-      const rs=loadRoutes(), nid=uid(); rs.push({id:nid,name:name.trim(),cams:[]}); saveRoutes(rs); rid=nid;
-    }
+  const finish=(rid)=>{
     const res=addCameraToRoute(k, props, coords, rid);
     const r=loadRoutes().find(x=>x.id===rid);
     menu.remove();
     const btn=el.querySelector('[data-add]');
     if(btn && r){ btn.textContent = res==='dup' ? `Already in ${r.name}` : `Saved to ${r.name} ✓`;
-      setTimeout(()=>{ btn.textContent='+ Route'; },1800); }
+      setTimeout(()=>{ if(btn.isConnected) btn.textContent='+ Route'; },1800); }
+  };
+  menu.addEventListener('click',(e)=>{
+    const b=e.target.closest('.rp-item'); if(!b) return;
+    const rid=b.dataset.rid;
+    if(rid!=='__new'){ finish(rid); return; }
+    // naming inline, right in the picker — no blocking browser dialog
+    menu.innerHTML=`<div class="rp-hd">Name the new route</div>
+      <input class="rp-input" type="text" placeholder="e.g. Work commute" maxlength="40" autocomplete="off">
+      <button class="mini-btn rp-go">Create &amp; save</button>`;
+    const inp=menu.querySelector('.rp-input');
+    const go=()=>{ const name=inp.value.trim(); if(!name){ inp.focus(); return; }
+      const rs=loadRoutes(), nid=uid(); rs.push({id:nid,name,cams:[]}); saveRoutes(rs); renderRouteList();
+      finish(nid); };
+    menu.querySelector('.rp-go').addEventListener('click',go);
+    inp.addEventListener('keydown',ev=>{ if(ev.key==='Enter'){ ev.preventDefault(); go(); } if(ev.key==='Escape') menu.remove(); });
+    inp.focus();
   });
 }
 let rvIO=null, rvTimer=null, rvRenderedFor=null;   // owned by route-view mode: installed on enter, removed on exit
@@ -1305,11 +1378,31 @@ document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener(
 document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.classList.contains('on')?store.enfFilter.types.add(t):store.enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
 document.getElementById('share').addEventListener('click',async ()=>{ const b=document.getElementById('share'); try{ await navigator.clipboard.writeText(location.href); }catch(e){} const t=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=t,1300); });
 document.getElementById('masterAll').addEventListener('change',e=>setAllStates(e.target.checked));
-document.getElementById('clearAll').addEventListener('click',()=>{ [...store.activeLayers].forEach(disableLayer); showOverview(); writeUrl(); });
-document.getElementById('newRoute').addEventListener('click',()=>{ const name=prompt('Name this route (e.g. Work commute)'); if(!name) return; const routes=loadRoutes(); const id=uid(); routes.push({id,name:name.trim(),cams:[]}); saveRoutes(routes); renderRouteList(); startAddMode(id); });
+// clearing layers moves nothing: the coverage markers reappear wherever you are
+document.getElementById('clearAll').addEventListener('click',()=>{ [...store.activeLayers].forEach(disableLayer); writeUrl(); });
+// naming happens inline in the panel, not in a blocking browser dialog; creating a
+// route drops you straight into add-mode and Done lands on the finished route view
+document.getElementById('newRoute').addEventListener('click',()=>{
+  const nrBtn=document.getElementById('newRoute');
+  if(document.getElementById('nrRow')) return;
+  nrBtn.style.display='none';
+  const row=document.createElement('div'); row.className='btn-row'; row.id='nrRow';
+  row.innerHTML=`<input id="nrName" type="text" placeholder="e.g. Work commute" maxlength="40" autocomplete="off">
+    <button class="mini-btn" id="nrGo">Create</button><button class="mini-btn grey" id="nrCancel">&#10005;</button>`;
+  nrBtn.parentElement.insertBefore(row, nrBtn);
+  const inp=row.querySelector('#nrName');
+  const cancel=()=>{ row.remove(); nrBtn.style.display=''; };
+  const go=()=>{ const name=inp.value.trim(); if(!name){ inp.focus(); return; }
+    const routes=loadRoutes(), id=uid(); routes.push({id, name, cams:[]}); saveRoutes(routes); renderRouteList();
+    cancel(); startAddMode(id,'route-view'); };
+  row.querySelector('#nrGo').addEventListener('click',go);
+  row.querySelector('#nrCancel').addEventListener('click',cancel);
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); go(); } if(e.key==='Escape') cancel(); });
+  inp.focus();
+});
 document.getElementById('addDone').addEventListener('click',stopAddMode);
 document.getElementById('rvClose').addEventListener('click',closeRouteView);
-document.getElementById('rvAdd').addEventListener('click',()=>{ if(store.openRoute) startAddMode(store.openRoute); });
+document.getElementById('rvAdd').addEventListener('click',()=>{ if(store.openRoute) startAddMode(store.openRoute,'route-view'); });   // Done returns here
 wireSheet();
 document.getElementById('panelToggle').addEventListener('click',()=>document.getElementById('panel').classList.toggle('expanded'));
 // touching the map puts the drawer away, the way every phone map app does
@@ -1341,11 +1434,20 @@ map.on('load', async ()=>{
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});
 
   // coverage overview markers: one label per covered state, shown when nothing is active.
-  // Informational only — a state is turned on from its side-panel checkbox, never from a map click.
+  // Tapping one opens that state — the finger is already on it, no side-panel detour.
   map.addSource('coverage',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'coverage-dot',type:'circle',source:'coverage',paint:{'circle-radius':['interpolate',['linear'],['get','n'],50,9,500,12,1500,16,3500,21],'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':2.5}});
   map.addLayer({id:'coverage-count',type:'symbol',source:'coverage',layout:{'text-field':['get','nLabel'],'text-size':10,'text-font':['Noto Sans Bold'],'text-allow-overlap':true},paint:{'text-color':'#fff'}});
   map.addLayer({id:'coverage-label',type:'symbol',source:'coverage',layout:{'text-field':['get','label'],'text-size':11,'text-font':['Noto Sans Bold'],'text-offset':[0,1.9],'text-anchor':'top','text-allow-overlap':false},paint:{'text-color':'#1c1c1e','text-halo-color':'#fff','text-halo-width':1.6}});
+  // 44px+ finger target over each state bubble; tapping is the same request as its checkbox
+  map.addLayer({id:'coverage-hit',type:'circle',source:'coverage',paint:{'circle-color':'rgba(0,0,0,0)','circle-radius':26}});
+  const coverTap=async (e)=>{ const f=e.features[0]; if(!f) return; await enableLayer(f.properties.k); writeUrl(); };
+  ['coverage-hit','coverage-label'].forEach(id=>{
+    map.on('click',id,coverTap);
+    map.on('mouseenter',id,()=>map.getCanvas().style.cursor='pointer');
+    map.on('mouseleave',id,()=>map.getCanvas().style.cursor='');
+    ['mousedown','touchstart'].forEach(ev=>map.on(ev,id,(e)=>{ const f=e.features[0]; if(f) pressFeedback(f.geometry.coordinates.slice(),26); }));
+  });
 
   // inject states from index
   try{
