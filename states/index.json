@@ -351,5 +351,16 @@
   ],
   "zoom": 5.8,
   "video": false
+ },
+ "MI": {
+  "name": "Michigan",
+  "file": "states/MI.json",
+  "count": 806,
+  "center": [
+   -85.4,
+   44.3
+  ],
+  "zoom": 6,
+  "video": false
  }
 }
