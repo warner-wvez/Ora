@@ -406,5 +406,16 @@
   ],
   "zoom": 6.2,
   "video": false
+ },
+ "WV": {
+  "name": "West Virginia",
+  "file": "states/WV.json",
+  "count": 127,
+  "center": [
+   -80.4,
+   38.8
+  ],
+  "zoom": 7,
+  "video": true
  }
 }
