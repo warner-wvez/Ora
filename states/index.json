@@ -395,5 +395,16 @@
   ],
   "zoom": 6.6,
   "video": false
+ },
+ "WY": {
+  "name": "Wyoming",
+  "file": "states/WY.json",
+  "count": 228,
+  "center": [
+   -107.5,
+   43.0
+  ],
+  "zoom": 6.2,
+  "video": false
  }
 }
