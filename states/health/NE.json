@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-07-13T15:42:10Z",
+"checked_at": "2026-07-13T20:20:00Z",
 "cameras": 1053,
 "counts": {
-"offline": 56
+"offline": 51
 },
 "status": {
 "https://dot511.nebraska.gov/images/vid-002034385-00.jpg": "offline",
@@ -35,11 +35,6 @@
 "https://dot511.nebraska.gov/images/vid-006026125-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006026125-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006026125-05.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030164-01.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030164-02.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030164-04.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030164-05.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030164-06.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080164-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080164-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080164-03.jpg": "offline",
