@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-07-12T08:33:26Z",
+"checked_at": "2026-07-13T09:49:58Z",
 "cameras": 448,
 "counts": {
-"placeholder": 118
+"placeholder": 119
 },
 "status": {
 "https://511.alaska.gov/map/Cctv/108": "placeholder",
@@ -16,6 +16,7 @@
 "https://511.alaska.gov/map/Cctv/162": "placeholder",
 "https://511.alaska.gov/map/Cctv/163": "placeholder",
 "https://511.alaska.gov/map/Cctv/192": "placeholder",
+"https://511.alaska.gov/map/Cctv/216": "placeholder",
 "https://511.alaska.gov/map/Cctv/218": "placeholder",
 "https://511.alaska.gov/map/Cctv/219": "placeholder",
 "https://511.alaska.gov/map/Cctv/220": "placeholder",
@@ -36,7 +37,6 @@
 "https://511.alaska.gov/map/Cctv/263": "placeholder",
 "https://511.alaska.gov/map/Cctv/264": "placeholder",
 "https://511.alaska.gov/map/Cctv/265": "placeholder",
-"https://511.alaska.gov/map/Cctv/266": "placeholder",
 "https://511.alaska.gov/map/Cctv/27": "placeholder",
 "https://511.alaska.gov/map/Cctv/28": "placeholder",
 "https://511.alaska.gov/map/Cctv/285": "placeholder",
@@ -69,6 +69,7 @@
 "https://511.alaska.gov/map/Cctv/31": "placeholder",
 "https://511.alaska.gov/map/Cctv/310": "placeholder",
 "https://511.alaska.gov/map/Cctv/311": "placeholder",
+"https://511.alaska.gov/map/Cctv/313": "placeholder",
 "https://511.alaska.gov/map/Cctv/32": "placeholder",
 "https://511.alaska.gov/map/Cctv/325": "placeholder",
 "https://511.alaska.gov/map/Cctv/326": "placeholder",
