@@ -413,5 +413,20 @@
   "sha": "9629f77e1875cd44",
   "first_seen": "2026-07-12T09:32:15Z",
   "state": "WI"
+ },
+ "39868:3b96ff840bd5": {
+  "sha": "f3ad2e79f8ac3b93",
+  "first_seen": "2026-07-13T02:55:46Z",
+  "state": "RI"
+ },
+ "149181:98901c5f984a": {
+  "sha": "063c951f42c0a31a",
+  "first_seen": "2026-07-13T02:56:20Z",
+  "state": "AL"
+ },
+ "11841:ba7cd9b28aea": {
+  "sha": "b466a016c36671ac",
+  "first_seen": "2026-07-13T02:56:41Z",
+  "state": "HI"
  }
 }
