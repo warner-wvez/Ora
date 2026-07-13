@@ -4,7 +4,8 @@
 
 24 frames harvested live from real Ora cameras this session (12 HLS video, 12 snapshot JPEG,
 across TX SC MD MS FL NY HI WA IL AL KY RI and NYC). I counted the vehicles in each by eye.
-Then I ran stock YOLOv8n and YOLOv8m cold, defaults, no fine-tuning.
+Then I ran all three candidates cold, at defaults, no fine-tuning: **YOLOv8n**, **YOLOv8m**, and
+the **Roboflow Universe vehicles model** (`roboflow-100/vehicles-q0x2v`, hosted inference).
 
 ---
 
@@ -31,6 +32,9 @@ ever looks. Concretely:
   state is noisy enough that these exact percentages should not be planned against). Texas, our
   largest state, is **~90% blind** on a deeper 40-camera probe: TxDOT publishes a single 320x240 or
   352x240 variant per camera, with no higher rendition available.
+- **The purpose-built vehicle model was the worst of the three, by a wide margin.** Roboflow's
+  `vehicles-q0x2v` found **38 of 359 vehicles** where stock YOLOv8m found 186. See "Candidate 3"
+  below; the short version is that buying a domain-specific model off the shelf is not a shortcut.
 
 So the honest headline is not "off-the-shelf doesn't transfer." It is: **off-the-shelf transfers
 about as well as the camera lets it, and half our cameras don't let it.** The first move is a
@@ -79,8 +83,8 @@ control that proves the model is not the problem.
 ## Score tables
 
 Ground truth is my own count. `bias` is mean signed error: negative means the model
-**under-counts**. Note bias equals -MAE almost exactly for the stock models, which means
-every error is a **miss**: at stock settings neither model ever over-counts a frame.
+**under-counts**. Note bias equals -MAE almost exactly for all three cold candidates, which
+means every error is a **miss**: run cold, not one of them ever over-counts a frame.
 
 `vehicles found / actual` is an upper bound on recall (it credits every box as a true hit).
 
@@ -89,28 +93,37 @@ every error is a **miss**: at stock settings neither model ever over-counts a fr
 
 | model | count MAE | bias | bucket accuracy | vehicles found / actual |
 |---|---|---|---|---|
-| YOLOv8n (stock) | 10.2 | -10.2 | **33%** | 115/359 (32%) |
-| YOLOv8m (stock) **<-- best cold** | 7.2 | -7.2 | **46%** | 186/359 (52%) |
-| YOLOv8m @1536 | 6.2 | -6.0 | **46%** | 214/359 (60%) |
-| YOLOv8m tiled 2x2 | 6.5 | -6.4 | **58%** | 205/359 (57%) |
+| **1.** YOLOv8n (stock) | 10.2 | -10.2 | **33%** | 115/359 (32%) |
+| **2.** YOLOv8m (stock) <-- best cold | 7.2 | -7.2 | **46%** | 186/359 (52%) |
+| **3.** Roboflow vehicles-q0x2v (stock, conf .40) | 13.4 | -13.4 | **21%** | 38/359 (11%) |
+| 3b. Roboflow @conf .25 (matched to YOLO) | 12.7 | -12.7 | **21%** | 54/359 (15%) |
+| diag: YOLOv8m @1536 | 6.2 | -6.0 | **46%** | 214/359 (60%) |
+| diag: YOLOv8m tiled 2x2 | 6.5 | -6.4 | **58%** | 205/359 (57%) |
+| diag: Roboflow tiled 2x2 | 10.3 | -10.0 | **38%** | 119/359 (33%) |
 
 **HLS video frames** (n=12)
 
 | model | count MAE | bias | bucket accuracy | vehicles found / actual |
 |---|---|---|---|---|
-| YOLOv8n (stock) | 9.4 | -9.4 | **33%** | 40/153 (26%) |
-| YOLOv8m (stock) **<-- best cold** | 6.6 | -6.6 | **50%** | 74/153 (48%) |
-| YOLOv8m @1536 | 6.8 | -6.8 | **42%** | 72/153 (47%) |
-| YOLOv8m tiled 2x2 | 6.8 | -6.6 | **58%** | 74/153 (48%) |
+| **1.** YOLOv8n (stock) | 9.4 | -9.4 | **33%** | 40/153 (26%) |
+| **2.** YOLOv8m (stock) <-- best cold | 6.6 | -6.6 | **50%** | 74/153 (48%) |
+| **3.** Roboflow vehicles-q0x2v (stock, conf .40) | 11.2 | -11.2 | **33%** | 18/153 (12%) |
+| 3b. Roboflow @conf .25 (matched to YOLO) | 10.8 | -10.8 | **33%** | 24/153 (16%) |
+| diag: YOLOv8m @1536 | 6.8 | -6.8 | **42%** | 72/153 (47%) |
+| diag: YOLOv8m tiled 2x2 | 6.8 | -6.6 | **58%** | 74/153 (48%) |
+| diag: Roboflow tiled 2x2 | 9.3 | -9.0 | **42%** | 45/153 (29%) |
 
 **Snapshot JPEGs** (n=12)
 
 | model | count MAE | bias | bucket accuracy | vehicles found / actual |
 |---|---|---|---|---|
-| YOLOv8n (stock) | 10.9 | -10.9 | **33%** | 75/206 (36%) |
-| YOLOv8m (stock) **<-- best cold** | 7.8 | -7.8 | **42%** | 112/206 (54%) |
-| YOLOv8m @1536 | 5.7 | -5.3 | **50%** | 142/206 (69%) |
-| YOLOv8m tiled 2x2 | 6.2 | -6.2 | **58%** | 131/206 (64%) |
+| **1.** YOLOv8n (stock) | 10.9 | -10.9 | **33%** | 75/206 (36%) |
+| **2.** YOLOv8m (stock) <-- best cold | 7.8 | -7.8 | **42%** | 112/206 (54%) |
+| **3.** Roboflow vehicles-q0x2v (stock, conf .40) | 15.5 | -15.5 | **8%** | 20/206 (10%) |
+| 3b. Roboflow @conf .25 (matched to YOLO) | 14.7 | -14.7 | **8%** | 30/206 (15%) |
+| diag: YOLOv8m @1536 | 5.7 | -5.3 | **50%** | 142/206 (69%) |
+| diag: YOLOv8m tiled 2x2 | 6.2 | -6.2 | **58%** | 131/206 (64%) |
+| diag: Roboflow tiled 2x2 | 11.3 | -11.0 | **33%** | 74/206 (36%) |
 
 
 ### Bucket confusion, YOLOv8m stock (the headline model)
@@ -128,32 +141,34 @@ exactly where traffic is worst, which is the opposite of what congestion detecti
 
 ## Per-frame results
 
-| frame | src | native | light/weather | GT | 8n | 8m | 8m err | bucket |
-|---|---|---|---|---|---|---|---|---|
-| `MS_video_jackson-i20-i220` | vide | 720x480 | overcast, storm sky, wet | 18 | 0 | 0 | -18 | **MISS** heavy->light |
-| `TX_video_dallas-ih35e-downtown` | vide | 352x240 | overcast, wet pavement | 23 | 2 | 7 | -16 | **MISS** heavy->moderate |
-| `KY_snapshot_rural-i24-mp92` | snap | 1280x720 | hazy low sun | 28 | 5 | 13 | -15 | **MISS** heavy->moderate |
-| `AL_snapshot_montgomery-i85-urban` | snap | 1280x720 | overcast bright | 30 | 10 | 16 | -14 | ok |
-| `TX_video_houston-ih45-urban-freeway` | vide | 320x240 | overcast, hazy, wet pavement | 23 | 5 | 9 | -14 | **MISS** heavy->moderate |
-| `IL_snapshot_chicago-urban` | snap | 720x480 | bright evening sun | 35 | 17 | 22 | -13 | ok |
-| `WA_snapshot_seattle-i5-freeway` | snap | 335x249 | bright sun, hard shadow | 15 | 0 | 2 | -13 | **MISS** moderate->light |
-| `NY_video_nyc-gowanus-i278` | vide | 352x240 | low sun, strong backlight haze | 25 | 10 | 15 | -10 | **MISS** heavy->moderate |
-| `IL_snapshot_tollway-i88-suburban` | snap | 360x240 | bright low sun, hard shadows | 13 | 4 | 4 | -9 | **MISS** moderate->light |
-| `NYC_snapshot_manhattan-dense` | snap | 352x240 | evening, shaded canyon | 17 | 8 | 8 | -9 | **MISS** heavy->moderate |
-| `FL_video_tampa-i75-i4` | vide | 352x240 | overcast, storm sky | 13 | 1 | 4 | -9 | **MISS** moderate->light |
-| `KY_snapshot_louisville-i264-urban` | snap | 1280x720 | golden hour, low sun into lens | 21 | 9 | 15 | -6 | **MISS** heavy->moderate |
-| `WA_snapshot_rural-snoqualmie-pass` | snap | 320x239 | bright sun, pavement blown out white | 8 | 1 | 2 | -6 | **MISS** moderate->light |
-| `SC_video_greenville-i85-freeway` | vide | 720x480 | overcast, wet pavement | 14 | 2 | 8 | -6 | ok |
-| `AL_snapshot_rural-i65-mp206` | snap | 1280x720 | overcast, hazy | 6 | 5 | 3 | -3 | **MISS** moderate->light |
-| `RI_snapshot_providence-henderson-bridge` | snap | 704x480 | soft evening light | 5 | 1 | 2 | -3 | ok |
-| `MD_video_dc-intersection` | vide | 704x480 | low sun, heavy backlight and haze | 7 | 2 | 4 | -3 | **MISS** moderate->light |
-| `MD_video_baltimore-i695-beltway` | vide | 640x480 | bright sun, hard shadows | 11 | 4 | 8 | -3 | ok |
-| `RI_snapshot_providence-i195` | snap | 704x480 | soft evening light | 15 | 7 | 13 | -2 | ok |
-| `NYC_snapshot_bronx-expressway` | snap | 1920x1080 | low sun, backlit, deep shadow under canopy | 13 | 8 | 12 | -1 | ok |
-| `HI_video_honolulu-dillingham` | vide | 720x480 | bright midday sun, clear | 14 | 11 | 14 | +0 | ok |
-| `MS_video_rural-i55-canton` | vide | 720x480 | overcast, storm sky | 4 | 2 | 4 | +0 | ok |
-| `SC_video_charleston-surface-road` | vide | 480x270 | sunny with cloud | 1 | 1 | 1 | +0 | ok |
-| `TX_video_rural-fm105-vidor` | vide | 352x240 | overcast after rain, standing water | 0 | 0 | 0 | +0 | ok |
+Cold runs of all three candidates. `8m err` is the best cold model's signed error.
+
+| frame | src | native | light/weather | GT | 8n | **8m** | RF | 8m err | 8m bucket |
+|---|---|---|---|---|---|---|---|---|---|
+| `MS_video_jackson-i20-i220` | vide | 720x480 | overcast, storm sky, wet | 18 | 0 | **0** | 2 | -18 | **MISS** heavy->light |
+| `TX_video_dallas-ih35e-downtown` | vide | 352x240 | overcast, wet pavement | 23 | 2 | **7** | 0 | -16 | **MISS** heavy->moderate |
+| `KY_snapshot_rural-i24-mp92` | snap | 1280x720 | hazy low sun | 28 | 5 | **13** | 1 | -15 | **MISS** heavy->moderate |
+| `AL_snapshot_montgomery-i85-urban` | snap | 1280x720 | overcast bright | 30 | 10 | **16** | 2 | -14 | ok |
+| `TX_video_houston-ih45-urban-freeway` | vide | 320x240 | overcast, hazy, wet pavement | 23 | 5 | **9** | 0 | -14 | **MISS** heavy->moderate |
+| `IL_snapshot_chicago-urban` | snap | 720x480 | bright evening sun | 35 | 17 | **22** | 1 | -13 | ok |
+| `WA_snapshot_seattle-i5-freeway` | snap | 335x249 | bright sun, hard shadow | 15 | 0 | **2** | 0 | -13 | **MISS** moderate->light |
+| `NY_video_nyc-gowanus-i278` | vide | 352x240 | low sun, strong backlight haze | 25 | 10 | **15** | 1 | -10 | **MISS** heavy->moderate |
+| `IL_snapshot_tollway-i88-suburban` | snap | 360x240 | bright low sun, hard shadows | 13 | 4 | **4** | 0 | -9 | **MISS** moderate->light |
+| `NYC_snapshot_manhattan-dense` | snap | 352x240 | evening, shaded canyon | 17 | 8 | **8** | 9 | -9 | **MISS** heavy->moderate |
+| `FL_video_tampa-i75-i4` | vide | 352x240 | overcast, storm sky | 13 | 1 | **4** | 0 | -9 | **MISS** moderate->light |
+| `KY_snapshot_louisville-i264-urban` | snap | 1280x720 | golden hour, low sun into lens | 21 | 9 | **15** | 0 | -6 | **MISS** heavy->moderate |
+| `WA_snapshot_rural-snoqualmie-pass` | snap | 320x239 | bright sun, pavement blown out white | 8 | 1 | **2** | 0 | -6 | **MISS** moderate->light |
+| `SC_video_greenville-i85-freeway` | vide | 720x480 | overcast, wet pavement | 14 | 2 | **8** | 0 | -6 | ok |
+| `AL_snapshot_rural-i65-mp206` | snap | 1280x720 | overcast, hazy | 6 | 5 | **3** | 0 | -3 | **MISS** moderate->light |
+| `RI_snapshot_providence-henderson-bridge` | snap | 704x480 | soft evening light | 5 | 1 | **2** | 0 | -3 | ok |
+| `MD_video_dc-intersection` | vide | 704x480 | low sun, heavy backlight and haze | 7 | 2 | **4** | 3 | -3 | **MISS** moderate->light |
+| `MD_video_baltimore-i695-beltway` | vide | 640x480 | bright sun, hard shadows | 11 | 4 | **8** | 4 | -3 | ok |
+| `RI_snapshot_providence-i195` | snap | 704x480 | soft evening light | 15 | 7 | **13** | 5 | -2 | ok |
+| `NYC_snapshot_bronx-expressway` | snap | 1920x1080 | low sun, backlit, deep shadow under canopy | 13 | 8 | **12** | 2 | -1 | ok |
+| `HI_video_honolulu-dillingham` | vide | 720x480 | bright midday sun, clear | 14 | 11 | **14** | 7 | +0 | ok |
+| `MS_video_rural-i55-canton` | vide | 720x480 | overcast, storm sky | 4 | 2 | **4** | 0 | +0 | ok |
+| `SC_video_charleston-surface-road` | vide | 480x270 | sunny with cloud | 1 | 1 | **1** | 1 | +0 | ok |
+| `TX_video_rural-fm105-vidor` | vide | 352x240 | overcast after rain, standing water | 0 | 0 | **0** | 0 | +0 | ok |
 
 
 ## Manifest: the 24 frames
@@ -192,13 +207,61 @@ adjacent lots/dealerships, excluded from ground truth (see `ground_truth.py` for
 
 ---
 
+## Candidate 3: the Roboflow vehicles model, and a prediction I got wrong
+
+`roboflow-100/vehicles-q0x2v` is a purpose-built vehicle detector: 4,058 images, 31,641 labelled
+cars, 12 vehicle classes and no person class, reporting **mAP 45.6 on its own test set**. On paper it
+is the specialist and YOLOv8m is the generalist. Before running it I wrote down a prediction so it
+could be scored: *"it will land close to YOLOv8m, because the binding constraint here is pixels on
+target and a different set of COCO-ish weights does not add pixels."*
+
+**That prediction was wrong, and not in a small way.** It did not land close to YOLOv8m. It landed
+far below it, and below YOLOv8n too:
+
+| | vehicles found of 359 | bucket accuracy | snapshot bucket accuracy |
+|---|---|---|---|
+| YOLOv8m (stock) | **186** | 46% | 42% |
+| YOLOv8n (stock) | 115 | 33% | 33% |
+| **Roboflow vehicles-q0x2v (stock)** | **38** | **21%** | **8%** |
+
+Eight percent on snapshots: it put one frame of twelve in the right bucket. I ran it a second time at
+confidence 0.25 to match ultralytics' default, in case its stock 0.40 threshold was doing the damage.
+It barely moved (54 of 359).
+
+Here is why the number is so low, and it is not the scale story:
+
+![Roboflow on AL Montgomery: 2 of 30, and it misses both semis](annotated/roboflow/AL_snapshot_montgomery-i85-urban.jpg)
+
+That is the same clean 1280x720 Alabama frame where YOLOv8m found 16 cold and 30 at native
+resolution. Roboflow finds **2** - and look at *which* 2. **It misses both articulated semi-trucks
+in the foreground**, the largest and most obvious objects in the entire image, while boxing a pickup
+at the frame edge. A scale-limited model cannot miss the biggest thing in the picture. This is a
+generalization failure: whatever viewpoint `vehicles-q0x2v` was trained on, our high-mounted DOT
+perspective is not it, and its 45.6 mAP is 45.6 mAP *on its own test set*, which tells us nothing
+about our cameras.
+
+I gave it the same 2x2 tiling that rescued YOLO, to be fair to it and to test whether scale was its
+problem too. Tiling roughly doubled it (54 -> 119 of 359), which says scale is *part* of its problem,
+but it still finished below stock YOLOv8m and it introduced a new one: **tiled Roboflow produced the
+only false positives in the entire spike**, hallucinating 2 vehicles on the empty wet rural road in
+Vidor, TX where every other configuration correctly returned zero.
+
+**What this changes.** It does not falsify the scale thesis. My stated falsification criterion was
+"if it beats YOLOv8m materially on the <640px cohort" - it does not; it scores near zero there too.
+But it kills a tempting shortcut. The instinct to fix a domain gap by grabbing someone else's
+domain-specific model off Roboflow Universe is exactly wrong here: the specialist was **5x worse
+than the generalist**. If we want a model tuned to DOT cameras, we will have to tune it on *our*
+frames. There is nothing to download.
+
+---
+
 ## Why it fails: scale, not domain
 
 The bias column tells the story before any diagnosis: **bias equals -MAE almost exactly**, meaning
-at stock settings neither model ever over-counts a single frame. There are no hallucinated cars.
-Every error is a vehicle the model did not see. A domain-gap failure (our pixels look *wrong* to
-the model) would produce both false positives and false negatives. A scale failure produces only
-misses. We got only misses.
+at stock settings not one of the three candidates ever over-counts a single frame. There are no
+hallucinated cars anywhere in the cold runs. Every error is a vehicle the model did not see. A
+domain-gap failure (our pixels look *wrong* to the model) would produce both false positives and
+false negatives. A scale failure produces only misses. We got only misses.
 
 To separate the two causes I re-ran the same stock weights with only the *input scale* changed.
 No fine-tuning, so any recovery is attributable to scale alone:
@@ -259,6 +322,7 @@ Ranked, the causes are:
 4. **Low contrast from backlit haze** (TX Houston, NY Gowanus, MD DC) **or blown-out pavement**
    (WA Snoqualmie). A fine-tune can help here too.
 5. **Foliage occlusion.** RI Henderson.
+6. **Wrong training viewpoint.** Roboflow only: it misses even large, unoccluded, well-lit vehicles.
 
 **What did *not* hurt, which surprised me:**
 
@@ -266,8 +330,9 @@ Ranked, the causes are:
   moving car and still returned one of the better results (22 of 35). Green chroma blobs on the
   wet TX Vidor road produced zero false positives.
 - **Rain and wet pavement are survivable.** Five frames had wet roads. None failed *because* of it.
-- **False positives are essentially absent at stock settings.** The empty wet rural road (TX Vidor)
-  returned 0 predicted, 0 actual. Nothing was hallucinated anywhere.
+- **False positives are essentially absent.** In all three cold runs, across 24 frames, nothing was
+  hallucinated: the empty wet rural road returned 0 predicted, 0 actual, from every candidate. The
+  single exception in the whole spike is tiled Roboflow, which invented 2 cars there.
 
 **One latent problem that is currently hidden.** Two frames have big off-road vehicle populations:
 an equipment dealership on the SC I-85 shoulder (~12 vehicles) and a car dealership lot beside MS
@@ -323,10 +388,12 @@ run the detector and look.
 
 ## Recommendation
 
-**Do not start with a fine-tune.** The brief's <50% band says "harvest-and-label before any product
-feature," and I would have agreed on the headline number alone. The diagnostic says otherwise: a
-label pipeline would spend months teaching the model to see cars it is *already capable of seeing*
-and would still be helpless on the 44% of cameras where the pixels do not exist.
+**Do not start with a fine-tune, and do not go shopping for a better model.** The brief's <50% band
+says "harvest-and-label before any product feature," and I would have agreed on the headline number
+alone. Two things in the data say otherwise: a label pipeline would spend months teaching the model
+to see cars it is *already capable of seeing*, and it would still be helpless on the ~44% of cameras
+where the pixels do not exist. Candidate 3 separately shows that the "just download a vehicle-specific
+model" shortcut leads somewhere much worse than where we started.
 
 In order:
 
@@ -352,6 +419,8 @@ In order:
    **(c) low-contrast backlit haze and blown-out pavement** (TX Houston, WA Snoqualmie). It does
    *not* need to fix compression artifacts or rain; those already work. Harvest must over-sample
    heavy frames, because that is where accuracy collapses and where the product's value lives.
+   Start from **stock COCO YOLOv8m weights**, not from `vehicles-q0x2v` - candidate 3 is a worse
+   starting point than the generalist.
 
 5. **Add a per-camera road-mask ROI before, not after, the resolution fix.** Off-road parked
    vehicles are invisible today only because everything small is invisible. Fix one and you unmask
@@ -367,7 +436,8 @@ In order:
 reasonable next bet given that the remaining errors after the config fix are occlusion and contrast,
 which are exactly what fine-tuning is good at. But the evidence in this spike only establishes the
 scale finding. Step 4 deserves its own smaller spike (label ~200 frames, fine-tune, re-score against
-this same harness) before anyone commits a quarter to it.
+this same harness) before anyone commits a quarter to it. I was already wrong once in this document
+about what a model would do before I ran it, which is the argument for running it.
 
 ---
 
@@ -380,6 +450,12 @@ blurry for anything to see a car in it. A car on a Texas camera is about six pix
 no clever software that recovers a car from six pixels, because the car was never really recorded in
 the first place. That is not a problem with the AI. It is a problem with the picture the state of
 Texas puts on the internet.
+
+We also tried the obvious shortcut, a ready-made model that someone else had trained specifically to
+find vehicles, on the theory that a specialist would beat a generalist. It was five times worse. It
+failed to notice two enormous eighteen-wheelers sitting in the middle of the picture. The lesson is
+that a model trained on somebody else's photos of cars is not trained on our photos of cars, and
+there is no version of this we can simply download.
 
 The good news is bigger than it sounds. On the other half of our cameras, the ones that publish a
 decent picture, the free detector already works, and it works better the moment we stop shrinking the
@@ -404,26 +480,22 @@ cd spike && uv venv --python 3.12 .venv && uv pip install --python .venv/bin/pyt
 
 .venv/bin/python harvest.py            # pull 24 live frames -> frames/, manifest.json
 .venv/bin/python ground_truth.py       # merge my counts into the manifest
-.venv/bin/python detect.py             # stock YOLOv8n + YOLOv8m -> detections.json, annotated/
+.venv/bin/python detect.py             # candidates 1+2: stock YOLOv8n/8m -> detections.json
+export ROBOFLOW_API_KEY=...            # free key: app.roboflow.com -> Settings -> API Keys
+.venv/bin/python roboflow_detect.py    # candidate 3: hosted vehicles-q0x2v
 .venv/bin/python diagnose.py           # the scale diagnostic: @1536 and tiled
 .venv/bin/python score.py              # score tables -> scores.json
 .venv/bin/python resolution_census.py  # fleet-wide capability probe
 .venv/bin/python report_tables.py      # regenerate the tables in this report
 ```
 
-Frames are live captures and will differ on a re-run; the manifest records exactly which camera and
-what time each came from. `zoom.py` / `crop.py` / `grid.py` are the magnification helpers I used to
-count vehicles by eye. Nothing here is product code and nothing merges to `main`.
+The Roboflow key is read from the environment and is never written to disk or committed. Frames are
+live captures and will differ on a re-run; the manifest records exactly which camera and what time
+each came from. `zoom.py` / `crop.py` / `grid.py` are the magnification helpers I used to count
+vehicles by eye. Nothing here is product code and nothing merges to `main`.
 
 ## What I did not test
 
-- **Roboflow `vehicles-q0x2v` (candidate 3) was not run: no API key is configured.** Get a free-tier
-  key at **app.roboflow.com** (sign up -> Settings -> API Keys -> Private API Key), then
-  `export ROBOFLOW_API_KEY=...` and I will run it against the same 24 frames and fold it into these
-  tables. I did not fabricate its numbers. My expectation, stated in advance so it can be scored: it
-  will land close to YOLOv8m, because the binding constraint here is pixels on target and a different
-  set of COCO-ish weights does not add pixels. If it *does* beat YOLOv8m materially on the <640px
-  cohort, that would falsify the scale thesis and is worth knowing.
 - **Night.** Everything was harvested in one sitting, 12:49 HST to 18:49 EDT, so the set spans midday
   sun through low-angle evening haze but contains **no true darkness**. Night is where DOT cameras get
   grainy and headlight-smeared, and it is a real gap in this verdict. A short night harvest on the
@@ -432,3 +504,6 @@ count vehicles by eye. Nothing here is product code and nothing merges to `main`
 - **Tracking across frames.** This is a single-frame spike. Stall detection and flow direction need
   temporal information that one frame cannot provide.
 - **Whether the fine-tune actually reaches 85%.** See the caveat above; that needs its own spike.
+- **Other detector families.** I tested the three candidates in the brief. RT-DETR and the newer YOLO
+  generations may raise the ceiling on the workable cohort, but none of them add pixels to a 320x240
+  frame, so none of them change the shape of the recommendation.
