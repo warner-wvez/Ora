@@ -1,0 +1,11 @@
+{
+"checked_at": "2026-07-13T02:55:43Z",
+"cameras": 894,
+"counts": {
+"offline": 2
+},
+"status": {
+"https://streamingjxn6.mdottraffic.com/thumbnail?application=rtplive&streamname=140201.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=042502.stream&size=640x480&format=jpg&fitmode=stretch": "offline"
+}
+}
