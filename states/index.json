@@ -98,17 +98,6 @@
   "zoom": 5.8,
   "video": false
  },
- "NE-ENG": {
-  "name": "New England (ME/NH/VT)",
-  "file": "states/NE-ENG.json",
-  "count": 404,
-  "center": [
-   -71.5,
-   44.0
-  ],
-  "zoom": 6.5,
-  "video": false
- },
  "CT": {
   "name": "Connecticut",
   "file": "states/CT.json",
@@ -425,6 +414,116 @@
   "center": [
    -92.5,
    38.5
+  ],
+  "zoom": 6.3,
+  "video": true
+ },
+ "AL": {
+  "name": "Alabama",
+  "file": "states/AL.json",
+  "count": 629,
+  "center": [
+   -86.8,
+   32.8
+  ],
+  "zoom": 6.3,
+  "video": false
+ },
+ "KY": {
+  "name": "Kentucky",
+  "file": "states/KY.json",
+  "count": 241,
+  "center": [
+   -85.7,
+   37.6
+  ],
+  "zoom": 6.5,
+  "video": false
+ },
+ "SC": {
+  "name": "South Carolina",
+  "file": "states/SC.json",
+  "count": 763,
+  "center": [
+   -80.9,
+   33.9
+  ],
+  "zoom": 6.8,
+  "video": true
+ },
+ "RI": {
+  "name": "Rhode Island",
+  "file": "states/RI.json",
+  "count": 135,
+  "center": [
+   -71.55,
+   41.65
+  ],
+  "zoom": 8.6,
+  "video": false
+ },
+ "ME": {
+  "name": "Maine",
+  "file": "states/ME.json",
+  "count": 151,
+  "center": [
+   -69.2,
+   45.2
+  ],
+  "zoom": 6.2,
+  "video": false
+ },
+ "NH": {
+  "name": "New Hampshire",
+  "file": "states/NH.json",
+  "count": 181,
+  "center": [
+   -71.6,
+   43.8
+  ],
+  "zoom": 6.8,
+  "video": false
+ },
+ "VT": {
+  "name": "Vermont",
+  "file": "states/VT.json",
+  "count": 89,
+  "center": [
+   -72.7,
+   44.1
+  ],
+  "zoom": 6.9,
+  "video": false
+ },
+ "HI": {
+  "name": "Hawaii",
+  "file": "states/HI.json",
+  "count": 361,
+  "center": [
+   -157.7,
+   21.1
+  ],
+  "zoom": 7,
+  "video": true
+ },
+ "MD": {
+  "name": "Maryland",
+  "file": "states/MD.json",
+  "count": 553,
+  "center": [
+   -77.2,
+   39.2
+  ],
+  "zoom": 7.2,
+  "video": true
+ },
+ "MS": {
+  "name": "Mississippi",
+  "file": "states/MS.json",
+  "count": 411,
+  "center": [
+   -89.7,
+   32.6
   ],
   "zoom": 6.3,
   "video": true
