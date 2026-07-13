@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-07-12T09:24:36Z",
+"checked_at": "2026-07-13T10:19:50Z",
 "cameras": 1121,
 "counts": {
-"frozen": 22,
+"frozen": 23,
 "offline": 1,
 "placeholder": 3
 },
@@ -29,6 +29,7 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV109a.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4156.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/cmh/PolarisPkwy-Sancus.jpg": "placeholder",

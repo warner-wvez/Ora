@@ -1,15 +1,13 @@
 {
-"checked_at": "2026-07-12T09:17:20Z",
+"checked_at": "2026-07-13T10:11:07Z",
 "cameras": 591,
 "counts": {
 "offline": 9,
-"placeholder": 13
+"placeholder": 11
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
-"https://kscam.carsprogram.org/snapshots/GEN_2-081-2230-2-US-81northofBelleville.jpeg": "placeholder",
-"https://kscam.carsprogram.org/snapshots/GEN_4-035-1750-2-I-35andOttawaRestStop.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-135-0119-2-I-135atI-235.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K007SBC-02.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K010EBIPC-01.jpg": "placeholder",
