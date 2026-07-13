@@ -32,7 +32,13 @@ STATES = {
   'AZ': {'host':'az511.com',            'name':'Arizona',        'center':[-111.9,34.3],'zoom':6},
   'WI': {'host':'511wi.gov',            'name':'Wisconsin',      'center':[-89.7,44.5],'zoom':6.5},
   'ID': {'host':'511.idaho.gov',        'name':'Idaho',          'center':[-114.5,44.4],'zoom':5.8},
-  'NE-ENG': {'host':'www.newengland511.org','name':'New England (ME/NH/VT)','center':[-71.5,44.0],'zoom':6.5},
+  # newengland511.org serves ME, NH and VT from one feed, and every row carries
+  # its own `state` label, so each state builds from the same host with an
+  # only_state filter (the 511ny pattern). Maine also gets the Maine Turnpike's
+  # cameras appended afterwards by build-states-me-turnpike.py.
+  'ME': {'host':'www.newengland511.org','name':'Maine',        'center':[-69.2,45.2],'zoom':6.2,'only_state':'Maine'},
+  'NH': {'host':'www.newengland511.org','name':'New Hampshire','center':[-71.6,43.8],'zoom':6.8,'only_state':'New Hampshire'},
+  'VT': {'host':'www.newengland511.org','name':'Vermont',      'center':[-72.7,44.1],'zoom':6.9,'only_state':'Vermont'},
   'CT': {'host':'ctroads.org',          'name':'Connecticut',    'center':[-72.7,41.6],'zoom':8.5},
   'LA': {'host':'511la.org',            'name':'Louisiana',      'center':[-92.0,31.0],'zoom':6.5},
   'AK': {'host':'511.alaska.gov',       'name':'Alaska',         'center':[-149.6,61.2],'zoom':5},
