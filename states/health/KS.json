@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-07-13T10:11:07Z",
+"checked_at": "2026-07-13T15:35:55Z",
 "cameras": 591,
 "counts": {
 "offline": 9,
-"placeholder": 11
+"placeholder": 13
 },
 "status": {
 "": "offline",
@@ -22,6 +22,8 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-58.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-60.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-68.jpg": "offline",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K070WBC-101.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K435SBIPC-76.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0022-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0024-LQ.jpg": "placeholder",

@@ -1,18 +1,43 @@
 {
-"checked_at": "2026-07-13T10:17:30Z",
+"checked_at": "2026-07-13T15:42:17Z",
 "cameras": 183,
 "counts": {
-"offline": 6,
-"frozen": 2
+"placeholder": 27,
+"offline": 6
 },
 "status": {
-"http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25_comanche.jpg": "frozen",
-"http://ss.nmroads.com/snapshots/i-40wb_juantabo.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i10eastus70.jpg": "frozen",
-"http://ss.nmroads.com/snapshots/i25_cerrillos.jpg": "offline",
+"http://ss.nmroads.com/snapshots/528_highresort.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/528_ridgecrest.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/528_sabana.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/528_southern.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/Coors_iliff.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/I40-98th.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/coors_atrisco.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/coors_glenrio.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/coorsn_i40.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i-25_comanche.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i-40_12st.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i-40_coors.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i-40_riograndeblvd.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i-40_riopuerco.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i-40_zamoraroad.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40w_atriscovista.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i10eastus70.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
-"http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline"
+"http://ss.nmroads.com/snapshots/i40_nm6.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i40atriscovista.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i40east-coors.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i40unser.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i40west-coors.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
+"http://ss.nmroads.com/snapshots/pdn_4th.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/pdn_coors.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/pdn_jefferson.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/pdneb_edith.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/pdnriogrande.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/pdnw-riogrande.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/pdnwb_edith.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/tramway_lomas.jpg": "offline"
 }
 }
