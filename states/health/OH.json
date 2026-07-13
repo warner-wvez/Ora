@@ -1,28 +1,18 @@
 {
-"checked_at": "2026-07-13T10:19:50Z",
+"checked_at": "2026-07-13T15:44:42Z",
 "cameras": 1121,
 "counts": {
-"frozen": 23,
-"offline": 1,
-"placeholder": 3
+"frozen": 16,
+"offline": 1
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CLE/CLE063.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CLE/I-71_at_SR-18.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D11/D11-004.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/CCTV108a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CLE/SR-18_Nettleton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CMH091.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CMH/Hard-SmokyRow.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D03/SR-18_Windfall_Rd.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D03/SR-18_at_Medina_Line_Rd.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D03/SR-18_at_SR-94.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Hull_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Strub_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
@@ -32,7 +22,6 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4156.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/cmh/PolarisPkwy-Sancus.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
