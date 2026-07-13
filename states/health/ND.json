@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-07-13T15:41:36Z",
+"checked_at": "2026-07-13T20:19:34Z",
 "cameras": 798,
 "counts": {
 "offline": 7,
-"placeholder": 28
+"placeholder": 24
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP64.432Fargo13thAve38thStWestRampSouth.jpg": "placeholder",
@@ -30,10 +30,6 @@
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeNorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgePavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeSouth.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/forttottencenter.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/forttotteneast.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/forttottenpavement.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/forttottenwest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/gladstonebridgeeb.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/gladstonebridgewb.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/gladstonecenter.jpg": "placeholder",

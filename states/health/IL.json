@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-07-13T15:35:08Z",
+"checked_at": "2026-07-13T20:13:54Z",
 "cameras": 3636,
 "counts": {
 "offline": 56,
 "frozen": 82,
-"placeholder": 153
+"placeholder": 158
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_31st_4183209_-8795890_1_E.jpg": "placeholder",
@@ -66,7 +66,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-290_4203750_-8803133_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-57_4156839_-8774291_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-94_4162060_-8757920_1_NONE.jpg": "offline",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_IL-53-Local_4205710_-8802914_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SEB_I-90_4197644_-8777364_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SWB_I-55_4177090_-8784509_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SWB_I-55_4179112_-8782342_1_NONE.jpg": "offline",
@@ -79,6 +78,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-55_4176148_-8786998_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-57_4171468_-8764615_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-57_4171473_-8764554_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-80_4157827_-8753297_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SEB_I-290_4194200_-8798801_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SWB_I-55_4175009_-8793150_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_EB_I-80_4151323_-8802721_1_NONE.jpg": "offline",
@@ -215,6 +215,10 @@
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Grand_@_Sheridan_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Grand_@_Sheridan_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Grand_@_Sheridan_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Grand_@_Sheridan_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Grass_Lake_@_Eagle_Way_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Grass_Lake_@_Eagle_Way_(Wireless)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Millburn_(Wireless)_cctv_North_Leg.jpg": "placeholder",
@@ -238,6 +242,10 @@
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Gilmer_Rd_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Gilmer_Rd_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Gilmer_Rd_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_120_@_Greenleaf_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_120_@_Greenleaf_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_120_@_Greenleaf_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_120_@_Greenleaf_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Wilson_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Wilson_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Wilson_(Wireless)_cctv_South_Leg.jpg": "placeholder",
@@ -260,7 +268,6 @@
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_60_@_IL_83-Schank_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_83_@_Center_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_83_@_Center_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_83_@_Center_cctv_South_Leg.jpg": "placeholder",
@@ -291,12 +298,10 @@
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hart_(Cell)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_IL_132_(SE)_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_IL_132_(SE)_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_IL_132_(SE)_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_IL_132_(SE)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_45_@_Deerpath_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_45_@_Deerpath_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_45_@_Deerpath_cctv_West_Leg.jpg": "placeholder"
+"https://www.lakecountypassage.com/snapshots/US_45_@_Deerpath_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Washington_@_West_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Washington_@_West_cctv_West_Leg.jpg": "placeholder"
 }
 }
