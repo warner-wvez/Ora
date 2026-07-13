@@ -2,24 +2,34 @@
 
 **Live at [warner-wvez.github.io/Ora](https://warner-wvez.github.io/Ora/)**
 
-A live map of public traffic cameras across the US, styled like Apple Maps. **~35,100 cameras across 27 states** — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
+A live map of public traffic cameras across the US, styled like Apple Maps. **~46,100 cameras across 49 states — every state but New Jersey** (whose feed is provably locked; see SKIPPED) — and where the state DOT exposes it, the popup plays **actual live video**, not just a refreshing snapshot.
 
 A layer panel lets you toggle states on and off independently and **stack them**. Turn on any combination — states, NYC, and the Chicago ticket-enforcement layer — on one map.
 
 ## Coverage
 
-**~35,100 cameras across 27 states**, from state DOT "511" systems that run on a handful of shared vendor platforms:
+**~46,100 cameras across 49 states** (48 in `states/index.json`, plus Illinois as the original standalone layer), from state DOT "511" systems that run on a handful of shared vendor platforms:
 
-- **Older DataTables platform (14 states)**: Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, New England (ME/NH/VT), Connecticut, Louisiana, Alaska, New York. Built by `build-states.py` (`python3 build-states.py NY` rebuilds one state; it merges into the index rather than overwriting it).
+- **Older DataTables platform (16 states)**: Florida, Georgia, Utah, Pennsylvania, North Carolina, Nevada, Arizona, Wisconsin, Idaho, Maine, New Hampshire, Vermont, Connecticut, Louisiana, Alaska, New York. Built by `build-states.py` (`python3 build-states.py NY` rebuilds one state; it merges into the index rather than overwriting it). Maine, New Hampshire and Vermont all come from newengland511.org, one feed whose rows each carry their own `state` label — they used to ship as one "New England" bundle and are now three states filtered by that label. Maine additionally gets the Maine Turnpike Authority's 17 camera sites appended by `build-states-me-turnpike.py`, scraped from the turnpike map's hardcoded JS (live snapshots, no video).
 - **Newer GraphQL platform (7 states)**: Minnesota, Colorado, Iowa, Nebraska, Indiana, Kansas, Massachusetts. Built by `build-states-graphql.py` (one `listCameraViewsQuery` per state returns every camera with a bbox, snapshot URL, and HLS sources).
 - **MapLarge platform (Texas)**: 3,430 cameras from TxDOT's drivetexas.org. Built by `build-states-tx.py`. Texas is the one **video-only** state — it publishes no snapshot at all, so its popups play the HLS stream over a dark backdrop instead of a poster image.
 - **WSDOT REST API (Washington)**: 1,516 cameras. Built by `build-states-wa.py` against WSDOT's Traveler Information API (free key, `WSDOT_API_KEY`). Snapshot-only, and the one state that also carries **which way each camera looks** and **how often its image really changes**. See below.
 
-**Eleven of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, TX, NY. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks sampled streams and sets the flag.
+**Twenty of these states play CORS-open HLS live video right in the browser**: FL, PA, NC, NV, WI, LA, MN, CO, IA, TX, NY, DE, TN, OK, WV, MO, SC, MS, HI, MD. The rest are snapshot-only (their stream host either lacks CORS or requires auth — Georgia, for example, returns 401). Each build script CORS-checks sampled streams and sets the flag.
+
+The 2026-07-12 session closed the map's remaining gaps — every state that had previously failed or been skipped, each dead for its own reason:
+
+- **South Carolina** — 763 cameras, all live video (Iteris ATIS like South Dakota, but SC's skyvdn.com Wowza streams are token-free and CORS-open). `build-states-sc.py`.
+- **Mississippi** — 411 camera sites / 956 views, live video. The map's markers come from an ASP.NET page-method (`default.aspx/LoadCameraData`), each site's views from its map-bubble page, snapshots from Wowza's own `/thumbnail` endpoint. The trap: streaming hosts are regional (`streamingjxn*` for Jackson, `streaminglym*`, `streamingshvn*`, `streaminggpt*` elsewhere), and a host pattern that only knew Jackson silently dropped 254 of 411 sites while looking exactly like a rate limit. `build-states-ms.py`.
+- **Maryland** — 553 cameras, live video. CHART's export service (`getCameraMapDataJSON.do`) is simply open; the strmrN.sha.maryland.gov Wowza hosts are token-free and CORS-open. Video-only like Texas: no still endpoint exists anywhere. `build-states-md.py`.
+- **Hawaii** — 361 cameras, live video. The long-standing blocker was coordinates: the camera-tour API has none and bare `/cameras` answers 403. The site's own config names `/cameras?format=mapPage`, which answers when the request carries the constant `x-icx-copyright` vendor header — with lat/lon on every camera. `build-states-hi.py`.
+- **Alabama** — 629 cameras, snapshot-only, and a new failure mode: **DRM behind a green CORS check**. ALGO Traffic's API is open and its Wowza playlists answer `Access-Control-Allow-Origin: *`, but every chunklist carries `#EXT-X-KEY:METHOD=SAMPLE-AES` (FairPlay via ezdrm) — undecryptable by hls.js or any static page. The CORS probe alone would have shipped a LIVE badge over 629 dead players, so `video_plays()` in the newer builders reads the chunklist and refuses any stream that names a key. Snapshots refresh ~10 min. `build-states-al.py`.
+- **Kentucky** — 241 cameras, snapshot-only. Both of KY's surfaces (maps.kytc.ky.gov and GoKY) read the same open ArcGIS FeatureServer; images live on trimarc.org and refresh within the minute. Nine Indiana-side rows whose images are dead from every door are dropped — Ora's Indiana layer carries those cameras live. `build-states-ky.py`.
+- **Rhode Island** — 135 cameras, snapshot-only. RIDOT publishes no API and no coordinates: six PHP pages inline the cameras, the Wowza video is Referer-locked to dot.ri.gov (a header a static page cannot send — CORS is open, which again is exactly why a CORS probe alone proves nothing), but the page "thumbnails" turn out to be the live snapshots. Coordinates were derived offline: RI renumbered its exits to mileposts in 2021, so OSM junction refs anchor each filename's milemarker along the route; named intersections come from OSM way-pair closest approach; every pin was validated inside the RI boundary polygon and reverse-geocoded. `build-states-ri.py` carries the full gazetteer with per-entry provenance.
 
 New York deserves its own line: **1,907 cameras, 1,553 with live video**, the largest live-video state after Florida and Texas. 511ny also serves 324 Connecticut and 66 New Jersey cameras on shared roads, which a bounding box cannot separate, since Connecticut sits inside any New York bbox and Ora already carries Connecticut from ctroads.org. The feed labels every row with its own `state`, so the build believes that instead and uses the bbox only to catch three null-island rows and one camera whose longitude lost its minus sign. Roughly a fifth of the 354 video-less cameras currently serve NYSDOT's "No live camera feed at this time" placeholder: a real outage, not a parsing failure, and it explains itself to the reader.
 
-Deciding that flag is subtler than it looks, and it has been wrong twice.
+Deciding that flag is subtler than it looks. It has been wrong twice, and two more traps were caught at the door: Alabama's FairPlay DRM behind a green CORS header, and Rhode Island/New Jersey's Referer-locked CDNs (CORS wide open, yet no static page can play them, because a browser will not spoof the Referer header).
 
 **One camera cannot speak for a state.** `video_plays_any()` samples eight streams and accepts the state if any plays. It used to test exactly the first camera, which is a coin flip: about 5% of DOT cameras are down at any moment (measured, 19 of 20 New York streams alive). New York's first camera, `R5_007`, happens to be one of the dead ones, so the old check marked the whole state snapshot-only and silently discarded 1,553 working live feeds. Nothing errored.
 
@@ -29,6 +39,20 @@ Deciding that flag is subtler than it looks, and it has been wrong twice.
 - **New York City** — 957 cameras (NYC DOT), snapshot refreshing every 2 seconds.
 
 Both `build-states*.py` scripts write `states/<code>.json` and merge into `states/index.json`, which the app reads at load to populate the state list and coverage markers.
+
+## SKIPPED
+
+The record of states with no static-compatible public feed, so nobody re-litigates them. Every door tried is listed; if a door here reopens, that is the place to start.
+
+**New Jersey** (verdict 2026-07-12): the only unreachable state. Its entire camera inventory — 666 entries with coordinates, readable from 511nj.org's API — is Video/HLS with **zero image mode**, and both stream families are locked in ways a static page cannot satisfy:
+
+1. `nj-511.wink.co` (379 cameras): playlists 403 without an `?otp=` one-time token from `getHlsToken`, valid **300 seconds**. An expiring credential cannot live in a static JSON file (the Kansas rule).
+2. `njtpk-wink.xcmdata.org` (102 Turnpike cameras): playlists require `Referer: 511nj.org` — a forbidden header a browser page cannot set — and even then answer `Access-Control-Allow-Origin: https://511nj.org` only, so another origin cannot read the bytes either. Two independent locks.
+3. The remaining 185 entries point at a literal `Camera-Unavailable.png`.
+4. No snapshot/thumbnail endpoint exists on either CDN (`poster/preview/thumbnail/snapshot.jpg` all 403), unlike Mississippi's Wowza.
+5. The API itself sits behind a Keycloak anonymous-login flow (encrypted request bodies, ~6-minute JWTs) — scriptable, but pointless while the streams stay locked.
+6. 511NY's feed used to carry 66 labeled New Jersey cameras on shared roads; as of 2026-07-12 its rows are labeled only "New York" or blank, so that honest-partial door is gone too.
+7. NJDOT's site (nj.gov/transportation) and the Turnpike Authority's (njta.gov) are JS shells over the same locked backends.
 
 ## Direction and refresh rate
 

@@ -516,5 +516,16 @@
   ],
   "zoom": 7.2,
   "video": true
+ },
+ "MS": {
+  "name": "Mississippi",
+  "file": "states/MS.json",
+  "count": 411,
+  "center": [
+   -89.7,
+   32.6
+  ],
+  "zoom": 6.3,
+  "video": true
  }
 }
