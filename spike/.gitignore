@@ -1,0 +1,6 @@
+# throwaway spike environment and reproducible downloads
+.venv/
+__pycache__/
+*.pt
+# my counting scratch: magnified crops used to eyeball ground truth, regenerable
+zoom/
