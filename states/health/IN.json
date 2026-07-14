@@ -1,17 +1,15 @@
 {
-"checked_at": "2026-07-14T04:03:03Z",
+"checked_at": "2026-07-14T09:12:40Z",
 "cameras": 705,
 "counts": {
 "offline": 1,
-"placeholder": 6
+"placeholder": 4
 },
 "status": {
 "/images/icon-camera-closed-fill-solid-padded.svg": "offline",
-"https://public.carsprogram.org/cameras/IN/INDOT_344_11tP3ozy3vAvnpiQ.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_510_9SBY5xrGu16rSiNJ.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_652_9PEbO_rU8-vhtie-.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_663_QAQAIlub6ENLuJKF.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_726_yWdeqK1LgnrcsXuX.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_999_qiy-ohd3PfUTa8Hm.flv.png": "placeholder"
 }
 }
