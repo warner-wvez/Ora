@@ -1,0 +1,13 @@
+# Secrets. spike/.env holds a Roboflow private API key, and this repo publishes straight
+# to a public GitHub Pages site, so nothing secret can be one `git add .` away from a commit.
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# YOLO spike artifacts: model weights, training data and frame captures (~100 MB). Outputs,
+# not source — the pipeline that makes them is what belongs in git.
+spike/train/
+spike/live/
+spike/yolov8m.mlpackage/
