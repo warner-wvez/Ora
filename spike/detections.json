@@ -1,0 +1,1506 @@
+{
+ "yolov8n": {
+  "AL_snapshot_montgomery-i85-urban": {
+   "count": 10,
+   "by_class": {
+    "car": 6,
+    "truck": 2,
+    "bus": 2
+   },
+   "confs": [
+    0.778,
+    0.627,
+    0.551,
+    0.493,
+    0.473,
+    0.457,
+    0.358,
+    0.328,
+    0.312,
+    0.252
+   ]
+  },
+  "AL_snapshot_rural-i65-mp206": {
+   "count": 5,
+   "by_class": {
+    "car": 5
+   },
+   "confs": [
+    0.479,
+    0.439,
+    0.347,
+    0.304,
+    0.289
+   ]
+  },
+  "FL_video_tampa-i75-i4": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.255
+   ]
+  },
+  "HI_video_honolulu-dillingham": {
+   "count": 11,
+   "by_class": {
+    "car": 10,
+    "truck": 1
+   },
+   "confs": [
+    0.816,
+    0.786,
+    0.735,
+    0.697,
+    0.682,
+    0.63,
+    0.619,
+    0.549,
+    0.404,
+    0.325,
+    0.323
+   ]
+  },
+  "IL_snapshot_chicago-urban": {
+   "count": 17,
+   "by_class": {
+    "car": 15,
+    "truck": 2
+   },
+   "confs": [
+    0.763,
+    0.76,
+    0.758,
+    0.693,
+    0.636,
+    0.588,
+    0.58,
+    0.571,
+    0.548,
+    0.426,
+    0.393,
+    0.377,
+    0.354,
+    0.344,
+    0.319,
+    0.255,
+    0.255
+   ]
+  },
+  "IL_snapshot_tollway-i88-suburban": {
+   "count": 4,
+   "by_class": {
+    "car": 4
+   },
+   "confs": [
+    0.492,
+    0.486,
+    0.341,
+    0.305
+   ]
+  },
+  "KY_snapshot_louisville-i264-urban": {
+   "count": 9,
+   "by_class": {
+    "car": 9
+   },
+   "confs": [
+    0.821,
+    0.749,
+    0.724,
+    0.712,
+    0.696,
+    0.682,
+    0.616,
+    0.594,
+    0.402
+   ]
+  },
+  "KY_snapshot_rural-i24-mp92": {
+   "count": 5,
+   "by_class": {
+    "car": 5
+   },
+   "confs": [
+    0.651,
+    0.518,
+    0.405,
+    0.345,
+    0.322
+   ]
+  },
+  "MD_video_baltimore-i695-beltway": {
+   "count": 4,
+   "by_class": {
+    "car": 3,
+    "truck": 1
+   },
+   "confs": [
+    0.619,
+    0.528,
+    0.523,
+    0.318
+   ]
+  },
+  "MD_video_dc-intersection": {
+   "count": 2,
+   "by_class": {
+    "car": 1,
+    "truck": 1
+   },
+   "confs": [
+    0.72,
+    0.297
+   ]
+  },
+  "MS_video_jackson-i20-i220": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "MS_video_rural-i55-canton": {
+   "count": 2,
+   "by_class": {
+    "car": 2
+   },
+   "confs": [
+    0.441,
+    0.305
+   ]
+  },
+  "NYC_snapshot_bronx-expressway": {
+   "count": 8,
+   "by_class": {
+    "car": 8
+   },
+   "confs": [
+    0.605,
+    0.484,
+    0.481,
+    0.446,
+    0.344,
+    0.322,
+    0.309,
+    0.308
+   ]
+  },
+  "NYC_snapshot_manhattan-dense": {
+   "count": 8,
+   "by_class": {
+    "car": 8
+   },
+   "confs": [
+    0.87,
+    0.853,
+    0.714,
+    0.671,
+    0.628,
+    0.449,
+    0.446,
+    0.372
+   ]
+  },
+  "NY_video_nyc-gowanus-i278": {
+   "count": 10,
+   "by_class": {
+    "car": 8,
+    "truck": 2
+   },
+   "confs": [
+    0.625,
+    0.591,
+    0.507,
+    0.473,
+    0.463,
+    0.447,
+    0.435,
+    0.367,
+    0.351,
+    0.331
+   ]
+  },
+  "RI_snapshot_providence-henderson-bridge": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.542
+   ]
+  },
+  "RI_snapshot_providence-i195": {
+   "count": 7,
+   "by_class": {
+    "car": 7
+   },
+   "confs": [
+    0.765,
+    0.75,
+    0.745,
+    0.698,
+    0.563,
+    0.556,
+    0.366
+   ]
+  },
+  "SC_video_charleston-surface-road": {
+   "count": 1,
+   "by_class": {
+    "truck": 1
+   },
+   "confs": [
+    0.426
+   ]
+  },
+  "SC_video_greenville-i85-freeway": {
+   "count": 2,
+   "by_class": {
+    "car": 2
+   },
+   "confs": [
+    0.723,
+    0.577
+   ]
+  },
+  "TX_video_dallas-ih35e-downtown": {
+   "count": 2,
+   "by_class": {
+    "truck": 1,
+    "car": 1
+   },
+   "confs": [
+    0.493,
+    0.353
+   ]
+  },
+  "TX_video_houston-ih45-urban-freeway": {
+   "count": 5,
+   "by_class": {
+    "car": 4,
+    "truck": 1
+   },
+   "confs": [
+    0.593,
+    0.543,
+    0.438,
+    0.368,
+    0.284
+   ]
+  },
+  "TX_video_rural-fm105-vidor": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_rural-snoqualmie-pass": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.49
+   ]
+  },
+  "WA_snapshot_seattle-i5-freeway": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  }
+ },
+ "yolov8m": {
+  "AL_snapshot_montgomery-i85-urban": {
+   "count": 16,
+   "by_class": {
+    "truck": 4,
+    "car": 12
+   },
+   "confs": [
+    0.892,
+    0.74,
+    0.738,
+    0.735,
+    0.728,
+    0.637,
+    0.583,
+    0.575,
+    0.514,
+    0.511,
+    0.478,
+    0.467,
+    0.396,
+    0.329,
+    0.326,
+    0.302
+   ]
+  },
+  "AL_snapshot_rural-i65-mp206": {
+   "count": 3,
+   "by_class": {
+    "car": 2,
+    "truck": 1
+   },
+   "confs": [
+    0.717,
+    0.361,
+    0.309
+   ]
+  },
+  "FL_video_tampa-i75-i4": {
+   "count": 4,
+   "by_class": {
+    "bus": 1,
+    "car": 3
+   },
+   "confs": [
+    0.869,
+    0.607,
+    0.504,
+    0.452
+   ]
+  },
+  "HI_video_honolulu-dillingham": {
+   "count": 14,
+   "by_class": {
+    "car": 12,
+    "truck": 2
+   },
+   "confs": [
+    0.884,
+    0.86,
+    0.854,
+    0.796,
+    0.778,
+    0.686,
+    0.587,
+    0.486,
+    0.457,
+    0.433,
+    0.418,
+    0.404,
+    0.322,
+    0.318
+   ]
+  },
+  "IL_snapshot_chicago-urban": {
+   "count": 22,
+   "by_class": {
+    "car": 19,
+    "truck": 3
+   },
+   "confs": [
+    0.763,
+    0.756,
+    0.736,
+    0.719,
+    0.699,
+    0.681,
+    0.676,
+    0.676,
+    0.637,
+    0.63,
+    0.601,
+    0.589,
+    0.573,
+    0.568,
+    0.561,
+    0.556,
+    0.499,
+    0.432,
+    0.423,
+    0.365,
+    0.337,
+    0.333
+   ]
+  },
+  "IL_snapshot_tollway-i88-suburban": {
+   "count": 4,
+   "by_class": {
+    "car": 4
+   },
+   "confs": [
+    0.635,
+    0.558,
+    0.555,
+    0.424
+   ]
+  },
+  "KY_snapshot_louisville-i264-urban": {
+   "count": 15,
+   "by_class": {
+    "car": 13,
+    "truck": 1,
+    "bus": 1
+   },
+   "confs": [
+    0.816,
+    0.803,
+    0.772,
+    0.627,
+    0.625,
+    0.623,
+    0.608,
+    0.601,
+    0.512,
+    0.458,
+    0.388,
+    0.312,
+    0.285,
+    0.278,
+    0.267
+   ]
+  },
+  "KY_snapshot_rural-i24-mp92": {
+   "count": 13,
+   "by_class": {
+    "car": 11,
+    "truck": 2
+   },
+   "confs": [
+    0.813,
+    0.781,
+    0.728,
+    0.692,
+    0.677,
+    0.647,
+    0.551,
+    0.497,
+    0.462,
+    0.434,
+    0.332,
+    0.296,
+    0.28
+   ]
+  },
+  "MD_video_baltimore-i695-beltway": {
+   "count": 8,
+   "by_class": {
+    "car": 6,
+    "truck": 2
+   },
+   "confs": [
+    0.795,
+    0.771,
+    0.721,
+    0.619,
+    0.579,
+    0.319,
+    0.296,
+    0.252
+   ]
+  },
+  "MD_video_dc-intersection": {
+   "count": 4,
+   "by_class": {
+    "car": 4
+   },
+   "confs": [
+    0.824,
+    0.652,
+    0.567,
+    0.484
+   ]
+  },
+  "MS_video_jackson-i20-i220": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "MS_video_rural-i55-canton": {
+   "count": 4,
+   "by_class": {
+    "car": 2,
+    "truck": 2
+   },
+   "confs": [
+    0.78,
+    0.503,
+    0.355,
+    0.284
+   ]
+  },
+  "NYC_snapshot_bronx-expressway": {
+   "count": 12,
+   "by_class": {
+    "car": 10,
+    "truck": 2
+   },
+   "confs": [
+    0.708,
+    0.637,
+    0.635,
+    0.633,
+    0.563,
+    0.484,
+    0.445,
+    0.38,
+    0.375,
+    0.358,
+    0.327,
+    0.274
+   ]
+  },
+  "NYC_snapshot_manhattan-dense": {
+   "count": 8,
+   "by_class": {
+    "car": 7,
+    "motorcycle": 1
+   },
+   "confs": [
+    0.917,
+    0.807,
+    0.79,
+    0.784,
+    0.573,
+    0.452,
+    0.451,
+    0.258
+   ]
+  },
+  "NY_video_nyc-gowanus-i278": {
+   "count": 15,
+   "by_class": {
+    "car": 11,
+    "truck": 3,
+    "bus": 1
+   },
+   "confs": [
+    0.678,
+    0.671,
+    0.643,
+    0.61,
+    0.6,
+    0.583,
+    0.491,
+    0.459,
+    0.422,
+    0.331,
+    0.33,
+    0.286,
+    0.285,
+    0.284,
+    0.259
+   ]
+  },
+  "RI_snapshot_providence-henderson-bridge": {
+   "count": 2,
+   "by_class": {
+    "car": 2
+   },
+   "confs": [
+    0.774,
+    0.512
+   ]
+  },
+  "RI_snapshot_providence-i195": {
+   "count": 13,
+   "by_class": {
+    "car": 13
+   },
+   "confs": [
+    0.86,
+    0.824,
+    0.799,
+    0.736,
+    0.731,
+    0.661,
+    0.637,
+    0.632,
+    0.612,
+    0.435,
+    0.39,
+    0.319,
+    0.264
+   ]
+  },
+  "SC_video_charleston-surface-road": {
+   "count": 1,
+   "by_class": {
+    "truck": 1
+   },
+   "confs": [
+    0.618
+   ]
+  },
+  "SC_video_greenville-i85-freeway": {
+   "count": 8,
+   "by_class": {
+    "car": 7,
+    "truck": 1
+   },
+   "confs": [
+    0.761,
+    0.717,
+    0.657,
+    0.525,
+    0.399,
+    0.344,
+    0.321,
+    0.252
+   ]
+  },
+  "TX_video_dallas-ih35e-downtown": {
+   "count": 7,
+   "by_class": {
+    "truck": 2,
+    "car": 5
+   },
+   "confs": [
+    0.68,
+    0.649,
+    0.502,
+    0.437,
+    0.421,
+    0.408,
+    0.369
+   ]
+  },
+  "TX_video_houston-ih45-urban-freeway": {
+   "count": 9,
+   "by_class": {
+    "car": 9
+   },
+   "confs": [
+    0.712,
+    0.693,
+    0.653,
+    0.566,
+    0.53,
+    0.504,
+    0.364,
+    0.311,
+    0.25
+   ]
+  },
+  "TX_video_rural-fm105-vidor": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_rural-snoqualmie-pass": {
+   "count": 2,
+   "by_class": {
+    "car": 2
+   },
+   "confs": [
+    0.671,
+    0.571
+   ]
+  },
+  "WA_snapshot_seattle-i5-freeway": {
+   "count": 2,
+   "by_class": {
+    "car": 2
+   },
+   "confs": [
+    0.345,
+    0.252
+   ]
+  }
+ },
+ "yolov8m_hi": {
+  "AL_snapshot_montgomery-i85-urban": {
+   "count": 30,
+   "by_class": {},
+   "confs": []
+  },
+  "AL_snapshot_rural-i65-mp206": {
+   "count": 4,
+   "by_class": {},
+   "confs": []
+  },
+  "FL_video_tampa-i75-i4": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "HI_video_honolulu-dillingham": {
+   "count": 13,
+   "by_class": {},
+   "confs": []
+  },
+  "IL_snapshot_chicago-urban": {
+   "count": 26,
+   "by_class": {},
+   "confs": []
+  },
+  "IL_snapshot_tollway-i88-suburban": {
+   "count": 3,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_louisville-i264-urban": {
+   "count": 21,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_rural-i24-mp92": {
+   "count": 14,
+   "by_class": {},
+   "confs": []
+  },
+  "MD_video_baltimore-i695-beltway": {
+   "count": 3,
+   "by_class": {},
+   "confs": []
+  },
+  "MD_video_dc-intersection": {
+   "count": 4,
+   "by_class": {},
+   "confs": []
+  },
+  "MS_video_jackson-i20-i220": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "MS_video_rural-i55-canton": {
+   "count": 4,
+   "by_class": {},
+   "confs": []
+  },
+  "NYC_snapshot_bronx-expressway": {
+   "count": 11,
+   "by_class": {},
+   "confs": []
+  },
+  "NYC_snapshot_manhattan-dense": {
+   "count": 6,
+   "by_class": {},
+   "confs": []
+  },
+  "NY_video_nyc-gowanus-i278": {
+   "count": 15,
+   "by_class": {},
+   "confs": []
+  },
+  "RI_snapshot_providence-henderson-bridge": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "RI_snapshot_providence-i195": {
+   "count": 17,
+   "by_class": {},
+   "confs": []
+  },
+  "SC_video_charleston-surface-road": {
+   "count": 1,
+   "by_class": {},
+   "confs": []
+  },
+  "SC_video_greenville-i85-freeway": {
+   "count": 10,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_dallas-ih35e-downtown": {
+   "count": 10,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_houston-ih45-urban-freeway": {
+   "count": 10,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_rural-fm105-vidor": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_rural-snoqualmie-pass": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_seattle-i5-freeway": {
+   "count": 6,
+   "by_class": {},
+   "confs": []
+  }
+ },
+ "yolov8m_tiled": {
+  "AL_snapshot_montgomery-i85-urban": {
+   "count": 26,
+   "by_class": {},
+   "confs": []
+  },
+  "AL_snapshot_rural-i65-mp206": {
+   "count": 5,
+   "by_class": {},
+   "confs": []
+  },
+  "FL_video_tampa-i75-i4": {
+   "count": 5,
+   "by_class": {},
+   "confs": []
+  },
+  "HI_video_honolulu-dillingham": {
+   "count": 11,
+   "by_class": {},
+   "confs": []
+  },
+  "IL_snapshot_chicago-urban": {
+   "count": 23,
+   "by_class": {},
+   "confs": []
+  },
+  "IL_snapshot_tollway-i88-suburban": {
+   "count": 4,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_louisville-i264-urban": {
+   "count": 19,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_rural-i24-mp92": {
+   "count": 17,
+   "by_class": {},
+   "confs": []
+  },
+  "MD_video_baltimore-i695-beltway": {
+   "count": 5,
+   "by_class": {},
+   "confs": []
+  },
+  "MD_video_dc-intersection": {
+   "count": 6,
+   "by_class": {},
+   "confs": []
+  },
+  "MS_video_jackson-i20-i220": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "MS_video_rural-i55-canton": {
+   "count": 5,
+   "by_class": {},
+   "confs": []
+  },
+  "NYC_snapshot_bronx-expressway": {
+   "count": 11,
+   "by_class": {},
+   "confs": []
+  },
+  "NYC_snapshot_manhattan-dense": {
+   "count": 6,
+   "by_class": {},
+   "confs": []
+  },
+  "NY_video_nyc-gowanus-i278": {
+   "count": 16,
+   "by_class": {},
+   "confs": []
+  },
+  "RI_snapshot_providence-henderson-bridge": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "RI_snapshot_providence-i195": {
+   "count": 14,
+   "by_class": {},
+   "confs": []
+  },
+  "SC_video_charleston-surface-road": {
+   "count": 1,
+   "by_class": {},
+   "confs": []
+  },
+  "SC_video_greenville-i85-freeway": {
+   "count": 9,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_dallas-ih35e-downtown": {
+   "count": 7,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_houston-ih45-urban-freeway": {
+   "count": 9,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_rural-fm105-vidor": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_rural-snoqualmie-pass": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_seattle-i5-freeway": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  }
+ },
+ "roboflow": {
+  "AL_snapshot_montgomery-i85-urban": {
+   "count": 2,
+   "by_class": {
+    "car": 2
+   },
+   "confs": [
+    0.997,
+    0.996
+   ]
+  },
+  "AL_snapshot_rural-i65-mp206": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "FL_video_tampa-i75-i4": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "HI_video_honolulu-dillingham": {
+   "count": 7,
+   "by_class": {
+    "car": 7
+   },
+   "confs": [
+    0.999,
+    0.998,
+    0.998,
+    0.997,
+    0.997,
+    0.997,
+    0.997
+   ]
+  },
+  "IL_snapshot_chicago-urban": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.98
+   ]
+  },
+  "IL_snapshot_tollway-i88-suburban": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_louisville-i264-urban": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_rural-i24-mp92": {
+   "count": 1,
+   "by_class": {
+    "small truck": 1
+   },
+   "confs": [
+    0.959
+   ]
+  },
+  "MD_video_baltimore-i695-beltway": {
+   "count": 4,
+   "by_class": {
+    "car": 4
+   },
+   "confs": [
+    0.999,
+    0.998,
+    0.998,
+    0.997
+   ]
+  },
+  "MD_video_dc-intersection": {
+   "count": 3,
+   "by_class": {
+    "car": 2,
+    "truck-xl-": 1
+   },
+   "confs": [
+    0.998,
+    0.997,
+    0.747
+   ]
+  },
+  "MS_video_jackson-i20-i220": {
+   "count": 2,
+   "by_class": {
+    "big truck": 1,
+    "truck-xl-": 1
+   },
+   "confs": [
+    0.982,
+    0.953
+   ]
+  },
+  "MS_video_rural-i55-canton": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "NYC_snapshot_bronx-expressway": {
+   "count": 2,
+   "by_class": {
+    "car": 2
+   },
+   "confs": [
+    0.998,
+    0.997
+   ]
+  },
+  "NYC_snapshot_manhattan-dense": {
+   "count": 9,
+   "by_class": {
+    "car": 5,
+    "bus-l-": 1,
+    "truck-l-": 1,
+    "big bus": 1,
+    "truck-m-": 1
+   },
+   "confs": [
+    0.998,
+    0.998,
+    0.997,
+    0.996,
+    0.499,
+    0.377,
+    0.258,
+    0.152,
+    0.085
+   ]
+  },
+  "NY_video_nyc-gowanus-i278": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.997
+   ]
+  },
+  "RI_snapshot_providence-henderson-bridge": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "RI_snapshot_providence-i195": {
+   "count": 5,
+   "by_class": {
+    "car": 5
+   },
+   "confs": [
+    0.999,
+    0.999,
+    0.998,
+    0.997,
+    0.997
+   ]
+  },
+  "SC_video_charleston-surface-road": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.997
+   ]
+  },
+  "SC_video_greenville-i85-freeway": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_dallas-ih35e-downtown": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_houston-ih45-urban-freeway": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_rural-fm105-vidor": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_rural-snoqualmie-pass": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_seattle-i5-freeway": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  }
+ },
+ "roboflow_c25": {
+  "AL_snapshot_montgomery-i85-urban": {
+   "count": 3,
+   "by_class": {
+    "car": 2,
+    "big truck": 1
+   },
+   "confs": [
+    0.997,
+    0.997,
+    0.967
+   ]
+  },
+  "AL_snapshot_rural-i65-mp206": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "FL_video_tampa-i75-i4": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "HI_video_honolulu-dillingham": {
+   "count": 7,
+   "by_class": {
+    "car": 7
+   },
+   "confs": [
+    0.999,
+    0.998,
+    0.998,
+    0.997,
+    0.997,
+    0.997,
+    0.997
+   ]
+  },
+  "IL_snapshot_chicago-urban": {
+   "count": 5,
+   "by_class": {
+    "car": 2,
+    "truck-l-": 2,
+    "truck-xl-": 1
+   },
+   "confs": [
+    0.996,
+    0.989,
+    0.471,
+    0.291,
+    0.212
+   ]
+  },
+  "IL_snapshot_tollway-i88-suburban": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_louisville-i264-urban": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.997
+   ]
+  },
+  "KY_snapshot_rural-i24-mp92": {
+   "count": 2,
+   "by_class": {
+    "small truck": 1,
+    "big truck": 1
+   },
+   "confs": [
+    0.959,
+    0.436
+   ]
+  },
+  "MD_video_baltimore-i695-beltway": {
+   "count": 5,
+   "by_class": {
+    "car": 5
+   },
+   "confs": [
+    0.999,
+    0.998,
+    0.998,
+    0.998,
+    0.997
+   ]
+  },
+  "MD_video_dc-intersection": {
+   "count": 4,
+   "by_class": {
+    "car": 2,
+    "truck-xl-": 1,
+    "bus-l-": 1
+   },
+   "confs": [
+    0.998,
+    0.997,
+    0.747,
+    0.345
+   ]
+  },
+  "MS_video_jackson-i20-i220": {
+   "count": 3,
+   "by_class": {
+    "truck-xl-": 1,
+    "big truck": 1,
+    "truck-l-": 1
+   },
+   "confs": [
+    0.984,
+    0.982,
+    0.562
+   ]
+  },
+  "MS_video_rural-i55-canton": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "NYC_snapshot_bronx-expressway": {
+   "count": 3,
+   "by_class": {
+    "car": 3
+   },
+   "confs": [
+    0.998,
+    0.997,
+    0.996
+   ]
+  },
+  "NYC_snapshot_manhattan-dense": {
+   "count": 11,
+   "by_class": {
+    "car": 5,
+    "truck-xl-": 1,
+    "bus-l-": 1,
+    "truck-l-": 2,
+    "big bus": 1,
+    "truck-m-": 1
+   },
+   "confs": [
+    0.998,
+    0.998,
+    0.997,
+    0.996,
+    0.95,
+    0.652,
+    0.591,
+    0.377,
+    0.258,
+    0.152,
+    0.085
+   ]
+  },
+  "NY_video_nyc-gowanus-i278": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.997
+   ]
+  },
+  "RI_snapshot_providence-henderson-bridge": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "RI_snapshot_providence-i195": {
+   "count": 5,
+   "by_class": {
+    "car": 5
+   },
+   "confs": [
+    0.999,
+    0.999,
+    0.998,
+    0.997,
+    0.997
+   ]
+  },
+  "SC_video_charleston-surface-road": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.998
+   ]
+  },
+  "SC_video_greenville-i85-freeway": {
+   "count": 1,
+   "by_class": {
+    "car": 1
+   },
+   "confs": [
+    0.998
+   ]
+  },
+  "TX_video_dallas-ih35e-downtown": {
+   "count": 1,
+   "by_class": {
+    "bus-s-": 1
+   },
+   "confs": [
+    0.629
+   ]
+  },
+  "TX_video_houston-ih45-urban-freeway": {
+   "count": 1,
+   "by_class": {
+    "truck-xl-": 1
+   },
+   "confs": [
+    0.802
+   ]
+  },
+  "TX_video_rural-fm105-vidor": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_rural-snoqualmie-pass": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_seattle-i5-freeway": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  }
+ },
+ "roboflow_tiled": {
+  "AL_snapshot_montgomery-i85-urban": {
+   "count": 7,
+   "by_class": {},
+   "confs": []
+  },
+  "AL_snapshot_rural-i65-mp206": {
+   "count": 1,
+   "by_class": {},
+   "confs": []
+  },
+  "FL_video_tampa-i75-i4": {
+   "count": 1,
+   "by_class": {},
+   "confs": []
+  },
+  "HI_video_honolulu-dillingham": {
+   "count": 8,
+   "by_class": {},
+   "confs": []
+  },
+  "IL_snapshot_chicago-urban": {
+   "count": 11,
+   "by_class": {},
+   "confs": []
+  },
+  "IL_snapshot_tollway-i88-suburban": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_louisville-i264-urban": {
+   "count": 8,
+   "by_class": {},
+   "confs": []
+  },
+  "KY_snapshot_rural-i24-mp92": {
+   "count": 5,
+   "by_class": {},
+   "confs": []
+  },
+  "MD_video_baltimore-i695-beltway": {
+   "count": 8,
+   "by_class": {},
+   "confs": []
+  },
+  "MD_video_dc-intersection": {
+   "count": 5,
+   "by_class": {},
+   "confs": []
+  },
+  "MS_video_jackson-i20-i220": {
+   "count": 6,
+   "by_class": {},
+   "confs": []
+  },
+  "MS_video_rural-i55-canton": {
+   "count": 4,
+   "by_class": {},
+   "confs": []
+  },
+  "NYC_snapshot_bronx-expressway": {
+   "count": 7,
+   "by_class": {},
+   "confs": []
+  },
+  "NYC_snapshot_manhattan-dense": {
+   "count": 19,
+   "by_class": {},
+   "confs": []
+  },
+  "NY_video_nyc-gowanus-i278": {
+   "count": 3,
+   "by_class": {},
+   "confs": []
+  },
+  "RI_snapshot_providence-henderson-bridge": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "RI_snapshot_providence-i195": {
+   "count": 9,
+   "by_class": {},
+   "confs": []
+  },
+  "SC_video_charleston-surface-road": {
+   "count": 1,
+   "by_class": {},
+   "confs": []
+  },
+  "SC_video_greenville-i85-freeway": {
+   "count": 4,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_dallas-ih35e-downtown": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_houston-ih45-urban-freeway": {
+   "count": 1,
+   "by_class": {},
+   "confs": []
+  },
+  "TX_video_rural-fm105-vidor": {
+   "count": 2,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_rural-snoqualmie-pass": {
+   "count": 3,
+   "by_class": {},
+   "confs": []
+  },
+  "WA_snapshot_seattle-i5-freeway": {
+   "count": 0,
+   "by_class": {},
+   "confs": []
+  }
+ }
+}

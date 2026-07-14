@@ -1,0 +1,675 @@
+{
+ "cameras": {
+  "FL": 4904,
+  "GA": 4043,
+  "UT": 2063,
+  "PA": 1522,
+  "NC": 1114,
+  "NV": 648,
+  "AZ": 644,
+  "WI": 482,
+  "ID": 457,
+  "CT": 347,
+  "LA": 336,
+  "AK": 123,
+  "MN": 1527,
+  "CO": 1026,
+  "IA": 844,
+  "NE": 353,
+  "IN": 740,
+  "KS": 613,
+  "MA": 304,
+  "CA": 3197,
+  "OR": 1127,
+  "VA": 1684,
+  "OH": 1121,
+  "TX": 3426,
+  "WA": 1524,
+  "NY": 1864,
+  "DE": 358,
+  "NM": 183,
+  "TN": 667,
+  "OK": 193,
+  "MT": 118,
+  "MI": 783,
+  "ND": 186,
+  "SD": 170,
+  "AR": 525,
+  "WY": 228,
+  "WV": 127,
+  "MO": 737,
+  "AL": 629,
+  "KY": 241,
+  "SC": 763,
+  "RI": 135,
+  "ME": 151,
+  "NH": 181,
+  "VT": 89,
+  "HI": 361,
+  "MD": 553,
+  "MS": 411,
+  "IL": 1328,
+  "NYC": 957
+ },
+ "probe": {
+  "AK": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 960,
+    "sizes": [
+     "1000x563",
+     "540x330",
+     "960x720"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "AL": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1920,
+    "sizes": [
+     "1280x720",
+     "1920x1080",
+     "2688x1512"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "AZ": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 540,
+    "sizes": [
+     "1920x1080",
+     "352x288",
+     "540x330"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "CA": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x260"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "CO": {
+   "video": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "320x240",
+     "352x240"
+    ],
+    "tier": "blind (<640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240",
+     "352x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "CT": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "DE": {
+   "video": {
+    "n": 2,
+    "median_width": 1920,
+    "sizes": [
+     "1280x720",
+     "1920x1080"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "FL": {
+   "video": {
+    "n": 3,
+    "median_width": 720,
+    "sizes": [
+     "640x480",
+     "720x576",
+     "800x450"
+    ],
+    "tier": "workable (>=640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "352x240",
+     "512x288"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "GA": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 450,
+    "sizes": [
+     "450x253"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "HI": {
+   "video": {
+    "n": 3,
+    "median_width": 720,
+    "sizes": [
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "IA": {
+   "video": {
+    "n": 3,
+    "median_width": 480,
+    "sizes": [
+     "480x270"
+    ],
+    "tier": "blind (<640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 480,
+    "sizes": [
+     "1280x720",
+     "480x270",
+     "480x360"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "ID": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 640,
+    "sizes": [
+     "240x146",
+     "640x388",
+     "800x486"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "IL": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 800,
+    "sizes": [
+     "1280x720",
+     "720x480",
+     "800x450"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "IN": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "352x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "KS": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1920,
+    "sizes": [
+     "1280x720",
+     "1920x1080"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "KY": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1280,
+    "sizes": [
+     "1280x720"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "LA": {
+   "video": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "352x240"
+    ],
+    "tier": "blind (<640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "352x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "MA": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "320x240",
+     "352x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "MD": {
+   "video": {
+    "n": 1,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "ME": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1280,
+    "sizes": [
+     "1280x777",
+     "2592x1944",
+     "640x518"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "MI": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "MN": {
+   "video": {
+    "n": 3,
+    "median_width": 720,
+    "sizes": [
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 720,
+    "sizes": [
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "MO": {
+   "video": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240",
+     "720x576"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "MS": {
+   "video": {
+    "n": 2,
+    "median_width": 720,
+    "sizes": [
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 640,
+    "sizes": [
+     "640x480"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "NC": {
+   "video": {
+    "n": 3,
+    "median_width": 1280,
+    "sizes": [
+     "1280x720"
+    ],
+    "tier": "workable (>=640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 800,
+    "sizes": [
+     "540x330",
+     "800x450",
+     "896x504"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "ND": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1920,
+    "sizes": [
+     "1920x1080",
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "NE": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1280,
+    "sizes": [
+     "1280x720"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "NH": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 480,
+    "sizes": [
+     "480x291"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "NM": {
+   "snapshot": {
+    "n": 2,
+    "median_width": 1920,
+    "sizes": [
+     "1920x1080",
+     "800x450"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "NV": {
+   "video": {
+    "n": 3,
+    "median_width": 360,
+    "sizes": [
+     "240x136",
+     "360x240",
+     "640x360"
+    ],
+    "tier": "blind (<640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "352x240",
+     "360x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "NY": {
+   "video": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "352x240",
+     "512x288"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "NYC": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "352x240",
+     "720x480"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "OH": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1280,
+    "sizes": [
+     "1280x720",
+     "2560x1920"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "OR": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 328,
+    "sizes": [
+     "328x295"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "PA": {
+   "video": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "RI": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 704,
+    "sizes": [
+     "704x480"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "SC": {
+   "video": {
+    "n": 2,
+    "median_width": 720,
+    "sizes": [
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 720,
+    "sizes": [
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "SD": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1920,
+    "sizes": [
+     "1920x1080"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "TN": {
+   "video": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "TX": {
+   "video": {
+    "n": 3,
+    "median_width": 720,
+    "sizes": [
+     "320x240",
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "UT": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1280,
+    "sizes": [
+     "1280x720"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "VA": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 320,
+    "sizes": [
+     "320x240"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "VT": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1280,
+    "sizes": [
+     "1024x829",
+     "1280x777"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "WA": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 335,
+    "sizes": [
+     "335x244",
+     "335x249"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "WI": {
+   "video": {
+    "n": 2,
+    "median_width": 352,
+    "sizes": [
+     "352x240"
+    ],
+    "tier": "blind (<640px)"
+   },
+   "snapshot": {
+    "n": 3,
+    "median_width": 352,
+    "sizes": [
+     "352x259"
+    ],
+    "tier": "blind (<640px)"
+   }
+  },
+  "WV": {
+   "video": {
+    "n": 1,
+    "median_width": 720,
+    "sizes": [
+     "720x480"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  },
+  "WY": {
+   "snapshot": {
+    "n": 3,
+    "median_width": 1280,
+    "sizes": [
+     "1280x720",
+     "800x450"
+    ],
+    "tier": "workable (>=640px)"
+   }
+  }
+ }
+}
