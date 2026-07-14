@@ -118,9 +118,10 @@
     transform: translateX(calc(100% + 28px)); visibility: hidden; transition: transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s .26s; }
   #routeView.show { transform: translateX(0); visibility: visible; transition: transform .26s cubic-bezier(.2,.8,.2,1); }
   #routeView .rv-head { padding: 14px 16px; background: #fff; border-bottom: 1px solid #e5e5ea; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  #routeView .rv-headtxt { min-width: 0; }
+  #routeView .rv-headtxt { flex: 1; min-width: 0; }
   #routeView .rv-actions { display: flex; gap: 6px; align-items: center; flex: none; }
-  #routeView .rv-title { font-size: 16px; font-weight: 700; color: #1c1c1e; }
+  /* a long route name truncates rather than squeezing the actions off the header */
+  #routeView .rv-title { font-size: 16px; font-weight: 700; color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   #routeView .rv-sub { font-size: 11px; color: #8e8e93; margin-top: 1px; }
   #routeView .rv-close { border: none; background: #f2f2f7; border-radius: 8px; width: 30px; height: 30px; font-size: 16px; cursor: pointer; color: #3c3c43; }
   #routeView .rv-body { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
@@ -135,6 +136,11 @@
   .rv-tile .rv-media .rv-nosnap span { font-size: 10px; font-weight: 500; color: #aeaeb2; }
   .rv-live { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; }
   .rv-live.rv-dead { background: #8e8e93; }
+  /* the resolution you already measured by opening this camera, so a route reads as a
+     checklist: which ones you have judged, and which of those clear the 640px bar */
+  .rv-res { position: absolute; bottom: 8px; left: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .02em; color: #fff;
+    background: rgba(26,138,60,.92); padding: 2px 6px; border-radius: 4px; }
+  .rv-res.low { background: rgba(216,27,69,.92); }
   .rv-tile .rv-cap { display: flex; align-items: center; gap: 8px; padding: 8px 11px; }
   .rv-tile .rv-nm { flex: 1; font-size: 12.5px; font-weight: 600; color: #1c1c1e; }
   .rv-tile .rv-rm { color: #c0c0c5; cursor: pointer; font-size: 15px; } .rv-tile .rv-rm:hover { color: #ff3b30; }
@@ -160,12 +166,33 @@
   .enlarge-btn { position: absolute; bottom: 8px; right: 8px; z-index: 3; width: 26px; height: 26px; border: none; border-radius: 5px; background: rgba(0,0,0,.5); color: #fff; font-size: 13px; line-height: 1; cursor: zoom-in; display: flex; align-items: center; justify-content: center; }
   .enlarge-btn:hover { background: rgba(0,0,0,.8); }
   .enlarge-ov { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,.82); display: flex; align-items: center; justify-content: center; padding: 24px; }
-  .enlarge-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 96vw; max-height: 92vh; }
-  .enlarge-media { max-width: 96vw; max-height: 84vh; width: auto; height: auto; border-radius: 8px; background: #000; box-shadow: 0 12px 44px rgba(0,0,0,.55); }
-  .enlarge-cap { color: #f2f2f5; font-size: 13px; text-align: center; max-width: 90vw; }
-  .enlarge-close { position: absolute; top: -14px; right: -14px; width: 32px; height: 32px; border-radius: 50%; border: none; background: #fff; color: #111; font-size: 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  .enlarge-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 96vw; }
+  /* every camera opens at the SAME size, so two scenes can actually be compared. The picture
+     letterboxes inside that fixed box rather than stretching to fill it: a 4:3 feed stretched
+     into 16:9 makes every vehicle 33% too wide, which would corrupt the exact judgment being
+     made here (vehicle shape and scale). F flips to the stretch for anyone who wants it. */
+  .enlarge-media { width: min(1600px, calc(100vw - 56px), calc((100vh - 132px) * 16 / 9)); aspect-ratio: 16 / 9;
+    object-fit: contain; border-radius: 8px; background: #000; box-shadow: 0 12px 44px rgba(0,0,0,.55); }
+  .enlarge-ov.fill .enlarge-media { object-fit: fill; }
+  .enlarge-cap { color: #f2f2f5; font-size: 13px; max-width: 90vw; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .enlarge-hint { color: #8e8e93; font-size: 11px; }
+  /* inside the box corner, not hanging off it: at -14px the button sat outside the media and
+     the viewport clipped it on smaller screens, which is why it read as broken */
+  .enlarge-close { position: absolute; top: 10px; right: 10px; z-index: 5; width: 40px; height: 40px; border-radius: 50%; border: none;
+    background: rgba(0,0,0,.55); color: #fff; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  .enlarge-close:hover { background: rgba(0,0,0,.85); }
   .popup-body { padding: 10px 12px 12px; }
   .popup-body h3 { font-size: 13px; margin: 0 0 4px; color: #1c1c1e; line-height: 1.3; }
+  /* the delivered resolution, read off the decoded picture. Green clears the 640px bar a
+     detector needs, red cannot. [hidden] needs its own rule here: the author `display`
+     below would otherwise beat the browser's default [hidden] { display: none }. */
+  .res-chip { display: inline-flex; align-items: center; vertical-align: middle; margin-left: 6px; padding: 2px 5px;
+    border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: .02em; background: #e7f8ed; color: #1a8a3c; }
+  .res-chip.low { background: #ffe9ee; color: #d81b45; }
+  .res-chip[hidden] { display: none; }
+  .enlarge-cap .res-chip { margin-left: 0; background: rgba(52,199,89,.22); color: #5fdc90; }
+  .enlarge-cap .res-chip.low { background: rgba(255,45,85,.22); color: #ff7b9c; }
   .popup-dirs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
   .dir-btn { font-size: 11px; padding: 3px 8px; border-radius: 999px; background: #f2f2f7; color: #007aff; border: none; cursor: pointer; font-weight: 600; }
   .dir-btn.active { background: #007aff; color: #fff; }
@@ -260,7 +287,7 @@
     .grp-h { min-height: 40px; align-items: center; }
     .mini-btn, .popup-add, #share, #panelToggle, .dir-btn { min-height: 36px; }
     .rv-close, .sheet-close { width: 38px; height: 38px; }
-    .enlarge-close { width: 40px; height: 40px; top: -16px; right: -6px; }
+    .enlarge-close { width: 44px; height: 44px; top: 8px; right: 8px; }
     .fchip, .color-btn { min-height: 34px; display: inline-flex; align-items: center; justify-content: center; }
     .rv-rm, .rx { padding: 10px 10px; font-size: 17px; }
   }
@@ -299,7 +326,7 @@
 <div id="routeView">
   <div class="rv-head">
     <div class="rv-headtxt"><div class="rv-title" id="rvTitle"></div><div class="rv-sub" id="rvSub"></div></div>
-    <div class="rv-actions"><button class="mini-btn" id="rvAdd">+ Add cameras</button><button class="rv-close" id="rvClose">&times;</button></div>
+    <div class="rv-actions"><button class="mini-btn grey" id="rvCopy" title="Copy this route's cameras as JSON">Copy list</button><button class="mini-btn" id="rvAdd">+ Add cameras</button><button class="rv-close" id="rvClose">&times;</button></div>
   </div>
   <div class="rv-body" id="rvBody"></div>
 </div>
@@ -417,6 +444,17 @@ const srcId=(k)=>`src-${k}`;
 function loadRoutes(){ try{ return JSON.parse(localStorage.getItem('ora-routes')||'[]'); }catch(e){ return []; } }
 function saveRoutes(r){ localStorage.setItem('ora-routes', JSON.stringify(r)); }
 function uid(){ return 'r'+Math.random().toString(36).slice(2,9); }
+/* one clipboard path for everything that copies: the async API where the page is a secure
+   context, a hidden textarea where it is not (opening the file straight off disk), so a copy
+   never silently does nothing */
+async function copyText(s){
+  try{ await navigator.clipboard.writeText(s); return true; }catch(e){}
+  try{
+    const ta=document.createElement('textarea'); ta.value=s;
+    ta.style.cssText='position:fixed;top:-1000px;opacity:0'; document.body.appendChild(ta);
+    ta.select(); const ok=document.execCommand('copy'); ta.remove(); return ok;
+  }catch(e){ return false; }
+}
 
 /* ---------- modes (the iD pattern) ----------
    Each mode's enter() installs everything it needs — listeners, timers, UI — and its
@@ -537,6 +575,59 @@ function canPlayVideo(dir, cfg){
 // whether a view has a still image is the layer's call (NYC builds its URL from camId
 // at render time and stores snapshot:null), so ask cfg.snap, never the raw field
 function snapSrc(dir, cfg){ return (dir && cfg && cfg.snap) ? (cfg.snap(dir)||'') : ''; }
+
+/* ---------- delivered resolution ----------
+   A camera below 640px wide is blind to a detector and no model fixes it, so it is the one
+   hard filter on this map — and the browser already knows the true pixel size of whatever it
+   just decoded, for free, the moment the media loads. Read it off, show it, remember it:
+   browsing the map IS the resolution census, collected passively instead of swept for.
+   The video outranks the poster snapshot when both land, because the stream is what a
+   detector would actually see.
+
+   THE CHIP ONLY EVER SHOWS WHAT THE BROWSER JUST DECODED. Do not paint it from resCache to
+   save a second on a re-visit: a camera that measured 1280x720 last week may be dead today,
+   and a remembered number rendered as a live readout is the map stating a present-tense fact
+   it has not confirmed — the same lie as the "NOT LIVE" badge above. Remembered numbers
+   belong in the route tiles and the export, where being a record is the whole point. */
+const RES_MIN_W=640, RES_SNAP=1, RES_VIDEO=2;          // rank: a truer source never loses to a weaker one
+// a view's identity in the cache: the stream if there is one, else the canonical snapshot
+// (the same normalizer the health sweep keys on), else NYC's camera id. A saved route entry
+// carries those same three fields, so one key function serves both.
+const resKey=(d)=> !d ? '' : (d.video || (d.snapshot ? snapKey(d.snapshot) : (d.camId ? 'nyc:'+d.camId : '')));
+let resCache=(()=>{ try{ return JSON.parse(localStorage.getItem('ora-res')||'{}'); }catch(e){ return {}; } })();
+let resSaveT=null;
+function rememberRes(key, w, h, rank){
+  const prev=resCache[key];
+  if(!key || (prev && prev.rank>rank)) return;
+  const s=store.selected;
+  resCache[key]={w, h, rank, name:(s&&s.props&&s.props.name)||(prev&&prev.name)||null};
+  clearTimeout(resSaveT);                              // debounced: a snapshot reloads every refresh
+  resSaveT=setTimeout(()=>{ try{ localStorage.setItem('ora-res', JSON.stringify(resCache)); }catch(e){} }, 500);
+}
+function paintRes(host, w, h, rank){
+  const c=host&&host.querySelector('[data-res]');
+  if(!c || !w || !h || +(c.dataset.rank||0)>rank) return;
+  c.dataset.rank=rank; c.textContent=`${w}×${h}`;
+  c.classList.toggle('low', w<RES_MIN_W);
+  c.title = w<RES_MIN_W ? `${w}px wide — under the ${RES_MIN_W}px a vehicle detector needs`
+                        : `${w}px wide — clears the ${RES_MIN_W}px bar`;
+  c.hidden=false;
+}
+function resetRes(host){ const c=host&&host.querySelector('[data-res]'); if(c){ c.hidden=true; c.dataset.rank=0; } }
+// an HLS stream's intrinsic size changes when hls.js switches variant, so watch 'resize' as
+// well as the first metadata: the number on screen must be what is decoding right now
+function watchRes(el, host, rank, key){
+  if(!el || !host) return;
+  const isVid=el.tagName==='VIDEO';
+  const read=()=>{
+    const w=isVid?el.videoWidth:el.naturalWidth, h=isVid?el.videoHeight:el.naturalHeight;
+    if(!w || !h) return;
+    paintRes(host, w, h, rank); rememberRes(key, w, h, rank);
+  };
+  if(isVid){ el.addEventListener('loadedmetadata', read); el.addEventListener('resize', read); if(el.videoWidth) read(); }
+  else { el.addEventListener('load', read); if(el.complete && el.naturalWidth) read(); }
+}
+
 function mediaHTML(dir, cfg){
   const live = canPlayVideo(dir, cfg), src = snapSrc(dir, cfg);
   // video cameras show the snapshot instantly as a poster, then the live video fades in over it
@@ -591,7 +682,7 @@ function facingHTML(dir){
 function buildLivePopup(props, cfg){
   const dirs=props.directions, showDir=dirs.length>1;
   return `<div class="popup-inner">${mediaHTML(dirs[0],cfg)}
-      <div class="popup-body"><h3>${props.name}</h3>
+      <div class="popup-body"><h3>${props.name}<span class="res-chip" data-res hidden></span></h3>
         ${props.rwis?`<div class="popup-rwis">${props.rwis}</div>`:''}
         ${showDir?`<div class="popup-dirs">${dirs.map((d,i)=>`<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.label||d.facing||d.direction||('View '+(i+1))}</button>`).join('')}</div>`:''}
         <div class="popup-meta">${facingHTML(dirs[0])}</div>
@@ -620,13 +711,23 @@ function watchLiveness(vid, wrap){
   let f0=null, t0=0, still=0;
   const tick=()=>{
     if(!vid.isConnected) return;
+    // a video WE paused says nothing about the camera. buildEnlarge pauses this one on
+    // purpose so two copies of the stream are not decoding at once, and a paused video has a
+    // frozen clock and pixel-identical frames — both of the things below read as a dead
+    // stream. Judging it meant that enlarging a camera to look at it marked it dead behind
+    // you, which is exactly the click a curator makes. Re-seed and wait for playback.
+    if(vid.paused){ f0=null; still=0; popupLive=setTimeout(tick,3500); return; }
     const f=frame();
     if(!f) return;                                     // pixels unreadable; say nothing
     if(f0){
       if(vid.currentTime-t0 <= 0.3){ markNotLive(wrap); return; }   // the clock stopped
-      // a real sensor is never perfectly still: exact repetition means a synthetic frame
-      still = delta(f0,f) < 0.02 ? still+1 : 0;
-      if(still>=2){ markNotLive(wrap); return; }        // two consecutive identical samples
+      // A live camera pointed at a quiet road is ALMOST still, and at delta<0.02 over two
+      // samples this called it dead after 7 seconds without traffic — the map lying about a
+      // working camera. A synthetic frozen frame repeats near-exactly (delta ≈ 0), so a tight
+      // threshold still catches it; holding out for 5 samples (~18s) gives a real road time
+      // for one car to cross it.
+      still = delta(f0,f) < 0.004 ? still+1 : 0;
+      if(still>=5){ markNotLive(wrap); return; }        // 5 consecutive near-identical samples
     }
     f0=f; t0=vid.currentTime;
     popupLive=setTimeout(tick,3500);
@@ -638,8 +739,14 @@ function playDir(dir, cfg, el, token){
   destroyPopupHls();
   const wrap=el.querySelector('.popup-imgwrap');
   const live=canPlayVideo(dir, cfg);
+  // resolution belongs to the VIEW, not the camera, so it resets every time the view changes.
+  // Both media elements are watched: the video is the truth where there is one, and where the
+  // stream never attaches the snapshot is what this camera actually delivers.
+  resetRes(el);
+  watchRes(el.querySelector('.poster, #popup-img'), el, RES_SNAP, resKey(dir));
   if(live){
     const vid=el.querySelector('#popup-vid');
+    watchRes(vid, el, RES_VIDEO, resKey(dir));
     popupHls=new Hls({maxBufferLength:8, startFragPrefetch:true, maxMaxBufferLength:20});
     popupHls.loadSource(dir.video); popupHls.attachMedia(vid);
     popupHls.on(Hls.Events.FRAG_LOADED,()=>{ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; }
@@ -729,23 +836,30 @@ function teardownEnlarge(){
   const cont=selContainer(); const pv=cont&&cont.querySelector('#popup-vid');
   if(pv) pv.play().catch(()=>{});
 }
+// contain letterboxes (true shape), fill stretches (distorted). The choice is remembered
+// across opens, because the whole point of a fixed box is comparing one camera to the next.
+let enlargeFit='contain';
 function buildEnlarge({dir, cfg, props}){
   const canVid=canPlayVideo(dir,cfg);
-  const ov=document.createElement('div'); ov.className='enlarge-ov';
+  const ov=document.createElement('div'); ov.className='enlarge-ov'+(enlargeFit==='fill'?' fill':'');
   const media=canVid ? `<video class="enlarge-media" muted autoplay playsinline></video>`
                      : `<img class="enlarge-media" src="${cfg.snap(dir)}">`;
   ov.innerHTML=`<div class="enlarge-box">${media}
       <button class="enlarge-close" title="Close">&#10005;</button>
-      <div class="enlarge-cap"><b>${props.name}</b>${props.rwis?` &middot; ${props.rwis}`:''}</div></div>`;
+      <div class="enlarge-cap"><span><b>${props.name}</b>${props.rwis?` &middot; ${props.rwis}`:''}</span>
+        <span class="res-chip" data-res hidden></span>
+        <span class="enlarge-hint">F stretches to fill &middot; Esc closes</span></div></div>`;
   document.body.appendChild(ov);
   // pause the selection's video so it is not decoding the same stream behind the overlay
   const cont0=selContainer(); const pv=cont0&&cont0.querySelector('#popup-vid'); if(pv) pv.pause();
   let hls=null, timer=null;
   if(canVid){
     const v=ov.querySelector('video');
+    watchRes(v, ov, RES_VIDEO, resKey(dir));
     hls=new Hls({maxBufferLength:8, maxMaxBufferLength:20}); hls.loadSource(dir.video); hls.attachMedia(v);
   } else {
     const im=ov.querySelector('img');
+    watchRes(im, ov, RES_SNAP, resKey(dir));
     // a broken image gets words, never the browser's broken-image glyph
     im.addEventListener('error',()=>{ if(!ov.isConnected || ov.querySelector('.enlarge-fail')) return;
       im.style.display='none';
@@ -753,7 +867,10 @@ function buildEnlarge({dir, cfg, props}){
       ov.querySelector('.enlarge-box').prepend(d); });
     timer=setInterval(()=>{ im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg));
   }
-  const onkey=(e)=>{ if(e.key==='Escape') closeEnlarge(); };
+  const onkey=(e)=>{
+    if(e.key==='Escape'){ closeEnlarge(); return; }
+    if(e.key==='f'||e.key==='F'){ enlargeFit = enlargeFit==='fill' ? 'contain' : 'fill'; ov.classList.toggle('fill', enlargeFit==='fill'); }
+  };
   document.addEventListener('keydown', onkey);
   ov.addEventListener('click',(e)=>{ if(e.target===ov || e.target.closest('.enlarge-close')) closeEnlarge(); });
   enlargeState={ov, hls, timer, onkey};
@@ -1229,6 +1346,18 @@ function routeCamStatus(c){
   const s=(h && h.status && c.snapshot) ? h.status[snapKey(c.snapshot)] : null;
   return s ? (s==='frozen'?'frozen':'offline') : 'snapshot';
 }
+/* A route IS the curation list: tap cameras onto it, then take it with you. Everything a
+   downstream pipeline needs to pull frames — where the camera is, what it streams, and the
+   resolution this browser actually decoded (null where it was never opened) — in one paste. */
+function routeExport(r){
+  return r.cams.map(c=>{
+    const m=resCache[resKey(c)]||{};
+    return { state: LAYERS[c.k] ? LAYERS[c.k].name : c.k, name: c.name,
+      lon: c.coords[0], lat: c.coords[1], status: routeCamStatus(c),
+      width: m.w||null, height: m.h||null,
+      video: c.video||null, snapshot: c.snapshot||null, camId: c.camId||null };
+  });
+}
 // the glanceable answer to "can I trust this route right now": how many cameras,
 // how many down, and how fresh that verdict is
 function renderRouteHeader(r){
@@ -1245,18 +1374,25 @@ function renderRouteHeader(r){
   }
   document.getElementById('rvSub').textContent=sub;
 }
-// dead cameras read as dead before the image even tries to load
+// dead cameras read as dead before the image even tries to load, and every camera already
+// opened carries the resolution it delivered — so the route answers "judged? and does it
+// clear 640px?" without reopening a single one
 function applyRvBadges(id){
   const r=loadRoutes().find(x=>x.id===id); if(!r) return;
   [...document.getElementById('rvBody').querySelectorAll('.rv-tile')].forEach((tile,i)=>{
     const c=r.cams[i]; if(!c) return;
     const st=routeCamStatus(c);
+    const media=tile.querySelector('.rv-media');
     const old=tile.querySelector('.rv-badge'); if(old) old.remove();
     if(st==='offline'||st==='frozen'){
       const b=document.createElement('span'); b.className='rv-live rv-dead rv-badge';
       b.textContent = st==='frozen' ? 'FROZEN' : 'OFFLINE';
-      tile.querySelector('.rv-media').appendChild(b);
+      media.appendChild(b);
     }
+    const oldRes=tile.querySelector('.rv-res'); if(oldRes) oldRes.remove();
+    const m=resCache[resKey(c)];                       // a route entry keys the same way a view does
+    if(m){ const e=document.createElement('span'); e.className='rv-res'+(m.w<RES_MIN_W?' low':'');
+      e.textContent=`${m.w}×${m.h}`; media.appendChild(e); }
   });
 }
 // tap a tile and the map takes you to that camera with its popup/sheet open. If its
@@ -1414,7 +1550,7 @@ document.querySelectorAll('.color-btn[data-mode]').forEach(btn=>btn.addEventList
 document.querySelectorAll('.color-btn[data-base]').forEach(btn=>btn.addEventListener('click',()=>{ document.querySelectorAll('.color-btn[data-base]').forEach(b=>b.classList.toggle('active',b===btn)); setBasemap(btn.dataset.base); writeUrl(); }));
 document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const v=ch.dataset.v; ch.classList.toggle('on'); ch.classList.contains('on')?store.enfFilter.verdicts.add(v):store.enfFilter.verdicts.delete(v); applyEnfFilter(); writeUrl(); }));
 document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.classList.contains('on')?store.enfFilter.types.add(t):store.enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
-document.getElementById('share').addEventListener('click',async ()=>{ const b=document.getElementById('share'); try{ await navigator.clipboard.writeText(location.href); }catch(e){} const t=b.textContent; b.textContent='Copied ✓'; setTimeout(()=>b.textContent=t,1300); });
+document.getElementById('share').addEventListener('click',async ()=>{ const b=document.getElementById('share'); const ok=await copyText(location.href); const t=b.textContent; b.textContent=ok?'Copied ✓':'Copy failed'; setTimeout(()=>b.textContent=t,1300); });
 document.getElementById('masterAll').addEventListener('change',e=>setAllStates(e.target.checked));
 // clearing layers moves nothing: the coverage markers reappear wherever you are
 document.getElementById('clearAll').addEventListener('click',()=>{ [...store.activeLayers].forEach(disableLayer); writeUrl(); });
@@ -1441,6 +1577,14 @@ document.getElementById('newRoute').addEventListener('click',()=>{
 document.getElementById('addDone').addEventListener('click',stopAddMode);
 document.getElementById('rvClose').addEventListener('click',closeRouteView);
 document.getElementById('rvAdd').addEventListener('click',()=>{ if(store.openRoute) startAddMode(store.openRoute,'route-view'); });   // Done returns here
+document.getElementById('rvCopy').addEventListener('click',async ()=>{
+  const r=loadRoutes().find(x=>x.id===store.openRoute); if(!r) return;
+  const b=document.getElementById('rvCopy');
+  if(!r.cams.length){ b.textContent='Nothing yet'; setTimeout(()=>{ b.textContent='Copy list'; },1400); return; }
+  const ok=await copyText(JSON.stringify(routeExport(r), null, 2));
+  b.textContent = ok ? `Copied ${r.cams.length} ✓` : 'Copy failed';
+  setTimeout(()=>{ b.textContent='Copy list'; },1700);
+});
 wireSheet();
 document.getElementById('panelToggle').addEventListener('click',()=>document.getElementById('panel').classList.toggle('expanded'));
 // touching the map puts the drawer away, the way every phone map app does
