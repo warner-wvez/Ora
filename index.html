@@ -582,7 +582,13 @@ function snapSrc(dir, cfg){ return (dir && cfg && cfg.snap) ? (cfg.snap(dir)||''
    just decoded, for free, the moment the media loads. Read it off, show it, remember it:
    browsing the map IS the resolution census, collected passively instead of swept for.
    The video outranks the poster snapshot when both land, because the stream is what a
-   detector would actually see. */
+   detector would actually see.
+
+   THE CHIP ONLY EVER SHOWS WHAT THE BROWSER JUST DECODED. Do not paint it from resCache to
+   save a second on a re-visit: a camera that measured 1280x720 last week may be dead today,
+   and a remembered number rendered as a live readout is the map stating a present-tense fact
+   it has not confirmed — the same lie as the "NOT LIVE" badge above. Remembered numbers
+   belong in the route tiles and the export, where being a record is the whole point. */
 const RES_MIN_W=640, RES_SNAP=1, RES_VIDEO=2;          // rank: a truer source never loses to a weaker one
 // a view's identity in the cache: the stream if there is one, else the canonical snapshot
 // (the same normalizer the health sweep keys on), else NYC's camera id. A saved route entry
@@ -608,9 +614,6 @@ function paintRes(host, w, h, rank){
   c.hidden=false;
 }
 function resetRes(host){ const c=host&&host.querySelector('[data-res]'); if(c){ c.hidden=true; c.dataset.rank=0; } }
-// what this camera measured last time you opened it, shown instantly so a re-visit does not
-// wait on the stream. Anything the browser reports now (rank ≥ 1) replaces it.
-function prefillRes(host, dir){ const m=resCache[resKey(dir)]; if(m) paintRes(host, m.w, m.h, 0); }
 // an HLS stream's intrinsic size changes when hls.js switches variant, so watch 'resize' as
 // well as the first metadata: the number on screen must be what is decoding right now
 function watchRes(el, host, rank, key){
@@ -739,7 +742,7 @@ function playDir(dir, cfg, el, token){
   // resolution belongs to the VIEW, not the camera, so it resets every time the view changes.
   // Both media elements are watched: the video is the truth where there is one, and where the
   // stream never attaches the snapshot is what this camera actually delivers.
-  resetRes(el); prefillRes(el, dir);
+  resetRes(el);
   watchRes(el.querySelector('.poster, #popup-img'), el, RES_SNAP, resKey(dir));
   if(live){
     const vid=el.querySelector('#popup-vid');
@@ -847,7 +850,6 @@ function buildEnlarge({dir, cfg, props}){
         <span class="res-chip" data-res hidden></span>
         <span class="enlarge-hint">F stretches to fill &middot; Esc closes</span></div></div>`;
   document.body.appendChild(ov);
-  prefillRes(ov, dir);
   // pause the selection's video so it is not decoding the same stream behind the overlay
   const cont0=selContainer(); const pv=cont0&&cont0.querySelector('#popup-vid'); if(pv) pv.pause();
   let hls=null, timer=null;
