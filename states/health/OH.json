@@ -1,17 +1,18 @@
 {
-"checked_at": "2026-07-15T14:46:34Z",
+"checked_at": "2026-07-15T20:09:05Z",
 "cameras": 1121,
 "counts": {
 "frozen": 17,
-"offline": 2,
+"offline": 3,
 "placeholder": 1
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE112.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D11/D11-004.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/Dayton/I-675_at_Colonel_Glenn_Highway.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/CCTV087a.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/artimis/CCTV4161.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",

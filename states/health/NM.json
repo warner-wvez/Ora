@@ -1,27 +1,20 @@
 {
-"checked_at": "2026-07-15T14:43:24Z",
+"checked_at": "2026-07-15T20:06:43Z",
 "cameras": 183,
 "counts": {
-"placeholder": 2,
-"offline": 15
+"offline": 6,
+"placeholder": 4
 },
 "status": {
-"http://ss.nmroads.com/snapshots/Coors_iliff.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/I25NBUS550.jpg": "offline",
 "http://ss.nmroads.com/snapshots/coors_atrisco.jpg": "offline",
-"http://ss.nmroads.com/snapshots/coors_glenrio.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_comanche.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25_sanantonio.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25sb_nm6.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25sb_us550.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40eb_juantabo.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40_sanmateo.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25nb_oldpecos.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25_lowerlabajada.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i25_upperlabajada.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25springer.jpg": "offline",
 "http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
-"http://ss.nmroads.com/snapshots/pdn_coors.jpg": "offline"
+"http://ss.nmroads.com/snapshots/pojoaque.jpg": "placeholder"
 }
 }
