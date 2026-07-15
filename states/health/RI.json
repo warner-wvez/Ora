@@ -1,10 +1,13 @@
 {
-"checked_at": "2026-07-15T15:01:06Z",
+"checked_at": "2026-07-15T20:23:47Z",
 "cameras": 135,
 "counts": {
-"offline": 1
+"placeholder": 4
 },
 "status": {
-"https://www.dot.ri.gov/img/travel/camimages/Memorial%20Blvd%20%40%20Steeple%20St.jpg": "offline"
+"https://www.dot.ri.gov/img/travel/camimages/1-04%20Rt%201%20N%20%40%20Rt%20138%20North%20Kingstown.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/1-07%20Rt%201%20S%20%40%20Government%20Center.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/146_10.4_N_CAM%20Exit%2010%20-%20Rt%20146A%20Split.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder"
 }
 }
