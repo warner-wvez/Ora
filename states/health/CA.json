@@ -1,37 +1,12 @@
 {
-"checked_at": "2026-07-15T03:47:30Z",
+"checked_at": "2026-07-15T09:08:12Z",
 "cameras": 3197,
 "counts": {
-"offline": 26,
+"offline": 1,
 "frozen": 1
 },
 "status": {
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/hum255gstlookingwesttow/hum255gstlookingwesttow.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/hum255kstlooking/hum255kstlooking.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/lak1750280lookings/lak1750280lookings.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/lak17526551lookingn/lak17526551lookingn.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/lak53sof20jctdome/lak53sof20jctdome.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/sr1boicelnn/sr1boicelnn.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/sr1chestnuts/sr1chestnuts.jpg": "offline",
 "https://cwwp2.dot.ca.gov/data/d3/cctv/image/hwy99ateeatonrd1/hwy99ateeatonrd1.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d3/cctv/image/hwy99athwy321/hwy99athwy321.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv975i80e80manuelcampospkwy/tv975i80e80manuelcampospkwy.jpg": "frozen",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker58atfairfaxrd/ker58atfairfaxrd.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker58athst/ker58athst.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker58athughesln/ker58athughesln.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker58atmohawkst/ker58atmohawkst.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker58atmtvernonave/ker58atmtvernonave.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker58attowerlinerd/ker58attowerlinerd.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker58atunionave/ker58atunionave.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker5atgrapevineuc/ker5atgrapevineuc.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker5atrte99/ker5atrte99.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker5attruckescaperampmedian/ker5attruckescaperampmedian.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker5attruckescaperampshoulder/ker5attruckescaperampshoulder.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker5norte119/ker5norte119.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker5norte43/ker5norte43.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker5sorte46/ker5sorte46.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker5sorte58/ker5sorte58.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker99at11thave/ker99at11thave.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d6/cctv/image/ker99atpanamalane/ker99atpanamalane.jpg": "offline"
+"https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv975i80e80manuelcampospkwy/tv975i80e80manuelcampospkwy.jpg": "frozen"
 }
 }
