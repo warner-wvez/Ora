@@ -113,6 +113,16 @@
   #addBanner.show { display: flex; }
   #addBanner button { background: #fff; color: #007aff; border: none; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
+  /* transient toast for the cross-state handoff ("End of West Virginia — → for Wyoming") */
+  #cycleNote { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 16; display: none;
+    background: rgba(28,28,30,0.92); color: #fff; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 999px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; max-width: calc(100vw - 32px); text-align: center; }
+  #cycleNote.show { display: block; animation: fadeSlide .2s cubic-bezier(.2,.8,.2,1); }
+  @media (max-width: 640px) {
+    #cycleNote { top: 96px; }                 /* clear of the collapsed phone panel */
+    .cam-arrow { min-height: 40px; min-width: 46px; }
+  }
+
   /* route viewer overlay: slides in and out instead of snapping */
   #routeView { position: absolute; top: 0; right: 0; bottom: 0; width: 380px; max-width: 90vw; z-index: 25; background: #f5f5f7; box-shadow: -4px 0 24px rgba(0,0,0,0.2); display: flex; flex-direction: column;
     transform: translateX(calc(100% + 28px)); visibility: hidden; transition: transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s .26s; }
@@ -182,8 +192,21 @@
     background: rgba(0,0,0,.55); color: #fff; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center;
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 2px 8px rgba(0,0,0,.4); }
   .enlarge-close:hover { background: rgba(0,0,0,.85); }
+  /* prev/next cameras, flanking the media at its edges */
+  .enlarge-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: none; border-radius: 50%;
+    background: rgba(0,0,0,.5); color: #fff; font-size: 30px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 4;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .enlarge-nav:hover { background: rgba(0,0,0,.85); }
+  .enlarge-nav.prev { left: 10px; } .enlarge-nav.next { right: 10px; }
+  .enlarge-pos { color: #9a9aa0; font-size: 11px; font-variant-numeric: tabular-nums; }
   .popup-body { padding: 10px 12px 12px; }
   .popup-body h3 { font-size: 13px; margin: 0 0 4px; color: #1c1c1e; line-height: 1.3; }
+  /* prev/next pager: the discoverable affordance for the ← / → keys that actually do the work */
+  .cam-nav { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #ececf0; }
+  .cam-nav[hidden] { display: none; }
+  .cam-arrow { width: 34px; height: 26px; border: none; border-radius: 6px; background: #f2f2f7; color: #007aff; font-size: 16px; line-height: 1; font-weight: 700; cursor: pointer; }
+  .cam-arrow:hover { background: #e0ecff; }
+  .cam-pos { font-size: 11px; color: #8e8e93; font-variant-numeric: tabular-nums; min-width: 58px; text-align: center; }
   /* the delivered resolution, read off the decoded picture. Green clears the 640px bar a
      detector needs, red cannot. [hidden] needs its own rule here: the author `display`
      below would otherwise beat the browser's default [hidden] { display: none }. */
@@ -246,10 +269,10 @@
   /* ---------- interaction physics ----------
      every touch answers within 100ms, every appearance eases in, every image loads
      behind a shimmer and fades up. Durations stay tight so it feels quicker, not slower. */
-  .mini-btn, #share, .popup-add, .dir-btn, .color-btn, .fchip, .rv-close, .sheet-close, .enlarge-close, #panelToggle, #addBanner button, .il-toggle
+  .mini-btn, #share, .popup-add, .dir-btn, .color-btn, .fchip, .rv-close, .sheet-close, .enlarge-close, .enlarge-nav, .cam-arrow, #panelToggle, #addBanner button, .il-toggle
     { transition: transform .12s ease, background .15s ease; }
   .mini-btn:active, #share:active, .popup-add:active, .dir-btn:active, .color-btn:active, .fchip:active, .rv-close:active,
-  .sheet-close:active, .enlarge-close:active, #panelToggle:active, #addBanner button:active { transform: scale(.94); }
+  .sheet-close:active, .enlarge-close:active, .enlarge-nav:active, .cam-arrow:active, #panelToggle:active, #addBanner button:active { transform: scale(.94); }
   .rv-tile { transition: transform .12s ease, box-shadow .15s ease; }
   .rv-tile:active { transform: scale(.985); }
   .lyr:active, .route-item:active, .sr-item:active, .grp-h:active { background: #ececf2; border-radius: 6px; }
@@ -316,6 +339,7 @@
 <body>
 <div id="map"></div>
 <div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
+<div id="cycleNote"></div>
 
 <div id="sheet">
   <div class="sheet-grip"><div class="grip-bar"></div></div>
@@ -688,6 +712,7 @@ function buildLivePopup(props, cfg){
         <div class="popup-meta">${facingHTML(dirs[0])}</div>
         <div class="popup-foot"><span class="popup-age${(dirs[0].stale_since||shownHealth(dirs[0],cfg))?' stale':''}">${camAge(dirs[0],cfg)}</span>
           <button class="popup-add" data-add>+ Route</button></div>
+        <div class="cam-nav" hidden><button class="cam-arrow" data-cyc="-1" title="Previous camera (←)">&#8249;</button><span class="cam-pos"></span><button class="cam-arrow" data-cyc="1" title="Next camera (→)">&#8250;</button></div>
       </div></div>`;
 }
 /* A stream can attach, buffer and still show you nothing: the clock runs while the
@@ -811,9 +836,18 @@ function wireCameraUI(el, props, cfg, token){
   });
   // click the picture (or its expand button) to open the same view full-screen
   el.addEventListener('click',(e)=>{
-    if(e.target.closest('.dir-btn')||e.target.closest('[data-add]')) return;
+    if(e.target.closest('.dir-btn')||e.target.closest('[data-add]')||e.target.closest('[data-cyc]')) return;
     if(e.target.closest('[data-enlarge]')||e.target.closest('.popup-imgwrap')) openEnlarge(props.directions[idx], cfg, props);
   });
+  // arrow-cycle pager: step through the state's spatial order. Shown only when this selection
+  // sits in the feed (a saved-route cam opened off-feed has no index and cannot be stepped).
+  const nav=el.querySelector('.cam-nav'), s0=store.selected;
+  if(nav){
+    const ord=(s0 && s0.i!=null && s0.i>=0) ? spatialOrder(s0.k) : null;
+    if(ord){ el.querySelector('.cam-pos').textContent=`${ord.pos[s0.i]+1} / ${ord.order.length}`;
+      nav.hidden=false;
+      nav.querySelectorAll('[data-cyc]').forEach(b=>b.addEventListener('click',()=>cycleCamera(+b.dataset.cyc))); }
+  }
 }
 
 /* ---------- full-screen enlarge (snapshot or HLS video), shared by every layer ---------- */
@@ -824,13 +858,14 @@ function openEnlarge(dir, cfg, props){
   switchMode('media-enlarged',{dir,cfg,props,returnTo:{name:store.mode,ctx:modeCtx}});
 }
 function closeEnlarge(){ if(store.mode==='media-enlarged') switchMode(modeCtx.returnTo.name, {...modeCtx.returnTo.ctx, resume:true}); }
-function teardownEnlarge(){
+function teardownEnlarge(immediate){
   if(!enlargeState) return;
   const {ov, hls, timer, onkey}=enlargeState;
   if(timer) clearInterval(timer);
   if(hls){ try{ hls.destroy(); }catch(e){} }
   document.removeEventListener('keydown', onkey);
-  ov.classList.add('closing'); setTimeout(()=>ov.remove(),170);   // fade out, never snap out
+  // cycling swaps overlays in place, so the old one leaves at once; a real close fades out
+  if(immediate) ov.remove(); else { ov.classList.add('closing'); setTimeout(()=>ov.remove(),170); }
   enlargeState=null;
   // resume the selection's own video, paused on open so two copies were not decoding at once
   const cont=selContainer(); const pv=cont&&cont.querySelector('#popup-vid');
@@ -845,11 +880,18 @@ function buildEnlarge({dir, cfg, props}){
   const media=canVid ? `<video class="enlarge-media" muted autoplay playsinline></video>`
                      : `<img class="enlarge-media" src="${cfg.snap(dir)}">`;
   ov.innerHTML=`<div class="enlarge-box">${media}
+      <button class="enlarge-nav prev" data-cyc="-1" title="Previous camera (←)">&#8249;</button>
+      <button class="enlarge-nav next" data-cyc="1" title="Next camera (→)">&#8250;</button>
       <button class="enlarge-close" title="Close">&#10005;</button>
       <div class="enlarge-cap"><span><b>${props.name}</b>${props.rwis?` &middot; ${props.rwis}`:''}</span>
         <span class="res-chip" data-res hidden></span>
-        <span class="enlarge-hint">F stretches to fill &middot; Esc closes</span></div></div>`;
+        <span class="enlarge-pos"></span>
+        <span class="enlarge-hint">&#8249; &#8250; cameras &middot; F fills &middot; Esc closes</span></div></div>`;
   document.body.appendChild(ov);
+  // position counter + prev/next, from the same spatial order the popup pager uses
+  const s=store.selected, ord=(s && s.i!=null && s.i>=0) ? spatialOrder(s.k) : null;
+  const posEl=ov.querySelector('.enlarge-pos'); if(posEl && ord) posEl.textContent=`${ord.pos[s.i]+1} / ${ord.order.length}`;
+  ov.querySelectorAll('.enlarge-nav').forEach(b=>b.addEventListener('click',(e)=>{ e.stopPropagation(); cycleEnlarge(+b.dataset.cyc); }));
   // pause the selection's video so it is not decoding the same stream behind the overlay
   const cont0=selContainer(); const pv=cont0&&cont0.querySelector('#popup-vid'); if(pv) pv.pause();
   let hls=null, timer=null;
@@ -869,6 +911,8 @@ function buildEnlarge({dir, cfg, props}){
   }
   const onkey=(e)=>{
     if(e.key==='Escape'){ closeEnlarge(); return; }
+    if(e.key==='ArrowLeft'){ e.preventDefault(); cycleEnlarge(-1); return; }
+    if(e.key==='ArrowRight'){ e.preventDefault(); cycleEnlarge(1); return; }
     if(e.key==='f'||e.key==='F'){ enlargeFit = enlargeFit==='fill' ? 'contain' : 'fill'; ov.classList.toggle('fill', enlargeFit==='fill'); }
   };
   document.addEventListener('keydown', onkey);
@@ -903,11 +947,132 @@ function showTip(coords,name){ if(!hoverTip) hoverTip=new maplibregl.Popup({clos
 function hideTip(){ if(hoverTip) hoverTip.remove(); }
 function raiseHighlights(){ if(map.getLayer('hl-hover')) map.moveLayer('hl-hover'); }
 
+/* ---------- spatial camera order (arrow cycling) ----------
+   Source order in these feeds is NOT a geographic sweep: consecutive cameras in a state file
+   can sit 100+ km apart (Ohio's are essentially shuffled), so stepping i±1 would fling the map
+   across the state on most presses. Instead each state is ordered once along a Hilbert curve,
+   which keeps neighbours in the list neighbours on the ground — median hop ~1-2 km, versus
+   10-100 km for source order. Prev/next is then a single step through that order, and the
+   position doubles as a progress counter through the state. O(n log n), computed once, cached. */
+const camOrderCache={}, GREEDY_MAX=2000;   // above this, O(n^2) greedy would jank the main thread
+function hilbertIndex(order,x,y){ let d=0;
+  for(let s=1<<(order-1); s>0; s>>=1){
+    const rx=(x&s)>0?1:0, ry=(y&s)>0?1:0;
+    d += s*s*((3*rx)^ry);
+    if(ry===0){ if(rx===1){ x=s-1-x; y=s-1-y; } const t=x; x=y; y=t; }   // rotate the quadrant
+  }
+  return d;
+}
+// Hilbert-curve order: O(n log n), used for the big states. Neighbours in the list stay near
+// on the ground (median hop 1-2 km in dense states), and there is no build-time jank.
+function hilbertChain(pts){
+  let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  for(const p of pts){ if(p[0]<minX)minX=p[0]; if(p[0]>maxX)maxX=p[0]; if(p[1]<minY)minY=p[1]; if(p[1]>maxY)maxY=p[1]; }
+  const O=16, N=(1<<O)-1, sx=(maxX-minX)||1, sy=(maxY-minY)||1;
+  return pts.map((p,i)=>[hilbertIndex(O, Math.round((p[0]-minX)/sx*N), Math.round((p[1]-minY)/sy*N)), i])
+            .sort((a,b)=>a[0]-b[0]).map(o=>o[1]);
+}
+// Greedy nearest-neighbour walk from the westmost camera: O(n^2), but tighter than Hilbert on
+// the sparse states' tail (WV p90 57 km -> 30 km) and free where n is small. Squared lon/lat
+// distance is enough to pick the nearest — the cos(lat) correction never changes which is closest.
+function greedyChain(pts){
+  const n=pts.length, used=new Uint8Array(n);
+  let cur=0; for(let i=1;i<n;i++) if(pts[i][0]<pts[cur][0]) cur=i;
+  const order=new Array(n); order[0]=cur; used[cur]=1;
+  for(let k=1;k<n;k++){ const cx=pts[cur][0], cy=pts[cur][1]; let best=-1, bd=Infinity;
+    for(let j=0;j<n;j++){ if(used[j]) continue; const dx=pts[j][0]-cx, dy=pts[j][1]-cy, d=dx*dx+dy*dy; if(d<bd){ bd=d; best=j; } }
+    order[k]=best; used[best]=1; cur=best; }
+  return order;
+}
+function spatialOrder(k){
+  if(camOrderCache[k]) return camOrderCache[k];
+  const d=dataCache[k]; if(!d||!d.features.length) return null;
+  const pts=d.features.map(f=>f.geometry.coordinates);
+  const order = pts.length<=GREEDY_MAX ? greedyChain(pts) : hilbertChain(pts);
+  const pos=new Int32Array(order.length);
+  order.forEach((fi,p)=>{ pos[fi]=p; });
+  return camOrderCache[k]={order,pos};
+}
+// directions arrive as a JSON string from the cluster pipeline but as a live array from the
+// feed cache; normalize once so every caller gets a real array
+function readProps(feature){ return (typeof feature.properties.directions==='string')
+  ? {...feature.properties, directions:JSON.parse(feature.properties.directions)} : feature.properties; }
+// the states A–Z, the same order the side panel lists them, so "next state" is what the eye expects
+function orderedLiveKeys(){ return liveKeys().sort((a,b)=>LAYERS[a].name.localeCompare(LAYERS[b].name)); }
+// centre the map on a camera being cycled to. Offset keeps the pin clear of the left panel
+// (desktop) the same way a route-jump does; on a phone the sheet sits low so centre is fine.
+function easeToCam(coords){ map.easeTo({center:coords, zoom:Math.max(map.getZoom(),14), duration:420, offset:isMobile()?[0,0]:[-170,0]}); }
+
+let cycleBoundary=null, cycleNoteT=null, suppressEnlargeClose=false;
+function flashCycleNotice(msg){
+  const n=document.getElementById('cycleNote'); if(!n) return;
+  n.textContent=msg; n.classList.add('show');
+  clearTimeout(cycleNoteT); cycleNoteT=setTimeout(()=>n.classList.remove('show'), 2600);
+}
+// step one camera prev(-1)/next(+1) through the current state's spatial order. In add-to-route
+// mode this only navigates — it never auto-adds the cameras you pass (you still tap the keepers).
+function cycleCamera(dir){
+  const s=store.selected; if(!s || s.k==null) return;
+  const cfg=LAYERS[s.k]; if(!cfg || cfg.kind!=='live') return;
+  if(s.i==null || s.i<0) return;                       // off-feed selection (a saved-route cam): nothing to step through
+  const ord=spatialOrder(s.k); if(!ord) return;
+  const np=ord.pos[s.i]+dir;
+  if(np<0 || np>=ord.order.length){ cycleToNextState(s.k, dir); return; }
+  cycleBoundary=null;
+  const ni=ord.order[np], feat=dataCache[s.k].features[ni];
+  easeToCam(feat.geometry.coordinates);
+  selectFeature(s.k, feat, {i:ni, noAutoAdd:true});
+}
+// at either end of a state, the first press names the neighbour and a second press crosses in,
+// so you learn which state is next and never fall out of one into another by accident
+async function cycleToNextState(fromK, dir){
+  const keys=orderedLiveKeys(), at=keys.indexOf(fromK); if(at<0 || keys.length<2) return;
+  const nextK=keys[(at+dir+keys.length)%keys.length];
+  if(!cycleBoundary || cycleBoundary.k!==fromK || cycleBoundary.dir!==dir){
+    cycleBoundary={k:fromK, dir};
+    flashCycleNotice(`End of ${LAYERS[fromK].name} — press ${dir>0?'→':'←'} again for ${LAYERS[nextK].name}`);
+    return;
+  }
+  cycleBoundary=null;
+  if(!store.activeLayers.has(nextK)) await enableLayer(nextK, false);
+  const ord=spatialOrder(nextK); if(!ord) return;
+  const startPos = dir>0 ? 0 : ord.order.length-1;     // forward lands on the state's first camera, backward on its last
+  const ni=ord.order[startPos], feat=dataCache[nextK].features[ni];
+  easeToCam(feat.geometry.coordinates);
+  selectFeature(nextK, feat, {i:ni, noAutoAdd:true});
+  flashCycleNotice(`Now in ${LAYERS[nextK].name}`);
+}
+// fullscreen cycling advances the camera behind the overlay too, so closing lands on the one
+// you stopped on. selectFeature removes the old popup, and popup.remove() fires that popup's
+// close handler which would closeEnlarge() — suppress exactly that, we are replacing it, not
+// closing it. At a state edge fullscreen stops with a note rather than crossing over.
+function flashEnlargeHint(msg){ const h=enlargeState&&enlargeState.ov.querySelector('.enlarge-hint'); if(!h) return;
+  const old=h.dataset.base||h.textContent; h.dataset.base=old; h.textContent=msg;
+  setTimeout(()=>{ if(h.isConnected) h.textContent=h.dataset.base; }, 2200); }
+function cycleEnlarge(dir){
+  const s=store.selected; if(!s || s.k==null) return;
+  const cfg=LAYERS[s.k]; if(!cfg || cfg.kind!=='live' || s.i==null || s.i<0) return;
+  const ord=spatialOrder(s.k); if(!ord) return;
+  const np=ord.pos[s.i]+dir;
+  if(np<0 || np>=ord.order.length){ flashEnlargeHint(`End of ${LAYERS[s.k].name} — exit to change states`); return; }
+  const ni=ord.order[np], feat=dataCache[s.k].features[ni], props=readProps(feat), dir0=props.directions[0];
+  easeToCam(feat.geometry.coordinates);
+  suppressEnlargeClose=true;                            // the replaced popup's close must not tear the overlay down
+  selectFeature(s.k, feat, {i:ni, noAutoAdd:true});
+  suppressEnlargeClose=false;
+  const rt=modeCtx.returnTo;                            // keep the ORIGINAL return target so Esc still exits cleanly
+  teardownEnlarge(true);
+  modeCtx={dir:dir0, cfg, props, returnTo:rt};
+  buildEnlarge(modeCtx);
+}
+
 /* ---------- selection ---------- */
 function selectFeature(k, feature, opts){
   const cfg=LAYERS[k], coords=feature.geometry.coordinates.slice();
-  const props=(typeof feature.properties.directions==='string')
-    ? {...feature.properties, directions:JSON.parse(feature.properties.directions)} : feature.properties;
+  const props=readProps(feature);
+  // the feed index locates this camera in the spatial order for prev/next. The map-click path
+  // hands it in (opts.i); other callers derive it, and a synthetic off-feed feature yields -1.
+  const i = (opts&&opts.i!=null) ? opts.i : (dataCache[k] ? dataCache[k].features.indexOf(feature) : -1);
   // add-to-route: a map tap adds the camera AND opens it, so you see what you just
   // added and can undo right there — no more collecting unlabeled dots from memory.
   // (Search picks navigate without auto-adding; the popup's Add button is one tap.)
@@ -921,7 +1086,7 @@ function selectFeature(k, feature, opts){
   // makes any stale async wiring a no-op either way
   if(popup){ const p=popup; popup=null; p.remove(); }
   destroyPopupHls();
-  store.selected={coords,k,props,token:++selToken};
+  store.selected={coords,k,props,token:++selToken,i};
   const token=selToken;
   const html = cfg.kind==='live' ? buildLivePopup(props,cfg) : buildEnfPopup(props);
   if(isMobile()){
@@ -932,7 +1097,7 @@ function selectFeature(k, feature, opts){
     popup=new maplibregl.Popup({closeButton:true,maxWidth:cfg.kind==='live'?'288px':'260px'}).setLngLat(coords).setHTML(html).addTo(map);
     const mine=popup;
     if(cfg.kind==='live') setTimeout(()=>{ if(popup===mine && selectionAlive(token)) wireCameraUI(mine.getElement(), props, cfg, token); },0);
-    mine.on('close',()=>{ if(selectionAlive(token)) store.selected=null; destroyPopupHls(); closeEnlarge(); });
+    mine.on('close',()=>{ if(selectionAlive(token)) store.selected=null; destroyPopupHls(); if(!suppressEnlargeClose) closeEnlarge(); });
   }
 }
 
@@ -1036,7 +1201,7 @@ function camsHitAction(f){
     let z; try{ z=camsIndex.getClusterExpansionZoom(f.properties.cluster_id); }catch(err){ return; }
     map.easeTo({center:f.geometry.coordinates, zoom:z, duration:500});
   } else { const p=f.properties;
-    const orig=dataCache[p.k]&&dataCache[p.k].features[p.i]; if(orig) selectFeature(p.k,orig); }
+    const orig=dataCache[p.k]&&dataCache[p.k].features[p.i]; if(orig) selectFeature(p.k,orig,{i:p.i}); }
 }
 // hit-test the supercluster index directly: everything within a finger radius of the point
 function camsAtPoint(point){
@@ -1611,6 +1776,16 @@ document.addEventListener('keydown',(e)=>{
   if(store.selected){ clearSelection(); return; }
   if(store.mode==='route-view'){ closeRouteView(); return; }
   if(store.mode==='add-to-route') stopAddMode();
+});
+// ← / → step through cameras whenever one is open (the fast curation path; the on-screen
+// pager teaches it). The fullscreen overlay owns its own arrows, and a focused field keeps them.
+document.addEventListener('keydown',(e)=>{
+  if(e.key!=='ArrowLeft' && e.key!=='ArrowRight') return;
+  if(e.target.matches && e.target.matches('input,textarea')) return;
+  if(store.mode==='media-enlarged') return;             // the overlay handles arrows itself
+  if(!store.selected) return;
+  e.preventDefault();
+  cycleCamera(e.key==='ArrowRight' ? 1 : -1);
 });
 
 /* ---------- boot ---------- */
