@@ -859,16 +859,17 @@ function wireCameraUI(el, props, cfg, token){
   // sits in the feed (a saved-route cam opened off-feed has no index and cannot be stepped).
   const nav=el.querySelector('.cam-nav'), s0=store.selected;
   if(nav){
-    const ord=(s0 && s0.i!=null && s0.i>=0) ? spatialOrder(s0.k) : null;
-    if(ord){ const total=ord.order.length, posEl=el.querySelector('.cam-pos');
-      posEl.textContent=`${ord.pos[s0.i]+1} / ${total}`;
+    const ord=(s0 && s0.i!=null && s0.i>=0) ? spatialOrder(cycleGroupKey(s0.k)) : null;
+    const cur0=ord ? orderPos(ord,s0.k,s0.i) : null;
+    if(ord && cur0!=null){ const total=ord.total, posEl=el.querySelector('.cam-pos');
+      posEl.textContent=`${cur0+1} / ${total}`;
       posEl.title='Double-click to jump to a camera number';
       nav.hidden=false;
       nav.querySelectorAll('[data-cyc]').forEach(b=>b.addEventListener('click',()=>cycleCamera(+b.dataset.cyc)));
       // double-click the counter to type a position (e.g. the last camera in the state)
       posEl.addEventListener('dblclick',()=>{
         const inp=document.createElement('input'); inp.className='cam-jump'; inp.type='text'; inp.inputMode='numeric';
-        inp.value=String(ord.pos[store.selected.i]+1);
+        inp.value=String((orderPos(ord,store.selected.k,store.selected.i)??0)+1);
         posEl.replaceWith(inp); inp.focus(); inp.select();
         const cancel=()=>{ if(inp.isConnected) inp.replaceWith(posEl); };
         inp.addEventListener('keydown',ev=>{
@@ -934,8 +935,9 @@ function buildEnlarge({dir, cfg, props}){
         <span class="enlarge-hint">&#8249; &#8250; cameras &middot; F fills &middot; Esc closes</span></div></div>`;
   document.body.appendChild(ov);
   // position counter + prev/next, from the same spatial order the popup pager uses
-  const s=store.selected, ord=(s && s.i!=null && s.i>=0) ? spatialOrder(s.k) : null;
-  const posEl=ov.querySelector('.enlarge-pos'); if(posEl && ord) posEl.textContent=`${ord.pos[s.i]+1} / ${ord.order.length}`;
+  const s=store.selected, ord=(s && s.i!=null && s.i>=0) ? spatialOrder(cycleGroupKey(s.k)) : null;
+  const curPos=ord ? orderPos(ord,s.k,s.i) : null;
+  const posEl=ov.querySelector('.enlarge-pos'); if(posEl && curPos!=null) posEl.textContent=`${curPos+1} / ${ord.total}`;
   ov.querySelectorAll('.enlarge-nav').forEach(b=>b.addEventListener('click',(e)=>{ e.stopPropagation(); cycleEnlarge(+b.dataset.cyc); }));
   // pause the selection's video so it is not decoding the same stream behind the overlay
   const cont0=selContainer(); const pv=cont0&&cont0.querySelector('#popup-vid'); if(pv) pv.pause();
@@ -1030,21 +1032,33 @@ function greedyChain(pts){
     order[k]=best; used[best]=1; cur=best; }
   return order;
 }
-function spatialOrder(k){
-  if(camOrderCache[k]) return camOrderCache[k];
-  const d=dataCache[k]; if(!d||!d.features.length) return null;
-  const pts=d.features.map(f=>f.geometry.coordinates);
-  const order = pts.length<=GREEDY_MAX ? greedyChain(pts) : hilbertChain(pts);
-  const pos=new Int32Array(order.length);
-  order.forEach((fi,p)=>{ pos[fi]=p; });
-  return camOrderCache[k]={order,pos};
+// A camera cycles within its GROUP's combined order, not its layer's. For most states the
+// group is the one state; New York is st-NY plus the folded New York City feed, so every NY
+// camera — state highway or city — cycles as one continuous run. Built over all active, loaded
+// members and keyed by the group's primary key; invalidated when a member loads or toggles.
+const cycleGroupKey=(k)=> foldParent(k)||k;
+function spatialOrder(gk){
+  if(camOrderCache[gk]) return camOrderCache[gk];
+  const entries=[];                                    // {k, i, c} across every active loaded member of the group
+  groupKeys(gk).forEach(g=>{ if(store.activeLayers.has(g) && dataCache[g])
+    dataCache[g].features.forEach((f,i)=>entries.push({k:g, i, c:f.geometry.coordinates})); });
+  if(!entries.length) return null;
+  const pts=entries.map(e=>e.c);
+  const perm = pts.length<=GREEDY_MAX ? greedyChain(pts) : hilbertChain(pts);   // permutation of entry indexes
+  const seq=perm.map(ei=>entries[ei]);                 // seq[p] = {k, i} of the camera at position p
+  const pos=new Map();
+  seq.forEach((e,p)=>pos.set(e.k+'/'+e.i, p));
+  return camOrderCache[gk]={seq, pos, total:seq.length};
 }
+const orderPos=(ord,k,i)=> ord.pos.get(k+'/'+i);       // 0-based position of a camera, or undefined if not in the order
+function invalidateOrder(k){ delete camOrderCache[cycleGroupKey(k)]; }   // a member loaded or toggled: rebuild on next use
 // directions arrive as a JSON string from the cluster pipeline but as a live array from the
 // feed cache; normalize once so every caller gets a real array
 function readProps(feature){ return (typeof feature.properties.directions==='string')
   ? {...feature.properties, directions:JSON.parse(feature.properties.directions)} : feature.properties; }
-// the states A–Z, the same order the side panel lists them, so "next state" is what the eye expects
-function orderedLiveKeys(){ return liveKeys().sort((a,b)=>LAYERS[a].name.localeCompare(LAYERS[b].name)); }
+// the sidebar states A–Z (folded feeds like New York City are part of their parent, not their
+// own entry), so "next state" is what the eye expects and NY is a single stop
+function orderedLiveKeys(){ return liveKeys().filter(k=>!foldParent(k)).sort((a,b)=>LAYERS[a].name.localeCompare(LAYERS[b].name)); }
 // centre the map on a camera being cycled to. Offset keeps the pin clear of the left panel
 // (desktop) the same way a route-jump does; on a phone the sheet sits low so centre is fine.
 function easeToCam(coords){ map.easeTo({center:coords, zoom:Math.max(map.getZoom(),14), duration:420, offset:isMobile()?[0,0]:[-170,0]}); }
@@ -1061,28 +1075,30 @@ function cycleCamera(dir){
   const s=store.selected; if(!s || s.k==null) return;
   const cfg=LAYERS[s.k]; if(!cfg || cfg.kind!=='live') return;
   if(s.i==null || s.i<0) return;                       // off-feed selection (a saved-route cam): nothing to step through
-  const ord=spatialOrder(s.k); if(!ord) return;
-  const np=ord.pos[s.i]+dir;
-  if(np<0 || np>=ord.order.length){ cycleToNextState(s.k, dir); return; }
+  const gk=cycleGroupKey(s.k), ord=spatialOrder(gk); if(!ord) return;
+  const cur=orderPos(ord,s.k,s.i); if(cur==null) return;
+  const np=cur+dir;
+  if(np<0 || np>=ord.total){ cycleToNextState(gk, dir); return; }
   cycleBoundary=null;
-  const ni=ord.order[np], feat=dataCache[s.k].features[ni];
+  const e=ord.seq[np], feat=dataCache[e.k].features[e.i];
   easeToCam(feat.geometry.coordinates);
-  selectFeature(s.k, feat, {i:ni, noAutoAdd:true});
+  selectFeature(e.k, feat, {i:e.i, noAutoAdd:true});
 }
-// jump straight to a position in the current state's order (1-based, clamped). Double-clicking
-// the pager counter opens an input for this, so "go to the last camera" is one gesture, not 100
-// arrow presses — handy for parking at a state's edge before crossing into the next.
+// jump straight to a position in the group's order (1-based, clamped). Double-clicking the pager
+// counter opens an input for this, so "go to the last camera" is one gesture, not 100 arrow
+// presses — handy for parking at a state's edge before crossing into the next.
 function jumpToOrderPos(pos1){
   const s=store.selected; if(!s || s.k==null || s.i==null || s.i<0) return;
-  const ord=spatialOrder(s.k); if(!ord) return;
-  const p=Math.max(0, Math.min(ord.order.length-1, (pos1|0)-1));
+  const ord=spatialOrder(cycleGroupKey(s.k)); if(!ord) return;
+  const p=Math.max(0, Math.min(ord.total-1, (pos1|0)-1));
   cycleBoundary=null;
-  const ni=ord.order[p], feat=dataCache[s.k].features[ni];
+  const e=ord.seq[p], feat=dataCache[e.k].features[e.i];
   easeToCam(feat.geometry.coordinates);
-  selectFeature(s.k, feat, {i:ni, noAutoAdd:true});
+  selectFeature(e.k, feat, {i:e.i, noAutoAdd:true});
 }
 // at either end of a state, the first press names the neighbour and a second press crosses in,
-// so you learn which state is next and never fall out of one into another by accident
+// so you learn which state is next and never fall out of one into another by accident. fromK is
+// a group's primary key, so New York (state + city) is a single stop in this sequence.
 async function cycleToNextState(fromK, dir){
   const keys=orderedLiveKeys(), at=keys.indexOf(fromK); if(at<0 || keys.length<2) return;
   const nextK=keys[(at+dir+keys.length)%keys.length];
@@ -1092,12 +1108,12 @@ async function cycleToNextState(fromK, dir){
     return;
   }
   cycleBoundary=null;
-  if(!store.activeLayers.has(nextK)) await enableLayer(nextK, false);
+  await enableGroup(nextK, false);                     // pull in the whole next group (its folded feeds too)
   const ord=spatialOrder(nextK); if(!ord) return;
-  const startPos = dir>0 ? 0 : ord.order.length-1;     // forward lands on the state's first camera, backward on its last
-  const ni=ord.order[startPos], feat=dataCache[nextK].features[ni];
+  const startPos = dir>0 ? 0 : ord.total-1;            // forward lands on the group's first camera, backward on its last
+  const e=ord.seq[startPos], feat=dataCache[e.k].features[e.i];
   easeToCam(feat.geometry.coordinates);
-  selectFeature(nextK, feat, {i:ni, noAutoAdd:true});
+  selectFeature(e.k, feat, {i:e.i, noAutoAdd:true});
   flashCycleNotice(`Now in ${LAYERS[nextK].name}`);
 }
 // fullscreen cycling advances the camera behind the overlay too, so closing lands on the one
@@ -1110,17 +1126,18 @@ function flashEnlargeHint(msg){ const h=enlargeState&&enlargeState.ov.querySelec
 function cycleEnlarge(dir){
   const s=store.selected; if(!s || s.k==null) return;
   const cfg=LAYERS[s.k]; if(!cfg || cfg.kind!=='live' || s.i==null || s.i<0) return;
-  const ord=spatialOrder(s.k); if(!ord) return;
-  const np=ord.pos[s.i]+dir;
-  if(np<0 || np>=ord.order.length){ flashEnlargeHint(`End of ${LAYERS[s.k].name} — exit to change states`); return; }
-  const ni=ord.order[np], feat=dataCache[s.k].features[ni], props=readProps(feat), dir0=props.directions[0];
+  const gk=cycleGroupKey(s.k), ord=spatialOrder(gk); if(!ord) return;
+  const cur=orderPos(ord,s.k,s.i); if(cur==null) return;
+  const np=cur+dir;
+  if(np<0 || np>=ord.total){ flashEnlargeHint(`End of ${LAYERS[gk].name} — exit to change states`); return; }
+  const e=ord.seq[np], feat=dataCache[e.k].features[e.i], ncfg=LAYERS[e.k], props=readProps(feat), dir0=props.directions[0];
   easeToCam(feat.geometry.coordinates);
   suppressEnlargeClose=true;                            // the replaced popup's close must not tear the overlay down
-  selectFeature(s.k, feat, {i:ni, noAutoAdd:true});
+  selectFeature(e.k, feat, {i:e.i, noAutoAdd:true});
   suppressEnlargeClose=false;
   const rt=modeCtx.returnTo;                            // keep the ORIGINAL return target so Esc still exits cleanly
   teardownEnlarge(true);
-  modeCtx={dir:dir0, cfg, props, returnTo:rt};
+  modeCtx={dir:dir0, cfg:ncfg, props, returnTo:rt};     // the next camera may be a different feed (NY state ↔ city)
   buildEnlarge(modeCtx);
 }
 
@@ -1376,7 +1393,7 @@ async function enableLayer(k,fly=true){
     finally{ clearTimeout(slow); }
   }
   const data=dataCache[k];
-  if(cfg.kind==='live') applyStatus(k,data);   // statuses exist before the health sweep lands (live/snapshot)
+  if(cfg.kind==='live'){ applyStatus(k,data); invalidateOrder(k); }   // statuses exist before the health sweep lands; the group order now includes this member
   // a folded layer's count shows on its parent row (New York City rolls up into New York)
   const dk=foldParent(k)||k, c=document.getElementById('cnt-'+dk);
   const setCount=()=>{ if(c) c.textContent=groupCountText(dk); };
@@ -1397,7 +1414,7 @@ async function enableLayer(k,fly=true){
   }
 }
 function disableLayer(k){ store.activeLayers.delete(k);
-  if(LAYERS[k].kind==='live') scheduleCamsRebuild(); else setLayerVis(k,'none');
+  if(LAYERS[k].kind==='live'){ scheduleCamsRebuild(); invalidateOrder(k); } else setLayerVis(k,'none');
   // only close the open camera if it belonged to THIS layer; unrelated toggles must
   // not take your popup away
   if(store.selected && store.selected.k===k) clearSelection();
