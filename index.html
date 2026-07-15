@@ -265,7 +265,10 @@
   #sheetContent .popup-imgwrap img, #sheetContent .popup-imgwrap video { height: min(56vw, 260px); }
   #sheetContent .enf { width: 100%; }
 
-  #panelToggle { display: none; font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+  #panelToggle { display: inline-block; font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+  /* desktop: the Layers button tucks the panel down to just its header, so the map underneath
+     is clear when you're not touching the controls (mobile has its own expand/collapse below) */
+  @media (min-width: 641px) { #panel.collapsed > *:not(.brand-row) { display: none; } }
 
   /* ---------- small viewports: the panel collapses to its header + search and expands
      on demand, so the map is not permanently covered on a phone ---------- */
@@ -1421,7 +1424,11 @@ async function enableLayer(k,fly=true){
     loadHealth(k,data).then(h=>{ if(h){ scheduleCamsRebuild(); setCount(); } });
   }
 }
-function disableLayer(k){ store.activeLayers.delete(k);
+function disableLayer(k){
+  // the Chicago ticket map is nested under Illinois and only means anything with it on, so
+  // turning Illinois off takes the ticket overlay with it
+  if(k==='il-cam' && store.activeLayers.has('chi-enf')) disableLayer('chi-enf');
+  store.activeLayers.delete(k);
   if(LAYERS[k].kind==='live'){ scheduleCamsRebuild(); invalidateOrder(k); } else setLayerVis(k,'none');
   // only close the open camera if it belonged to THIS layer; unrelated toggles must
   // not take your popup away
@@ -1797,6 +1804,9 @@ function renderCamList(){
   // the state and the city feed together); chi-enf and unfolded states are groups of one
   document.querySelectorAll('#camList .lyr input').forEach(cb=>{ if(cb._wired) return; cb._wired=true;
     cb.addEventListener('change',async ()=>{ const k=cb.dataset.layer; if(cb.checked) await enableGroup(k); else disableGroup(k); writeUrl(); }); });
+  // show each state's camera total up front, so the list reads as data before you turn anything
+  // on (New York shows its two feeds combined). An active layer keeps its live count untouched.
+  keys.forEach(k=>{ const c=document.getElementById('cnt-'+k); if(c && !c.textContent) c.textContent=groupCountText(k); });
 }
 
 /* ---------- UI wiring ---------- */
@@ -1843,7 +1853,12 @@ document.getElementById('rvCopy').addEventListener('click',async ()=>{
   setTimeout(()=>{ b.textContent='Copy list'; },1700);
 });
 wireSheet();
-document.getElementById('panelToggle').addEventListener('click',()=>document.getElementById('panel').classList.toggle('expanded'));
+// mobile expands the collapsed-by-default panel; desktop collapses the always-open one — one
+// button, the gesture that makes sense for the viewport
+document.getElementById('panelToggle').addEventListener('click',()=>{
+  const p=document.getElementById('panel');
+  p.classList.toggle(isMobile()?'expanded':'collapsed');
+});
 // touching the map puts the drawer away, the way every phone map app does
 map.getCanvas().addEventListener('pointerdown',()=>{ if(isMobile()) document.getElementById('panel').classList.remove('expanded'); });
 // search + keyboard nav
