@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-07-15T04:08:00Z",
+"checked_at": "2026-07-15T09:20:45Z",
 "cameras": 3636,
 "counts": {
-"offline": 63,
+"offline": 61,
 "frozen": 86,
-"placeholder": 138
+"placeholder": 144
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_31st_4183209_-8795890_1_E.jpg": "placeholder",
@@ -19,6 +19,10 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_Midwest_4182390_-8797400_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_Midwest_4182390_-8797400_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_Midwest_4182390_-8797400_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Glen-Ellyn_4191820_-8806170_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Glen-Ellyn_4191820_-8806170_1_N.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Glen-Ellyn_4191820_-8806170_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Glen-Ellyn_4191820_-8806170_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_IL-83_4183229_-8795460_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_IL-83_4183229_-8795460_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_IL-83_4183229_-8795460_1_S.jpg": "placeholder",
@@ -59,7 +63,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4176052_-8788413_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4176299_-8785852_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4179650_-8780866_1_NONE.jpg": "offline",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Van-Buren_4187650_-8764425_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4177672_-8783951_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4179538_-8781836_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4182742_-8770972_1_NONE.jpg": "offline",
@@ -111,6 +114,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_Kankakee_NEB_IL-17_4111897_-8789221_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_Kankakee_NWB_IL-102_4115803_-8788414_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Fulton_NB_IL-97_4070591_-9015759_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_EB_Fremont_4096224_-9038308_1_N.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_NB_IL-41_4093366_-9040282_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_NB_IL-41_4093366_-9040282_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_NB_IL-41_4093366_-9040282_1_S.jpg": "frozen",
@@ -155,8 +159,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_SWB_I-70_3943054_-8754360_1_E.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_SWB_I-70_3943054_-8754360_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Cumberland_SB_I-57_3935647_-8842158_1_N.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_NB_I-57_3912042_-8856812_1_E.jpg": "offline",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_E.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_SWB_I-72_3998832_-8878706_1_E.jpg": "frozen",
@@ -272,6 +274,8 @@
 "https://www.lakecountypassage.com/snapshots/IL_83_@_Washington_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_83_@_Washington_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_83_@_Washington_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Russell_@_Trumpet_(Cell)_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Russell_@_Trumpet_(Cell)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_12_@_Cuba_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_12_@_Cuba_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_12_@_Cuba_cctv_South_Leg.jpg": "placeholder",

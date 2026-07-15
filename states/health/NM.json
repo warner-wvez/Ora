@@ -1,23 +1,22 @@
 {
-"checked_at": "2026-07-15T04:15:06Z",
+"checked_at": "2026-07-15T09:28:00Z",
 "cameras": 183,
 "counts": {
 "placeholder": 3,
-"offline": 10
+"offline": 9
 },
 "status": {
 "http://ss.nmroads.com/snapshots/Coors_iliff.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/coors_atrisco.jpg": "offline",
 "http://ss.nmroads.com/snapshots/coors_glenrio.jpg": "offline",
-"http://ss.nmroads.com/snapshots/fairviewdr_espanola.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_comanche.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25nb_broadway.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i25_glorietapass.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
-"http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline"
+"http://ss.nmroads.com/snapshots/i40_exit36.jpg": "offline",
+"http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
+"http://ss.nmroads.com/snapshots/pdn_jefferson.jpg": "offline"
 }
 }

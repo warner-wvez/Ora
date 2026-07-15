@@ -1,13 +1,17 @@
 {
-"checked_at": "2026-07-15T04:08:46Z",
+"checked_at": "2026-07-15T09:21:36Z",
 "cameras": 591,
 "counts": {
 "offline": 9,
-"placeholder": 13
+"placeholder": 17
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
+"https://kscam.carsprogram.org/snapshots/GEN_1-035-1310-2-I-35andBurlingameRoadExit131.jpeg": "placeholder",
+"https://kscam.carsprogram.org/snapshots/GEN_4-035-1510-2-I-35atBetoJunction.jpeg": "placeholder",
+"https://kscam.carsprogram.org/snapshots/GEN_5-050-2670-2-US-50atNewtonEBCCTV.jpeg": "placeholder",
+"https://kscam.carsprogram.org/snapshots/GEN_5-054-1750-2-US-54atKingmanWBCCTV.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K007SBC-02.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBC-05T.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBC-13.jpg": "placeholder",
