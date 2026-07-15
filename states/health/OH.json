@@ -1,15 +1,16 @@
 {
-"checked_at": "2026-07-14T20:16:50Z",
+"checked_at": "2026-07-15T04:17:24Z",
 "cameras": 1121,
 "counts": {
 "frozen": 16,
-"offline": 1,
+"offline": 2,
 "placeholder": 1
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D11/D11-004.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/CCTV4157.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",

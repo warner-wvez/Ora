@@ -1,6 +1,10 @@
 {
-"checked_at": "2026-07-14T20:30:24Z",
+"checked_at": "2026-07-15T04:24:45Z",
 "cameras": 1127,
-"counts": {},
-"status": {}
+"counts": {
+"offline": 1
+},
+"status": {
+"https://tripcheck.com/RoadCams/cams/Paisley_pid2415.JPG": "offline"
+}
 }

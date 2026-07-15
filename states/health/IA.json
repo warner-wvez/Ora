@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-07-14T20:05:02Z",
+"checked_at": "2026-07-15T04:05:49Z",
 "cameras": 1240,
 "counts": {
-"offline": 118,
+"offline": 113,
 "frozen": 1
 },
 "status": {
@@ -117,11 +117,6 @@
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_57-00.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_64-00.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_70-07.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_76-01.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_76-02.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_76-03.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_76-04.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_76-05.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_78-05.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_78-06.jpg": "offline",
 "https://public.carsprogram.org/cameras/IA/cameraunavailable.png": "frozen"
