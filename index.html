@@ -113,6 +113,16 @@
   #addBanner.show { display: flex; }
   #addBanner button { background: #fff; color: #007aff; border: none; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
+  /* transient toast for the cross-state handoff ("End of West Virginia — → for Wyoming") */
+  #cycleNote { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 16; display: none;
+    background: rgba(28,28,30,0.92); color: #fff; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 999px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; max-width: calc(100vw - 32px); text-align: center; }
+  #cycleNote.show { display: block; animation: fadeSlide .2s cubic-bezier(.2,.8,.2,1); }
+  @media (max-width: 640px) {
+    #cycleNote { top: 96px; }                 /* clear of the collapsed phone panel */
+    .cam-arrow { min-height: 40px; min-width: 46px; }
+  }
+
   /* route viewer overlay: slides in and out instead of snapping */
   #routeView { position: absolute; top: 0; right: 0; bottom: 0; width: 380px; max-width: 90vw; z-index: 25; background: #f5f5f7; box-shadow: -4px 0 24px rgba(0,0,0,0.2); display: flex; flex-direction: column;
     transform: translateX(calc(100% + 28px)); visibility: hidden; transition: transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s .26s; }
@@ -182,8 +192,25 @@
     background: rgba(0,0,0,.55); color: #fff; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center;
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 2px 8px rgba(0,0,0,.4); }
   .enlarge-close:hover { background: rgba(0,0,0,.85); }
+  /* prev/next cameras, flanking the media at its edges */
+  .enlarge-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: none; border-radius: 50%;
+    background: rgba(0,0,0,.5); color: #fff; font-size: 30px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 4;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .enlarge-nav:hover { background: rgba(0,0,0,.85); }
+  .enlarge-nav.prev { left: 10px; } .enlarge-nav.next { right: 10px; }
+  .enlarge-pos { color: #9a9aa0; font-size: 11px; font-variant-numeric: tabular-nums; }
+  /* three-dot loader centred on the black box until the feed paints; SMIL animates on its own */
+  .enlarge-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; color: rgba(255,255,255,0.8); pointer-events: none; }
+  .enlarge-ov.media-ready .enlarge-loading, .enlarge-ov.media-fail .enlarge-loading { display: none; }
   .popup-body { padding: 10px 12px 12px; }
   .popup-body h3 { font-size: 13px; margin: 0 0 4px; color: #1c1c1e; line-height: 1.3; }
+  /* prev/next pager: the discoverable affordance for the ← / → keys that actually do the work */
+  .cam-nav { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #ececf0; }
+  .cam-nav[hidden] { display: none; }
+  .cam-arrow { width: 34px; height: 26px; border: none; border-radius: 6px; background: #f2f2f7; color: #007aff; font-size: 16px; line-height: 1; font-weight: 700; cursor: pointer; }
+  .cam-arrow:hover { background: #e0ecff; }
+  .cam-pos { font-size: 11px; color: #8e8e93; font-variant-numeric: tabular-nums; min-width: 58px; text-align: center; cursor: pointer; }
+  .cam-jump { width: 58px; text-align: center; font-size: 11px; padding: 2px 4px; border: 1px solid #007aff; border-radius: 5px; outline: none; font-variant-numeric: tabular-nums; }
   /* the delivered resolution, read off the decoded picture. Green clears the 640px bar a
      detector needs, red cannot. [hidden] needs its own rule here: the author `display`
      below would otherwise beat the browser's default [hidden] { display: none }. */
@@ -246,10 +273,10 @@
   /* ---------- interaction physics ----------
      every touch answers within 100ms, every appearance eases in, every image loads
      behind a shimmer and fades up. Durations stay tight so it feels quicker, not slower. */
-  .mini-btn, #share, .popup-add, .dir-btn, .color-btn, .fchip, .rv-close, .sheet-close, .enlarge-close, #panelToggle, #addBanner button, .il-toggle
+  .mini-btn, #share, .popup-add, .dir-btn, .color-btn, .fchip, .rv-close, .sheet-close, .enlarge-close, .enlarge-nav, .cam-arrow, #panelToggle, #addBanner button, .il-toggle
     { transition: transform .12s ease, background .15s ease; }
   .mini-btn:active, #share:active, .popup-add:active, .dir-btn:active, .color-btn:active, .fchip:active, .rv-close:active,
-  .sheet-close:active, .enlarge-close:active, #panelToggle:active, #addBanner button:active { transform: scale(.94); }
+  .sheet-close:active, .enlarge-close:active, .enlarge-nav:active, .cam-arrow:active, #panelToggle:active, #addBanner button:active { transform: scale(.94); }
   .rv-tile { transition: transform .12s ease, box-shadow .15s ease; }
   .rv-tile:active { transform: scale(.985); }
   .lyr:active, .route-item:active, .sr-item:active, .grp-h:active { background: #ececf2; border-radius: 6px; }
@@ -316,6 +343,7 @@
 <body>
 <div id="map"></div>
 <div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
+<div id="cycleNote"></div>
 
 <div id="sheet">
   <div class="sheet-grip"><div class="grip-bar"></div></div>
@@ -400,6 +428,18 @@ const LAYERS = {
   'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, count:957, snap:(d)=> d.camId ? `https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}` : '', age:'refreshes every 2s' },
   'chi-enf': { kind:'enforcement', name:'Chicago tickets', file:'cameras-chicago-enforcement.json', center:[-87.72,41.84], zoom:10.3 }
 };
+/* New York City's own camera feed (nyc-cam) is folded into New York (st-NY) in the sidebar:
+   one row, one checkbox, combined count. They already cluster together on the map — this only
+   merges the control. Both keys stay valid, so older shared links keep working. */
+const FOLD={ 'nyc-cam':'st-NY' };
+const foldParent=(k)=>FOLD[k]||null;                       // the row this layer hides under, or null
+const foldKids=(k)=>Object.keys(FOLD).filter(c=>FOLD[c]===k);
+const groupKeys=(k)=>[k, ...foldKids(k)];                  // a sidebar row's layer plus anything folded into it
+const groupCount=(k)=>groupKeys(k).reduce((s,g)=>s+(dataCache[g]?dataCache[g].features.length:(LAYERS[g]&&LAYERS[g].count||0)),0);
+const groupDead =(k)=>groupKeys(k).reduce((s,g)=>s+((LAYERS[g]&&LAYERS[g].deadCount)||0),0);
+const groupCountText=(k)=>{ const dead=groupDead(k); return groupCount(k).toLocaleString()+(dead?` · ${dead.toLocaleString()} offline`:''); };
+async function enableGroup(k, fly=true){ await Promise.allSettled(groupKeys(k).map(g=>store.activeLayers.has(g)?null:enableLayer(g, fly && g===k))); }
+function disableGroup(k){ groupKeys(k).forEach(g=>{ if(store.activeLayers.has(g)) disableLayer(g); }); }
 const VERDICT = {
   justified:{color:'#34c759',label:'On real danger'}, revenue:{color:'#ff2d55',label:'Ticket-heavy, low crash'},
   gap:{color:'#ff9500',label:'Crashes, light enforcement'}, quiet:{color:'#b0b0b5',label:'Quiet on both'}
@@ -688,6 +728,7 @@ function buildLivePopup(props, cfg){
         <div class="popup-meta">${facingHTML(dirs[0])}</div>
         <div class="popup-foot"><span class="popup-age${(dirs[0].stale_since||shownHealth(dirs[0],cfg))?' stale':''}">${camAge(dirs[0],cfg)}</span>
           <button class="popup-add" data-add>+ Route</button></div>
+        <div class="cam-nav" hidden><button class="cam-arrow" data-cyc="-1" title="Previous camera (←)">&#8249;</button><span class="cam-pos"></span><button class="cam-arrow" data-cyc="1" title="Next camera (→)">&#8250;</button></div>
       </div></div>`;
 }
 /* A stream can attach, buffer and still show you nothing: the clock runs while the
@@ -811,9 +852,33 @@ function wireCameraUI(el, props, cfg, token){
   });
   // click the picture (or its expand button) to open the same view full-screen
   el.addEventListener('click',(e)=>{
-    if(e.target.closest('.dir-btn')||e.target.closest('[data-add]')) return;
+    if(e.target.closest('.dir-btn')||e.target.closest('[data-add]')||e.target.closest('[data-cyc]')) return;
     if(e.target.closest('[data-enlarge]')||e.target.closest('.popup-imgwrap')) openEnlarge(props.directions[idx], cfg, props);
   });
+  // arrow-cycle pager: step through the state's spatial order. Shown only when this selection
+  // sits in the feed (a saved-route cam opened off-feed has no index and cannot be stepped).
+  const nav=el.querySelector('.cam-nav'), s0=store.selected;
+  if(nav){
+    const ord=(s0 && s0.i!=null && s0.i>=0) ? spatialOrder(cycleGroupKey(s0.k)) : null;
+    const cur0=ord ? orderPos(ord,s0.k,s0.i) : null;
+    if(ord && cur0!=null){ const total=ord.total, posEl=el.querySelector('.cam-pos');
+      posEl.textContent=`${cur0+1} / ${total}`;
+      posEl.title='Double-click to jump to a camera number';
+      nav.hidden=false;
+      nav.querySelectorAll('[data-cyc]').forEach(b=>b.addEventListener('click',()=>cycleCamera(+b.dataset.cyc)));
+      // double-click the counter to type a position (e.g. the last camera in the state)
+      posEl.addEventListener('dblclick',()=>{
+        const inp=document.createElement('input'); inp.className='cam-jump'; inp.type='text'; inp.inputMode='numeric';
+        inp.value=String((orderPos(ord,store.selected.k,store.selected.i)??0)+1);
+        posEl.replaceWith(inp); inp.focus(); inp.select();
+        const cancel=()=>{ if(inp.isConnected) inp.replaceWith(posEl); };
+        inp.addEventListener('keydown',ev=>{
+          if(ev.key==='Enter'){ ev.preventDefault(); const v=parseInt(inp.value,10); if(v>=1) jumpToOrderPos(v); else cancel(); }
+          else if(ev.key==='Escape'){ ev.preventDefault(); cancel(); } });
+        inp.addEventListener('blur',cancel);
+      });
+    }
+  }
 }
 
 /* ---------- full-screen enlarge (snapshot or HLS video), shared by every layer ---------- */
@@ -824,13 +889,14 @@ function openEnlarge(dir, cfg, props){
   switchMode('media-enlarged',{dir,cfg,props,returnTo:{name:store.mode,ctx:modeCtx}});
 }
 function closeEnlarge(){ if(store.mode==='media-enlarged') switchMode(modeCtx.returnTo.name, {...modeCtx.returnTo.ctx, resume:true}); }
-function teardownEnlarge(){
+function teardownEnlarge(immediate){
   if(!enlargeState) return;
   const {ov, hls, timer, onkey}=enlargeState;
   if(timer) clearInterval(timer);
   if(hls){ try{ hls.destroy(); }catch(e){} }
   document.removeEventListener('keydown', onkey);
-  ov.classList.add('closing'); setTimeout(()=>ov.remove(),170);   // fade out, never snap out
+  // cycling swaps overlays in place, so the old one leaves at once; a real close fades out
+  if(immediate) ov.remove(); else { ov.classList.add('closing'); setTimeout(()=>ov.remove(),170); }
   enlargeState=null;
   // resume the selection's own video, paused on open so two copies were not decoding at once
   const cont=selContainer(); const pv=cont&&cont.querySelector('#popup-vid');
@@ -839,36 +905,62 @@ function teardownEnlarge(){
 // contain letterboxes (true shape), fill stretches (distorted). The choice is remembered
 // across opens, because the whole point of a fixed box is comparing one camera to the next.
 let enlargeFit='contain';
+// a three-dot pulse over the black box while the feed decodes — on first open and again on
+// every arrow to the next camera. Pure SVG/SMIL, so it animates with no script running.
+const ENLARGE_SPINNER=`<div class="enlarge-loading"><svg class="enlarge-spinner" width="42" height="42" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="4" cy="12" r="2" fill="currentColor"><animate id="spA" begin="0;spC.end+0.25s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle>
+  <circle cx="12" cy="12" r="2" fill="currentColor"><animate begin="spA.begin+0.1s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle>
+  <circle cx="20" cy="12" r="2" fill="currentColor"><animate id="spC" begin="spA.begin+0.2s" attributeName="cy" calcMode="spline" dur="0.6s" values="12;6;12" keySplines=".33,.66,.66,1;.33,0,.66,.33"/></circle>
+</svg></div>`;
+// a feed that will not answer gets words, never the browser's broken glyph or an endless spin
+function showEnlargeFail(ov, msg){
+  if(!ov.isConnected || ov.querySelector('.enlarge-fail')) return;
+  const m=ov.querySelector('.enlarge-media'); if(m) m.style.display='none';
+  ov.classList.add('media-fail');                       // also hides the spinner
+  const d=document.createElement('div'); d.className='enlarge-fail'; d.textContent=msg;
+  ov.querySelector('.enlarge-box').prepend(d);
+}
 function buildEnlarge({dir, cfg, props}){
   const canVid=canPlayVideo(dir,cfg);
   const ov=document.createElement('div'); ov.className='enlarge-ov'+(enlargeFit==='fill'?' fill':'');
   const media=canVid ? `<video class="enlarge-media" muted autoplay playsinline></video>`
                      : `<img class="enlarge-media" src="${cfg.snap(dir)}">`;
-  ov.innerHTML=`<div class="enlarge-box">${media}
+  ov.innerHTML=`<div class="enlarge-box">${media}${ENLARGE_SPINNER}
+      <button class="enlarge-nav prev" data-cyc="-1" title="Previous camera (←)">&#8249;</button>
+      <button class="enlarge-nav next" data-cyc="1" title="Next camera (→)">&#8250;</button>
       <button class="enlarge-close" title="Close">&#10005;</button>
       <div class="enlarge-cap"><span><b>${props.name}</b>${props.rwis?` &middot; ${props.rwis}`:''}</span>
         <span class="res-chip" data-res hidden></span>
-        <span class="enlarge-hint">F stretches to fill &middot; Esc closes</span></div></div>`;
+        <span class="enlarge-pos"></span>
+        <span class="enlarge-hint">&#8249; &#8250; cameras &middot; F fills &middot; Esc closes</span></div></div>`;
   document.body.appendChild(ov);
+  // position counter + prev/next, from the same spatial order the popup pager uses
+  const s=store.selected, ord=(s && s.i!=null && s.i>=0) ? spatialOrder(cycleGroupKey(s.k)) : null;
+  const curPos=ord ? orderPos(ord,s.k,s.i) : null;
+  const posEl=ov.querySelector('.enlarge-pos'); if(posEl && curPos!=null) posEl.textContent=`${curPos+1} / ${ord.total}`;
+  ov.querySelectorAll('.enlarge-nav').forEach(b=>b.addEventListener('click',(e)=>{ e.stopPropagation(); cycleEnlarge(+b.dataset.cyc); }));
   // pause the selection's video so it is not decoding the same stream behind the overlay
   const cont0=selContainer(); const pv=cont0&&cont0.querySelector('#popup-vid'); if(pv) pv.pause();
   let hls=null, timer=null;
+  const ready=()=>{ if(ov.isConnected) ov.classList.add('media-ready'); };   // first frame decoded: drop the spinner
   if(canVid){
     const v=ov.querySelector('video');
     watchRes(v, ov, RES_VIDEO, resKey(dir));
+    v.addEventListener('loadeddata', ready); v.addEventListener('playing', ready);
     hls=new Hls({maxBufferLength:8, maxMaxBufferLength:20}); hls.loadSource(dir.video); hls.attachMedia(v);
+    // a dead stream can attach and never paint; stop the spin and say so rather than spin forever
+    timer=setTimeout(()=>{ if(!ov.classList.contains('media-ready')) showEnlargeFail(ov,'This camera is not answering right now'); }, 15000);
   } else {
     const im=ov.querySelector('img');
     watchRes(im, ov, RES_SNAP, resKey(dir));
-    // a broken image gets words, never the browser's broken-image glyph
-    im.addEventListener('error',()=>{ if(!ov.isConnected || ov.querySelector('.enlarge-fail')) return;
-      im.style.display='none';
-      const d=document.createElement('div'); d.className='enlarge-fail'; d.textContent='This camera is not answering right now';
-      ov.querySelector('.enlarge-box').prepend(d); });
+    im.addEventListener('load', ready);
+    im.addEventListener('error',()=>showEnlargeFail(ov,'This camera is not answering right now'));
     timer=setInterval(()=>{ im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg));
   }
   const onkey=(e)=>{
     if(e.key==='Escape'){ closeEnlarge(); return; }
+    if(e.key==='ArrowLeft'){ e.preventDefault(); cycleEnlarge(-1); return; }
+    if(e.key==='ArrowRight'){ e.preventDefault(); cycleEnlarge(1); return; }
     if(e.key==='f'||e.key==='F'){ enlargeFit = enlargeFit==='fill' ? 'contain' : 'fill'; ov.classList.toggle('fill', enlargeFit==='fill'); }
   };
   document.addEventListener('keydown', onkey);
@@ -903,11 +995,159 @@ function showTip(coords,name){ if(!hoverTip) hoverTip=new maplibregl.Popup({clos
 function hideTip(){ if(hoverTip) hoverTip.remove(); }
 function raiseHighlights(){ if(map.getLayer('hl-hover')) map.moveLayer('hl-hover'); }
 
+/* ---------- spatial camera order (arrow cycling) ----------
+   Source order in these feeds is NOT a geographic sweep: consecutive cameras in a state file
+   can sit 100+ km apart (Ohio's are essentially shuffled), so stepping i±1 would fling the map
+   across the state on most presses. Instead each state is ordered once along a Hilbert curve,
+   which keeps neighbours in the list neighbours on the ground — median hop ~1-2 km, versus
+   10-100 km for source order. Prev/next is then a single step through that order, and the
+   position doubles as a progress counter through the state. O(n log n), computed once, cached. */
+const camOrderCache={}, GREEDY_MAX=2000;   // above this, O(n^2) greedy would jank the main thread
+function hilbertIndex(order,x,y){ let d=0;
+  for(let s=1<<(order-1); s>0; s>>=1){
+    const rx=(x&s)>0?1:0, ry=(y&s)>0?1:0;
+    d += s*s*((3*rx)^ry);
+    if(ry===0){ if(rx===1){ x=s-1-x; y=s-1-y; } const t=x; x=y; y=t; }   // rotate the quadrant
+  }
+  return d;
+}
+// Hilbert-curve order: O(n log n), used for the big states. Neighbours in the list stay near
+// on the ground (median hop 1-2 km in dense states), and there is no build-time jank.
+function hilbertChain(pts){
+  let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  for(const p of pts){ if(p[0]<minX)minX=p[0]; if(p[0]>maxX)maxX=p[0]; if(p[1]<minY)minY=p[1]; if(p[1]>maxY)maxY=p[1]; }
+  const O=16, N=(1<<O)-1, sx=(maxX-minX)||1, sy=(maxY-minY)||1;
+  return pts.map((p,i)=>[hilbertIndex(O, Math.round((p[0]-minX)/sx*N), Math.round((p[1]-minY)/sy*N)), i])
+            .sort((a,b)=>a[0]-b[0]).map(o=>o[1]);
+}
+// Greedy nearest-neighbour walk from the westmost camera: O(n^2), but tighter than Hilbert on
+// the sparse states' tail (WV p90 57 km -> 30 km) and free where n is small. Squared lon/lat
+// distance is enough to pick the nearest — the cos(lat) correction never changes which is closest.
+function greedyChain(pts){
+  const n=pts.length, used=new Uint8Array(n);
+  let cur=0; for(let i=1;i<n;i++) if(pts[i][0]<pts[cur][0]) cur=i;
+  const order=new Array(n); order[0]=cur; used[cur]=1;
+  for(let k=1;k<n;k++){ const cx=pts[cur][0], cy=pts[cur][1]; let best=-1, bd=Infinity;
+    for(let j=0;j<n;j++){ if(used[j]) continue; const dx=pts[j][0]-cx, dy=pts[j][1]-cy, d=dx*dx+dy*dy; if(d<bd){ bd=d; best=j; } }
+    order[k]=best; used[best]=1; cur=best; }
+  return order;
+}
+// A camera cycles within its GROUP's combined order, not its layer's. For most states the
+// group is the one state; New York is st-NY plus the folded New York City feed, so every NY
+// camera — state highway or city — cycles as one continuous run. Built over all active, loaded
+// members and keyed by the group's primary key; invalidated when a member loads or toggles.
+const cycleGroupKey=(k)=> foldParent(k)||k;
+function spatialOrder(gk){
+  if(camOrderCache[gk]) return camOrderCache[gk];
+  const entries=[];                                    // {k, i, c} across every active loaded member of the group
+  groupKeys(gk).forEach(g=>{ if(store.activeLayers.has(g) && dataCache[g])
+    dataCache[g].features.forEach((f,i)=>entries.push({k:g, i, c:f.geometry.coordinates})); });
+  if(!entries.length) return null;
+  const pts=entries.map(e=>e.c);
+  const perm = pts.length<=GREEDY_MAX ? greedyChain(pts) : hilbertChain(pts);   // permutation of entry indexes
+  const seq=perm.map(ei=>entries[ei]);                 // seq[p] = {k, i} of the camera at position p
+  const pos=new Map();
+  seq.forEach((e,p)=>pos.set(e.k+'/'+e.i, p));
+  return camOrderCache[gk]={seq, pos, total:seq.length};
+}
+const orderPos=(ord,k,i)=> ord.pos.get(k+'/'+i);       // 0-based position of a camera, or undefined if not in the order
+function invalidateOrder(k){ delete camOrderCache[cycleGroupKey(k)]; }   // a member loaded or toggled: rebuild on next use
+// directions arrive as a JSON string from the cluster pipeline but as a live array from the
+// feed cache; normalize once so every caller gets a real array
+function readProps(feature){ return (typeof feature.properties.directions==='string')
+  ? {...feature.properties, directions:JSON.parse(feature.properties.directions)} : feature.properties; }
+// the sidebar states A–Z (folded feeds like New York City are part of their parent, not their
+// own entry), so "next state" is what the eye expects and NY is a single stop
+function orderedLiveKeys(){ return liveKeys().filter(k=>!foldParent(k)).sort((a,b)=>LAYERS[a].name.localeCompare(LAYERS[b].name)); }
+// centre the map on a camera being cycled to. Offset keeps the pin clear of the left panel
+// (desktop) the same way a route-jump does; on a phone the sheet sits low so centre is fine.
+function easeToCam(coords){ map.easeTo({center:coords, zoom:Math.max(map.getZoom(),14), duration:420, offset:isMobile()?[0,0]:[-170,0]}); }
+
+let cycleBoundary=null, cycleNoteT=null, suppressEnlargeClose=false;
+function flashCycleNotice(msg){
+  const n=document.getElementById('cycleNote'); if(!n) return;
+  n.textContent=msg; n.classList.add('show');
+  clearTimeout(cycleNoteT); cycleNoteT=setTimeout(()=>n.classList.remove('show'), 2600);
+}
+// step one camera prev(-1)/next(+1) through the current state's spatial order. In add-to-route
+// mode this only navigates — it never auto-adds the cameras you pass (you still tap the keepers).
+function cycleCamera(dir){
+  const s=store.selected; if(!s || s.k==null) return;
+  const cfg=LAYERS[s.k]; if(!cfg || cfg.kind!=='live') return;
+  if(s.i==null || s.i<0) return;                       // off-feed selection (a saved-route cam): nothing to step through
+  const gk=cycleGroupKey(s.k), ord=spatialOrder(gk); if(!ord) return;
+  const cur=orderPos(ord,s.k,s.i); if(cur==null) return;
+  const np=cur+dir;
+  if(np<0 || np>=ord.total){ cycleToNextState(gk, dir); return; }
+  cycleBoundary=null;
+  const e=ord.seq[np], feat=dataCache[e.k].features[e.i];
+  easeToCam(feat.geometry.coordinates);
+  selectFeature(e.k, feat, {i:e.i, noAutoAdd:true});
+}
+// jump straight to a position in the group's order (1-based, clamped). Double-clicking the pager
+// counter opens an input for this, so "go to the last camera" is one gesture, not 100 arrow
+// presses — handy for parking at a state's edge before crossing into the next.
+function jumpToOrderPos(pos1){
+  const s=store.selected; if(!s || s.k==null || s.i==null || s.i<0) return;
+  const ord=spatialOrder(cycleGroupKey(s.k)); if(!ord) return;
+  const p=Math.max(0, Math.min(ord.total-1, (pos1|0)-1));
+  cycleBoundary=null;
+  const e=ord.seq[p], feat=dataCache[e.k].features[e.i];
+  easeToCam(feat.geometry.coordinates);
+  selectFeature(e.k, feat, {i:e.i, noAutoAdd:true});
+}
+// at either end of a state, the first press names the neighbour and a second press crosses in,
+// so you learn which state is next and never fall out of one into another by accident. fromK is
+// a group's primary key, so New York (state + city) is a single stop in this sequence.
+async function cycleToNextState(fromK, dir){
+  const keys=orderedLiveKeys(), at=keys.indexOf(fromK); if(at<0 || keys.length<2) return;
+  const nextK=keys[(at+dir+keys.length)%keys.length];
+  if(!cycleBoundary || cycleBoundary.k!==fromK || cycleBoundary.dir!==dir){
+    cycleBoundary={k:fromK, dir};
+    flashCycleNotice(`End of ${LAYERS[fromK].name} — press ${dir>0?'→':'←'} again for ${LAYERS[nextK].name}`);
+    return;
+  }
+  cycleBoundary=null;
+  await enableGroup(nextK, false);                     // pull in the whole next group (its folded feeds too)
+  const ord=spatialOrder(nextK); if(!ord) return;
+  const startPos = dir>0 ? 0 : ord.total-1;            // forward lands on the group's first camera, backward on its last
+  const e=ord.seq[startPos], feat=dataCache[e.k].features[e.i];
+  easeToCam(feat.geometry.coordinates);
+  selectFeature(e.k, feat, {i:e.i, noAutoAdd:true});
+  flashCycleNotice(`Now in ${LAYERS[nextK].name}`);
+}
+// fullscreen cycling advances the camera behind the overlay too, so closing lands on the one
+// you stopped on. selectFeature removes the old popup, and popup.remove() fires that popup's
+// close handler which would closeEnlarge() — suppress exactly that, we are replacing it, not
+// closing it. At a state edge fullscreen stops with a note rather than crossing over.
+function flashEnlargeHint(msg){ const h=enlargeState&&enlargeState.ov.querySelector('.enlarge-hint'); if(!h) return;
+  const old=h.dataset.base||h.textContent; h.dataset.base=old; h.textContent=msg;
+  setTimeout(()=>{ if(h.isConnected) h.textContent=h.dataset.base; }, 2200); }
+function cycleEnlarge(dir){
+  const s=store.selected; if(!s || s.k==null) return;
+  const cfg=LAYERS[s.k]; if(!cfg || cfg.kind!=='live' || s.i==null || s.i<0) return;
+  const gk=cycleGroupKey(s.k), ord=spatialOrder(gk); if(!ord) return;
+  const cur=orderPos(ord,s.k,s.i); if(cur==null) return;
+  const np=cur+dir;
+  if(np<0 || np>=ord.total){ flashEnlargeHint(`End of ${LAYERS[gk].name} — exit to change states`); return; }
+  const e=ord.seq[np], feat=dataCache[e.k].features[e.i], ncfg=LAYERS[e.k], props=readProps(feat), dir0=props.directions[0];
+  easeToCam(feat.geometry.coordinates);
+  suppressEnlargeClose=true;                            // the replaced popup's close must not tear the overlay down
+  selectFeature(e.k, feat, {i:e.i, noAutoAdd:true});
+  suppressEnlargeClose=false;
+  const rt=modeCtx.returnTo;                            // keep the ORIGINAL return target so Esc still exits cleanly
+  teardownEnlarge(true);
+  modeCtx={dir:dir0, cfg:ncfg, props, returnTo:rt};     // the next camera may be a different feed (NY state ↔ city)
+  buildEnlarge(modeCtx);
+}
+
 /* ---------- selection ---------- */
 function selectFeature(k, feature, opts){
   const cfg=LAYERS[k], coords=feature.geometry.coordinates.slice();
-  const props=(typeof feature.properties.directions==='string')
-    ? {...feature.properties, directions:JSON.parse(feature.properties.directions)} : feature.properties;
+  const props=readProps(feature);
+  // the feed index locates this camera in the spatial order for prev/next. The map-click path
+  // hands it in (opts.i); other callers derive it, and a synthetic off-feed feature yields -1.
+  const i = (opts&&opts.i!=null) ? opts.i : (dataCache[k] ? dataCache[k].features.indexOf(feature) : -1);
   // add-to-route: a map tap adds the camera AND opens it, so you see what you just
   // added and can undo right there — no more collecting unlabeled dots from memory.
   // (Search picks navigate without auto-adding; the popup's Add button is one tap.)
@@ -921,7 +1161,7 @@ function selectFeature(k, feature, opts){
   // makes any stale async wiring a no-op either way
   if(popup){ const p=popup; popup=null; p.remove(); }
   destroyPopupHls();
-  store.selected={coords,k,props,token:++selToken};
+  store.selected={coords,k,props,token:++selToken,i};
   const token=selToken;
   const html = cfg.kind==='live' ? buildLivePopup(props,cfg) : buildEnfPopup(props);
   if(isMobile()){
@@ -932,7 +1172,7 @@ function selectFeature(k, feature, opts){
     popup=new maplibregl.Popup({closeButton:true,maxWidth:cfg.kind==='live'?'288px':'260px'}).setLngLat(coords).setHTML(html).addTo(map);
     const mine=popup;
     if(cfg.kind==='live') setTimeout(()=>{ if(popup===mine && selectionAlive(token)) wireCameraUI(mine.getElement(), props, cfg, token); },0);
-    mine.on('close',()=>{ if(selectionAlive(token)) store.selected=null; destroyPopupHls(); closeEnlarge(); });
+    mine.on('close',()=>{ if(selectionAlive(token)) store.selected=null; destroyPopupHls(); if(!suppressEnlargeClose) closeEnlarge(); });
   }
 }
 
@@ -1036,7 +1276,7 @@ function camsHitAction(f){
     let z; try{ z=camsIndex.getClusterExpansionZoom(f.properties.cluster_id); }catch(err){ return; }
     map.easeTo({center:f.geometry.coordinates, zoom:z, duration:500});
   } else { const p=f.properties;
-    const orig=dataCache[p.k]&&dataCache[p.k].features[p.i]; if(orig) selectFeature(p.k,orig); }
+    const orig=dataCache[p.k]&&dataCache[p.k].features[p.i]; if(orig) selectFeature(p.k,orig,{i:p.i}); }
 }
 // hit-test the supercluster index directly: everything within a finger radius of the point
 function camsAtPoint(point){
@@ -1153,9 +1393,10 @@ async function enableLayer(k,fly=true){
     finally{ clearTimeout(slow); }
   }
   const data=dataCache[k];
-  if(cfg.kind==='live') applyStatus(k,data);   // statuses exist before the health sweep lands (live/snapshot)
-  const c=document.getElementById('cnt-'+k);
-  const setCount=()=>{ if(c) c.textContent=data.features.length.toLocaleString()+(cfg.deadCount?` · ${cfg.deadCount.toLocaleString()} offline`:''); };
+  if(cfg.kind==='live'){ applyStatus(k,data); invalidateOrder(k); }   // statuses exist before the health sweep lands; the group order now includes this member
+  // a folded layer's count shows on its parent row (New York City rolls up into New York)
+  const dk=foldParent(k)||k, c=document.getElementById('cnt-'+dk);
+  const setCount=()=>{ if(c) c.textContent=groupCountText(dk); };
   setCount();
   store.activeLayers.add(k);
   if(cfg.kind==='enforcement'){
@@ -1173,7 +1414,7 @@ async function enableLayer(k,fly=true){
   }
 }
 function disableLayer(k){ store.activeLayers.delete(k);
-  if(LAYERS[k].kind==='live') scheduleCamsRebuild(); else setLayerVis(k,'none');
+  if(LAYERS[k].kind==='live'){ scheduleCamsRebuild(); invalidateOrder(k); } else setLayerVis(k,'none');
   // only close the open camera if it belonged to THIS layer; unrelated toggles must
   // not take your popup away
   if(store.selected && store.selected.k===k) clearSelection();
@@ -1187,7 +1428,9 @@ function disableLayer(k){ store.activeLayers.delete(k);
 function liveKeys(){ return Object.keys(LAYERS).filter(k=>LAYERS[k].kind==='live'); }
 function syncMaster(){
   const m=document.getElementById('masterAll'); if(!m) return;
-  const keys=liveKeys(), on=keys.filter(k=>store.activeLayers.has(k)).length;
+  // one entry per sidebar row: a folded child (New York City) is not its own state here, and a
+  // row is "on" when its parent layer is, since a group always toggles together
+  const keys=liveKeys().filter(k=>!foldParent(k)), on=keys.filter(k=>store.activeLayers.has(k)).length;
   m.checked = on>0 && on===keys.length;
   m.indeterminate = on>0 && on<keys.length;
   const lbl=document.getElementById('cnt-all');
@@ -1206,8 +1449,9 @@ async function setAllStates(on){
 /* coverage overview markers (one per covered state), sized by and labelled with the
    actual camera count so the zoomed-out map reads as data, not just dots */
 function buildCoverage(){
-  const feats=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live'&&c.center).map(([k,c])=>{
-    const n=dataCache[k]?dataCache[k].features.length:(c.count||0);
+  // one marker per sidebar state; a folded feed (New York City) rolls into its parent's count
+  const feats=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live'&&c.center&&!foldParent(k)).map(([k,c])=>{
+    const n=groupCount(k);
     return { type:'Feature', geometry:{type:'Point',coordinates:c.center},
       properties:{k, label:c.name, n, nLabel: n>=1000 ? (Math.round(n/100)/10)+'k' : String(n)} };
   });
@@ -1227,13 +1471,16 @@ function runSearch(q){
     searchHits=[];
     // the searcher knows the camera, not the layer model: when nothing matches in what's
     // on, offer the states whose names match — one tap turns the state on and re-searches
-    const stateHits=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live' && !store.activeLayers.has(k) && c.name.toLowerCase().includes(q)).slice(0,4);
+    // one hit per sidebar row; match on any name in the group so "new york city" still turns on
+    // New York (which carries the city feed), and enable the whole group like the checkbox does
+    const stateHits=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live' && !foldParent(k) && !store.activeLayers.has(k)
+      && groupKeys(k).some(g=>LAYERS[g].name.toLowerCase().includes(q))).slice(0,4);
     if(stateHits.length){
       box.innerHTML=`<div class="sr-empty">No camera matches in the states that are on.</div>`+stateHits.map(([k,c])=>
-        `<div class="sr-item sr-state" data-k="${k}"><span class="sr-dot" style="background:#007aff"></span>Turn on ${c.name}<span class="sr-sub">${Number(c.count||0).toLocaleString()} cameras</span></div>`).join('');
+        `<div class="sr-item sr-state" data-k="${k}"><span class="sr-dot" style="background:#007aff"></span>Turn on ${c.name}<span class="sr-sub">${groupCount(k).toLocaleString()} cameras</span></div>`).join('');
       box.classList.add('show');
       box.querySelectorAll('.sr-state').forEach(it=>it.addEventListener('click',async ()=>{
-        await enableLayer(it.dataset.k); writeUrl();       // same request as its checkbox, fly included
+        await enableGroup(it.dataset.k); writeUrl();        // same request as its checkbox, fly included
         runSearch(document.getElementById('search').value);
       }));
       return;
@@ -1518,9 +1765,10 @@ async function restoreState(){
 
 /* ---------- build camera list (states A-Z; Illinois nests the Chicago ticket map) ---------- */
 function renderCamList(){
-  const keys=Object.keys(LAYERS).filter(k=>LAYERS[k].kind==='live').sort((a,b)=>LAYERS[a].name.localeCompare(LAYERS[b].name));
-  const rowFor=(k)=>{ const c=LAYERS[k];
-    return `<label class="lyr"><input type="checkbox" data-layer="${k}"><span class="swatch"></span><span class="nm">${c.name}</span>${c.hasVideo?'<span class="live-tag">LIVE</span>':''}<span class="cnt" id="cnt-${k}"></span></label>`; };
+  // one row per sidebar state: live layers, minus any folded into another (New York City → New York)
+  const keys=Object.keys(LAYERS).filter(k=>LAYERS[k].kind==='live' && !foldParent(k)).sort((a,b)=>LAYERS[a].name.localeCompare(LAYERS[b].name));
+  const rowFor=(k)=>{ const c=LAYERS[k], live=groupKeys(k).some(g=>LAYERS[g].hasVideo);
+    return `<label class="lyr"><input type="checkbox" data-layer="${k}"><span class="swatch"></span><span class="nm">${c.name}</span>${live?'<span class="live-tag">LIVE</span>':''}<span class="cnt" id="cnt-${k}"></span></label>`; };
   document.getElementById('camList').innerHTML=keys.map(k=>{
     if(k!=='il-cam') return rowFor(k);
     return `<div class="il-block" id="ilBlock">
@@ -1537,9 +1785,10 @@ function renderCamList(){
   // Illinois sub toggle
   const t=document.getElementById('ilToggle');
   if(t) t.addEventListener('click',()=>{ document.getElementById('ilBlock').classList.toggle('open'); document.getElementById('ilSub').classList.toggle('collapsed'); });
-  // wire all camera + chi-enf checkboxes
+  // wire all camera + chi-enf checkboxes — a row toggles its whole group (New York flips both
+  // the state and the city feed together); chi-enf and unfolded states are groups of one
   document.querySelectorAll('#camList .lyr input').forEach(cb=>{ if(cb._wired) return; cb._wired=true;
-    cb.addEventListener('change',async ()=>{ const k=cb.dataset.layer; if(cb.checked) await enableLayer(k); else disableLayer(k); writeUrl(); }); });
+    cb.addEventListener('change',async ()=>{ const k=cb.dataset.layer; if(cb.checked) await enableGroup(k); else disableGroup(k); writeUrl(); }); });
 }
 
 /* ---------- UI wiring ---------- */
@@ -1612,6 +1861,16 @@ document.addEventListener('keydown',(e)=>{
   if(store.mode==='route-view'){ closeRouteView(); return; }
   if(store.mode==='add-to-route') stopAddMode();
 });
+// ← / → step through cameras whenever one is open (the fast curation path; the on-screen
+// pager teaches it). The fullscreen overlay owns its own arrows, and a focused field keeps them.
+document.addEventListener('keydown',(e)=>{
+  if(e.key!=='ArrowLeft' && e.key!=='ArrowRight') return;
+  if(e.target.matches && e.target.matches('input,textarea')) return;
+  if(store.mode==='media-enlarged') return;             // the overlay handles arrows itself
+  if(!store.selected) return;
+  e.preventDefault();
+  cycleCamera(e.key==='ArrowRight' ? 1 : -1);
+});
 
 /* ---------- boot ---------- */
 map.on('load', async ()=>{
@@ -1634,7 +1893,7 @@ map.on('load', async ()=>{
   map.addLayer({id:'coverage-label',type:'symbol',source:'coverage',layout:{'text-field':['get','label'],'text-size':11,'text-font':['Noto Sans Bold'],'text-offset':[0,1.9],'text-anchor':'top','text-allow-overlap':false},paint:{'text-color':'#1c1c1e','text-halo-color':'#fff','text-halo-width':1.6}});
   // 44px+ finger target over each state bubble; tapping is the same request as its checkbox
   map.addLayer({id:'coverage-hit',type:'circle',source:'coverage',paint:{'circle-color':'rgba(0,0,0,0)','circle-radius':26}});
-  const coverTap=async (e)=>{ const f=e.features[0]; if(!f) return; await enableLayer(f.properties.k); writeUrl(); };
+  const coverTap=async (e)=>{ const f=e.features[0]; if(!f) return; await enableGroup(f.properties.k); writeUrl(); };
   ['coverage-hit','coverage-label'].forEach(id=>{
     map.on('click',id,coverTap);
     map.on('mouseenter',id,()=>map.getCanvas().style.cursor='pointer');
