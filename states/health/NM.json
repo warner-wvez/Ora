@@ -1,20 +1,21 @@
 {
-"checked_at": "2026-07-15T20:06:43Z",
+"checked_at": "2026-07-16T09:21:04Z",
 "cameras": 183,
 "counts": {
-"offline": 6,
-"placeholder": 4
+"offline": 8,
+"placeholder": 3
 },
 "status": {
 "http://ss.nmroads.com/snapshots/coors_atrisco.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_comanche.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40_sanmateo.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25nb_broadway.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i25_lowerlabajada.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i25_upperlabajada.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
-"http://ss.nmroads.com/snapshots/pojoaque.jpg": "placeholder"
+"http://ss.nmroads.com/snapshots/pojoaque.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/tramway_lomas.jpg": "offline"
 }
 }

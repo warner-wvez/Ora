@@ -1,6 +1,12 @@
 {
-"checked_at": "2026-07-15T20:22:32Z",
+"checked_at": "2026-07-16T09:36:58Z",
 "cameras": 1127,
-"counts": {},
-"status": {}
+"counts": {
+"placeholder": 3
+},
+"status": {
+"https://tripcheck.com/RoadCams/cams/ORE11 at OR204 EB_pid3878.jpg": "placeholder",
+"https://tripcheck.com/RoadCams/cams/ORE11 at OR204 NB_pid3882.jpg": "placeholder",
+"https://tripcheck.com/RoadCams/cams/ORE11 at OR204 WB_pid3886.jpg": "placeholder"
+}
 }
