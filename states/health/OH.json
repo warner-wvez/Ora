@@ -1,16 +1,14 @@
 {
-"checked_at": "2026-07-16T14:55:36Z",
+"checked_at": "2026-07-16T20:06:01Z",
 "cameras": 1121,
 "counts": {
-"frozen": 17,
-"offline": 3,
+"frozen": 16,
+"offline": 1,
 "placeholder": 1
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE112.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/Central-Harrisburg-Mound.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
-"https://itscameras.dot.state.oh.us/images/artimis/CCTV008a-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
@@ -23,7 +21,6 @@
 "https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV109a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4156.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",

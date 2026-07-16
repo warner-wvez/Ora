@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-07-16T14:52:50Z",
+"checked_at": "2026-07-16T20:03:11Z",
 "cameras": 798,
 "counts": {
 "offline": 7,
-"placeholder": 24
+"placeholder": 20
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP64.432Fargo13thAve38thStWestRampSouth.jpg": "placeholder",
@@ -21,10 +21,6 @@
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamPavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND5RP152.WesthopeWest.jpg": "offline",
-"https://www.dot.nd.gov/travel-info/cameras/ND68RP1.73CheneyCreekEast.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/ND68RP1.73CheneyCreekPavement.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/ND68RP1.73CheneyCreekSouth.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/ND68RP1.73CheneyCreekWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US83RP175MaxCenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeCenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeNorth.jpg": "placeholder",
