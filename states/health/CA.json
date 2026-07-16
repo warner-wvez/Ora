@@ -1,36 +1,13 @@
 {
-"checked_at": "2026-07-15T19:46:14Z",
+"checked_at": "2026-07-16T09:01:23Z",
 "cameras": 3197,
 "counts": {
-"offline": 25,
+"offline": 2,
 "frozen": 1
 },
 "status": {
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/hum255gstlookingwesttow/hum255gstlookingwesttow.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/hum255kstlooking/hum255kstlooking.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/lak1750280lookings/lak1750280lookings.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/lak17526551lookingn/lak17526551lookingn.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/sr120jctn/sr120jctn.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d1/cctv/image/sr1chestnuts/sr1chestnuts.jpg": "offline",
+"https://cwwp2.dot.ca.gov/data/d12/cctv/image/sr1578nbpchatdiamond1/sr1578nbpchatdiamond1.jpg": "offline",
 "https://cwwp2.dot.ca.gov/data/d3/cctv/image/hwy99ateeatonrd1/hwy99ateeatonrd1.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d3/cctv/image/hwy99athwy321/hwy99athwy321.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv975i80e80manuelcampospkwy/tv975i80e80manuelcampospkwy.jpg": "frozen",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110194sorte5/i110194sorte5.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110196avenue26offramp/i110196avenue26offramp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110341southofi405/i110341southofi405.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110396190thst/i110396190thst.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110791gaffeyst/i110791gaffeyst.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110792channelstofframp/i110792channelstofframp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110793johngibsonblonramp/i110793johngibsonblonramp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110794pchonramp/i110794pchonramp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110797223rdstonramp/i110797223rdstonramp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110798carsonstofframp/i110798carsonstofframp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110799carsonstonramp/i110799carsonstonramp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110800torranceblvdonramp/i110800torranceblvdonramp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110801torranceblvdonramp/i110801torranceblvdonramp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110802redondobeachblvd/i110802redondobeachblvd.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110803rosecransave/i110803rosecransave.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110804elsegundoblvdonramp/i110804elsegundoblvdonramp.jpg": "offline",
-"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i110805imperialhwyonramp/i110805imperialhwyonramp.jpg": "offline"
+"https://cwwp2.dot.ca.gov/data/d4/cctv/image/tv975i80e80manuelcampospkwy/tv975i80e80manuelcampospkwy.jpg": "frozen"
 }
 }
