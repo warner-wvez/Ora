@@ -1,15 +1,18 @@
 {
-"checked_at": "2026-07-16T20:03:34Z",
+"checked_at": "2026-07-17T09:27:32Z",
 "cameras": 183,
 "counts": {
-"offline": 7,
+"offline": 10,
 "placeholder": 1
 },
 "status": {
+"http://ss.nmroads.com/snapshots/i-40w_i25.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-40wb_lomas.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10_mesquite.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i25nb_oldpecos.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25nbcentral.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",

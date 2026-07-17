@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-07-16T20:06:01Z",
+"checked_at": "2026-07-17T09:30:26Z",
 "cameras": 1121,
 "counts": {
-"frozen": 16,
+"frozen": 15,
 "offline": 1,
 "placeholder": 1
 },
@@ -18,7 +18,6 @@
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Hull_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Strub_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4156.jpg": "frozen",
