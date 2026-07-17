@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-07-17T09:22:08Z",
+"checked_at": "2026-07-17T20:24:11Z",
 "cameras": 591,
 "counts": {
 "offline": 9,
-"placeholder": 13
+"placeholder": 10
 },
 "status": {
 "": "offline",
@@ -11,10 +11,7 @@
 "https://kscam.carsprogram.org/snapshots/GEN_5-054-1750-2-US-54atKingmanWBCCTV.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K007SBC-02.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBC-05T.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-86.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-88.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBC-13.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBIPC-85.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-38.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBIPC-02A.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-22.jpg": "placeholder",
