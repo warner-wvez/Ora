@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-07-16T19:44:02Z",
+"checked_at": "2026-07-17T08:38:07Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
 "frozen": 4,
-"placeholder": 1
+"placeholder": 6
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -15,6 +15,11 @@
 "https://cocam.carsprogram.org/Douglas/89_County_Line_Colorado-cotripNorth-DO-NOT-DELETE.jpg": "frozen",
 "https://cocam.carsprogram.org/Douglas/89_County_Line_Colorado-cotripSouth-DO-NOT-DELETE.jpg": "frozen",
 "https://cocam.carsprogram.org/Douglas/89_County_Line_Colorado-cotripWest-DO-NOT-DELETE.jpg": "frozen",
-"https://cocam.carsprogram.org/Snapshots/050E27700CAM1RHS.flv.png": "placeholder"
+"https://cocam.carsprogram.org/Snapshots/025S16080CAM1NEC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/050E27700CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/093S00755CAM1SWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/094E00810CAM1SEC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/094W00100CAM1NWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/121S00655CAM1SWC.flv.png": "placeholder"
 }
 }
