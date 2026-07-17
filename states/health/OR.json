@@ -1,6 +1,10 @@
 {
-"checked_at": "2026-07-17T09:43:43Z",
+"checked_at": "2026-07-17T20:46:08Z",
 "cameras": 1127,
-"counts": {},
-"status": {}
+"counts": {
+"offline": 1
+},
+"status": {
+"https://tripcheck.com/RoadCams/cams/158th Ave at Walker Rd_pid3975.JPG": "offline"
+}
 }
