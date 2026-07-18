@@ -1,5 +1,5 @@
 {
-"checked_at": "2026-07-18T04:43:58Z",
+"checked_at": "2026-07-18T09:06:33Z",
 "cameras": 1121,
 "counts": {
 "frozen": 13,
@@ -16,12 +16,12 @@
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Hull_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Strub_Rd.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D05/D05-032.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Wood_SB-3.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
