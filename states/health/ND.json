@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-07-21T15:21:30Z",
+"checked_at": "2026-07-21T20:46:18Z",
 "cameras": 798,
 "counts": {
-"offline": 8,
-"placeholder": 10
+"offline": 7,
+"placeholder": 16
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP64.432Fargo13thAve38thStWestRampSouth.jpg": "placeholder",
@@ -22,7 +22,12 @@
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND5RP152.WesthopeWest.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/US83RP175MaxCenter.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeCenter.jpg": "offline",
+"https://www.dot.nd.gov/travel-info/cameras/gladstonebridgeeb.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/gladstonebridgewb.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/gladstonecenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/gladstoneeast.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/gladstonepavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/gladstonewest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/camerasND13RP308VeronaEast.jpg": "offline"
 }
 }
