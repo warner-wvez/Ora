@@ -1,23 +1,26 @@
 {
-"checked_at": "2026-07-20T20:57:15Z",
+"checked_at": "2026-07-21T04:56:02Z",
 "cameras": 183,
 "counts": {
-"offline": 12,
-"placeholder": 1
+"offline": 14,
+"placeholder": 2
 },
 "status": {
-"http://ss.nmroads.com/snapshots/I25NBUS550.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25sb_us550.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40_west_edgewood.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40wb_sedillohill.jpg": "offline",
+"http://ss.nmroads.com/snapshots/I40eb-I25sb.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25nb_broadway.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25sb_bobbyfoster.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i25nbfrontage-osuna.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25sanmateo.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25sbpdn.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25south-riobravo.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i40pennsylvania.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
-"http://ss.nmroads.com/snapshots/pdn_coors.jpg": "offline",
-"http://ss.nmroads.com/snapshots/pojoaque.jpg": "offline",
-"http://ss.nmroads.com/snapshots/us67_capulin.jpg": "offline"
+"http://ss.nmroads.com/snapshots/pdn_jefferson.jpg": "offline",
+"http://ss.nmroads.com/snapshots/pojoaque.jpg": "offline"
 }
 }
