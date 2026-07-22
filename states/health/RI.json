@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-07-22T15:39:33Z",
+"checked_at": "2026-07-22T20:52:32Z",
 "cameras": 135,
 "counts": {
-"placeholder": 6
+"placeholder": 7
 },
 "status": {
 "https://www.dot.ri.gov/img/travel/camimages/1-04%20Rt%201%20N%20%40%20Rt%20138%20North%20Kingstown.jpg": "placeholder",
@@ -10,6 +10,7 @@
 "https://www.dot.ri.gov/img/travel/camimages/138_32.9_W_CAM%20Admiral%20Kalbfus%20at%20Halsey%20St.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/Admiral%20Kalbfus%20%40%20JT%20Connell%20Roundabout.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/Henderson%20Bridge%20EP%202.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/Memorial%20Blvd%20%40%20Francis%20St.jpg": "placeholder"
 }
 }

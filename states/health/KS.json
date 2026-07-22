@@ -1,14 +1,13 @@
 {
-"checked_at": "2026-07-22T15:14:55Z",
+"checked_at": "2026-07-22T20:28:54Z",
 "cameras": 591,
 "counts": {
 "offline": 9,
-"placeholder": 13
+"placeholder": 11
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
-"https://kscam.carsprogram.org/snapshots/GEN_1-070-3530-2-I-70nearAuburnRoadExit353.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_3-070-0620-2-I-70atMingoExit62.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_3-070-1270-2-I-70atWakeeneyexit127.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-054-1750-2-US-54atKingmanWBCCTV.jpeg": "placeholder",
@@ -24,7 +23,6 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-60.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-68.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070WBIPC-14.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0022-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0024-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0045-LQ.jpg": "offline"
