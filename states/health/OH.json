@@ -1,18 +1,15 @@
 {
-"checked_at": "2026-07-22T15:24:07Z",
+"checked_at": "2026-07-22T20:37:44Z",
 "cameras": 1121,
 "counts": {
-"offline": 5,
-"frozen": 14,
+"frozen": 15,
+"offline": 1,
 "placeholder": 1
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CLE/CLE126-L.jpg": "offline",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/dayton/SR-49_at_Shiloh_Springs_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/toledo/I-75_at_I-475_North_side.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3134.jpg": "frozen",
@@ -23,8 +20,8 @@
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV022.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_SR-4.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }

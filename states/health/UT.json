@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-07-22T15:41:17Z",
+"checked_at": "2026-07-22T20:55:15Z",
 "cameras": 2063,
 "counts": {
-"placeholder": 36
+"placeholder": 41
 },
 "status": {
 "https://udottraffic.utah.gov/map/Cctv/112731": "placeholder",
@@ -16,11 +16,13 @@
 "https://udottraffic.utah.gov/map/Cctv/123411": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/126755": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/126943": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/135609": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135827": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136017": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136087": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136095": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136190": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/136203": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136242": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136301": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136359": "placeholder",
@@ -33,11 +35,14 @@
 "https://udottraffic.utah.gov/map/Cctv/137292": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/137940": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138085": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/138319": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138444": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138455": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138508": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138514": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/138521": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/138534": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/138536": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/138571": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138596": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138643": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/140171": "placeholder"

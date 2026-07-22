@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-07-22T15:14:01Z",
+"checked_at": "2026-07-22T20:28:24Z",
 "cameras": 3636,
 "counts": {
-"offline": 58,
+"offline": 59,
 "frozen": 105,
-"placeholder": 159
+"placeholder": 154
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_31st_4183209_-8795890_1_E.jpg": "placeholder",
@@ -31,7 +31,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Schmale_4193889_-8810100_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_Midwest_4182470_-8797210_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_Midwest_4182470_-8797210_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_Midwest_4182470_-8797210_1_S.jpg": "placeholder",
@@ -48,10 +47,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Summit_4185700_-8797290_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Summit_4185700_-8797290_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Summit_4185700_-8797290_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SWB_Finley_4181940_-8802900_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SWB_Finley_4181940_-8802900_1_N.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SWB_Finley_4181940_-8802900_1_S.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SWB_Finley_4181940_-8802900_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SWB_Old-Plank_4179200_-8811820_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SWB_Old-Plank_4179200_-8811820_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SWB_Old-Plank_4179200_-8811820_1_S.jpg": "placeholder",
@@ -77,6 +72,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4158749_-8772759_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4159614_-8771628_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4160161_-8770909_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-290_4204263_-8803107_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-57_4156839_-8774291_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-94_4162060_-8757920_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_IL-53-Local_4205130_-8802969_1_NONE.jpg": "offline",
