@@ -1,5 +1,5 @@
 {
-"checked_at": "2026-07-22T19:48:06Z",
+"checked_at": "2026-07-23T08:47:23Z",
 "cameras": 629,
 "counts": {
 "placeholder": 10
@@ -10,10 +10,10 @@
 "https://api.algotraffic.com/v4/Cameras/1378/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1415/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1454/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1499/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1535/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1602/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1606/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1674/snapshot.jpg": "placeholder"
+"https://api.algotraffic.com/v4/Cameras/1674/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/1964/snapshot.jpg": "placeholder"
 }
 }
