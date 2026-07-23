@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-07-23T10:07:29Z",
+"checked_at": "2026-07-23T15:32:39Z",
 "cameras": 1384,
 "counts": {
-"placeholder": 58
+"placeholder": 57
 },
 "status": {
 "https://www.511pa.com/map/Cctv/4707": "placeholder",
@@ -14,7 +14,6 @@
 "https://www.511pa.com/map/Cctv/4944": "placeholder",
 "https://www.511pa.com/map/Cctv/4963": "placeholder",
 "https://www.511pa.com/map/Cctv/5096": "placeholder",
-"https://www.511pa.com/map/Cctv/5097": "placeholder",
 "https://www.511pa.com/map/Cctv/5116": "placeholder",
 "https://www.511pa.com/map/Cctv/5140": "placeholder",
 "https://www.511pa.com/map/Cctv/5226": "placeholder",
@@ -25,11 +24,10 @@
 "https://www.511pa.com/map/Cctv/5348": "placeholder",
 "https://www.511pa.com/map/Cctv/5375": "placeholder",
 "https://www.511pa.com/map/Cctv/5376": "placeholder",
-"https://www.511pa.com/map/Cctv/5420": "placeholder",
 "https://www.511pa.com/map/Cctv/5460": "placeholder",
 "https://www.511pa.com/map/Cctv/5492": "placeholder",
-"https://www.511pa.com/map/Cctv/5518": "placeholder",
 "https://www.511pa.com/map/Cctv/5557": "placeholder",
+"https://www.511pa.com/map/Cctv/5559": "placeholder",
 "https://www.511pa.com/map/Cctv/5567": "placeholder",
 "https://www.511pa.com/map/Cctv/5588": "placeholder",
 "https://www.511pa.com/map/Cctv/5589": "placeholder",
@@ -52,11 +50,12 @@
 "https://www.511pa.com/map/Cctv/5998": "placeholder",
 "https://www.511pa.com/map/Cctv/6000": "placeholder",
 "https://www.511pa.com/map/Cctv/6118": "placeholder",
-"https://www.511pa.com/map/Cctv/6124": "placeholder",
+"https://www.511pa.com/map/Cctv/6144": "placeholder",
 "https://www.511pa.com/map/Cctv/6154": "placeholder",
 "https://www.511pa.com/map/Cctv/6163": "placeholder",
 "https://www.511pa.com/map/Cctv/6164": "placeholder",
 "https://www.511pa.com/map/Cctv/6220": "placeholder",
+"https://www.511pa.com/map/Cctv/6343": "placeholder",
 "https://www.511pa.com/map/Cctv/6359": "placeholder",
 "https://www.511pa.com/map/Cctv/6360": "placeholder",
 "https://www.511pa.com/map/Cctv/6361": "placeholder",
