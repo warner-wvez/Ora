@@ -1,17 +1,13 @@
 {
-"checked_at": "2026-07-23T09:50:35Z",
+"checked_at": "2026-07-23T15:25:40Z",
 "cameras": 183,
 "counts": {
-"offline": 9,
-"placeholder": 4
+"offline": 6,
+"placeholder": 3
 },
 "status": {
 "http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25nb_bobbyfoster.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40w_i25.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40wb_lomas.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25lasvegas.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
