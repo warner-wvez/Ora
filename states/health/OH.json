@@ -1,12 +1,13 @@
 {
-"checked_at": "2026-07-24T20:35:53Z",
+"checked_at": "2026-07-25T04:30:10Z",
 "cameras": 1121,
 "counts": {
-"frozen": 14,
-"offline": 1,
+"offline": 2,
+"frozen": 15,
 "placeholder": 1
 },
 "status": {
+"https://itscameras.dot.state.oh.us/images/CMH/CCTV2146.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
@@ -14,6 +15,7 @@
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3134.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/D03/SR-4_at_Bogart.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Hull_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Strub_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
