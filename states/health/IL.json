@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-07-25T09:21:53Z",
+"checked_at": "2026-07-27T11:07:56Z",
 "cameras": 3636,
 "counts": {
-"offline": 57,
-"frozen": 105,
+"offline": 58,
+"frozen": 107,
 "placeholder": 165
 },
 "status": {
@@ -72,6 +72,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4158749_-8772759_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4159614_-8771628_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4160161_-8770909_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-290_4204263_-8803107_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-57_4156839_-8774291_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-94_4162060_-8757920_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_IL-53-Local_4205130_-8802969_1_NONE.jpg": "offline",
@@ -192,6 +193,8 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_EB_I-70_3875531_-8986658_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_NB_I-270_3875685_-8990555_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_NB_I-55_3872652_-8991393_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_NB_IL-157_3875617_-9000737_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_NB_IL-157_3875617_-9000737_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_NEB_I-55_3871844_-8991740_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_NWB_I-255_3872468_-9003237_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_NWB_I-255_3872468_-9003237_1_S.jpg": "frozen",
