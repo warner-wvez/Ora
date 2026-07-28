@@ -1,15 +1,15 @@
 {
-"checked_at": "2026-07-28T09:57:47Z",
+"checked_at": "2026-07-28T15:19:54Z",
 "cameras": 183,
 "counts": {
-"offline": 5,
-"placeholder": 2
+"offline": 6,
+"placeholder": 1
 },
 "status": {
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i40east-exit36.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i40pennsylvania.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
 "http://ss.nmroads.com/snapshots/pojoaque.jpg": "offline"

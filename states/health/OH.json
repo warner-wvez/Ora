@@ -1,17 +1,14 @@
 {
-"checked_at": "2026-07-28T09:59:58Z",
+"checked_at": "2026-07-28T15:22:15Z",
 "cameras": 1121,
 "counts": {
-"frozen": 21,
+"frozen": 16,
 "offline": 1
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/artimis/747_Hutzleman.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Courtright_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/SR-747_Muhlhauser_Quad.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/SR-747_Tylersville_Quad.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/SR747-Union.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3134.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",
@@ -24,8 +21,6 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV022.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_PortUnion_Quad.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_Smith_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
