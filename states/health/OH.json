@@ -1,22 +1,24 @@
 {
-"checked_at": "2026-07-28T20:50:17Z",
+"checked_at": "2026-07-29T10:19:33Z",
 "cameras": 1121,
 "counts": {
-"offline": 2,
-"frozen": 15
+"frozen": 17,
+"offline": 2
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/artimis/CCTV038a-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3134.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/SR-4_at_Bogart.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Hull_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/US-250_at_Strub_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/Dayton/US-40_Upper_Vally_Pike.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV022.jpg": "frozen",
