@@ -1,37 +1,21 @@
 {
-"checked_at": "2026-07-29T09:13:33Z",
+"checked_at": "2026-07-29T14:34:45Z",
 "cameras": 548,
 "counts": {
-"placeholder": 28
+"placeholder": 12
 },
 "status": {
 "https://layers.idrivearkansas.com/cameras/101.jpg": "placeholder",
 "https://layers.idrivearkansas.com/cameras/109.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/334.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/363.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/370.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/392.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/424.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/433.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/458.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/462.jpg": "placeholder",
+"https://layers.idrivearkansas.com/cameras/439.jpg": "placeholder",
 "https://layers.idrivearkansas.com/cameras/482.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/521.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/526.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/532.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/605.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/609.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/616.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/649.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/685.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/711.jpg": "placeholder",
+"https://layers.idrivearkansas.com/cameras/550.jpg": "placeholder",
 "https://layers.idrivearkansas.com/cameras/722.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/784.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/845.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/852.jpg": "placeholder",
+"https://layers.idrivearkansas.com/cameras/731.jpg": "placeholder",
+"https://layers.idrivearkansas.com/cameras/732.jpg": "placeholder",
+"https://layers.idrivearkansas.com/cameras/749.jpg": "placeholder",
 "https://layers.idrivearkansas.com/cameras/866.jpg": "placeholder",
 "https://layers.idrivearkansas.com/cameras/867.jpg": "placeholder",
-"https://layers.idrivearkansas.com/cameras/874.jpg": "placeholder",
 "https://layers.idrivearkansas.com/cameras/99.jpg": "placeholder"
 }
 }
