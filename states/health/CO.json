@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-07-30T09:13:42Z",
+"checked_at": "2026-07-30T20:03:38Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
 "frozen": 10,
-"placeholder": 21
+"placeholder": 32
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -21,6 +21,19 @@
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-N.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-S.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-W.jpg": "frozen",
+"https://cocam.carsprogram.org/Snapshots/006E26235CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006E26265CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006E26295CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006E26405CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006E26480CAM1GP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006E26555CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006E26670CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006W26485CAM1GP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006W26490CAM1GP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006W26500CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006W26610CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006W26725CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/006W26775CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009N09605CAM1NEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S09245CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S09665CAM1SWC.flv.png": "placeholder",
@@ -30,16 +43,14 @@
 "https://cocam.carsprogram.org/Snapshots/036E03920CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/050E27700CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E12315CAM1MED.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/070E15420CAM1GP2.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E18110CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E21785CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E24905CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/070E25075CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E27750CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E29735CAM1MED.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W12085CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W12250CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/070W15710CAM1GP2.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/070W24105CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/094W00100CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/470E02585CAM1RHS.flv.png": "placeholder"
 }
