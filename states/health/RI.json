@@ -1,6 +1,14 @@
 {
-"checked_at": "2026-07-29T15:38:40Z",
+"checked_at": "2026-07-30T10:24:15Z",
 "cameras": 135,
-"counts": {},
-"status": {}
+"counts": {
+"offline": 1,
+"placeholder": 3
+},
+"status": {
+"https://www.dot.ri.gov/img/travel/camimages/138_32.9_W_CAM%20Admiral%20Kalbfus%20at%20Halsey%20St.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/37_02.0_E_CAM%20Exit%201E%20-%20Pontiac%20Ave.jpg": "offline",
+"https://www.dot.ri.gov/img/travel/camimages/Admiral%20Kalbfus%20%40%20JT%20Connell%20Roundabout.jpg": "placeholder"
+}
 }
