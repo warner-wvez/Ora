@@ -1,17 +1,17 @@
 {
-"checked_at": "2026-07-31T05:04:40Z",
+"checked_at": "2026-07-31T10:26:58Z",
 "cameras": 1121,
 "counts": {
-"offline": 3,
-"frozen": 15,
+"offline": 2,
+"frozen": 16,
 "placeholder": 1
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV038a-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/toledo/I-475_at_US-24.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3134.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",
