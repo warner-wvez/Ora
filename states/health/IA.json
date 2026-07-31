@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-07-30T20:41:29Z",
+"checked_at": "2026-07-31T04:53:16Z",
 "cameras": 1240,
 "counts": {
 "offline": 144,
-"frozen": 7
+"frozen": 10
 },
 "status": {
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/dmtv050qlb.jpeg": "offline",
@@ -107,6 +107,9 @@
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_2-03.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_20-00.jpg": "frozen",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_20-02.jpg": "frozen",
+"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_20-03.jpg": "frozen",
+"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_20-04.jpg": "frozen",
+"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_20-05.jpg": "frozen",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_20-06.jpg": "frozen",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_26-01.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_26-02.jpg": "offline",
