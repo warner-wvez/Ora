@@ -1,19 +1,20 @@
 {
-"checked_at": "2026-07-31T15:27:03Z",
+"checked_at": "2026-08-04T16:03:42Z",
 "cameras": 1121,
 "counts": {
-"offline": 2,
-"frozen": 16,
-"placeholder": 1
+"offline": 3,
+"frozen": 14,
+"placeholder": 2
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CLE/CLE142-L.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/I-270_at_McCutcheon_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
+"https://itscameras.dot.state.oh.us/images/Dayton/I-70_at_Buena_Vista_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV038a-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3134.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
@@ -21,7 +22,6 @@
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV022.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/cmh/PolarisPkwy-Sancus.jpg": "placeholder",
