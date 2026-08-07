@@ -1,11 +1,13 @@
 {
-"checked_at": "2026-08-04T16:01:22Z",
+"checked_at": "2026-08-07T20:21:52Z",
 "cameras": 183,
 "counts": {
-"offline": 11,
+"offline": 13,
 "placeholder": 1
 },
 "status": {
+"http://ss.nmroads.com/snapshots/i-25n_bigi.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40RioGrandeRiver.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
@@ -13,7 +15,7 @@
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_richards.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25sbmlk.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i40_continentaldivide.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i40pennsylvania.jpg": "offline",
 "http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
 "http://ss.nmroads.com/snapshots/pojoaque.jpg": "offline",
