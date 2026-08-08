@@ -1,16 +1,15 @@
 {
-"checked_at": "2026-08-08T08:20:40Z",
+"checked_at": "2026-08-08T14:22:21Z",
 "cameras": 1121,
 "counts": {
-"frozen": 15,
-"offline": 1,
-"placeholder": 2
+"frozen": 16,
+"offline": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE100a-L.jpg": "placeholder",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE188-L.jpg": "placeholder",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",
