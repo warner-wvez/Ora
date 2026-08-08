@@ -1,12 +1,11 @@
 {
-"checked_at": "2026-08-07T19:19:29Z",
+"checked_at": "2026-08-08T02:24:43Z",
 "cameras": 629,
 "counts": {
-"placeholder": 22
+"placeholder": 21
 },
 "status": {
 "https://api.algotraffic.com/v4/Cameras/1152/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1161/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1267/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1303/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1320/snapshot.jpg": "placeholder",
