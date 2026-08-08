@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-08T07:25:48Z",
+"checked_at": "2026-08-08T13:22:31Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
 "frozen": 10,
-"placeholder": 16
+"placeholder": 18
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -21,13 +21,13 @@
 "https://cocam.carsprogram.org/Cellular/550N01440CAM1RHS-N.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550N01440CAM1RHS-Road.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550N01440CAM1RHS-S.jpg": "frozen",
-"https://cocam.carsprogram.org/Snapshots/006W22625CAM2RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/006W25970CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025N18690CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S22910CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/034E09765CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/034W09640CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E03920CAM1RP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E05735CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E18110CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E18780CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E18945CAM1LHS.flv.png": "placeholder",
@@ -36,6 +36,8 @@
 "https://cocam.carsprogram.org/Snapshots/070E29735CAM1MED.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W18680CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/094W00100CAM1NWC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/128W00720CAM1NWC.flv.png": "placeholder"
+"https://cocam.carsprogram.org/Snapshots/128W00720CAM1NWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/225N00230CAM1GP4.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/225S00230CAM1RHS.flv.png": "placeholder"
 }
 }
