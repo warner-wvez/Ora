@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-09T03:44:00Z",
+"checked_at": "2026-08-09T08:37:05Z",
 "cameras": 1121,
 "counts": {
 "frozen": 19,
-"offline": 2,
+"offline": 1,
 "placeholder": 1
 },
 "status": {
@@ -12,7 +12,6 @@
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/I-75_N_of_Hopple.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-75_at_US-35.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-75_at_W_Riverview_Ave.jpg": "frozen",
