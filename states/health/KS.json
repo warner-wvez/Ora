@@ -1,12 +1,14 @@
 {
-"checked_at": "2026-08-08T14:13:46Z",
+"checked_at": "2026-08-09T03:34:35Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
+"frozen": 1,
 "placeholder": 29
 },
 "status": {
 "": "offline",
+"https://kscam.carsprogram.org/plaza057.jpg": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2750-2-I-70atAbileneExit275.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_3-070-0620-2-I-70atMingoExit62.jpeg": "placeholder",

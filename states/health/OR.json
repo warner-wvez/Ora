@@ -1,6 +1,10 @@
 {
-"checked_at": "2026-08-08T14:25:26Z",
+"checked_at": "2026-08-09T03:47:18Z",
 "cameras": 1127,
-"counts": {},
-"status": {}
+"counts": {
+"offline": 1
+},
+"status": {
+"https://tripcheck.com/RoadCams/cams/Cornelius Pass Rd at Tualatin Valley Hwy_pid4367.jpg": "offline"
+}
 }
