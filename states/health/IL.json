@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-09T08:26:59Z",
+"checked_at": "2026-08-09T20:11:42Z",
 "cameras": 3636,
 "counts": {
-"offline": 62,
+"offline": 61,
 "frozen": 107,
-"placeholder": 152
+"placeholder": 160
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -19,6 +19,10 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Plainfield-Naperville_4172580_-8816750_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Plainfield-Naperville_4172580_-8816750_1_N.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Plainfield-Naperville_4172580_-8816750_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Plainfield-Naperville_4172580_-8816750_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_S.jpg": "placeholder",
@@ -160,7 +164,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_WB_I-70_3942235_-8766210_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Cumberland_SB_I-57_3935647_-8842158_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_W.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Fayette_NEB_I-70_3892346_-8924576_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_SWB_I-72_3998832_-8878706_1_E.jpg": "frozen",
@@ -244,6 +247,10 @@
 "https://www.lakecountypassage.com/snapshots/Fairfield_@_Gossell_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Fairfield_@_Gossell_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Fairfield_@_Gossell_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Fairfield_@_Nippersink_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Fairfield_@_Nippersink_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Fairfield_@_Nippersink_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Fairfield_@_Nippersink_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Grass_Lake_@_Eagle_Way_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Grass_Lake_@_Eagle_Way_(Wireless)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hainesville_@_Rollins_cctv_East_Leg.jpg": "placeholder",
