@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-08T14:13:10Z",
+"checked_at": "2026-08-09T03:33:55Z",
 "cameras": 3636,
 "counts": {
-"offline": 63,
+"offline": 62,
 "frozen": 102,
-"placeholder": 152
+"placeholder": 153
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -48,11 +48,11 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Schick_4195180_-8815030_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Schick_4195180_-8815030_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187370_-8765083_1_NONE.jpg": "offline",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187371_-8765100_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187397_-8765102_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187398_-8765090_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4176299_-8785852_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4179650_-8780866_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NB_I-290_4204000_-8803040_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4177672_-8783951_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4178043_-8783539_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4179538_-8781836_1_NONE.jpg": "offline",
@@ -156,7 +156,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_WB_I-70_3942235_-8766210_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Cumberland_SB_I-57_3935647_-8842158_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_W.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Fayette_NEB_I-70_3892346_-8924576_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_SWB_I-72_3998832_-8878706_1_E.jpg": "frozen",
@@ -278,6 +277,7 @@
 "https://www.lakecountypassage.com/snapshots/IL_22_@_IL_59_(SE)_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_22_@_IL_59_(SE)_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_22_@_IL_59_(SE)_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_60_@_Cedar_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_South_Leg.jpg": "placeholder",
