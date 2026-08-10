@@ -1,23 +1,20 @@
 {
-"checked_at": "2026-08-09T20:20:46Z",
+"checked_at": "2026-08-10T03:49:54Z",
 "cameras": 1121,
 "counts": {
 "frozen": 20,
-"offline": 6,
-"placeholder": 1
+"offline": 3,
+"placeholder": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE184-L.jpg": "offline",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CLE/CLE071-L.jpg": "placeholder",
+"https://itscameras.dot.state.oh.us/images/CLE/CLE097-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/Dayton/US-35_at_Gettysburg_Ave.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/I-75_S_of_Hopple.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/compton195.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/dayton/I-75_at_US-35.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-75_at_W_Riverview_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
@@ -33,6 +30,7 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4005.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Wood_NB-1.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
