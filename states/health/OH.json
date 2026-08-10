@@ -1,15 +1,17 @@
 {
-"checked_at": "2026-08-10T09:20:01Z",
+"checked_at": "2026-08-10T15:01:41Z",
 "cameras": 1121,
 "counts": {
 "frozen": 23,
-"offline": 1,
-"placeholder": 1
+"offline": 3,
+"placeholder": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CLE/CLE100a-L.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/D09/US-52_Ashland_Bridge.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Nagel.jpg": "frozen",
@@ -24,6 +26,7 @@
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/SR-4_at_Bogart.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/D05/I-70_at_I-77.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D10/D10-002.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
