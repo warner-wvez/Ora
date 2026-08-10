@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-08-10T03:47:49Z",
+"checked_at": "2026-08-10T09:18:41Z",
 "cameras": 648,
 "counts": {
-"placeholder": 68
+"placeholder": 60
 },
 "status": {
 "https://nvroads.com/map/Cctv/5999": "placeholder",
@@ -17,14 +17,9 @@
 "https://nvroads.com/map/Cctv/6087": "placeholder",
 "https://nvroads.com/map/Cctv/6088": "placeholder",
 "https://nvroads.com/map/Cctv/6090": "placeholder",
-"https://nvroads.com/map/Cctv/6094": "placeholder",
-"https://nvroads.com/map/Cctv/6098": "placeholder",
-"https://nvroads.com/map/Cctv/6099": "placeholder",
-"https://nvroads.com/map/Cctv/6110": "placeholder",
 "https://nvroads.com/map/Cctv/6118": "placeholder",
 "https://nvroads.com/map/Cctv/6138": "placeholder",
 "https://nvroads.com/map/Cctv/6162": "placeholder",
-"https://nvroads.com/map/Cctv/6179": "placeholder",
 "https://nvroads.com/map/Cctv/6183": "placeholder",
 "https://nvroads.com/map/Cctv/6186": "placeholder",
 "https://nvroads.com/map/Cctv/6216": "placeholder",
@@ -55,16 +50,13 @@
 "https://nvroads.com/map/Cctv/6526": "placeholder",
 "https://nvroads.com/map/Cctv/6528": "placeholder",
 "https://nvroads.com/map/Cctv/6531": "placeholder",
-"https://nvroads.com/map/Cctv/6540": "placeholder",
 "https://nvroads.com/map/Cctv/6557": "placeholder",
 "https://nvroads.com/map/Cctv/6558": "placeholder",
 "https://nvroads.com/map/Cctv/6568": "placeholder",
-"https://nvroads.com/map/Cctv/6587": "placeholder",
 "https://nvroads.com/map/Cctv/6592": "placeholder",
 "https://nvroads.com/map/Cctv/6595": "placeholder",
 "https://nvroads.com/map/Cctv/6596": "placeholder",
 "https://nvroads.com/map/Cctv/6597": "placeholder",
-"https://nvroads.com/map/Cctv/6600": "placeholder",
 "https://nvroads.com/map/Cctv/6611": "placeholder",
 "https://nvroads.com/map/Cctv/6612": "placeholder",
 "https://nvroads.com/map/Cctv/6613": "placeholder",

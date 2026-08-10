@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-10T02:44:11Z",
+"checked_at": "2026-08-10T08:15:11Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
-"frozen": 21,
+"frozen": 18,
 "placeholder": 14
 },
 "status": {
@@ -15,9 +15,6 @@
 "https://cocam.carsprogram.org/Cellular/040W24300CAM1RHS-ParkingLot.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/040W24300CAM1RHS-RoadSurface.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/040W24300CAM1RHS-W.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/050W21695CAM1NWC-N.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/050W21695CAM1NWC-S.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/050W21695CAM1NWC-W.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/070E24165CAM1RHS-E.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/070E24165CAM1RHS-RoadSurface.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/070E24165CAM1RHS-W.jpg": "frozen",
