@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-11T03:26:04Z",
+"checked_at": "2026-08-11T08:43:45Z",
 "cameras": 3636,
 "counts": {
-"offline": 64,
-"frozen": 98,
+"offline": 63,
+"frozen": 99,
 "placeholder": 157
 },
 "status": {
@@ -52,6 +52,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187398_-8765090_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4176299_-8785852_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4179650_-8780866_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Van-Buren_4187650_-8764425_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4177672_-8783951_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4178043_-8783539_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4179538_-8781836_1_NONE.jpg": "offline",
@@ -71,12 +72,10 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-290_4187174_-8783407_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-290_4187575_-8763734_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-290_4187575_-8763734_2_NONE.jpg": "offline",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-290_4187603_-8764630_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-290_4187610_-8767087_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-55_4176148_-8786998_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-57_4171468_-8764615_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-57_4171473_-8764554_1_NONE.jpg": "offline",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-90_4205822_-8802895_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SEB_I-290_4194196_-8798805_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SEB_I-290_4194200_-8798801_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SWB_I-55_4175009_-8793150_1_NONE.jpg": "offline",
@@ -201,6 +200,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_NB_Kirk_4189315_-8827671_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_NB_Randall_4185897_-8834032_1_NONE.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_NB_Randall_4213579_-8833533_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_SB_Huntley_4213971_-8834572_1_NONE.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_SB_Randall_4195328_-8834097_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_SB_Randall_4212500_-8833563_1_NONE.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_WB_Longmeadow_4213941_-8832117_1_NONE.jpg": "frozen",
