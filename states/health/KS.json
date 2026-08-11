@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-10T20:24:20Z",
+"checked_at": "2026-08-11T03:26:24Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"placeholder": 31
+"placeholder": 30
 },
 "status": {
 "": "offline",
@@ -18,7 +18,6 @@
 "https://kscam.carsprogram.org/snapshots/GEN_5-135-0110-2-I-135NOK-96.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-254-0023-T-K-254atK-196-789-0125.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBC-05T.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-88.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBC-13.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBIPC-01.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-38.jpg": "placeholder",
