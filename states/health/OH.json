@@ -1,19 +1,21 @@
 {
-"checked_at": "2026-08-11T08:54:10Z",
+"checked_at": "2026-08-11T15:04:54Z",
 "cameras": 1121,
 "counts": {
-"frozen": 20,
-"offline": 1
+"frozen": 19,
+"offline": 3,
+"placeholder": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CCTV2148.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/D05/D05-007.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/SR-125_Nagel.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/asbury3.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/wolfangel19.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CMH071.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
@@ -24,8 +26,10 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4005.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4202.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/cmh/FCEO-HaydenRun-Cosgray.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
