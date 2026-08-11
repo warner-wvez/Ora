@@ -1,12 +1,13 @@
 {
-"checked_at": "2026-08-10T20:33:54Z",
+"checked_at": "2026-08-11T03:34:50Z",
 "cameras": 1121,
 "counts": {
 "frozen": 21,
-"offline": 1
+"offline": 3
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/US-33_at_Gender_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
@@ -15,6 +16,7 @@
 "https://itscameras.dot.state.oh.us/images/artimis/asbury3.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/wolfangel19.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2040.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2192.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CMH071.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",

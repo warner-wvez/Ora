@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-10T19:27:47Z",
+"checked_at": "2026-08-11T02:37:55Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
-"frozen": 18,
-"placeholder": 16
+"frozen": 8,
+"placeholder": 15
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -18,17 +18,6 @@
 "https://cocam.carsprogram.org/Cellular/070E24165CAM1RHS-E.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/070E24165CAM1RHS-RoadSurface.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/070E24165CAM1RHS-W.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/550N01440CAM1RHS-N.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/550N01440CAM1RHS-Road.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/550N01440CAM1RHS-S.jpg": "frozen",
-"https://cocam.carsprogram.org/Douglas/43_Brdwy_Lucent-cotripNorth-DO-NOT-DELETE.jpg": "frozen",
-"https://cocam.carsprogram.org/Douglas/43_Brdwy_Lucent-cotripSouth-DO-NOT-DELETE.jpg": "frozen",
-"https://cocam.carsprogram.org/Douglas/43_Brdwy_Lucent-cotripWest-DO-NOT-DELETE.jpg": "frozen",
-"https://cocam.carsprogram.org/Douglas/48_HRP_Lucent-cotripEast-DO-NOT-DELETE.jpg": "frozen",
-"https://cocam.carsprogram.org/Douglas/48_HRP_Lucent-cotripNorth-DO-NOT-DELETE.jpg": "frozen",
-"https://cocam.carsprogram.org/Douglas/48_HRP_Lucent-cotripSouth-DO-NOT-DELETE.jpg": "frozen",
-"https://cocam.carsprogram.org/Douglas/48_HRP_Lucent-cotripWest-DO-NOT-DELETE.jpg": "frozen",
-"https://cocam.carsprogram.org/Snapshots/006E26295CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/006W25970CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025N18690CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S22610CAM1RHS.flv.png": "frozen",
