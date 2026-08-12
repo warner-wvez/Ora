@@ -1,16 +1,14 @@
 {
-"checked_at": "2026-08-12T08:54:13Z",
+"checked_at": "2026-08-12T14:44:44Z",
 "cameras": 183,
 "counts": {
-"offline": 13,
+"offline": 11,
 "placeholder": 2
 },
 "status": {
-"http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25nb_broadway.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40_tramway_onramp.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40w_atriscovista.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i10_mesquite.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40w_i25.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40wb_juantabo.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40wb_lomas.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
