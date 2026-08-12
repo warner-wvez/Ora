@@ -1,11 +1,15 @@
 {
-"checked_at": "2026-08-12T03:47:32Z",
+"checked_at": "2026-08-12T08:53:48Z",
 "cameras": 798,
 "counts": {
 "offline": 7,
-"placeholder": 14
+"placeholder": 19
 },
 "status": {
+"https://www.dot.nd.gov/travel-info/cameras/I29RP62.627Fargo32ndAveSEastRampNorth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I29RP62.627Fargo32ndAveSEastRampPavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I29RP62.627Fargo32ndAveSEastRampSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I29RP62.627Fargo32ndAveSEastRampWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I29RP64.432Fargo13thAve38thStWestRampSouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94MileRP213TappenWest.jpg": "offline",
@@ -20,6 +24,7 @@
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamEast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamPavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamWest.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/ND22RP112Killdeerpavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND5RP152.WesthopeWest.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/US281RP54MillartonSouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/newenglandcenter.jpg": "placeholder",
