@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-13T04:11:23Z",
+"checked_at": "2026-08-13T20:25:47Z",
 "cameras": 798,
 "counts": {
 "offline": 7,
-"placeholder": 15
+"placeholder": 31
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP62.627Fargo32ndAveSEastRampNorth.jpg": "placeholder",
@@ -20,13 +20,29 @@
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenCenter.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenEast.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenPavement.jpg": "offline",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonCenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonEast.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonPavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamCenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamEast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamPavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND22RP112Killdeerpavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleeCenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleeNorth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleePavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleeSouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND5RP152.WesthopeWest.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/US281RP54MillartonSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeCenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeNorth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgePavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/marmarthcenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/marmartheast.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/marmarthpavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/marmarthwest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/camerasND13RP308VeronaEast.jpg": "offline"
 }
 }

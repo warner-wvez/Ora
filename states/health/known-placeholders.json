@@ -1843,5 +1843,20 @@
   "sha": "eebdfc9efe750801",
   "first_seen": "2026-08-13T04:06:20Z",
   "state": "LA"
+ },
+ "17138:5574522a1912": {
+  "sha": "a7960a4f56c58a93",
+  "first_seen": "2026-08-13T20:21:05Z",
+  "state": "LA"
+ },
+ "881:de6723a7b85f": {
+  "sha": "de6723a7b85f5baf",
+  "first_seen": "2026-08-13T20:33:43Z",
+  "state": "PA"
+ },
+ "39941:3b96ff840bd5": {
+  "sha": "bad3ebe2dec9f03f",
+  "first_seen": "2026-08-13T20:33:49Z",
+  "state": "RI"
  }
 }
