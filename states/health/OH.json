@@ -1,18 +1,15 @@
 {
-"checked_at": "2026-08-12T20:34:26Z",
+"checked_at": "2026-08-13T04:15:41Z",
 "cameras": 1121,
 "counts": {
 "frozen": 34,
-"offline": 2,
+"offline": 1,
 "placeholder": 1
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2119.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2148.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH058.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH059.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D05/D05-007.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
@@ -22,13 +19,13 @@
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/US-27_Raeann.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/cincinnati/I-75_at_Union_Centre_Blvd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_I-675.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-201.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-4_Enon.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/toledo/I-75_at_SR-2.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2168.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CMH071.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
@@ -43,6 +40,8 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4169.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/US-27_Dry_Ridge.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/struble3.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
