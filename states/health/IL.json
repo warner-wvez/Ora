@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-08-14T03:50:14Z",
+"checked_at": "2026-08-14T08:44:14Z",
 "cameras": 3636,
 "counts": {
-"offline": 78,
+"offline": 77,
 "frozen": 108,
 "placeholder": 137
 },
@@ -184,7 +184,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_WB_I-70_3942235_-8766210_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Cumberland_SB_I-57_3935647_-8842158_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_W.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Fayette_NEB_I-70_3892346_-8924576_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_SWB_I-72_3998832_-8878706_1_E.jpg": "frozen",
