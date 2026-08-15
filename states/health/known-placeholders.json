@@ -1913,5 +1913,15 @@
   "sha": "1fee6f96d0a5db01",
   "first_seen": "2026-08-15T03:05:06Z",
   "state": "RI"
+ },
+ "12596:44b2322e8c66": {
+  "sha": "bfcaf425de9e468a",
+  "first_seen": "2026-08-15T07:58:52Z",
+  "state": "LA"
+ },
+ "39822:3b96ff840bd5": {
+  "sha": "82241382204e3c21",
+  "first_seen": "2026-08-15T08:12:04Z",
+  "state": "RI"
  }
 }
