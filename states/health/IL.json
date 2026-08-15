@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-14T19:59:14Z",
+"checked_at": "2026-08-15T02:40:56Z",
 "cameras": 3636,
 "counts": {
-"offline": 75,
+"offline": 76,
 "frozen": 112,
-"placeholder": 141
+"placeholder": 145
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -19,6 +19,10 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_York_4197210_-8793970_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_York_4197210_-8793970_1_N.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_York_4197210_-8793970_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_York_4197210_-8793970_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_S.jpg": "placeholder",
@@ -47,11 +51,16 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Schick_4195180_-8815030_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Schick_4195180_-8815030_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Schick_4195180_-8815030_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Thorndale_4197600_-8793980_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Thorndale_4197600_-8793980_1_N.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Thorndale_4197600_-8793980_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Thorndale_4197600_-8793980_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187370_-8765083_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187397_-8765102_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187398_-8765090_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4176299_-8785852_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4179650_-8780866_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Van-Buren_4187650_-8764425_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4177672_-8783951_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4178043_-8783539_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4179538_-8781836_1_NONE.jpg": "offline",
@@ -264,8 +273,6 @@
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Butrick_@_Glen_Flora_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Butrick_@_Glen_Flora_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
@@ -332,8 +339,6 @@
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hart_(Cell)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hart_(Cell)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Wadsworth_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Wadsworth_cctv_West_Leg.jpg": "placeholder"
+"https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_West_Leg.jpg": "placeholder"
 }
 }
