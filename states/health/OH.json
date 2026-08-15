@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-14T20:09:59Z",
+"checked_at": "2026-08-15T02:50:49Z",
 "cameras": 1121,
 "counts": {
 "frozen": 24,
-"offline": 3,
+"offline": 2,
 "placeholder": 1
 },
 "status": {
@@ -15,7 +15,6 @@
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/CCTV146.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
