@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-08-16T03:09:58Z",
+"checked_at": "2026-08-16T20:00:42Z",
 "cameras": 1053,
 "counts": {
-"offline": 78
+"offline": 79
 },
 "status": {
 "https://dot511.nebraska.gov/images/vid-001080402-00.jpg": "offline",
@@ -45,6 +45,7 @@
 "https://dot511.nebraska.gov/images/vid-006021045-03.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006021045-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006021045-05.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006026125-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006026125-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-02.jpg": "offline",
@@ -56,9 +57,6 @@
 "https://dot511.nebraska.gov/images/vid-006080133-03.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080133-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080158-01.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080158-02.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080158-03.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080158-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080164-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080164-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080164-03.jpg": "offline",
@@ -77,6 +75,9 @@
 "https://dot511.nebraska.gov/images/vid-006083148-05.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006083148-06.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006083148-07.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006092213-01.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006092213-02.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006092213-05.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-007023002-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-007023002-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-007023002-05.jpg": "offline",
