@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-08-16T03:21:14Z",
+"checked_at": "2026-08-16T20:11:42Z",
 "cameras": 667,
 "counts": {
-"placeholder": 21
+"placeholder": 20
 },
 "status": {
 "https://tnsnapshots.com/thumbs/R1_041.flv.png": "placeholder",
@@ -24,7 +24,6 @@
 "https://tnsnapshots.com/thumbs/R3_223.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_275.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_052.flv.png": "placeholder",
-"https://tnsnapshots.com/thumbs/R4_165.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_205.flv.png": "placeholder"
 }
 }
