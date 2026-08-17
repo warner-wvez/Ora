@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-16T19:54:24Z",
+"checked_at": "2026-08-17T03:00:58Z",
 "cameras": 3636,
 "counts": {
-"offline": 75,
+"offline": 77,
 "frozen": 135,
-"placeholder": 136
+"placeholder": 144
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -76,6 +76,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-55_4176148_-8786998_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-57_4171468_-8764615_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-57_4171473_-8764554_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-90_4205822_-8802895_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SEB_I-290_4194200_-8798801_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SWB_I-55_4175009_-8793150_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_WB_I-290_4195833_-8802554_1_NONE.jpg": "offline",
@@ -212,6 +213,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_WB_I-70_3942235_-8766210_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_WB_I-70_3942235_-8766210_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Cumberland_SB_I-57_3935647_-8842158_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_E.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Fayette_NEB_I-70_3892346_-8924576_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_S.jpg": "frozen",
@@ -304,6 +306,10 @@
 "https://www.lakecountypassage.com/snapshots/Hutchins_@_Stearns_School_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hutchins_@_Stearns_School_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hutchins_@_Stearns_School_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/I-94_@_IL_60_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/I-94_@_IL_60_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/I-94_@_IL_60_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/I-94_@_IL_60_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Fish_Lake_Rd_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Fish_Lake_Rd_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Fish_Lake_Rd_(Wireless)_cctv_South_Leg.jpg": "placeholder",
@@ -328,6 +334,10 @@
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_60_@_St_Marys_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_60_@_St_Marys_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_60_@_St_Marys_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_60_@_St_Marys_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Portable_PTZ_(Cell)_cctv_East_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Portable_PTZ_(Cell)_cctv_West_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/River_@_Roberts_(Cell)_cctv_North_Leg.jpg": "frozen",
