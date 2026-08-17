@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-08-17T14:31:09Z",
+"checked_at": "2026-08-17T20:14:29Z",
 "cameras": 2063,
 "counts": {
-"placeholder": 47
+"placeholder": 46
 },
 "status": {
 "https://udottraffic.utah.gov/map/Cctv/112731": "placeholder",
@@ -18,8 +18,8 @@
 "https://udottraffic.utah.gov/map/Cctv/133097": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135287": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135605": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/135609": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135816": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/135935": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136005": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136013": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136071": "placeholder",
@@ -36,9 +36,9 @@
 "https://udottraffic.utah.gov/map/Cctv/136796": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/137018": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/137092": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/137231": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/137275": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/137939": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/137992": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138238": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138337": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138411": "placeholder",
@@ -46,8 +46,7 @@
 "https://udottraffic.utah.gov/map/Cctv/138455": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138476": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138512": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/138586": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/138590": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/138521": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138596": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138647": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138667": "placeholder",
