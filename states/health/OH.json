@@ -1,16 +1,12 @@
 {
-"checked_at": "2026-08-16T20:04:01Z",
+"checked_at": "2026-08-17T03:10:51Z",
 "cameras": 1121,
 "counts": {
-"frozen": 26,
-"offline": 2,
-"placeholder": 2
+"frozen": 27,
+"offline": 3
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE100a-L.jpg": "placeholder",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE188-L.jpg": "placeholder",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE3097.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2119.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2148.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
@@ -23,9 +19,11 @@
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_I-675.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-201.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-4_Enon.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/dayton/I-75_at_SR-41.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/toledo/I-75_at_East_Alexis_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/toledo/I-75_at_SR-2.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/SR-4_at_Bogart.jpg": "frozen",
@@ -34,6 +32,7 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4005.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4202.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
