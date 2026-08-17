@@ -1968,5 +1968,15 @@
   "sha": "e8c5dce2d27d18f6",
   "first_seen": "2026-08-17T03:21:21Z",
   "state": "WI"
+ },
+ "39874:3b96ff840bd5": {
+  "sha": "1553a53aa9a78838",
+  "first_seen": "2026-08-17T14:27:40Z",
+  "state": "RI"
+ },
+ "64369:1cb0c094ad6e": {
+  "sha": "c33ab6f198ce2d90",
+  "first_seen": "2026-08-17T14:33:15Z",
+  "state": "WI"
  }
 }
