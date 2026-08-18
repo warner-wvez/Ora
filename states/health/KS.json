@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-17T19:56:45Z",
+"checked_at": "2026-08-18T02:53:28Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"placeholder": 26
+"placeholder": 25
 },
 "status": {
 "": "offline",
@@ -11,7 +11,6 @@
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2950-2-I-70atUS-77TowerE.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2951-2-I-70atUS-77TowerW.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_3-070-0620-2-I-70atMingoExit62.jpeg": "placeholder",
-"https://kscam.carsprogram.org/snapshots/GEN_5-096-2951-2-K-96atRock.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-135-0110-2-I-135NOK-96.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-254-0023-T-K-254atK-196-789-0125.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBIPC-01.jpg": "placeholder",

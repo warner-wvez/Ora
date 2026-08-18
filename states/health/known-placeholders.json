@@ -1983,5 +1983,15 @@
   "sha": "2f381f42df53dfbc",
   "first_seen": "2026-08-17T20:16:42Z",
   "state": "WI"
+ },
+ "11470:31b9a8105c30": {
+  "sha": "a622b7ff113eeb07",
+  "first_seen": "2026-08-18T02:54:08Z",
+  "state": "LA"
+ },
+ "39871:3b96ff840bd5": {
+  "sha": "6af9a3fa15c71652",
+  "first_seen": "2026-08-18T03:09:18Z",
+  "state": "RI"
  }
 }

@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-08-17T20:06:00Z",
+"checked_at": "2026-08-18T03:03:07Z",
 "cameras": 1121,
 "counts": {
-"frozen": 31,
+"frozen": 30,
 "offline": 1
 },
 "status": {
@@ -11,7 +11,6 @@
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2148.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH065.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-270_at_E_Main_St.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/D05/D05-007.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
