@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-18T02:00:54Z",
+"checked_at": "2026-08-18T13:20:03Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
 "frozen": 17,
-"placeholder": 38
+"placeholder": 37
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -44,9 +44,8 @@
 "https://cocam.carsprogram.org/Snapshots/009S09245CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S09665CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/024W28610CAM1SEC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/025S23055CAM1GP3.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S26725CAM1RP2.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/036W04820CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E04915CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E17790CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E17820CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E17845CAM1RHS.flv.png": "placeholder",
@@ -60,11 +59,11 @@
 "https://cocam.carsprogram.org/Snapshots/070W18680CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W24285CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W26695CAM1MED.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/070W28280CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/076E10135CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/094W00100CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/128W00720CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/160W03520CAM1NWC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/160W03740CAM1NWC.flv.png": "placeholder"
+"https://cocam.carsprogram.org/Snapshots/160W03740CAM1NWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/225S00015CAM2RHS.flv.png": "placeholder"
 }
 }
