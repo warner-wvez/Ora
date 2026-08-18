@@ -1,14 +1,13 @@
 {
-"checked_at": "2026-08-18T14:05:04Z",
+"checked_at": "2026-08-18T19:57:03Z",
 "cameras": 1121,
 "counts": {
-"frozen": 32,
-"offline": 2
+"frozen": 29,
+"offline": 3
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2119.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/CCTV2148.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH065.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-270_at_E_Main_St.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/bethel-jasonway.jpg": "offline",
@@ -22,8 +21,6 @@
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_I-675.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-201.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-4_Enon.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/toledo/I-75_at_SR-2.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/toledo/I-75_at_SR-65.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/toledo/I-75_at_Wales_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
@@ -33,6 +30,7 @@
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/SR-4_at_Bogart.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/I-70_at_I-77.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/D09/SR-104_Moundsville.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
