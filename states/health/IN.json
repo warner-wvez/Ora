@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-19T08:07:44Z",
+"checked_at": "2026-08-19T14:05:11Z",
 "cameras": 705,
 "counts": {
 "offline": 1,
-"placeholder": 55
+"placeholder": 57
 },
 "status": {
 "/images/icon-camera-closed-fill-solid-padded.svg": "offline",
@@ -11,6 +11,7 @@
 "https://public.carsprogram.org/cameras/IN/INDOT_141_kdgwH3iTJczM6OpF.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_143_FuwMXzPwoov2U8KP.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_154_IVLXT8yDM9GILrTi.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_16_Wj8lHnkrc6f0ZS1e.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_209_bMSYpITwAcFRMLK-.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_420_JXnWhYPoWnY9Muzf.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_424_D5F5BWJQNurK8ljN.flv.png": "placeholder",
@@ -54,13 +55,14 @@
 "https://public.carsprogram.org/cameras/IN/INDOT_62_v8AmR-Ir9_EHCsH-.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_634_vPPvjkJrDmE8y2Hi.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_677_vL81it7xyjsz7ScI.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_726_yWdeqK1LgnrcsXuX.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_738_m9exUdhLUw3Rxl2g.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_754_B7j2B8FKMMZ9Ean6.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_766_ye4QypwSLTz3o25G.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_776_DTZhM3DqRADDNloY.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_785_1R0VzUqUwMiw3AIB.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_88_sPSYMC6ZWieuBbCI.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_95_TnFYmCt4JuVnmLsh.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_998_Jj9-IUIWb_1XAalr.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_999_qiy-ohd3PfUTa8Hm.flv.png": "placeholder"
 }
 }
