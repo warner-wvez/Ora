@@ -2088,5 +2088,10 @@
   "sha": "a2a643134a7ae6b0",
   "first_seen": "2026-08-19T14:32:56Z",
   "state": "WI"
+ },
+ "18754:2c882c44ed6e": {
+  "sha": "eb0177aad5cfcb35",
+  "first_seen": "2026-08-19T19:47:22Z",
+  "state": "LA"
  }
 }
