@@ -1,17 +1,18 @@
 {
-"checked_at": "2026-08-20T02:56:54Z",
+"checked_at": "2026-08-20T08:22:02Z",
 "cameras": 1121,
 "counts": {
 "frozen": 27,
-"offline": 3
+"offline": 5
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2119.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/CCTV2146.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH065.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-270_at_E_Main_St.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/I-71_at_5th_Ave.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
@@ -21,6 +22,7 @@
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_I-675.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-201.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-4_Enon.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/dayton/I-75_at_South_of_I-675.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/toledo/I-75_at_Wales_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
