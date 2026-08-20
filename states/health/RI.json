@@ -1,8 +1,7 @@
 {
-"checked_at": "2026-08-20T14:25:56Z",
+"checked_at": "2026-08-20T20:17:37Z",
 "cameras": 135,
 "counts": {
-"offline": 1,
 "placeholder": 5
 },
 "status": {
@@ -10,7 +9,6 @@
 "https://www.dot.ri.gov/img/travel/camimages/138_32.9_W_CAM%20Admiral%20Kalbfus%20at%20Halsey%20St.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_16.2_S_CAM%20Rt%20116.jpg": "placeholder",
-"https://www.dot.ri.gov/img/travel/camimages/95_26.0_S_CAM%20-%20Cowesett%20Rd.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/95_31.4_N_CAM%20-%20Jefferson%20Blvd.jpg": "placeholder"
 }
 }

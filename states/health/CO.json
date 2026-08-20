@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-20T13:22:10Z",
+"checked_at": "2026-08-20T19:11:50Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
 "frozen": 21,
-"placeholder": 31
+"placeholder": 32
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -38,7 +38,6 @@
 "https://cocam.carsprogram.org/Snapshots/009S08755CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S08920CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/024W28610CAM1SEC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/025S07500CAM1GP2.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S09400CAM1GP2.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S23055CAM1GP3.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S26725CAM1RP2.flv.png": "placeholder",
@@ -50,12 +49,14 @@
 "https://cocam.carsprogram.org/Snapshots/070E18110CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E18780CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E18945CAM1LHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/070E24435CAM1MED.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E24905CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E29735CAM1MED.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E30640CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W18680CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W24285CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W26695CAM1MED.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/070W28280CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/094W00100CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/121N01800CAM1NEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/128W00720CAM1NWC.flv.png": "placeholder",
