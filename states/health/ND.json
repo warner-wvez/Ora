@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-21T03:05:20Z",
+"checked_at": "2026-08-21T08:04:18Z",
 "cameras": 798,
 "counts": {
 "offline": 7,
-"placeholder": 41
+"placeholder": 50
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP62.627Fargo32ndAveSEastRampNorth.jpg": "placeholder",
@@ -11,6 +11,11 @@
 "https://www.dot.nd.gov/travel-info/cameras/I29RP62.627Fargo32ndAveSEastRampSouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I29RP62.627Fargo32ndAveSEastRampWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I29RP64.432Fargo13thAve38thStWestRampSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I29RP64.725FargoNorthof9thAveEast.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I29RP64.725FargoNorthof9thAveNorth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I29RP64.725FargoNorthof9thAvePavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I29RP64.725FargoNorthof9thAveSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I29RP64.725FargoNorthof9thAveWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94MileRP213TappenWest.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP119Hailstoneeast.jpg": "placeholder",
@@ -39,6 +44,10 @@
 "https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleePavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleeSouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND5RP152.WesthopeWest.jpg": "offline",
+"https://www.dot.nd.gov/travel-info/cameras/ND8RP99MarshallCenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/ND8RP99MarshallNorth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/ND8RP99MarshallPavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/ND8RP99MarshallSouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US12RP60ReederCenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US12RP60ReederEast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US12RP60ReederNorth.jpg": "placeholder",
