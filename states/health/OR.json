@@ -1,10 +1,6 @@
 {
-"checked_at": "2026-08-21T14:23:33Z",
+"checked_at": "2026-08-21T20:11:34Z",
 "cameras": 1127,
-"counts": {
-"offline": 1
-},
-"status": {
-"https://tripcheck.com/RoadCams/cams/US97 at Modoc Point_pid2740.JPG": "offline"
-}
+"counts": {},
+"status": {}
 }
