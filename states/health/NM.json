@@ -1,38 +1,24 @@
 {
-"checked_at": "2026-08-21T14:08:07Z",
+"checked_at": "2026-08-21T19:57:41Z",
 "cameras": 183,
 "counts": {
-"offline": 18,
-"placeholder": 10
+"offline": 13,
+"placeholder": 1
 },
 "status": {
-"http://ss.nmroads.com/snapshots/I40WBMountainView.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25n_bigi.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40RioGrandeRiver.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40_carnuel.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-40_quarryrd.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-40_tramway_onramp.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-40_west_edgewood.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-40_zamoraroad.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-40eb_martinroad.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-40eb_moriarty_west.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40eb_mountainview.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40wb_martinroad.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-40wb_moriarty_west.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i10eb_union.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_cerrillos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nb_richards.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25nbcentral.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_richards.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i40_nm6.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i40east-exit36.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i40pennsylvania.jpg": "offline",
 "http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
-"http://ss.nmroads.com/snapshots/lci25sbuniversity.jpg": "offline",
-"http://ss.nmroads.com/snapshots/pojoaque.jpg": "placeholder"
+"http://ss.nmroads.com/snapshots/pojoaque.jpg": "offline"
 }
 }
