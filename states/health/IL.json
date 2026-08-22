@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-08-21T19:50:27Z",
+"checked_at": "2026-08-22T02:46:00Z",
 "cameras": 3636,
 "counts": {
-"offline": 60,
+"offline": 62,
 "frozen": 332,
-"placeholder": 156
+"placeholder": 152
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -48,6 +48,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4176299_-8785852_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4179650_-8780866_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-90_4198388_-8783975_1_NONE.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Van-Buren_4187650_-8764425_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4177672_-8783951_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4178043_-8783539_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4179538_-8781836_1_NONE.jpg": "offline",
@@ -389,6 +390,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_WB_I-70_3942235_-8766210_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_WB_I-70_3942235_-8766210_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Clark_WB_I-70_3942235_-8766210_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_NB_I-57_3912042_-8856812_1_E.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_WB_I-70_3906780_-8867021_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Fayette_NEB_I-70_3892346_-8924576_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_S.jpg": "frozen",
@@ -529,10 +531,6 @@
 "https://www.lakecountypassage.com/snapshots/Portable_PTZ_(Cell)_cctv_East_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Portable_PTZ_(Cell)_cctv_West_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/River_@_Roberts_(Cell)_cctv_North_Leg.jpg": "frozen",
-"https://www.lakecountypassage.com/snapshots/US_12_@_Cuba_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_12_@_Cuba_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_12_@_Cuba_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_12_@_Cuba_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_12_@_IL_22_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_12_@_IL_22_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_12_@_IL_22_cctv_South_Leg.jpg": "placeholder",

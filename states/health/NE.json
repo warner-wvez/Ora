@@ -1,10 +1,11 @@
 {
-"checked_at": "2026-08-21T19:57:32Z",
+"checked_at": "2026-08-22T02:52:34Z",
 "cameras": 1053,
 "counts": {
-"offline": 50
+"offline": 60
 },
 "status": {
+"https://dot511.nebraska.gov/images/vid-001077079-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-001080402-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-001080406-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-001080407-00.jpg": "offline",
@@ -33,7 +34,14 @@
 "https://dot511.nebraska.gov/images/vid-004183064-03.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-004183064-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-004183064-05.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005026018-05.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005026042-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080052-03.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005385154-03.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005385154-04.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005385154-05.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005385154-06.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005385154-07.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006002196-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006002196-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006002196-03.jpg": "offline",
@@ -46,6 +54,8 @@
 "https://dot511.nebraska.gov/images/vid-006080222-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080222-03.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080222-04.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006080237-03.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006080248-03.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006083148-06.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006083148-07.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006092213-01.jpg": "offline",
