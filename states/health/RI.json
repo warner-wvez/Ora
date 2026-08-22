@@ -1,15 +1,12 @@
 {
-"checked_at": "2026-08-22T08:17:40Z",
+"checked_at": "2026-08-22T19:55:08Z",
 "cameras": 135,
 "counts": {
-"offline": 2,
 "placeholder": 3
 },
 "status": {
-"https://www.dot.ri.gov/img/travel/camimages/1-04%20Rt%201%20N%20%40%20Rt%20138%20North%20Kingstown.jpg": "placeholder",
-"https://www.dot.ri.gov/img/travel/camimages/24_04.1_N_CAM%20-%20Sakonnet%20River%20Bridge%20%28Portsmouth%29.jpg": "offline",
+"https://www.dot.ri.gov/img/travel/camimages/146_10.4_N_CAM%20Exit%2010%20-%20Rt%20146A%20Split.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_16.2_S_CAM%20Rt%20116.jpg": "placeholder",
-"https://www.dot.ri.gov/img/travel/camimages/95_31.4_N_CAM%20-%20Jefferson%20Blvd.jpg": "placeholder",
-"https://www.dot.ri.gov/img/travel/camimages/95_32.4_N_CAM%20-%20Wellington%20Ave.jpg": "offline"
+"https://www.dot.ri.gov/img/travel/camimages/95_31.4_N_CAM%20-%20Jefferson%20Blvd.jpg": "placeholder"
 }
 }
