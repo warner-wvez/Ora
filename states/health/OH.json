@@ -1,15 +1,16 @@
 {
-"checked_at": "2026-08-24T03:16:54Z",
+"checked_at": "2026-08-24T08:48:09Z",
 "cameras": 1121,
 "counts": {
 "frozen": 33,
-"offline": 3,
+"offline": 5,
 "placeholder": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2183.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH039.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-71SB-Eleventh.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
@@ -18,6 +19,7 @@
 "https://itscameras.dot.state.oh.us/images/Dayton/I-70_at_Snider_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV008a-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV009a-L.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/CCTV042a.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV4097.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
