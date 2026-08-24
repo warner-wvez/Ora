@@ -1,19 +1,17 @@
 {
-"checked_at": "2026-08-22T19:43:53Z",
+"checked_at": "2026-08-24T03:16:54Z",
 "cameras": 1121,
 "counts": {
 "frozen": 33,
 "offline": 3,
-"placeholder": 4
+"placeholder": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE132-L.jpg": "placeholder",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE188-L.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2183.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH039.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
-"https://itscameras.dot.state.oh.us/images/CMH/Long-Hanover.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/I-71SB-Eleventh.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",

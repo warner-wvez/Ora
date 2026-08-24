@@ -1,40 +1,19 @@
 {
-"checked_at": "2026-08-22T19:32:20Z",
+"checked_at": "2026-08-24T03:04:55Z",
 "cameras": 730,
 "counts": {
-"placeholder": 31
+"placeholder": 10
 },
 "status": {
-"https://511.idaho.gov/map/Cctv/1248": "placeholder",
-"https://511.idaho.gov/map/Cctv/1260": "placeholder",
-"https://511.idaho.gov/map/Cctv/1261": "placeholder",
+"https://511.idaho.gov/map/Cctv/1034": "placeholder",
 "https://511.idaho.gov/map/Cctv/296": "placeholder",
 "https://511.idaho.gov/map/Cctv/297": "placeholder",
 "https://511.idaho.gov/map/Cctv/612": "placeholder",
 "https://511.idaho.gov/map/Cctv/613": "placeholder",
 "https://511.idaho.gov/map/Cctv/614": "placeholder",
-"https://511.idaho.gov/map/Cctv/631": "placeholder",
 "https://511.idaho.gov/map/Cctv/638": "placeholder",
-"https://511.idaho.gov/map/Cctv/647": "placeholder",
-"https://511.idaho.gov/map/Cctv/665": "placeholder",
-"https://511.idaho.gov/map/Cctv/669": "placeholder",
-"https://511.idaho.gov/map/Cctv/671": "placeholder",
-"https://511.idaho.gov/map/Cctv/675": "placeholder",
-"https://511.idaho.gov/map/Cctv/677": "placeholder",
-"https://511.idaho.gov/map/Cctv/678": "placeholder",
-"https://511.idaho.gov/map/Cctv/679": "placeholder",
-"https://511.idaho.gov/map/Cctv/681": "placeholder",
-"https://511.idaho.gov/map/Cctv/734": "placeholder",
-"https://511.idaho.gov/map/Cctv/738": "placeholder",
-"https://511.idaho.gov/map/Cctv/741": "placeholder",
-"https://511.idaho.gov/map/Cctv/744": "placeholder",
-"https://511.idaho.gov/map/Cctv/763": "placeholder",
-"https://511.idaho.gov/map/Cctv/764": "placeholder",
-"https://511.idaho.gov/map/Cctv/769": "placeholder",
-"https://511.idaho.gov/map/Cctv/782": "placeholder",
-"https://511.idaho.gov/map/Cctv/784": "placeholder",
-"https://511.idaho.gov/map/Cctv/786": "placeholder",
-"https://511.idaho.gov/map/Cctv/797": "placeholder",
-"https://511.idaho.gov/map/Cctv/844": "placeholder"
+"https://511.idaho.gov/map/Cctv/762": "placeholder",
+"https://511.idaho.gov/map/Cctv/765": "placeholder",
+"https://511.idaho.gov/map/Cctv/778": "placeholder"
 }
 }
