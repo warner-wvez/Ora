@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-25T02:59:54Z",
+"checked_at": "2026-08-25T08:17:19Z",
 "cameras": 1121,
 "counts": {
 "frozen": 28,
-"offline": 2,
+"offline": 3,
 "placeholder": 2
 },
 "status": {
@@ -38,6 +38,7 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/cmh/PolarisPkwy-Sancus.jpg": "placeholder",
+"https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Wood_NB-1.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
