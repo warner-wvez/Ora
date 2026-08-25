@@ -1,15 +1,12 @@
 {
-"checked_at": "2026-08-25T14:05:29Z",
+"checked_at": "2026-08-25T19:36:31Z",
 "cameras": 361,
 "counts": {
-"placeholder": 68
+"placeholder": 65
 },
 "status": {
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0022.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0030.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0031.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0032.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0033.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0036.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0037.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0042.jpg": "placeholder",
@@ -31,7 +28,6 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0201.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0217.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0218.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0219.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0220.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0224.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0225.jpg": "placeholder",
@@ -62,6 +58,7 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0333.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0338.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0340.jpg": "placeholder",
+"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0348.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0365.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0803.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0804.jpg": "placeholder",
