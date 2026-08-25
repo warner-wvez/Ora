@@ -1,25 +1,19 @@
 {
-"checked_at": "2026-08-24T20:14:16Z",
+"checked_at": "2026-08-25T03:09:46Z",
 "cameras": 482,
 "counts": {
-"placeholder": 16
+"placeholder": 10
 },
 "status": {
 "https://511wi.gov/map/Cctv/1047": "placeholder",
-"https://511wi.gov/map/Cctv/1123": "placeholder",
-"https://511wi.gov/map/Cctv/1184": "placeholder",
-"https://511wi.gov/map/Cctv/1284": "placeholder",
-"https://511wi.gov/map/Cctv/1294": "placeholder",
+"https://511wi.gov/map/Cctv/1091": "placeholder",
+"https://511wi.gov/map/Cctv/1242": "placeholder",
 "https://511wi.gov/map/Cctv/1297": "placeholder",
-"https://511wi.gov/map/Cctv/1298": "placeholder",
-"https://511wi.gov/map/Cctv/1314": "placeholder",
-"https://511wi.gov/map/Cctv/1335": "placeholder",
-"https://511wi.gov/map/Cctv/1343": "placeholder",
+"https://511wi.gov/map/Cctv/1361": "placeholder",
 "https://511wi.gov/map/Cctv/1407": "placeholder",
 "https://511wi.gov/map/Cctv/1408": "placeholder",
 "https://511wi.gov/map/Cctv/1409": "placeholder",
 "https://511wi.gov/map/Cctv/1410": "placeholder",
-"https://511wi.gov/map/Cctv/1417": "placeholder",
 "https://511wi.gov/map/Cctv/939": "placeholder"
 }
 }
