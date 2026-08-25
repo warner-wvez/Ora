@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-25T14:08:33Z",
+"checked_at": "2026-08-25T19:39:55Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"placeholder": 35
+"placeholder": 34
 },
 "status": {
 "": "offline",
@@ -11,6 +11,7 @@
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2950-2-I-70atUS-77TowerE.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2951-2-I-70atUS-77TowerW.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_3-070-0620-2-I-70atMingoExit62.jpeg": "placeholder",
+"https://kscam.carsprogram.org/snapshots/GEN_5-135-0110-2-I-135NOK-96.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-254-0023-T-K-254atK-196-789-0125.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-38.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBIPC-02A.jpg": "placeholder",
@@ -22,8 +23,6 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-60.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-68.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K070WBIPC-71.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K435SBC-05.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K435SBIPC-52.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K635NBC-14.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K635SBC-13.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M009SBC-01.jpg": "placeholder",
