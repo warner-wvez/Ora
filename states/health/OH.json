@@ -1,5 +1,5 @@
 {
-"checked_at": "2026-08-26T08:08:53Z",
+"checked_at": "2026-08-26T14:14:21Z",
 "cameras": 1121,
 "counts": {
 "frozen": 27,
@@ -12,7 +12,6 @@
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2183.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
-"https://itscameras.dot.state.oh.us/images/CMH/NorthBroadway-SR315nbOhioHealth.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
@@ -24,6 +23,7 @@
 "https://itscameras.dot.state.oh.us/images/dayton/I-75_at_W_Riverview_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV6081.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/CLE/I-90_at_Paine_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
