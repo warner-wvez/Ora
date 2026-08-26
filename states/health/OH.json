@@ -1,16 +1,18 @@
 {
-"checked_at": "2026-08-25T19:49:15Z",
+"checked_at": "2026-08-26T03:05:00Z",
 "cameras": 1121,
 "counts": {
 "frozen": 27,
-"offline": 2
+"offline": 4
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CLE/CLE051-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CLE/CLE055-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CCTV2183.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/US-33_at_Hamilton_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",

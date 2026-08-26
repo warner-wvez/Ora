@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-08-25T20:02:54Z",
+"checked_at": "2026-08-26T03:12:54Z",
 "cameras": 667,
 "counts": {
-"placeholder": 35
+"placeholder": 34
 },
 "status": {
 "https://tnsnapshots.com/thumbs/R1_041.flv.png": "placeholder",
@@ -15,7 +15,6 @@
 "https://tnsnapshots.com/thumbs/R3_088.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_090.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_139.flv.png": "placeholder",
-"https://tnsnapshots.com/thumbs/R3_174.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_178.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_195.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_207.flv.png": "placeholder",
@@ -24,7 +23,6 @@
 "https://tnsnapshots.com/thumbs/R3_216.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_219.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_223.flv.png": "placeholder",
-"https://tnsnapshots.com/thumbs/R3_227.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_275.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_MobileTrailer_003.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_029.flv.png": "placeholder",
@@ -35,6 +33,7 @@
 "https://tnsnapshots.com/thumbs/R4_072.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_073.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_085.flv.png": "placeholder",
+"https://tnsnapshots.com/thumbs/R4_090.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_101.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_102.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_168.flv.png": "placeholder",
