@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-08-26T14:14:21Z",
+"checked_at": "2026-08-26T21:04:27Z",
 "cameras": 1121,
 "counts": {
-"frozen": 27,
-"offline": 4
+"frozen": 25,
+"offline": 3
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE027-L.jpg": "frozen",
@@ -22,14 +22,11 @@
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-4_Enon.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-75_at_W_Riverview_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CLE/CCTV6081.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CLE/I-90_at_Paine_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/SR-4_at_Bogart.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D05/D05-002.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/I-70_at_I-77.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
