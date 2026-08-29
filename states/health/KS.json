@@ -1,14 +1,12 @@
 {
-"checked_at": "2026-08-29T08:08:25Z",
+"checked_at": "2026-08-29T22:00:13Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 1,
 "placeholder": 25
 },
 "status": {
 "": "offline",
-"https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2950-2-I-70atUS-77TowerE.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2951-2-I-70atUS-77TowerW.jpeg": "placeholder",
