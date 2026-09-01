@@ -1,15 +1,16 @@
 {
-"checked_at": "2026-09-01T17:41:37Z",
+"checked_at": "2026-09-01T22:28:31Z",
 "cameras": 135,
 "counts": {
 "offline": 4,
-"placeholder": 4
+"placeholder": 5
 },
 "status": {
 "https://www.dot.ri.gov/img/travel/camimages/1-04%20Rt%201%20N%20%40%20Rt%20138%20North%20Kingstown.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/138_32.9_W_CAM%20Admiral%20Kalbfus%20at%20Halsey%20St.jpg": "placeholder",
-"https://www.dot.ri.gov/img/travel/camimages/24_03.6_N_CAM%20-%20Sakonnet%20River%20Bridge%20%28Tiverton%29.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/295_10.8_M_CAM%20Exit%2010.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/295_16.2_S_CAM%20Rt%20116.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/4_04.6_S_CAM%20Exit%205%20-%20Rt%20102%20DMS.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/95_22.4_N_CAM%20-%20Shippeetown%20Rd.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/95_42.0_S_CAM%20-%20Central%20Ave.jpg": "offline",
