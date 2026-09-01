@@ -1,25 +1,25 @@
 {
-"checked_at": "2026-09-01T00:04:01Z",
+"checked_at": "2026-09-01T12:51:56Z",
 "cameras": 183,
 "counts": {
 "offline": 13,
 "frozen": 2
 },
 "status": {
-"http://ss.nmroads.com/snapshots/i-25_comanche.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25n_pdn.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40_zamoraroad.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25lomas.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "frozen",
 "http://ss.nmroads.com/snapshots/i25nb_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_richards.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_richards.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i40-sunsetcanyon.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i40pennsylvania.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i40unser.jpg": "offline",
 "http://ss.nmroads.com/snapshots/lci25i10.jpg": "offline",
-"http://ss.nmroads.com/snapshots/pojoaque.jpg": "frozen"
+"http://ss.nmroads.com/snapshots/pojoaque.jpg": "frozen",
+"http://ss.nmroads.com/snapshots/us67_capulin.jpg": "offline"
 }
 }
