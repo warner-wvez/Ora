@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-01T17:25:12Z",
+"checked_at": "2026-09-01T22:12:34Z",
 "cameras": 1114,
 "counts": {
-"placeholder": 121
+"placeholder": 115
 },
 "status": {
 "https://drivenc.gov/map/Cctv/4026": "placeholder",
@@ -38,11 +38,11 @@
 "https://drivenc.gov/map/Cctv/4784": "placeholder",
 "https://drivenc.gov/map/Cctv/4791": "placeholder",
 "https://drivenc.gov/map/Cctv/4799": "placeholder",
-"https://drivenc.gov/map/Cctv/4813": "placeholder",
 "https://drivenc.gov/map/Cctv/4817": "placeholder",
 "https://drivenc.gov/map/Cctv/4821": "placeholder",
 "https://drivenc.gov/map/Cctv/4830": "placeholder",
 "https://drivenc.gov/map/Cctv/4879": "placeholder",
+"https://drivenc.gov/map/Cctv/5065": "placeholder",
 "https://drivenc.gov/map/Cctv/5290": "placeholder",
 "https://drivenc.gov/map/Cctv/5298": "placeholder",
 "https://drivenc.gov/map/Cctv/5314": "placeholder",
@@ -55,9 +55,7 @@
 "https://drivenc.gov/map/Cctv/5356": "placeholder",
 "https://drivenc.gov/map/Cctv/5366": "placeholder",
 "https://drivenc.gov/map/Cctv/5369": "placeholder",
-"https://drivenc.gov/map/Cctv/5370": "placeholder",
 "https://drivenc.gov/map/Cctv/5399": "placeholder",
-"https://drivenc.gov/map/Cctv/5402": "placeholder",
 "https://drivenc.gov/map/Cctv/5404": "placeholder",
 "https://drivenc.gov/map/Cctv/5405": "placeholder",
 "https://drivenc.gov/map/Cctv/5406": "placeholder",
@@ -95,17 +93,12 @@
 "https://drivenc.gov/map/Cctv/5716": "placeholder",
 "https://drivenc.gov/map/Cctv/5717": "placeholder",
 "https://drivenc.gov/map/Cctv/5747": "placeholder",
-"https://drivenc.gov/map/Cctv/5749": "placeholder",
-"https://drivenc.gov/map/Cctv/5750": "placeholder",
-"https://drivenc.gov/map/Cctv/5752": "placeholder",
-"https://drivenc.gov/map/Cctv/5753": "placeholder",
-"https://drivenc.gov/map/Cctv/5754": "placeholder",
-"https://drivenc.gov/map/Cctv/5755": "placeholder",
 "https://drivenc.gov/map/Cctv/5758": "placeholder",
 "https://drivenc.gov/map/Cctv/5771": "placeholder",
 "https://drivenc.gov/map/Cctv/5775": "placeholder",
 "https://drivenc.gov/map/Cctv/5782": "placeholder",
 "https://drivenc.gov/map/Cctv/5816": "placeholder",
+"https://drivenc.gov/map/Cctv/5824": "placeholder",
 "https://drivenc.gov/map/Cctv/5840": "placeholder",
 "https://drivenc.gov/map/Cctv/5862": "placeholder",
 "https://drivenc.gov/map/Cctv/5882": "placeholder",
@@ -116,7 +109,9 @@
 "https://drivenc.gov/map/Cctv/5922": "placeholder",
 "https://drivenc.gov/map/Cctv/5923": "placeholder",
 "https://drivenc.gov/map/Cctv/5970": "placeholder",
+"https://drivenc.gov/map/Cctv/5976": "placeholder",
 "https://drivenc.gov/map/Cctv/5994": "placeholder",
+"https://drivenc.gov/map/Cctv/6018": "placeholder",
 "https://drivenc.gov/map/Cctv/6038": "placeholder",
 "https://drivenc.gov/map/Cctv/6046": "placeholder",
 "https://drivenc.gov/map/Cctv/6056": "placeholder",
@@ -124,7 +119,6 @@
 "https://drivenc.gov/map/Cctv/6085": "placeholder",
 "https://drivenc.gov/map/Cctv/6087": "placeholder",
 "https://drivenc.gov/map/Cctv/6112": "placeholder",
-"https://drivenc.gov/map/Cctv/6120": "placeholder",
 "https://drivenc.gov/map/Cctv/6121": "placeholder"
 }
 }
