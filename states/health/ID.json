@@ -1,31 +1,16 @@
 {
-"checked_at": "2026-09-01T12:42:54Z",
+"checked_at": "2026-09-01T17:17:34Z",
 "cameras": 730,
 "counts": {
-"placeholder": 22
+"placeholder": 7
 },
 "status": {
 "https://511.idaho.gov/map/Cctv/296": "placeholder",
 "https://511.idaho.gov/map/Cctv/297": "placeholder",
-"https://511.idaho.gov/map/Cctv/471": "placeholder",
-"https://511.idaho.gov/map/Cctv/472": "placeholder",
-"https://511.idaho.gov/map/Cctv/473": "placeholder",
-"https://511.idaho.gov/map/Cctv/500": "placeholder",
-"https://511.idaho.gov/map/Cctv/501": "placeholder",
-"https://511.idaho.gov/map/Cctv/528": "placeholder",
-"https://511.idaho.gov/map/Cctv/529": "placeholder",
-"https://511.idaho.gov/map/Cctv/530": "placeholder",
-"https://511.idaho.gov/map/Cctv/531": "placeholder",
-"https://511.idaho.gov/map/Cctv/532": "placeholder",
-"https://511.idaho.gov/map/Cctv/533": "placeholder",
 "https://511.idaho.gov/map/Cctv/612": "placeholder",
 "https://511.idaho.gov/map/Cctv/613": "placeholder",
 "https://511.idaho.gov/map/Cctv/614": "placeholder",
-"https://511.idaho.gov/map/Cctv/677": "placeholder",
-"https://511.idaho.gov/map/Cctv/678": "placeholder",
-"https://511.idaho.gov/map/Cctv/795": "placeholder",
-"https://511.idaho.gov/map/Cctv/936": "placeholder",
-"https://511.idaho.gov/map/Cctv/937": "placeholder",
-"https://511.idaho.gov/map/Cctv/938": "placeholder"
+"https://511.idaho.gov/map/Cctv/697": "placeholder",
+"https://511.idaho.gov/map/Cctv/698": "placeholder"
 }
 }
