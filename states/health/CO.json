@@ -1,5 +1,5 @@
 {
-"checked_at": "2026-09-01T21:18:52Z",
+"checked_at": "2026-09-02T04:49:32Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
@@ -51,7 +51,7 @@
 "https://cocam.carsprogram.org/Snapshots/025S22705CAM1GP3.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S25530CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S26725CAM1RP2.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/036E03920CAM1RP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E04915CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E05600CAM1ML1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036W05510CAM1ML1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E17790CAM1RHS.flv.png": "placeholder",
@@ -62,7 +62,6 @@
 "https://cocam.carsprogram.org/Snapshots/070E18780CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E18945CAM1LHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E24905CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/070E25395CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E27790CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E30640CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W18680CAM1RHS.flv.png": "placeholder",
@@ -78,6 +77,7 @@
 "https://cocam.carsprogram.org/Snapshots/160W03990CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/225S00015CAM2RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/470E01015CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/470W02465CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/550E02135CAM1NEC.flv.png": "placeholder",
 "https://websvc.coloradosprings.gov/live/TOC/00084_I-25%20%28mm156%29%20_%20Gleneagle.jpg": "frozen"
 }

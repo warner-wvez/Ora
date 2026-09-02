@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-01T22:31:25Z",
+"checked_at": "2026-09-02T06:05:04Z",
 "cameras": 2063,
 "counts": {
-"placeholder": 41
+"placeholder": 42
 },
 "status": {
 "https://udottraffic.utah.gov/map/Cctv/112731": "placeholder",
@@ -43,6 +43,7 @@
 "https://udottraffic.utah.gov/map/Cctv/138501": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138517": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138521": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/138541": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138561": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138596": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/140171": "placeholder"
