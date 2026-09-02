@@ -1,6 +1,10 @@
 {
-"checked_at": "2026-09-02T12:36:29Z",
+"checked_at": "2026-09-02T17:51:19Z",
 "cameras": 1127,
-"counts": {},
-"status": {}
+"counts": {
+"frozen": 1
+},
+"status": {
+"https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen"
+}
 }
