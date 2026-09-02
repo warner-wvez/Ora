@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-02T06:02:20Z",
+"checked_at": "2026-09-02T12:38:00Z",
 "cameras": 763,
 "counts": {
-"placeholder": 26
+"placeholder": 18
 },
 "status": {
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10014.flv.png": "placeholder",
@@ -11,25 +11,17 @@
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10257.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10500.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10503.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10504.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10505.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10507.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10508.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10511.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10506.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10514.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10515.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10516.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10517.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10519.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10520.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10522.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10523.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10532.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10536.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/30092.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/30095.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10601.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/30307.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/30309.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/40076.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/40500.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/50004.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/50035.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/60076.flv.png": "placeholder"
 }
 }
