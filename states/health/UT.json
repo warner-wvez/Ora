@@ -1,5 +1,5 @@
 {
-"checked_at": "2026-09-03T17:47:20Z",
+"checked_at": "2026-09-03T22:25:20Z",
 "cameras": 2063,
 "counts": {
 "placeholder": 41
@@ -18,7 +18,6 @@
 "https://udottraffic.utah.gov/map/Cctv/133097": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135287": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135459": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/135500": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135605": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135609": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135816": "placeholder",
@@ -29,12 +28,11 @@
 "https://udottraffic.utah.gov/map/Cctv/136136": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136190": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136359": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/136370": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136382": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136554": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136594": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136668": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/136734": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/137092": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/137225": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/137939": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138337": "placeholder",
@@ -42,9 +40,11 @@
 "https://udottraffic.utah.gov/map/Cctv/138430": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138455": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138476": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/138501": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138517": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138561": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138596": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/138598": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/140171": "placeholder"
 }
 }
