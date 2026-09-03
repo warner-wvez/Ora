@@ -1,28 +1,25 @@
 {
-"checked_at": "2026-09-02T17:52:36Z",
+"checked_at": "2026-09-03T12:28:59Z",
 "cameras": 763,
 "counts": {
-"placeholder": 19
+"placeholder": 16
 },
 "status": {
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10014.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10103.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10199.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10257.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10258.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10500.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10506.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10514.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10523.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10532.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10601.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/30301.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/30307.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/30309.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/40076.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/40502.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/50004.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/60052.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/60076.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/60113.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/60118.flv.png": "placeholder"
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/50023.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/60041.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/60076.flv.png": "placeholder"
 }
 }

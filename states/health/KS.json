@@ -1,20 +1,20 @@
 {
-"checked_at": "2026-09-02T17:30:27Z",
+"checked_at": "2026-09-03T12:13:44Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 2,
-"placeholder": 23
+"frozen": 1,
+"placeholder": 24
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
+"https://kscam.carsprogram.org/snapshots/GEN_1-010-0095-2-K-10EastofMichiganSt.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2950-2-I-70atUS-77TowerE.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2951-2-I-70atUS-77TowerW.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_2-081-1890-2-U-81&U24.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_3-070-0620-2-I-70atMingoExit62.jpeg": "placeholder",
-"https://kscam.carsprogram.org/snapshots/GEN_4-400-4565-2-US-400atUS-166.jpeg": "frozen",
 "https://kscam.carsprogram.org/snapshots/GEN_5-254-0023-T-K-254atK-196-789-0125.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-38.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBIPC-02A.jpg": "placeholder",
