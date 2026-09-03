@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-03T12:14:39Z",
+"checked_at": "2026-09-03T17:28:36Z",
 "cameras": 159,
 "counts": {
 "frozen": 1,
-"placeholder": 24
+"placeholder": 25
 },
 "status": {
 "https://www.maineturnpike.com/cameras/Andro_River.jpg": "frozen",
@@ -29,6 +29,7 @@
 "https://www.newengland511.org/map/Cctv/2253": "placeholder",
 "https://www.newengland511.org/map/Cctv/2315": "placeholder",
 "https://www.newengland511.org/map/Cctv/2320": "placeholder",
+"https://www.newengland511.org/map/Cctv/2321": "placeholder",
 "https://www.newengland511.org/map/Cctv/2324": "placeholder",
 "https://www.newengland511.org/map/Cctv/2330": "placeholder"
 }
