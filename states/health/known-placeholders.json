@@ -2823,5 +2823,25 @@
   "sha": "9e2cc69fac624ba6",
   "first_seen": "2026-09-04T06:01:15Z",
   "state": "WI"
+ },
+ "18764:5b19739a728c": {
+  "sha": "9fb4be56e91dc951",
+  "first_seen": "2026-09-04T12:15:59Z",
+  "state": "LA"
+ },
+ "39970:3b96ff840bd5": {
+  "sha": "7528a3487b032cd1",
+  "first_seen": "2026-09-04T12:35:49Z",
+  "state": "RI"
+ },
+ "64676:1cb0c094ad6e": {
+  "sha": "bee3f8fbe57fc8ed",
+  "first_seen": "2026-09-04T12:39:35Z",
+  "state": "WI"
+ },
+ "64786:1cb0c094ad6e": {
+  "sha": "2c69b73f06408f9b",
+  "first_seen": "2026-09-04T12:39:35Z",
+  "state": "WI"
  }
 }
