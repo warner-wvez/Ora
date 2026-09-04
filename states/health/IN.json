@@ -1,24 +1,25 @@
 {
-"checked_at": "2026-09-04T12:15:03Z",
+"checked_at": "2026-09-04T21:49:56Z",
 "cameras": 705,
 "counts": {
 "offline": 1,
-"placeholder": 14
+"placeholder": 15
 },
 "status": {
 "/images/icon-camera-closed-fill-solid-padded.svg": "offline",
 "https://public.carsprogram.org/cameras/IN/INDOT_113_TvJxfniKm0UI2_ta.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_126_wdGkA6sKsedGeKrp.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_159_AA1RWSrwkYhfVmy8.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_165_piBDQtVc77jT1ej4.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_166_cWmaHGs3o7mGdusK.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_458_dqHm6GC0BjyZuDNs.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_346_T9hsZKv2UVTS-3gB.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_503_pxPFU7EnuvM1-_f8.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_504_6qrHXuVHQkVhql46.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_505_SOtxVM8HqOPcP-9h.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_506_JVTSpzrtwvIYcFt4.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_516_HE9T4ysNiWHd2P1r.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_542_879tOx5s3ps57tLb.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_583_8uJEBG7xKgLSES49.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_634_vPPvjkJrDmE8y2Hi.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_677_vL81it7xyjsz7ScI.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_678_tjkzOFqbJOtIzlMC.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_754_B7j2B8FKMMZ9Ean6.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_999_qiy-ohd3PfUTa8Hm.flv.png": "placeholder"
 }
