@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-05T05:45:24Z",
+"checked_at": "2026-09-05T16:23:05Z",
 "cameras": 1121,
 "counts": {
-"offline": 3,
+"offline": 2,
 "frozen": 19,
 "placeholder": 2
 },
@@ -16,7 +16,6 @@
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CLE/I-90_at_Paine_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2223.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
