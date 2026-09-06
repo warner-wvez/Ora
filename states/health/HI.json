@@ -1,14 +1,14 @@
 {
-"checked_at": "2026-09-05T21:18:55Z",
+"checked_at": "2026-09-06T05:46:01Z",
 "cameras": 361,
 "counts": {
 "placeholder": 86
 },
 "status": {
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0022.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0030.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0036.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0037.jpg": "placeholder",
+"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0042.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0046.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0054.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0055.jpg": "placeholder",
@@ -17,6 +17,7 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0058.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0059.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0060.jpg": "placeholder",
+"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0073.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0081.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0086.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0095.jpg": "placeholder",
@@ -41,7 +42,6 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0249.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0251.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0252.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0253.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0258.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0272.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0273.jpg": "placeholder",

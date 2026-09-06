@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-05T20:27:32Z",
+"checked_at": "2026-09-06T04:46:32Z",
 "cameras": 548,
 "counts": {
 "placeholder": 9,
-"frozen": 43
+"frozen": 44
 },
 "status": {
 "https://layers.idrivearkansas.com/cameras/101.jpg": "placeholder",
@@ -18,6 +18,7 @@
 "https://layers.idrivearkansas.com/cameras/335.jpg": "frozen",
 "https://layers.idrivearkansas.com/cameras/352.jpg": "frozen",
 "https://layers.idrivearkansas.com/cameras/359.jpg": "frozen",
+"https://layers.idrivearkansas.com/cameras/377.jpg": "frozen",
 "https://layers.idrivearkansas.com/cameras/4.jpg": "frozen",
 "https://layers.idrivearkansas.com/cameras/50.jpg": "frozen",
 "https://layers.idrivearkansas.com/cameras/51.jpg": "frozen",
