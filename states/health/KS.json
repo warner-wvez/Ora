@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-08T05:42:30Z",
+"checked_at": "2026-09-08T12:15:27Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
 "frozen": 1,
-"placeholder": 36
+"placeholder": 37
 },
 "status": {
 "": "offline",
@@ -14,6 +14,7 @@
 "https://kscam.carsprogram.org/snapshots/GEN_3-070-0620-2-I-70atMingoExit62.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_3-070-0780-2-I-70eastofOakley.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-015-0731-2-K-15&MACARTHURRD.jpeg": "placeholder",
+"https://kscam.carsprogram.org/snapshots/GEN_5-135-0110-2-I-135NOK-96.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-254-0023-T-K-254atK-196-789-0125.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K007SBIPC-20.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-38.jpg": "placeholder",
@@ -33,8 +34,8 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K435SBIPC-52.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K635NBC-14.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M035NBC-22.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M049SBIPC-42.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBIPC-20.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M435NBIPC-16.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M435NBIPC-17.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M435NBIPC-19.jpg": "placeholder",
