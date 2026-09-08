@@ -1,10 +1,12 @@
 {
-"checked_at": "2026-09-08T12:36:34Z",
+"checked_at": "2026-09-08T17:59:32Z",
 "cameras": 1127,
 "counts": {
-"frozen": 1
+"frozen": 1,
+"offline": 1
 },
 "status": {
-"https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen"
+"https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen",
+"https://tripcheck.com/RoadCams/cams/i205powl_pid497.jpg": "offline"
 }
 }
