@@ -1,20 +1,17 @@
 {
-"checked_at": "2026-09-08T16:51:08Z",
+"checked_at": "2026-09-08T21:21:54Z",
 "cameras": 347,
 "counts": {
-"placeholder": 15
+"placeholder": 12
 },
 "status": {
-"https://ctroads.org/map/Cctv/392": "placeholder",
-"https://ctroads.org/map/Cctv/393": "placeholder",
-"https://ctroads.org/map/Cctv/397": "placeholder",
-"https://ctroads.org/map/Cctv/402": "placeholder",
-"https://ctroads.org/map/Cctv/407": "placeholder",
-"https://ctroads.org/map/Cctv/493": "placeholder",
-"https://ctroads.org/map/Cctv/494": "placeholder",
-"https://ctroads.org/map/Cctv/497": "placeholder",
-"https://ctroads.org/map/Cctv/498": "placeholder",
-"https://ctroads.org/map/Cctv/499": "placeholder",
+"https://ctroads.org/map/Cctv/513": "placeholder",
+"https://ctroads.org/map/Cctv/523": "placeholder",
+"https://ctroads.org/map/Cctv/524": "placeholder",
+"https://ctroads.org/map/Cctv/525": "placeholder",
+"https://ctroads.org/map/Cctv/526": "placeholder",
+"https://ctroads.org/map/Cctv/527": "placeholder",
+"https://ctroads.org/map/Cctv/530": "placeholder",
 "https://ctroads.org/map/Cctv/601": "placeholder",
 "https://ctroads.org/map/Cctv/611": "placeholder",
 "https://ctroads.org/map/Cctv/616": "placeholder",
