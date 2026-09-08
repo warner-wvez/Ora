@@ -1,13 +1,12 @@
 {
-"checked_at": "2026-09-07T22:38:50Z",
+"checked_at": "2026-09-08T05:52:19Z",
 "cameras": 1121,
 "counts": {
-"offline": 3,
+"offline": 2,
 "frozen": 22,
 "placeholder": 2
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
