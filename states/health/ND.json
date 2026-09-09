@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-09T05:43:04Z",
+"checked_at": "2026-09-09T12:24:26Z",
 "cameras": 798,
 "counts": {
 "offline": 7,
-"placeholder": 35
+"placeholder": 31
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
@@ -38,10 +38,6 @@
 "https://www.dot.nd.gov/travel-info/cameras/bottineaunorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/bottineaupavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/bottineausouth.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/marmarthcenter.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/marmartheast.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/marmarthpavement.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/marmarthwest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/whiteshieldcenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/whiteshieldeast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/whiteshieldpavement.jpg": "placeholder",
