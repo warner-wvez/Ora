@@ -1,13 +1,20 @@
 {
-"checked_at": "2026-09-08T22:03:05Z",
+"checked_at": "2026-09-09T05:39:56Z",
 "cameras": 894,
 "counts": {
-"offline": 113
+"offline": 118
 },
 "status": {
+"https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=010307.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=010701.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=010705.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=020601.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=020609.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=020701.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=021008.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=021505.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingjxn1.mdottraffic.com/thumbnail?application=rtplive&streamname=021507.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingjxn4.mdottraffic.com/thumbnail?application=rtplive&streamname=022803.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingjxn6.mdottraffic.com/thumbnail?application=rtplive&streamname=140102.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingjxn6.mdottraffic.com/thumbnail?application=rtplive&streamname=140308.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingjxn6.mdottraffic.com/thumbnail?application=rtplive&streamname=140401.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingjxn6.mdottraffic.com/thumbnail?application=rtplive&streamname=150104.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
@@ -114,9 +121,7 @@
 "https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=041208.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=042306.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=042403.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=042808.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=043203.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn3.mdottraffic.com/thumbnail?application=rtplive&streamname=041008.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn3.mdottraffic.com/thumbnail?application=rtplive&streamname=041103.stream&size=640x480&format=jpg&fitmode=stretch": "offline"
+"https://streamingshvn3.mdottraffic.com/thumbnail?application=rtplive&streamname=041008.stream&size=640x480&format=jpg&fitmode=stretch": "offline"
 }
 }

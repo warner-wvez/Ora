@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-08T21:55:08Z",
+"checked_at": "2026-09-09T05:33:51Z",
 "cameras": 361,
 "counts": {
-"placeholder": 164
+"placeholder": 157
 },
 "status": {
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0006.jpg": "placeholder",
@@ -27,7 +27,6 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0049.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0054.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0055.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0056.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0057.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0058.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0059.jpg": "placeholder",
@@ -38,16 +37,10 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0068.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0073.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0081.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0082.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0083.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0084.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0086.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0087.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0088.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0089.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0090.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0092.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0093.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0095.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0109.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0111.jpg": "placeholder",
@@ -60,7 +53,6 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0122.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0123.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0126.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0140.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0150.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0188.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0189.jpg": "placeholder",
@@ -95,6 +87,7 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0249.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0251.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0258.jpg": "placeholder",
+"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0261.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0268.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0269.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0270.jpg": "placeholder",
