@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-10T12:16:28Z",
+"checked_at": "2026-09-10T17:18:23Z",
 "cameras": 3636,
 "counts": {
-"offline": 66,
-"frozen": 138,
-"placeholder": 162
+"offline": 65,
+"frozen": 158,
+"placeholder": 158
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -101,7 +101,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_SWB_I-80_4153051_-8798685_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_WB_I-80_4151180_-8811160_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_WB_I-80_4151947_-8799049_1_NONE.jpg": "offline",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_WB_I-80_4155270_-8789035_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_2_Henry_SB_I-74_4118011_-9033269_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_2_Henry_SB_I-74_4118011_-9033269_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_2_Henry_SB_I-74_4118011_-9033269_1_S.jpg": "frozen",
@@ -145,10 +144,22 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_WB_IL-110_4098410_-9036356_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_WB_IL-110_4098410_-9036356_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_WB_IL-110_4098410_-9036356_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_IL-110_4055049_-9067366_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_IL-110_4055049_-9067366_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_IL-110_4055049_-9067366_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_IL-110_4055049_-9067366_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_IL-110_4055778_-9067364_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_IL-110_4055778_-9067364_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_IL-110_4055778_-9067364_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_IL-110_4055778_-9067364_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_US-67_4046108_-9067170_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_US-67_4046108_-9067170_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_US-67_4046108_-9067170_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_US-67_4046108_-9067170_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_US-67_4047321_-9067142_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_US-67_4047321_-9067142_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_US-67_4047321_-9067142_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_NB_US-67_4047321_-9067142_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_SWB_US-136_4044787_-9073928_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_SWB_US-136_4044787_-9073928_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_SWB_US-136_4044787_-9073928_1_S.jpg": "frozen",
@@ -197,6 +208,14 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_EB_IL-110_4092437_-9063087_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_EB_IL-110_4092437_-9063087_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_EB_IL-110_4092437_-9063087_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_EB_IL-110_4092498_-9064055_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_EB_IL-110_4092498_-9064055_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_EB_IL-110_4092498_-9064055_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_EB_IL-110_4092498_-9064055_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_NB_IL-110_4091230_-9066298_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_NB_IL-110_4091230_-9066298_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_NB_IL-110_4091230_-9066298_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Warren_NB_IL-110_4091230_-9066298_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Woodford_EB_IL-116_4079049_-8936054_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Woodford_EB_IL-116_4079049_-8936054_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Woodford_EB_IL-116_4079049_-8936054_1_S.jpg": "frozen",
@@ -368,10 +387,6 @@
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hart_(Cell)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hart_(Cell)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Wilson_@_Nippersink_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Wilson_@_Nippersink_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Wilson_@_Nippersink_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Wilson_@_Nippersink_cctv_West_Leg.jpg": "placeholder"
+"https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_West_Leg.jpg": "placeholder"
 }
 }

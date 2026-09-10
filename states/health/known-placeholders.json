@@ -3128,5 +3128,20 @@
   "sha": "ef66b5dc63bce518",
   "first_seen": "2026-09-10T12:37:07Z",
   "state": "WI"
+ },
+ "39887:3b96ff840bd5": {
+  "sha": "d672629d6af224a8",
+  "first_seen": "2026-09-10T17:37:57Z",
+  "state": "RI"
+ },
+ "65060:1cb0c094ad6e": {
+  "sha": "17161154cf8e8302",
+  "first_seen": "2026-09-10T17:42:40Z",
+  "state": "WI"
+ },
+ "64878:1cb0c094ad6e": {
+  "sha": "0a5e4fef89a2930a",
+  "first_seen": "2026-09-10T17:42:40Z",
+  "state": "WI"
  }
 }

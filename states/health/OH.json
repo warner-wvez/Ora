@@ -1,13 +1,15 @@
 {
-"checked_at": "2026-09-10T12:26:58Z",
+"checked_at": "2026-09-10T17:27:44Z",
 "cameras": 1121,
 "counts": {
+"frozen": 23,
 "offline": 3,
-"frozen": 21,
 "placeholder": 1
 },
 "status": {
+"https://itscameras.dot.state.oh.us/images/CMH/CMH070.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/britton-tuttle.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
