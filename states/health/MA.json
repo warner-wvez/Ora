@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-10T17:19:40Z",
+"checked_at": "2026-09-10T21:50:58Z",
 "cameras": 304,
 "counts": {
-"placeholder": 134
+"placeholder": 135
 },
 "status": {
 "https://public.carsprogram.org/cameras/MA/1119-fullJpeg.jpg": "placeholder",
@@ -10,8 +10,8 @@
 "https://public.carsprogram.org/cameras/MA/1188-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1231-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1239-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/1278-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/1279-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/1282-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/1283-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1302-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1316-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1340-fullJpeg.jpg": "placeholder",
@@ -69,10 +69,11 @@
 "https://public.carsprogram.org/cameras/MA/432505-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432506-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432507-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/432519-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432520-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/432523-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432525-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432527-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/432542-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432543-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432545-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435439-fullJpeg.jpg": "placeholder",
