@@ -1,18 +1,17 @@
 {
-"checked_at": "2026-09-10T17:27:44Z",
+"checked_at": "2026-09-10T21:59:20Z",
 "cameras": 1121,
 "counts": {
-"frozen": 23,
-"offline": 3,
+"offline": 4,
+"frozen": 20,
 "placeholder": 1
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CMH/CMH070.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
-"https://itscameras.dot.state.oh.us/images/CMH/britton-tuttle.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/I-75_S_of_Hopple.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
@@ -21,7 +20,6 @@
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2223.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D03/D03-028.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/SR-4_at_Bogart.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/SR-37_at_SR-16_Columbus Rd.jpg": "frozen",
@@ -29,8 +27,8 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/SR-28_McClelland.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/cmh/FCEO-Cleveland-Innis.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/cmh/PolarisPkwy-Sancus.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Hancock_SB-3.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
