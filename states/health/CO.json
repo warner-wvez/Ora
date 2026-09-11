@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-10T21:03:59Z",
+"checked_at": "2026-09-11T11:36:40Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
 "frozen": 41,
-"placeholder": 45
+"placeholder": 47
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -51,7 +51,9 @@
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-N.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-S.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-W.jpg": "frozen",
-"https://cocam.carsprogram.org/Snapshots/006E26295CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Douglas/69_Lucent_Plaza-cotripEast-DO-NOT-DELETE.jpg": "placeholder",
+"https://cocam.carsprogram.org/Douglas/69_Lucent_Plaza-cotripNorth-DO-NOT-DELETE.jpg": "placeholder",
+"https://cocam.carsprogram.org/Douglas/69_Lucent_Plaza-cotripSouth-DO-NOT-DELETE.jpg": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/007N06750CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009N09290CAM1SEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S08735CAM1RHS.flv.png": "placeholder",
@@ -59,8 +61,8 @@
 "https://cocam.carsprogram.org/Snapshots/009S08920CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/024W28610CAM1SEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S22610CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/025S25530CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/036E03920CAM1RP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E04040CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E04915CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E05055CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E05600CAM1ML1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036W04820CAM1RHS.flv.png": "placeholder",

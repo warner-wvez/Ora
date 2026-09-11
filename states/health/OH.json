@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-10T21:59:20Z",
+"checked_at": "2026-09-11T12:33:52Z",
 "cameras": 1121,
 "counts": {
-"offline": 4,
+"offline": 2,
 "frozen": 20,
 "placeholder": 1
 },
@@ -11,7 +11,6 @@
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/I-75_S_of_Hopple.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
@@ -27,7 +26,6 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/SR-28_McClelland.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/cmh/PolarisPkwy-Sancus.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Hancock_SB-3.jpg": "frozen",
