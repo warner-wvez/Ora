@@ -1,10 +1,12 @@
 {
-"checked_at": "2026-09-11T17:50:05Z",
+"checked_at": "2026-09-11T22:18:15Z",
 "cameras": 1127,
 "counts": {
+"offline": 1,
 "frozen": 1
 },
 "status": {
+"https://tripcheck.com/RoadCams/cams/I-5@Goshen_pid1504.jpg": "offline",
 "https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen"
 }
 }

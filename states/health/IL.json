@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-11T17:28:58Z",
+"checked_at": "2026-09-11T22:02:18Z",
 "cameras": 3636,
 "counts": {
 "offline": 66,
-"frozen": 180,
-"placeholder": 155
+"frozen": 183,
+"placeholder": 147
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -229,8 +229,11 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Woodford_EB_IL-116_4079049_-8936054_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Woodford_EB_IL-116_4079049_-8936054_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Woodford_EB_IL-116_4079049_-8936054_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_5_Champaign_EB_US-150_4011253_-8825761_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_5_Champaign_NB_US-45_4005464_-8825121_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_5_Champaign_NB_US-45_4008379_-8824666_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_5_Champaign_NB_US-45_4009829_-8824440_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_5_Champaign_NB_US-45_4011007_-8824329_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_5_McLean_EB_US-150_4047396_-8898428_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_5_McLean_EB_Veterans_4045958_-8897033_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_5_McLean_NB_Veterans_4047335_-8895211_1_N.jpg": "frozen",
@@ -342,12 +345,6 @@
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Butrick_@_Glen_Flora_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Butrick_@_Glen_Flora_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Fairfield_@_Gossell_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Fairfield_@_Gossell_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Fairfield_@_Gossell_(Wireless)_cctv_West_Leg.jpg": "placeholder",
@@ -392,8 +389,6 @@
 "https://www.lakecountypassage.com/snapshots/Portable_PTZ_(Cell)_cctv_East_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Portable_PTZ_(Cell)_cctv_West_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/River_@_Roberts_(Cell)_cctv_North_Leg.jpg": "frozen",
-"https://www.lakecountypassage.com/snapshots/Rollins_@_Washington_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Rollins_@_Washington_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/SkyWarn_Tower_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/SkyWarn_Tower_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/SkyWarn_Tower_cctv_South_Leg.jpg": "placeholder",
