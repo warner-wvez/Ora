@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-11T11:36:40Z",
+"checked_at": "2026-09-11T16:41:44Z",
 "cameras": 1263,
 "counts": {
-"offline": 4,
+"offline": 5,
 "frozen": 41,
-"placeholder": 47
+"placeholder": 46
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -51,18 +51,14 @@
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-N.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-S.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-W.jpg": "frozen",
-"https://cocam.carsprogram.org/Douglas/69_Lucent_Plaza-cotripEast-DO-NOT-DELETE.jpg": "placeholder",
-"https://cocam.carsprogram.org/Douglas/69_Lucent_Plaza-cotripNorth-DO-NOT-DELETE.jpg": "placeholder",
-"https://cocam.carsprogram.org/Douglas/69_Lucent_Plaza-cotripSouth-DO-NOT-DELETE.jpg": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/007N06750CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009N09290CAM1SEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S08735CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S08755CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S08920CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/024W28610CAM1SEC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/025S19440CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S22610CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/036E04040CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/036E04915CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E05055CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E05600CAM1ML1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036W04820CAM1RHS.flv.png": "placeholder",
@@ -79,6 +75,7 @@
 "https://cocam.carsprogram.org/Snapshots/070W24640CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W26695CAM1MED.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/085S25380CAM1SWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/088E01465CAM1SEC.flv.png": "offline",
 "https://cocam.carsprogram.org/Snapshots/088E01850CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/094W00100CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/095S00980CAM1SWC.flv.png": "placeholder",
@@ -97,6 +94,9 @@
 "https://cocam.carsprogram.org/Snapshots/470E01015CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/470W00875CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/470W02290CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/470W02595CAM1RP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/470W02610CAM1RP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/470W02615CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/550E02135CAM1NEC.flv.png": "placeholder",
 "https://websvc.coloradosprings.gov/live/TOC/00084_I-25%20%28mm156%29%20_%20Gleneagle.jpg": "frozen"
 }
