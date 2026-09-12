@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-12T16:43:23Z",
+"checked_at": "2026-09-12T21:46:46Z",
 "cameras": 1121,
 "counts": {
 "offline": 2,
-"frozen": 18,
+"frozen": 25,
 "placeholder": 2
 },
 "status": {
@@ -11,10 +11,15 @@
 "https://itscameras.dot.state.oh.us/images/CMH/bethel-godown.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/747_Hutzleman.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/SR-747_Muhlhauser_Quad.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/SR-747_Tylersville_Quad.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/SR747-Union.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/toledo/I-75_at_East_Alexis_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2223.jpg": "frozen",
@@ -26,6 +31,8 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_PortUnion_Quad.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_Smith_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/cmh/PolarisPkwy-Sancus.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"

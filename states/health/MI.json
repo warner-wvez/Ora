@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-12T16:34:56Z",
+"checked_at": "2026-09-12T21:38:54Z",
 "cameras": 790,
 "counts": {
 "offline": 3,
-"placeholder": 92
+"placeholder": 97
 },
 "status": {
 "https://micamerasimages.net/thumbs/grand_cam_014.flv.jpg": "placeholder",
@@ -27,12 +27,16 @@
 "https://micamerasimages.net/thumbs/internet_cam_077.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_084.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_098.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_108.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_143.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_145.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_157.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_156.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_161.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_169.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_182.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_187.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_199.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_213.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_006.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_014.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_019.flv.jpg": "placeholder",
@@ -48,6 +52,7 @@
 "https://micamerasimages.net/thumbs/semtoc_cam_104.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_108.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_111.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/semtoc_cam_121.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_123.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_134.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_142.flv.jpg": "placeholder",
