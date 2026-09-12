@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-11T22:03:54Z",
+"checked_at": "2026-09-12T16:34:56Z",
 "cameras": 790,
 "counts": {
 "offline": 3,
-"placeholder": 93
+"placeholder": 92
 },
 "status": {
 "https://micamerasimages.net/thumbs/grand_cam_014.flv.jpg": "placeholder",
@@ -27,14 +27,13 @@
 "https://micamerasimages.net/thumbs/internet_cam_077.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_084.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_098.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_108.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_143.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_145.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_157.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_182.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_187.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_199.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_006.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/semtoc_cam_010.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_014.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_019.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_034.flv.jpg": "placeholder",
