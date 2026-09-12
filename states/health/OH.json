@@ -1,13 +1,14 @@
 {
-"checked_at": "2026-09-11T22:12:04Z",
+"checked_at": "2026-09-12T16:43:23Z",
 "cameras": 1121,
 "counts": {
 "offline": 2,
-"frozen": 19,
-"placeholder": 1
+"frozen": 18,
+"placeholder": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/bethel-godown.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
@@ -27,7 +28,6 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/cmh/PolarisPkwy-Sancus.jpg": "placeholder",
-"https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Hancock_SB-3.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
