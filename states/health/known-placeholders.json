@@ -3248,5 +3248,50 @@
   "sha": "aa4fbec938676ff7",
   "first_seen": "2026-09-12T22:04:45Z",
   "state": "WI"
+ },
+ "16851:d4fbb066fa60": {
+  "sha": "746be5fd8b6bf95c",
+  "first_seen": "2026-09-14T13:04:02Z",
+  "state": "CA"
+ },
+ "16854:9161e92a93a8": {
+  "sha": "3d3d575dd24e05d7",
+  "first_seen": "2026-09-14T13:04:02Z",
+  "state": "CA"
+ },
+ "11368:a0e373c918f9": {
+  "sha": "5f23ff5d7824bbed",
+  "first_seen": "2026-09-14T13:53:08Z",
+  "state": "GA"
+ },
+ "32426:87cc07526b92": {
+  "sha": "2d4e09b4a4121b49",
+  "first_seen": "2026-09-14T13:54:43Z",
+  "state": "ID"
+ },
+ "32481:2b4be0df278e": {
+  "sha": "0665eb52fa357a95",
+  "first_seen": "2026-09-14T13:54:43Z",
+  "state": "ID"
+ },
+ "25250:f28a54df2787": {
+  "sha": "2d5165509313990d",
+  "first_seen": "2026-09-14T13:57:23Z",
+  "state": "LA"
+ },
+ "39862:3b96ff840bd5": {
+  "sha": "2edd5313ea522f14",
+  "first_seen": "2026-09-14T14:18:58Z",
+  "state": "RI"
+ },
+ "65548:1cb0c094ad6e": {
+  "sha": "28ddf44c02f3ddfb",
+  "first_seen": "2026-09-14T14:23:04Z",
+  "state": "WI"
+ },
+ "65610:1cb0c094ad6e": {
+  "sha": "3581266ee909742a",
+  "first_seen": "2026-09-14T14:23:04Z",
+  "state": "WI"
  }
 }
