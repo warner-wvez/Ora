@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-12T21:46:46Z",
+"checked_at": "2026-09-14T14:06:08Z",
 "cameras": 1121,
 "counts": {
 "offline": 2,
-"frozen": 25,
+"frozen": 23,
 "placeholder": 2
 },
 "status": {
@@ -19,10 +19,8 @@
 "https://itscameras.dot.state.oh.us/images/artimis/SR-747_Muhlhauser_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-747_Tylersville_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR747-Union.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/toledo/I-75_at_East_Alexis_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2223.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
