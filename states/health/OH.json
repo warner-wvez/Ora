@@ -1,14 +1,12 @@
 {
-"checked_at": "2026-09-15T12:54:03Z",
+"checked_at": "2026-09-15T18:14:16Z",
 "cameras": 1121,
 "counts": {
-"frozen": 18,
-"offline": 3,
+"offline": 2,
+"frozen": 17,
 "placeholder": 2
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CMH/AlumCreek-Main.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/Broad-Waggoner.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/bethel-godown.jpg": "placeholder",
