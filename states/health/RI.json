@@ -1,11 +1,12 @@
 {
-"checked_at": "2026-09-15T22:28:40Z",
+"checked_at": "2026-09-16T13:02:21Z",
 "cameras": 135,
 "counts": {
 "offline": 4,
-"placeholder": 5
+"placeholder": 6
 },
 "status": {
+"https://www.dot.ri.gov/img/travel/camimages/1-03%20Rt%201%20N%20%40%20Rt%20403%20Devils%20Foot%20Road.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/1-04%20Rt%201%20N%20%40%20Rt%20138%20North%20Kingstown.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/138_32.9_W_CAM%20Admiral%20Kalbfus%20at%20Halsey%20St.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
