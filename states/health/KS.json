@@ -1,17 +1,16 @@
 {
-"checked_at": "2026-09-17T18:10:42Z",
+"checked_at": "2026-09-17T22:13:56Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 1,
-"placeholder": 25
+"frozen": 2,
+"placeholder": 26
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/Image-I470andWanamaker.jpg": "frozen",
+"https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
-"https://kscam.carsprogram.org/snapshots/GEN_3-070-0620-2-I-70atMingoExit62.jpeg": "placeholder",
-"https://kscam.carsprogram.org/snapshots/GEN_4-400-4565-2-US-400atUS-166.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-015-0731-2-K-15&MACARTHURRD.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-135-0110-2-I-135NOK-96.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-235-0039-2-I-235atWestSt.jpeg": "placeholder",
@@ -27,7 +26,9 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-68.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K070WBIPC-71.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K635NBC-14.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M035NBC-22.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M035SBC-01.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M049SBIPC-42.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0021-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0022-LQ.jpg": "placeholder",
@@ -37,6 +38,7 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0046-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0047-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0048-LQ.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0049-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTVKS0016-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTVKS0026-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTVKS0036-LQ.jpg": "placeholder",
