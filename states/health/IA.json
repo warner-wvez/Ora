@@ -1,16 +1,12 @@
 {
-"checked_at": "2026-09-16T22:04:46Z",
+"checked_at": "2026-09-17T18:07:19Z",
 "cameras": 1240,
 "counts": {
 "offline": 141,
 "frozen": 1
 },
 "status": {
-"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/80TV214hd.jpeg": "offline",
-"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/80TV215hd.jpeg": "offline",
-"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/80TV217hd.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/80tv022hd.jpeg": "offline",
-"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/80tv096hd.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/amtv17hd.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/crtv49hd.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/crtv50hd.jpeg": "offline",
@@ -19,7 +15,12 @@
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/dmtv050qlb.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/dmtv100hd.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/dqtv20lb.jpeg": "offline",
+"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/dqtv22lb.jpeg": "offline",
+"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/dqtv23lb.jpeg": "offline",
+"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/dqtv24lb.jpeg": "offline",
+"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/dqtv25lb.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/iwz204lb.jpeg": "offline",
+"https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/iwz3101lb.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/iwz3172lb.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/iwz3173lb.jpeg": "offline",
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/iwz3197lb.jpeg": "offline",
@@ -101,7 +102,6 @@
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_36-01.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_36-02.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_36-03.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_38-00.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_38-01.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_38-02.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/public/RWIS/RWIS_38-04.jpg": "offline",
