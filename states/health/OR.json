@@ -1,10 +1,11 @@
 {
-"checked_at": "2026-09-17T18:25:17Z",
+"checked_at": "2026-09-17T22:32:25Z",
 "cameras": 1127,
 "counts": {
-"frozen": 1
+"frozen": 2
 },
 "status": {
+"https://tripcheck.com/RoadCams/cams/Stafford Rd at Ek Rd S_pid3766.JPG": "frozen",
 "https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen"
 }
 }

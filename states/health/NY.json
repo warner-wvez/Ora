@@ -1,12 +1,13 @@
 {
-"checked_at": "2026-09-17T18:20:04Z",
+"checked_at": "2026-09-17T22:22:54Z",
 "cameras": 1864,
 "counts": {
-"placeholder": 152
+"placeholder": 150
 },
 "status": {
 "https://511ny.org/map/Cctv/2114": "placeholder",
 "https://511ny.org/map/Cctv/2115": "placeholder",
+"https://511ny.org/map/Cctv/2121": "placeholder",
 "https://511ny.org/map/Cctv/3260": "placeholder",
 "https://511ny.org/map/Cctv/3261": "placeholder",
 "https://511ny.org/map/Cctv/3277": "placeholder",
@@ -19,6 +20,7 @@
 "https://511ny.org/map/Cctv/3442": "placeholder",
 "https://511ny.org/map/Cctv/3477": "placeholder",
 "https://511ny.org/map/Cctv/3557": "placeholder",
+"https://511ny.org/map/Cctv/3579": "placeholder",
 "https://511ny.org/map/Cctv/4": "placeholder",
 "https://511ny.org/map/Cctv/4227": "placeholder",
 "https://511ny.org/map/Cctv/4283": "placeholder",
@@ -29,6 +31,7 @@
 "https://511ny.org/map/Cctv/4384": "placeholder",
 "https://511ny.org/map/Cctv/4404": "placeholder",
 "https://511ny.org/map/Cctv/4435": "placeholder",
+"https://511ny.org/map/Cctv/4440": "placeholder",
 "https://511ny.org/map/Cctv/4449": "placeholder",
 "https://511ny.org/map/Cctv/4457": "placeholder",
 "https://511ny.org/map/Cctv/4474": "placeholder",
@@ -59,7 +62,6 @@
 "https://511ny.org/map/Cctv/4770": "placeholder",
 "https://511ny.org/map/Cctv/4774": "placeholder",
 "https://511ny.org/map/Cctv/4780": "placeholder",
-"https://511ny.org/map/Cctv/4790": "placeholder",
 "https://511ny.org/map/Cctv/4793": "placeholder",
 "https://511ny.org/map/Cctv/4846": "placeholder",
 "https://511ny.org/map/Cctv/4850": "placeholder",
@@ -67,7 +69,6 @@
 "https://511ny.org/map/Cctv/4865": "placeholder",
 "https://511ny.org/map/Cctv/4893": "placeholder",
 "https://511ny.org/map/Cctv/4907": "placeholder",
-"https://511ny.org/map/Cctv/4919": "placeholder",
 "https://511ny.org/map/Cctv/4923": "placeholder",
 "https://511ny.org/map/Cctv/4925": "placeholder",
 "https://511ny.org/map/Cctv/4935": "placeholder",
@@ -78,11 +79,11 @@
 "https://511ny.org/map/Cctv/5023": "placeholder",
 "https://511ny.org/map/Cctv/5025": "placeholder",
 "https://511ny.org/map/Cctv/5056": "placeholder",
+"https://511ny.org/map/Cctv/5074": "placeholder",
 "https://511ny.org/map/Cctv/5086": "placeholder",
 "https://511ny.org/map/Cctv/5088": "placeholder",
-"https://511ny.org/map/Cctv/5095": "placeholder",
 "https://511ny.org/map/Cctv/5096": "placeholder",
-"https://511ny.org/map/Cctv/5105": "placeholder",
+"https://511ny.org/map/Cctv/5106": "placeholder",
 "https://511ny.org/map/Cctv/5185": "placeholder",
 "https://511ny.org/map/Cctv/5276": "placeholder",
 "https://511ny.org/map/Cctv/5290": "placeholder",
@@ -96,7 +97,6 @@
 "https://511ny.org/map/Cctv/5354": "placeholder",
 "https://511ny.org/map/Cctv/5360": "placeholder",
 "https://511ny.org/map/Cctv/5406": "placeholder",
-"https://511ny.org/map/Cctv/5415": "placeholder",
 "https://511ny.org/map/Cctv/5443": "placeholder",
 "https://511ny.org/map/Cctv/5444": "placeholder",
 "https://511ny.org/map/Cctv/5451": "placeholder",
@@ -118,7 +118,6 @@
 "https://511ny.org/map/Cctv/5656": "placeholder",
 "https://511ny.org/map/Cctv/5662": "placeholder",
 "https://511ny.org/map/Cctv/5665": "placeholder",
-"https://511ny.org/map/Cctv/5680": "placeholder",
 "https://511ny.org/map/Cctv/5681": "placeholder",
 "https://511ny.org/map/Cctv/5727": "placeholder",
 "https://511ny.org/map/Cctv/5743": "placeholder",
@@ -129,7 +128,6 @@
 "https://511ny.org/map/Cctv/5857": "placeholder",
 "https://511ny.org/map/Cctv/5858": "placeholder",
 "https://511ny.org/map/Cctv/5870": "placeholder",
-"https://511ny.org/map/Cctv/5878": "placeholder",
 "https://511ny.org/map/Cctv/5879": "placeholder",
 "https://511ny.org/map/Cctv/5880": "placeholder",
 "https://511ny.org/map/Cctv/5881": "placeholder",
@@ -141,7 +139,6 @@
 "https://511ny.org/map/Cctv/5975": "placeholder",
 "https://511ny.org/map/Cctv/5980": "placeholder",
 "https://511ny.org/map/Cctv/5989": "placeholder",
-"https://511ny.org/map/Cctv/7175": "placeholder",
 "https://511ny.org/map/Cctv/7181": "placeholder",
 "https://511ny.org/map/Cctv/7221": "placeholder",
 "https://511ny.org/map/Cctv/7240": "placeholder",
@@ -156,6 +153,7 @@
 "https://511ny.org/map/Cctv/9460": "placeholder",
 "https://511ny.org/map/Cctv/9461": "placeholder",
 "https://511ny.org/map/Cctv/9462": "placeholder",
-"https://511ny.org/map/Cctv/9464": "placeholder"
+"https://511ny.org/map/Cctv/9464": "placeholder",
+"https://511ny.org/map/Cctv/9472": "placeholder"
 }
 }
