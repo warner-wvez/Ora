@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-16T22:08:36Z",
+"checked_at": "2026-09-17T18:11:46Z",
 "cameras": 159,
 "counts": {
 "frozen": 1,
-"placeholder": 54
+"placeholder": 49
 },
 "status": {
 "https://www.maineturnpike.com/cameras/Andro_River.jpg": "frozen",
@@ -16,7 +16,6 @@
 "https://www.newengland511.org/map/Cctv/2092": "placeholder",
 "https://www.newengland511.org/map/Cctv/2094": "placeholder",
 "https://www.newengland511.org/map/Cctv/2095": "placeholder",
-"https://www.newengland511.org/map/Cctv/2098": "placeholder",
 "https://www.newengland511.org/map/Cctv/2102": "placeholder",
 "https://www.newengland511.org/map/Cctv/2108": "placeholder",
 "https://www.newengland511.org/map/Cctv/2112": "placeholder",
@@ -28,21 +27,17 @@
 "https://www.newengland511.org/map/Cctv/2128": "placeholder",
 "https://www.newengland511.org/map/Cctv/2130": "placeholder",
 "https://www.newengland511.org/map/Cctv/2132": "placeholder",
-"https://www.newengland511.org/map/Cctv/2134": "placeholder",
 "https://www.newengland511.org/map/Cctv/2135": "placeholder",
 "https://www.newengland511.org/map/Cctv/2136": "placeholder",
 "https://www.newengland511.org/map/Cctv/2137": "placeholder",
 "https://www.newengland511.org/map/Cctv/2144": "placeholder",
 "https://www.newengland511.org/map/Cctv/2149": "placeholder",
-"https://www.newengland511.org/map/Cctv/2150": "placeholder",
 "https://www.newengland511.org/map/Cctv/2156": "placeholder",
 "https://www.newengland511.org/map/Cctv/2167": "placeholder",
 "https://www.newengland511.org/map/Cctv/2176": "placeholder",
 "https://www.newengland511.org/map/Cctv/2177": "placeholder",
-"https://www.newengland511.org/map/Cctv/2225": "placeholder",
 "https://www.newengland511.org/map/Cctv/2230": "placeholder",
 "https://www.newengland511.org/map/Cctv/2232": "placeholder",
-"https://www.newengland511.org/map/Cctv/2233": "placeholder",
 "https://www.newengland511.org/map/Cctv/2237": "placeholder",
 "https://www.newengland511.org/map/Cctv/2238": "placeholder",
 "https://www.newengland511.org/map/Cctv/2240": "placeholder",
@@ -57,7 +52,7 @@
 "https://www.newengland511.org/map/Cctv/2304": "placeholder",
 "https://www.newengland511.org/map/Cctv/2305": "placeholder",
 "https://www.newengland511.org/map/Cctv/2306": "placeholder",
-"https://www.newengland511.org/map/Cctv/2316": "placeholder",
+"https://www.newengland511.org/map/Cctv/2313": "placeholder",
 "https://www.newengland511.org/map/Cctv/2320": "placeholder",
 "https://www.newengland511.org/map/Cctv/2324": "placeholder",
 "https://www.newengland511.org/map/Cctv/2330": "placeholder"
