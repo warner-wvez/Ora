@@ -1,9 +1,8 @@
 {
-"checked_at": "2026-09-18T12:23:21Z",
+"checked_at": "2026-09-18T17:28:19Z",
 "cameras": 1918,
 "counts": {
-"offline": 37,
-"frozen": 5
+"offline": 44
 },
 "status": {
 "/images/icon-camera-closed-fill-solid-padded.svg": "offline",
@@ -19,7 +18,6 @@
 "https://public.carsprogram.org/cameras/MN/C30003": "offline",
 "https://public.carsprogram.org/cameras/MN/C30004": "offline",
 "https://public.carsprogram.org/cameras/MN/C30028": "offline",
-"https://public.carsprogram.org/cameras/MN/C30030": "offline",
 "https://public.carsprogram.org/cameras/MN/C30032": "offline",
 "https://public.carsprogram.org/cameras/MN/C30040": "offline",
 "https://public.carsprogram.org/cameras/MN/C30041": "offline",
@@ -38,15 +36,18 @@
 "https://public.carsprogram.org/cameras/MN/C420": "offline",
 "https://public.carsprogram.org/cameras/MN/C5157": "offline",
 "https://public.carsprogram.org/cameras/MN/C5158": "offline",
-"https://public.carsprogram.org/cameras/MN/C608": "frozen",
+"https://public.carsprogram.org/cameras/MN/C608": "offline",
+"https://public.carsprogram.org/cameras/MN/C641": "offline",
 "https://public.carsprogram.org/cameras/MN/C646": "offline",
+"https://public.carsprogram.org/cameras/MN/C771": "offline",
 "https://public.carsprogram.org/cameras/MN/C792": "offline",
-"https://public.carsprogram.org/cameras/MN/C9003": "frozen",
+"https://public.carsprogram.org/cameras/MN/C856": "offline",
+"https://public.carsprogram.org/cameras/MN/C9003": "offline",
 "https://public.carsprogram.org/cameras/MN/C902": "offline",
-"https://public.carsprogram.org/cameras/MN/C9041": "frozen",
+"https://public.carsprogram.org/cameras/MN/C9041": "offline",
 "https://public.carsprogram.org/cameras/MN/C9081": "offline",
-"https://public.carsprogram.org/cameras/MN/C9426": "frozen",
+"https://public.carsprogram.org/cameras/MN/C9426": "offline",
 "https://public.carsprogram.org/cameras/MN/D6-C093": "offline",
-"https://public.carsprogram.org/cameras/MN/D6-C109": "frozen"
+"https://public.carsprogram.org/cameras/MN/D6-C109": "offline"
 }
 }
