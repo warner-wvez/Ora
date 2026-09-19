@@ -1,13 +1,12 @@
 {
-"checked_at": "2026-09-18T22:03:23Z",
+"checked_at": "2026-09-19T12:12:19Z",
 "cameras": 1121,
 "counts": {
-"offline": 4,
+"offline": 2,
 "frozen": 17,
 "placeholder": 2
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/bethel-godown.jpg": "placeholder",
@@ -18,7 +17,6 @@
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2040.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",

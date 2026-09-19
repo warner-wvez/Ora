@@ -1,15 +1,14 @@
 {
-"checked_at": "2026-09-18T21:53:36Z",
+"checked_at": "2026-09-19T12:03:21Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 2,
-"placeholder": 27
+"frozen": 1,
+"placeholder": 26
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/Image-I470andWanamaker.jpg": "frozen",
-"https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3008-2-K-96NorthofUS-54N.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3009-2-K-96NorthofUS-54S.jpeg": "placeholder",
@@ -29,7 +28,6 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K070WBIPC-71.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K635NBC-14.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M035SBC-01.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M049SBIPC-42.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0021-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0022-LQ.jpg": "placeholder",
