@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-19T12:02:49Z",
+"checked_at": "2026-09-19T16:49:44Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 468,
-"offline": 16,
-"frozen": 134
+"placeholder": 470,
+"frozen": 134,
+"offline": 15
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -39,10 +39,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Plainfield-Naperville_4172580_-8816750_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Plainfield-Naperville_4172580_-8816750_1_N.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Plainfield-Naperville_4172580_-8816750_1_S.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Plainfield-Naperville_4172580_-8816750_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_St-Charles_4188980_-8800850_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_St-Charles_4188980_-8800850_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_St-Charles_4188980_-8800850_1_S.jpg": "placeholder",
@@ -117,7 +113,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NB_IL-53-Local_4204698_-8802925_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4177672_-8783951_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4178043_-8783539_1_NONE.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4178475_-8782943_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4179538_-8781836_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4158749_-8772759_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4159614_-8771628_1_NONE.jpg": "placeholder",
@@ -593,6 +588,8 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_22_@_IL_59_(SE)_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_22_@_IL_59_(SE)_(Wireless)_cctv_North_Leg.jpg": "placeholder",
@@ -624,6 +621,10 @@
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hart_(Cell)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hart_(Cell)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_West_Leg.jpg": "placeholder"
+"https://www.lakecountypassage.com/snapshots/US_14_@_Hillside_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Wilson_@_Nippersink_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Wilson_@_Nippersink_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Wilson_@_Nippersink_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Wilson_@_Nippersink_cctv_West_Leg.jpg": "placeholder"
 }
 }

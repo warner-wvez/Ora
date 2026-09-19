@@ -1,14 +1,15 @@
 {
-"checked_at": "2026-09-19T12:03:21Z",
+"checked_at": "2026-09-19T16:50:20Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 1,
+"frozen": 2,
 "placeholder": 26
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/Image-I470andWanamaker.jpg": "frozen",
+"https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3008-2-K-96NorthofUS-54N.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3009-2-K-96NorthofUS-54S.jpeg": "placeholder",
