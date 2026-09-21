@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-19T15:58:52Z",
+"checked_at": "2026-09-21T21:29:10Z",
 "cameras": 678,
 "counts": {
-"placeholder": 81
+"placeholder": 84
 },
 "status": {
 "https://az511.com/map/Cctv/1010": "placeholder",
@@ -12,8 +12,8 @@
 "https://az511.com/map/Cctv/1027": "placeholder",
 "https://az511.com/map/Cctv/1035": "placeholder",
 "https://az511.com/map/Cctv/1041": "placeholder",
+"https://az511.com/map/Cctv/1042": "placeholder",
 "https://az511.com/map/Cctv/1068": "placeholder",
-"https://az511.com/map/Cctv/1069": "placeholder",
 "https://az511.com/map/Cctv/1072": "placeholder",
 "https://az511.com/map/Cctv/1116": "placeholder",
 "https://az511.com/map/Cctv/1117": "placeholder",
@@ -23,10 +23,10 @@
 "https://az511.com/map/Cctv/1215": "placeholder",
 "https://az511.com/map/Cctv/1217": "placeholder",
 "https://az511.com/map/Cctv/1219": "placeholder",
-"https://az511.com/map/Cctv/1226": "placeholder",
 "https://az511.com/map/Cctv/1248": "placeholder",
 "https://az511.com/map/Cctv/1250": "placeholder",
 "https://az511.com/map/Cctv/1259": "placeholder",
+"https://az511.com/map/Cctv/1260": "placeholder",
 "https://az511.com/map/Cctv/1358": "placeholder",
 "https://az511.com/map/Cctv/1422": "placeholder",
 "https://az511.com/map/Cctv/1435": "placeholder",
@@ -84,7 +84,10 @@
 "https://az511.com/map/Cctv/873": "placeholder",
 "https://az511.com/map/Cctv/876": "placeholder",
 "https://az511.com/map/Cctv/893": "placeholder",
+"https://az511.com/map/Cctv/894": "placeholder",
 "https://az511.com/map/Cctv/903": "placeholder",
-"https://az511.com/map/Cctv/943": "placeholder"
+"https://az511.com/map/Cctv/943": "placeholder",
+"https://az511.com/map/Cctv/977": "placeholder",
+"https://az511.com/map/Cctv/979": "placeholder"
 }
 }

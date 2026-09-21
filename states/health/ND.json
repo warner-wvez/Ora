@@ -1,18 +1,13 @@
 {
-"checked_at": "2026-09-19T16:56:27Z",
+"checked_at": "2026-09-21T22:30:56Z",
 "cameras": 798,
 "counts": {
 "offline": 7,
-"placeholder": 35
+"placeholder": 30
 },
 "status": {
-"https://www.dot.nd.gov/travel-info/cameras/I29RP1StateLineSBCenter.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/I29RP1StateLineSBNorth.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/I29RP1StateLineSBPavement.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/I29RP1StateLineSBSouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94MileRP213TappenWest.jpg": "offline",
-"https://www.dot.nd.gov/travel-info/cameras/I94RP119Hailstoneeast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenCenter.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenEast.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenPavement.jpg": "offline",
@@ -28,10 +23,6 @@
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamEast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamPavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND200RP177GarrisonDamWest.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/ND200RP231GoldenValleyCenter.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/ND200RP231GoldenValleyEast.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/ND200RP231GoldenValleyPavement.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/ND200RP231GoldenValleyWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleeCenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleeNorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND22RP6BuffaloCouleePavement.jpg": "placeholder",
@@ -42,6 +33,10 @@
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeNorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgePavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/marmarthcenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/marmartheast.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/marmarthpavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/marmarthwest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/whiteshieldcenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/whiteshieldeast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/whiteshieldpavement.jpg": "placeholder",
