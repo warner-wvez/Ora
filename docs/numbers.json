@@ -1,0 +1,12 @@
+{
+  "states_covered": 49,
+  "cameras": 46107,
+  "video_states": 20,
+  "cameras_down": 6188,
+  "health": {
+    "placeholder": 5049,
+    "frozen": 704,
+    "offline": 435
+  },
+  "last_sweep": "2026-09-19 17:14 UTC"
+}
