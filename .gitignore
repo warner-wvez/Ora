@@ -11,3 +11,14 @@
 spike/train/
 spike/live/
 spike/yolov8m.mlpackage/
+
+# Python bytecode from running the builders locally.
+__pycache__/
+*.pyc
+
+# Planning notes between sessions (specs, plans, handoffs) stay on this machine.
+# The repo carries decisions as ADRs in docs/6-decisions/, not the drafts.
+docs/superpowers/
+
+# The docs generator's output, if it is ever rendered locally.
+docs-site/
