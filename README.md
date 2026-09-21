@@ -12,6 +12,10 @@ feeds.
 **Live at [warner-wvez.github.io/Ora](https://warner-wvez.github.io/Ora/)**. Read the
 [docs](docs/1-overview.md).
 
+![The coverage overview: a counted pin on every covered state](docs/docs-assets/coverage-overview.jpg)
+
+![A camera popup in Seattle with the direction chip and the measured refresh rate](docs/docs-assets/camera-popup.jpg)
+
 ## What it covers today
 
 <!-- numbers:start -->
