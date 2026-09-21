@@ -14,7 +14,7 @@ import requests
 from PIL import Image
 import numpy as np
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent  # the repo root, where states/ lives
 FRAMES = ROOT / "spike" / "frames"
 FRAMES.mkdir(parents=True, exist_ok=True)
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/126 Safari/537.36"

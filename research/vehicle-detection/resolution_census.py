@@ -14,7 +14,7 @@ from concurrent.futures import ThreadPoolExecutor
 import requests
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent  # the repo root, where states/ lives
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/126 Safari/537.36"
 PER_STATE = int(sys.argv[1]) if len(sys.argv) > 1 else 4
 EXTRA = {"IL": ROOT / "cameras.json", "NYC": ROOT / "cameras-nyc.json"}
