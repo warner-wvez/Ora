@@ -1,0 +1,175 @@
+#!/usr/bin/perl
+# commit-voice: global commit-msg gate for every repo on this Mac.
+# Rules come from refactoringenglish.com/excerpts/commit-messages and Warner's written voice.
+# Writer's guide: docs/7-contributing.md
+# Tests:          ~/.git-hooks/test-commit-msg.sh
+# Turn off:       git config --global commit-voice.enabled false   (or per repo without --global)
+#                 COMMIT_VOICE=off git commit ...                    (one commit)
+use strict; use warnings; use utf8;
+binmode STDERR, ':encoding(UTF-8)';
+
+my $file = $ARGV[0] or exit 0;
+my $test = $ENV{COMMIT_VOICE_TEST} ? 1 : 0;
+
+exit 0 if (($ENV{COMMIT_VOICE} // '') eq 'off');
+unless ($test) {
+  my $enabled = `git config --get commit-voice.enabled 2>/dev/null` // ''; chomp $enabled;
+  exit 0 if $enabled eq 'false';
+}
+
+# ---- read the message, drop comment lines and anything after the scissors line
+open(my $fh, '<:encoding(UTF-8)', $file) or exit 0;
+my @raw = <$fh>; close $fh;
+# ---- strip AI co-author trailers and generator lines (Claude, Cursor, Copilot, Codex, Gemini).
+# Warner's repos never list an AI as a contributor; the message is rewritten without these lines.
+my $ai_trailer = qr/^(?:Co-Authored-By|Co-authored-by):.*(?:claude|anthropic|cursor|copilot|codex|openai|gemini)|Generated with \[Claude Code\]|^Claude-Session:/i;
+my $stripped = 0;
+my @lines;
+for (@raw) { chomp; last if /^# -{8,} >8 -{8,}/; next if /^#/; if ($_ =~ $ai_trailer) { $stripped++; next } push @lines, $_; }
+shift @lines while @lines && $lines[0] =~ /^\s*$/;
+my $title = $lines[0] // '';
+exit 0 if $title eq '';                       # git rejects an empty message on its own
+
+my $exempt = ($title =~ /^(Merge |Revert "|fixup! |squash! )/) ? 1 : 0;
+
+# ---- split body and trailers
+my @rest = @lines > 1 ? @lines[1 .. $#lines] : ();
+pop @rest while @rest && $rest[-1] =~ /^\s*$/;
+my $blank_after_title = (!@rest) || ($rest[0] =~ /^\s*$/);
+my @trailers;
+while (@rest && $rest[-1] =~ /^[A-Za-z][A-Za-z-]*: \S/) { unshift @trailers, pop @rest; }
+pop @rest while @rest && $rest[-1] =~ /^\s*$/;
+my @body = grep { !/^\s*$/ } @rest;
+
+# ---- staged diff size (COMMIT_VOICE_DIFF="lines files" overrides, used by tests)
+my ($dlines, $dfiles) = (0, 0);
+if (defined $ENV{COMMIT_VOICE_DIFF}) {
+  ($dlines, $dfiles) = split ' ', $ENV{COMMIT_VOICE_DIFF};
+} else {
+  for (`git diff --cached --numstat 2>/dev/null`) {
+    my ($a, $d) = split /\t/;
+    $dfiles++;
+    $dlines += (($a // '') =~ /^\d+$/ ? $a : 0) + (($d // '') =~ /^\d+$/ ? $d : 0);
+  }
+}
+
+my @fail;
+sub fail { push @fail, [@_] }
+
+unless ($exempt) {
+  # T1 title length
+  my $len = length $title;
+  fail('T1', "title is $len chars, max 72. Move detail and numbers into the body.", "got: \"$title\"") if $len > 72;
+
+  # T2 title shape: area: Effect
+  if ($title !~ /^[a-z0-9][a-z0-9._\/-]*: [A-Z]/) {
+    fail('T2', 'title must be "area: Effect in plain words" (lowercase area, colon, capitalized effect).',
+         "got: \"$title\"",
+         'ok:  "jobs-board: Stop counting pref-only YoE over 12 as passing"');
+  } else {
+    my ($effect) = $title =~ /^[^:]*: (.*)$/;
+    my @w = split ' ', ($effect // '');
+    fail('T2', 'the effect needs at least three words that say what changed for the reader.', "got: \"$title\"") if @w < 3;
+  }
+
+  # T3 stacked changes and metric noise in the title
+  my @t3;
+  push @t3, 'ends with a period'                                   if $title =~ /\.$/;
+  push @t3, 'stacks changes with ";"'                              if $title =~ /;/;
+  push @t3, 'contains "->"'                                        if $title =~ /->/;
+  push @t3, 'contains "%"'                                         if $title =~ /%/;
+  push @t3, 'contains a metric pair like 81.7/78.5'                if $title =~ /\d+(?:\.\d+)?\/\d+(?:\.\d+)?/;
+  push @t3, 'is marked WIP'                                        if $title =~ /\bwip\b/i;
+  fail('T3', 'title ' . join(', ', @t3) . '. The title carries the effect; numbers and pairs go in the body.', "got: \"$title\"") if @t3;
+
+  # B1 body required for a real change
+  if (!@body && ($dlines > 20 || $dfiles > 2)) {
+    fail('B1', "body missing for a real change ($dfiles files, $dlines lines). Say what changed for the reader, why, the numbers, and any refs (#12, abc1234).");
+  }
+  # B2 blank line between title and body
+  fail('B2', 'put one blank line between the title and the body.') if @rest && !$blank_after_title;
+}
+
+# ---- prose = message minus fenced code, indented blocks, backtick spans, URLs, trailers
+my @prose; my $in_fence = 0;
+for my $l ($title, @rest) {
+  if ($l =~ /^\s*```/) { $in_fence = !$in_fence; next; }
+  next if $in_fence;
+  next if $l =~ /^(?: {4}|\t)/;
+  (my $p = $l) =~ s/`[^`]*`//g;
+  $p =~ s/https?:\/\/\S+//g;
+  push @prose, $p;
+}
+my $prose = join "\n", @prose;
+
+# M1 dashes and emoji
+my @m1;
+push @m1, 'an em dash or en dash (use a comma, colon, or period)' if $prose =~ /[\x{2014}\x{2013}]/;
+push @m1, 'an emoji'                                              if $prose =~ /[\x{1F000}-\x{1FAFF}\x{2600}-\x{27BF}\x{FE0F}]/;
+fail('M1', 'message contains ' . join(' and ', @m1) . '.') if @m1;
+
+# B3 file-list bullets
+my $filebullets = grep { /^\s*[-*]\s+\S+\.(?:py|js|jsx|ts|tsx|md|json|ya?ml|css|html|csv|sh|txt|sql|toml|cfg|ini)\b/ } @body;
+fail('B3', "$filebullets bullets start with a file name. The diff already lists files; say what changed and why instead.") if $filebullets >= 2;
+
+# V1 generic AI phrasing and third person
+my @ai = (
+  qr/\bdelv(?:e|es|ed|ing)\b/i, qr/\bleverag(?:e|es|ed|ing)\b/i, qr/\bseamless(?:ly)?\b/i, qr/\brobust(?:ly|ness)?\b/i,
+  qr/\bcomprehensive(?:ly)?\b/i, qr/\bstreamlin(?:e|es|ed|ing)\b/i, qr/\butiliz(?:e|es|ed|ing)\b/i, qr/\bcutting-edge\b/i,
+  qr/\bgame-chang(?:er|ing)\b/i, qr/\bit(?:'s| is) worth noting\b/i, qr/\bin order to\b/i, qr/\bmoreover\b/i,
+  qr/\bfurthermore\b/i, qr/\badditionally,/i, qr/\bcrucial(?:ly)?\b/i, qr/\bpivotal\b/i, qr/\btapestry\b/i,
+  qr/\belevat(?:e|es|ed|ing)\b/i, qr/\bempower(?:s|ed|ing)?\b/i, qr/\bholistic\b/i, qr/\bsynergy\b/i,
+  qr/\bin today's\b/i, qr/\bdive into\b/i, qr/\bdeep dive\b/i, qr/\bthis commit\b/i, qr/\bthis PR\b/i,
+  qr/\bWarner(?:'s)?\b/,
+);
+my @hits;
+for my $re (@ai) { while ($prose =~ /($re)/g) { push @hits, $1 } }
+if (@hits) {
+  my %seen; my @u = grep { !$seen{lc $_}++ } @hits;
+  fail('V1', 'reads like generic AI output or third person: ' . join(', ', map { "\"$_\"" } @u) . '. Say it plainly, first person.');
+}
+
+# V2 spoken fillers that belong in voice memos, not written work
+my @fill = (qr/\bbasically\b/i, qr/\bessentially\b/i, qr/\bliterally\b/i, qr/\band stuff\b/i, qr/\bwhatnot\b/i,
+            qr/\bkinda\b/i, qr/\bgonna\b/i, qr/\bsort of\b/i, qr/\bkind of\b/i);
+my @fhits;
+for my $re (@fill) { while ($prose =~ /($re)/g) { push @fhits, $1 } }
+if (@fhits) {
+  my %seen; my @u = grep { !$seen{lc $_}++ } @fhits;
+  fail('V2', 'spoken filler in written work: ' . join(', ', map { "\"$_\"" } @u) . '. Cut it or say the exact thing.');
+}
+
+if (@fail) {
+  my $n = scalar @fail;
+  print STDERR "commit-voice: rejected ($n rule" . ($n == 1 ? '' : 's') . "). Your message is saved in .git/COMMIT_EDITMSG.\n";
+  for my $f (@fail) {
+    my ($id, $msg, @det) = @$f;
+    print STDERR "  $id  $msg\n";
+    print STDERR "      $_\n" for @det;
+  }
+  print STDERR <<'END';
+Format:  area: Effect in plain words          (72 chars max; area = jobs-board, ui, engine, docs, ...)
+         <blank line>
+         What changed for the reader and why. Numbers here, insider terms expanded, refs (#12, abc1234).
+Guide:   docs/7-contributing.md      Fix the message and commit again.
+END
+  exit 1;
+}
+
+# ---- write the message back without the AI trailer lines
+if ($stripped) {
+  my @out = @lines;
+  pop @out while @out && $out[-1] =~ /^\s*$/;
+  if (open(my $wh, '>:encoding(UTF-8)', $file)) { print $wh join("\n", @out), "\n"; close $wh; }
+}
+
+# ---- chain to a repo-local hook if the repo has one
+unless ($test) {
+  my $gitdir = `git rev-parse --git-dir 2>/dev/null` // ''; chomp $gitdir;
+  my $local = "$gitdir/hooks/commit-msg";
+  if ($gitdir ne '' && -x $local) {
+    my $me = (stat($0))[1] // 0; my $them = (stat($local))[1] // -1;
+    if ($me != $them) { system($local, $file); exit($? >> 8); }
+  }
+}
+exit 0;
