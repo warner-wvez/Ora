@@ -8,7 +8,8 @@
    28.2
   ],
   "zoom": 6,
-  "video": true
+  "video": true,
+  "relay": "https://relay.wvez.org/fl"
  },
  "GA": {
   "name": "Georgia",

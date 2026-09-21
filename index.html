@@ -434,6 +434,15 @@ const snapKey = (u)=>{ const i=u.indexOf('?'); if(i<0) return u; const q=u.slice
 // with the cache buster inside the proxied URL so the proxy refetches the origin instead of caching.
 const wsrv = (u)=> !u ? '' : 'https://wsrv.nl/?url=' + encodeURIComponent(u.replace(/^https?:\/\//,'') + (u.includes('?')?'&':'?') + 't=' + Date.now());
 const snapFor = (s)=> s.imgproxy==='wsrv' ? ((d)=>wsrv(d.snapshot)) : ((d)=>cb(d.snapshot));
+// Florida's stream host (divas.cloud) answers only requests that carry fl511.com's own Referer plus
+// a per-camera token minted through fl511.com, which no page on another origin can send. A state
+// flagged with a relay in states/index.json plays through it: the stored URL stays the agency's own
+// (the data, the health key, and the docs all key on it) and the rewrite to
+// <relay>/<imageId>/<host>/<chan>/index.m3u8 happens only here, at play time, the imgproxy pattern.
+const RELAY_DIVAS=/^https:\/\/dis-(se\d+)\.divas\.cloud:8200\/(chan-[\w]+)\/index\.m3u8$/;
+const videoFor = (cfg, d)=>{ if(!d||!d.video) return null; if(!cfg||!cfg.relay) return d.video;
+  const m=RELAY_DIVAS.exec(d.video), id=/\/map\/Cctv\/(\d+)/.exec(d.snapshot||'');
+  return (m&&id) ? `${cfg.relay}/${id[1]}/${m[1]}/${m[2]}/index.m3u8` : d.video; };
 const LAYERS = {
   'il-cam':  { kind:'live', name:'Illinois', file:'cameras.json', center:[-88.5,41.6], zoom:8, refreshMs:30000, hasVideo:false, count:1328, snap:(d)=>cb(d.snapshot), age:'source updates every 1–10 min' },
   'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, count:957, snap:(d)=> d.camId ? `https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}` : '', age:'refreshes every 2s' },
@@ -800,7 +809,7 @@ function playDir(dir, cfg, el, token){
     const vid=el.querySelector('#popup-vid');
     watchRes(vid, el, RES_VIDEO, resKey(dir));
     popupHls=new Hls({maxBufferLength:8, startFragPrefetch:true, maxMaxBufferLength:20});
-    popupHls.loadSource(dir.video); popupHls.attachMedia(vid);
+    popupHls.loadSource(videoFor(cfg, dir)); popupHls.attachMedia(vid);
     popupHls.on(Hls.Events.FRAG_LOADED,()=>{ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; }
       if(!wrap.classList.contains('ready')){ wrap.classList.add('ready'); watchLiveness(vid,wrap); } }); // video fades in over the poster
     // keep the poster snapshot on failure, but stop the badge insisting it is live
@@ -958,7 +967,7 @@ function buildEnlarge({dir, cfg, props}){
     const v=ov.querySelector('video');
     watchRes(v, ov, RES_VIDEO, resKey(dir));
     v.addEventListener('loadeddata', ready); v.addEventListener('playing', ready);
-    hls=new Hls({maxBufferLength:8, maxMaxBufferLength:20}); hls.loadSource(dir.video); hls.attachMedia(v);
+    hls=new Hls({maxBufferLength:8, maxMaxBufferLength:20}); hls.loadSource(videoFor(cfg, dir)); hls.attachMedia(v);
     // a dead stream can attach and never paint; stop the spin and say so rather than spin forever
     timer=setTimeout(()=>{ if(!ov.classList.contains('media-ready')) showEnlargeFail(ov,'This camera is not answering right now'); }, 15000);
   } else {
@@ -1382,10 +1391,10 @@ function applyStatus(k, data){
   cfg.deadCount=deadViews;
 }
 // warm TCP/TLS to the snapshot + video hosts so the first click connects instantly (no feed fetched)
-function preconnectFor(data){
+function preconnectFor(data, cfg){
   const hosts=new Set();
   for(const f of data.features.slice(0,60)){ const d=f.properties.directions?.[0]||{};
-    [d.snapshot,d.video].forEach(u=>{ if(u){ try{ hosts.add(new URL(u).origin); }catch(e){} } }); }
+    [d.snapshot, videoFor(cfg, d)].forEach(u=>{ if(u){ try{ hosts.add(new URL(u).origin); }catch(e){} } }); }
   hosts.forEach(origin=>{ if(document.querySelector(`link[data-pc="${CSS.escape(origin)}"]`)) return;
     const l=document.createElement('link'); l.rel='preconnect'; l.href=origin; l.crossOrigin=''; l.dataset.pc=origin; document.head.appendChild(l); });
 }
@@ -1419,7 +1428,7 @@ async function enableLayer(k,fly=true){
   const chk=document.querySelector(`.lyr input[data-layer="${k}"]`); if(chk) chk.checked=true; syncMaster();
   if(fly) map.easeTo({center:cfg.center,zoom:cfg.zoom,duration:700});
   if(cfg.kind==='live'){
-    preconnectFor(data);
+    preconnectFor(data, cfg);
     // pins paint right away; the health sweep greys the dead ones a moment later, off the critical path
     loadHealth(k,data).then(h=>{ if(h){ scheduleCamsRebuild(); setCount(); } });
   }
@@ -1927,7 +1936,7 @@ map.on('load', async ()=>{
   // inject states from index
   try{
     const idx=await (await fetch('states/index.json')).json();
-    Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, count:s.count, snap:snapFor(s), age: s.video?'live video where available':'snapshot, updates every few min' }; });
+    Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, count:s.count, snap:snapFor(s), relay:s.relay||null, age: s.video?'live video where available':'snapshot, updates every few min' }; });
   }catch(e){ console.warn('states index failed', e); }
   renderCamList(); renderRouteList(); buildCoverage();
 
