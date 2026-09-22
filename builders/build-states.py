@@ -143,6 +143,10 @@ def main():
     want={c.upper() for c in sys.argv[1:]}
     todo={k:v for k,v in STATES.items() if not want or k in want}
     if want-set(STATES): raise SystemExit(f'unknown state(s): {sorted(want-set(STATES))}')
+    # How a locked state is played (Florida's relay, Texas's self-signing) is decided by hand and
+    # written on the index entry, not derivable from the feed. A rebuild replaces the entry, so
+    # these ride along or the state silently goes dark the next time it is rebuilt.
+    def carry_playback(prev): return {k:prev[k] for k in ('relay','sign') if prev and k in prev}
     # merge, never clobber: California, Texas, Washington and the rest live in here too
     index=json.load(open('states/index.json')) if os.path.exists('states/index.json') else {}
     def run(item):
@@ -162,7 +166,8 @@ def main():
         for code,cfg,n,vids,err in ex.map(run, todo.items()):
             if err: print(f'  [FAIL] {code}: {err}'); continue
             index[code]={'name':cfg['name'],'file':f'states/{code}.json','count':n,
-                         'center':cfg['center'],'zoom':cfg['zoom'],'video':vids>0}
+                         'center':cfg['center'],'zoom':cfg['zoom'],'video':vids>0,
+                         **carry_playback(index.get(code))}
             print(f'  {code:7} {cfg["name"]:22} {n:5} cams  {vids:5} with live video')
     json.dump(index, open('states/index.json','w'), indent=1)
     print(f'\nwrote states/index.json ({len(index)} states, {sum(v["count"] for v in index.values())} cameras)')
