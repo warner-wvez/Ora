@@ -1,15 +1,16 @@
 {
-"checked_at": "2026-09-21T22:34:12Z",
+"checked_at": "2026-09-22T05:59:45Z",
 "cameras": 1121,
 "counts": {
-"offline": 2,
-"frozen": 31
+"offline": 3,
+"frozen": 32
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D05/SR-204_at_Taylor_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/Dayton/I-75_at_Pennyroyal_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/747_Hutzleman.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV072a-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
@@ -19,6 +20,7 @@
 "https://itscameras.dot.state.oh.us/images/artimis/SR-747_Tylersville_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR747-Union.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-675_at_Yankee_St.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/dayton/I-70_at_West_of_US-40.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/dayton/SR-725_at_Southwind_Dr.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",

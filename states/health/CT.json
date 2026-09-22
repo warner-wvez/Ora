@@ -1,10 +1,12 @@
 {
-"checked_at": "2026-09-21T21:35:30Z",
+"checked_at": "2026-09-22T04:59:59Z",
 "cameras": 347,
 "counts": {
-"placeholder": 4
+"placeholder": 6
 },
 "status": {
+"https://ctroads.org/map/Cctv/562": "placeholder",
+"https://ctroads.org/map/Cctv/563": "placeholder",
 "https://ctroads.org/map/Cctv/601": "placeholder",
 "https://ctroads.org/map/Cctv/611": "placeholder",
 "https://ctroads.org/map/Cctv/616": "placeholder",
