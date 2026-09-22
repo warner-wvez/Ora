@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-22T17:54:53Z",
+"checked_at": "2026-09-22T22:11:39Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 10,
+"frozen": 4,
 "placeholder": 26
 },
 "status": {
@@ -11,13 +11,7 @@
 "https://kscam.carsprogram.org/D6_Jct_K4_K23_E.jpg": "frozen",
 "https://kscam.carsprogram.org/Image-I470andWanamaker.jpg": "frozen",
 "https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
-"https://kscam.carsprogram.org/KDOT_123015_IMAGE002.JPG": "frozen",
-"https://kscam.carsprogram.org/KDOT_540005_IMAGE001.JPG": "frozen",
-"https://kscam.carsprogram.org/KDOT_541000_IMAGE001.JPG": "frozen",
-"https://kscam.carsprogram.org/KDOT_541005_IMAGE001.JPG": "frozen",
-"https://kscam.carsprogram.org/KDOT_543002_IMAGE001.JPG": "frozen",
-"https://kscam.carsprogram.org/KDOT_573001_IMAGE001.JPG": "frozen",
-"https://kscam.carsprogram.org/KDOT_573001_IMAGE002.JPG": "frozen",
+"https://kscam.carsprogram.org/KDOT_543005_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2990-2-I-70atJunctionCityexit299.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3008-2-K-96NorthofUS-54N.jpeg": "placeholder",
