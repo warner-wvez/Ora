@@ -7,6 +7,10 @@ commits are not listed.
 ## 2026-09
 
 ### Added
+- Pennsylvania video plays again, 1,303 streams through the relay. Its lock is Florida's,
+  a per-camera token plus the agency's own `Referer`, so the relay grew a second state:
+  a path keyed by state, a per-state token cache and rate-limit backoff, and a simpler
+  mint with no session to warm.
 - Texas video plays again. TxDOT's lock turned out to be a token in the query string, not
   a header, so the map mints it in the browser and plays drivetexas.org's host direct:
   3,426 cameras, no relay, no VPS bandwidth. The token expires mid-playback, so a signed

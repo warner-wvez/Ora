@@ -42,7 +42,8 @@
    40.9
   ],
   "zoom": 6.5,
-  "video": true
+  "video": true,
+  "relay": "https://relay.wvez.org/pa"
  },
  "NC": {
   "name": "North Carolina",

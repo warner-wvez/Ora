@@ -439,10 +439,14 @@ const snapFor = (s)=> s.imgproxy==='wsrv' ? ((d)=>wsrv(d.snapshot)) : ((d)=>cb(d
 // flagged with a relay in states/index.json plays through it: the stored URL stays the agency's own
 // (the data, the health key, and the docs all key on it) and the rewrite to
 // <relay>/<imageId>/<host>/<chan>/index.m3u8 happens only here, at play time, the imgproxy pattern.
-const RELAY_DIVAS=/^https:\/\/dis-(se\d+)\.divas\.cloud:8200\/(chan-[\w]+)\/index\.m3u8$/;
+// Both relayed states are the same vendor platform, so one pattern covers them: a regional
+// stream host, a channel folder, index.m3u8. Florida is dis-<seN>.divas.cloud, Pennsylvania
+// is pa-<seN>.arcadis-ivds.com. The camera id comes from the snapshot URL, which is
+// .../map/Cctv/<id> on both, and is what each agency's own token endpoint takes.
+const RELAY_HLS=/^https:\/\/(?:dis-(se\d+)\.divas\.cloud|pa-(se\d+)\.arcadis-ivds\.com):8200\/(chan-[\w]+)\/index\.m3u8$/;
 const videoFor = (cfg, d)=>{ if(!d||!d.video) return null; if(!cfg||!cfg.relay) return d.video;
-  const m=RELAY_DIVAS.exec(d.video), id=/\/map\/Cctv\/(\d+)/.exec(d.snapshot||'');
-  return (m&&id) ? `${cfg.relay}/${id[1]}/${m[1]}/${m[2]}/index.m3u8` : d.video; };
+  const m=RELAY_HLS.exec(d.video), id=/\/map\/Cctv\/(\d+)/.exec(d.snapshot||'');
+  return (m&&id) ? `${cfg.relay}/${id[1]}/${m[1]||m[2]}/${m[3]}/index.m3u8` : d.video; };
 
 /* Texas locks its SkyVDN streams with a JWT in the query string, but unlike Florida it asks for
    nothing a browser cannot send: no cookie, no Referer, no anti-forgery header. Both TxDOT's token
