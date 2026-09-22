@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-22T05:59:45Z",
+"checked_at": "2026-09-22T12:34:06Z",
 "cameras": 1121,
 "counts": {
-"offline": 3,
+"offline": 2,
 "frozen": 32
 },
 "status": {
@@ -20,7 +20,6 @@
 "https://itscameras.dot.state.oh.us/images/artimis/SR-747_Tylersville_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR747-Union.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/dayton/I-675_at_Yankee_St.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/dayton/I-70_at_West_of_US-40.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/dayton/SR-725_at_Southwind_Dr.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
