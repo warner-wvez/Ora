@@ -28,6 +28,7 @@ The one missing state is New Jersey, whose feeds cannot be played from a static 
 | See whether Chicago's ticket cameras sit on real danger | [Chicago tickets](2.2-chicago-tickets.md) |
 | Know where a state's cameras come from and what they give | [Sources](3-sources.md) |
 | Understand how dead cameras are found | [Camera health](4-camera-health.md) |
+| See why Florida plays through a relay | [The stream relay](1.4-stream-relay.md) |
 | Run it or rebuild a state on my machine | [Run locally](1.3-run-locally.md) |
 | Read the shape of a state file | [Data format](1.2-data-format.md) |
 | See why a decision was made | [Decisions](6-decisions.md) |
@@ -57,7 +58,8 @@ The one missing state is New Jersey, whose feeds cannot be played from a static 
 | Layer | What |
 |---|---|
 | Map | [MapLibre GL JS](https://maplibre.org/) 4.7 with [MapTiler](https://www.maptiler.com/) streets-v2 tiles, Esri World Imagery for satellite, supercluster for clustering |
-| Video | [hls.js](https://github.com/video-dev/hls.js) 1.5 playing agencies' HLS streams straight from the browser |
+| Video | [hls.js](https://github.com/video-dev/hls.js) 1.5 playing agencies' HLS streams straight from the browser; Florida through the [relay](1.4-stream-relay.md) |
+| Relay | Node 20, no dependencies, one Docker container on the VPS behind Traefik at relay.wvez.org |
 | Data | One GeoJSON file per state in `states/`, an index, and a health verdict file per snapshot state |
 | Builders | Python 3.12, standard library only, one script per feed under `builders/` |
 | Checks | GitHub Actions: the camera health sweep every six hours, the docs check on every push |
@@ -75,6 +77,7 @@ Ora/
 ├── states-outline.json # State boundaries for the coverage overview
 ├── builders/           # One Python script per feed; each writes states/<CODE>.json
 ├── scripts/            # The health sweep, the refresh-rate measurement, the docs check, the numbers refresh
+├── relay/              # The stream relay for locked hosts (Florida), runs on the VPS
 ├── research/           # The vehicle-detection spike: scripts, report, evidence frames
 ├── docs/               # These pages, numbered
 └── .github/workflows/  # camera-health.yml (every 6 h) and docs.yml (every push)

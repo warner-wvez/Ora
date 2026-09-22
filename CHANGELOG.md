@@ -7,6 +7,10 @@ commits are not listed.
 ## 2026-09
 
 ### Added
+- The stream relay: Florida's host began refusing any browser not on fl511.com, so a
+  150-line Node service on the VPS fetches those streams with fl511's headers and the map
+  plays them through it. Florida is live again; the 4,325 stored URLs are unchanged
+  (430d84c, a7a2084).
 - A license (PolyForm Noncommercial 1.0.0), a security policy that explains the two
   public keys, a code of conduct, and an environment example (c8daada, 2fc6815, 8455d96).
 - Numbered docs with one page per state feed, twelve decision records, and a checker that

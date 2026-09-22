@@ -22,3 +22,4 @@ time.
 | 0010 | [Off-the-shelf vehicle detection is not shipped](6-decisions/0010-vehicle-detection-not-shipped.md) | 2026-07-13 | Accepted |
 | 0011 | [The state outline is never the primary in-or-out filter](6-decisions/0011-outline-is-not-a-filter.md) | 2026-07-11 | Accepted |
 | 0012 | [The repo is organised to production grade](6-decisions/0012-production-grade-repo-cleanup.md) | 2026-09-21 | Accepted |
+| 0013 | [A locked stream is relayed through the VPS rather than dropped](6-decisions/0013-relay-for-locked-streams.md) | 2026-09-21 | Accepted |

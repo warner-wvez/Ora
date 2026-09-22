@@ -67,6 +67,7 @@ Ora/
 ├── states-outline.json # State boundaries for the coverage overview
 ├── builders/           # One Python script per feed; each writes states/<CODE>.json
 ├── scripts/            # Health sweep, refresh-rate measurement, docs check, numbers refresh
+├── relay/              # Stream relay for hosts that lock out other origins (Florida), runs on the VPS
 ├── research/           # The vehicle-detection spike: scripts, report, evidence
 ├── docs/               # Numbered docs, one page per state feed, decision records
 └── .github/workflows/  # camera-health.yml every 6 h, docs.yml on every push
@@ -77,7 +78,7 @@ Ora/
 | Layer | What |
 |---|---|
 | Map | MapLibre GL JS with MapTiler streets-v2 tiles, Esri World Imagery for satellite, supercluster |
-| Video | hls.js playing the agencies' HLS streams straight from the browser |
+| Video | hls.js playing the agencies' HLS streams straight from the browser; Florida through a small relay on the VPS ([why](docs/1.4-stream-relay.md)) |
 | Data | Static GeoJSON per state, committed; health verdicts committed by a bot every six hours |
 | Builders | Python 3.12, standard library only, one script per feed |
 | Hosting | GitHub Pages from the root of `main` |
