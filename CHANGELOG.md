@@ -7,6 +7,11 @@ commits are not listed.
 ## 2026-09
 
 ### Added
+- Texas video plays again. TxDOT's lock turned out to be a token in the query string, not
+  a header, so the map mints it in the browser and plays drivetexas.org's host direct:
+  3,426 cameras, no relay, no VPS bandwidth. The token expires mid-playback, so a signed
+  player restamps every request and waits out the ~19s per 300s when TxDOT has no valid
+  token at all.
 - The stream relay: Florida's host began refusing any browser not on fl511.com, so a
   150-line Node service on the VPS fetches those streams with fl511's headers and the map
   plays them through it. Florida is live again; the 4,325 stored URLs are unchanged
@@ -23,6 +28,11 @@ commits are not listed.
 - Commit history rewritten once: AI co-author trailers removed from 78 commits and the two
   handoff files removed from every commit. Planning notes stay local (578ade9).
 - The health bot's commit message follows the same shape as every other commit (d6d3c56).
+
+### Fixed
+- Rebuilding a state no longer drops how its video is played. `build-states.py` rewrote an
+  index entry wholesale, so `python3 builders/build-states.py FL` would have silently
+  removed Florida's `relay` and taken it dark with no error.
 
 ## 2026-07
 

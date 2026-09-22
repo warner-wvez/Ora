@@ -75,8 +75,10 @@ def main():
     os.makedirs('states', exist_ok=True)
     json.dump({'type': 'FeatureCollection', 'features': feats}, open('states/TX.json', 'w'))
     idx = json.load(open('states/index.json')) if os.path.exists('states/index.json') else {}
+    # sign:'tx' is how the map knows to mint TxDOT's stream token at play time. It is a decision,
+    # not something the feed reports, so a rebuild must keep it or every Texas camera goes dark.
     idx['TX'] = {'name': 'Texas', 'file': 'states/TX.json', 'count': len(feats),
-                 'center': [-99.3, 31.3], 'zoom': 5.4, 'video': True}
+                 'center': [-99.3, 31.3], 'zoom': 5.4, 'video': True, 'sign': 'tx'}
     json.dump(idx, open('states/index.json', 'w'), indent=1)
     print(f'Texas: {len(feats)} cameras ({skipped} skipped)')
 

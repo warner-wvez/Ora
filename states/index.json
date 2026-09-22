@@ -262,7 +262,8 @@
    31.3
   ],
   "zoom": 5.4,
-  "video": true
+  "video": true,
+  "sign": "tx"
  },
  "WA": {
   "name": "Washington",

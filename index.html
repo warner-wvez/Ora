@@ -443,6 +443,112 @@ const RELAY_DIVAS=/^https:\/\/dis-(se\d+)\.divas\.cloud:8200\/(chan-[\w]+)\/inde
 const videoFor = (cfg, d)=>{ if(!d||!d.video) return null; if(!cfg||!cfg.relay) return d.video;
   const m=RELAY_DIVAS.exec(d.video), id=/\/map\/Cctv\/(\d+)/.exec(d.snapshot||'');
   return (m&&id) ? `${cfg.relay}/${id[1]}/${m[1]}/${m[2]}/index.m3u8` : d.video; };
+
+/* Texas locks its SkyVDN streams with a JWT in the query string, but unlike Florida it asks for
+   nothing a browser cannot send: no cookie, no Referer, no anti-forgery header. Both TxDOT's token
+   API and the stream host answer Access-Control-Allow-Origin *, so a state flagged sign:'tx' needs
+   no relay at all — the page signs the stored URL itself at play time and plays direct.
+
+   The token is not minted on demand. It is a stored column on the MapLarge table behind
+   drivetexas.org, which TxDOT rebuilds about every 300s, and the token it carries also lives 300s.
+   Three measured facts shape the code below:
+     - one token opens every camera, across cities and across stream hosts, so the whole state
+       needs a single token rather than a per-camera mint;
+     - a token's age falls monotonically down the table, so the last row carries the freshest one
+       and signing costs two small requests (~900 bytes) instead of the 738KB full table;
+     - the version that is currently active can still hand out a token that has already expired,
+       for roughly the last 19s of each cycle, and an expired token is a hard 401. So a sign that
+       comes back dead waits for the next rebuild instead of opening a player certain to fail. */
+const TX_STREAM=/^https:\/\/s\d+\.us-east-1\.skyvdn\.com\/rtplive\/TX_[A-Z]+_\d+\/playlist\.m3u8$/;
+const TX_ML='https://dtx-e-cdn.maplarge.com', TX_TABLE='appgeo/cameraPoint';
+const TX_FRESH_MS=20000;                                  // sign only with this much life left
+const txTok={value:null, exp:0, rows:0, pending:null};
+const txRow=(table,start)=>`${TX_ML}/Api/ProcessDirect?request=`+encodeURIComponent(JSON.stringify(
+  {action:'table/query', query:{sqlselect:['httpsurl'], start, take:1, table:{name:table}}}));
+const txExpOf=(t)=>{ const p=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
+  return JSON.parse(atob(p+'='.repeat((4-p.length%4)%4))).exp; };
+async function txReadToken(){
+  const j=async(u)=>{ const r=await fetch(u,{cache:'no-store'}); if(!r.ok) throw new Error('tx sign '+r.status); return r.json(); };
+  // the active version is part of the query, and asking for a stale one returns stale tokens,
+  // so it is re-resolved on every refresh rather than cached
+  const table=(await j(`${TX_ML}/Remote/GetActiveTableID?shortTableId=${encodeURIComponent(TX_TABLE)}`)).table;
+  if(!table) throw new Error('tx sign: no active table');
+  if(!txTok.rows){                                        // row count only moves when TxDOT adds cameras
+    const first=await j(txRow(table,0));
+    txTok.rows=(((first.data||{}).totals||{}).Records)|0;
+  }
+  const last=await j(txRow(table, Math.max(0, txTok.rows-1)));
+  const url=((((last.data||{}).data||{}).httpsurl)||[])[0]||'';
+  const m=/[?&]token=([\w.-]+)/.exec(url);
+  if(!m) { txTok.rows=0; throw new Error('tx sign: no token in row'); }   // table reshaped: recount next time
+  txTok.value=m[1]; txTok.exp=txExpOf(m[1])*1000;
+  return txTok;
+}
+// resolves to a signed URL, or null if Texas stayed dead for the whole wait (the caller then
+// says so rather than spinning). Concurrent callers share one in-flight refresh.
+async function txSign(url, waitMs=25000){
+  const start=Date.now();
+  for(;;){
+    if(!txTok.value || txTok.exp-Date.now() < TX_FRESH_MS){
+      try{
+        txTok.pending = txTok.pending || txReadToken().finally(()=>{ txTok.pending=null; });
+        await txTok.pending;
+      }catch(e){ if(Date.now()-start > waitMs) throw e; }
+    }
+    if(txTok.value && txTok.exp-Date.now() >= TX_FRESH_MS) return `${url}?token=${txTok.value}`;
+    if(Date.now()-start > waitMs) return null;
+    await new Promise(r=>setTimeout(r, 2000));
+    txTok.value=null;                                     // drop the dead one; the version may have rolled
+  }
+}
+// the one place a stored stream URL becomes a URL a player can open
+async function resolveVideo(cfg, d){
+  const u=videoFor(cfg, d);
+  if(!u || !cfg || cfg.sign!=='tx' || !TX_STREAM.test(u)) return u;
+  return txSign(u);
+}
+/* Signing once is not enough for Texas. The token is stamped into the playlist, the chunklist and
+   every segment URL, and it is not re-stamped on the way down, so a stream that started fine stops
+   the moment the token expires (measured: a chunklist 401s 18s past exp). Worse, a token cannot
+   simply be renewed early — the next one does not exist until TxDOT rebuilds the table, which
+   leaves roughly 19s in every 300s cycle when no live token exists at all. TxDOT's own site has
+   the same gap. So a Texas player rewrites the token on every request, keeps it as fresh as the
+   table allows, and rides out the gap instead of declaring the camera dead. */
+const TX_GAP_MS=70000;                                    // outlast the no-valid-token gap before giving up
+let txTicker=null, txHolders=0;
+function txHold(){
+  if(++txHolders===1 && !txTicker) txTicker=setInterval(()=>{
+    if(txTok.exp-Date.now() < 60000) txReadToken().catch(()=>{});
+  }, 15000);
+}
+function txRelease(){ if(--txHolders<=0){ txHolders=0; if(txTicker){ clearInterval(txTicker); txTicker=null; } } }
+// hls.js bakes the URL it was handed into every later request, so the token is swapped at load time
+function txLoader(){
+  const Base=Hls.DefaultConfig.loader;
+  return class extends Base {
+    load(context, config, callbacks){
+      if(txTok.value) context.url=String(context.url).replace(/([?&]token=)[\w.-]+/, '$1'+txTok.value);
+      return super.load(context, config, callbacks);
+    }
+  };
+}
+const txConfig=()=>({loader: txLoader()});
+// returns a teardown; onDead fires only once the gap has been given its full chance
+function txWatch(hls, onDead){
+  txHold();
+  let gapSince=0, retry=null, done=false;
+  const stop=()=>{ if(done) return; done=true; if(retry) clearTimeout(retry); txRelease(); };
+  hls.on(Hls.Events.FRAG_LOADED, ()=>{ gapSince=0; });
+  hls.on(Hls.Events.ERROR, (e,d)=>{
+    if(done || !d.fatal) return;
+    if(d.type!==Hls.ErrorTypes.NETWORK_ERROR){ stop(); onDead(); return; }
+    if(!gapSince) gapSince=Date.now();
+    if(Date.now()-gapSince > TX_GAP_MS){ stop(); onDead(); return; }
+    txReadToken().catch(()=>{});                          // the rebuild may have landed
+    retry=setTimeout(()=>{ if(!done) try{ hls.startLoad(); }catch(err){ stop(); onDead(); } }, 4000);
+  });
+  return stop;
+}
 const LAYERS = {
   'il-cam':  { kind:'live', name:'Illinois', file:'cameras.json', center:[-88.5,41.6], zoom:8, refreshMs:30000, hasVideo:false, count:1328, snap:(d)=>cb(d.snapshot), age:'source updates every 1–10 min' },
   'nyc-cam': { kind:'live', name:'New York City', file:'cameras-nyc.json', center:[-73.95,40.75], zoom:11, refreshMs:2000, hasVideo:false, count:957, snap:(d)=> d.camId ? `https://webcams.nyctmc.org/api/cameras/${d.camId}/image?t=${Date.now()}` : '', age:'refreshes every 2s' },
@@ -483,7 +589,7 @@ const store = {
 };
 /* derived caches and media resources — owned by lifecycles below, not UI state */
 const dataCache={}, bound=new Set(), created=new Set();
-let enfMeta=null, popup=null, popupHls=null, popupWatch=null, popupLive=null, popupTimer=null, hoverTip=null, restoring=false, selToken=0;
+let enfMeta=null, popup=null, popupHls=null, popupWatch=null, popupLive=null, popupTimer=null, popupUnwatch=null, hoverTip=null, restoring=false, selToken=0;
 let searchIndex=[], kbdIdx=-1, searchHits=[];
 
 const US_VIEW={ center:[-96,38.5], zoom:3.7 };
@@ -625,7 +731,7 @@ function wireSheet(){
 /* ---------- live popup (snapshot or HLS video) ---------- */
 // one media owner, one teardown path: clears the snapshot interval, the liveness/watch
 // timers and the HLS instance. Everything that starts media must route its timer here.
-function destroyPopupHls(){ if(popupTimer){ clearInterval(popupTimer); popupTimer=null; } if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } if(popupLive){ clearTimeout(popupLive); popupLive=null; } if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
+function destroyPopupHls(){ if(popupTimer){ clearInterval(popupTimer); popupTimer=null; } if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } if(popupLive){ clearTimeout(popupLive); popupLive=null; } if(popupUnwatch){ try{popupUnwatch();}catch(e){} popupUnwatch=null; } if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
 // video only plays where the state's stream host allows cross-origin playback; that
 // fact lives in the view's status ('live'), computed once in applyStatus
 function canPlayVideo(dir, cfg){
@@ -808,16 +914,28 @@ function playDir(dir, cfg, el, token){
   if(live){
     const vid=el.querySelector('#popup-vid');
     watchRes(vid, el, RES_VIDEO, resKey(dir));
-    popupHls=new Hls({maxBufferLength:8, startFragPrefetch:true, maxMaxBufferLength:20});
-    popupHls.loadSource(videoFor(cfg, dir)); popupHls.attachMedia(vid);
+    const signed=cfg.sign==='tx';
+    popupHls=new Hls({maxBufferLength:8, startFragPrefetch:true, maxMaxBufferLength:20, ...(signed?txConfig():{})});
+    const mine=popupHls;                                  // the signing hop below can outlive this selection
+    popupHls.attachMedia(vid);
     popupHls.on(Hls.Events.FRAG_LOADED,()=>{ if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; }
       if(!wrap.classList.contains('ready')){ wrap.classList.add('ready'); watchLiveness(vid,wrap); } }); // video fades in over the poster
-    // keep the poster snapshot on failure, but stop the badge insisting it is live
-    popupHls.on(Hls.Events.ERROR,(e,d)=>{ if(d.fatal){ destroyPopupHls(); markNotLive(wrap); } });
-    // a dead SkyVDN stream stalls without hls.js ever reporting a fatal error. Roughly 5% of
-    // streams are down, and behind a poster that reads as a live camera that has simply stopped
-    // moving, which is the whole complaint. Watch every video camera, poster or not.
-    popupWatch=setTimeout(()=>{ if(!wrap.classList.contains('ready')){ destroyPopupHls(); markNotLive(wrap); } }, 12000);
+    // keep the poster snapshot on failure, but stop the badge insisting it is live. A signed state
+    // rides out its token gap first, so a five-minute-old Texas stream is not called dead.
+    if(signed) popupUnwatch=txWatch(popupHls, ()=>{ destroyPopupHls(); markNotLive(wrap); });
+    else popupHls.on(Hls.Events.ERROR,(e,d)=>{ if(d.fatal){ destroyPopupHls(); markNotLive(wrap); } });
+    // signing is a network hop for Texas and immediate everywhere else; either way the stall
+    // watchdog starts once there is a source to watch, so a slow sign is not read as a dead camera
+    const stale=()=>!selectionAlive(token) || popupHls!==mine;
+    resolveVideo(cfg, dir).then(src=>{
+      if(stale()) return;
+      if(!src){ destroyPopupHls(); markNotLive(wrap); return; }
+      mine.loadSource(src);
+      // a dead SkyVDN stream stalls without hls.js ever reporting a fatal error. Roughly 5% of
+      // streams are down, and behind a poster that reads as a live camera that has simply stopped
+      // moving, which is the whole complaint. Watch every video camera, poster or not.
+      popupWatch=setTimeout(()=>{ if(!wrap.classList.contains('ready')){ destroyPopupHls(); markNotLive(wrap); } }, 12000);
+    }).catch(()=>{ if(!stale()){ destroyPopupHls(); markNotLive(wrap); } });
   } else {
     const img=el.querySelector('#popup-img'); if(img) img.src=cfg.snap(dir);
   }
@@ -911,8 +1029,9 @@ function openEnlarge(dir, cfg, props){
 function closeEnlarge(){ if(store.mode==='media-enlarged') switchMode(modeCtx.returnTo.name, {...modeCtx.returnTo.ctx, resume:true}); }
 function teardownEnlarge(immediate){
   if(!enlargeState) return;
-  const {ov, hls, timer, onkey}=enlargeState;
+  const {ov, hls, timer, onkey, unwatch}=enlargeState;
   if(timer) clearInterval(timer);
+  if(unwatch){ try{ unwatch(); }catch(e){} }
   if(hls){ try{ hls.destroy(); }catch(e){} }
   document.removeEventListener('keydown', onkey);
   // cycling swaps overlays in place, so the old one leaves at once; a real close fades out
@@ -961,15 +1080,24 @@ function buildEnlarge({dir, cfg, props}){
   ov.querySelectorAll('.enlarge-nav').forEach(b=>b.addEventListener('click',(e)=>{ e.stopPropagation(); cycleEnlarge(+b.dataset.cyc); }));
   // pause the selection's video so it is not decoding the same stream behind the overlay
   const cont0=selContainer(); const pv=cont0&&cont0.querySelector('#popup-vid'); if(pv) pv.pause();
-  let hls=null, timer=null;
+  let hls=null, timer=null, unwatch=null;
   const ready=()=>{ if(ov.isConnected) ov.classList.add('media-ready'); };   // first frame decoded: drop the spinner
   if(canVid){
     const v=ov.querySelector('video');
     watchRes(v, ov, RES_VIDEO, resKey(dir));
     v.addEventListener('loadeddata', ready); v.addEventListener('playing', ready);
-    hls=new Hls({maxBufferLength:8, maxMaxBufferLength:20}); hls.loadSource(videoFor(cfg, dir)); hls.attachMedia(v);
-    // a dead stream can attach and never paint; stop the spin and say so rather than spin forever
-    timer=setTimeout(()=>{ if(!ov.classList.contains('media-ready')) showEnlargeFail(ov,'This camera is not answering right now'); }, 15000);
+    const signed=cfg.sign==='tx';
+    hls=new Hls({maxBufferLength:8, maxMaxBufferLength:20, ...(signed?txConfig():{})}); hls.attachMedia(v);
+    const mine=hls;
+    if(signed) unwatch=txWatch(hls, ()=>{ if(ov.isConnected) showEnlargeFail(ov,'This camera is not answering right now'); });
+    resolveVideo(cfg, dir).then(src=>{
+      if(!ov.isConnected || (enlargeState && enlargeState.hls!==mine)) return;   // overlay closed or cycled while signing
+      if(!src){ showEnlargeFail(ov,'This camera is not answering right now'); return; }
+      mine.loadSource(src);
+      // a dead stream can attach and never paint; stop the spin and say so rather than spin forever
+      timer=setTimeout(()=>{ if(!ov.classList.contains('media-ready')) showEnlargeFail(ov,'This camera is not answering right now'); }, 15000);
+      if(enlargeState && enlargeState.hls===mine) enlargeState.timer=timer;
+    }).catch(()=>{ if(ov.isConnected) showEnlargeFail(ov,'This camera is not answering right now'); });
   } else {
     const im=ov.querySelector('img');
     watchRes(im, ov, RES_SNAP, resKey(dir));
@@ -985,7 +1113,7 @@ function buildEnlarge({dir, cfg, props}){
   };
   document.addEventListener('keydown', onkey);
   ov.addEventListener('click',(e)=>{ if(e.target===ov || e.target.closest('.enlarge-close')) closeEnlarge(); });
-  enlargeState={ov, hls, timer, onkey};
+  enlargeState={ov, hls, timer, onkey, unwatch};
 }
 
 /* ---------- enforcement popup ---------- */
@@ -1395,6 +1523,7 @@ function preconnectFor(data, cfg){
   const hosts=new Set();
   for(const f of data.features.slice(0,60)){ const d=f.properties.directions?.[0]||{};
     [d.snapshot, videoFor(cfg, d)].forEach(u=>{ if(u){ try{ hosts.add(new URL(u).origin); }catch(e){} } }); }
+  if(cfg.sign==='tx') hosts.add(TX_ML);                    // the token hop sits in front of the first frame
   hosts.forEach(origin=>{ if(document.querySelector(`link[data-pc="${CSS.escape(origin)}"]`)) return;
     const l=document.createElement('link'); l.rel='preconnect'; l.href=origin; l.crossOrigin=''; l.dataset.pc=origin; document.head.appendChild(l); });
 }
@@ -1936,7 +2065,7 @@ map.on('load', async ()=>{
   // inject states from index
   try{
     const idx=await (await fetch('states/index.json')).json();
-    Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, count:s.count, snap:snapFor(s), relay:s.relay||null, age: s.video?'live video where available':'snapshot, updates every few min' }; });
+    Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, count:s.count, snap:snapFor(s), relay:s.relay||null, sign:s.sign||null, age: s.video?'live video where available':'snapshot, updates every few min' }; });
   }catch(e){ console.warn('states index failed', e); }
   renderCamList(); renderRouteList(); buildCoverage();
 
