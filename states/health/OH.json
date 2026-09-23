@@ -1,11 +1,12 @@
 {
-"checked_at": "2026-09-23T12:36:50Z",
+"checked_at": "2026-09-23T17:55:02Z",
 "cameras": 1121,
 "counts": {
-"offline": 2,
-"frozen": 28
+"offline": 3,
+"frozen": 32
 },
 "status": {
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
@@ -14,6 +15,7 @@
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV072a-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-747_Tylersville_Quad.jpg": "frozen",
@@ -31,6 +33,9 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Montgomery_Crestview.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Montgomery_The_Village.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Merwin_Ten_Mile.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Thriftway.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Waterford.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_Smith_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/US-22_Columbia.jpg": "frozen",
