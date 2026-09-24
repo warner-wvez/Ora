@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-24T18:08:24Z",
+"checked_at": "2026-09-24T22:31:22Z",
 "cameras": 1121,
 "counts": {
-"offline": 2,
+"offline": 3,
 "frozen": 32
 },
 "status": {
@@ -39,6 +39,7 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/US-22_Columbia.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/US-22_Townsley.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Wood_NB-1.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
