@@ -1,8 +1,9 @@
 {
-"checked_at": "2026-09-24T13:07:39Z",
+"checked_at": "2026-09-24T18:23:02Z",
 "cameras": 2063,
 "counts": {
-"placeholder": 65
+"offline": 3,
+"placeholder": 64
 },
 "status": {
 "https://udottraffic.utah.gov/map/Cctv/112731": "placeholder",
@@ -27,12 +28,16 @@
 "https://udottraffic.utah.gov/map/Cctv/135793": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135816": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135942": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/136013": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136087": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136119": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136136": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136139": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136165": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136190": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/136211": "offline",
+"https://udottraffic.utah.gov/map/Cctv/136228": "offline",
+"https://udottraffic.utah.gov/map/Cctv/136231": "offline",
 "https://udottraffic.utah.gov/map/Cctv/136240": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136359": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136390": "placeholder",
@@ -53,7 +58,6 @@
 "https://udottraffic.utah.gov/map/Cctv/138106": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138120": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138138": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/138146": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138188": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138337": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138388": "placeholder",
@@ -65,7 +69,6 @@
 "https://udottraffic.utah.gov/map/Cctv/138525": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138561": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138596": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/138658": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138673": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138681": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138682": "placeholder",

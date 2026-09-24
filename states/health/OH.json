@@ -1,12 +1,11 @@
 {
-"checked_at": "2026-09-24T12:52:29Z",
+"checked_at": "2026-09-24T18:08:24Z",
 "cameras": 1121,
 "counts": {
-"offline": 4,
+"offline": 2,
 "frozen": 32
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
@@ -25,7 +24,6 @@
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D05/D05-032.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",

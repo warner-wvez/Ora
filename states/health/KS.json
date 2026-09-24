@@ -1,17 +1,19 @@
 {
-"checked_at": "2026-09-24T12:42:37Z",
+"checked_at": "2026-09-24T17:58:34Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 10,
-"placeholder": 23
+"frozen": 12,
+"placeholder": 28
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/D6_Jct_K4_K23_E.jpg": "frozen",
 "https://kscam.carsprogram.org/Image-I470andWanamaker.jpg": "frozen",
 "https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
+"https://kscam.carsprogram.org/KDOT_123015_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_540005_IMAGE001.JPG": "frozen",
+"https://kscam.carsprogram.org/KDOT_541000_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541000_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541005_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_543002_IMAGE001.JPG": "frozen",
@@ -23,6 +25,11 @@
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3008-2-K-96NorthofUS-54N.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3009-2-K-96NorthofUS-54S.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3011-2-K-96atUS-54.jpeg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-86.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-87.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-88.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBIPC-85.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBIPC-89.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-38.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBIPC-02A.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-22.jpg": "placeholder",
