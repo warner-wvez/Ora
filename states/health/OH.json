@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-23T22:26:24Z",
+"checked_at": "2026-09-24T12:52:29Z",
 "cameras": 1121,
 "counts": {
-"offline": 3,
+"offline": 4,
 "frozen": 32
 },
 "status": {
@@ -25,6 +25,7 @@
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/D05/D05-032.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D09/SR-159_Delano.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",

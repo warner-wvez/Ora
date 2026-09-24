@@ -3923,5 +3923,15 @@
   "sha": "d96dc8b9685eb428",
   "first_seen": "2026-09-23T22:41:03Z",
   "state": "WI"
+ },
+ "16880:1b12e52b62e0": {
+  "sha": "7a49c6503ecde8c6",
+  "first_seen": "2026-09-24T11:49:51Z",
+  "state": "CA"
+ },
+ "39980:3b96ff840bd5": {
+  "sha": "6a6063169db2e3a8",
+  "first_seen": "2026-09-24T13:04:17Z",
+  "state": "RI"
  }
 }
