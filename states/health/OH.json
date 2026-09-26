@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-26T06:05:44Z",
+"checked_at": "2026-09-26T12:32:01Z",
 "cameras": 1121,
 "counts": {
 "frozen": 29,
-"offline": 2,
+"offline": 4,
 "placeholder": 1
 },
 "status": {
@@ -15,10 +15,12 @@
 "https://itscameras.dot.state.oh.us/images/Dayton/I-75_at_Pennyroyal_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV072a-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/I-75_at_SR-562.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/cmh/US-23_at_Hyatts-Shanahan.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",

@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-09-26T05:56:22Z",
+"checked_at": "2026-09-26T12:22:18Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 12,
+"frozen": 13,
 "placeholder": 24
 },
 "status": {
@@ -13,6 +13,7 @@
 "https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/KDOT_123015_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_540005_IMAGE001.JPG": "frozen",
+"https://kscam.carsprogram.org/KDOT_541000_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541000_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541005_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_543002_IMAGE001.JPG": "frozen",
@@ -20,6 +21,7 @@
 "https://kscam.carsprogram.org/KDOT_573001_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_573001_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
+"https://kscam.carsprogram.org/snapshots/GEN_2-070-2750-2-I-70atAbileneExit275.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_2-070-2990-2-I-70atJunctionCityexit299.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3008-2-K-96NorthofUS-54N.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3009-2-K-96NorthofUS-54S.jpeg": "placeholder",
@@ -35,7 +37,6 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-58.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-60.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-68.jpg": "offline",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K635SBC-10.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M049SBIPC-30.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0021-LQ.jpg": "placeholder",
