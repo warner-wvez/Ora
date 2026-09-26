@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-26T12:22:18Z",
+"checked_at": "2026-09-26T17:21:03Z",
 "cameras": 591,
 "counts": {
 "offline": 8,
-"frozen": 13,
-"placeholder": 24
+"frozen": 12,
+"placeholder": 23
 },
 "status": {
 "": "offline",
@@ -12,7 +12,6 @@
 "https://kscam.carsprogram.org/Image-I470andWanamaker.jpg": "frozen",
 "https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/KDOT_123015_IMAGE002.JPG": "frozen",
-"https://kscam.carsprogram.org/KDOT_540005_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541000_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541000_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541005_IMAGE001.JPG": "frozen",
@@ -27,7 +26,6 @@
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3009-2-K-96NorthofUS-54S.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3011-2-K-96atUS-54.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-135-0110-2-I-135NOK-96.jpeg": "frozen",
-"https://kscam.carsprogram.org/snapshots/GEN_6-400-1193-2US-400atUS-56.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-38.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBIPC-02A.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-22.jpg": "placeholder",
