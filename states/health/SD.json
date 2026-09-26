@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-24T22:43:30Z",
+"checked_at": "2026-09-26T06:18:13Z",
 "cameras": 693,
 "counts": {
-"frozen": 9
+"frozen": 15
 },
 "status": {
 "https://sd.cdn.iteris-atis.com/camera_images/CSDKY2/0/latest.jpg": "frozen",
@@ -10,9 +10,15 @@
 "https://sd.cdn.iteris-atis.com/camera_images/CSDKY2/2/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/CSDKY2/3/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/CSDKY2/4/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/CSDRAL/0/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/CSDRAL/1/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/CSDRAL/2/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/CSDRAL/3/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/SDBTS/3/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/SDDEL/0/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/SDDEL/1/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/SDDEL/2/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/SDDEL/3/latest.jpg": "frozen"
+"https://sd.cdn.iteris-atis.com/camera_images/SDDEL/3/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/SDMRS/2/latest.jpg": "frozen"
 }
 }

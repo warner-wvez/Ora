@@ -1,24 +1,24 @@
 {
-"checked_at": "2026-09-24T22:31:22Z",
+"checked_at": "2026-09-26T06:05:44Z",
 "cameras": 1121,
 "counts": {
-"offline": 3,
-"frozen": 32
+"frozen": 29,
+"offline": 2,
+"placeholder": 1
 },
 "status": {
+"https://itscameras.dot.state.oh.us/images/CHI/CHI010.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/Sancus-WorthingtonWoods.jpg": "placeholder",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/Dayton/I-75_at_Pennyroyal_Rd.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/747_Hutzleman.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV072a-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/SR-747_Tylersville_Quad.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/SR747-Union.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2226.jpg": "frozen",
@@ -35,11 +35,9 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Merwin_Ten_Mile.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Thriftway.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Waterford.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_Smith_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Second_Elm.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/US-22_Columbia.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/US-22_Townsley.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Wood_NB-1.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
