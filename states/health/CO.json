@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-26T16:30:49Z",
+"checked_at": "2026-09-28T13:57:49Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
-"frozen": 38,
-"placeholder": 36
+"frozen": 37,
+"placeholder": 41
 },
 "status": {
 " https://cocam.carsprogram.org/Cellular/149N05430CAM1RHS-N.jpg": "offline",
@@ -47,7 +47,6 @@
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-N.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-S.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-W.jpg": "frozen",
-"https://cocam.carsprogram.org/Snapshots/006W25915CAM1RHS.flv.png": "frozen",
 "https://cocam.carsprogram.org/Snapshots/007N06750CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009N09290CAM1SEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/009S08735CAM1RHS.flv.png": "placeholder",
@@ -55,7 +54,10 @@
 "https://cocam.carsprogram.org/Snapshots/009S08920CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/024W28610CAM1SEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025N22030CAM1GP2.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/025S09400CAM1GP2.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/025S16080CAM1NEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S22910CAM1RP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E03920CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E05600CAM1ML1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036W04820CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036W05510CAM1ML1.flv.png": "placeholder",
@@ -81,6 +83,8 @@
 "https://cocam.carsprogram.org/Snapshots/121N01695CAM1NEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/121N01800CAM1NEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/128W00720CAM1NWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/160W23275CAM1NWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/224W00065CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/225S00845CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/470W02290CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/550E02135CAM1NEC.flv.png": "placeholder",
