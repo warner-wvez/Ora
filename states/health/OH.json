@@ -1,15 +1,14 @@
 {
-"checked_at": "2026-09-29T00:14:59Z",
+"checked_at": "2026-09-29T06:51:08Z",
 "cameras": 1121,
 "counts": {
-"offline": 3,
+"offline": 2,
 "frozen": 28
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CMH/Evaline-Karl.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/SR-315_at_Ackerman_Rd.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/US-33_at_Hamilton_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/Dayton/I-75_at_Pennyroyal_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
