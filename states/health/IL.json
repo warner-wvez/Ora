@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-09-29T06:40:50Z",
+"checked_at": "2026-09-29T13:37:46Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 481,
-"offline": 13,
-"frozen": 90
+"placeholder": 475,
+"frozen": 90,
+"offline": 12
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_75th_4175220_-8795443_1_E.jpg": "placeholder",
@@ -35,10 +35,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_Naper_4180260_-8811990_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_York_4197210_-8793970_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_York_4197210_-8793970_1_N.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_York_4197210_-8793970_1_S.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NB_York_4197210_-8793970_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_St-Charles_4188980_-8800850_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_St-Charles_4188980_-8800850_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NEB_St-Charles_4188980_-8800850_1_S.jpg": "placeholder",
@@ -91,10 +87,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Schick_4195180_-8815030_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Schick_4195180_-8815030_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Schick_4195180_-8815030_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Thorndale_4197600_-8793980_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Thorndale_4197600_-8793980_1_N.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Thorndale_4197600_-8793980_1_S.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_WB_Thorndale_4197600_-8793980_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187370_-8765083_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187371_-8765100_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Harrison_4187397_-8765102_1_NONE.jpg": "placeholder",
@@ -139,7 +131,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_EB_I-290_4190625_-8792395_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SEB_I-290_4194200_-8798801_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SWB_I-55_4175009_-8793150_1_NONE.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_WB_I-290_4195833_-8802558_1_NONE.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_EB_I-80_4151323_-8802721_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_EB_I-80_4155053_-8781258_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_EB_I-80_4155248_-8787003_1_NONE.jpg": "placeholder",
@@ -486,6 +477,8 @@
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_DuPage_NB_I-355-CASH_4173299_-8803389_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179840_-8828500_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179840_-8828500_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179960_-8826570_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179960_-8826570_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_2_Winnebago_NB_I-39_4231810_-8896400_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_2_Winnebago_NB_I-39_4231810_-8896400_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_EB_IL-56_4181315_-8827932_1_NONE.jpg": "frozen",
