@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-29T13:35:12Z",
+"checked_at": "2026-09-29T22:49:35Z",
 "cameras": 1240,
 "counts": {
-"offline": 164,
+"offline": 162,
 "frozen": 1
 },
 "status": {
@@ -65,7 +65,6 @@
 "https://atmsqf.iowadot.gov/snapshots/Public/RWIS/RWIS_74-00.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RWIS/RWIS_8-04.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RWIS/RWIS_9-02.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/Public/RWIS/RWIS_90-01.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RWIS/RWIS_96-01.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA35NB212-Entrance.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA35NB212-Exit.jpg": "offline",
@@ -79,7 +78,6 @@
 "https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80WB148-01-CENTER.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80WB148-01-ENTRY.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80WB148-01-EXIT.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80WB208-01-Parking.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/Rural/D6TV03.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/Rural/D6TV03Q.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/WWD/WWDDMTT05.jpg": "offline",
