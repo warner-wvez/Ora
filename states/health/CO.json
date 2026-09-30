@@ -1,5 +1,5 @@
 {
-"checked_at": "2026-09-30T12:38:36Z",
+"checked_at": "2026-09-30T22:21:14Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
@@ -47,14 +47,15 @@
 "https://cocam.carsprogram.org/Snapshots/025S16080CAM1NEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S22910CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E03920CAM1RP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E04915CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E05600CAM1ML1.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/036W04820CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036W05510CAM1ML1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E17790CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E17820CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E17845CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E17865CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/070E18110CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/070E22650CAM1RP1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/070E23190CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E24905CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E25395CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W13095CAM1RHS.flv.png": "placeholder",
@@ -74,7 +75,6 @@
 "https://cocam.carsprogram.org/Snapshots/121S02335CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/128W00720CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/224W00065CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/225S00845CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/550E02135CAM1NEC.flv.png": "placeholder",
 "https://websvc.coloradosprings.gov/live/TOC/00084_I-25%20%28mm156%29%20_%20Gleneagle.jpg": "frozen"
 }
