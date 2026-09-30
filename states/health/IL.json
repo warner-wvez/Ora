@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-09-30T06:26:02Z",
+"checked_at": "2026-09-30T13:18:01Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 484,
+"placeholder": 487,
 "frozen": 81,
 "offline": 12
 },
@@ -47,6 +47,10 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NWB_I-88_4180840_-8816710_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NWB_I-88_4180840_-8816710_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_NWB_I-88_4180840_-8816710_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Bartlett_4197350_-8818380_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Bartlett_4197350_-8818380_1_N.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Bartlett_4197350_-8818380_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Bartlett_4197350_-8818380_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_County-Farm_4186603_-8814337_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_County-Farm_4186603_-8814337_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_County-Farm_4186603_-8814337_1_S.jpg": "placeholder",
@@ -106,7 +110,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4177672_-8783951_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4178043_-8783539_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4179538_-8781836_1_NONE.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4182742_-8770972_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4158749_-8772759_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4159614_-8771628_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4160161_-8770909_1_NONE.jpg": "placeholder",
