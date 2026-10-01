@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-01T06:42:48Z",
+"checked_at": "2026-10-01T13:50:01Z",
 "cameras": 705,
 "counts": {
 "offline": 1,
-"placeholder": 18
+"placeholder": 14
 },
 "status": {
 "/images/icon-camera-closed-fill-solid-padded.svg": "offline",
@@ -11,19 +11,15 @@
 "https://public.carsprogram.org/cameras/IN/INDOT_165_piBDQtVc77jT1ej4.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_166_cWmaHGs3o7mGdusK.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_176_ixrpDXCMB_z5Pv7_.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_332_6XMRE32wdodaBwle.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_333_XduegnwjJ1TrtQf4.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_344_11tP3ozy3vAvnpiQ.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_410_pz1ipKI4hfdhnzdy.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_453_v_0L_XxBkuN5voC0.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_516_HE9T4ysNiWHd2P1r.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_517_fOqsIpbvY0fNFWeD.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_634_vPPvjkJrDmE8y2Hi.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_674_GYcKTANbU3r5BXBl.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_677_vL81it7xyjsz7ScI.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_716_iM-lcSv2zHkYYLsS.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_735_53NRwnsqoNn3_O0t.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_758_2GIk82sUgVyADO4h.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_80_Qv2KD2hDDbPUj1Fs.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_79_41j6mZks_E8JmE2I.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_999_qiy-ohd3PfUTa8Hm.flv.png": "placeholder"
 }
 }
