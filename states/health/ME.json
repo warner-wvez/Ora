@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-03T16:56:10Z",
+"checked_at": "2026-10-04T13:24:13Z",
 "cameras": 159,
 "counts": {
 "frozen": 1,
-"placeholder": 45
+"placeholder": 53
 },
 "status": {
 "https://www.maineturnpike.com/cameras/Andro_River.jpg": "frozen",
@@ -17,7 +17,6 @@
 "https://www.newengland511.org/map/Cctv/2094": "placeholder",
 "https://www.newengland511.org/map/Cctv/2095": "placeholder",
 "https://www.newengland511.org/map/Cctv/2102": "placeholder",
-"https://www.newengland511.org/map/Cctv/2108": "placeholder",
 "https://www.newengland511.org/map/Cctv/2112": "placeholder",
 "https://www.newengland511.org/map/Cctv/2117": "placeholder",
 "https://www.newengland511.org/map/Cctv/2119": "placeholder",
@@ -32,6 +31,7 @@
 "https://www.newengland511.org/map/Cctv/2144": "placeholder",
 "https://www.newengland511.org/map/Cctv/2156": "placeholder",
 "https://www.newengland511.org/map/Cctv/2167": "placeholder",
+"https://www.newengland511.org/map/Cctv/2170": "placeholder",
 "https://www.newengland511.org/map/Cctv/2176": "placeholder",
 "https://www.newengland511.org/map/Cctv/2177": "placeholder",
 "https://www.newengland511.org/map/Cctv/2185": "placeholder",
@@ -46,6 +46,14 @@
 "https://www.newengland511.org/map/Cctv/2258": "placeholder",
 "https://www.newengland511.org/map/Cctv/2277": "placeholder",
 "https://www.newengland511.org/map/Cctv/2278": "placeholder",
+"https://www.newengland511.org/map/Cctv/2281": "placeholder",
+"https://www.newengland511.org/map/Cctv/2282": "placeholder",
+"https://www.newengland511.org/map/Cctv/2283": "placeholder",
+"https://www.newengland511.org/map/Cctv/2284": "placeholder",
+"https://www.newengland511.org/map/Cctv/2285": "placeholder",
+"https://www.newengland511.org/map/Cctv/2286": "placeholder",
+"https://www.newengland511.org/map/Cctv/2287": "placeholder",
+"https://www.newengland511.org/map/Cctv/2288": "placeholder",
 "https://www.newengland511.org/map/Cctv/2304": "placeholder",
 "https://www.newengland511.org/map/Cctv/2313": "placeholder",
 "https://www.newengland511.org/map/Cctv/2316": "placeholder",

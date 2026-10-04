@@ -1,14 +1,10 @@
 {
-"checked_at": "2026-10-03T17:08:28Z",
+"checked_at": "2026-10-04T13:39:17Z",
 "cameras": 1127,
 "counts": {
-"offline": 3,
 "frozen": 2
 },
 "status": {
-"https://tripcheck.com/RoadCams/cams/ORE11 at OR204 EB_pid3878.jpg": "offline",
-"https://tripcheck.com/RoadCams/cams/ORE11 at OR204 NB_pid3882.jpg": "offline",
-"https://tripcheck.com/RoadCams/cams/ORE126 at Cushman_pid2651.JPG": "offline",
 "https://tripcheck.com/RoadCams/cams/Stafford Rd at Ek Rd S_pid3766.JPG": "frozen",
 "https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen"
 }
