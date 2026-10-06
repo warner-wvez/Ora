@@ -1,12 +1,12 @@
 {
-"checked_at": "2026-10-05T15:46:08Z",
+"checked_at": "2026-10-06T07:17:45Z",
 "cameras": 667,
 "counts": {
-"placeholder": 14
+"placeholder": 13
 },
 "status": {
+"https://tnsnapshots.com/thumbs/R1_001.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R1_041.flv.png": "placeholder",
-"https://tnsnapshots.com/thumbs/R1_056.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R1_107.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_021.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R3_207.flv.png": "placeholder",
@@ -17,7 +17,6 @@
 "https://tnsnapshots.com/thumbs/R4_006.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_007.flv.png": "placeholder",
 "https://tnsnapshots.com/thumbs/R4_008.flv.png": "placeholder",
-"https://tnsnapshots.com/thumbs/R4_031.flv.png": "placeholder",
-"https://tnsnapshots.com/thumbs/R4_165.flv.png": "placeholder"
+"https://tnsnapshots.com/thumbs/R4_207.flv.png": "placeholder"
 }
 }
