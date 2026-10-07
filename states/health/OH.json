@@ -1,17 +1,16 @@
 {
-"checked_at": "2026-10-06T23:36:37Z",
+"checked_at": "2026-10-07T14:12:41Z",
 "cameras": 1121,
 "counts": {
-"frozen": 27,
-"offline": 5
+"frozen": 28,
+"offline": 4
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE182.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CLE/CLE6073.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH058.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/Fourth-Mound.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/James-Allegheny.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/SR-315_at_Ackerman_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
@@ -22,6 +21,7 @@
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/HilliardRome-Renner.jpg": "offline",
+"https://itscameras.dot.state.oh.us:443/images/CMH/I-71_at_US-36.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",

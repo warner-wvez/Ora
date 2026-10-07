@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-06T23:32:36Z",
+"checked_at": "2026-10-07T14:08:23Z",
 "cameras": 798,
 "counts": {
 "offline": 7,
-"placeholder": 30
+"placeholder": 34
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
@@ -12,6 +12,10 @@
 "https://www.dot.nd.gov/travel-info/cameras/I94RP160BismarckEast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP160BismarckPavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP160BismarckWest.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP162BismarckCenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP162BismarckEast.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP162BismarckPavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP162BismarckWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenCenter.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenEast.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenPavement.jpg": "offline",
