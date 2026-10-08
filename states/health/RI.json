@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-07T14:16:44Z",
+"checked_at": "2026-10-08T00:08:29Z",
 "cameras": 135,
 "counts": {
-"offline": 4,
+"offline": 3,
 "placeholder": 5
 },
 "status": {
@@ -11,8 +11,7 @@
 "https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_16.2_S_CAM%20Rt%20116.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/4_04.6_S_CAM%20Exit%205%20-%20Rt%20102%20DMS.jpg": "offline",
-"https://www.dot.ri.gov/img/travel/camimages/95_22.4_N_CAM%20-%20Shippeetown%20Rd.jpg": "offline",
-"https://www.dot.ri.gov/img/travel/camimages/95_31.4_N_CAM%20-%20Jefferson%20Blvd.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/95_28.8_S_CAM%20-%20Greenwich%20Ave.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/95_42.0_S_CAM%20-%20Central%20Ave.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/Rt%20114%20%40%20Mink%20St%20DMS%20and%20Camera.jpg": "offline"
 }
