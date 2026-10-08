@@ -1,12 +1,13 @@
 {
-"checked_at": "2026-10-08T06:50:13Z",
+"checked_at": "2026-10-08T14:03:52Z",
 "cameras": 361,
 "counts": {
-"placeholder": 89
+"placeholder": 85
 },
 "status": {
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0022.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0030.jpg": "placeholder",
+"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0031.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0032.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0033.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0036.jpg": "placeholder",
@@ -79,20 +80,15 @@
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0804.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0805.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0806.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0808.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0809.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0810.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0812.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0813.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0817.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0818.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0819.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0820.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0822.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0823.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0824.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0825.jpg": "placeholder",
-"https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0826.jpg": "placeholder",
 "https://betaimageserver.goakamai.org/SnapShot/320x240/TL-0828.jpg": "placeholder"
 }
 }
