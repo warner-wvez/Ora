@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-07T23:57:50Z",
+"checked_at": "2026-10-08T07:02:11Z",
 "cameras": 1121,
 "counts": {
 "frozen": 29,
-"offline": 5
+"offline": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE182.jpg": "frozen",
@@ -17,17 +17,14 @@
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/toledo/CCTV5072.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/toledo/US-23_at_S_of_SR-51.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CLE/CCTV6081.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/I-71_at_US-36.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4167.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4169.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4190.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/Eggleston_PRW.jpg": "frozen",
