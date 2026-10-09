@@ -1,11 +1,10 @@
 {
-"checked_at": "2026-10-09T14:23:41Z",
+"checked_at": "2026-10-09T23:19:48Z",
 "cameras": 763,
 "counts": {
-"placeholder": 24
+"placeholder": 21
 },
 "status": {
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10059.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10068.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10187.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10193.flv.png": "placeholder",
@@ -14,17 +13,15 @@
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10196.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10199.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10258.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10286.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10313.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10500.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10514.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10518.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10515.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10519.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10522.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10523.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10532.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/30102.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/30301.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10537.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/30307.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/60012.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/60068.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/60076.flv.png": "placeholder",

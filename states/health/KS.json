@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-09T14:01:23Z",
+"checked_at": "2026-10-09T22:59:16Z",
 "cameras": 591,
 "counts": {
 "offline": 4,
-"frozen": 19,
+"frozen": 18,
 "placeholder": 18
 },
 "status": {
@@ -13,7 +13,6 @@
 "https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/KDOT_123015_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_505010_IMAGE001.JPG": "frozen",
-"https://kscam.carsprogram.org/KDOT_540005_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541000_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541000_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_541005_IMAGE001.JPG": "frozen",
@@ -33,7 +32,7 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBIPC-58.jpg": "frozen",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBIPC-60.jpg": "frozen",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBIPC-68.jpg": "frozen",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K635SBC-10.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M035SBIPC-21.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0021-LQ.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/PTCCTV0022-LQ.jpg": "placeholder",

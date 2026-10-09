@@ -1,12 +1,11 @@
 {
-"checked_at": "2026-10-08T14:18:09Z",
+"checked_at": "2026-10-09T23:09:01Z",
 "cameras": 1121,
 "counts": {
-"frozen": 29,
+"frozen": 27,
 "offline": 1
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CLE/CLE182.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CLE/CLE6073.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/SR-315_at_Ackerman_Rd.jpg": "frozen",
@@ -20,7 +19,6 @@
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/I-71_at_US-36.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CMH/US-23NB_Trench_South.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Sycamore.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/3rd_Vine.jpg": "frozen",
