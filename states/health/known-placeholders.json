@@ -4623,5 +4623,15 @@
   "sha": "1b49221a7846b28f",
   "first_seen": "2026-10-09T07:23:52Z",
   "state": "WI"
+ },
+ "16506:c1edcc244473": {
+  "sha": "c6bf42e6bc87191b",
+  "first_seen": "2026-10-09T13:27:23Z",
+  "state": "CA"
+ },
+ "16501:aad20cfafbb2": {
+  "sha": "1e3cf68278720e4a",
+  "first_seen": "2026-10-09T13:27:23Z",
+  "state": "CA"
  }
 }
