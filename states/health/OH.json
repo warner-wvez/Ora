@@ -1,12 +1,14 @@
 {
-"checked_at": "2026-10-09T23:09:01Z",
+"checked_at": "2026-10-10T06:26:53Z",
 "cameras": 1121,
 "counts": {
 "frozen": 27,
-"offline": 1
+"offline": 4
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE6073.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CCTV2119.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/SR-315_at_Ackerman_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
@@ -15,6 +17,7 @@
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Brandychase_Way.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/toledo/I-475_at_Monroe_St.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/toledo/US-23_at_S_of_SR-51.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CCTV_Trailer_5.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
