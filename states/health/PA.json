@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-10T06:37:24Z",
+"checked_at": "2026-10-10T13:04:04Z",
 "cameras": 1384,
 "counts": {
-"placeholder": 203
+"placeholder": 204
 },
 "status": {
 "https://www.511pa.com/map/Cctv/4727": "placeholder",
@@ -33,12 +33,14 @@
 "https://www.511pa.com/map/Cctv/4988": "placeholder",
 "https://www.511pa.com/map/Cctv/5004": "placeholder",
 "https://www.511pa.com/map/Cctv/5006": "placeholder",
+"https://www.511pa.com/map/Cctv/5065": "placeholder",
 "https://www.511pa.com/map/Cctv/5068": "placeholder",
 "https://www.511pa.com/map/Cctv/5073": "placeholder",
 "https://www.511pa.com/map/Cctv/5074": "placeholder",
 "https://www.511pa.com/map/Cctv/5076": "placeholder",
 "https://www.511pa.com/map/Cctv/5080": "placeholder",
 "https://www.511pa.com/map/Cctv/5081": "placeholder",
+"https://www.511pa.com/map/Cctv/5089": "placeholder",
 "https://www.511pa.com/map/Cctv/5090": "placeholder",
 "https://www.511pa.com/map/Cctv/5092": "placeholder",
 "https://www.511pa.com/map/Cctv/5094": "placeholder",
@@ -113,7 +115,6 @@
 "https://www.511pa.com/map/Cctv/5714": "placeholder",
 "https://www.511pa.com/map/Cctv/5726": "placeholder",
 "https://www.511pa.com/map/Cctv/5734": "placeholder",
-"https://www.511pa.com/map/Cctv/5739": "placeholder",
 "https://www.511pa.com/map/Cctv/5746": "placeholder",
 "https://www.511pa.com/map/Cctv/5766": "placeholder",
 "https://www.511pa.com/map/Cctv/5778": "placeholder",
