@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-11T22:29:43Z",
+"checked_at": "2026-10-12T06:26:10Z",
 "cameras": 135,
 "counts": {
-"offline": 3,
+"offline": 4,
 "placeholder": 5
 },
 "status": {
@@ -12,6 +12,7 @@
 "https://www.dot.ri.gov/img/travel/camimages/295_16.2_S_CAM%20Rt%20116.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_20.0_N_CAM%20Exit%2020%20-%20Rt%20122.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/4_04.6_S_CAM%20Exit%205%20-%20Rt%20102%20DMS.jpg": "offline",
+"https://www.dot.ri.gov/img/travel/camimages/95_41.0_S_CAM%20-%20Garden%20St.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/95_42.0_S_CAM%20-%20Central%20Ave.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/Rt%20114%20%40%20Mink%20St%20DMS%20and%20Camera.jpg": "offline"
 }

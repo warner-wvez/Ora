@@ -4753,5 +4753,30 @@
   "sha": "b3389a7bd61686ef",
   "first_seen": "2026-10-11T22:15:48Z",
   "state": "LA"
+ },
+ "16576:d47ccc4cb93a": {
+  "sha": "87a56c33944508f4",
+  "first_seen": "2026-10-12T06:00:17Z",
+  "state": "CA"
+ },
+ "16571:35b5b4555014": {
+  "sha": "0c585dee2f256f94",
+  "first_seen": "2026-10-12T06:00:17Z",
+  "state": "CA"
+ },
+ "11295:df1f85b029fa": {
+  "sha": "ac1bf4af97825e4b",
+  "first_seen": "2026-10-12T06:13:40Z",
+  "state": "LA"
+ },
+ "39907:3b96ff840bd5": {
+  "sha": "1ede4a47b4f64485",
+  "first_seen": "2026-10-12T06:26:10Z",
+  "state": "RI"
+ },
+ "65059:1cb0c094ad6e": {
+  "sha": "11a6a960c768208b",
+  "first_seen": "2026-10-12T06:31:49Z",
+  "state": "WI"
  }
 }
