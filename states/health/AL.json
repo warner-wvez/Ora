@@ -1,10 +1,11 @@
 {
-"checked_at": "2026-10-12T15:18:50Z",
+"checked_at": "2026-10-13T00:37:59Z",
 "cameras": 629,
 "counts": {
-"placeholder": 44
+"placeholder": 41
 },
 "status": {
+"https://api.algotraffic.com/v4/Cameras/1134/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1157/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1191/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1256/snapshot.jpg": "placeholder",
@@ -17,14 +18,10 @@
 "https://api.algotraffic.com/v4/Cameras/1415/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1454/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1455/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1491/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1515/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1516/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1520/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1523/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1562/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1564/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1567/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1568/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1575/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1602/snapshot.jpg": "placeholder",
@@ -33,6 +30,7 @@
 "https://api.algotraffic.com/v4/Cameras/1625/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1674/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1688/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/1690/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1701/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1721/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1722/snapshot.jpg": "placeholder",
@@ -45,7 +43,6 @@
 "https://api.algotraffic.com/v4/Cameras/1833/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1842/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1889/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1913/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1926/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1927/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/1966/snapshot.jpg": "placeholder"
