@@ -4863,5 +4863,30 @@
   "sha": "4b2673292e3140bf",
   "first_seen": "2026-10-14T05:42:21Z",
   "state": "WI"
+ },
+ "16823:2a94eef1bac4": {
+  "sha": "ca5466ee94cb7484",
+  "first_seen": "2026-10-14T11:55:08Z",
+  "state": "CA"
+ },
+ "32518:c1b13e4beef6": {
+  "sha": "568c9f1b14119ace",
+  "first_seen": "2026-10-14T12:06:48Z",
+  "state": "ID"
+ },
+ "10026:c50533910337": {
+  "sha": "1b9c80e19f7c8712",
+  "first_seen": "2026-10-14T12:09:58Z",
+  "state": "LA"
+ },
+ "65962:1cb0c094ad6e": {
+  "sha": "9827c4f3c6035cb2",
+  "first_seen": "2026-10-14T12:31:38Z",
+  "state": "WI"
+ },
+ "66092:1cb0c094ad6e": {
+  "sha": "0993ef417f0cb969",
+  "first_seen": "2026-10-14T12:31:38Z",
+  "state": "WI"
  }
 }
