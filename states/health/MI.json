@@ -1,11 +1,12 @@
 {
-"checked_at": "2026-10-15T11:45:34Z",
+"checked_at": "2026-10-15T17:20:04Z",
 "cameras": 790,
 "counts": {
-"offline": 3,
-"placeholder": 90
+"offline": 4,
+"placeholder": 94
 },
 "status": {
+"https://mdotjboss.state.mi.us/docs/drive/camfiles/rwis/748.jpg": "offline",
 "https://micamerasimages.net/thumbs/grand_cam_014.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/grand_cam_036.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/grand_cam_039.flv.jpg": "placeholder",
@@ -30,6 +31,7 @@
 "https://micamerasimages.net/thumbs/internet_cam_089.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_092.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_098.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_107.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_108.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_143.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_144.flv.jpg": "placeholder",
@@ -46,6 +48,7 @@
 "https://micamerasimages.net/thumbs/semtoc_cam_041.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_048.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_049.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/semtoc_cam_090.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_092.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_094.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_104.flv.jpg": "placeholder",
@@ -85,8 +88,10 @@
 "https://micamerasimages.net/thumbs/semtoc_cam_314.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_324.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_358.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/semtoc_cam_360.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_369.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_370.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/semtoc_cam_382.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_415.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_430.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/stoc_cam_003.flv.jpg": "offline",
