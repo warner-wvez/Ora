@@ -1,8 +1,9 @@
 {
-"checked_at": "2026-10-15T05:11:11Z",
+"checked_at": "2026-10-15T12:09:02Z",
 "cameras": 2063,
 "counts": {
-"placeholder": 61
+"offline": 4,
+"placeholder": 57
 },
 "status": {
 "https://udottraffic.utah.gov/map/Cctv/112731": "placeholder",
@@ -14,14 +15,16 @@
 "https://udottraffic.utah.gov/map/Cctv/114114": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/114119": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/114120": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/114122": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/114122": "offline",
 "https://udottraffic.utah.gov/map/Cctv/123411": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/125516": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/126755": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135287": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135439": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135605": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/135609": "placeholder",
+"https://udottraffic.utah.gov/map/Cctv/135611": "offline",
+"https://udottraffic.utah.gov/map/Cctv/135615": "offline",
+"https://udottraffic.utah.gov/map/Cctv/135616": "offline",
 "https://udottraffic.utah.gov/map/Cctv/135816": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/135942": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/136013": "placeholder",
@@ -59,11 +62,9 @@
 "https://udottraffic.utah.gov/map/Cctv/138476": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138521": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138532": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/138540": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138555": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138594": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138596": "placeholder",
-"https://udottraffic.utah.gov/map/Cctv/138667": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/138673": "placeholder",
 "https://udottraffic.utah.gov/map/Cctv/140171": "placeholder"
 }
