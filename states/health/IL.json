@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-16T04:46:39Z",
+"checked_at": "2026-10-16T11:47:17Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 570,
+"placeholder": 569,
 "frozen": 15,
 "offline": 12
 },
@@ -246,7 +246,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_W.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_I-74_4068969_-8958408_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_I-74_4069272_-8958489_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-40_4083438_-8961798_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-40_4083438_-8961798_1_W.jpg": "placeholder",

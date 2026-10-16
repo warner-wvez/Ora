@@ -1,12 +1,13 @@
 {
-"checked_at": "2026-10-16T04:50:28Z",
+"checked_at": "2026-10-16T11:53:31Z",
 "cameras": 894,
 "counts": {
-"offline": 97
+"offline": 99
 },
 "status": {
 "https://streamingjxn2.mdottraffic.com/thumbnail?application=rtplive&streamname=021304.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streamingjxn6.mdottraffic.com/thumbnail?application=rtplive&streamname=140106.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingjxn6.mdottraffic.com/thumbnail?application=rtplive&streamname=140201.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streaminglym1.mdottraffic.com/thumbnail?application=rtplive&streamname=050207.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streaminglym1.mdottraffic.com/thumbnail?application=rtplive&streamname=050301.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streaminglym1.mdottraffic.com/thumbnail?application=rtplive&streamname=050408.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
@@ -90,6 +91,7 @@
 "https://streaminglym2.mdottraffic.com/thumbnail?application=rtplive&streamname=052646.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streaminglym2.mdottraffic.com/thumbnail?application=rtplive&streamname=052647.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streaminglym2.mdottraffic.com/thumbnail?application=rtplive&streamname=052649.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streaminglym3.mdottraffic.com/thumbnail?application=rtplive&streamname=050505.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streaminglym3.mdottraffic.com/thumbnail?application=rtplive&streamname=051005.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streaminglym3.mdottraffic.com/thumbnail?application=rtplive&streamname=051008.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
 "https://streaminglym4.mdottraffic.com/thumbnail?application=rtplive&streamname=050303.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
