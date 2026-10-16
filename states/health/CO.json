@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-15T21:28:41Z",
+"checked_at": "2026-10-16T04:36:10Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
-"frozen": 38,
+"frozen": 36,
 "placeholder": 19
 },
 "status": {
@@ -41,9 +41,6 @@
 "https://cocam.carsprogram.org/Cellular/285N23100CAM1RHS-S.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/287N38025CAM1RHS-N.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/287N38025CAM1RHS-S.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/385S27130CAM1RHS-N.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/385S27130CAM1RHS-S.jpg": "frozen",
-"https://cocam.carsprogram.org/Cellular/385S27130CAM1RHS-roadway.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-E.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-N.jpg": "frozen",
 "https://cocam.carsprogram.org/Cellular/550S10370CAM1SWC-S.jpg": "frozen",
@@ -53,6 +50,7 @@
 "https://cocam.carsprogram.org/Snapshots/025S22910CAM1RP1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S23410CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E05600CAM1ML1.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036W04820CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036W05510CAM1ML1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E18280CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E24905CAM1RHS.flv.png": "placeholder",
@@ -64,8 +62,8 @@
 "https://cocam.carsprogram.org/Snapshots/088E01850CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/094W00100CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/095S00980CAM1SWC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/121N01800CAM1NEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/128W00720CAM1NWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/160E16515CAM2RHS.flv.png": "frozen",
 "https://cocam.carsprogram.org/Snapshots/550E02135CAM1NEC.flv.png": "placeholder",
 "https://websvc.coloradosprings.gov/live/TOC/00084_I-25%20%28mm156%29%20_%20Gleneagle.jpg": "frozen"
 }

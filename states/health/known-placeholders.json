@@ -5008,5 +5008,15 @@
   "sha": "b2df0d7c298f9ed5",
   "first_seen": "2026-10-15T21:41:33Z",
   "state": "LA"
+ },
+ "16691:107058c39f85": {
+  "sha": "07b718a737ecb47a",
+  "first_seen": "2026-10-16T04:35:30Z",
+  "state": "CA"
+ },
+ "12700:3ad6e48f04c8": {
+  "sha": "13e911c2b0e56a1f",
+  "first_seen": "2026-10-16T04:48:02Z",
+  "state": "LA"
  }
 }
