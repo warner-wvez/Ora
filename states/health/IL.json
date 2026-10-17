@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-17T10:58:18Z",
+"checked_at": "2026-10-17T15:48:42Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 561,
+"placeholder": 563,
 "frozen": 22,
 "offline": 12
 },
@@ -535,6 +535,8 @@
 "https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Millburn_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Millburn_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Millburn_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Orchard_Valley_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Orchard_Valley_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Wadsworth_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Wadsworth_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Wadsworth_(Wireless)_cctv_South_Leg.jpg": "placeholder",
