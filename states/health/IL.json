@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-17T04:40:29Z",
+"checked_at": "2026-10-17T10:58:18Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 565,
+"placeholder": 561,
 "frozen": 22,
 "offline": 12
 },
@@ -601,10 +601,6 @@
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_West_Leg.jpg": "placeholder"
+"https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_West_Leg.jpg": "placeholder"
 }
 }
