@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-10-17T20:54:43Z",
+"checked_at": "2026-10-18T04:47:57Z",
 "cameras": 591,
 "counts": {
 "offline": 4,
 "frozen": 37,
-"placeholder": 26
+"placeholder": 22
 },
 "status": {
 "": "offline",
@@ -47,10 +47,6 @@
 "https://kscam.carsprogram.org/snapshots/GEN_5-135-0110-2-I-135NOK-96.jpeg": "frozen",
 "https://kscam.carsprogram.org/snapshots/GEN_5-254-0023-T-K-254atK-196-789-0125.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_K-10NofClintonPkwyC25-0005-C25-0005.jpeg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-86.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-87.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-88.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBIPC-89.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBIPC-02A.jpg": "frozen",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-28.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-52.jpg": "offline",
