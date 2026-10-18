@@ -1,15 +1,16 @@
 {
-"checked_at": "2026-10-18T04:47:57Z",
+"checked_at": "2026-10-18T11:18:44Z",
 "cameras": 591,
 "counts": {
 "offline": 4,
-"frozen": 37,
+"frozen": 38,
 "placeholder": 22
 },
 "status": {
 "": "offline",
 "https://kscam.carsprogram.org/D6_Jct_K4_K23_E.jpg": "frozen",
 "https://kscam.carsprogram.org/Image-I470andWanamaker.jpg": "frozen",
+"https://kscam.carsprogram.org/Image-I70andCalifornia.jpg": "frozen",
 "https://kscam.carsprogram.org/KDOT_123014_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_123015_IMAGE002.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_505010_IMAGE001.JPG": "frozen",

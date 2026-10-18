@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-18T04:36:27Z",
+"checked_at": "2026-10-18T11:08:37Z",
 "cameras": 1263,
 "counts": {
 "offline": 4,
-"frozen": 41,
+"frozen": 42,
 "placeholder": 22
 },
 "status": {
@@ -71,6 +71,7 @@
 "https://cocam.carsprogram.org/Snapshots/160E16515CAM2RHS.flv.png": "frozen",
 "https://cocam.carsprogram.org/Snapshots/287N29610CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/287N29700CAM1NEC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/287N30095CAM1MED.flv.png": "frozen",
 "https://cocam.carsprogram.org/Snapshots/287S29745CAM1SEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/550E02135CAM1NEC.flv.png": "placeholder",
 "https://websvc.coloradosprings.gov/live/TOC/00084_I-25%20%28mm156%29%20_%20Gleneagle.jpg": "frozen"
