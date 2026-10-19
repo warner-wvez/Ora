@@ -5248,5 +5248,15 @@
   "sha": "18e1ff01077dbdc6",
   "first_seen": "2026-10-19T05:19:57Z",
   "state": "WI"
+ },
+ "16642:005d4e84c1ed": {
+  "sha": "9155083e4d70788d",
+  "first_seen": "2026-10-19T13:15:43Z",
+  "state": "CA"
+ },
+ "65444:1cb0c094ad6e": {
+  "sha": "248bc14942afa3a5",
+  "first_seen": "2026-10-19T13:51:38Z",
+  "state": "WI"
  }
 }
