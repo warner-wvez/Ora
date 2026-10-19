@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-19T13:47:13Z",
+"checked_at": "2026-10-19T23:00:07Z",
 "cameras": 693,
 "counts": {
-"frozen": 20
+"frozen": 15
 },
 "status": {
 "https://sd.cdn.iteris-atis.com/camera_images/CSDGNV/0/latest.jpg": "frozen",
@@ -19,11 +19,6 @@
 "https://sd.cdn.iteris-atis.com/camera_images/CSDRVW/1/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/CSDRVW/2/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/CSDRVW/3/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/CSDRVW/4/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/SDDIX/0/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/SDDIX/1/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/SDDIX/2/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/SDDIX/3/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/SDDIX/4/latest.jpg": "frozen"
+"https://sd.cdn.iteris-atis.com/camera_images/CSDRVW/4/latest.jpg": "frozen"
 }
 }

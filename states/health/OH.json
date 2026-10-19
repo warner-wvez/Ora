@@ -1,16 +1,18 @@
 {
-"checked_at": "2026-10-19T13:42:09Z",
+"checked_at": "2026-10-19T22:47:55Z",
 "cameras": 1121,
 "counts": {
 "frozen": 29,
-"offline": 1
+"offline": 3
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CCTV3102.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CLE/CLE216-L.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/SR-315_at_Ackerman_Rd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/D10/CCTV007.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV083a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/Liberty_Way_at_I-75NB_Ramp.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
