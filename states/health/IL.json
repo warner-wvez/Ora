@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-18T20:57:27Z",
+"checked_at": "2026-10-19T04:54:11Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 558,
+"placeholder": 561,
 "frozen": 28,
 "offline": 12
 },
@@ -513,6 +513,9 @@
 "https://iowadotsnapshot.us-east-1.skyvdn.com/thumbs/qctv37lb.flv.jpg": "offline",
 "https://iowadotsnapshot.us-east-1.skyvdn.com/thumbs/qctv50lb.flv.jpg": "offline",
 "https://iowadotsnapshot.us-east-1.skyvdn.com/thumbs/qctv60lb.flv.jpg": "offline",
+"https://www.lakecountypassage.com/snapshots/Aptakisic_@_Bond_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Aptakisic_@_Bond_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Aptakisic_@_Bond_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_South_Leg.jpg": "placeholder",

@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-18T20:57:52Z",
+"checked_at": "2026-10-19T04:54:50Z",
 "cameras": 591,
 "counts": {
 "offline": 4,
-"frozen": 38,
+"frozen": 37,
 "placeholder": 22
 },
 "status": {
@@ -40,7 +40,6 @@
 "https://kscam.carsprogram.org/KDOT_572002_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_573001_IMAGE001.JPG": "frozen",
 "https://kscam.carsprogram.org/KDOT_573001_IMAGE002.JPG": "frozen",
-"https://kscam.carsprogram.org/image_severy.jpg": "frozen",
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3008-2-K-96NorthofUS-54N.jpeg": "placeholder",
 "https://kscam.carsprogram.org/snapshots/GEN_5-096-3009-2-K-96NorthofUS-54S.jpeg": "placeholder",
