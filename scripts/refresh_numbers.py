@@ -18,7 +18,7 @@ NUMBER_FILES = ["README.md", os.path.join("docs", "1-overview.md")]
 SOURCES_PAGE = os.path.join("docs", "3-sources.md")
 
 # Which docs page explains each state's feed. Anything not listed is on the shared 511 pages.
-DATATABLES = {"FL", "GA", "UT", "PA", "NC", "NV", "AZ", "WI", "ID", "ME", "NH", "VT", "CT", "LA", "AK", "NY"}
+DATATABLES = {"FL", "GA", "UT", "PA", "NC", "NV", "AZ", "WI", "ID", "ME", "NH", "VT", "CT", "LA", "AK"}
 GRAPHQL = {"MN", "CO", "IA", "NE", "IN", "KS", "MA"}
 BESPOKE = {
     "AL": "3.3-alabama.md", "AR": "3.4-arkansas.md", "CA": "3.5-california.md", "DE": "3.6-delaware.md",
@@ -27,7 +27,7 @@ BESPOKE = {
     "ND": "3.18-north-dakota.md", "OH": "3.19-ohio.md", "OK": "3.20-oklahoma.md", "OR": "3.21-oregon.md",
     "RI": "3.22-rhode-island.md", "SC": "3.23-south-carolina.md", "SD": "3.24-south-dakota.md",
     "TN": "3.25-tennessee.md", "TX": "3.26-texas.md", "VA": "3.27-virginia.md", "WA": "3.28-washington.md",
-    "WV": "3.29-west-virginia.md", "WY": "3.30-wyoming.md",
+    "WV": "3.29-west-virginia.md", "WY": "3.30-wyoming.md", "NY": "3.32-new-york.md",
 }
 CITY_LAYERS = [("Illinois", "cameras.json", "3.8-illinois.md"), ("New York City", "cameras-nyc.json", "3.17-new-york-city.md")]
 

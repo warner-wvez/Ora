@@ -12,16 +12,14 @@ Writes states/<code>.json (one FeatureCollection each) and merges them into
 states/index.json, leaving states built by the other scripts alone.
 
 Usage: python3 build-states.py            # every state below
-       python3 build-states.py NY CT      # just these
+       python3 build-states.py GA CT      # just these
 """
 import urllib.request, json, gzip, zlib, urllib.parse, re, os, sys, time, random, concurrent.futures
 
 # Optional per-state keys:
 #   bbox        (w, s, e, n). Rows outside it are dropped.
 #   only_state  drop any row whose own `state` column names a different state.
-# 511ny carries 324 Connecticut and 66 New Jersey cameras on shared roads, and a
-# bbox cannot separate them: Connecticut sits inside any New York bbox, and Ora
-# already has Connecticut from ctroads.org. The feed labels them, so believe it.
+# New York left this platform around 2026-09-30 and builds from build-states-ny.py.
 STATES = {
   'FL': {'host':'fl511.com',            'name':'Florida',        'center':[-81.7,28.2],'zoom':6},
   'GA': {'host':'511ga.org',            'name':'Georgia',        'center':[-83.6,32.8],'zoom':6.5},
@@ -42,8 +40,6 @@ STATES = {
   'CT': {'host':'ctroads.org',          'name':'Connecticut',    'center':[-72.7,41.6],'zoom':8.5},
   'LA': {'host':'511la.org',            'name':'Louisiana',      'center':[-92.0,31.0],'zoom':6.5},
   'AK': {'host':'511.alaska.gov',       'name':'Alaska',         'center':[-149.6,61.2],'zoom':5},
-  'NY': {'host':'511ny.org',            'name':'New York',       'center':[-75.5,42.9],'zoom':6.3,
-         'bbox':(-79.77,40.47,-71.85,45.02), 'only_state':'New York'},
 }
 
 # the popup renders a compass chip from this; anything else ('Unknown', 'Inbound') gets none
