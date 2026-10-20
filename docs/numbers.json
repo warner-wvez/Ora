@@ -1,7 +1,7 @@
 {
   "states_covered": 49,
-  "cameras": 46015,
-  "video_states": 20,
+  "cameras": 46045,
+  "video_states": 21,
   "cameras_down": 5534,
   "health": {
     "placeholder": 4419,
