@@ -325,7 +325,7 @@
  "OK": {
   "name": "Oklahoma",
   "file": "states/OK.json",
-  "count": 193,
+  "count": 207,
   "center": [
    -97.5,
    35.5
@@ -424,7 +424,7 @@
  "AL": {
   "name": "Alabama",
   "file": "states/AL.json",
-  "count": 629,
+  "count": 645,
   "center": [
    -86.8,
    32.8
