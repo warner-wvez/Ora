@@ -137,7 +137,7 @@
  "MN": {
   "name": "Minnesota",
   "file": "states/MN.json",
-  "count": 1527,
+  "count": 1539,
   "center": [
    -94.3,
    46.3
@@ -159,7 +159,7 @@
  "IA": {
   "name": "Iowa",
   "file": "states/IA.json",
-  "count": 844,
+  "count": 865,
   "center": [
    -93.5,
    42.0
@@ -170,7 +170,7 @@
  "NE": {
   "name": "Nebraska",
   "file": "states/NE.json",
-  "count": 353,
+  "count": 341,
   "center": [
    -99.8,
    41.5
@@ -181,18 +181,18 @@
  "IN": {
   "name": "Indiana",
   "file": "states/IN.json",
-  "count": 740,
+  "count": 749,
   "center": [
    -86.3,
    39.9
   ],
   "zoom": 6.5,
-  "video": false
+  "video": true
  },
  "KS": {
   "name": "Kansas",
   "file": "states/KS.json",
-  "count": 613,
+  "count": 608,
   "center": [
    -98.3,
    38.5
@@ -203,7 +203,7 @@
  "MA": {
   "name": "Massachusetts",
   "file": "states/MA.json",
-  "count": 304,
+  "count": 309,
   "center": [
    -71.8,
    42.2
