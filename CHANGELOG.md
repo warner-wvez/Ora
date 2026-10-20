@@ -10,11 +10,19 @@ commits are not listed.
 - North Carolina video plays again, 1,046 streams through the relay. Its token is
   Pennsylvania's two calls on drivenc.gov's own hosts, and a browser cannot make the first
   one, so the relay mints it.
+- Indiana video plays again, 748 streams. Its stream ids carry a random suffix that had
+  changed since July, so every stored link was 404 and Indiana was a snapshot state.
+- Every state now rebuilds on a schedule: Montana every hour, all others on Mondays. A
+  safety check holds back any state the rebuild made worse, and Montana's 425 images work
+  again. When a whole state goes dark, the health sweep opens a GitHub issue.
 
 ### Changed
-- New York builds from 511NY's new CARS 511x map with its own builder,
-  `builders/build-states-ny.py`: 1,742 NYSDOT cameras, all with live video, and a live
-  preview image for each. Compass chips carry forward from the old feed by stream name.
+- New York builds from 511NY's new CARS 511x map, `builders/build-states-511x.py`: 1,742
+  NYSDOT cameras, all with live video, and a live preview image for each. Compass chips
+  carry forward from the old feed by stream name. Colorado moved to the same platform and
+  the same builder.
+- The GraphQL builder sends the exact queries the sites' own pages send, the only text the
+  servers now accept, and pages Minnesota's list so its gateway does not time out.
 
 ### Fixed
 - Every New York snapshot had been dark since about 2026-09-30, when 511ny.org left the
