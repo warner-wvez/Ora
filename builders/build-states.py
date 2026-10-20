@@ -19,7 +19,7 @@ import urllib.request, json, gzip, zlib, urllib.parse, re, os, sys, time, random
 # Optional per-state keys:
 #   bbox        (w, s, e, n). Rows outside it are dropped.
 #   only_state  drop any row whose own `state` column names a different state.
-# New York left this platform around 2026-09-30 and builds from build-states-ny.py.
+# New York left this platform around 2026-09-30 and builds from build-states-511x.py.
 STATES = {
   'FL': {'host':'fl511.com',            'name':'Florida',        'center':[-81.7,28.2],'zoom':6},
   'GA': {'host':'511ga.org',            'name':'Georgia',        'center':[-83.6,32.8],'zoom':6.5},
