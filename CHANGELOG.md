@@ -4,6 +4,28 @@ All notable changes to Ora. The format follows keepachangelog.com; dates are the
 change landed on main, and each line ends with its commit. The six-hourly health-sweep
 commits are not listed.
 
+## 2026-10
+
+### Added
+- North Carolina video plays again, 1,046 streams through the relay. Its token is
+  Pennsylvania's two calls on drivenc.gov's own hosts, and a browser cannot make the first
+  one, so the relay mints it.
+
+### Changed
+- New York builds from 511NY's new CARS 511x map with its own builder,
+  `builders/build-states-ny.py`: 1,742 NYSDOT cameras, all with live video, and a live
+  preview image for each. Compass chips carry forward from the old feed by stream name.
+
+### Fixed
+- Every New York snapshot had been dark since about 2026-09-30, when 511ny.org left the
+  DataTables platform and its old image path began returning a web page.
+- Alabama showed a "No camera" card on 626 of 629 cameras after ALGO renumbered them all;
+  rebuilt to 645.
+- Oklahoma's 494 stored streams were all 404 after its stream ids rotated; rebuilt to 552
+  views that play.
+- Florida and Pennsylvania video was down for about 19 hours on 2026-10-20 because the VPS
+  disk filled with another service's error log, which failed every container health check.
+
 ## 2026-09
 
 ### Added
