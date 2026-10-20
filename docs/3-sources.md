@@ -60,7 +60,7 @@ not this.
 <!-- states:start -->
 | State | Cameras | Live video | How it is read |
 |---|---|---|---|
-| Alabama | 629 | snapshot | [Alabama](3.3-alabama.md) |
+| Alabama | 645 | snapshot | [Alabama](3.3-alabama.md) |
 | Alaska | 123 | snapshot | [511 DataTables](3.1-511-datatables.md) |
 | Arizona | 644 | snapshot | [511 DataTables](3.1-511-datatables.md) |
 | Arkansas | 525 | snapshot | [Arkansas](3.4-arkansas.md) |
@@ -90,12 +90,12 @@ not this.
 | Nevada | 648 | yes | [511 DataTables](3.1-511-datatables.md) |
 | New Hampshire | 181 | snapshot | [511 DataTables](3.1-511-datatables.md) |
 | New Mexico | 183 | snapshot | [New Mexico](3.16-new-mexico.md) |
-| New York | 1,864 | yes | [511 DataTables](3.1-511-datatables.md) |
+| New York | 1,742 | yes | [New York](3.32-new-york.md) |
 | New York City | 957 | snapshot | [New York City](3.17-new-york-city.md) |
 | North Carolina | 1,114 | yes | [511 DataTables](3.1-511-datatables.md) |
 | North Dakota | 186 | snapshot | [North Dakota](3.18-north-dakota.md) |
 | Ohio | 1,121 | snapshot | [Ohio](3.19-ohio.md) |
-| Oklahoma | 193 | yes | [Oklahoma](3.20-oklahoma.md) |
+| Oklahoma | 207 | yes | [Oklahoma](3.20-oklahoma.md) |
 | Oregon | 1,127 | snapshot | [Oregon](3.21-oregon.md) |
 | Pennsylvania | 1,522 | yes | [511 DataTables](3.1-511-datatables.md) |
 | Rhode Island | 135 | snapshot | [Rhode Island](3.22-rhode-island.md) |

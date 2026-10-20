@@ -13,7 +13,7 @@ that checks whether each camera is still telling the truth.
 <!-- numbers:start -->
 | States | Cameras | States with live video | Cameras down at the last sweep | Last sweep |
 |---|---|---|---|---|
-| 49 of 50 | 46,107 | 20 | 6,188 | 2026-09-19 17:14 UTC |
+| 49 of 50 | 46,015 | 20 | 5,534 | 2026-10-20 17:42 UTC |
 <!-- numbers:end -->
 
 The one missing state is New Jersey, whose feeds cannot be played from a static page.
