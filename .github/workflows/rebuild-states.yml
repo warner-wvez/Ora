@@ -1,0 +1,80 @@
+name: Rebuild states
+
+# A state built once goes stale on the agency's schedule, not ours. Between July and
+# October 2026, Alabama renumbered every camera, Oklahoma and Indiana rotated their stream
+# ids, and New York and Colorado moved websites; nothing rebuilt them, so the map kept the
+# dead links. So every state is rebuilt once a week, and Montana every hour, because its
+# images are timestamped files the agency deletes after two to three days.
+on:
+  schedule:
+    - cron: '41 * * * *'     # Montana
+    - cron: '23 10 * * 1'    # every state, Monday mornings US time
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'all = every state, montana = Montana only'
+        default: all
+
+concurrency:
+  group: rebuild-states
+  cancel-in-progress: false   # a half-finished rebuild would publish a half-truth
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Montana
+        run: python3 builders/build-states-mt.py || echo "::warning::Montana failed, keeping the committed file"
+
+      # Builders run one after another, each from the repo root. A builder that fails leaves
+      # its state's committed file in place. Maine's Turnpike builder must run after
+      # build-states.py, which writes the rest of Maine.
+      - name: Every other state
+        if: github.event.schedule == '23 10 * * 1' || (github.event_name == 'workflow_dispatch' && inputs.scope == 'all')
+        env:
+          OHGO_API_KEY: ${{ secrets.OHGO_API_KEY }}
+          WSDOT_API_KEY: ${{ secrets.WSDOT_API_KEY }}
+        run: |
+          run() { echo "::group::$1"; python3 "$1" || echo "::warning::$1 failed, keeping the committed file"; echo "::endgroup::"; }
+          run builders/build-states.py
+          run builders/build-states-me-turnpike.py
+          run builders/build-states-graphql.py
+          run builders/build-states-511x.py
+          for s in al ar ca de hi ky md mi mo ms nd nm ok or ri sc sd tn tx va wv wy; do
+            run builders/build-states-$s.py
+          done
+          # Ohio and Washington need free API keys; without the repo secret they stay as committed
+          if [ -n "$OHGO_API_KEY" ]; then run builders/build-states-oh.py; else echo "no OHGO_API_KEY secret, Ohio kept"; fi
+          if [ -n "$WSDOT_API_KEY" ]; then run builders/build-states-wa.py; else echo "no WSDOT_API_KEY secret, Washington kept"; fi
+
+      - name: Hold back any state the rebuild made worse
+        run: REBUILD_NOTES="$RUNNER_TEMP/notes.txt" python3 scripts/rebuild_guard.py
+
+      - name: Commit the rebuilt states
+        run: |
+          git config user.name  'ora-rebuild-bot'
+          git config user.email 'ora-rebuild-bot@users.noreply.github.com'
+          git add states
+          if git diff --cached --quiet; then
+            echo 'no change in any state'
+            exit 0
+          fi
+          if [ "${{ github.event.schedule }}" = '41 * * * *' ] || [ "${{ inputs.scope }}" = 'montana' ]; then
+            title="states: Refresh Montana's camera images"
+          else
+            title="states: Rebuild the camera lists from the agencies' feeds"
+          fi
+          printf '%s\n\n%s\n' "$title" "$(cat "$RUNNER_TEMP/notes.txt")" | git commit -F -
+          # the health bot commits only states/health, so rebasing over it cannot conflict
+          git pull --rebase origin main
+          git push
