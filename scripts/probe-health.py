@@ -44,8 +44,12 @@ CLUSTER_MIN = 3         # 2 cameras can share an image by being the same camera 
 STALE_SEC = 24 * 3600
 MAGIC = (b'\xff\xd8', b'\x89P', b'GI')   # jpeg, png, gif
 PER_HOST = 8
+# A state this dark has almost always changed something on its side (Alabama renumbered its
+# cameras and served one "No camera" card on 626 of 629), not had a bad day: say so out loud.
+DARK = 0.9
 
 _sema, _lock = {}, threading.Lock()
+ALERTS = []
 
 
 def host_slot(url):
@@ -177,10 +181,16 @@ def probe(code, path, known):
     # throttled, or the URLs never left this machine: Oregon read as 86% offline
     # because 964 of its snapshot URLs contain a space. Publishing that would
     # replace the lie we are fixing with a louder one. Say nothing instead.
+    # But staying quiet here is also how New York sat dark for three weeks in October 2026
+    # behind its September health file, so the skip is raised as an alert (see main).
     if counts['offline'] / len(urls) > 0.4:
         print(f'  {code:7} {len(urls):6} cameras  SKIPPED, {counts["offline"]} offline '
               f'({counts["offline"]/len(urls):.0%}) looks like our fault, not theirs', flush=True)
+        ALERTS.append(f'{code}: {counts["offline"]} of {len(urls)} snapshots did not load, so the sweep '
+                      f'skipped it and the map still shows its last good health')
         return None
+    if bad / len(urls) >= DARK:
+        ALERTS.append(f'{code}: {bad} of {len(urls)} snapshots are not a live view ({dict(counts)})')
 
     doc = {'checked_at': now.isoformat(timespec='seconds').replace('+00:00', 'Z'),
            'cameras': len(urls), 'counts': dict(counts),
@@ -218,6 +228,11 @@ def main():
     print(f'\n{sum(tot.values())} cameras are not showing a live view '
           f'({dict(tot)}) in {time.time()-t0:.0f}s')
     print(f'{len(known)} placeholder fingerprints now known')
+    for a in ALERTS:
+        print(f'  ALERT {a}')
+    # the workflow turns this file into a GitHub issue; outside CI it is not written
+    if os.environ.get('ALERTS_FILE'):
+        json.dump(ALERTS, open(os.environ['ALERTS_FILE'], 'w'), indent=1)
 
 
 if __name__ == '__main__':

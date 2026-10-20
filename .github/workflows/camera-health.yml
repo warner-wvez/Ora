@@ -13,6 +13,7 @@ concurrency:
 
 permissions:
   contents: write
+  issues: write    # a state gone dark opens an issue, which emails the repo owner
 
 jobs:
   sweep:
@@ -28,7 +29,33 @@ jobs:
       # Range requests keep this near 42MB against 27 state governments' servers,
       # rather than the 1.4GB it would cost to pull whole JPEGs.
       - name: Probe every camera
-        run: python3 scripts/probe-health.py
+        run: ALERTS_FILE="$RUNNER_TEMP/alerts.json" python3 scripts/probe-health.py
+
+      # One open issue, labelled dark-state, says which states are dark right now. It is
+      # opened when a state goes dark, commented on while any stay dark, and closed when
+      # the sweep comes back clean. Silence is how New York hid for three weeks.
+      - name: Raise or clear the dark-state issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create dark-state --color B60205 --description 'A state the health sweep cannot see' --force
+          open=$(gh issue list --label dark-state --state open --json number -q '.[0].number')
+          if [ -s "$RUNNER_TEMP/alerts.json" ] && [ "$(python3 -c "import json;print(len(json.load(open('$RUNNER_TEMP/alerts.json'))))")" != 0 ]; then
+            body=$(python3 -c "import json;print('\n'.join('- '+a for a in json.load(open('$RUNNER_TEMP/alerts.json'))))")
+            body="$body
+
+          From the sweep at $(date -u '+%Y-%m-%d %H:%M UTC'), run ${{ github.run_id }}. A state this dark has usually changed something on its side: renumbered its cameras, rotated its stream ids, or moved websites. The rebuild workflow may already fix it; if not, its builder needs a look."
+            if [ -z "$open" ]; then
+              gh issue create --title 'Camera health: a state has gone dark' --label dark-state --body "$body"
+            else
+              # comment only when the list of dark states changed, or every sweep would email
+              last=$(gh issue view "$open" --json body,comments -q 'if (.comments|length)>0 then .comments[-1].body else .body end' | grep '^- ' | cut -d: -f1 | sort)
+              now=$(printf '%s\n' "$body" | grep '^- ' | cut -d: -f1 | sort)
+              if [ "$last" != "$now" ]; then gh issue comment "$open" --body "$body"; else echo 'same dark states as last time'; fi
+            fi
+          elif [ -n "$open" ]; then
+            gh issue close "$open" --comment 'The sweep is clean again: no state is dark.'
+          fi
 
       - name: Commit the verdicts
         run: |

@@ -45,6 +45,17 @@ this week is fine next week, and a one-off sweep would rot into a different kind
 than the one it fixed. The sweep takes about 40 minutes, so the bot rebases before it
 pushes; it owns `states/health/` alone, so the rebase cannot conflict.
 
+**It says when a whole state goes dark.** A state where 40 percent of snapshots fail to
+load is skipped, because that much `offline` usually means the sweep was throttled, and
+publishing it would grey a working state. But a skipped state keeps its last good health
+file, and that is how New York sat dark for three weeks in October 2026 while the map said
+it was fine. So the sweep now raises an alert for a skipped state, and for any state where
+90 percent or more of its snapshots are not a live view (Alabama's renumbering served one
+"No camera" card on 626 of 629). The workflow turns the alerts into one open GitHub issue
+labelled `dark-state`, which emails the repo owner, comments on it only when the list of
+dark states changes, and closes it when a sweep comes back clean. Video-only states have
+no snapshots and are not covered.
+
 Measured bad rates when the sweep first ran: Georgia 25 percent, Alaska 27, Florida 13,
 New York 9, Arizona 10, Washington 3, California, Pennsylvania, and Utah near zero.
 
