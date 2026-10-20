@@ -1,13 +1,12 @@
 {
-"checked_at": "2026-10-20T11:54:55Z",
+"checked_at": "2026-10-20T17:21:13Z",
 "cameras": 241,
 "counts": {
-"offline": 13
+"offline": 12
 },
 "status": {
 "https://www.trimarc.org/images/milestone/CCTV_02_165_0412.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_02_KY911_0001.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_05_264_0007.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_05_64_0054-1.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_05_65_1359.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_06_71_0770.jpg": "offline",
