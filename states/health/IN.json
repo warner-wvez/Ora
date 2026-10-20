@@ -1,35 +1,33 @@
 {
-"checked_at": "2026-10-19T22:38:31Z",
+"checked_at": "2026-10-20T05:05:47Z",
 "cameras": 705,
 "counts": {
 "offline": 1,
-"placeholder": 24
+"placeholder": 22
 },
 "status": {
 "/images/icon-camera-closed-fill-solid-padded.svg": "offline",
-"https://public.carsprogram.org/cameras/IN/INDOT_1063_pTAwI7BGfS8TTGHZ.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_1048_Z4O30iTCv6QpTVD4.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_159_AA1RWSrwkYhfVmy8.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_165_piBDQtVc77jT1ej4.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_166_cWmaHGs3o7mGdusK.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_176_ixrpDXCMB_z5Pv7_.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_311_u-EAh5hPfc-DdumfI.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_497_UMJx2ZaLysvGw-c0.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_504_6qrHXuVHQkVhql46.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_506_JVTSpzrtwvIYcFt4.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_441_zyDYV7dPAIVUrWyk.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_449_SFBDSZOzQZVkvFHy.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_471_waiiDrAO8WUuv-xs.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_542_879tOx5s3ps57tLb.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_585_qsuarWdNyzerTBUe.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_630_gCvvags27TOAaCa7.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_634_vPPvjkJrDmE8y2Hi.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_64_s-eu0k9ALTftKW8c.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_677_vL81it7xyjsz7ScI.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_701_TwmFg9hoTloYYV7d.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_716_iM-lcSv2zHkYYLsS.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_719_k9pXCoMjALceg6QN.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_726_yWdeqK1LgnrcsXuX.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_728_2A0gfy2QXGvqzLN1.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_735_53NRwnsqoNn3_O0t.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_786_PBDtDphT95KO3a06.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_79_41j6mZks_E8JmE2I.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_84_s3JSbABSjzC-MKC8.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_7_EApncdic1102Fu96.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_999_qiy-ohd3PfUTa8Hm.flv.png": "placeholder"
 }
 }
