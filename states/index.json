@@ -54,7 +54,8 @@
    35.5
   ],
   "zoom": 6.5,
-  "video": true
+  "video": true,
+  "relay": "https://relay.wvez.org/nc"
  },
  "NV": {
   "name": "Nevada",

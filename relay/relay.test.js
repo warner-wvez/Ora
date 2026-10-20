@@ -19,12 +19,21 @@ test('parsePath reads Pennsylvania and keeps the two states apart', () => {
   assert.equal(parsePath('/pa/4774/nope/chan-2274/index.m3u8'), null);
 });
 
+test('parsePath reads North Carolina regional hosts and refuses the other states\' shapes', () => {
+  assert.deepEqual(parsePath('/nc/4020/cfmse01/chan-5135_l/index.m3u8'), { state: 'nc', imageId: '4020', host: 'cfmse01', chan: 'chan-5135_l', file: 'index.m3u8' });
+  assert.equal(parsePath('/nc/4020/cftse12/chan-5135_l/d0e1d450bf25_seg3601.mp4').host, 'cftse12');
+  assert.equal(parsePath('/nc/4020/se1/chan-5135_l/index.m3u8'), null);
+  assert.equal(parsePath('/pa/4020/cfmse01/chan-5135_l/index.m3u8'), null);
+});
+
 test('upstreamUrl builds each state host from the short name and appends the token', () => {
   const p = parsePath('/fl/691/se7/chan-3936_h/xflow.m3u8');
   assert.equal(upstreamUrl(p, 'abc123'), 'https://dis-se7.divas.cloud:8200/chan-3936_h/xflow.m3u8?token=abc123');
   assert.equal(upstreamUrl(p), 'https://dis-se7.divas.cloud:8200/chan-3936_h/xflow.m3u8');
   const q = parsePath('/pa/4774/se1/chan-2274/xflow.m3u8');
   assert.equal(upstreamUrl(q, 'abc123'), 'https://pa-se1.arcadis-ivds.com:8200/chan-2274/xflow.m3u8?token=abc123');
+  const n = parsePath('/nc/4020/cfmse01/chan-5135_l/xflow.m3u8');
+  assert.equal(upstreamUrl(n, 'abc123'), 'https://cfmse01.services.ncdot.gov:8887/chan-5135_l/xflow.m3u8?token=abc123');
 });
 
 test('rewritePlaylist strips the token and pins absolute host references to the relay path', () => {

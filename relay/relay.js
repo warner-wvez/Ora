@@ -21,6 +21,8 @@
 const STATES = {
   fl: { short: /^se\d{1,3}$/, origin: (h) => `https://dis-${h}.divas.cloud:8200` },
   pa: { short: /^se\d{1,2}$/, origin: (h) => `https://pa-${h}.arcadis-ivds.com:8200` },
+  // North Carolina's hosts are named by region and site, e.g. cfmse01, cfese04, cftse12
+  nc: { short: /^cf[a-z]se\d{1,2}$/, origin: (h) => `https://${h}.services.ncdot.gov:8887` },
 };
 
 const PATH = /^\/([a-z]{2})\/(\d{1,7})\/([a-z0-9-]{1,12})\/(chan-[A-Za-z0-9_]{1,40})\/([A-Za-z0-9_.-]{1,80})$/;

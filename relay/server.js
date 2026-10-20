@@ -6,10 +6,9 @@
 // GET /healthz                                      -> {ok, cameras cached, session age}
 // GET /<state>/<imageId>/<seN>/<chan>/<file>        -> the upstream file, token added, playlist rewritten
 //
-// Two states, one shape. Both lock the stream behind the agency's own Referer plus a
-// per-camera token minted through the agency's site, and both are on the same vendor
-// platform, so the token dance is the same two calls. Florida needs a session in front of
-// them; Pennsylvania does not.
+// Three states, one shape. Each locks the stream behind a per-camera token minted through
+// the agency's site, and all are on the same vendor platform, so the token dance is the same
+// two calls. Florida needs a session in front of them; Pennsylvania and North Carolina do not.
 //
 // Florida, the same steps fl511.com's own page performs, anonymously:
 //   1. GET https://fl511.com/cctv once: a session cookie and an anti-forgery token.
@@ -23,6 +22,13 @@
 //   2. POST it to https://pa.arcadis-ivds.com/api/SecureTokenUri/GetSecureTokenUriBySourceId.
 // Note the different host and path from Florida's, and that PennDOT's sourceId is a name
 // ("mp10-5e-fortcherryroad"), not a number, so the JSON is passed through untouched.
+//
+// North Carolina, traced 2026-10-20, is Pennsylvania's two calls on its own hosts:
+//   1. GET https://www.drivenc.gov/Camera/GetVideoUrl?imageId=N, plain.
+//   2. POST it to https://vds.nc.insight-atms.com/api/SecureTokenUri/GetSecureTokenUriBySourceId,
+//      which answers CORS only to www.drivenc.gov. That is why a browser cannot mint it.
+// Its stream hosts (cf?seNN.services.ncdot.gov:8887) do not check the Referer at all, so
+// the token is the whole lock; the relay sends drivenc's Referer anyway, like a browser would.
 //
 // Tokens are per camera and were stable across repeated mints in testing, so each is cached
 // and re-minted only when the stream answers 401. Neither token is IP-bound: one minted on a
@@ -41,9 +47,11 @@ const FL = 'https://fl511.com';
 const PA = 'https://www.511pa.com';
 const TOKEN_API = 'https://divas.cloud/VDS-API/SecureTokenUri/GetSecureTokenUriBySourceId';
 const PA_TOKEN_API = 'https://pa.arcadis-ivds.com/api/SecureTokenUri/GetSecureTokenUriBySourceId';
+const NC = 'https://www.drivenc.gov';
+const NC_TOKEN_API = 'https://vds.nc.insight-atms.com/api/SecureTokenUri/GetSecureTokenUriBySourceId';
 // The site whose Referer each state's stream host demands. Sending the wrong one is a 401,
 // so fl511's Referer does not open a Pennsylvania stream and the reverse is also true.
-const SITE = { fl: FL, pa: PA };
+const SITE = { fl: FL, pa: PA, nc: NC };
 const SESSION_MAX_AGE_MS = 6 * 3600 * 1000;
 const TOKEN_MAX_AGE_MS = 12 * 3600 * 1000;
 const UPSTREAM_TIMEOUT_MS = 15000;
@@ -51,7 +59,7 @@ const UPSTREAM_TIMEOUT_MS = 15000;
 const session = { cookie: '', antiForgery: '', at: 0, refreshing: null };
 const tokens = new Map();          // "<state>:<imageId>" -> {token, at}
 const inflight = new Map();        // "<state>:<imageId>" -> Promise<string>
-const rateLimited = { fl: 0, pa: 0 };   // per state: one agency's 429 must not stall the other
+const rateLimited = { fl: 0, pa: 0, nc: 0 };   // per state: one agency's 429 must not stall another
 function rateGuard(state) {
   const until = rateLimited[state];
   if (Date.now() >= until) return;
@@ -76,27 +84,29 @@ async function refreshSession() {
   return session.refreshing;
 }
 
-// Pennsylvania's token, the same two calls its own camera page makes and nothing else:
-// no session to warm, no cookie, no anti-forgery header.
-async function mintTokenPA(imageId) {
-  rateGuard('pa');
-  const r = await fetch(`${PA}/Camera/GetVideoUrl?imageId=${imageId}`, {
-    headers: { 'User-Agent': UA, 'X-Requested-With': 'XMLHttpRequest', 'Referer': `${PA}/cctv` },
+// Pennsylvania's and North Carolina's token, the same two calls their own camera pages make
+// and nothing else: no session to warm, no cookie, no anti-forgery header.
+const PLAIN = { pa: { site: PA, api: PA_TOKEN_API }, nc: { site: NC, api: NC_TOKEN_API } };
+async function mintTokenPlain(state, imageId) {
+  rateGuard(state);
+  const { site, api } = PLAIN[state];
+  const r = await fetch(`${site}/Camera/GetVideoUrl?imageId=${imageId}`, {
+    headers: { 'User-Agent': UA, 'X-Requested-With': 'XMLHttpRequest', 'Referer': `${site}/cctv` },
     signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
   });
-  if (r.status === 429) { rateLimited.pa = Date.now() + 15000; const e = new Error('511pa rate limit'); e.status = 503; e.retryAfter = 15; throw e; }
-  if (!r.ok) { const e = new Error(`511pa GetVideoUrl ${r.status}`); e.status = 502; throw e; }
+  if (r.status === 429) { rateLimited[state] = Date.now() + 15000; const e = new Error(`${state} rate limit`); e.status = 503; e.retryAfter = 15; throw e; }
+  if (!r.ok) { const e = new Error(`${state} GetVideoUrl ${r.status}`); e.status = 502; throw e; }
   // a camera with no video answers 200 with an empty body, which JSON.parse would throw on
   const body = (await r.text()).trim();
   if (!body || body[0] !== '{') { const e = new Error('camera has no video source'); e.status = 404; throw e; }
   const src = JSON.parse(body);
   if (!src || !src.sourceId) { const e = new Error('camera has no video source'); e.status = 404; throw e; }
-  const t = await fetch(PA_TOKEN_API, {
+  const t = await fetch(api, {
     method: 'POST', body: JSON.stringify(src),
-    headers: { 'User-Agent': UA, 'Content-Type': 'application/json', 'Origin': PA, 'Referer': `${PA}/` },
+    headers: { 'User-Agent': UA, 'Content-Type': 'application/json', 'Origin': site, 'Referer': `${site}/` },
     signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
   });
-  if (!t.ok) { const e = new Error(`arcadis token api ${t.status}`); e.status = 502; throw e; }
+  if (!t.ok) { const e = new Error(`${state} token api ${t.status}`); e.status = 502; throw e; }
   const m = /token=([A-Fa-f0-9]+)/.exec(String(await t.json()));
   if (!m) { const e = new Error('token api returned no token'); e.status = 502; throw e; }
   return m[1];
@@ -132,7 +142,7 @@ async function mintToken(imageId) {
   return m[1];
 }
 
-const MINT = { fl: mintToken, pa: mintTokenPA };
+const MINT = { fl: mintToken, pa: (id) => mintTokenPlain('pa', id), nc: (id) => mintTokenPlain('nc', id) };
 // cached per state as well as per camera: the same imageId means a different camera in
 // each state, and one state's token never opens another's stream
 function tokenFor(state, imageId, force) {
