@@ -7,6 +7,14 @@ commits are not listed.
 ## 2026-10
 
 ### Added
+- Tap a landmark, shop or restaurant on the map and its card opens with its name, kind and
+  the cameras within a mile; tap empty map to close it.
+- A route preview for testing on your own machine: search a place or an address, compare two
+  or three routes by trip time, traffic delay and the cameras on each, with traffic colours,
+  a time bubble on each route and a 3D preview ride. It runs on TomTom's APIs through a local
+  proxy that holds the key, under their evaluation terms, and the live site never calls it.
+  On that machine a card also gets the address, phone and website from Overture Maps Places,
+  built per region by `builders/build-places.py`.
 - A locate button under the zoom buttons shows where you are as a blue dot with an accuracy
   ring and flies there at city zoom. It asks for location only when tapped, and says so in
   one line if location is off. Opening the bare address returns to the last view.
@@ -20,6 +28,8 @@ commits are not listed.
   again. When a whole state goes dark, the health sweep opens a GitHub issue.
 
 ### Changed
+- Search results list inside the panel, two lines a row, instead of a dropdown the panel cut
+  off. The panel is wider, 340 px.
 - The map moves more smoothly. A wheel or pinch zoom no longer rebuilds the camera pins on
   every frame (40 rebuilds in one level of wheel zoom, now 1), the panel is solid white
   instead of a blur over the moving map, phones draw the map at 2x instead of 3x, and a flick

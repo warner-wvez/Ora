@@ -3,8 +3,9 @@
 Lets the map, served from this machine, try a route preview on TomTom's APIs: search a place
 or address, open its card, and compare two or three routes by trip time, traffic delay and the
 cameras on each, with traffic colours on the roads. It is for testing on this machine only,
-under the Evaluation Use terms of TomTom's Portal agreement, and lives on the `tomtom-eval`
-branch. Production will use another provider. The user-facing behaviour is in
+under the Evaluation Use terms of TomTom's Portal agreement: the page turns these features on
+only when it is served from localhost and this proxy answers, so the live site never calls
+TomTom. Production will use another provider. The user-facing behaviour is in
 [docs/2.3-route-preview.md](../../docs/2.3-route-preview.md).
 
 Node 20+, no dependencies.

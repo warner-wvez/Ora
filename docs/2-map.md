@@ -51,9 +51,18 @@ arrow keys cycle to the next camera in spatial order, and F toggles fit and fill
 ## Search
 
 The search box matches every loaded camera by name, road, and intersection, instantly and
-in the browser. Pick a result and the map flies to it and opens it. Only the states loaded
-right now are searched; when nothing loaded matches, a search offers to turn on the state
-it finds.
+in the browser. Results list inside the panel, two lines a row: the name, then where it is.
+Pick a result and the map flies to it and opens it. Only the states loaded right now are
+searched; when nothing loaded matches, a search offers to turn on the state it finds. Run on
+your own machine with the [route preview](2.3-route-preview.md) proxy, it also finds places
+and addresses.
+
+## Tap the map
+
+Tap a landmark, a shop or a restaurant drawn on the map and its card opens: its name and
+kind, and how many cameras sit within a mile. Tap empty map to close it. Camera pins and
+state bubbles answer a tap first. On your own machine the card also fills in the address,
+phone and website from Overture Maps Places (see the [route preview](2.3-route-preview.md)).
 
 ## Basemap
 

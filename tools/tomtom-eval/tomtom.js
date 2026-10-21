@@ -1,10 +1,10 @@
 // Pure logic for the local TomTom evaluation proxy: no network, no state, unit-tested.
 //
-// This is for Warner's own testing of a route preview on his laptop, which TomTom's Portal
-// terms call Evaluation Use. It never runs on the live site: the proxy listens on 127.0.0.1
-// only, the page turns these features on only when it is itself served from localhost, and
-// the branch that carries them is not merged to main. Production will use another provider,
-// which is why the page sees Ora's own small shapes below and never TomTom's.
+// This is for testing a route preview on one laptop, which TomTom's Portal terms call
+// Evaluation Use. It never runs on the live site: the proxy listens on 127.0.0.1 only and holds
+// the key, and the page turns these features on only when it is itself served from localhost
+// and the proxy answers. Production will use another provider, which is why the page sees
+// Ora's own small shapes below and never TomTom's.
 //
 // Three upstream calls, nothing else:
 //   place search   https://api.tomtom.com/search/2/search/<q>.json

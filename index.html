@@ -2095,8 +2095,12 @@ function countNear([lng,lat], m){
    builders/build-places.py, one small file per zoom-15 tile) fills in the address, phone and
    website. A tap on empty map closes the card. Ora's own pins, bubbles and route lines answer
    a tap first, and while routes are up taps belong to the routes. */
-const PLACES={index:undefined, tiles:new Map()};
+// The place files are built on this machine and not hosted anywhere public yet, so the live
+// site does not look for them (each look would log a 404); there a card keeps the map tile's
+// name and kind and the cameras near it.
+const PLACES={index:undefined, tiles:new Map(), on:/^(localhost|127\.0\.0\.1)$/.test(location.hostname)};
 async function placesIndex(){
+  if(!PLACES.on) return null;
   if(PLACES.index===undefined){ try{ const r=await fetch('places/index.json'); PLACES.index=r.ok ? await r.json() : null; }catch(e){ PLACES.index=null; } }
   return PLACES.index;
 }
