@@ -7,6 +7,9 @@ commits are not listed.
 ## 2026-10
 
 ### Added
+- A locate button under the zoom buttons shows where you are as a blue dot with an accuracy
+  ring and flies there at city zoom. It asks for location only when tapped, and says so in
+  one line if location is off. Opening the bare address returns to the last view.
 - North Carolina video plays again, 1,046 streams through the relay. Its token is
   Pennsylvania's two calls on drivenc.gov's own hosts, and a browser cannot make the first
   one, so the relay mints it.

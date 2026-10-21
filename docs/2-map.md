@@ -22,6 +22,14 @@ moving the map. New York City is folded into New York's row.
 The Chicago ticket map is a different kind of data, so it never loads on its own. Turn it
 on in its own section of the panel.
 
+## Find yourself
+
+The locate button under the zoom buttons shows your position as a blue dot with a ring for
+how sure the browser is, and flies there at about city zoom, so the cameras around you load.
+The browser asks for permission only when you tap it, never on load. If location is off for
+the site, one line says so and the map stays where it was. Opening the bare address, with no
+link, returns to wherever you last looked; the very first visit opens on the whole country.
+
 ## Read a pin
 
 Pins cluster as you zoom out and split as you zoom in, with a short morph between levels

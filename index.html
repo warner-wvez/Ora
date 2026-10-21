@@ -102,6 +102,11 @@
   #legend .sizedot { border-radius: 50%; background: #b0b0b5; }
   #legend .sizelbl { font-size: 9px; color: #8e8e93; }
 
+  /* your location: bigger than a camera pin, with a thicker white ring and a shadow, so it never
+     reads as one more blue camera in a dense city (MapLibre's stock dot is smaller than our pins) */
+  .maplibregl-user-location-dot, .maplibregl-user-location-dot::before { width: 18px; height: 18px; background-color: #0a84ff; }
+  .maplibregl-user-location-dot::after { width: 26px; height: 26px; left: -4px; top: -4px; border: 4px solid #fff; box-shadow: 0 1px 7px rgba(0,0,0,.45); }
+
   .basemap { margin-top: 10px; border-top: 1px solid #ececf0; padding-top: 10px; }
   .basemap .hd { font-size: 11px; font-weight: 600; color: #6e6e73; margin-bottom: 6px; }
 
@@ -606,6 +611,44 @@ function showOverview(){
   map.fitBounds(OVERVIEW_BOUNDS,{padding:pad,duration:700});
 }
 map.addControl(new maplibregl.NavigationControl(),'top-right');
+/* locate me: the blue dot every map app starts from. Asked for only when the button is tapped,
+   never on load, and a refusal keeps the map where it is with one plain line saying why.
+   MapLibre's own GeolocateControl is not used because it disables itself, silently, for anyone
+   who blocked location earlier, so their tap would get no answer at all. The look is its own:
+   the same button icon and the same dot. */
+let meMarker=null;
+// the accuracy ring as a real circle on the ground, so it stays true at every zoom
+function accuracyCircle([lng,lat], m){
+  const dy=m/111320, dx=dy/Math.cos(lat*Math.PI/180), ring=[];
+  for(let i=0;i<=64;i++){ const a=i/64*2*Math.PI; ring.push([lng+dx*Math.cos(a), lat+dy*Math.sin(a)]); }
+  return {type:'Feature', geometry:{type:'Polygon', coordinates:[ring]}, properties:{}};
+}
+function showMe(pos){
+  const c=[pos.coords.longitude, pos.coords.latitude], acc=Math.max(10, pos.coords.accuracy||0);
+  if(!meMarker){ const el=document.createElement('div'); el.className='maplibregl-user-location-dot';
+    meMarker=new maplibregl.Marker({element:el}).setLngLat(c).addTo(map); }
+  else meMarker.setLngLat(c);
+  const src=map.getSource('me-accuracy'); if(src) src.setData(accuracyCircle(c, acc));
+  // frame the whole ring when the fix is rough (a laptop on wifi), but never closer than a city view
+  const dy=acc/111320, dx=dy/Math.cos(c[1]*Math.PI/180);
+  map.fitBounds([[c[0]-dx, c[1]-dy],[c[0]+dx, c[1]+dy]], {maxZoom:12, padding:40, duration:900});
+}
+function locateMe(btn){
+  if(!navigator.geolocation){ flashCycleNotice('This browser cannot share your location'); return; }
+  btn.classList.add('maplibregl-ctrl-geolocate-waiting');
+  navigator.geolocation.getCurrentPosition(
+    (pos)=>{ btn.classList.remove('maplibregl-ctrl-geolocate-waiting'); btn.classList.add('maplibregl-ctrl-geolocate-active'); showMe(pos); },
+    (err)=>{ btn.classList.remove('maplibregl-ctrl-geolocate-waiting');
+      flashCycleNotice(err.code===1 ? 'Location is off for this site, so the map stays where it is'
+                                    : 'Could not find your location, so the map stays where it is'); },
+    {enableHighAccuracy:true, timeout:10000, maximumAge:60000});
+}
+map.addControl({
+  onAdd(){ const g=document.createElement('div'); g.className='maplibregl-ctrl maplibregl-ctrl-group';
+    g.innerHTML='<button type="button" class="maplibregl-ctrl-geolocate" title="Show my location" aria-label="Show my location"><span class="maplibregl-ctrl-icon" aria-hidden="true"></span></button>';
+    const b=g.firstChild; b.addEventListener('click',()=>locateMe(b)); return g; },
+  onRemove(){}
+},'top-right');
 const srcId=(k)=>`src-${k}`;
 
 /* ---------- routes storage ---------- */
@@ -1940,7 +1983,11 @@ function serializeState(){ const p=new URLSearchParams();
   if(store.enfColorMode!=='verdict') p.set('cm',store.enfColorMode); if(store.basemap!=='light') p.set('b',store.basemap);
   if(store.enfFilter.verdicts.size<4) p.set('fv',[...store.enfFilter.verdicts].join(',')); if(store.enfFilter.types.size<2) p.set('ft',[...store.enfFilter.types].join(','));
   return p.toString(); }
-function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+serializeState()); }
+function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+serializeState());
+  // the last view, so opening the bare address returns where you left off rather than the overview
+  try{ const c=map.getCenter(); localStorage.setItem('ora-view', JSON.stringify({c:[c.lng,c.lat], z:map.getZoom()})); }catch(e){} }
+function lastView(){ try{ const v=JSON.parse(localStorage.getItem('ora-view')||'null');
+  return (v && Array.isArray(v.c) && v.c.every(Number.isFinite) && Number.isFinite(v.z)) ? v : null; }catch(e){ return null; } }
 async function restoreState(){
   const p=new URLSearchParams(location.hash.slice(1));
   const layers=(p.get('l')||'').split(',').filter(k=>LAYERS[k]);
@@ -1960,7 +2007,7 @@ async function restoreState(){
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr());
   syncEnfControls(); setBasemap(store.basemap);
   if(p.has('c')&&p.has('z')){ const [lng,lat]=p.get('c').split(',').map(Number); map.jumpTo({center:[lng,lat],zoom:Number(p.get('z'))}); }
-  else showOverview();
+  else { const v=lastView(); if(v) map.jumpTo({center:v.c, zoom:v.z}); else showOverview(); }
   syncMaster();
 }
 
@@ -2081,6 +2128,10 @@ map.on('load', async ()=>{
   outlineP.then(o=>{ if(o) map.getSource('us-states').setData(o); });
   map.addLayer({id:'state-lines',type:'line',source:'us-states',
     paint:{'line-color':'#9aa1ac','line-width':['interpolate',['linear'],['zoom'],3,0.7,5,1.1,8,1.5],'line-opacity':['interpolate',['linear'],['zoom'],3,0.8,8,0.35]}}, firstSymbol);
+  // the locate-me accuracy ring sits under the camera pins, the blue dot itself above everything
+  map.addSource('me-accuracy',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+  map.addLayer({id:'me-accuracy',type:'fill',source:'me-accuracy',paint:{'fill-color':'#007aff','fill-opacity':0.12}});
+  map.addLayer({id:'me-accuracy-edge',type:'line',source:'me-accuracy',paint:{'line-color':'#007aff','line-opacity':0.35,'line-width':1}});
   addCamsLayers(); bindCamsHandlers();
   map.addSource('hl-hover',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});

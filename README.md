@@ -29,7 +29,8 @@ The missing state is New Jersey, whose feeds cannot be played from a static page
 
 ## Quick start
 
-1. Open the map. It starts on the whole country with a counted bubble per covered state.
+1. Open the map. The first visit starts on the whole country with a counted bubble per
+   covered state; after that it opens where you last looked. The locate button finds you.
 2. Zoom in anywhere, or tap a state's bubble. Cameras load for whatever the map shows.
 3. Click a camera. Video fades in over the snapshot where it plays; the arrow keys cycle
    to the next camera in spatial order; click the picture to go full screen.
