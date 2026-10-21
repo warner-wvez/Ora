@@ -9,7 +9,7 @@ branch. Production will use another provider. The user-facing behaviour is in
 
 Node 20+, no dependencies.
 
-    node --test tools/tomtom-eval/tomtom.test.js     # nine unit tests
+    node --test tools/tomtom-eval/tomtom.test.js     # ten unit tests
     node tools/tomtom-eval/proxy.js                  # http://127.0.0.1:8792
     curl http://127.0.0.1:8792/healthz               # key loaded? usage this month
 
@@ -28,7 +28,7 @@ different file.
 | Proxy path | TomTom API | Free each month |
 |---|---|---|
 | `/search?q=&near=lat,lon` | Search API, fuzzy search, US only | 2,500 |
-| `/route?from=lat,lon&to=lat,lon` | Routing API, traffic on, 2 alternatives, no turn instructions | 20,000 |
+| `/route?from=lat,lon&to=lat,lon` | Routing API, traffic on, 2 alternatives, traffic and important-road sections, no turn instructions | 20,000 |
 | `/traffic/{z}/{x}/{y}.png` | Raster flow tiles, `relative0` style | 200,000 |
 
 TomTom blocks requests at the free limit instead of billing. The proxy counts each call in

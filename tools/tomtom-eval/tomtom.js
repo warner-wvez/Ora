@@ -40,6 +40,10 @@ function routeUrl(key, from, to) {
     key, traffic: 'true', maxAlternatives: '2', routeRepresentation: 'polyline',
     computeTravelTimeFor: 'all', travelMode: 'car', departAt: 'now',
   });
+  // traffic sections colour the line itself (slow and jammed stretches), and the important road
+  // stretches name the roads that tell one route from another ("via I-5")
+  p.append('sectionType', 'traffic');
+  p.append('sectionType', 'importantRoadStretch');
   return `${API}/routing/1/calculateRoute/${from.lat},${from.lon}:${to.lat},${to.lon}/json?${p}`;
 }
 
@@ -71,10 +75,30 @@ function shapePlaces(json) {
   });
 }
 
-// A route is its time, its delay, its length and its line as [lon, lat] pairs for MapLibre.
+// How bad a traffic section is, in the three steps the big apps colour a route line by:
+// slow (orange), jam (red), closed (dark red). magnitudeOfDelay is 1 minor, 2 moderate,
+// 3 major, 4 undefined (closures and other open-ended delays).
+function trafficLevel(sec) {
+  if (sec.simpleCategory === 'ROAD_CLOSURE' || sec.magnitudeOfDelay === 4) return 'closed';
+  return sec.magnitudeOfDelay === 3 ? 'jam' : 'slow';
+}
+// The roads a route is known by, most important first: a road number where there is one
+// ("I-5"), else the street name. Two are enough to tell routes apart.
+function roadNames(sections) {
+  const byIdx = new Map();
+  for (const s of sections) {
+    if (s.sectionType !== 'IMPORTANT_ROAD_STRETCH') continue;
+    const name = (s.roadNumbers && s.roadNumbers[0] && s.roadNumbers[0].text) || (s.streetName && s.streetName.text);
+    if (name && !byIdx.has(s.importantRoadStretchIndex)) byIdx.set(s.importantRoadStretchIndex, name);
+  }
+  return [...byIdx.entries()].sort((a, b) => a[0] - b[0]).map((e) => e[1])
+    .filter((n, i, a) => a.indexOf(n) === i).slice(0, 2);
+}
+// A route is its time, its delay, its length, its line as [lon, lat] pairs for MapLibre, the
+// slow stretches by point index, and the roads it goes by.
 function shapeRoutes(json) {
   return ((json && json.routes) || []).map((r) => {
-    const s = r.summary || {};
+    const s = r.summary || {}, sections = r.sections || [];
     const coords = [];
     for (const leg of r.legs || []) for (const p of leg.points || []) coords.push([p.longitude, p.latitude]);
     return {
@@ -83,6 +107,9 @@ function shapeRoutes(json) {
       noTrafficSeconds: s.noTrafficTravelTimeInSeconds || null,
       meters: s.lengthInMeters || 0,
       coords,
+      traffic: sections.filter((x) => x.sectionType === 'TRAFFIC' && x.endPointIndex > x.startPointIndex)
+        .map((x) => ({ from: x.startPointIndex, to: x.endPointIndex, level: trafficLevel(x) })),
+      via: roadNames(sections),
     };
   });
 }

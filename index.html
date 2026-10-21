@@ -25,24 +25,35 @@
     background: rgba(255,255,255,0.9);
     backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 12px; padding: 12px 14px 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    width: 258px; max-height: calc(100vh - 24px); overflow-y: auto;
+    width: 340px; max-height: calc(100vh - 24px); overflow-y: auto;
   }
   #panel .brand-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
   #panel .brand { font-size: 15px; font-weight: 700; color: #1c1c1e; }
   #share { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
   #share:hover { background: #e0ecff; }
 
+  /* a filled field, the way Apple and Google draw search; results flow inside the panel (the
+     dropdown used to sit absolutely inside it and the panel cut it off), two lines a row */
   .search-wrap { position: relative; margin-bottom: 10px; }
-  #search { width: 100%; font-size: 13px; padding: 7px 10px 7px 28px; border: 1px solid #dcdce1; border-radius: 8px; outline: none; background: #fff; }
-  #search:focus { border-color: #007aff; }
-  .search-wrap svg { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); opacity: .45; }
-  #search-results { position: absolute; top: 38px; left: 0; right: 0; background: #fff; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.18); overflow: hidden; z-index: 20; display: none; max-height: 260px; overflow-y: auto; }
+  #search { width: 100%; height: 40px; font-size: 14px; padding: 0 36px 0 36px; border: 1px solid transparent; border-radius: 10px; outline: none; background: #f2f2f7; color: #1c1c1e; text-overflow: ellipsis; }
+  #search:focus { border-color: #007aff; background: #fff; }
+  #search::placeholder { color: #8e8e93; }
+  .search-wrap > svg { position: absolute; left: 12px; top: 20px; transform: translateY(-50%); opacity: .5; }
+  .search-x { position: absolute; right: 6px; top: 6px; width: 28px; height: 28px; border: none; border-radius: 50%; background: transparent; color: #8e8e93; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .search-x:hover { background: #e5e5ea; }
+  .search-x[hidden] { display: none; }
+  #search-results { display: none; margin-top: 6px; }
   #search-results.show { display: block; }
-  .sr-item { padding: 7px 10px; font-size: 12px; color: #1c1c1e; cursor: pointer; display: flex; align-items: center; gap: 7px; }
+  #panel.searching > .grp, #panel.searching #dirBox { display: none; }
+  .sr-item { display: flex; align-items: center; gap: 10px; padding: 7px 6px; border-radius: 8px; cursor: pointer; }
   .sr-item:hover, .sr-item.kbd { background: #f2f2f7; }
-  .sr-item .sr-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
-  .sr-item .sr-sub { color: #a0a0a5; font-size: 10px; margin-left: auto; }
-  .sr-empty { padding: 8px 10px; font-size: 11px; color: #a0a0a5; }
+  .sr-ic { width: 30px; height: 30px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; background: #ececf0; color: #6e6e73; }
+  .sr-ic.cam { background: #e8f1ff; color: #0a84ff; }
+  .sr-ic.me { background: #e8f1ff; color: #0a84ff; }
+  .sr-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .sr-t { font-size: 14px; color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sr-s { font-size: 12px; color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+  .sr-empty { padding: 8px 6px; font-size: 12px; color: #8e8e93; }
 
   .grp { border-top: 1px solid #ececf0; }
   .grp-h { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 600; color: #1c1c1e; cursor: pointer; padding: 8px 0 6px; }
@@ -272,7 +283,7 @@
   @media (max-width: 640px) {
     /* collapsed is the brand row and the search box; cameras load for whatever the map
        shows, so there is no instruction left to carry */
-    #panel { top: 10px; left: 10px; right: 10px; width: auto; max-height: 98px; overflow: hidden; transition: max-height .22s ease; }
+    #panel { top: 10px; left: 10px; right: 10px; width: auto; max-height: 106px; overflow: hidden; transition: max-height .22s ease; }
     #panel.expanded { max-height: calc(100vh - 140px); max-height: calc(100dvh - 140px); overflow-y: auto; }
     #panelToggle { display: inline-block; }
     #addBanner { top: 104px; max-width: calc(100vw - 20px); }
@@ -325,39 +336,104 @@
     .rv-rm, .rx { padding: 10px 10px; font-size: 17px; }
   }
 
-  /* ---------- route preview (TomTom evaluation, this machine only) ---------- */
-  .sr-grp { padding: 7px 10px 3px; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #8e8e93; }
+  /* ---------- route preview (TomTom evaluation, this machine only) ----------
+     Laid out the way Google Maps (desktop) and Apple Maps (phone) do it: a place card with one
+     big Directions button, a From/To pair joined by a rail with a swap button, and route rows
+     that lead with a time coloured by traffic, then the roads, then the cameras. On a phone the
+     routes sit in a bottom sheet so the map stays in the middle. */
+  .sr-grp { padding: 8px 6px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #8e8e93; }
   .sr-grp span { font-weight: 500; text-transform: none; letter-spacing: 0; color: #aeaeb2; margin-left: 4px; }
-  .place-card { width: 260px; padding: 12px 14px 14px; }
-  #sheetContent .place-card { width: 100%; padding: 6px 16px 18px; }
-  .place-card h3 { font-size: 15px; margin: 0 0 3px; color: #1c1c1e; line-height: 1.3; padding-right: 22px; }
-  .place-addr { font-size: 12px; color: #6e6e73; line-height: 1.35; }
-  .place-go { margin-top: 12px; width: 100%; min-height: 40px; font-size: 14px; font-weight: 700; color: #fff; background: #0a84ff; border: none; border-radius: 10px; cursor: pointer; }
-  #dirBox { margin: -2px 0 10px; }
+  #dirBox { margin: 0 0 4px; }
   #dirBox[hidden] { display: none; }
-  .dir-head { display: flex; gap: 8px; align-items: flex-start; }
-  .dir-ends { flex: 1; min-width: 0; font-size: 12px; color: #3c3c43; }
-  .dir-row { display: flex; align-items: center; gap: 6px; padding: 2px 0; min-width: 0; }
-  .dir-row b { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #1c1c1e; }
-  .dir-lbl { flex: none; width: 34px; color: #8e8e93; }
-  .dir-change { flex: none; font-size: 11px; font-weight: 600; color: #007aff; background: none; border: none; padding: 0; cursor: pointer; }
-  .dir-x { flex: none; width: 28px; height: 28px; border: none; border-radius: 8px; background: #f2f2f7; color: #3c3c43; font-size: 13px; cursor: pointer; }
-  .dir-msg { font-size: 12px; color: #6e6e73; padding: 10px 2px 2px; }
-  .rt-card { border: 1px solid #e5e5ea; background: #fff; border-radius: 10px; padding: 8px 10px; margin-top: 8px; cursor: pointer; outline: none; }
-  .rt-card.sel { border-color: #0a84ff; box-shadow: inset 0 0 0 1px #0a84ff; }
-  .rt-card:focus-visible { box-shadow: 0 0 0 2px #0a84ff; }
-  .rt-time { font-size: 15px; font-weight: 700; color: #1c1c1e; display: flex; align-items: center; gap: 6px; }
-  .rt-tag { font-size: 10px; font-weight: 700; color: #1a8a3c; background: #e7f8ed; border-radius: 4px; padding: 1px 5px; }
-  .rt-sub { font-size: 12px; color: #6e6e73; margin-top: 2px; }
-  .rt-sub .late { color: #c26a00; font-weight: 600; }
-  .rt-cams { font-size: 12px; color: #1c1c1e; margin-top: 4px; }
-  .rt-watch { margin-top: 8px; }
-  .dir-note { font-size: 10.5px; color: #8e8e93; margin-top: 8px; }
+  #panel.nav-place > .grp, #panel.nav-dir > .grp, #panel.nav-dir .search-wrap { display: none; }
+  .nav-ic { flex: none; width: 36px; height: 36px; border: none; border-radius: 50%; background: transparent; color: #3c3c43; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .nav-ic:hover { background: #f2f2f7; }
+
+  .place-card { padding: 2px 0 4px; }
+  #sheetContent .place-card { padding: 4px 18px 20px; }
+  .pc-head { display: flex; align-items: flex-start; gap: 8px; }
+  .pc-txt { flex: 1; min-width: 0; }
+  .place-card h3 { font-size: 18px; font-weight: 700; margin: 2px 0 3px; color: #1c1c1e; line-height: 1.25; }
+  .place-addr { font-size: 13px; color: #6e6e73; line-height: 1.35; }
+  .pc-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: 13px; color: #3c3c43; }
+  .pc-meta span:empty { display: none; }
+  .pc-meta svg { vertical-align: -3px; color: #0a84ff; margin-right: 3px; }
+  .place-go { margin-top: 14px; width: 100%; height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 15px; font-weight: 700; color: #fff; background: #0a84ff; border: none; border-radius: 12px; cursor: pointer; }
+  .place-go:hover { background: #0071e3; }
+  .place-go .pg-time:not(:empty)::before { content: '\00b7'; margin: 0 6px 0 2px; font-weight: 400; }
+  .place-go .pg-time { font-weight: 600; }
+
+  .dir-top { display: flex; align-items: center; gap: 6px; margin: -2px 0 6px -6px; }
+  .dir-mode { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #0a84ff; background: #e8f1ff; border-radius: 999px; padding: 6px 12px; }
+  .dir-stack { display: flex; align-items: center; gap: 6px; }
+  .dir-rail { flex: none; width: 18px; display: flex; flex-direction: column; align-items: center; align-self: stretch; padding: 13px 0 11px; }
+  .rail-from { width: 11px; height: 11px; border-radius: 50%; border: 2.5px solid #3c3c43; background: #fff; flex: none; }
+  .rail-dots { flex: 1; width: 0; border-left: 2px dotted #aeaeb2; margin: 4px 0; }
+  .rail-to { color: #d93025; line-height: 0; flex: none; }
+  .dir-fields { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .dir-field { width: 100%; height: 38px; font-size: 14px; color: #1c1c1e; background: #f2f2f7; border: 1px solid transparent; border-radius: 10px; padding: 0 12px; outline: none; text-overflow: ellipsis; }
+  .dir-field:focus { background: #fff; border-color: #0a84ff; }
+  .dir-field::placeholder { color: #8e8e93; }
+  #dirSuggest:not(:empty) { margin: 8px 0 2px; border-top: 1px solid #ececf0; padding-top: 4px; }
+  #dirRoutes { margin-top: 10px; border-top: 1px solid #ececf0; }
+
+  .rt-row { position: relative; padding: 11px 10px 11px 14px; border-bottom: 1px solid #ececf0; cursor: pointer; outline: none; }
+  .rt-row:hover { background: #f8f8fa; }
+  .rt-row.sel { background: #f0f6ff; }
+  .rt-row.sel::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 4px; border-radius: 0 3px 3px 0; background: #1a73e8; }
+  .rt-row:focus-visible { box-shadow: inset 0 0 0 2px #1a73e8; }
+  .rt-l1 { display: flex; align-items: baseline; gap: 10px; }
+  .rt-time { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+  .t-ok { color: #188038; } .t-slow { color: #e37400; } .t-jam { color: #d93025; }
+  .rt-dist { margin-left: auto; font-size: 13px; color: #6e6e73; }
+  .rt-via { font-size: 13px; color: #1c1c1e; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rt-l3 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; font-size: 12px; }
+  .rt-badge { font-weight: 700; color: #188038; background: #e6f4ea; border-radius: 4px; padding: 1px 6px; }
+  .rt-dim { color: #6e6e73; }
+  .rt-late { font-weight: 600; }
+  .rt-cams { display: flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 12.5px; color: #3c3c43; }
+  .rt-cams svg { color: #0a84ff; flex: none; }
+  .rt-watch { margin-top: 10px; height: 36px; padding: 0 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
+    color: #0a84ff; background: #fff; border: 1.5px solid #0a84ff; border-radius: 999px; cursor: pointer; }
+  .rt-watch:hover { background: #e8f1ff; }
+  .dir-msg { font-size: 13px; color: #6e6e73; padding: 14px 6px; }
+  .dir-note { font-size: 11px; color: #8e8e93; padding: 10px 6px 2px; }
+
+  /* time bubbles pinned to each route, the selected one filled */
+  .rt-callout { padding: 5px 9px; border-radius: 9px; background: #fff; color: #1c1c1e; font-size: 13px; font-weight: 700; line-height: 1.1; white-space: nowrap;
+    box-shadow: 0 1px 5px rgba(0,0,0,.28); cursor: pointer; }   /* no position here: MapLibre's marker class keeps it absolute */
+  .rt-callout::after { content: ''; position: absolute; left: 50%; bottom: -5px; margin-left: -6px; border: 6px solid transparent; border-bottom: 0; border-top-color: #fff; }
+  .rt-callout.sel { background: #1a73e8; color: #fff; }
+  .rt-callout.sel::after { border-top-color: #1a73e8; }
+  .rt-callout small { display: block; font-size: 10.5px; font-weight: 600; opacity: .85; margin-top: 1px; }
+  .rt-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .rt-actions .rt-watch { margin-top: 0; }
+  .rt-preview { color: #3c3c43; border-color: #c7c7cc; }
+  .rt-preview:hover { background: #f2f2f7; }
+  /* preview: the lists step aside and one pill says what is happening and how to stop it */
+  body.previewing #panel, body.previewing #dirSheet, body.previewing .maplibregl-ctrl-top-right { display: none !important; }
+  #previewBar { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 16; display: none; align-items: center; gap: 12px;
+    background: rgba(28,28,30,.92); color: #fff; font-size: 13px; font-weight: 600; padding: 8px 8px 8px 16px; border-radius: 999px; box-shadow: 0 3px 14px rgba(0,0,0,.3); max-width: calc(100vw - 24px); }
+  body.previewing #previewBar { display: flex; }
+  #previewBar span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #previewBar button { flex: none; height: 36px; padding: 0 16px; border: none; border-radius: 999px; background: #fff; color: #1c1c1e; font-weight: 700; font-size: 13px; cursor: pointer; }
+  .nav-origin { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 4px solid #1c1c1e; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+
+  /* phone: the routes live in a bottom sheet under the map */
+  #dirSheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 28; display: none; flex-direction: column; max-height: 44vh; max-height: 44dvh;
+    background: #fff; border-radius: 16px 16px 0 0; box-shadow: 0 -6px 28px rgba(0,0,0,0.22); }
+  #dirSheet.open { display: flex; animation: fadeIn .18s ease-out; }
+  #dirSheet .ds-grip { flex: none; display: flex; justify-content: center; padding: 8px 0 4px; }
+  #dirSheet .ds-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 6px 10px; }
   @media (max-width: 640px) {
-    #panel.dir { max-height: 60vh; max-height: 60dvh; overflow-y: auto; }
-    #panel.dir .grp { display: none; }               /* on a phone the routes get the whole panel */
-    .dir-x { width: 40px; height: 40px; }
-    .place-go { min-height: 46px; }
+    #panel.nav-dir { max-height: 70vh; max-height: 70dvh; overflow-y: auto; }
+    #panel.nav-dir .brand-row { display: none; }
+    body.dir-editing #dirSheet { display: none; }
+    .nav-ic { width: 44px; height: 44px; }
+    .dir-field { height: 44px; font-size: 16px; }    /* 16px keeps iOS from zooming the page on focus */
+    .place-go { height: 50px; }
+    .rt-watch { height: 44px; }
   }
 
   .enf { width: 258px; padding: 12px 14px 14px; }
@@ -385,12 +461,16 @@
 <div id="map"></div>
 <div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
 <div id="cycleNote"></div>
+<div id="previewBar"><span id="previewTxt"></span><button id="previewStop">Stop</button></div>
 
 <div id="sheet">
   <div class="sheet-grip"><div class="grip-bar"></div></div>
   <button class="sheet-close" id="sheetClose" title="Close">&#10005;</button>
   <div id="sheetContent"></div>
 </div>
+
+<!-- route options on a phone, under the map (route preview, this machine only) -->
+<div id="dirSheet"><div class="ds-grip"><div class="grip-bar"></div></div><div class="ds-body"></div></div>
 
 <div id="routeView">
   <div class="rv-head">
@@ -406,9 +486,10 @@
   <div class="search-wrap">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
     <input id="search" type="text" placeholder="Search a place or road" autocomplete="off">
+    <button id="searchClear" class="search-x" hidden aria-label="Clear search"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     <div id="search-results"></div>
   </div>
-  <!-- route preview, filled by renderDirBox; only ever shown on this machine (see NAV_BASE) -->
+  <!-- the place card and directions (route preview), filled by showPlace and renderDir; only ever shown on this machine (see NAV_BASE) -->
   <div id="dirBox" hidden></div>
 
   <div class="grp collapsed" data-region="routes">
@@ -766,6 +847,7 @@ function clearSelection(){
 let sheetDetent='peek';
 function sheetPeekOffset(){
   const s=document.getElementById('sheet'), c=document.getElementById('sheetContent');
+  if(c.querySelector('.place-card')) return 0;          // a place card is short; show all of it, Directions included
   const media=c.querySelector('.popup-imgwrap'), head=c.querySelector('.popup-body h3, .enf h3');
   // peek shows the grip, the picture and the title line; the rest waits below the fold
   const visible=22 + (media?media.offsetHeight:0) + (head?head.offsetHeight+64:120);
@@ -1445,8 +1527,11 @@ function camsKey(f){ const p=f.properties; return p.cluster ? 'c'+p.cluster_id :
 function scheduleCamsRebuild(){ clearTimeout(camsRebuildT); camsRebuildT=setTimeout(buildCamsIndex,120); }
 function buildCamsIndex(){
   const pts=[];
+  // while routes are up only the chosen route's cameras show (camFocus), the way the big apps
+  // clear everything off the map that is not about the trip
   store.activeLayers.forEach(k=>{ if(LAYERS[k].kind!=='live') return; const d=dataCache[k]; if(!d) return;
-    d.features.forEach((f,i)=>pts.push({type:'Feature',geometry:f.geometry,properties:{k,i,name:f.properties.name,status:f.properties.status||'snapshot'}})); });
+    d.features.forEach((f,i)=>{ if(camFocus && !camFocus.has(k+'/'+i)) return;
+      pts.push({type:'Feature',geometry:f.geometry,properties:{k,i,name:f.properties.name,status:f.properties.status||'snapshot'}}); }); });
   stopCamsAnim(); camsZ=Math.floor(map.getZoom());
   if(!pts.length){ camsIndex=null; camsSet([]); return; }
   if(!window.Supercluster){ camsIndex=null; camsSet(pts); return; }   // CDN failed: raw pins beat nothing
@@ -1696,7 +1781,8 @@ function buildCoverage(){
 // a state's bubble stands in for its cameras until they load, then steps aside for them, so a
 // zoomed-out map shows clusters where states are loaded and one counted bubble everywhere else
 const COVERAGE_LAYERS=['coverage-dot','coverage-label','coverage-block','coverage-count','coverage-hit'];
-function updateCoverage(){ const hide=['!',['in',['get','k'],['literal',[...store.activeLayers]]]];
+function updateCoverage(){ const hide=(typeof nav!=='undefined' && nav.mode==='dir') ? ['in',['get','k'],['literal',[]]]   // matches nothing: no state bubbles over a route
+    : ['!',['in',['get','k'],['literal',[...store.activeLayers]]]];
   COVERAGE_LAYERS.forEach(id=>{ if(map.getLayer(id)) map.setFilter(id,hide); }); }
 
 /* ---------- the view decides which states load ----------
@@ -1746,7 +1832,8 @@ function rebuildSearchIndex(){ searchIndex=[]; store.activeLayers.forEach(k=>{ c
 const esc=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function runSearch(q){
   const box=document.getElementById('search-results'), raw=q.trim(); q=raw.toLowerCase(); kbdIdx=-1;
-  if(q.length<2){ box.classList.remove('show'); box.innerHTML=''; searchHits=[]; return; }
+  document.getElementById('searchClear').hidden=!raw;
+  if(q.length<2){ box.classList.remove('show'); box.innerHTML=''; searchHits=[]; document.getElementById('panel').classList.remove('searching'); return; }
   const cams=searchIndex.filter(e=>(e.name&&e.name.toLowerCase().includes(q))||(e.road&&e.road.toLowerCase().includes(q))).slice(0,8).map(e=>({kind:'cam',...e}));
   // the searcher knows the camera, not the layer model: when nothing matches in what's
   // on, offer the states whose names match — one tap turns the state on and re-searches
@@ -1756,27 +1843,41 @@ function runSearch(q){
     && groupKeys(k).some(g=>LAYERS[g].name.toLowerCase().includes(q))).slice(0,4).map(([k,c])=>({kind:'state',k,name:c.name}));
   // places arrive later than cameras; until they do the group says so rather than looking empty
   const placeState=(!navOn || raw.length<3) ? null : placeCache.has(raw) ? 'done' : placeFail.has(raw) ? 'fail' : 'busy';
-  const places=placeState==='done' ? placeCache.get(raw) : [];
+  // A query that reads like a road ("I-5", "SR 167", "MP 16", "exit 12", any number) is a
+  // camera search first: its cameras lead and only the top three places follow, because
+  // TomTom's fuzzy matches for road text are loose ("I-5 at MP 16" found a doctor's office).
+  // Anything else is a place search first, the way every map app ranks a name.
+  const roadish=cams.length>0 && /\d|\b(i|sr|us|hwy|mp|exit)\b/i.test(raw);
+  let places=placeState==='done' ? placeCache.get(raw) : [];
+  if(roadish) places=places.slice(0,3);
   if(navOn) schedulePlaces(raw);
-  searchHits=[...places, ...cams, ...states];
+  searchHits=roadish ? [...cams, ...places, ...states] : [...places, ...cams, ...states];
   const dot=(e)=> e.k==='chi-enf' ? (VERDICT[e.feature.properties.quad]||VERDICT.quiet).color : '#007aff';
-  const row=(h,i)=> h.kind==='place'
-      ? `<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:#1c1c1e"></span>${esc(h.name)}<span class="sr-sub">${esc(h.address)}</span></div>`
-    : h.kind==='state'
-      ? `<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:#007aff"></span>Turn on ${h.name}<span class="sr-sub">${groupCount(h.k).toLocaleString()} cameras</span></div>`
-      : `<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:${dot(h)}"></span>${h.name}<span class="sr-sub">${LAYERS[h.k]?.name || h.k}</span></div>`;
+  // two lines a row, the way every map app lists results: what it is, then where it is
+  const row=(h,i)=>{
+    const ic= h.kind==='place' ? `<span class="sr-ic">${ICON.pin}</span>`
+            : h.kind==='state' ? `<span class="sr-ic">${ICON.state}</span>`
+            : `<span class="sr-ic cam" style="color:${dot(h)}">${ICON.cam}</span>`;
+    const t= h.kind==='state' ? `Turn on ${esc(h.name)}` : esc(h.name);
+    const sub= h.kind==='place' ? esc(h.address) : h.kind==='state' ? `${groupCount(h.k).toLocaleString()} cameras` : esc(LAYERS[h.k]?.name || h.k);
+    return `<div class="sr-item" data-i="${i}">${ic}<span class="sr-txt"><span class="sr-t">${t}</span>${sub?`<span class="sr-s">${sub}</span>`:''}</span></div>`;
+  };
   let html='', i=0;
-  if(places.length) html+=`<div class="sr-grp">Places <span>TomTom</span></div>`+places.map(h=>row(h,i++)).join('');
-  else if(placeState==='busy') html+=`<div class="sr-grp">Places <span>searching…</span></div>`;
-  else if(placeState==='fail') html+=`<div class="sr-grp">Places <span>TomTom is not answering right now</span></div>`;
-  if(cams.length) html+=(places.length?`<div class="sr-grp">Cameras</div>`:'')+cams.map(h=>row(h,i++)).join('');
-  else if(states.length) html+=`<div class="sr-empty">No camera matches in the states that are on.</div>`+states.map(h=>row(h,i++)).join('');
-  else if(!places.length && placeState!=='busy') html+=`<div class="sr-empty">No matches in the states that are on. Try a state name to turn one on.</div>`;
-  box.innerHTML=html; box.classList.add('show');
+  const placeHTML=()=> places.length ? `<div class="sr-grp">Places <span>TomTom</span></div>`+places.map(h=>row(h,i++)).join('')
+    : placeState==='busy' ? `<div class="sr-grp">Places <span>searching…</span></div>`
+    : placeState==='fail' ? `<div class="sr-grp">Places <span>TomTom is not answering right now</span></div>` : '';
+  const camHTML=()=> cams.length ? ((places.length||placeState)?`<div class="sr-grp">Cameras</div>`:'')+cams.map(h=>row(h,i++)).join('') : '';
+  html+=roadish ? camHTML()+placeHTML() : placeHTML()+camHTML();
+  if(!cams.length){
+    if(states.length) html+=`<div class="sr-empty">No camera matches in the states that are on.</div>`+states.map(h=>row(h,i++)).join('');
+    else if(!places.length && placeState!=='busy') html+=`<div class="sr-empty">No matches in the states that are on. Try a state name to turn one on.</div>`;
+  }
+  box.innerHTML=html; box.classList.add('show'); document.getElementById('panel').classList.add('searching');
   box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>pickSearch(searchHits[+it.dataset.i])));
 }
 // a pick puts the phone keyboard and the expanded panel away, so the map shows what was picked
-function foldSearch(){ document.getElementById('search').blur(); if(isMobile()) document.getElementById('panel').classList.remove('expanded'); }
+function foldSearch(){ document.getElementById('search').blur(); document.getElementById('panel').classList.remove('searching');
+  if(isMobile()) document.getElementById('panel').classList.remove('expanded'); }
 async function pickSearch(h){
   if(!h) return;
   if(h.kind==='state'){ await enableGroup(h.k); writeUrl(); runSearch(document.getElementById('search').value); return; }  // same request as its checkbox, fly included
@@ -1788,17 +1889,39 @@ async function pickSearch(h){
 
 /* ---------- route preview (TomTom evaluation, this machine only) ----------
    Search a place or an address, open its card, ask for directions, and compare two or three
-   routes by trip time, traffic delay and how many of Ora's cameras sit on each, with traffic
-   colours on the roads. It is a preview: no turn-by-turn, no following your position, no
-   rerouting. Everything here is for testing on this machine under TomTom's evaluation terms.
-   It turns on only when the page itself is served from localhost and the local proxy
-   (tools/tomtom-eval/proxy.js, which holds the key) answers, so the live site never calls
-   TomTom. The proxy hands back Ora's own small shapes, so another provider can replace it. */
+   routes by trip time, traffic delay and how many of Ora's cameras sit on each. It is a
+   preview: no turn-by-turn, no following your position, no rerouting. Everything here is for
+   testing on this machine under TomTom's evaluation terms. It turns on only when the page
+   itself is served from localhost and the local proxy (tools/tomtom-eval/proxy.js, which holds
+   the key) answers, so the live site never calls TomTom. The proxy hands back Ora's own small
+   shapes, so another provider can replace it.
+
+   The flow and the map copy what people already know from Google Maps, Apple Maps and Waze:
+   a place card with one Directions button; a From/To pair with a swap button; routes listed by
+   time (coloured by traffic), the roads they take and the cameras on them; the chosen route
+   drawn thick and blue with its slow stretches coloured, the others grey; a time bubble pinned
+   to each route, tap one to choose it; and the map zooming to the chosen route clear of the
+   panel and the sheet. While routes are up, only the chosen route's cameras show. */
 const NAV_BASE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8792' : null;
 // place answers are kept per query for the session, so a late reply or a retyped query never costs a second request
-let navOn=false, placeT=null;
+let navOn=false, placeT=null, camFocus=null;
 const placeCache=new Map(), placeBusy=new Set(), placeFail=new Set();
-const nav={ place:null, marker:null, from:null, fromLabel:'', routes:[], sel:0, token:0, pickingStart:false, autoTraffic:false, watched:{} };
+// mode: null (plain map), 'place' (a place's card is open) or 'dir' (comparing routes).
+// from/to: {lngLat, label, me?}. ptok and token guard the place extras and the route calls.
+const nav={ mode:null, place:null, from:null, to:null, routes:[], sel:0, token:0, ptok:0, editing:null,
+  marker:null, origin:null, callouts:[], pre:null, watched:{} };
+const ICON={
+  pin:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z"/></svg>',
+  cam:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M4 6.5h10a2 2 0 0 1 2 2v1.6l4.2-2.6v9l-4.2-2.6v1.6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"/></svg>',
+  state:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 3.5 3 5.6v14.9l6-2.1 6 2.1 6-2.1V3.5l-6 2.1-6-2.1zm.9 2.3 4.2 1.5v11l-4.2-1.5v-11z"/></svg>',
+  me:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21 3 3 10.5l7.4 2.1L12.5 20z"/></svg>',
+  car:'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M18.9 6.4A2 2 0 0 0 17 5H7a2 2 0 0 0-1.9 1.4L3 12v7a1 1 0 0 0 1 1h1.5a1 1 0 0 0 1-1v-1.5h11V19a1 1 0 0 0 1 1H20a1 1 0 0 0 1-1v-7l-2.1-5.6zM7.2 7h9.6l1.5 4H5.7l1.5-4zM6.5 15.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>',
+  back:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  swap:'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 4v15M8 4 4.5 7.5M8 4l3.5 3.5M16 20V5M16 20l-3.5-3.5M16 20l3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  close:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+  play:'<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg>',
+};
+const FC=(features)=>({type:'FeatureCollection',features});
 async function navGet(path){
   const r=await fetch(NAV_BASE+path), j=await r.json().catch(()=>({}));
   if(!r.ok) throw new Error(j.error||`HTTP ${r.status}`);
@@ -1810,16 +1933,26 @@ async function navInit(){
   if(!navOn) return;
   document.getElementById('search').placeholder='Search a place, address or road';
   document.getElementById('trafficRow').hidden=false;
-  document.getElementById('trafficOn').addEventListener('change',e=>{ nav.autoTraffic=false; setTraffic(e.target.checked); });
-  // route lines sit under the camera pins, so the cameras on a route stay tappable
-  map.addSource('nav-routes',{type:'geojson',data:{type:'FeatureCollection',features:[]},attribution:'Routes &copy; TomTom'});
-  map.addLayer({id:'nav-route-casing',type:'line',source:'nav-routes',layout:{'line-join':'round','line-cap':'round','line-sort-key':['get','sel']},
-    paint:{'line-color':['case',['==',['get','sel'],1],'#0a5bc4','#7f8fa6'],'line-width':['interpolate',['linear'],['zoom'],5,5,12,10,16,14]}},'cams__clusters');
-  map.addLayer({id:'nav-route-line',type:'line',source:'nav-routes',layout:{'line-join':'round','line-cap':'round','line-sort-key':['get','sel']},
-    paint:{'line-color':['case',['==',['get','sel'],1],'#0a84ff','#c3cddb'],'line-width':['interpolate',['linear'],['zoom'],5,3,12,7,16,10]}},'cams__clusters');
-  map.on('click','nav-route-line',(e)=>{ const f=e.features[0]; if(f && !map.queryRenderedFeatures(e.point,{layers:['cams__hit']}).length) selectRoute(f.properties.i); });
-  map.on('mouseenter','nav-route-line',()=>{ map.getCanvas().style.cursor='pointer'; });
-  map.on('mouseleave','nav-route-line',()=>{ map.getCanvas().style.cursor=''; });
+  document.getElementById('trafficOn').addEventListener('change',e=>setTraffic(e.target.checked));
+  // a phone's place card lives in the shared sheet; closing that sheet closes the place
+  document.getElementById('sheetClose').addEventListener('click',()=>{ if(nav.mode==='place') closeNav(); });
+  // alternatives under the chosen route, the chosen route under its own traffic colours, and
+  // every route under the camera pins so the cameras on it stay tappable
+  const w=(a,b,c)=>['interpolate',['linear'],['zoom'],5,a,12,b,16,c];
+  const line={'line-join':'round','line-cap':'round'};
+  map.addSource('nav-routes',{type:'geojson',data:FC([]),attribution:'Routes &copy; TomTom'});
+  map.addSource('nav-traffic',{type:'geojson',data:FC([])});
+  map.addLayer({id:'nav-alt-casing',type:'line',source:'nav-routes',filter:['==',['get','sel'],0],layout:line,paint:{'line-color':'#8996a8','line-width':w(6,10,14)}},'cams__clusters');
+  map.addLayer({id:'nav-alt',type:'line',source:'nav-routes',filter:['==',['get','sel'],0],layout:line,paint:{'line-color':'#bcc7d6','line-width':w(4,7,10)}},'cams__clusters');
+  map.addLayer({id:'nav-sel-casing',type:'line',source:'nav-routes',filter:['==',['get','sel'],1],layout:line,paint:{'line-color':'#0b4fb3','line-width':w(8,13,18)}},'cams__clusters');
+  map.addLayer({id:'nav-sel',type:'line',source:'nav-routes',filter:['==',['get','sel'],1],layout:line,paint:{'line-color':'#1a73e8','line-width':w(5,9,13)}},'cams__clusters');
+  map.addLayer({id:'nav-traffic',type:'line',source:'nav-traffic',layout:line,paint:{'line-color':['match',['get','level'],'jam','#d93025','closed','#7a1712','#f29900'],'line-width':w(5,9,13)}},'cams__clusters');
+  // a wide invisible line over every route, so a finger finds a thin grey alternative
+  map.addLayer({id:'nav-hit',type:'line',source:'nav-routes',layout:line,paint:{'line-color':'rgba(0,0,0,0)','line-width':24}},'cams__clusters');
+  map.on('click','nav-hit',(e)=>{ const f=e.features[0];
+    if(f && !map.queryRenderedFeatures(e.point,{layers:['cams__hit']}).length) selectRoute(f.properties.i); });
+  map.on('mouseenter','nav-hit',()=>{ map.getCanvas().style.cursor='pointer'; });
+  map.on('mouseleave','nav-hit',()=>{ map.getCanvas().style.cursor=''; });
 }
 // wait for a pause in typing (the free allowance for place search is 2,500 a month), and
 // search near the middle of the map so "main st" means the one you are looking at
@@ -1832,25 +1965,77 @@ function schedulePlaces(q){
     try{ placeCache.set(q, (await navGet(`/search?q=${encodeURIComponent(q)}&near=${c.lat.toFixed(5)},${c.lng.toFixed(5)}`)).places.map(p=>({...p, kind:'place'}))); }
     catch(e){ placeFail.add(q); console.warn('place search failed:', e.message); }
     placeBusy.delete(q);
-    const s=document.getElementById('search');
-    if(s.value.trim()===q && document.activeElement===s) runSearch(s.value);
+    // whichever box asked, the main search or a From/To field, redraws if it still shows this query
+    const a=document.activeElement;
+    if(a && a.id==='search' && a.value.trim()===q) runSearch(a.value);
+    if(a && a.classList.contains('dir-field') && a.value.trim()===q) renderSuggest(a);
   }, 350);
 }
-function pickPlace(p){
-  if(nav.pickingStart){ setStart([p.lon,p.lat], p.name); return; }
-  clearSelection();
-  nav.place=p;
-  if(!nav.marker) nav.marker=new maplibregl.Marker({color:'#1c1c1e'});
-  nav.marker.setLngLat([p.lon,p.lat]).addTo(map);
-  if(p.bbox) map.fitBounds([[p.bbox[0],p.bbox[1]],[p.bbox[2],p.bbox[3]]],{maxZoom:15,padding:60,duration:800});
-  else map.flyTo({center:[p.lon,p.lat],zoom:15,duration:800});
-  const html=`<div class="place-card"><h3>${esc(p.name)}</h3>${p.address?`<div class="place-addr">${esc(p.address)}</div>`:''}<button class="place-go" data-dir>Directions</button></div>`;
-  let el;
-  if(isMobile()){ openSheet(html); el=document.getElementById('sheetContent'); }
-  else { const mine=popup=new maplibregl.Popup({closeButton:true,maxWidth:'288px',offset:34}).setLngLat([p.lon,p.lat]).setHTML(html).addTo(map);
-    mine.on('close',()=>{ if(popup===mine) popup=null; }); el=mine.getElement(); }
-  el.querySelector('[data-dir]').addEventListener('click',()=>startDirections(p));
+const placeState=(q)=> q.length<3 ? null : placeCache.has(q) ? 'done' : placeFail.has(q) ? 'fail' : 'busy';
+
+/* --- the place card --- */
+function navBox(){ return document.getElementById('dirBox'); }
+function setPanelMode(mode){
+  const p=document.getElementById('panel');
+  p.classList.toggle('nav-place', mode==='place'); p.classList.toggle('nav-dir', mode==='dir');
+  navBox().hidden=!(mode==='dir' || (mode==='place' && !isMobile()));
+  updateCoverage();
 }
+function placeMarker(lngLat){
+  if(!nav.marker) nav.marker=new maplibregl.Marker({color:'#d93025'});
+  nav.marker.setLngLat(lngLat).addTo(map);
+}
+function pickPlace(p){ showPlace(p); }
+function showPlace(p){
+  clearSelection();
+  nav.mode='place'; nav.place=p; nav.routes=[]; nav.token++;
+  placeMarker([p.lon,p.lat]);
+  // the place sits in the middle of the map that is left over beside the panel or above the sheet
+  const off=isMobile() ? [0,-90] : [Math.round(document.getElementById('panel').getBoundingClientRect().right/2),0];
+  if(p.bbox && !/POI|Address/.test(p.type||'')) map.fitBounds([[p.bbox[0],p.bbox[1]],[p.bbox[2],p.bbox[3]]],{maxZoom:15,padding:framePad(),duration:800});
+  else map.flyTo({center:[p.lon,p.lat],zoom:Math.max(map.getZoom(),15),offset:off,duration:800});
+  const html=`<div class="place-card"><div class="pc-head"><div class="pc-txt"><h3>${esc(p.name)}</h3>${p.address?`<div class="place-addr">${esc(p.address)}</div>`:''}</div>
+      ${isMobile()?'':`<button class="nav-ic" data-close aria-label="Close">${ICON.close}</button>`}</div>
+    <div class="pc-meta"><span data-drive></span><span data-near></span></div>
+    <button class="place-go" data-dir>${ICON.car}<span>Directions</span><span class="pg-time" data-gotime></span></button></div>`;
+  let el;
+  if(isMobile()){ setPanelMode('place'); openSheet(html); el=document.getElementById('sheetContent'); }
+  else { navBox().innerHTML=html; setPanelMode('place'); el=navBox(); }
+  el.querySelector('[data-dir]').addEventListener('click',startDirections);
+  const x=el.querySelector('[data-close]'); if(x) x.addEventListener('click',closeNav);
+  placeExtras(p);
+}
+function setPlaceMeta(key, html){
+  const host=isMobile() ? document.getElementById('sheetContent') : navBox();
+  const el=host && host.querySelector(`[data-${key}]`); if(el) el.innerHTML=html;
+}
+// the extras fill in as they land: cameras near the place from Ora's own data, and the drive
+// time from one route call, which Directions then reuses instead of asking again
+async function placeExtras(p){
+  const tok=++nav.ptok, at=[p.lon,p.lat];
+  await Promise.allSettled(statesAt(at).map(k=>enableGroup(k,false)));
+  if(tok!==nav.ptok || nav.mode!=='place') return;
+  const near=countNear(at, 1609);
+  setPlaceMeta('near', `${ICON.cam}${near ? `${near} camera${near===1?'':'s'} within 1 mi` : 'No cameras within 1 mi'}`);
+  if(!meMarker) return;                       // a drive time needs a start; never ask for location just for this
+  const from=meMarker.getLngLat().toArray();
+  try{
+    const routes=(await navGet(routeQuery(from,at))).routes;
+    if(tok!==nav.ptok || nav.mode!=='place' || !routes.length) return;
+    nav.pre={key:routeKey(from,at), routes, at:Date.now()};
+    const best=Math.min(...routes.map(r=>r.seconds));
+    setPlaceMeta('drive', `${fmtTime(best)} drive · ${fmtMiles(routes.find(r=>r.seconds===best).meters)}`);
+    setPlaceMeta('gotime', fmtTime(best));
+  }catch(e){}
+}
+function countNear([lng,lat], m){
+  const kx=111320*Math.cos(lat*Math.PI/180); let n=0;
+  for(const k of statesAt([lng,lat]).flatMap(groupKeys)) if(dataCache[k]) for(const f of dataCache[k].features){
+    const [x,y]=f.geometry.coordinates; if(Math.hypot((x-lng)*kx,(y-lat)*110540)<=m) n++; }
+  return n;
+}
+
+/* --- directions --- */
 // your position for "From": the dot's last fix if it is on the map, otherwise one fresh ask
 function myPosition(){
   if(meMarker){ const l=meMarker.getLngLat(); return Promise.resolve([l.lng,l.lat]); }
@@ -1859,55 +2044,173 @@ function myPosition(){
     (pos)=>{ showMe(pos,false); res([pos.coords.longitude,pos.coords.latitude]); }, ()=>res(null),
     {enableHighAccuracy:true, timeout:10000, maximumAge:60000}));
 }
-async function startDirections(p){
-  clearSelection();
-  nav.place=p;
-  if(!nav.from){ const me=await myPosition(); if(me){ nav.from=me; nav.fromLabel='Your location'; } }
-  if(!nav.from){ renderDirBox(); askStart(); return; }
+const routeKey=(a,b)=>[...a,...b].map(v=>v.toFixed(4)).join(',');
+const routeQuery=(a,b)=>`/route?from=${a[1].toFixed(6)},${a[0].toFixed(6)}&to=${b[1].toFixed(6)},${b[0].toFixed(6)}`;
+async function startDirections(){
+  const p=nav.place; if(!p) return;
+  clearSelection();                                   // the phone's place sheet gives way to the route sheet
+  nav.mode='dir'; nav.to={lngLat:[p.lon,p.lat], label:p.name};
+  if(!nav.from){ const me=await myPosition(); nav.from= me ? {lngLat:me, label:'Your location', me:true} : null; }
+  renderDir();
+  if(!nav.from){ focusField('from'); return; }
   planRoutes();
 }
-// a start other than your position comes from the same search box
-function askStart(){
-  nav.pickingStart=true; renderDirBox();
-  const s=document.getElementById('search'); s.value=''; s.placeholder='Search a start point'; s.focus();
+function renderDir(){
+  setPanelMode('dir');
+  navBox().innerHTML=`<div class="dir-top"><button class="nav-ic" data-back aria-label="Back">${ICON.back}</button><div class="dir-mode">${ICON.car}<span>Drive</span></div></div>
+    <div class="dir-stack"><div class="dir-rail"><span class="rail-from"></span><span class="rail-dots"></span><span class="rail-to">${ICON.pin}</span></div>
+      <div class="dir-fields">
+        <input class="dir-field" data-end="from" autocomplete="off" spellcheck="false" placeholder="Choose a starting point" aria-label="Start" value="${esc(nav.from?nav.from.label:'')}">
+        <input class="dir-field" data-end="to" autocomplete="off" spellcheck="false" placeholder="Choose a destination" aria-label="Destination" value="${esc(nav.to?nav.to.label:'')}"></div>
+      <button class="nav-ic" data-swap aria-label="Swap start and destination" title="Swap">${ICON.swap}</button></div>
+    <div id="dirSuggest"></div>${isMobile()?'':'<div id="dirRoutes"></div>'}`;
+  const box=navBox();
+  box.querySelector('[data-back]').addEventListener('click',navBack);
+  box.querySelector('[data-swap]').addEventListener('click',()=>{
+    if(!nav.from || !nav.to) return;
+    [nav.from, nav.to]=[nav.to, nav.from]; renderDir(); planRoutes(); });
+  box.querySelectorAll('.dir-field').forEach(f=>{
+    // on a phone the route sheet steps aside while a field is being edited, so the suggestions show
+    f.addEventListener('focus',()=>{ nav.editing=f.dataset.end; document.body.classList.add('dir-editing'); f.select(); renderSuggest(f); });
+    f.addEventListener('input',()=>renderSuggest(f));
+    f.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter'){ e.preventDefault(); const first=document.querySelector('#dirSuggest .sr-item'); if(first) first.dispatchEvent(new Event('pointerdown')); }
+      if(e.key==='Escape'){ e.preventDefault(); f.blur(); } });
+    // leaving a field without picking puts back what it held
+    f.addEventListener('blur',()=>setTimeout(()=>{ if(nav.editing!==f.dataset.end || document.activeElement===f) return;
+      nav.editing=null; document.body.classList.remove('dir-editing');
+      const v=nav[f.dataset.end]; f.value=v?v.label:''; document.getElementById('dirSuggest').innerHTML=''; },120));
+  });
+  const sheet=document.getElementById('dirSheet'); sheet.classList.toggle('open', isMobile());
+  renderRoutes();
 }
-function setStart(lngLat, label){
-  nav.pickingStart=false; nav.from=lngLat; nav.fromLabel=label;
-  const s=document.getElementById('search'); s.value=''; s.placeholder='Search a place, address or road';
-  foldSearch(); planRoutes();
+function focusField(end){ const f=navBox().querySelector(`.dir-field[data-end="${end}"]`); if(f) f.focus(); }
+function renderSuggest(field){
+  const box=document.getElementById('dirSuggest'); if(!box) return;
+  const q=field.value.trim(), end=field.dataset.end, hits=[];
+  if(end==='from') hits.push({kind:'me', name:'Your location'});
+  const st=placeState(q);
+  if(st==='done') hits.push(...placeCache.get(q)); else if(st==='busy') schedulePlaces(q);
+  box.innerHTML=hits.map((h,i)=>`<div class="sr-item" data-i="${i}"><span class="sr-ic${h.kind==='me'?' me':''}">${h.kind==='me'?ICON.me:ICON.pin}</span>
+      <span class="sr-txt"><span class="sr-t">${esc(h.name)}</span>${h.address?`<span class="sr-s">${esc(h.address)}</span>`:''}</span></div>`).join('')
+    + (st==='busy' ? `<div class="sr-empty">Searching places…</div>` : st==='fail' ? `<div class="sr-empty">TomTom is not answering right now</div>` : '');
+  // pointerdown, not click: picking must win the race with the field's blur
+  box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('pointerdown',(e)=>{ e.preventDefault(); setEnd(end, hits[+it.dataset.i]); }));
+}
+async function setEnd(end, hit){
+  let v;
+  if(hit.kind==='me'){ const me=await myPosition(); if(!me){ flashCycleNotice('Location is off for this site, so pick a place instead'); return; }
+    v={lngLat:me, label:'Your location', me:true}; }
+  else v={lngLat:[hit.lon,hit.lat], label:hit.name};
+  nav[end]=v; nav.editing=null; document.body.classList.remove('dir-editing');
+  if(end==='to' && hit.kind==='place') nav.place=hit;
+  renderDir();
+  if(nav.from && nav.to) planRoutes(); else focusField(nav.from ? 'to' : 'from');
 }
 async function planRoutes(){
-  const tok=++nav.token;
-  nav.routes=[]; nav.sel=0; drawRoutes(); renderDirBox('Finding routes…');
-  const ll=(c)=>`${c[1].toFixed(6)},${c[0].toFixed(6)}`;
-  try{
-    const j=await navGet(`/route?from=${ll(nav.from)}&to=${ll([nav.place.lon,nav.place.lat])}`);
-    if(tok!==nav.token) return;
-    nav.routes=j.routes.map(r=>({...r, cams:null}));
-  }catch(e){ if(tok===nav.token) renderDirBox(`Could not get routes: ${e.message}`); return; }
-  if(!nav.routes.length){ renderDirBox('No route found between these two points'); return; }
-  if(!document.getElementById('trafficOn').checked){ nav.autoTraffic=true; setTraffic(true); }
-  drawRoutes(); renderDirBox(); fitRoute();          // frame the route below the panel at its full height
+  const tok=++nav.token, from=nav.from.lngLat, to=nav.to.lngLat;
+  nav.routes=[]; nav.sel=0; camFocus=new Set(); buildCamsIndex();    // no stray pins while routes load
+  drawRouteMap(); renderRoutes('Finding routes…');
+  if(nav.from.me){ if(nav.origin) nav.origin.remove(); }
+  else { if(!nav.origin){ const el=document.createElement('div'); el.className='nav-origin'; nav.origin=new maplibregl.Marker({element:el}); } nav.origin.setLngLat(from).addTo(map); }
+  placeMarker(to);
+  let routes;
+  const key=routeKey(from,to);
+  if(nav.pre && nav.pre.key===key && Date.now()-nav.pre.at<300000) routes=nav.pre.routes;     // the place card already asked
+  else{
+    try{ routes=(await navGet(routeQuery(from,to))).routes; }
+    catch(e){ if(tok===nav.token) renderRoutes(`Could not get routes: ${e.message}`); return; }
+  }
+  if(tok!==nav.token) return;
+  if(!routes.length){ renderRoutes('No route found between these two points'); return; }
+  const fastest=Math.min(...routes.map(r=>r.seconds));
+  nav.routes=routes.map(r=>({...r, cams:null}));
+  nav.sel=nav.routes.findIndex(r=>r.seconds===fastest);
+  drawRouteMap(); renderRoutes(); frameRoutes(true);
   routeCameras(tok);
 }
-function drawRoutes(){
-  const s=map.getSource('nav-routes'); if(!s) return;
-  s.setData({type:'FeatureCollection',features:nav.routes.map((r,i)=>({type:'Feature',properties:{i,sel:i===nav.sel?1:0},geometry:{type:'LineString',coordinates:r.coords}}))});
+function clearRouteMap(){
+  nav.callouts.forEach(m=>m.remove()); nav.callouts=[];
+  ['nav-routes','nav-traffic'].forEach(id=>{ const s=map.getSource(id); if(s) s.setData(FC([])); });
 }
-function fitRoute(){
-  const r=nav.routes[nav.sel]; if(!r) return;
+function drawRouteMap(){
+  if(!map.getSource('nav-routes')) return;
+  clearRouteMap();
+  map.getSource('nav-routes').setData(FC(nav.routes.map((r,i)=>({type:'Feature',properties:{i,sel:i===nav.sel?1:0},geometry:{type:'LineString',coordinates:r.coords}}))));
+  const r=nav.routes[nav.sel];
+  map.getSource('nav-traffic').setData(FC(r ? r.traffic.map(t=>({type:'Feature',properties:{level:t.level},
+    geometry:{type:'LineString',coordinates:r.coords.slice(t.from,t.to+1)}})) : []));
+  const fastest=nav.routes.length ? Math.min(...nav.routes.map(x=>x.seconds)) : 0;
+  nav.routes.forEach((rt,i)=>{
+    const el=document.createElement('div'); el.className='rt-callout'+(i===nav.sel?' sel':'');
+    el.innerHTML=`${fmtTime(rt.seconds)}${nav.routes.length>1 && rt.seconds===fastest?'<small>Fastest</small>':''}`;
+    el.addEventListener('click',(e)=>{ e.stopPropagation(); selectRoute(i); });
+    if(i===nav.sel) el.style.zIndex='2';               // the chosen route's bubble sits on top where bubbles meet
+    nav.callouts.push(new maplibregl.Marker({element:el, anchor:'bottom', offset:[0,-4]}).setLngLat(calloutPoint(i)).addTo(map));
+  });
+}
+// a route's bubble goes in the middle of the longest stretch that no other route shares, so
+// each bubble clearly belongs to its own line (Google and Mapbox place theirs the same way)
+function calloutPoint(i){
+  const r=nav.routes[i], shared=new Set(), key=([x,y])=>`${x.toFixed(4)},${y.toFixed(4)}`;
+  nav.routes.forEach((o,j)=>{ if(j!==i) for(const c of o.coords) shared.add(key(c)); });
+  let best=null, start=-1, len=0, bestLen=-1;
+  const seg=(a,b)=>Math.hypot((b[0]-a[0])*Math.cos(a[1]*Math.PI/180),b[1]-a[1]);
+  r.coords.forEach((c,k)=>{
+    if(shared.has(key(c))){ start=-1; return; }
+    if(start<0){ start=k; len=0; } else len+=seg(r.coords[k-1],c);
+    if(len>bestLen){ bestLen=len; best=[start,k]; }
+  });
+  if(!best || best[1]===best[0]) return r.coords[Math.floor(r.coords.length/2)];
+  // walk to the halfway distance of that stretch
+  let half=bestLen/2, k=best[0];
+  while(k<best[1] && half>0){ half-=seg(r.coords[k],r.coords[k+1]); k++; }
+  return r.coords[k];
+}
+// the room the map has left once the panel (desktop) or the sheet (phone) is drawn over it
+function framePad(){
+  const p=document.getElementById('panel').getBoundingClientRect();
+  if(isMobile()){
+    const s=document.getElementById('dirSheet'), sh=s.classList.contains('open') ? s.offsetHeight : 0;
+    return {top:Math.round(p.bottom)+20, bottom:sh+28, left:30, right:30};
+  }
+  return {top:60, bottom:50, left:Math.round(p.right)+50, right:80};
+}
+// all routes when they first come back, then the chosen one whenever it changes, the way the
+// big apps zoom to the route you pick
+function frameRoutes(all){
+  const rs=all ? nav.routes : [nav.routes[nav.sel]]; if(!rs.length || !rs[0]) return;
   let w=Infinity,s=Infinity,e=-Infinity,n=-Infinity;
-  for(const [x,y] of r.coords){ if(x<w)w=x; if(x>e)e=x; if(y<s)s=y; if(y>n)n=y; }
-  const panel=document.getElementById('panel').getBoundingClientRect();
-  const pad=isMobile() ? {top:panel.bottom+16,right:24,bottom:32,left:24} : {top:40,right:60,bottom:40,left:panel.right+30};
-  map.fitBounds([[w,s],[e,n]],{padding:pad,duration:700,maxZoom:15});
+  for(const r of rs) for(const [x,y] of r.coords){ if(x<w)w=x; if(x>e)e=x; if(y<s)s=y; if(y>n)n=y; }
+  map.fitBounds([[w,s],[e,n]],{padding:framePad(),duration:900,maxZoom:15});
 }
-function selectRoute(i){ if(!nav.routes[i] || i===nav.sel) return; nav.sel=i; drawRoutes(); renderDirBox(); fitRoute(); }
+function selectRoute(i){
+  if(!nav.routes[i]) return;
+  nav.sel=i; drawRouteMap(); renderRoutes();
+  const r=nav.routes[i]; if(r.cams){ camFocus=new Set(r.cams.map(c=>c.k+'/'+c.i)); buildCamsIndex(); }
+  frameRoutes(false);
+}
+function closeNav(){
+  stopPreview(false); nav.token++; nav.ptok++; nav.mode=null; nav.place=null; nav.from=null; nav.to=null; nav.routes=[]; nav.editing=null;
+  clearRouteMap(); if(nav.marker) nav.marker.remove(); if(nav.origin) nav.origin.remove();
+  camFocus=null; buildCamsIndex();
+  clearSelection(); document.getElementById('dirSheet').classList.remove('open');
+  navBox().innerHTML=''; setPanelMode(null);
+  const s=document.getElementById('search'); s.value=''; document.getElementById('searchClear').hidden=true;
+}
+// back from directions lands on the destination's card, the way Apple Maps steps back
+function navBack(){
+  if(nav.mode==='dir' && nav.place){
+    nav.token++; nav.routes=[]; nav.from=null; clearRouteMap(); if(nav.origin) nav.origin.remove();
+    camFocus=null; buildCamsIndex(); document.getElementById('dirSheet').classList.remove('open');
+    document.getElementById('search').value=nav.place.name; showPlace(nav.place);
+  } else closeNav();
+}
 
 /* the cameras on a route: every camera within ALONG_M of the line, in driving order. The
-   states the line crosses load first (their pins show on the map too), then each camera is
-   checked only against the route segments in its own grid cell, so a cross-country route
-   against thousands of cameras stays quick. */
+   states the line crosses load first, then each camera is checked only against the route
+   segments in its own grid cell, so a cross-country route against thousands of cameras stays
+   quick. */
 const ALONG_M=120, CELL=0.01;
 function statesAt([lng,lat]){ return Object.keys(stateBoxes).filter(k=>{ const b=stateBoxes[k]; return lng>=b[0] && lng<=b[2] && lat>=b[1] && lat<=b[3]; }); }
 async function routeCameras(tok){
@@ -1919,7 +2222,8 @@ async function routeCameras(tok){
   if(tok!==nav.token) return;
   const layers=[...ks].flatMap(groupKeys).filter(g=>dataCache[g]);
   for(const r of nav.routes) r.cams=camerasAlong(r.coords, layers);
-  renderDirBox();
+  const sel=nav.routes[nav.sel]; camFocus=new Set(sel.cams.map(c=>c.k+'/'+c.i)); buildCamsIndex();
+  renderRoutes();
 }
 function camerasAlong(coords, layers){
   const M_LAT=110540, mLon=(lat)=>111320*Math.cos(lat*Math.PI/180);
@@ -1945,51 +2249,93 @@ function camerasAlong(coords, layers){
 }
 const fmtTime=(s)=>{ const m=Math.max(1,Math.round(s/60)); return m<60 ? `${m} min` : `${Math.floor(m/60)} h ${m%60} min`; };
 const fmtMiles=(m)=>`${(m/1609.344).toFixed(m<16093?1:0)} mi`;
-function renderDirBox(msg){
-  const box=document.getElementById('dirBox'); box.hidden=false;
-  document.getElementById('panel').classList.add('dir');
-  const from=nav.pickingStart ? 'Search a start above' : (nav.from ? nav.fromLabel : 'Location is off');
-  let body;
-  if(msg) body=`<div class="dir-msg">${esc(msg)}</div>`;
-  else if(!nav.routes.length) body='';
-  else body=nav.routes.map((r,i)=>{
-    const sel=i===nav.sel, down=r.cams ? r.cams.filter(c=>c.down).length : 0;
-    const cams=r.cams==null ? 'Finding cameras…' : `${r.cams.length} camera${r.cams.length===1?'':'s'} on this route${down?` · ${down} not working`:''}`;
-    const delay=r.delaySeconds>=60 ? `<span class="late">+${fmtTime(r.delaySeconds)} traffic</span>` : 'No traffic delay';
-    const fastest=nav.routes.length>1 && r.seconds===Math.min(...nav.routes.map(x=>x.seconds));
-    return `<div class="rt-card${sel?' sel':''}" role="button" tabindex="0" data-rt="${i}"><div class="rt-time">${fmtTime(r.seconds)}${fastest?'<span class="rt-tag">Fastest</span>':''}</div>
-      <div class="rt-sub">${delay} · ${fmtMiles(r.meters)}</div><div class="rt-cams">${cams}</div>
-      ${sel && r.cams && r.cams.length ? `<button class="mini-btn rt-watch" data-watch>Watch these ${r.cams.length} cameras</button>` : ''}</div>`;
+// a time is green when traffic adds little, orange when it adds a quarter, red past that,
+// the colours Google uses for the same thing
+function trafficClass(r){ const late=r.delaySeconds, ratio=late/Math.max(1,r.seconds-late); return late<60||ratio<0.1 ? 't-ok' : ratio<0.25 ? 't-slow' : 't-jam'; }
+function renderRoutes(msg){
+  const box=isMobile() ? document.querySelector('#dirSheet .ds-body') : document.getElementById('dirRoutes'); if(!box) return;
+  const fastest=nav.routes.length ? Math.min(...nav.routes.map(r=>r.seconds)) : 0;
+  const rows=msg ? `<div class="dir-msg">${esc(msg)}</div>` : !nav.from ? `<div class="dir-msg">Choose a starting point to see routes.</div>` : nav.routes.map((r,i)=>{
+    const sel=i===nav.sel, tc=trafficClass(r), down=r.cams ? r.cams.filter(c=>c.down).length : 0;
+    const diff=r.seconds-fastest;
+    const l3=(nav.routes.length>1 && diff<30 ? '<span class="rt-badge">Fastest</span>' : diff>=30 ? `<span class="rt-dim">${fmtTime(diff)} slower</span>` : '')
+      + (r.delaySeconds>=60 ? `<span class="rt-late ${tc}">+${fmtTime(r.delaySeconds)} from traffic</span>` : '<span class="rt-dim">No traffic delays</span>');
+    const cams=r.cams==null ? `${ICON.cam}<span class="rt-dim">Finding cameras on this route…</span>`
+      : `${ICON.cam}<span>${r.cams.length} camera${r.cams.length===1?'':'s'} on this route${down?` · ${down} not working`:''}</span>`;
+    return `<div class="rt-row${sel?' sel':''}" role="button" tabindex="0" data-rt="${i}" aria-pressed="${sel}">
+      <div class="rt-l1"><span class="rt-time ${tc}">${fmtTime(r.seconds)}</span><span class="rt-dist">${fmtMiles(r.meters)}</span></div>
+      ${r.via && r.via.length ? `<div class="rt-via">via ${esc(r.via.join(', '))}</div>` : ''}
+      <div class="rt-l3">${l3}</div><div class="rt-cams">${cams}</div>
+      ${sel ? `<div class="rt-actions">${r.cams && r.cams.length ? `<button class="rt-watch" data-watch>${ICON.cam}Watch these ${r.cams.length} cameras</button>` : ''}
+        <button class="rt-watch rt-preview" data-preview>${ICON.play}Preview</button></div>` : ''}</div>`;
   }).join('');
-  box.innerHTML=`<div class="dir-head"><div class="dir-ends">
-      <div class="dir-row"><span class="dir-lbl">From</span><b>${esc(from)}</b><button class="dir-change" data-start>Change</button></div>
-      <div class="dir-row"><span class="dir-lbl">To</span><b>${esc(nav.place?nav.place.name:'')}</b></div></div>
-      <button class="dir-x" data-close title="Close directions">&#10005;</button></div>${body}
-    <div class="dir-note">A route preview, not turn-by-turn. Places, routes and traffic &copy; TomTom.</div>`;
-  box.querySelector('[data-close]').addEventListener('click',closeDirections);
-  box.querySelector('[data-start]').addEventListener('click',askStart);
+  box.innerHTML=rows+`<div class="dir-note">A route preview, not turn-by-turn. Places, routes and traffic &copy; TomTom.</div>`;
   box.querySelectorAll('[data-rt]').forEach(c=>{ const go=()=>selectRoute(+c.dataset.rt);
     c.addEventListener('click',(e)=>{ if(!e.target.closest('[data-watch]')) go(); });
-    c.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); go(); } }); });
+    c.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } }); });
   const w=box.querySelector('[data-watch]'); if(w) w.addEventListener('click',()=>watchRoute(nav.routes[nav.sel]));
+  const pv=box.querySelector('[data-preview]'); if(pv) pv.addEventListener('click',(e)=>{ e.stopPropagation(); startPreview(); });
+}
+
+/* Preview: the close-up the big apps show once you set off, without following anyone. The map
+   tilts down to the start of the chosen route and rides the line to the end (about 0.6 s a
+   kilometre, 15 to 45 s), heading the way the road goes, past the cameras on it, then pulls
+   back to the whole route. It replays the route's geometry only: no turn instructions and no
+   position, so it stays a preview. Any touch on the map, Esc or Stop ends it. */
+let preview=null;
+function startPreview(){
+  const r=nav.routes[nav.sel]; if(!r || r.coords.length<2) return;
+  stopPreview(false);
+  const pts=r.coords, kx=(lat)=>111320*Math.cos(lat*Math.PI/180), cum=[0];
+  for(let i=1;i<pts.length;i++) cum.push(cum[i-1]+Math.hypot((pts[i][0]-pts[i-1][0])*kx(pts[i][1]),(pts[i][1]-pts[i-1][1])*110540));
+  const total=cum[cum.length-1];
+  const at=(d)=>{ d=Math.max(0,Math.min(total,d)); let lo=0, hi=cum.length-1;
+    while(hi-lo>1){ const m=(lo+hi)>>1; if(cum[m]<=d) lo=m; else hi=m; }
+    const t=cum[hi]>cum[lo] ? (d-cum[lo])/(cum[hi]-cum[lo]) : 0;
+    return [pts[lo][0]+(pts[hi][0]-pts[lo][0])*t, pts[lo][1]+(pts[hi][1]-pts[lo][1])*t]; };
+  const heading=(a,b)=>{ const y=(b[0]-a[0])*Math.cos(a[1]*Math.PI/180), x=b[1]-a[1]; return Math.atan2(y,x)*180/Math.PI; };
+  const dur=Math.min(45000, Math.max(15000, total/1000*600));
+  preview={raf:0, off:null};
+  document.body.classList.add('previewing');
+  document.getElementById('previewTxt').textContent=`Previewing ${fmtTime(r.seconds)}${r.via&&r.via.length?` via ${r.via[0]}`:''}`;
+  let brg=heading(pts[0], at(400));
+  map.flyTo({center:pts[0], zoom:15.2, pitch:55, bearing:brg, duration:1800, essential:true});
+  map.once('moveend',()=>{
+    if(!preview) return;
+    const t0=performance.now();
+    const tick=(now)=>{
+      if(!preview) return;
+      const d=(now-t0)/dur*total, p=at(d);
+      // turn smoothly toward a point a little way ahead, so the view does not jerk at every bend
+      const want=heading(p, at(d+450)); let diff=((want-brg+540)%360)-180; brg+=diff*0.06;
+      map.jumpTo({center:p, bearing:brg});
+      if(d>=total){ stopPreview(true); return; }
+      preview.raf=requestAnimationFrame(tick);
+    };
+    preview.raf=requestAnimationFrame(tick);
+  });
+  // a person taking hold of the map ends the ride on the spot
+  const grab=()=>stopPreview(false);
+  ['mousedown','touchstart','wheel'].forEach(ev=>map.getCanvas().addEventListener(ev,grab,{once:true}));
+  preview.off=()=>['mousedown','touchstart','wheel'].forEach(ev=>map.getCanvas().removeEventListener(ev,grab));
+}
+function stopPreview(reframe=true){
+  if(!preview) return;
+  cancelAnimationFrame(preview.raf); preview.off(); preview=null;
+  document.body.classList.remove('previewing');
+  map.easeTo({pitch:0, bearing:0, duration:500});
+  if(reframe) map.once('moveend',()=>frameRoutes(false));
 }
 // the cameras on a route become one of your saved routes, which opens as the scrolling stack
 // of live feeds the route view already is; asking twice reopens the same one
 function watchRoute(r){
-  const key=`${nav.place.name}|${r.seconds}|${r.meters}`;
+  const key=`${nav.to.label}|${r.seconds}|${r.meters}`;
   if(nav.watched[key] && loadRoutes().some(x=>x.id===nav.watched[key])){ openRouteView(nav.watched[key]); return; }
   const id=uid(), routes=loadRoutes();
-  routes.push({id, name:`To ${nav.place.name}`.slice(0,40), cams:r.cams.map(c=>{
+  routes.push({id, name:`To ${nav.to.label}`.slice(0,40), cams:r.cams.map(c=>{
     const f=dataCache[c.k].features[c.i], p=readProps(f), d=p.directions[0]||{};
     return {k:c.k, name:p.name, coords:f.geometry.coordinates.slice(), snapshot:d.snapshot||null, video:d.video||null, camId:d.camId||null}; })});
   saveRoutes(routes); renderRouteList(); nav.watched[key]=id; openRouteView(id);
-}
-function closeDirections(){
-  nav.token++; nav.routes=[]; nav.from=null; nav.place=null; drawRoutes();
-  if(nav.pickingStart){ nav.pickingStart=false; document.getElementById('search').placeholder='Search a place, address or road'; }
-  if(nav.marker) nav.marker.remove();
-  if(nav.autoTraffic){ nav.autoTraffic=false; setTraffic(false); }
-  document.getElementById('dirBox').hidden=true; document.getElementById('panel').classList.remove('dir');
 }
 // traffic colours on the roads: TomTom's relative flow tiles, under the basemap's labels
 function setTraffic(on){
@@ -2349,26 +2695,31 @@ map.getCanvas().addEventListener('pointerdown',()=>{ if(isMobile()) document.get
 // search + keyboard nav
 const sEl=document.getElementById('search');
 sEl.addEventListener('input',e=>runSearch(e.target.value));
+document.getElementById('previewStop').addEventListener('click',()=>stopPreview(true));
+document.getElementById('searchClear').addEventListener('click',()=>{
+  sEl.value=''; runSearch(''); if(nav.mode==='place') closeNav(); sEl.focus(); });
 sEl.addEventListener('focus',e=>{ if(isMobile()) document.getElementById('panel').classList.add('expanded');   // results need room below the collapsed fold
   if(e.target.value.trim().length>=2) runSearch(e.target.value); });
 sEl.addEventListener('keydown',e=>{ const items=[...document.querySelectorAll('.sr-item')]; if(!items.length) return;
   if(e.key==='ArrowDown'){ e.preventDefault(); kbdIdx=Math.min(kbdIdx+1,items.length-1); }
   else if(e.key==='ArrowUp'){ e.preventDefault(); kbdIdx=Math.max(kbdIdx-1,0); }
   else if(e.key==='Enter'){ e.preventDefault(); const h=searchHits||[]; if(h[kbdIdx<0?0:kbdIdx]) pickSearch(h[kbdIdx<0?0:kbdIdx]); return; }
-  else if(e.key==='Escape'){ document.getElementById('search-results').classList.remove('show'); return; }
+  else if(e.key==='Escape'){ hideResults(); return; }
   items.forEach((it,i)=>it.classList.toggle('kbd',i===kbdIdx)); if(items[kbdIdx]) items[kbdIdx].scrollIntoView({block:'nearest'}); });
-document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) document.getElementById('search-results').classList.remove('show'); });
+function hideResults(){ document.getElementById('search-results').classList.remove('show'); document.getElementById('panel').classList.remove('searching'); }
+document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) hideResults(); });
 // Escape peels the UI back one layer at a time: results, then the open camera, then
 // the route view, then add-mode. The enlarge overlay and text inputs own their own Esc.
 document.addEventListener('keydown',(e)=>{
   if(e.key!=='Escape' || (e.target.matches && e.target.matches('input'))) return;
   if(store.mode==='media-enlarged') return;
   const sr=document.getElementById('search-results');
-  if(sr.classList.contains('show')){ sr.classList.remove('show'); return; }
+  if(sr.classList.contains('show')){ hideResults(); return; }
   if(store.selected){ clearSelection(); return; }
   if(store.mode==='route-view'){ closeRouteView(); return; }
   if(store.mode==='add-to-route'){ stopAddMode(); return; }
-  if(!document.getElementById('dirBox').hidden) closeDirections();
+  if(preview){ stopPreview(true); return; }
+  if(nav.mode) navBack();
 });
 // ← / → step through cameras whenever one is open (the fast curation path; the on-screen
 // pager teaches it). The fullscreen overlay owns its own arrows, and a focused field keeps them.

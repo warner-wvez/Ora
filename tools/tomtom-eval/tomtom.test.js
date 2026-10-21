@@ -24,6 +24,7 @@ test('routeUrl asks for traffic and alternatives and never for turn instructions
   assert.equal(u.searchParams.get('traffic'), 'true');
   assert.equal(u.searchParams.get('maxAlternatives'), '2');
   assert.equal(u.searchParams.get('instructionsType'), null);
+  assert.deepEqual(u.searchParams.getAll('sectionType'), ['traffic', 'importantRoadStretch']);
 });
 
 test('parseTile accepts real tile coordinates only', () => {
@@ -52,7 +53,21 @@ test('shapeRoutes joins every leg into one [lon, lat] line with its time and del
     summary: { travelTimeInSeconds: 1500, trafficDelayInSeconds: 360, noTrafficTravelTimeInSeconds: 1140, lengthInMeters: 29000 },
     legs: [{ points: [{ latitude: 47.6, longitude: -122.3 }, { latitude: 47.5, longitude: -122.31 }] }, { points: [{ latitude: 47.4, longitude: -122.32 }] }],
   }] });
-  assert.deepEqual(routes, [{ seconds: 1500, delaySeconds: 360, noTrafficSeconds: 1140, meters: 29000, coords: [[-122.3, 47.6], [-122.31, 47.5], [-122.32, 47.4]] }]);
+  assert.deepEqual(routes, [{ seconds: 1500, delaySeconds: 360, noTrafficSeconds: 1140, meters: 29000, coords: [[-122.3, 47.6], [-122.31, 47.5], [-122.32, 47.4]], traffic: [], via: [] }]);
+});
+
+test('shapeRoutes grades traffic sections and names the roads by importance', () => {
+  const [r] = t.shapeRoutes({ routes: [{ summary: {}, legs: [], sections: [
+    { sectionType: 'TRAFFIC', startPointIndex: 10, endPointIndex: 40, simpleCategory: 'JAM', magnitudeOfDelay: 1 },
+    { sectionType: 'TRAFFIC', startPointIndex: 50, endPointIndex: 60, simpleCategory: 'JAM', magnitudeOfDelay: 3 },
+    { sectionType: 'TRAFFIC', startPointIndex: 70, endPointIndex: 90, simpleCategory: 'ROAD_CLOSURE', magnitudeOfDelay: 4 },
+    { sectionType: 'IMPORTANT_ROAD_STRETCH', importantRoadStretchIndex: 1, streetName: { text: 'Valley Fwy' }, roadNumbers: [{ text: 'WA-167' }] },
+    { sectionType: 'IMPORTANT_ROAD_STRETCH', importantRoadStretchIndex: 0, roadNumbers: [{ text: 'I-405' }] },
+    { sectionType: 'IMPORTANT_ROAD_STRETCH', importantRoadStretchIndex: 0, roadNumbers: [{ text: 'I-405' }] },
+    { sectionType: 'IMPORTANT_ROAD_STRETCH', importantRoadStretchIndex: 2, streetName: { text: 'E D St' } },
+  ] }] });
+  assert.deepEqual(r.traffic, [{ from: 10, to: 40, level: 'slow' }, { from: 50, to: 60, level: 'jam' }, { from: 70, to: 90, level: 'closed' }]);
+  assert.deepEqual(r.via, ['I-405', 'WA-167']);
 });
 
 test('scrub removes the key from anything headed to the page', () => {
