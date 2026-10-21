@@ -32,8 +32,12 @@ function send(res, status, body, type = 'application/json') {
   res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' });
   res.end(typeof body === 'string' || Buffer.isBuffer(body) ? body : JSON.stringify(body));
 }
+// TomTom's place search now and then takes 20 s or more to answer; past 10 s the page is
+// better told so than left waiting
 async function upstream(url) {
-  const r = await fetch(url, { headers: { accept: '*/*' } });
+  let r;
+  try { r = await fetch(url, { headers: { accept: '*/*' }, signal: AbortSignal.timeout(10000) }); }
+  catch (e) { if (e.name === 'TimeoutError') { const err = new Error('TomTom did not answer within 10 s'); err.status = 504; throw err; } throw e; }
   return { status: r.status, type: r.headers.get('content-type') || '', body: Buffer.from(await r.arrayBuffer()) };
 }
 
@@ -79,7 +83,7 @@ const server = http.createServer(async (req, res) => {
     return send(res, 404, { error: 'not found' });
   } catch (e) {
     log('error', t.scrub(e.message, key));
-    return send(res, 502, { error: t.scrub(e.message, key) });
+    return send(res, e.status || 502, { error: t.scrub(e.message, key) });
   }
 });
 

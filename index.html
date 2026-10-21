@@ -1754,7 +1754,9 @@ function runSearch(q){
   // New York (which carries the city feed), and enable the whole group like the checkbox does
   const states=cams.length ? [] : Object.entries(LAYERS).filter(([k,c])=>c.kind==='live' && !foldParent(k) && !store.activeLayers.has(k)
     && groupKeys(k).some(g=>LAYERS[g].name.toLowerCase().includes(q))).slice(0,4).map(([k,c])=>({kind:'state',k,name:c.name}));
-  const places=(navOn && placeQ===raw) ? placeHits : [];
+  // places arrive later than cameras; until they do the group says so rather than looking empty
+  const placeState=(!navOn || raw.length<3) ? null : placeCache.has(raw) ? 'done' : placeFail.has(raw) ? 'fail' : 'busy';
+  const places=placeState==='done' ? placeCache.get(raw) : [];
   if(navOn) schedulePlaces(raw);
   searchHits=[...places, ...cams, ...states];
   const dot=(e)=> e.k==='chi-enf' ? (VERDICT[e.feature.properties.quad]||VERDICT.quiet).color : '#007aff';
@@ -1765,9 +1767,11 @@ function runSearch(q){
       : `<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:${dot(h)}"></span>${h.name}<span class="sr-sub">${LAYERS[h.k]?.name || h.k}</span></div>`;
   let html='', i=0;
   if(places.length) html+=`<div class="sr-grp">Places <span>TomTom</span></div>`+places.map(h=>row(h,i++)).join('');
+  else if(placeState==='busy') html+=`<div class="sr-grp">Places <span>searching…</span></div>`;
+  else if(placeState==='fail') html+=`<div class="sr-grp">Places <span>TomTom is not answering right now</span></div>`;
   if(cams.length) html+=(places.length?`<div class="sr-grp">Cameras</div>`:'')+cams.map(h=>row(h,i++)).join('');
   else if(states.length) html+=`<div class="sr-empty">No camera matches in the states that are on.</div>`+states.map(h=>row(h,i++)).join('');
-  else if(!places.length) html+=`<div class="sr-empty">No matches in the states that are on. Try a state name to turn one on.</div>`;
+  else if(!places.length && placeState!=='busy') html+=`<div class="sr-empty">No matches in the states that are on. Try a state name to turn one on.</div>`;
   box.innerHTML=html; box.classList.add('show');
   box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>pickSearch(searchHits[+it.dataset.i])));
 }
@@ -1791,7 +1795,9 @@ async function pickSearch(h){
    (tools/tomtom-eval/proxy.js, which holds the key) answers, so the live site never calls
    TomTom. The proxy hands back Ora's own small shapes, so another provider can replace it. */
 const NAV_BASE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8792' : null;
-let navOn=false, placeHits=[], placeQ='', placeT=null;
+// place answers are kept per query for the session, so a late reply or a retyped query never costs a second request
+let navOn=false, placeT=null;
+const placeCache=new Map(), placeBusy=new Set(), placeFail=new Set();
 const nav={ place:null, marker:null, from:null, fromLabel:'', routes:[], sel:0, token:0, pickingStart:false, autoTraffic:false, watched:{} };
 async function navGet(path){
   const r=await fetch(NAV_BASE+path), j=await r.json().catch(()=>({}));
@@ -1818,13 +1824,14 @@ async function navInit(){
 // wait for a pause in typing (the free allowance for place search is 2,500 a month), and
 // search near the middle of the map so "main st" means the one you are looking at
 function schedulePlaces(q){
-  if(q.length<3 || q===placeQ) return;
+  if(q.length<3 || placeCache.has(q) || placeBusy.has(q) || placeFail.has(q)) return;
   clearTimeout(placeT);
   placeT=setTimeout(async ()=>{
+    placeBusy.add(q);
     const c=map.getCenter();
-    try{ placeHits=(await navGet(`/search?q=${encodeURIComponent(q)}&near=${c.lat.toFixed(5)},${c.lng.toFixed(5)}`)).places.map(p=>({...p, kind:'place'})); }
-    catch(e){ placeHits=[]; console.warn('place search failed:', e.message); }
-    placeQ=q;
+    try{ placeCache.set(q, (await navGet(`/search?q=${encodeURIComponent(q)}&near=${c.lat.toFixed(5)},${c.lng.toFixed(5)}`)).places.map(p=>({...p, kind:'place'}))); }
+    catch(e){ placeFail.add(q); console.warn('place search failed:', e.message); }
+    placeBusy.delete(q);
     const s=document.getElementById('search');
     if(s.value.trim()===q && document.activeElement===s) runSearch(s.value);
   }, 350);
