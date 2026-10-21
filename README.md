@@ -29,8 +29,8 @@ The missing state is New Jersey, whose feeds cannot be played from a static page
 
 ## Quick start
 
-1. Open the map. It starts on the whole country with a counted pin per covered state.
-2. Click a state pin, or tick states in the sidebar. They stack.
+1. Open the map. It starts on the whole country with a counted bubble per covered state.
+2. Zoom in anywhere, or tap a state's bubble. Cameras load for whatever the map shows.
 3. Click a camera. Video fades in over the snapshot where it plays; the arrow keys cycle
    to the next camera in spatial order; click the picture to go full screen.
 4. Make a route: name it, tap the cameras on your drive, and scroll through all of their

@@ -27,11 +27,10 @@
     border-radius: 12px; padding: 12px 14px 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     width: 258px; max-height: calc(100vh - 24px); overflow-y: auto;
   }
-  #panel .brand-row { display: flex; align-items: center; justify-content: space-between; }
+  #panel .brand-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
   #panel .brand { font-size: 15px; font-weight: 700; color: #1c1c1e; }
   #share { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
   #share:hover { background: #e0ecff; }
-  #panel .tag { font-size: 11px; color: #8e8e93; margin: 2px 0 10px; }
 
   .search-wrap { position: relative; margin-bottom: 10px; }
   #search { width: 100%; font-size: 13px; padding: 7px 10px 7px 28px; border: 1px solid #dcdce1; border-radius: 8px; outline: none; background: #fff; }
@@ -59,18 +58,11 @@
   .lyr { display: flex; align-items: center; gap: 8px; padding: 4px 2px; cursor: pointer; font-size: 13px; color: #3c3c43; }
   .lyr input { accent-color: #007aff; width: 15px; height: 15px; cursor: pointer; flex: none; }
   .lyr .swatch { width: 9px; height: 9px; border-radius: 50%; flex: none; background: #007aff; }
-  .lyr .swatch.enf { background: linear-gradient(135deg, #34c759 50%, #ff2d55 50%); }
+  /* two plain dots, the verdict colours at either end of the scale, not a split gradient */
+  .lyr .swatch.pair { background: #34c759; box-shadow: 12px 0 0 #ff2d55; margin-right: 12px; }
   .lyr .nm { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .lyr .live-tag { font-size: 8.5px; font-weight: 800; letter-spacing: .03em; color: #fff; background: #ff2d55; padding: 1px 4px; border-radius: 3px; }
   .lyr .cnt { font-size: 10px; color: #a0a0a5; }
-
-  /* Illinois nested block with the Chicago ticket map under it */
-  .il-block { border-radius: 8px; }
-  .il-toggle { font-size: 12px; color: #007aff; cursor: pointer; padding: 3px 2px 4px 25px; display: flex; align-items: center; gap: 5px; user-select: none; }
-  .il-toggle .caret { font-size: 9px; transition: transform .15s; }
-  .il-block.open .il-toggle .caret { transform: rotate(90deg); }
-  .il-sub { margin: 2px 0 4px 12px; padding-left: 10px; border-left: 2px solid #ececf0; }
-  .il-sub.collapsed { display: none; }
 
   .btn-row { display: flex; gap: 6px; margin-top: 4px; }
   .mini-btn { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 5px 9px; cursor: pointer; }
@@ -85,7 +77,7 @@
   .route-item .rx:hover { color: #ff3b30; }
   .route-empty { font-size: 11px; color: #a0a0a5; padding: 2px; }
 
-  .enf-controls { margin-top: 8px; border-top: 1px solid #ececf0; padding-top: 10px; display: none; }
+  .enf-controls { margin-top: 4px; padding-top: 4px; display: none; }
   .enf-controls.show { display: block; }
   .enf-controls .hd { font-size: 11px; font-weight: 600; color: #6e6e73; margin: 2px 0 6px; }
   .color-switch { display: flex; gap: 2px; background: #f2f2f7; border-radius: 8px; padding: 2px; }
@@ -273,9 +265,9 @@
   /* ---------- small viewports: the panel collapses to its header + search and expands
      on demand, so the map is not permanently covered on a phone ---------- */
   @media (max-width: 640px) {
-    /* collapsed still carries the one-line orientation ("check a state to see its
-       cameras") — a phone user's only explanation of what this app is */
-    #panel { top: 10px; left: 10px; right: 10px; width: auto; max-height: 118px; overflow: hidden; transition: max-height .22s ease; }
+    /* collapsed is the brand row and the search box; cameras load for whatever the map
+       shows, so there is no instruction left to carry */
+    #panel { top: 10px; left: 10px; right: 10px; width: auto; max-height: 98px; overflow: hidden; transition: max-height .22s ease; }
     #panel.expanded { max-height: calc(100vh - 140px); max-height: calc(100dvh - 140px); overflow-y: auto; }
     #panelToggle { display: inline-block; }
     #addBanner { top: 104px; max-width: calc(100vw - 20px); }
@@ -284,7 +276,7 @@
   /* ---------- interaction physics ----------
      every touch answers within 100ms, every appearance eases in, every image loads
      behind a shimmer and fades up. Durations stay tight so it feels quicker, not slower. */
-  .mini-btn, #share, .popup-add, .dir-btn, .color-btn, .fchip, .rv-close, .sheet-close, .enlarge-close, .enlarge-nav, .cam-arrow, #panelToggle, #addBanner button, .il-toggle
+  .mini-btn, #share, .popup-add, .dir-btn, .color-btn, .fchip, .rv-close, .sheet-close, .enlarge-close, .enlarge-nav, .cam-arrow, #panelToggle, #addBanner button
     { transition: transform .12s ease, background .15s ease; }
   .mini-btn:active, #share:active, .popup-add:active, .dir-btn:active, .color-btn:active, .fchip:active, .rv-close:active,
   .sheet-close:active, .enlarge-close:active, .enlarge-nav:active, .cam-arrow:active, #panelToggle:active, #addBanner button:active { transform: scale(.94); }
@@ -307,8 +299,6 @@
   /* panel groups ease open and shut instead of popping */
   .grp-body { overflow: hidden; max-height: 420px; opacity: 1; transition: max-height .2s ease, opacity .16s ease, padding .2s ease; }
   .grp.collapsed .grp-body { display: block; max-height: 0; opacity: 0; padding-bottom: 0; }
-  .il-sub { transition: max-height .2s ease, opacity .16s ease; overflow: hidden; max-height: 600px; opacity: 1; }
-  .il-sub.collapsed { display: block; max-height: 0; opacity: 0; }
 
   /* skeleton shimmer behind every camera image; the image fades up over it when it lands */
   @keyframes shimmer { from { background-position: -260px 0; } to { background-position: 260px 0; } }
@@ -371,21 +361,12 @@
 </div>
 
 <div id="panel">
-  <div class="brand-row"><div class="brand">Ora</div><div style="display:flex;gap:6px"><button id="panelToggle" title="Show states, routes and map style">Layers &#9662;</button><button id="share" title="Copy a link to exactly this view">Copy link</button></div></div>
-  <div class="tag">Live traffic cameras across the US. Check a state to see its cameras.</div>
+  <div class="brand-row"><div class="brand">Ora</div><div style="display:flex;gap:6px"><button id="panelToggle" title="Show routes, map style and sources">Layers &#9662;</button><button id="share" title="Copy a link to exactly this view">Copy link</button></div></div>
 
   <div class="search-wrap">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
     <input id="search" type="text" placeholder="Search a place or road" autocomplete="off">
     <div id="search-results"></div>
-  </div>
-
-  <div class="grp" data-region="cams">
-    <div class="grp-h"><span>States</span><span class="caret">&#9660;</span></div>
-    <div class="grp-body">
-      <div class="cam-tools"><label class="lyr master-row"><input type="checkbox" id="masterAll"><span class="nm">All states</span><span class="cnt" id="cnt-all"></span></label><button class="mini-btn grey" id="clearAll">Clear</button></div>
-      <div id="camList"></div>
-    </div>
   </div>
 
   <div class="grp collapsed" data-region="routes">
@@ -403,8 +384,11 @@
     </div>
   </div>
 
-  <!-- enforcement controls live here at parse time (so handlers wire), then get moved under Illinois -->
-  <div id="enfHolder" style="display:none">
+  <!-- a different kind of data from the cameras, so it stays a toggle you opt into -->
+  <div class="grp collapsed" data-region="enf">
+    <div class="grp-h"><span>Chicago ticket map</span><span class="caret">&#9660;</span></div>
+    <div class="grp-body">
+      <label class="lyr"><input type="checkbox" data-layer="chi-enf"><span class="swatch pair"></span><span class="nm">Show ticket map</span><span class="cnt" id="cnt-chi-enf"></span></label>
     <div class="enf-controls" id="enfControls">
       <div class="hd">Color by</div>
       <div class="color-switch"><button class="color-btn active" data-mode="verdict">Safety verdict</button><button class="color-btn" data-mode="type">Camera type</button></div>
@@ -415,6 +399,16 @@
         <span class="fchip on" data-v="gap">Under-enforced</span><span class="fchip on" data-v="quiet">Quiet</span>
       </div>
       <div class="filters" id="fltType" style="margin-top:6px"><span class="fchip on" data-t="redlight">Red light</span><span class="fchip on" data-t="speed">Speed</span></div>
+    </div>
+    </div>
+  </div>
+
+  <!-- cameras load for whatever the map shows; this list is only for switching a state off or forcing one on -->
+  <div class="grp collapsed" data-region="cams">
+    <div class="grp-h"><span>Sources</span><span class="caret">&#9660;</span></div>
+    <div class="grp-body">
+      <div class="cam-tools"><label class="lyr master-row"><input type="checkbox" id="masterAll"><span class="nm">All states</span><span class="cnt" id="cnt-all"></span></label><button class="mini-btn grey" id="clearAll">Clear</button></div>
+      <div id="camList"></div>
     </div>
   </div>
 </div>
@@ -569,8 +563,11 @@ const groupKeys=(k)=>[k, ...foldKids(k)];                  // a sidebar row's la
 const groupCount=(k)=>groupKeys(k).reduce((s,g)=>s+(dataCache[g]?dataCache[g].features.length:(LAYERS[g]&&LAYERS[g].count||0)),0);
 const groupDead =(k)=>groupKeys(k).reduce((s,g)=>s+((LAYERS[g]&&LAYERS[g].deadCount)||0),0);
 const groupCountText=(k)=>{ const dead=groupDead(k); return groupCount(k).toLocaleString()+(dead?` · ${dead.toLocaleString()} offline`:''); };
-async function enableGroup(k, fly=true){ await Promise.allSettled(groupKeys(k).map(g=>store.activeLayers.has(g)?null:enableLayer(g, fly && g===k))); }
-function disableGroup(k){ groupKeys(k).forEach(g=>{ if(store.activeLayers.has(g)) disableLayer(g); }); }
+// rows switched off by hand in Sources. The view never turns these back on; asking for the
+// state again (its box, its bubble, a search pick) does
+const userOff=new Set();
+async function enableGroup(k, fly=true){ userOff.delete(k); await Promise.allSettled(groupKeys(k).map(g=>store.activeLayers.has(g)?null:enableLayer(g, fly && g===k))); }
+function disableGroup(k){ userOff.add(k); groupKeys(k).forEach(g=>{ if(store.activeLayers.has(g)) disableLayer(g); }); }
 const VERDICT = {
   justified:{color:'#34c759',label:'On real danger'}, revenue:{color:'#ff2d55',label:'Ticket-heavy, low crash'},
   gap:{color:'#ff9500',label:'Crashes, light enforcement'}, quiet:{color:'#b0b0b5',label:'Quiet on both'}
@@ -1340,8 +1337,8 @@ function renderLegend(){
   el.innerHTML=(store.enfColorMode==='type')?`<div class="row"><span class="dot rl"></span> Red light camera</div><div class="row"><span class="dot sp"></span> Speed camera</div>${sz}`:
     `<div class="row"><span class="dot justified"></span> On real danger <span class="sub">&nbsp;tickets + crashes</span></div><div class="row"><span class="dot revenue"></span> Ticket-heavy, low crash</div><div class="row"><span class="dot gap"></span> Crashes, light enforcement</div><div class="row"><span class="dot quiet"></span> Quiet on both</div>${sz}`;
 }
-function expandIlSub(){ const b=document.getElementById('ilBlock'), s=document.getElementById('ilSub'); if(b) b.classList.add('open'); if(s) s.classList.remove('collapsed'); }
-function syncEnfControls(){ document.getElementById('enfControls').classList.toggle('show', store.activeLayers.has('chi-enf')); if(store.activeLayers.has('chi-enf')){ renderLegend(); expandIlSub(); } }
+function expandEnfGroup(){ const g=document.querySelector('.grp[data-region="enf"]'); if(g) g.classList.remove('collapsed'); }
+function syncEnfControls(){ document.getElementById('enfControls').classList.toggle('show', store.activeLayers.has('chi-enf')); if(store.activeLayers.has('chi-enf')){ renderLegend(); expandEnfGroup(); } }
 
 /* ---------- basemap ---------- */
 function applyContrast(){ const w=store.basemap==='satellite';
@@ -1568,9 +1565,6 @@ async function enableLayer(k,fly=true){
   }
 }
 function disableLayer(k){
-  // the Chicago ticket map is nested under Illinois and only means anything with it on, so
-  // turning Illinois off takes the ticket overlay with it
-  if(k==='il-cam' && store.activeLayers.has('chi-enf')) disableLayer('chi-enf');
   store.activeLayers.delete(k);
   if(LAYERS[k].kind==='live'){ scheduleCamsRebuild(); invalidateOrder(k); } else setLayerVis(k,'none');
   // only close the open camera if it belonged to THIS layer; unrelated toggles must
@@ -1597,6 +1591,8 @@ function syncMaster(){
 async function setAllStates(on){
   const m=document.getElementById('masterAll'); m.disabled=true;   // no double-fire mid-load
   const keys=liveKeys();
+  // off means off: the view does not pull states back in until one is asked for again
+  keys.forEach(k=>{ if(!foldParent(k)) on ? userOff.delete(k) : userOff.add(k); });
   if(on) await Promise.allSettled(keys.map(k=>store.activeLayers.has(k)?null:enableLayer(k,false)));
   else keys.forEach(k=>{ if(store.activeLayers.has(k)) disableLayer(k); });
   // asking for the whole country is the one case where the overview jump IS the request;
@@ -1615,8 +1611,50 @@ function buildCoverage(){
   });
   if(map.getSource('coverage')) map.getSource('coverage').setData({type:'FeatureCollection',features:feats});
 }
-function updateCoverage(){ const show=store.activeLayers.size===0;
-  ['coverage-dot','coverage-label','coverage-count','coverage-hit'].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',show?'visible':'none'); }); }
+// a state's bubble stands in for its cameras until they load, then steps aside for them, so a
+// zoomed-out map shows clusters where states are loaded and one counted bubble everywhere else
+const COVERAGE_LAYERS=['coverage-dot','coverage-label','coverage-block','coverage-count','coverage-hit'];
+function updateCoverage(){ const hide=['!',['in',['get','k'],['literal',[...store.activeLayers]]]];
+  COVERAGE_LAYERS.forEach(id=>{ if(map.getLayer(id)) map.setFilter(id,hide); }); }
+
+/* ---------- the view decides which states load ----------
+   The first screen used to be a 49-row checklist, which is how the data is stored, not how
+   anyone uses a map. Now whatever the map shows at a city or region zoom loads on its own.
+   Each state gets a loose box from its outline (padded, because the outline is coarse and a
+   ferry or river-bridge camera can sit just outside it; decision 0011). Only the few states
+   nearest the middle of the view load per move, so a wide view never pulls ten files. */
+const AUTO_Z=6, AUTO_MAX=4, BOX_PAD=0.2;
+const stateBoxes={};                                     // sidebar row key -> [w, s, e, n]
+const autoPending=new Set();
+function buildStateBoxes(outline){
+  const byName={};
+  Object.keys(LAYERS).forEach(k=>{ if(LAYERS[k].kind==='live' && !foldParent(k)) byName[LAYERS[k].name]=k; });
+  for(const f of (outline&&outline.features)||[]){
+    const k=byName[f.properties.name]; if(!k) continue;
+    let w=Infinity, s=Infinity, e=-Infinity, n=-Infinity;
+    const walk=(c)=>{ if(typeof c[0]==='number'){ if(c[0]<w)w=c[0]; if(c[0]>e)e=c[0]; if(c[1]<s)s=c[1]; if(c[1]>n)n=c[1]; } else c.forEach(walk); };
+    walk(f.geometry.coordinates);
+    stateBoxes[k]=[w-BOX_PAD, s-BOX_PAD, e+BOX_PAD, n+BOX_PAD];
+  }
+}
+function autoLoadView(){
+  if(map.getZoom()<AUTO_Z) return;
+  const b=map.getBounds(), w=b.getWest(), s=b.getSouth(), e=b.getEast(), n=b.getNorth(), c=map.getCenter();
+  // nearest first by distance from the view's centre to the box; a box holding the centre
+  // is distance 0, and among those the smaller state is the one being looked at
+  Object.entries(stateBoxes)
+    .filter(([,[bw,bs,be,bn]])=> bw<=e && be>=w && bs<=n && bn>=s)
+    .map(([k,[bw,bs,be,bn]])=>{ const dx=Math.max(bw-c.lng,0,c.lng-be), dy=Math.max(bs-c.lat,0,c.lat-bn);
+      return {k, d:dx*dx+dy*dy, area:(be-bw)*(bn-bs)}; })
+    .sort((a,b)=> a.d-b.d || a.area-b.area).slice(0,AUTO_MAX)
+    .forEach(({k})=>{
+      if(userOff.has(k) || autoPending.has(k) || groupKeys(k).every(g=>store.activeLayers.has(g))) return;
+      autoPending.add(k);
+      enableGroup(k,false).finally(()=>autoPending.delete(k));
+    });
+}
+let autoLoadT=null;
+function scheduleAutoLoad(){ clearTimeout(autoLoadT); autoLoadT=setTimeout(autoLoadView,250); }
 
 /* ---------- search ---------- */
 function rebuildSearchIndex(){ searchIndex=[]; store.activeLayers.forEach(k=>{ const d=dataCache[k]; if(!d) return;
@@ -1893,8 +1931,11 @@ function bindLayerHandlers(k){
 }
 
 /* ---------- shareable URL ---------- */
+// states follow the view, so the link carries only the layers you opt into (the Chicago
+// ticket map); position and zoom bring the states back on their own
 function serializeState(){ const p=new URLSearchParams();
-  if(store.activeLayers.size) p.set('l',[...store.activeLayers].join(',')); const c=map.getCenter();
+  const optIn=[...store.activeLayers].filter(k=>LAYERS[k].kind!=='live');
+  if(optIn.length) p.set('l',optIn.join(',')); const c=map.getCenter();
   p.set('c',`${c.lng.toFixed(5)},${c.lat.toFixed(5)}`); p.set('z',map.getZoom().toFixed(2));
   if(store.enfColorMode!=='verdict') p.set('cm',store.enfColorMode); if(store.basemap!=='light') p.set('b',store.basemap);
   if(store.enfFilter.verdicts.size<4) p.set('fv',[...store.enfFilter.verdicts].join(',')); if(store.enfFilter.types.size<2) p.set('ft',[...store.enfFilter.types].join(','));
@@ -1903,8 +1944,10 @@ function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+seri
 async function restoreState(){
   const p=new URLSearchParams(location.hash.slice(1));
   const layers=(p.get('l')||'').split(',').filter(k=>LAYERS[k]);
-  // reconcile, don't just add: a pasted link means exactly its layers (no-op at boot)
-  [...store.activeLayers].filter(k=>!layers.includes(k)).forEach(disableLayer);
+  // reconcile the opt-in layers only: a pasted link means exactly its overlays, but states
+  // follow the view and a link never switches one off (no-op at boot). An older link that
+  // still names states (#l=st-WA) loads them below, so it opens on the view it was copied from.
+  [...store.activeLayers].filter(k=>LAYERS[k].kind!=='live' && !layers.includes(k)).forEach(disableLayer);
   if(p.get('cm')==='type') store.enfColorMode='type'; if(p.get('b')==='satellite') store.basemap='satellite';
   if(p.has('fv')) store.enfFilter.verdicts=new Set(p.get('fv').split(',').filter(Boolean));
   if(p.has('ft')) store.enfFilter.types=new Set(p.get('ft').split(',').filter(Boolean));
@@ -1912,7 +1955,7 @@ async function restoreState(){
   document.querySelectorAll('.color-btn[data-base]').forEach(b=>b.classList.toggle('active',b.dataset.base===store.basemap));
   document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.classList.toggle('on',store.enfFilter.verdicts.has(ch.dataset.v)));
   document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.classList.toggle('on',store.enfFilter.types.has(ch.dataset.t)));
-  if(layers.includes('chi-enf')) expandIlSub();
+  if(layers.includes('chi-enf')) expandEnfGroup();
   for(const k of layers) await enableLayer(k,false);
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr());
   syncEnfControls(); setBasemap(store.basemap);
@@ -1921,31 +1964,15 @@ async function restoreState(){
   syncMaster();
 }
 
-/* ---------- build camera list (states A-Z; Illinois nests the Chicago ticket map) ---------- */
+/* ---------- build the Sources list (states A-Z) ---------- */
 function renderCamList(){
   // one row per sidebar state: live layers, minus any folded into another (New York City → New York)
   const keys=Object.keys(LAYERS).filter(k=>LAYERS[k].kind==='live' && !foldParent(k)).sort((a,b)=>LAYERS[a].name.localeCompare(LAYERS[b].name));
-  const rowFor=(k)=>{ const c=LAYERS[k], live=groupKeys(k).some(g=>LAYERS[g].hasVideo);
-    return `<label class="lyr"><input type="checkbox" data-layer="${k}"><span class="swatch"></span><span class="nm">${c.name}</span>${live?'<span class="live-tag">LIVE</span>':''}<span class="cnt" id="cnt-${k}"></span></label>`; };
-  document.getElementById('camList').innerHTML=keys.map(k=>{
-    if(k!=='il-cam') return rowFor(k);
-    return `<div class="il-block" id="ilBlock">
-      ${rowFor('il-cam')}
-      <div class="il-toggle" id="ilToggle"><span class="caret">&#9656;</span> Chicago ticket &amp; crash map</div>
-      <div class="il-sub collapsed" id="ilSub">
-        <label class="lyr"><input type="checkbox" data-layer="chi-enf"><span class="swatch enf"></span><span class="nm">Show ticket map</span><span class="cnt" id="cnt-chi-enf"></span></label>
-        <div id="enfMount"></div>
-      </div></div>`;
-  }).join('');
-  // move the enforcement controls under Illinois
-  const enf=document.getElementById('enfControls'), mount=document.getElementById('enfMount');
-  if(enf&&mount) mount.appendChild(enf);
-  // Illinois sub toggle
-  const t=document.getElementById('ilToggle');
-  if(t) t.addEventListener('click',()=>{ document.getElementById('ilBlock').classList.toggle('open'); document.getElementById('ilSub').classList.toggle('collapsed'); });
-  // wire all camera + chi-enf checkboxes — a row toggles its whole group (New York flips both
-  // the state and the city feed together); chi-enf and unfolded states are groups of one
-  document.querySelectorAll('#camList .lyr input').forEach(cb=>{ if(cb._wired) return; cb._wired=true;
+  document.getElementById('camList').innerHTML=keys.map(k=>{ const c=LAYERS[k], live=groupKeys(k).some(g=>LAYERS[g].hasVideo);
+    return `<label class="lyr"><input type="checkbox" data-layer="${k}"><span class="swatch"></span><span class="nm">${c.name}</span>${live?'<span class="live-tag">LIVE</span>':''}<span class="cnt" id="cnt-${k}"></span></label>`; }).join('');
+  // wire every state box and the Chicago ticket box — a row toggles its whole group (New York
+  // flips both the state and the city feed together); chi-enf and unfolded states are groups of one
+  document.querySelectorAll('.lyr input[data-layer]').forEach(cb=>{ if(cb._wired) return; cb._wired=true;
     cb.addEventListener('change',async ()=>{ const k=cb.dataset.layer; if(cb.checked) await enableGroup(k); else disableGroup(k); writeUrl(); }); });
   // show each state's camera total up front, so the list reads as data before you turn anything
   // on (New York shows its two feeds combined). An active layer keeps its live count untouched.
@@ -1962,8 +1989,11 @@ document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener(
 document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.classList.contains('on')?store.enfFilter.types.add(t):store.enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
 document.getElementById('share').addEventListener('click',async ()=>{ const b=document.getElementById('share'); const ok=await copyText(location.href); const t=b.textContent; b.textContent=ok?'Copied ✓':'Copy failed'; setTimeout(()=>b.textContent=t,1300); });
 document.getElementById('masterAll').addEventListener('change',e=>setAllStates(e.target.checked));
-// clearing layers moves nothing: the coverage markers reappear wherever you are
-document.getElementById('clearAll').addEventListener('click',()=>{ [...store.activeLayers].forEach(disableLayer); writeUrl(); });
+// clearing layers moves nothing: the coverage markers reappear wherever you are, and the view
+// leaves every state off until one is asked for again
+document.getElementById('clearAll').addEventListener('click',()=>{
+  liveKeys().forEach(k=>{ if(!foldParent(k)) userOff.add(k); if(store.activeLayers.has(k)) disableLayer(k); });
+  writeUrl(); });
 // naming happens inline in the panel, not in a blocking browser dialog; creating a
 // route drops you straight into add-mode and Done lands on the finished route view
 document.getElementById('newRoute').addEventListener('click',()=>{
@@ -2039,24 +2069,38 @@ document.addEventListener('keydown',(e)=>{
 });
 
 /* ---------- boot ---------- */
+// one fetch of the outline serves both the drawn borders and the boxes that decide what loads,
+// started now so it runs alongside the basemap style
+const outlineP=fetch('states-outline.json').then(r=>r.json()).catch(e=>{ console.warn('state outline failed', e); return null; });
 map.on('load', async ()=>{
   map.addSource('sat',{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics'});
   const firstSymbol=(map.getStyle().layers.find(l=>l.type==='symbol')||{}).id;
   map.addLayer({id:'sat-layer',type:'raster',source:'sat',layout:{visibility:'none'}}, firstSymbol);
   // crisp US state boundaries (Positron's are missing/broken at low zoom) — below labels, above land
-  map.addSource('us-states',{type:'geojson',data:'states-outline.json'});
+  map.addSource('us-states',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
+  outlineP.then(o=>{ if(o) map.getSource('us-states').setData(o); });
   map.addLayer({id:'state-lines',type:'line',source:'us-states',
     paint:{'line-color':'#9aa1ac','line-width':['interpolate',['linear'],['zoom'],3,0.7,5,1.1,8,1.5],'line-opacity':['interpolate',['linear'],['zoom'],3,0.8,8,0.35]}}, firstSymbol);
   addCamsLayers(); bindCamsHandlers();
   map.addSource('hl-hover',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});
 
-  // coverage overview markers: one label per covered state, shown when nothing is active.
+  // coverage overview markers: one counted bubble per state whose cameras are not loaded.
   // Tapping one opens that state — the finger is already on it, no side-panel detour.
   map.addSource('coverage',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'coverage-dot',type:'circle',source:'coverage',paint:{'circle-radius':['interpolate',['linear'],['get','n'],50,9,500,12,1500,16,3500,21],'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':2.5}});
+  // A circle layer never takes part in label placement, so one state's name could land on a
+  // neighbour's bubble (on a phone, "Oklahoma" sat on Texas). An invisible icon the size of
+  // each bubble claims that space first; a name avoids it, moves from below its own bubble to
+  // above it if it must (never beside it: a side label gets cut off at the screen edge), and
+  // the biggest states place first.
+  map.addImage('coverage-block',{width:10,height:10,data:new Uint8Array(400)});
+  map.addLayer({id:'coverage-label',type:'symbol',source:'coverage',layout:{'text-field':['get','label'],'text-size':11,'text-font':['Noto Sans Bold'],
+    'text-variable-anchor':['top','bottom'],'text-radial-offset':['interpolate',['linear'],['get','n'],50,15/11,500,18/11,1500,22/11,3500,27/11],
+    'symbol-sort-key':['-',['get','n']],'text-allow-overlap':false},paint:{'text-color':'#1c1c1e','text-halo-color':'#fff','text-halo-width':1.6}});
+  map.addLayer({id:'coverage-block',type:'symbol',source:'coverage',layout:{'icon-image':'coverage-block','icon-size':['interpolate',['linear'],['get','n'],50,2.3,500,2.9,1500,3.7,3500,4.7],
+    'icon-padding':0,'icon-allow-overlap':true}});
   map.addLayer({id:'coverage-count',type:'symbol',source:'coverage',layout:{'text-field':['get','nLabel'],'text-size':10,'text-font':['Noto Sans Bold'],'text-allow-overlap':true},paint:{'text-color':'#fff'}});
-  map.addLayer({id:'coverage-label',type:'symbol',source:'coverage',layout:{'text-field':['get','label'],'text-size':11,'text-font':['Noto Sans Bold'],'text-offset':[0,1.9],'text-anchor':'top','text-allow-overlap':false},paint:{'text-color':'#1c1c1e','text-halo-color':'#fff','text-halo-width':1.6}});
   // 44px+ finger target over each state bubble; tapping is the same request as its checkbox
   map.addLayer({id:'coverage-hit',type:'circle',source:'coverage',paint:{'circle-color':'rgba(0,0,0,0)','circle-radius':26}});
   const coverTap=async (e)=>{ const f=e.features[0]; if(!f) return; await enableGroup(f.properties.k); writeUrl(); };
@@ -2072,10 +2116,13 @@ map.on('load', async ()=>{
     const idx=await (await fetch('states/index.json')).json();
     Object.entries(idx).forEach(([code,s])=>{ LAYERS['st-'+code]={ kind:'live', name:s.name, file:s.file, center:s.center, zoom:s.zoom, refreshMs:30000, hasVideo:!!s.video, count:s.count, snap:snapFor(s), relay:s.relay||null, sign:s.sign||null, age: s.video?'live video where available':'snapshot, updates every few min' }; });
   }catch(e){ console.warn('states index failed', e); }
-  renderCamList(); renderRouteList(); buildCoverage();
+  renderCamList(); renderRouteList(); buildCoverage(); updateCoverage();
+  buildStateBoxes(await outlineP);
 
   restoring=true; await restoreState(); restoring=false; writeUrl();
   map.on('moveend', writeUrl);
+  map.on('moveend', scheduleAutoLoad);
+  autoLoadView();                                      // a link or reload that opens at city zoom shows pins with no clicks
   // a pasted deep link in the same tab (hashchange) restores like a fresh load; our own
   // writes use replaceState, which never fires this
   window.addEventListener('hashchange', async ()=>{

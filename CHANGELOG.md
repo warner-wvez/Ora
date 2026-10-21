@@ -17,6 +17,11 @@ commits are not listed.
   again. When a whole state goes dark, the health sweep opens a GitHub issue.
 
 ### Changed
+- Cameras load for whatever the map shows. At zoom 6 or closer the states in view load on
+  their own, up to four per move, so the first screen no longer asks you to tick a state.
+  The state list moved into a collapsed Sources section, the Chicago ticket map got its own
+  opt-in section, and the tagline is gone. The link now carries only the ticket map; older
+  links that name states still open on the same view.
 - New York builds from 511NY's new CARS 511x map, `builders/build-states-511x.py`: 1,742
   NYSDOT cameras, all with live video, and a live preview image for each. Compass chips
   carry forward from the old feed by stream name. Colorado moved to the same platform and
@@ -25,6 +30,8 @@ commits are not listed.
   servers now accept, and pages Minnesota's list so its gateway does not time out.
 
 ### Fixed
+- A state's name no longer lands on a neighbour's bubble on the zoomed-out map. On a
+  phone, "Oklahoma" had sat on Texas.
 - Every New York snapshot had been dark since about 2026-09-30, when 511ny.org left the
   DataTables platform and its old image path began returning a web page.
 - Alabama showed a "No camera" card on 626 of 629 cameras after ALGO renumbered them all;

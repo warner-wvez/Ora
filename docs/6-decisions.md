@@ -18,8 +18,10 @@ time.
 | 0006 | [The MapTiler key lives in the page, origin-locked](6-decisions/0006-maptiler-key-in-the-page.md) | 2026-07-10 | Accepted |
 | 0007 | [An image served by three or more cameras is a placeholder](6-decisions/0007-three-cameras-make-a-placeholder.md) | 2026-07-10 | Accepted |
 | 0008 | [Snapshots are not meshed into video](6-decisions/0008-no-snapshot-meshing.md) | 2026-07-09 | Accepted |
-| 0009 | [Coverage pins are informational and never toggle a layer](6-decisions/0009-coverage-pins-are-informational.md) | 2026-07-10 | Accepted |
+| 0009 | [Coverage pins are informational and never toggle a layer](6-decisions/0009-coverage-pins-are-informational.md) | 2026-07-10 | Superseded by 0015 |
 | 0010 | [Off-the-shelf vehicle detection is not shipped](6-decisions/0010-vehicle-detection-not-shipped.md) | 2026-07-13 | Accepted |
 | 0011 | [The state outline is never the primary in-or-out filter](6-decisions/0011-outline-is-not-a-filter.md) | 2026-07-11 | Accepted |
 | 0012 | [The repo is organised to production grade](6-decisions/0012-production-grade-repo-cleanup.md) | 2026-09-21 | Accepted |
 | 0013 | [A locked stream is relayed through the VPS rather than dropped](6-decisions/0013-relay-for-locked-streams.md) | 2026-09-21 | Accepted |
+| 0014 | [Texas signs its own streams in the browser instead of using the relay](6-decisions/0014-texas-signs-its-own-streams.md) | 2026-09-22 | Accepted |
+| 0015 | [The view decides which states load](6-decisions/0015-the-view-decides-what-loads.md) | 2026-10-21 | Accepted |

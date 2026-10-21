@@ -5,22 +5,29 @@ type: page
 
 What a visitor can do on the map, in the order they usually do it.
 
-## Pick a state
+## Find cameras
 
-The map opens on the whole country with a counted pin on every covered state. Click a pin
-or tick the state in the sidebar to load it and fly in. States stack: tick several and all
-of their cameras share one map. "All states" is a three-way box (none, some, all), "Show
-all states" returns to the overview, and "Clear" turns everything off without moving the
-map. New York City is folded into New York's row; the Chicago ticket layer sits under
-Illinois.
+The map opens on the whole country with a counted bubble on every covered state. Zoom to a
+city or a region (zoom 6 or closer) and the cameras there load on their own, with no
+clicks: up to four states per move, nearest the middle of the screen first, so panning
+from Washington into Oregon brings Oregon in. A state's bubble steps aside once its
+cameras load, so a zoomed-out map shows clusters where states are loaded and one bubble
+everywhere else. Tap a bubble to load that state and fly in.
+
+The Sources section of the panel lists every state. Untick one to switch it off; the map
+then leaves it off until you tick it again, tap its bubble, or pick it in search. "All
+states" is a three-way box (none, some, all), and "Clear" switches every state off without
+moving the map. New York City is folded into New York's row.
+
+The Chicago ticket map is a different kind of data, so it never loads on its own. Turn it
+on in its own section of the panel.
 
 ## Read a pin
 
 Pins cluster as you zoom out and split as you zoom in, with a short morph between levels
 so a cluster visibly becomes its members. A grey pin is a camera the health sweep found
 offline, frozen, or serving a placeholder; the popup says which and when that was last
-checked. Hovering shows a ring and the camera's name; the selected pin stays ringed as you
-pan, with a "Back to selection" button to return to it.
+checked. Hovering shows a ring and the camera's name.
 
 ## Open a camera
 
@@ -35,9 +42,9 @@ arrow keys cycle to the next camera in spatial order, and F toggles fit and fill
 ## Search
 
 The search box matches every loaded camera by name, road, and intersection, instantly and
-in the browser. Pick a result and the map flies to it and opens it. Only the layers you
-have switched on are searched; with none on, a search offers to turn on the state it
-finds.
+in the browser. Pick a result and the map flies to it and opens it. Only the states loaded
+right now are searched; when nothing loaded matches, a search offers to turn on the state
+it finds.
 
 ## Basemap
 
@@ -46,9 +53,10 @@ and intersection each camera watches; pin outlines thicken on it so they stay vi
 
 ## Share a view
 
-The URL always reflects what you are looking at: layers, position, zoom, basemap, Chicago
-filters, and the selected camera. "Copy link" copies it, and opening it restores that exact
-view, popup included.
+The URL always reflects what you are looking at: position, zoom, basemap, and the Chicago
+ticket map with its filters. States are not in it, because they follow the view: opening
+the link at the same position loads the same states. "Copy link" copies it. Older links
+that name states (`#l=st-WA`) still open on the same view.
 
 ## On a phone
 

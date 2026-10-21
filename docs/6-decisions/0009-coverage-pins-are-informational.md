@@ -3,7 +3,7 @@ type: adr
 ---
 # 0009. Coverage pins are informational and never toggle a layer
 
-Date: 2026-07-10. Status: Accepted.
+Date: 2026-07-10. Status: Superseded by [0015](0015-the-view-decides-what-loads.md).
 
 ## Context
 
