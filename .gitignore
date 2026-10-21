@@ -24,3 +24,6 @@ docs/superpowers/
 
 # The docs generator's output, if it is ever rendered locally.
 docs-site/
+
+# place details built by builders/build-places.py (local evaluation data, not committed)
+places/

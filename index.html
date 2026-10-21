@@ -358,6 +358,14 @@
   .pc-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: 13px; color: #3c3c43; }
   .pc-meta span:empty { display: none; }
   .pc-meta svg { vertical-align: -3px; color: #0a84ff; margin-right: 3px; }
+  .pc-cat { font-size: 13px; color: #3c3c43; margin: 1px 0 2px; }
+  .pc-cat:empty, .place-addr:empty { display: none; }
+  .pc-rows:not(:empty) { margin-top: 12px; border-top: 1px solid #ececf0; }
+  .pc-rows a { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: 14px; color: #0a84ff; text-decoration: none; border-bottom: 1px solid #ececf0; }
+  .pc-rows a svg { color: #8e8e93; flex: none; }
+  .pc-rows a span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pc-src { font-size: 11px; color: #8e8e93; margin-top: 8px; }
+  .pc-src a { color: inherit; }
   .place-go { margin-top: 14px; width: 100%; height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px;
     font-size: 15px; font-weight: 700; color: #fff; background: #0a84ff; border: none; border-radius: 12px; cursor: pointer; }
   .place-go:hover { background: #0071e3; }
@@ -1920,6 +1928,8 @@ const ICON={
   swap:'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 4v15M8 4 4.5 7.5M8 4l3.5 3.5M16 20V5M16 20l-3.5-3.5M16 20l3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   close:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
   play:'<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg>',
+  phone:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>',
+  web:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm-9 9h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
 };
 const FC=(features)=>({type:'FeatureCollection',features});
 async function navGet(path){
@@ -1992,16 +2002,20 @@ function showPlace(p){
   placeMarker([p.lon,p.lat]);
   // the place sits in the middle of the map that is left over beside the panel or above the sheet
   const off=isMobile() ? [0,-90] : [Math.round(document.getElementById('panel').getBoundingClientRect().right/2),0];
-  if(p.bbox && !/POI|Address/.test(p.type||'')) map.fitBounds([[p.bbox[0],p.bbox[1]],[p.bbox[2],p.bbox[3]]],{maxZoom:15,padding:framePad(),duration:800});
+  // a tap on the map keeps the zoom you chose and only slides the place clear of the panel or sheet
+  if(p.fromTap) map.easeTo({center:[p.lon,p.lat],offset:off,duration:500});
+  else if(p.bbox && !/POI|Address/.test(p.type||'')) map.fitBounds([[p.bbox[0],p.bbox[1]],[p.bbox[2],p.bbox[3]]],{maxZoom:15,padding:framePad(),duration:800});
   else map.flyTo({center:[p.lon,p.lat],zoom:Math.max(map.getZoom(),15),offset:off,duration:800});
-  const html=`<div class="place-card"><div class="pc-head"><div class="pc-txt"><h3>${esc(p.name)}</h3>${p.address?`<div class="place-addr">${esc(p.address)}</div>`:''}</div>
+  const html=`<div class="place-card"><div class="pc-head"><div class="pc-txt"><h3>${esc(p.name)}</h3>
+        <div class="pc-cat" data-cat>${esc(humanCat(p.category))}</div><div class="place-addr" data-addr>${esc(p.address||'')}</div></div>
       ${isMobile()?'':`<button class="nav-ic" data-close aria-label="Close">${ICON.close}</button>`}</div>
     <div class="pc-meta"><span data-drive></span><span data-near></span></div>
-    <button class="place-go" data-dir>${ICON.car}<span>Directions</span><span class="pg-time" data-gotime></span></button></div>`;
+    ${navOn ? `<button class="place-go" data-dir>${ICON.car}<span>Directions</span><span class="pg-time" data-gotime></span></button>` : ''}
+    <div class="pc-rows" data-rows></div><div class="pc-src" data-src></div></div>`;
   let el;
   if(isMobile()){ setPanelMode('place'); openSheet(html); el=document.getElementById('sheetContent'); }
   else { navBox().innerHTML=html; setPanelMode('place'); el=navBox(); }
-  el.querySelector('[data-dir]').addEventListener('click',startDirections);
+  const go=el.querySelector('[data-dir]'); if(go) go.addEventListener('click',startDirections);
   const x=el.querySelector('[data-close]'); if(x) x.addEventListener('click',closeNav);
   placeExtras(p);
 }
@@ -2013,11 +2027,14 @@ function setPlaceMeta(key, html){
 // time from one route call, which Directions then reuses instead of asking again
 async function placeExtras(p){
   const tok=++nav.ptok, at=[p.lon,p.lat];
+  const info=await overtureMatch(p);
+  if(tok!==nav.ptok || nav.mode!=='place') return;
+  if(info) fillPlace(p, info);
   await Promise.allSettled(statesAt(at).map(k=>enableGroup(k,false)));
   if(tok!==nav.ptok || nav.mode!=='place') return;
   const near=countNear(at, 1609);
   setPlaceMeta('near', `${ICON.cam}${near ? `${near} camera${near===1?'':'s'} within 1 mi` : 'No cameras within 1 mi'}`);
-  if(!meMarker) return;                       // a drive time needs a start; never ask for location just for this
+  if(!meMarker || !navOn) return;             // a drive time needs a start and the routing proxy; never ask for location just for this
   const from=meMarker.getLngLat().toArray();
   try{
     const routes=(await navGet(routeQuery(from,at))).routes;
@@ -2028,11 +2045,107 @@ async function placeExtras(p){
     setPlaceMeta('gotime', fmtTime(best));
   }catch(e){}
 }
+const humanCat=(c)=> c ? String(c).replace(/_/g,' ').replace(/^./,ch=>ch.toUpperCase()) : '';
+// the rest of a card from Overture: what kind of place, where, how to reach it, and who says so
+function fillPlace(p, o){
+  p.phone=o.phone; p.website=o.website;
+  if(o.category) setPlaceMeta('cat', esc(humanCat(o.category)));
+  if(!p.address){ const a=[o.street, [o.city, [o.region, o.zip].filter(Boolean).join(' ')].filter(Boolean).join(', ')].filter(Boolean).join(', ');
+    if(a){ p.address=a; setPlaceMeta('addr', esc(a)); } }
+  const rows=[];
+  if(o.phone){ const d=String(o.phone).replace(/[^\d+]/g,''), us=d.replace(/^\+?1(?=\d{10}$)/,'');
+    const shown=/^\d{10}$/.test(us) ? `(${us.slice(0,3)}) ${us.slice(3,6)}-${us.slice(6)}` : o.phone;
+    rows.push(`<a href="tel:${esc(d)}">${ICON.phone}<span>${esc(shown)}</span></a>`); }
+  if(o.website){ let host=o.website; try{ host=new URL(o.website).hostname.replace(/^www\./,''); }catch(e){}
+    if(/^https?:/i.test(o.website)) rows.push(`<a href="${esc(o.website)}" target="_blank" rel="noopener">${ICON.web}<span>${esc(host)}</span></a>`); }
+  setPlaceMeta('rows', rows.join(''));
+  setPlaceMeta('src', `Details from <a href="https://docs.overturemaps.org/attribution/" target="_blank" rel="noopener">Overture Maps Foundation</a>`);
+}
 function countNear([lng,lat], m){
   const kx=111320*Math.cos(lat*Math.PI/180); let n=0;
   for(const k of statesAt([lng,lat]).flatMap(groupKeys)) if(dataCache[k]) for(const f of dataCache[k].features){
     const [x,y]=f.geometry.coordinates; if(Math.hypot((x-lng)*kx,(y-lat)*110540)<=m) n++; }
   return n;
+}
+
+/* --- tapping the map, and the place details behind it ---
+   Tap a landmark and its card opens, the way every map app does: the name and kind come
+   straight from the map tile, and Overture Maps Places (built into places/ by
+   builders/build-places.py, one small file per zoom-15 tile) fills in the address, phone and
+   website. A tap on empty map closes the card. Ora's own pins, bubbles and route lines answer
+   a tap first, and while routes are up taps belong to the routes. */
+const PLACES={index:undefined, tiles:new Map()};
+async function placesIndex(){
+  if(PLACES.index===undefined){ try{ const r=await fetch('places/index.json'); PLACES.index=r.ok ? await r.json() : null; }catch(e){ PLACES.index=null; } }
+  return PLACES.index;
+}
+function tileXY(lon, lat, z){
+  const n=2**z, r=lat*Math.PI/180;
+  return [Math.floor((lon+180)/360*n), Math.floor((1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2*n)];
+}
+function placesTile(z, x, y){
+  const k=`${z}/${x}/${y}`;
+  if(!PLACES.tiles.has(k)) PLACES.tiles.set(k, fetch(`places/${k}.json`).then(r=>r.ok ? r.json() : []).catch(()=>[]));
+  return PLACES.tiles.get(k);
+}
+// every Overture place within m metres, from the one to four tiles that box touches
+async function placesNear(lon, lat, m){
+  const ix=await placesIndex(); if(!ix) return [];
+  const dLat=m/110540, dLon=m/(111320*Math.cos(lat*Math.PI/180));
+  const [x0,y0]=tileXY(lon-dLon, lat+dLat, ix.z), [x1,y1]=tileXY(lon+dLon, lat-dLat, ix.z), jobs=[];
+  for(let x=x0;x<=x1;x++) for(let y=y0;y<=y1;y++) jobs.push(placesTile(ix.z,x,y));
+  return (await Promise.all(jobs)).flat().map(r=>Object.fromEntries(ix.fields.map((f,i)=>[f,r[i]])));
+}
+const normName=(s)=>String(s||'').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g,'').replace(/&/g,' and ')
+  .replace(/[^a-z0-9]+/g,' ').replace(/\b(the|of)\b/g,' ').replace(/\s+/g,' ').trim();
+// Words that make a longer name a different thing at the same spot: "Space Needle Observation
+// Deck Parking" is a car park, not the deck, and must not lend the deck its category or website.
+const FACILITY=/\b(parking|garage|lot|atm|station|stop|entrance|exit|gate|lobby|dock|terminal|office|kiosk|annex)\b/;
+function nameSim(a, b){
+  a=normName(a); b=normName(b); if(!a || !b) return 0; if(a===b) return 1;
+  const A=new Set(a.split(' ')), B=new Set(b.split(' ')); let both=0; A.forEach(t=>{ if(B.has(t)) both++; });
+  const extra=[...A].filter(t=>!B.has(t)).concat([...B].filter(t=>!A.has(t))).join(' ');
+  if(FACILITY.test(extra)) return 0;
+  return both/(A.size+B.size-both);                    // shared words over all words: 4 of 5 is 0.8
+}
+// the Overture place a tap or a search pick means: the same name (or near enough) within 150 m,
+// preferring the closer and the surer one. A name match is required, so a tap on one shop never
+// borrows the phone number of its neighbour.
+async function overtureMatch(p){
+  const kx=111320*Math.cos(p.lat*Math.PI/180); let best=null, top=0;
+  for(const c of await placesNear(p.lon, p.lat, 150)){
+    const sim=nameSim(p.name, c.name); if(sim<0.6) continue;
+    const d=Math.hypot((c.lon-p.lon)*kx, (c.lat-p.lat)*110540), score=sim - d/600 + (c.confidence||0)*0.2;
+    if(score>top){ top=score; best=c; }
+  }
+  return best;
+}
+// the nearest named landmark under a finger, from the map tile's own points of interest
+function poiAt(point){
+  const r=12; let best=null, bd=Infinity;
+  for(const f of map.queryRenderedFeatures([[point.x-r,point.y-r],[point.x+r,point.y+r]])){
+    if(f.sourceLayer!=='poi' || !f.properties.name || f.geometry.type!=='Point') continue;
+    const px=map.project(f.geometry.coordinates), d=Math.hypot(px.x-point.x, px.y-point.y);
+    if(d<bd){ bd=d; best=f; }
+  }
+  return best;
+}
+const OWN_LAYERS=['cams__hit','chi-enf__hit','coverage-hit','coverage-label','nav-hit'];
+const ownAt=(point)=>map.queryRenderedFeatures(point,{layers:OWN_LAYERS.filter(id=>map.getLayer(id))}).length>0;
+function bindMapTaps(){
+  map.on('click',(e)=>{
+    if(preview || nav.mode==='dir' || ownAt(e.point)) return;
+    const f=poiAt(e.point);
+    if(!f){ if(nav.mode==='place') closeNav(); return; }
+    const pr=f.properties, [lon,lat]=f.geometry.coordinates;
+    document.getElementById('search').value=pr.name; document.getElementById('searchClear').hidden=false;
+    showPlace({name:pr.name, category:pr.subclass||pr.class, lon, lat, address:'', fromTap:true});
+  });
+  // the pointer turns into a hand over anything a tap would open
+  let raf=0, onPoi=false;
+  map.on('mousemove',(e)=>{ if(raf) return; raf=requestAnimationFrame(()=>{ raf=0;
+    const hit=nav.mode!=='dir' && !ownAt(e.point) && !!poiAt(e.point);
+    if(hit!==onPoi){ onPoi=hit; map.getCanvas().style.cursor=hit ? 'pointer' : ''; } }); });
 }
 
 /* --- directions --- */
@@ -2791,7 +2904,7 @@ map.on('load', async ()=>{
   map.on('moveend', writeUrl);
   map.on('moveend', scheduleAutoLoad);
   autoLoadView();                                      // a link or reload that opens at city zoom shows pins with no clicks
-  navInit();
+  navInit(); bindMapTaps();
   // a pasted deep link in the same tab (hashchange) restores like a fresh load; our own
   // writes use replaceState, which never fires this
   window.addEventListener('hashchange', async ()=>{
