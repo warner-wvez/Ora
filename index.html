@@ -22,8 +22,8 @@
 
   #panel {
     position: absolute; top: 12px; left: 12px; z-index: 10;
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+    /* solid, not frosted: a backdrop blur over the map is recomputed on every frame the map moves */
+    background: #fff;
     border-radius: 12px; padding: 12px 14px 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     width: 258px; max-height: calc(100vh - 24px); overflow-y: auto;
   }
@@ -602,7 +602,16 @@ let searchIndex=[], kbdIdx=-1, searchHits=[];
 const US_VIEW={ center:[-96,38.5], zoom:3.7 };
 const OVERVIEW_BOUNDS=[[-124.5,24.5],[-67,48.5]]; // frames the lower-48 states we cover (Alaska reachable from the list)
 const MAPTILER_KEY='dtmplMa5VK2EtReQ2Ug8'; // origin-locked to warner-wvez.github.io + localhost in the MapTiler dashboard
-const map=new maplibregl.Map({ container:'map', style:`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`, center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0 });
+// pixelRatio: a 3x phone screen draws 9 pixels for every 1; 2x draws 4 and still looks sharp
+const map=new maplibregl.Map({ container:'map', style:`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`, center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0,
+  pixelRatio:Math.min(window.devicePixelRatio||1, 2) });
+/* Momentum after a drag, closer to how Apple's maps glide. MapLibre's glide starts at
+   linearity x 1.67 of the finger's speed (its default 0.3 starts at half speed, a brake at
+   release) and runs speed/deceleration seconds. At 0.6 the glide starts at the finger's speed,
+   and deceleration 1100 carries a 1,500 px/s flick about 600 px over 1.4 s, near Apple's
+   projection (velocity x 0.998 / (1 - 0.998) / 1000, about half the speed in pixels), where the
+   default stopped after about 140 px. */
+map.dragPan.enable({linearity:0.6, deceleration:1100, maxSpeed:1800});
 function showOverview(){
   // padding mirrors where the chrome actually is: desktop's panel sits left, the mobile
   // panel sits top. 280px of left padding on a 390px phone broke fitBounds entirely
@@ -1415,9 +1424,21 @@ function buildCamsIndex(){
   camsSet(camsGet(camsZ));
 }
 function stopCamsAnim(){ if(camsAnim){ cancelAnimationFrame(camsAnim.raf); camsSet(camsAnim.final); camsZ=camsAnim.toZ; camsAnim=null; } }
-function camsRender(){ if(!camsIndex) return; const z=Math.floor(map.getZoom());
-  if(z===camsZ){ if(!camsAnim) camsSet(camsGet(z)); return; }
-  if(Math.abs(z-camsZ)!==1){ stopCamsAnim(); camsZ=z; camsSet(camsGet(z)); return; }  // fast multi-level jump: no morph
+// Runs on every frame of a zoom, so it does nothing until the whole zoom level changes. It used
+// to re-send every pin each frame (71 times in one level of wheel zoom), and each re-send makes
+// MapLibre rebuild the pin layer; that was the stutter. Within a level the pins already cover
+// half a viewport past each edge, which is all of the view one level further out, and moveend
+// tops them up after a pan.
+let camsCrossAt=0;
+function camsRender(e){ if(!camsIndex) return; const z=Math.floor(map.getZoom());
+  if(z===camsZ) return;
+  // The morph re-sends every pin each frame for 260 ms. That reads well after a tap on + or -,
+  // but under a finger (a wheel or pinch) or mid-flight (level after level within half a second)
+  // it is the stutter itself, so those swap levels in one step.
+  // MapLibre tags a tap on + or - with its click too, so only wheel and touch count as a finger
+  const now=performance.now(), rapid=now-camsCrossAt<500; camsCrossAt=now;
+  const finger=!!(e && e.originalEvent && /wheel|touch|pointer|mousemove/.test(e.originalEvent.type));
+  if(Math.abs(z-camsZ)!==1 || rapid || finger){ stopCamsAnim(); camsZ=z; camsSet(camsGet(z)); return; }
   startCamsMorph(camsZ,z);
 }
 function startCamsMorph(z1,z2){

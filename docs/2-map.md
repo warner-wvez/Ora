@@ -32,8 +32,9 @@ link, returns to wherever you last looked; the very first visit opens on the who
 
 ## Read a pin
 
-Pins cluster as you zoom out and split as you zoom in, with a short morph between levels
-so a cluster visibly becomes its members. A grey pin is a camera the health sweep found
+Pins cluster as you zoom out and split as you zoom in. A tap on + or -, or a double-click,
+plays a short morph so a cluster visibly becomes its members; a wheel or pinch swaps levels
+at once so the gesture stays smooth. A grey pin is a camera the health sweep found
 offline, frozen, or serving a placeholder; the popup says which and when that was last
 checked. Hovering shows a ring and the camera's name.
 
