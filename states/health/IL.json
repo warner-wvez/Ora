@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-21T05:00:55Z",
+"checked_at": "2026-10-21T12:03:01Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 550,
+"placeholder": 555,
 "frozen": 24,
 "offline": 12
 },
@@ -242,6 +242,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_E.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_S.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_W.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_I-74_4068969_-8958408_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_I-74_4069272_-8958489_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-40_4083438_-8961798_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-40_4083438_-8961798_1_W.jpg": "placeholder",
@@ -560,6 +561,10 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_South_Leg.jpg": "placeholder",
