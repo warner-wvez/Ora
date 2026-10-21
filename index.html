@@ -325,6 +325,41 @@
     .rv-rm, .rx { padding: 10px 10px; font-size: 17px; }
   }
 
+  /* ---------- route preview (TomTom evaluation, this machine only) ---------- */
+  .sr-grp { padding: 7px 10px 3px; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #8e8e93; }
+  .sr-grp span { font-weight: 500; text-transform: none; letter-spacing: 0; color: #aeaeb2; margin-left: 4px; }
+  .place-card { width: 260px; padding: 12px 14px 14px; }
+  #sheetContent .place-card { width: 100%; padding: 6px 16px 18px; }
+  .place-card h3 { font-size: 15px; margin: 0 0 3px; color: #1c1c1e; line-height: 1.3; padding-right: 22px; }
+  .place-addr { font-size: 12px; color: #6e6e73; line-height: 1.35; }
+  .place-go { margin-top: 12px; width: 100%; min-height: 40px; font-size: 14px; font-weight: 700; color: #fff; background: #0a84ff; border: none; border-radius: 10px; cursor: pointer; }
+  #dirBox { margin: -2px 0 10px; }
+  #dirBox[hidden] { display: none; }
+  .dir-head { display: flex; gap: 8px; align-items: flex-start; }
+  .dir-ends { flex: 1; min-width: 0; font-size: 12px; color: #3c3c43; }
+  .dir-row { display: flex; align-items: center; gap: 6px; padding: 2px 0; min-width: 0; }
+  .dir-row b { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #1c1c1e; }
+  .dir-lbl { flex: none; width: 34px; color: #8e8e93; }
+  .dir-change { flex: none; font-size: 11px; font-weight: 600; color: #007aff; background: none; border: none; padding: 0; cursor: pointer; }
+  .dir-x { flex: none; width: 28px; height: 28px; border: none; border-radius: 8px; background: #f2f2f7; color: #3c3c43; font-size: 13px; cursor: pointer; }
+  .dir-msg { font-size: 12px; color: #6e6e73; padding: 10px 2px 2px; }
+  .rt-card { border: 1px solid #e5e5ea; background: #fff; border-radius: 10px; padding: 8px 10px; margin-top: 8px; cursor: pointer; outline: none; }
+  .rt-card.sel { border-color: #0a84ff; box-shadow: inset 0 0 0 1px #0a84ff; }
+  .rt-card:focus-visible { box-shadow: 0 0 0 2px #0a84ff; }
+  .rt-time { font-size: 15px; font-weight: 700; color: #1c1c1e; display: flex; align-items: center; gap: 6px; }
+  .rt-tag { font-size: 10px; font-weight: 700; color: #1a8a3c; background: #e7f8ed; border-radius: 4px; padding: 1px 5px; }
+  .rt-sub { font-size: 12px; color: #6e6e73; margin-top: 2px; }
+  .rt-sub .late { color: #c26a00; font-weight: 600; }
+  .rt-cams { font-size: 12px; color: #1c1c1e; margin-top: 4px; }
+  .rt-watch { margin-top: 8px; }
+  .dir-note { font-size: 10.5px; color: #8e8e93; margin-top: 8px; }
+  @media (max-width: 640px) {
+    #panel.dir { max-height: 60vh; max-height: 60dvh; overflow-y: auto; }
+    #panel.dir .grp { display: none; }               /* on a phone the routes get the whole panel */
+    .dir-x { width: 40px; height: 40px; }
+    .place-go { min-height: 46px; }
+  }
+
   .enf { width: 258px; padding: 12px 14px 14px; }
   .enf-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; color: #fff; margin-right: 5px; }
   .enf-badge.rl { background: #ff3b30; } .enf-badge.sp { background: #ff9500; }
@@ -373,6 +408,8 @@
     <input id="search" type="text" placeholder="Search a place or road" autocomplete="off">
     <div id="search-results"></div>
   </div>
+  <!-- route preview, filled by renderDirBox; only ever shown on this machine (see NAV_BASE) -->
+  <div id="dirBox" hidden></div>
 
   <div class="grp collapsed" data-region="routes">
     <div class="grp-h"><span>My routes</span><span class="caret">&#9660;</span></div>
@@ -386,6 +423,7 @@
     <div class="grp-h"><span>Map style</span><span class="caret">&#9660;</span></div>
     <div class="grp-body">
       <div class="color-switch"><button class="color-btn active" data-base="light">Map</button><button class="color-btn" data-base="satellite">Satellite</button></div>
+      <label class="lyr" id="trafficRow" hidden style="margin-top:6px"><input type="checkbox" id="trafficOn"><span class="nm">Traffic</span><span class="cnt">TomTom</span></label>
     </div>
   </div>
 
@@ -623,12 +661,13 @@ function accuracyCircle([lng,lat], m){
   for(let i=0;i<=64;i++){ const a=i/64*2*Math.PI; ring.push([lng+dx*Math.cos(a), lat+dy*Math.sin(a)]); }
   return {type:'Feature', geometry:{type:'Polygon', coordinates:[ring]}, properties:{}};
 }
-function showMe(pos){
+function showMe(pos, fly=true){
   const c=[pos.coords.longitude, pos.coords.latitude], acc=Math.max(10, pos.coords.accuracy||0);
   if(!meMarker){ const el=document.createElement('div'); el.className='maplibregl-user-location-dot';
     meMarker=new maplibregl.Marker({element:el}).setLngLat(c).addTo(map); }
   else meMarker.setLngLat(c);
   const src=map.getSource('me-accuracy'); if(src) src.setData(accuracyCircle(c, acc));
+  if(!fly) return;
   // frame the whole ring when the fix is rough (a laptop on wifi), but never closer than a city view
   const dy=acc/111320, dx=dy/Math.cos(c[1]*Math.PI/180);
   map.fitBounds([[c[0]-dx, c[1]-dy],[c[0]+dx, c[1]+dy]], {maxZoom:12, padding:40, duration:900});
@@ -1702,40 +1741,259 @@ function scheduleAutoLoad(){ clearTimeout(autoLoadT); autoLoadT=setTimeout(autoL
 /* ---------- search ---------- */
 function rebuildSearchIndex(){ searchIndex=[]; store.activeLayers.forEach(k=>{ const d=dataCache[k]; if(!d) return;
   d.features.forEach(f=>searchIndex.push({name:f.properties.name,road:f.properties.roadway||'',coords:f.geometry.coordinates,k,feature:f})); }); }
+// one list of hits in display order, places first, so the mouse, the arrow keys and Enter all
+// pick from the same thing. A hit is {kind:'place'|'cam'|'state', ...}.
+const esc=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function runSearch(q){
-  const box=document.getElementById('search-results'); q=q.trim().toLowerCase(); kbdIdx=-1;
-  if(q.length<2){ box.classList.remove('show'); box.innerHTML=''; return; }
-  const hits=searchIndex.filter(e=>(e.name&&e.name.toLowerCase().includes(q))||(e.road&&e.road.toLowerCase().includes(q))).slice(0,8);
-  if(!hits.length){
-    searchHits=[];
-    // the searcher knows the camera, not the layer model: when nothing matches in what's
-    // on, offer the states whose names match — one tap turns the state on and re-searches
-    // one hit per sidebar row; match on any name in the group so "new york city" still turns on
-    // New York (which carries the city feed), and enable the whole group like the checkbox does
-    const stateHits=Object.entries(LAYERS).filter(([k,c])=>c.kind==='live' && !foldParent(k) && !store.activeLayers.has(k)
-      && groupKeys(k).some(g=>LAYERS[g].name.toLowerCase().includes(q))).slice(0,4);
-    if(stateHits.length){
-      box.innerHTML=`<div class="sr-empty">No camera matches in the states that are on.</div>`+stateHits.map(([k,c])=>
-        `<div class="sr-item sr-state" data-k="${k}"><span class="sr-dot" style="background:#007aff"></span>Turn on ${c.name}<span class="sr-sub">${groupCount(k).toLocaleString()} cameras</span></div>`).join('');
-      box.classList.add('show');
-      box.querySelectorAll('.sr-state').forEach(it=>it.addEventListener('click',async ()=>{
-        await enableGroup(it.dataset.k); writeUrl();        // same request as its checkbox, fly included
-        runSearch(document.getElementById('search').value);
-      }));
-      return;
-    }
-    box.innerHTML=`<div class="sr-empty">No matches in the states that are on. Try a state name to turn one on.</div>`; box.classList.add('show'); return;
-  }
-  searchHits=hits;
+  const box=document.getElementById('search-results'), raw=q.trim(); q=raw.toLowerCase(); kbdIdx=-1;
+  if(q.length<2){ box.classList.remove('show'); box.innerHTML=''; searchHits=[]; return; }
+  const cams=searchIndex.filter(e=>(e.name&&e.name.toLowerCase().includes(q))||(e.road&&e.road.toLowerCase().includes(q))).slice(0,8).map(e=>({kind:'cam',...e}));
+  // the searcher knows the camera, not the layer model: when nothing matches in what's
+  // on, offer the states whose names match — one tap turns the state on and re-searches
+  // one hit per sidebar row; match on any name in the group so "new york city" still turns on
+  // New York (which carries the city feed), and enable the whole group like the checkbox does
+  const states=cams.length ? [] : Object.entries(LAYERS).filter(([k,c])=>c.kind==='live' && !foldParent(k) && !store.activeLayers.has(k)
+    && groupKeys(k).some(g=>LAYERS[g].name.toLowerCase().includes(q))).slice(0,4).map(([k,c])=>({kind:'state',k,name:c.name}));
+  const places=(navOn && placeQ===raw) ? placeHits : [];
+  if(navOn) schedulePlaces(raw);
+  searchHits=[...places, ...cams, ...states];
   const dot=(e)=> e.k==='chi-enf' ? (VERDICT[e.feature.properties.quad]||VERDICT.quiet).color : '#007aff';
-  const sub=(e)=> LAYERS[e.k]?.name || e.k;
-  box.innerHTML=hits.map((e,i)=>`<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:${dot(e)}"></span>${e.name}<span class="sr-sub">${sub(e)}</span></div>`).join('');
-  box.classList.add('show');
-  box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>pickSearch(hits[+it.dataset.i])));
+  const row=(h,i)=> h.kind==='place'
+      ? `<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:#1c1c1e"></span>${esc(h.name)}<span class="sr-sub">${esc(h.address)}</span></div>`
+    : h.kind==='state'
+      ? `<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:#007aff"></span>Turn on ${h.name}<span class="sr-sub">${groupCount(h.k).toLocaleString()} cameras</span></div>`
+      : `<div class="sr-item" data-i="${i}"><span class="sr-dot" style="background:${dot(h)}"></span>${h.name}<span class="sr-sub">${LAYERS[h.k]?.name || h.k}</span></div>`;
+  let html='', i=0;
+  if(places.length) html+=`<div class="sr-grp">Places <span>TomTom</span></div>`+places.map(h=>row(h,i++)).join('');
+  if(cams.length) html+=(places.length?`<div class="sr-grp">Cameras</div>`:'')+cams.map(h=>row(h,i++)).join('');
+  else if(states.length) html+=`<div class="sr-empty">No camera matches in the states that are on.</div>`+states.map(h=>row(h,i++)).join('');
+  else if(!places.length) html+=`<div class="sr-empty">No matches in the states that are on. Try a state name to turn one on.</div>`;
+  box.innerHTML=html; box.classList.add('show');
+  box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>pickSearch(searchHits[+it.dataset.i])));
 }
-function pickSearch(e){ document.getElementById('search-results').classList.remove('show'); document.getElementById('search').value=e.name;
+// a pick puts the phone keyboard and the expanded panel away, so the map shows what was picked
+function foldSearch(){ document.getElementById('search').blur(); if(isMobile()) document.getElementById('panel').classList.remove('expanded'); }
+async function pickSearch(h){
+  if(!h) return;
+  if(h.kind==='state'){ await enableGroup(h.k); writeUrl(); runSearch(document.getElementById('search').value); return; }  // same request as its checkbox, fly included
+  document.getElementById('search-results').classList.remove('show'); document.getElementById('search').value=h.name;
+  foldSearch();
+  if(h.kind==='place'){ pickPlace(h); return; }
   // a search pick navigates and shows — it never silently adds to a route mid-add-mode
-  map.flyTo({center:e.coords,zoom:15,duration:800}); selectFeature(e.k,e.feature,{noAutoAdd:true}); }
+  map.flyTo({center:h.coords,zoom:15,duration:800}); selectFeature(h.k,h.feature,{noAutoAdd:true}); }
+
+/* ---------- route preview (TomTom evaluation, this machine only) ----------
+   Search a place or an address, open its card, ask for directions, and compare two or three
+   routes by trip time, traffic delay and how many of Ora's cameras sit on each, with traffic
+   colours on the roads. It is a preview: no turn-by-turn, no following your position, no
+   rerouting. Everything here is for testing on this machine under TomTom's evaluation terms.
+   It turns on only when the page itself is served from localhost and the local proxy
+   (tools/tomtom-eval/proxy.js, which holds the key) answers, so the live site never calls
+   TomTom. The proxy hands back Ora's own small shapes, so another provider can replace it. */
+const NAV_BASE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8792' : null;
+let navOn=false, placeHits=[], placeQ='', placeT=null;
+const nav={ place:null, marker:null, from:null, fromLabel:'', routes:[], sel:0, token:0, pickingStart:false, autoTraffic:false, watched:{} };
+async function navGet(path){
+  const r=await fetch(NAV_BASE+path), j=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.error||`HTTP ${r.status}`);
+  return j;
+}
+async function navInit(){
+  if(!NAV_BASE) return;
+  try{ navOn=!!(await navGet('/healthz')).ok; }catch(e){ navOn=false; }
+  if(!navOn) return;
+  document.getElementById('search').placeholder='Search a place, address or road';
+  document.getElementById('trafficRow').hidden=false;
+  document.getElementById('trafficOn').addEventListener('change',e=>{ nav.autoTraffic=false; setTraffic(e.target.checked); });
+  // route lines sit under the camera pins, so the cameras on a route stay tappable
+  map.addSource('nav-routes',{type:'geojson',data:{type:'FeatureCollection',features:[]},attribution:'Routes &copy; TomTom'});
+  map.addLayer({id:'nav-route-casing',type:'line',source:'nav-routes',layout:{'line-join':'round','line-cap':'round','line-sort-key':['get','sel']},
+    paint:{'line-color':['case',['==',['get','sel'],1],'#0a5bc4','#7f8fa6'],'line-width':['interpolate',['linear'],['zoom'],5,5,12,10,16,14]}},'cams__clusters');
+  map.addLayer({id:'nav-route-line',type:'line',source:'nav-routes',layout:{'line-join':'round','line-cap':'round','line-sort-key':['get','sel']},
+    paint:{'line-color':['case',['==',['get','sel'],1],'#0a84ff','#c3cddb'],'line-width':['interpolate',['linear'],['zoom'],5,3,12,7,16,10]}},'cams__clusters');
+  map.on('click','nav-route-line',(e)=>{ const f=e.features[0]; if(f && !map.queryRenderedFeatures(e.point,{layers:['cams__hit']}).length) selectRoute(f.properties.i); });
+  map.on('mouseenter','nav-route-line',()=>{ map.getCanvas().style.cursor='pointer'; });
+  map.on('mouseleave','nav-route-line',()=>{ map.getCanvas().style.cursor=''; });
+}
+// wait for a pause in typing (the free allowance for place search is 2,500 a month), and
+// search near the middle of the map so "main st" means the one you are looking at
+function schedulePlaces(q){
+  if(q.length<3 || q===placeQ) return;
+  clearTimeout(placeT);
+  placeT=setTimeout(async ()=>{
+    const c=map.getCenter();
+    try{ placeHits=(await navGet(`/search?q=${encodeURIComponent(q)}&near=${c.lat.toFixed(5)},${c.lng.toFixed(5)}`)).places.map(p=>({...p, kind:'place'})); }
+    catch(e){ placeHits=[]; console.warn('place search failed:', e.message); }
+    placeQ=q;
+    const s=document.getElementById('search');
+    if(s.value.trim()===q && document.activeElement===s) runSearch(s.value);
+  }, 350);
+}
+function pickPlace(p){
+  if(nav.pickingStart){ setStart([p.lon,p.lat], p.name); return; }
+  clearSelection();
+  nav.place=p;
+  if(!nav.marker) nav.marker=new maplibregl.Marker({color:'#1c1c1e'});
+  nav.marker.setLngLat([p.lon,p.lat]).addTo(map);
+  if(p.bbox) map.fitBounds([[p.bbox[0],p.bbox[1]],[p.bbox[2],p.bbox[3]]],{maxZoom:15,padding:60,duration:800});
+  else map.flyTo({center:[p.lon,p.lat],zoom:15,duration:800});
+  const html=`<div class="place-card"><h3>${esc(p.name)}</h3>${p.address?`<div class="place-addr">${esc(p.address)}</div>`:''}<button class="place-go" data-dir>Directions</button></div>`;
+  let el;
+  if(isMobile()){ openSheet(html); el=document.getElementById('sheetContent'); }
+  else { const mine=popup=new maplibregl.Popup({closeButton:true,maxWidth:'288px',offset:34}).setLngLat([p.lon,p.lat]).setHTML(html).addTo(map);
+    mine.on('close',()=>{ if(popup===mine) popup=null; }); el=mine.getElement(); }
+  el.querySelector('[data-dir]').addEventListener('click',()=>startDirections(p));
+}
+// your position for "From": the dot's last fix if it is on the map, otherwise one fresh ask
+function myPosition(){
+  if(meMarker){ const l=meMarker.getLngLat(); return Promise.resolve([l.lng,l.lat]); }
+  if(!navigator.geolocation) return Promise.resolve(null);
+  return new Promise(res=>navigator.geolocation.getCurrentPosition(
+    (pos)=>{ showMe(pos,false); res([pos.coords.longitude,pos.coords.latitude]); }, ()=>res(null),
+    {enableHighAccuracy:true, timeout:10000, maximumAge:60000}));
+}
+async function startDirections(p){
+  clearSelection();
+  nav.place=p;
+  if(!nav.from){ const me=await myPosition(); if(me){ nav.from=me; nav.fromLabel='Your location'; } }
+  if(!nav.from){ renderDirBox(); askStart(); return; }
+  planRoutes();
+}
+// a start other than your position comes from the same search box
+function askStart(){
+  nav.pickingStart=true; renderDirBox();
+  const s=document.getElementById('search'); s.value=''; s.placeholder='Search a start point'; s.focus();
+}
+function setStart(lngLat, label){
+  nav.pickingStart=false; nav.from=lngLat; nav.fromLabel=label;
+  const s=document.getElementById('search'); s.value=''; s.placeholder='Search a place, address or road';
+  foldSearch(); planRoutes();
+}
+async function planRoutes(){
+  const tok=++nav.token;
+  nav.routes=[]; nav.sel=0; drawRoutes(); renderDirBox('Finding routes…');
+  const ll=(c)=>`${c[1].toFixed(6)},${c[0].toFixed(6)}`;
+  try{
+    const j=await navGet(`/route?from=${ll(nav.from)}&to=${ll([nav.place.lon,nav.place.lat])}`);
+    if(tok!==nav.token) return;
+    nav.routes=j.routes.map(r=>({...r, cams:null}));
+  }catch(e){ if(tok===nav.token) renderDirBox(`Could not get routes: ${e.message}`); return; }
+  if(!nav.routes.length){ renderDirBox('No route found between these two points'); return; }
+  if(!document.getElementById('trafficOn').checked){ nav.autoTraffic=true; setTraffic(true); }
+  drawRoutes(); renderDirBox(); fitRoute();          // frame the route below the panel at its full height
+  routeCameras(tok);
+}
+function drawRoutes(){
+  const s=map.getSource('nav-routes'); if(!s) return;
+  s.setData({type:'FeatureCollection',features:nav.routes.map((r,i)=>({type:'Feature',properties:{i,sel:i===nav.sel?1:0},geometry:{type:'LineString',coordinates:r.coords}}))});
+}
+function fitRoute(){
+  const r=nav.routes[nav.sel]; if(!r) return;
+  let w=Infinity,s=Infinity,e=-Infinity,n=-Infinity;
+  for(const [x,y] of r.coords){ if(x<w)w=x; if(x>e)e=x; if(y<s)s=y; if(y>n)n=y; }
+  const panel=document.getElementById('panel').getBoundingClientRect();
+  const pad=isMobile() ? {top:panel.bottom+16,right:24,bottom:32,left:24} : {top:40,right:60,bottom:40,left:panel.right+30};
+  map.fitBounds([[w,s],[e,n]],{padding:pad,duration:700,maxZoom:15});
+}
+function selectRoute(i){ if(!nav.routes[i] || i===nav.sel) return; nav.sel=i; drawRoutes(); renderDirBox(); fitRoute(); }
+
+/* the cameras on a route: every camera within ALONG_M of the line, in driving order. The
+   states the line crosses load first (their pins show on the map too), then each camera is
+   checked only against the route segments in its own grid cell, so a cross-country route
+   against thousands of cameras stays quick. */
+const ALONG_M=120, CELL=0.01;
+function statesAt([lng,lat]){ return Object.keys(stateBoxes).filter(k=>{ const b=stateBoxes[k]; return lng>=b[0] && lng<=b[2] && lat>=b[1] && lat<=b[3]; }); }
+async function routeCameras(tok){
+  const ks=new Set();
+  for(const r of nav.routes){ const step=Math.max(1,Math.floor(r.coords.length/400));
+    for(let i=0;i<r.coords.length;i+=step) statesAt(r.coords[i]).forEach(k=>ks.add(k));
+    statesAt(r.coords[r.coords.length-1]).forEach(k=>ks.add(k)); }
+  await Promise.allSettled([...ks].map(k=>enableGroup(k,false)));
+  if(tok!==nav.token) return;
+  const layers=[...ks].flatMap(groupKeys).filter(g=>dataCache[g]);
+  for(const r of nav.routes) r.cams=camerasAlong(r.coords, layers);
+  renderDirBox();
+}
+function camerasAlong(coords, layers){
+  const M_LAT=110540, mLon=(lat)=>111320*Math.cos(lat*Math.PI/180);
+  const cum=[0];                                       // metres from the start to each point
+  for(let i=1;i<coords.length;i++){ const [x0,y0]=coords[i-1], [x1,y1]=coords[i];
+    cum.push(cum[i-1]+Math.hypot((x1-x0)*mLon(y0),(y1-y0)*M_LAT)); }
+  const grid=new Map(), padLat=ALONG_M/M_LAT;
+  for(let i=1;i<coords.length;i++){ const [x0,y0]=coords[i-1], [x1,y1]=coords[i], padLon=ALONG_M/mLon(y0);
+    for(let cx=Math.floor((Math.min(x0,x1)-padLon)/CELL); cx<=Math.floor((Math.max(x0,x1)+padLon)/CELL); cx++)
+      for(let cy=Math.floor((Math.min(y0,y1)-padLat)/CELL); cy<=Math.floor((Math.max(y0,y1)+padLat)/CELL); cy++){
+        const key=cx+','+cy; let a=grid.get(key); if(!a) grid.set(key,a=[]); a.push(i); } }
+  const out=[];
+  for(const k of layers) dataCache[k].features.forEach((f,fi)=>{
+    const [px,py]=f.geometry.coordinates, segs=grid.get(Math.floor(px/CELL)+','+Math.floor(py/CELL)); if(!segs) return;
+    const kx=mLon(py); let best=Infinity, along=0;
+    for(const i of segs){ const [x0,y0]=coords[i-1], [x1,y1]=coords[i];
+      const ax=(x1-x0)*kx, ay=(y1-y0)*M_LAT, bx=(px-x0)*kx, by=(py-y0)*M_LAT, L=ax*ax+ay*ay;
+      const t=L ? Math.max(0,Math.min(1,(ax*bx+ay*by)/L)) : 0, d=Math.hypot(bx-ax*t, by-ay*t);
+      if(d<best){ best=d; along=cum[i-1]+t*Math.sqrt(L); } }
+    if(best<=ALONG_M) out.push({k, i:fi, along, down:['offline','frozen'].includes(f.properties.status)});
+  });
+  return out.sort((a,b)=>a.along-b.along);
+}
+const fmtTime=(s)=>{ const m=Math.max(1,Math.round(s/60)); return m<60 ? `${m} min` : `${Math.floor(m/60)} h ${m%60} min`; };
+const fmtMiles=(m)=>`${(m/1609.344).toFixed(m<16093?1:0)} mi`;
+function renderDirBox(msg){
+  const box=document.getElementById('dirBox'); box.hidden=false;
+  document.getElementById('panel').classList.add('dir');
+  const from=nav.pickingStart ? 'Search a start above' : (nav.from ? nav.fromLabel : 'Location is off');
+  let body;
+  if(msg) body=`<div class="dir-msg">${esc(msg)}</div>`;
+  else if(!nav.routes.length) body='';
+  else body=nav.routes.map((r,i)=>{
+    const sel=i===nav.sel, down=r.cams ? r.cams.filter(c=>c.down).length : 0;
+    const cams=r.cams==null ? 'Finding cameras…' : `${r.cams.length} camera${r.cams.length===1?'':'s'} on this route${down?` · ${down} not working`:''}`;
+    const delay=r.delaySeconds>=60 ? `<span class="late">+${fmtTime(r.delaySeconds)} traffic</span>` : 'No traffic delay';
+    const fastest=nav.routes.length>1 && r.seconds===Math.min(...nav.routes.map(x=>x.seconds));
+    return `<div class="rt-card${sel?' sel':''}" role="button" tabindex="0" data-rt="${i}"><div class="rt-time">${fmtTime(r.seconds)}${fastest?'<span class="rt-tag">Fastest</span>':''}</div>
+      <div class="rt-sub">${delay} · ${fmtMiles(r.meters)}</div><div class="rt-cams">${cams}</div>
+      ${sel && r.cams && r.cams.length ? `<button class="mini-btn rt-watch" data-watch>Watch these ${r.cams.length} cameras</button>` : ''}</div>`;
+  }).join('');
+  box.innerHTML=`<div class="dir-head"><div class="dir-ends">
+      <div class="dir-row"><span class="dir-lbl">From</span><b>${esc(from)}</b><button class="dir-change" data-start>Change</button></div>
+      <div class="dir-row"><span class="dir-lbl">To</span><b>${esc(nav.place?nav.place.name:'')}</b></div></div>
+      <button class="dir-x" data-close title="Close directions">&#10005;</button></div>${body}
+    <div class="dir-note">A route preview, not turn-by-turn. Places, routes and traffic &copy; TomTom.</div>`;
+  box.querySelector('[data-close]').addEventListener('click',closeDirections);
+  box.querySelector('[data-start]').addEventListener('click',askStart);
+  box.querySelectorAll('[data-rt]').forEach(c=>{ const go=()=>selectRoute(+c.dataset.rt);
+    c.addEventListener('click',(e)=>{ if(!e.target.closest('[data-watch]')) go(); });
+    c.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); go(); } }); });
+  const w=box.querySelector('[data-watch]'); if(w) w.addEventListener('click',()=>watchRoute(nav.routes[nav.sel]));
+}
+// the cameras on a route become one of your saved routes, which opens as the scrolling stack
+// of live feeds the route view already is; asking twice reopens the same one
+function watchRoute(r){
+  const key=`${nav.place.name}|${r.seconds}|${r.meters}`;
+  if(nav.watched[key] && loadRoutes().some(x=>x.id===nav.watched[key])){ openRouteView(nav.watched[key]); return; }
+  const id=uid(), routes=loadRoutes();
+  routes.push({id, name:`To ${nav.place.name}`.slice(0,40), cams:r.cams.map(c=>{
+    const f=dataCache[c.k].features[c.i], p=readProps(f), d=p.directions[0]||{};
+    return {k:c.k, name:p.name, coords:f.geometry.coordinates.slice(), snapshot:d.snapshot||null, video:d.video||null, camId:d.camId||null}; })});
+  saveRoutes(routes); renderRouteList(); nav.watched[key]=id; openRouteView(id);
+}
+function closeDirections(){
+  nav.token++; nav.routes=[]; nav.from=null; nav.place=null; drawRoutes();
+  if(nav.pickingStart){ nav.pickingStart=false; document.getElementById('search').placeholder='Search a place, address or road'; }
+  if(nav.marker) nav.marker.remove();
+  if(nav.autoTraffic){ nav.autoTraffic=false; setTraffic(false); }
+  document.getElementById('dirBox').hidden=true; document.getElementById('panel').classList.remove('dir');
+}
+// traffic colours on the roads: TomTom's relative flow tiles, under the basemap's labels
+function setTraffic(on){
+  if(on && !map.getSource('traffic')){
+    const firstSymbol=(map.getStyle().layers.find(l=>l.type==='symbol')||{}).id;
+    map.addSource('traffic',{type:'raster',tiles:[NAV_BASE+'/traffic/{z}/{x}/{y}.png'],tileSize:256,attribution:'Traffic &copy; TomTom'});
+    map.addLayer({id:'traffic',type:'raster',source:'traffic',paint:{'raster-opacity':0.85}}, firstSymbol);
+  }
+  if(map.getLayer('traffic')) map.setLayoutProperty('traffic','visibility',on?'visible':'none');
+  document.getElementById('trafficOn').checked=on;
+}
 
 /* ---------- routes ---------- */
 function renderRouteList(){
@@ -2102,7 +2360,8 @@ document.addEventListener('keydown',(e)=>{
   if(sr.classList.contains('show')){ sr.classList.remove('show'); return; }
   if(store.selected){ clearSelection(); return; }
   if(store.mode==='route-view'){ closeRouteView(); return; }
-  if(store.mode==='add-to-route') stopAddMode();
+  if(store.mode==='add-to-route'){ stopAddMode(); return; }
+  if(!document.getElementById('dirBox').hidden) closeDirections();
 });
 // ← / → step through cameras whenever one is open (the fast curation path; the on-screen
 // pager teaches it). The fullscreen overlay owns its own arrows, and a focused field keeps them.
@@ -2174,6 +2433,7 @@ map.on('load', async ()=>{
   map.on('moveend', writeUrl);
   map.on('moveend', scheduleAutoLoad);
   autoLoadView();                                      // a link or reload that opens at city zoom shows pins with no clicks
+  navInit();
   // a pasted deep link in the same tab (hashchange) restores like a fresh load; our own
   // writes use replaceState, which never fires this
   window.addEventListener('hashchange', async ()=>{
