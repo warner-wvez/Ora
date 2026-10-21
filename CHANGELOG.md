@@ -20,6 +20,10 @@ commits are not listed.
   again. When a whole state goes dark, the health sweep opens a GitHub issue.
 
 ### Changed
+- The map moves more smoothly. A wheel or pinch zoom no longer rebuilds the camera pins on
+  every frame (40 rebuilds in one level of wheel zoom, now 1), the panel is solid white
+  instead of a blur over the moving map, phones draw the map at 2x instead of 3x, and a flick
+  glides on at the finger's speed, about 3.6 times farther than before.
 - Cameras load for whatever the map shows. At zoom 6 or closer the states in view load on
   their own, up to four per move, so the first screen no longer asks you to tick a state.
   The state list moved into a collapsed Sources section, the Chicago ticket map got its own
