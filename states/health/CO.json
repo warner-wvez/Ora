@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-22T17:16:01Z",
+"checked_at": "2026-10-22T21:41:59Z",
 "cameras": 1308,
 "counts": {
-"frozen": 23,
+"frozen": 20,
 "placeholder": 24
 },
 "status": {
@@ -26,11 +26,9 @@
 "https://cocam.carsprogram.org/Douglas/64_Linc_Keystone-cotripSouth-DO-NOT-DELETE.jpg": "frozen",
 "https://cocam.carsprogram.org/Douglas/64_Linc_Keystone-cotripWest-DO-NOT-DELETE.jpg": "frozen",
 "https://cocam.carsprogram.org/Snapshots/006E27515CAM1SEC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/006W25915CAM1RHS.flv.png": "frozen",
 "https://cocam.carsprogram.org/Snapshots/007N06415CAM1NWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025N21365CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025S11150CAM1RHS.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/025S23410CAM1RHS.flv.png": "frozen",
 "https://cocam.carsprogram.org/Snapshots/036E05660CAM1ML1.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E21660CAM1RHS-2.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E21660CAM1RHS-3.flv.png": "placeholder",
@@ -49,7 +47,6 @@
 "https://cocam.carsprogram.org/Snapshots/115N03895CAM1NEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/128E00490CAM1SEC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/128W01265CAM1NEC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/287N30095CAM1MED.flv.png": "frozen",
 "https://cocam.carsprogram.org/Snapshots/287S28955CAM1SWC.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/550E02135CAM1NEC.flv.png": "placeholder",
 "https://websvc.coloradosprings.gov/live/TOC/00084_I-25%20%28mm156%29%20_%20Gleneagle.jpg": "frozen"

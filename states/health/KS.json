@@ -1,13 +1,18 @@
 {
-"checked_at": "2026-10-22T17:28:11Z",
+"checked_at": "2026-10-22T21:51:25Z",
 "cameras": 560,
 "counts": {
-"offline": 9,
-"placeholder": 13
+"offline": 8,
+"placeholder": 18
 },
 "status": {
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
 "https://kscam.carsprogram.org/snapshots/GEN_4-035-1880-2-I-35andUS-59.jpeg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-86.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-87.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035NBIPC-88.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBIPC-85.jpg": "placeholder",
+"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K035SBIPC-89.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-02.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBIPC-64.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-03.jpg": "offline",
@@ -15,7 +20,6 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-52.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBIPC-66.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K169NBC-01.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K635SBC-07.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M291NBC-03.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M291SBIPC-01.jpg": "placeholder",
