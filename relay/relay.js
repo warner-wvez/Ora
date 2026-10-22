@@ -65,6 +65,64 @@ function rewritePlaylist(text, { state, imageId, host, chan }) {
   }
 }
 
+// New Jersey, traced 2026-10-22, needs no token at all: its two stream hosts serve anyone
+// whose request says it came from 511nj.org, and answer CORS to 511nj.org alone. A page on
+// another origin can do neither, so the relay says it instead. The path after the host key
+// is the upstream path unchanged, which keeps every relative link in a playlist pointing
+// back here. See docs/6-decisions/0016-new-jersey-through-the-relay.md.
+//
+// Relay path:   /nj/<w|t>/<upstream path>
+// Upstream URL: https://nj-511.wink.co/<upstream path>, or the Turnpike's host for t
+const PASS = {
+  nj: {
+    site: 'https://511nj.org',
+    hosts: {
+      w: { origin: 'https://nj-511.wink.co', path: /^hls\/public\/\d{1,3}\/[A-Za-z0-9_-]{1,40}\/[A-Za-z0-9_.-]{1,80}$/ },
+      t: { origin: 'https://njtpk-wink.xcmdata.org', path: /^njta\/\d{1,4}\/(?:media\/)?public\/hls\/[A-Za-z0-9_.-]{1,80}$/ },
+    },
+  },
+};
+
+const PASS_PATH = /^\/([a-z]{2})\/([a-z])\/(.+)$/;
+
+function parsePassPath(pathname) {
+  const m = PASS_PATH.exec(pathname);
+  if (!m) return null;
+  const [, state, key, path] = m;
+  const host = PASS[state] && PASS[state].hosts[key];
+  if (!host || path.includes('..') || !host.path.test(path)) return null;
+  return { state, key, path, file: path.slice(path.lastIndexOf('/') + 1) };
+}
+
+function passUrl({ state, key, path }) {
+  return `${PASS[state].hosts[key].origin}/${path}`;
+}
+
+// wink.co serves low-latency HLS, a quarter-second part per request. A traffic camera gains
+// nothing from that and the relay would carry eight times the requests, so the part tags go
+// and the player falls back to plain two-second segments. An otp, should one ever be handed
+// out again, is stripped like the other states' tokens.
+const LOW_LATENCY = /^#EXT-X-(?:SERVER-CONTROL|PART-INF|PART|PRELOAD-HINT|RENDITION-REPORT|SKIP):/;
+
+function rewritePassPlaylist(text, { state, key }) {
+  const { origin } = PASS[state].hosts[key];
+  const prefix = `/${state}/${key}/`;
+  return text
+    .split('\n')
+    .filter((line) => !LOW_LATENCY.test(line))
+    .map((line) => {
+      if (line.startsWith('#') || line.trim() === '') return line.replace(/URI="([^"]+)"/, (_, u) => `URI="${relayUri(u)}"`);
+      return relayUri(line.trim());
+    })
+    .join('\n');
+
+  function relayUri(u) {
+    let out = u.startsWith(`${origin}/`) ? prefix + u.slice(origin.length + 1) : u;
+    out = out.replace(/([?&])otp=[0-9A-Za-z%]+&?/, (m, sep) => (m.endsWith('&') ? sep : ''));
+    return out.replace(/[?&]$/, '');
+  }
+}
+
 function isPlaylist(file) {
   return file.endsWith('.m3u8');
 }
@@ -74,4 +132,4 @@ function originAllowed(origin, allowed) {
   return allowed.some((a) => (a.endsWith('*') ? origin.startsWith(a.slice(0, -1)) : origin === a));
 }
 
-module.exports = { parsePath, upstreamUrl, rewritePlaylist, isPlaylist, originAllowed, STATES };
+module.exports = { parsePath, upstreamUrl, rewritePlaylist, isPlaylist, originAllowed, STATES, PASS, parsePassPath, passUrl, rewritePassPlaylist };

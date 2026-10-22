@@ -13,11 +13,11 @@ that checks whether each camera is still telling the truth.
 <!-- numbers:start -->
 | States | Cameras | States with live video | Cameras down at the last sweep | Last sweep |
 |---|---|---|---|---|
-| 49 of 50 | 46,045 | 21 | 5,534 | 2026-10-20 17:42 UTC |
+| 50 of 50 | 46,853 | 22 | 7,637 | 2026-10-22 17:47 UTC |
 <!-- numbers:end -->
 
-The one missing state is New Jersey, whose feeds cannot be played from a static page.
-[New Jersey](3.31-new-jersey.md) records every door tried so nobody re-litigates it.
+Every state is on the map. [New Jersey](3.31-new-jersey.md), the last, joined on
+2026-10-22 with its video played through the [stream relay](1.4-stream-relay.md).
 
 ## I want to...
 

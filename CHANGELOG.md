@@ -7,6 +7,9 @@ commits are not listed.
 ## 2026-10
 
 ### Added
+- New Jersey is on the map, the last state: 808 cameras, 794 with live video played through
+  the relay. Its streams no longer need the five-minute code they did in July, only
+  511nj.org's headers, which a page elsewhere cannot send and the relay can.
 - Tap a landmark, shop or restaurant on the map and its card opens with its name, kind and
   the cameras within a mile; tap empty map to close it.
 - A route preview for testing on your own machine: search a place or an address, compare two

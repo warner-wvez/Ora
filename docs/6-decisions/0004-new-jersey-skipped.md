@@ -3,7 +3,7 @@ type: adr
 ---
 # 0004. New Jersey is skipped, with every door tried on record
 
-Date: 2026-07-12. Status: Accepted.
+Date: 2026-07-12. Status: Superseded by [0016](0016-new-jersey-through-the-relay.md).
 
 ## Context
 

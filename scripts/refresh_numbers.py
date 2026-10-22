@@ -2,7 +2,7 @@
 """Refresh the live numbers in README.md, docs/1-overview.md, and docs/3-sources.md.
 
 Everything is read from the data files already in the repo, so this needs no key and no
-network: states/index.json for the 48 state layers, cameras.json and cameras-nyc.json for
+network: states/index.json for the 49 state layers, cameras.json and cameras-nyc.json for
 the Illinois and New York City layers, and states/health/*.json for the last sweep. It
 rewrites the block between <!-- numbers:start --> and <!-- numbers:end --> in the README
 and the overview, and the state table between <!-- states:start --> and <!-- states:end -->
@@ -28,6 +28,7 @@ BESPOKE = {
     "RI": "3.22-rhode-island.md", "SC": "3.23-south-carolina.md", "SD": "3.24-south-dakota.md",
     "TN": "3.25-tennessee.md", "TX": "3.26-texas.md", "VA": "3.27-virginia.md", "WA": "3.28-washington.md",
     "WV": "3.29-west-virginia.md", "WY": "3.30-wyoming.md", "NY": "3.32-cars-511x.md", "CO": "3.32-cars-511x.md",
+    "NJ": "3.31-new-jersey.md",
 }
 CITY_LAYERS = [("Illinois", "cameras.json", "3.8-illinois.md"), ("New York City", "cameras-nyc.json", "3.17-new-york-city.md")]
 

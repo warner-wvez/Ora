@@ -24,8 +24,10 @@ working feeds. A stream is refused, and its URL stored as `null`, when:
   in a static file (Kansas and Massachusetts, [decision 0002](6-decisions/0002-no-expiring-tokens.md));
 - the chunklist names an `#EXT-X-KEY`, which is DRM the browser cannot decrypt however
   green the CORS header is (Alabama);
-- the host demands a `Referer`, a header a static page cannot send (Rhode Island, New
-  Jersey). [Decision 0003](6-decisions/0003-cors-alone-proves-nothing.md).
+- the host demands a `Referer`, a header a static page cannot send (Rhode Island).
+  [Decision 0003](6-decisions/0003-cors-alone-proves-nothing.md). Florida, Pennsylvania,
+  North Carolina and New Jersey are the exception: their streams play through the
+  [stream relay](1.4-stream-relay.md) ([decision 0013](6-decisions/0013-relay-for-locked-streams.md)).
 
 **URLs are stored as the agency serves them.** No rewriting to https, no proxy baked in.
 The health sweep must fingerprint the real bytes, and the health file must key on the same
@@ -89,6 +91,7 @@ not this.
 | Nebraska | 341 | snapshot | [511 GraphQL](3.2-511-graphql.md) |
 | Nevada | 648 | yes | [511 DataTables](3.1-511-datatables.md) |
 | New Hampshire | 181 | snapshot | [511 DataTables](3.1-511-datatables.md) |
+| New Jersey | 808 | yes | [New Jersey](3.31-new-jersey.md) |
 | New Mexico | 183 | snapshot | [New Mexico](3.16-new-mexico.md) |
 | New York | 1,742 | yes | [Cars 511X](3.32-cars-511x.md) |
 | New York City | 957 | snapshot | [New York City](3.17-new-york-city.md) |
@@ -111,5 +114,3 @@ not this.
 | Wisconsin | 482 | yes | [511 DataTables](3.1-511-datatables.md) |
 | Wyoming | 228 | snapshot | [Wyoming](3.30-wyoming.md) |
 <!-- states:end -->
-
-Not on the map: [New Jersey](3.31-new-jersey.md).

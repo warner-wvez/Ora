@@ -1,12 +1,12 @@
 {
-  "states_covered": 49,
-  "cameras": 46045,
-  "video_states": 21,
-  "cameras_down": 5534,
+  "states_covered": 50,
+  "cameras": 46853,
+  "video_states": 22,
+  "cameras_down": 7637,
   "health": {
-    "placeholder": 4419,
-    "frozen": 652,
-    "offline": 463
+    "placeholder": 6972,
+    "frozen": 232,
+    "offline": 433
   },
-  "last_sweep": "2026-10-20 17:42 UTC"
+  "last_sweep": "2026-10-22 17:47 UTC"
 }

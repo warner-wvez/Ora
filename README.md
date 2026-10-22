@@ -21,11 +21,11 @@ feeds.
 <!-- numbers:start -->
 | States | Cameras | States with live video | Cameras down at the last sweep | Last sweep |
 |---|---|---|---|---|
-| 49 of 50 | 46,045 | 21 | 5,534 | 2026-10-20 17:42 UTC |
+| 50 of 50 | 46,853 | 22 | 7,637 | 2026-10-22 17:47 UTC |
 <!-- numbers:end -->
 
-The missing state is New Jersey, whose feeds cannot be played from a static page.
-[Every door tried is on record](docs/3.31-new-jersey.md).
+Every state is on the map. New Jersey, the last, joined on 2026-10-22: its video plays
+through the [stream relay](docs/1.4-stream-relay.md), like Florida's.
 
 ## Quick start
 

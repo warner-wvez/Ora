@@ -531,5 +531,17 @@
   ],
   "zoom": 6.3,
   "video": true
+ },
+ "NJ": {
+  "name": "New Jersey",
+  "file": "states/NJ.json",
+  "count": 808,
+  "center": [
+   -74.6,
+   40.1
+  ],
+  "zoom": 7.5,
+  "video": true,
+  "relay": "https://relay.wvez.org/nj"
  }
 }

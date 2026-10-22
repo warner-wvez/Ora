@@ -5,6 +5,7 @@
 //
 // GET /healthz                                      -> {ok, cameras cached, session age}
 // GET /<state>/<imageId>/<seN>/<chan>/<file>        -> the upstream file, token added, playlist rewritten
+// GET /nj/<w|t>/<upstream path>                     -> the upstream file, 511nj.org's headers added
 //
 // Three states, one shape. Each locks the stream behind a per-camera token minted through
 // the agency's site, and all are on the same vendor platform, so the token dance is the same
@@ -38,7 +39,7 @@
 
 const http = require('node:http');
 const { Readable } = require('node:stream');
-const { parsePath, upstreamUrl, rewritePlaylist, isPlaylist, originAllowed } = require('./relay');
+const { parsePath, upstreamUrl, rewritePlaylist, isPlaylist, originAllowed, PASS, parsePassPath, passUrl, rewritePassPlaylist } = require('./relay');
 
 const PORT = Number(process.env.PORT || 8791);
 const ALLOWED = (process.env.ALLOWED_ORIGINS || 'https://warner-wvez.github.io,http://localhost:*').split(',').map((s) => s.trim()).filter(Boolean);
@@ -172,6 +173,32 @@ async function fetchUpstream(p, token) {
   });
 }
 
+// New Jersey: no token, only the headers a page on 511nj.org would send. See relay.js.
+async function fetchPass(p) {
+  const site = PASS[p.state].site;
+  return fetch(passUrl(p), {
+    headers: { 'User-Agent': UA, 'Referer': `${site}/`, 'Origin': site },
+    signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+  });
+}
+
+// Playlists are rewritten and never cached; segments stream through and may be cached briefly,
+// unless the host reuses segment names (the NJ Turnpike cycles nj0.ts to nj4.ts every ten
+// seconds, so a cached segment would replay old video).
+async function sendUpstream(req, res, up, file, rewrite, segmentCache = 'public, max-age=30') {
+  if (!up.ok) { res.writeHead(up.status === 404 ? 404 : 502, { 'Cache-Control': 'no-store' }); return res.end(`upstream ${up.status}`); }
+  if (isPlaylist(file)) {
+    const text = rewrite(await up.text());
+    res.writeHead(200, { 'Content-Type': 'application/vnd.apple.mpegurl', 'Cache-Control': 'no-store' });
+    return res.end(req.method === 'HEAD' ? undefined : text);
+  }
+  const headers = { 'Content-Type': up.headers.get('content-type') || 'video/mp4', 'Cache-Control': segmentCache };
+  const len = up.headers.get('content-length'); if (len) headers['Content-Length'] = len;
+  res.writeHead(200, headers);
+  if (req.method === 'HEAD' || !up.body) return res.end();
+  Readable.fromWeb(up.body).on('error', () => res.destroy()).pipe(res);
+}
+
 async function serve(req, res) {
   const url = new URL(req.url, 'http://relay');
   const origin = req.headers.origin;
@@ -182,9 +209,11 @@ async function serve(req, res) {
     res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
     return res.end(JSON.stringify({ ok: true, cameras: tokens.size, sessionAgeMin: session.at ? Math.round((Date.now() - session.at) / 60000) : null }));
   }
+  if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405); return res.end(); }
+  const pass = parsePassPath(url.pathname);
+  if (pass) return sendUpstream(req, res, await fetchPass(pass), pass.file, (t) => rewritePassPlaylist(t, pass), 'no-store');
   const p = parsePath(url.pathname);
   if (!p) { res.writeHead(404); return res.end('not found'); }
-  if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405); return res.end(); }
 
   let token = await tokenFor(p.state, p.imageId);
   let up = await fetchUpstream(p, token);
@@ -192,18 +221,7 @@ async function serve(req, res) {
     token = await tokenFor(p.state, p.imageId, true);
     up = await fetchUpstream(p, token);
   }
-  if (!up.ok) { res.writeHead(up.status === 404 ? 404 : 502, { 'Cache-Control': 'no-store' }); return res.end(`upstream ${up.status}`); }
-
-  if (isPlaylist(p.file)) {
-    const text = rewritePlaylist(await up.text(), p);
-    res.writeHead(200, { 'Content-Type': 'application/vnd.apple.mpegurl', 'Cache-Control': 'no-store' });
-    return res.end(req.method === 'HEAD' ? undefined : text);
-  }
-  const headers = { 'Content-Type': up.headers.get('content-type') || 'video/mp4', 'Cache-Control': 'public, max-age=30' };
-  const len = up.headers.get('content-length'); if (len) headers['Content-Length'] = len;
-  res.writeHead(200, headers);
-  if (req.method === 'HEAD' || !up.body) return res.end();
-  Readable.fromWeb(up.body).on('error', () => res.destroy()).pipe(res);
+  return sendUpstream(req, res, up, p.file, (t) => rewritePlaylist(t, p));
 }
 
 const server = http.createServer((req, res) => {

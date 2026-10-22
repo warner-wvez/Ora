@@ -13,7 +13,7 @@ time.
 | 0001 | [Every camera location is a pin, feed or no feed](6-decisions/0001-location-first.md) | 2026-07-10 | Accepted |
 | 0002 | [A stream URL carrying an expiring token is never marked video](6-decisions/0002-no-expiring-tokens.md) | 2026-07-09 | Accepted |
 | 0003 | [A CORS check alone proves nothing: refuse DRM and Referer locks too](6-decisions/0003-cors-alone-proves-nothing.md) | 2026-07-12 | Accepted |
-| 0004 | [New Jersey is skipped, with every door tried on record](6-decisions/0004-new-jersey-skipped.md) | 2026-07-12 | Accepted |
+| 0004 | [New Jersey is skipped, with every door tried on record](6-decisions/0004-new-jersey-skipped.md) | 2026-07-12 | Superseded by 0016 |
 | 0005 | [Texas is read from MapLarge directly, correcting the first investigation](6-decisions/0005-texas-reads-maplarge-directly.md) | 2026-07-09 | Accepted |
 | 0006 | [The MapTiler key lives in the page, origin-locked](6-decisions/0006-maptiler-key-in-the-page.md) | 2026-07-10 | Accepted |
 | 0007 | [An image served by three or more cameras is a placeholder](6-decisions/0007-three-cameras-make-a-placeholder.md) | 2026-07-10 | Accepted |
@@ -25,3 +25,4 @@ time.
 | 0013 | [A locked stream is relayed through the VPS rather than dropped](6-decisions/0013-relay-for-locked-streams.md) | 2026-09-21 | Accepted |
 | 0014 | [Texas signs its own streams in the browser instead of using the relay](6-decisions/0014-texas-signs-its-own-streams.md) | 2026-09-22 | Accepted |
 | 0015 | [The view decides which states load](6-decisions/0015-the-view-decides-what-loads.md) | 2026-10-21 | Accepted |
+| 0016 | [New Jersey plays through the relay](6-decisions/0016-new-jersey-through-the-relay.md) | 2026-10-22 | Accepted |

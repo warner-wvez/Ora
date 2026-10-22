@@ -50,7 +50,7 @@ jobs:
           run builders/build-states-me-turnpike.py
           run builders/build-states-graphql.py
           run builders/build-states-511x.py
-          for s in al ar ca de hi ky md mi mo ms nd nm ok or ri sc sd tn tx va wv wy; do
+          for s in al ar ca de hi ky md mi mo ms nd nj nm ok or ri sc sd tn tx va wv wy; do
             run builders/build-states-$s.py
           done
           # Ohio and Washington need free API keys; without the repo secret they stay as committed

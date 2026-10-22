@@ -570,8 +570,13 @@ const snapFor = (s)=> s.imgproxy==='wsrv' ? ((d)=>wsrv(d.snapshot)) : ((d)=>cb(d
 // is pa-<seN>.arcadis-ivds.com, North Carolina is <cf?seNN>.services.ncdot.gov. The camera id
 // comes from the snapshot URL, which is .../map/Cctv/<id> on all three, and is what each
 // agency's own token endpoint takes.
+// New Jersey is simpler: no token and no camera id, only 511nj.org's headers, so its relay path
+// is the upstream path behind a one-letter host key, <relay>/<w|t>/<upstream path>.
 const RELAY_HLS=/^https:\/\/(?:dis-(se\d+)\.divas\.cloud:8200|pa-(se\d+)\.arcadis-ivds\.com:8200|(cf[a-z]se\d+)\.services\.ncdot\.gov:8887)\/(chan-[\w]+)\/index\.m3u8$/;
+const RELAY_PASS={ 'https://nj-511.wink.co/':'w', 'https://njtpk-wink.xcmdata.org/':'t' };
 const videoFor = (cfg, d)=>{ if(!d||!d.video) return null; if(!cfg||!cfg.relay) return d.video;
+  const pass=Object.keys(RELAY_PASS).find(h=>d.video.startsWith(h));
+  if(pass) return `${cfg.relay}/${RELAY_PASS[pass]}/${d.video.slice(pass.length)}`;
   const m=RELAY_HLS.exec(d.video), id=/\/map\/Cctv\/(\d+)/.exec(d.snapshot||'');
   return (m&&id) ? `${cfg.relay}/${id[1]}/${m[1]||m[2]||m[3]}/${m[4]}/index.m3u8` : d.video; };
 
