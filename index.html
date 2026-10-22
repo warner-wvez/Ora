@@ -850,6 +850,8 @@ function renderAddBanner(){
 /* ---------- selection containers: floating popup on desktop, bottom sheet on mobile ---------- */
 const mqMobile = window.matchMedia('(max-width: 640px)');
 function isMobile(){ return mqMobile.matches; }
+const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+function reducedMotion(){ return mqReduce.matches; }
 // a selection survives only while its token matches; every new selection bumps it,
 // which is the same race guard the popup already used, generalized to both containers
 function selectionAlive(token){ return !!(store.selected && store.selected.token===token); }
@@ -1405,6 +1407,25 @@ function orderedLiveKeys(){ return liveKeys().filter(k=>!foldParent(k)).sort((a,
 // centre the map on a camera being cycled to. Offset keeps the pin clear of the left panel
 // (desktop) the same way a route-jump does; on a phone the sheet sits low so centre is fine.
 function easeToCam(coords){ map.easeTo({center:coords, zoom:Math.max(map.getZoom(),14), duration:420, offset:isMobile()?[0,0]:[-170,0]}); }
+// a pin tapped beside the panel opened its popup underneath it (half the picture hidden);
+// slide the map the shorter way until the popup clears the panel. The picture lands after the
+// popup opens and grows it upward, so the check runs again whenever the popup changes size
+// during its first two seconds
+function clearPopupOfPanel(p){
+  const el=p.getElement(); if(!el) return;
+  const check=()=>{
+    const panel=document.getElementById('panel');
+    if(isMobile()||!panel||!el.isConnected||popup!==p) return;
+    const a=panel.getBoundingClientRect(), b=el.getBoundingClientRect(), gap=12;
+    if(Math.min(a.right,b.right)<=Math.max(a.left,b.left)||Math.min(a.bottom,b.bottom)<=Math.max(a.top,b.top)) return;
+    const dx=a.right+gap-b.left, dy=a.bottom+gap-b.top;
+    map.panBy(dx<=dy?[-dx,0]:[0,-dy],{duration:reducedMotion()?0:260});
+  };
+  requestAnimationFrame(check);
+  if(!window.ResizeObserver) return;
+  const ro=new ResizeObserver(()=>requestAnimationFrame(check)); ro.observe(el);
+  setTimeout(()=>ro.disconnect(),2000);
+}
 
 let cycleBoundary=null, cycleNoteT=null, suppressEnlargeClose=false;
 function flashCycleNotice(msg){
@@ -1516,6 +1537,7 @@ function selectFeature(k, feature, opts){
     const mine=popup;
     if(cfg.kind==='live') setTimeout(()=>{ if(popup===mine && selectionAlive(token)) wireCameraUI(mine.getElement(), props, cfg, token); },0);
     mine.on('close',()=>{ if(selectionAlive(token)) store.selected=null; destroyPopupHls(); if(!suppressEnlargeClose) closeEnlarge(); });
+    clearPopupOfPanel(mine);
   }
 }
 
