@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-21T22:07:24Z",
+"checked_at": "2026-10-22T05:01:18Z",
 "cameras": 798,
 "counts": {
 "offline": 12,
-"placeholder": 25
+"placeholder": 26
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP64.261Fargo13thAve36thStEastRampEast.jpg": "placeholder",
@@ -20,6 +20,7 @@
 "https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonEast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonPavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonWest.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP70Greenrivercenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND16RP117.5TrottersCenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND16RP117.5TrottersNorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND16RP117.5TrottersPavement.jpg": "placeholder",
