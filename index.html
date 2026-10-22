@@ -1034,12 +1034,17 @@ function refreshMsFor(dir, cfg){
 function facingHTML(dir){
   return dir.facing ? `<div class="popup-facing"><span class="arrow">${FACING_ARROW[dir.facing]||'•'}</span>${dir.facing}</div>` : '';
 }
+// a source's placeholder ("NONE", blank) is not a name; those fall back to View 1, View 2
+function dirLabel(d,i){
+  const v=[d.label,d.facing,d.direction].find(x=>x&&String(x).trim()&&!/^none$/i.test(String(x).trim()));
+  return v||('View '+(i+1));
+}
 function buildLivePopup(props, cfg){
   const dirs=props.directions, showDir=dirs.length>1;
   return `<div class="popup-inner">${mediaHTML(dirs[0],cfg)}
       <div class="popup-body"><h3>${props.name}<span class="res-chip" data-res hidden></span></h3>
         ${props.rwis?`<div class="popup-rwis">${props.rwis}</div>`:''}
-        ${showDir?`<div class="popup-dirs">${dirs.map((d,i)=>`<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${d.label||d.facing||d.direction||('View '+(i+1))}</button>`).join('')}</div>`:''}
+        ${showDir?`<div class="popup-dirs">${dirs.map((d,i)=>`<button class="dir-btn ${i===0?'active':''}" data-idx="${i}">${dirLabel(d,i)}</button>`).join('')}</div>`:''}
         <div class="popup-meta">${facingHTML(dirs[0])}</div>
         <div class="popup-foot"><span class="popup-age${(dirs[0].stale_since||shownHealth(dirs[0],cfg))?' stale':''}">${camAge(dirs[0],cfg)}</span>
           <button class="popup-add" data-add>+ Route</button></div>
