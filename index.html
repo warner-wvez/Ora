@@ -56,7 +56,8 @@
   .sr-empty { padding: 8px 6px; font-size: 12px; color: #8e8e93; }
 
   .grp { border-top: 1px solid #ececf0; }
-  .grp-h { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 600; color: #1c1c1e; cursor: pointer; padding: 8px 0 6px; }
+  .grp-h { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; background: none; font: inherit; text-align: left; font-size: 12px; font-weight: 600; color: #1c1c1e; cursor: pointer; padding: 8px 0 6px; }
+  .grp-h:focus-visible { outline: 2px solid #0062cc; outline-offset: 2px; border-radius: 6px; }
   .grp-h .caret { font-size: 10px; color: #8e8e93; transition: transform .15s; }
   .grp.collapsed .caret { transform: rotate(-90deg); }
   .grp.collapsed .grp-body { display: none; }
@@ -501,16 +502,16 @@
   <div id="dirBox" hidden></div>
 
   <div class="grp collapsed" data-region="routes">
-    <div class="grp-h"><span>My routes</span><span class="caret">&#9660;</span></div>
-    <div class="grp-body">
+    <button type="button" class="grp-h" aria-expanded="false" aria-controls="grp-routes"><span>My routes</span><span class="caret" aria-hidden="true">&#9660;</span></button>
+    <div class="grp-body" id="grp-routes">
       <div id="routeList"></div>
       <div class="btn-row"><button class="mini-btn" id="newRoute">+ New route</button></div>
     </div>
   </div>
 
   <div class="grp collapsed" data-region="mapstyle">
-    <div class="grp-h"><span>Map style</span><span class="caret">&#9660;</span></div>
-    <div class="grp-body">
+    <button type="button" class="grp-h" aria-expanded="false" aria-controls="grp-mapstyle"><span>Map style</span><span class="caret" aria-hidden="true">&#9660;</span></button>
+    <div class="grp-body" id="grp-mapstyle">
       <div class="color-switch"><button class="color-btn active" data-base="light">Map</button><button class="color-btn" data-base="satellite">Satellite</button></div>
       <label class="lyr" id="trafficRow" hidden style="margin-top:6px"><input type="checkbox" id="trafficOn"><span class="nm">Traffic</span><span class="cnt">TomTom</span></label>
     </div>
@@ -518,8 +519,8 @@
 
   <!-- a different kind of data from the cameras, so it stays a toggle you opt into -->
   <div class="grp collapsed" data-region="enf">
-    <div class="grp-h"><span>Chicago ticket map</span><span class="caret">&#9660;</span></div>
-    <div class="grp-body">
+    <button type="button" class="grp-h" aria-expanded="false" aria-controls="grp-enf"><span>Chicago ticket map</span><span class="caret" aria-hidden="true">&#9660;</span></button>
+    <div class="grp-body" id="grp-enf">
       <label class="lyr"><input type="checkbox" data-layer="chi-enf"><span class="swatch pair"></span><span class="nm">Show ticket map</span><span class="cnt" id="cnt-chi-enf"></span></label>
     <div class="enf-controls" id="enfControls">
       <div class="hd">Color by</div>
@@ -537,8 +538,8 @@
 
   <!-- cameras load for whatever the map shows; this list is only for switching a state off or forcing one on -->
   <div class="grp collapsed" data-region="cams">
-    <div class="grp-h"><span>Sources</span><span class="caret">&#9660;</span></div>
-    <div class="grp-body">
+    <button type="button" class="grp-h" aria-expanded="false" aria-controls="grp-cams"><span>Sources</span><span class="caret" aria-hidden="true">&#9660;</span></button>
+    <div class="grp-body" id="grp-cams">
       <div class="cam-tools"><label class="lyr master-row"><input type="checkbox" id="masterAll"><span class="nm">All states</span><span class="cnt" id="cnt-all"></span></label><button class="mini-btn grey" id="clearAll">Clear</button></div>
       <div id="camList"></div>
     </div>
@@ -1523,7 +1524,15 @@ function renderLegend(){
   el.innerHTML=(store.enfColorMode==='type')?`<div class="row"><span class="dot rl"></span> Red light camera</div><div class="row"><span class="dot sp"></span> Speed camera</div>${sz}`:
     `<div class="row"><span class="dot justified"></span> On real danger <span class="sub">&nbsp;tickets + crashes</span></div><div class="row"><span class="dot revenue"></span> Ticket-heavy, low crash</div><div class="row"><span class="dot gap"></span> Crashes, light enforcement</div><div class="row"><span class="dot quiet"></span> Quiet on both</div>${sz}`;
 }
-function expandEnfGroup(){ const g=document.querySelector('.grp[data-region="enf"]'); if(g) g.classList.remove('collapsed'); }
+// one place opens or shuts a panel group: the class drives the look, aria-expanded tells screen
+// readers, and inert keeps a shut group's checkboxes out of the Tab order
+function setGroupOpen(g,open){
+  g.classList.toggle('collapsed',!open);
+  const h=g.querySelector('.grp-h'), b=g.querySelector('.grp-body');
+  if(h) h.setAttribute('aria-expanded',String(open));
+  if(b) b.inert=!open;
+}
+function expandEnfGroup(){ const g=document.querySelector('.grp[data-region="enf"]'); if(g) setGroupOpen(g,true); }
 function syncEnfControls(){ document.getElementById('enfControls').classList.toggle('show', store.activeLayers.has('chi-enf')); if(store.activeLayers.has('chi-enf')){ renderLegend(); expandEnfGroup(); } }
 
 /* ---------- basemap ---------- */
@@ -2781,7 +2790,8 @@ function renderCamList(){
 }
 
 /* ---------- UI wiring ---------- */
-document.querySelectorAll('.grp-h').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('collapsed')));
+document.querySelectorAll('.grp').forEach(g=>setGroupOpen(g,!g.classList.contains('collapsed')));
+document.querySelectorAll('.grp-h').forEach(h=>h.addEventListener('click',()=>{ const g=h.parentElement; setGroupOpen(g,g.classList.contains('collapsed')); }));
 document.querySelectorAll('.color-btn[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{ store.enfColorMode=btn.dataset.mode;
   document.querySelectorAll('.color-btn[data-mode]').forEach(b=>b.classList.toggle('active',b===btn));
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr()); renderLegend(); writeUrl(); }));
