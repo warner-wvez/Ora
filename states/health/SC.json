@@ -1,12 +1,11 @@
 {
-"checked_at": "2026-10-22T22:09:26Z",
+"checked_at": "2026-10-23T05:14:58Z",
 "cameras": 763,
 "counts": {
-"placeholder": 21
+"placeholder": 20
 },
 "status": {
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10013.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10014.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10042.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10087.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10108.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10171.flv.png": "placeholder",
@@ -17,13 +16,13 @@
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10196.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10199.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10500.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10518.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/10523.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/10532.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/30029.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/30305.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/40025.flv.png": "placeholder",
-"https://scdotsnap.us-east-1.skyvdn.com/thumbs/40500.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/50040.flv.png": "placeholder",
+"https://scdotsnap.us-east-1.skyvdn.com/thumbs/50262.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/60068.flv.png": "placeholder",
 "https://scdotsnap.us-east-1.skyvdn.com/thumbs/60232.flv.png": "placeholder"
 }
