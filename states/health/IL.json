@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-24T16:09:48Z",
+"checked_at": "2026-10-24T21:03:53Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 580,
+"placeholder": 593,
 "frozen": 17,
 "offline": 12
 },
@@ -79,6 +79,10 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Medinah_4198160_-8805140_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Medinah_4198160_-8805140_1_N.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Medinah_4198160_-8805140_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Medinah_4198160_-8805140_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Midwest_4183160_-8797190_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Midwest_4183160_-8797190_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Midwest_4183160_-8797190_1_S.jpg": "placeholder",
@@ -552,6 +556,10 @@
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_South_Leg.jpg": "frozen",
+"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_South_Leg.jpg": "placeholder",
@@ -582,6 +590,7 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_North_Leg.jpg": "placeholder",
@@ -615,6 +624,10 @@
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_West_Leg.jpg": "placeholder"
+"https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_West_Leg.jpg": "placeholder"
 }
 }
