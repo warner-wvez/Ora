@@ -1,37 +1,34 @@
 {
-"checked_at": "2026-10-24T21:14:35Z",
+"checked_at": "2026-10-25T05:04:11Z",
 "cameras": 183,
 "counts": {
-"offline": 23,
-"placeholder": 13
+"offline": 22,
+"placeholder": 12
 },
 "status": {
 "http://ss.nmroads.com/snapshots/I25NBUS550.jpg": "offline",
-"http://ss.nmroads.com/snapshots/I40WBMountainView.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i-10lordsburgmm9.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_bernalillo.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25_jefferson.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i-25_jefferson.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_pdn.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i-25_sanantonio.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-25n_bigi.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25n_pdn.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25nb_tramway.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25nbbernalillo.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i-25s_tramway.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i-25sb_us550.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i-40wb_juantabo.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i10_mesquite.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25alameda.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nb_oldpecos.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25nb_richards.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25nb_richards.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbfrontage-osuna.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sanmateo.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_richards.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25sbmlk.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sbpdn.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i40pennsylvania.jpg": "offline",
 "http://ss.nmroads.com/snapshots/lci10i25.jpg": "offline",
@@ -41,6 +38,7 @@
 "http://ss.nmroads.com/snapshots/us550_nm313.jpg": "offline",
 "http://ss.nmroads.com/snapshots/us550e_nm528.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/us550riverbridge.jpg": "offline",
-"http://ss.nmroads.com/snapshots/us550w_nm528.jpg": "placeholder"
+"http://ss.nmroads.com/snapshots/us550w_nm528.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/us67_capulin.jpg": "offline"
 }
 }

@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-24T21:03:53Z",
+"checked_at": "2026-10-25T04:53:24Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 593,
-"frozen": 17,
+"placeholder": 590,
+"frozen": 20,
 "offline": 12
 },
 "status": {
@@ -79,10 +79,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Greene_4175840_-8807520_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Medinah_4198160_-8805140_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Medinah_4198160_-8805140_1_N.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Medinah_4198160_-8805140_1_S.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Medinah_4198160_-8805140_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Midwest_4183160_-8797190_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Midwest_4183160_-8797190_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_SB_Midwest_4183160_-8797190_1_S.jpg": "placeholder",
@@ -269,6 +265,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_Pioneer_4078329_-8960249_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_Pioneer_4078329_-8960249_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_Pioneer_4078329_-8960249_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-150_4073261_-8961285_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_W.jpg": "placeholder",
@@ -292,6 +289,8 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SB_Sheridan_4071047_-8960353_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-474_4063532_-8962302_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-474_4063532_-8962302_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-74_4082706_-8987024_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-74_4082706_-8987024_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SWB_IL-29_4084962_-8953714_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SWB_IL-29_4084962_-8953714_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SWB_IL-29_4084962_-8953714_1_W.jpg": "placeholder",
@@ -550,6 +549,9 @@
 "https://iowadotsnapshot.us-east-1.skyvdn.com/thumbs/qctv37lb.flv.jpg": "offline",
 "https://iowadotsnapshot.us-east-1.skyvdn.com/thumbs/qctv50lb.flv.jpg": "offline",
 "https://iowadotsnapshot.us-east-1.skyvdn.com/thumbs/qctv60lb.flv.jpg": "offline",
+"https://www.lakecountypassage.com/snapshots/Aptakisic_@_Bond_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Aptakisic_@_Bond_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Aptakisic_@_Bond_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_South_Leg.jpg": "placeholder",
@@ -590,6 +592,8 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_East_Leg.jpg": "placeholder",
@@ -624,10 +628,6 @@
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_41_@_Park_Ave_West_cctv_West_Leg.jpg": "placeholder"
+"https://www.lakecountypassage.com/snapshots/US_41_@_IL_176_cctv_West_Leg.jpg": "placeholder"
 }
 }

@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-24T21:33:14Z",
+"checked_at": "2026-10-25T05:20:32Z",
 "cameras": 1684,
 "counts": {
-"placeholder": 148,
+"placeholder": 144,
 "frozen": 1
 },
 "status": {
@@ -72,7 +72,6 @@
 "https://snapshot.vdotcameras.com/thumbs/NO0007.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0018.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0128.flv.png": "placeholder",
-"https://snapshot.vdotcameras.com/thumbs/NO0138.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0260.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0311.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0318.flv.png": "placeholder",
@@ -89,6 +88,7 @@
 "https://snapshot.vdotcameras.com/thumbs/RI0124.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/RI0129.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/RI0142.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/RichmondCS085NB0660.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/RichmondPCCTV3.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/SA0189.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/SA0449.flv.png": "placeholder",
@@ -97,14 +97,10 @@
 "https://snapshot.vdotcameras.com/thumbs/SalemI77MM594.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/SalemI77N0106.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/SalemI81MM25.flv.png": "placeholder",
-"https://snapshot.vdotcameras.com/thumbs/SalemI81MM606.flv.png": "placeholder",
-"https://snapshot.vdotcameras.com/thumbs/SalemSR1520SR9070.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonCCTV6494W.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonCCTV6496W.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonCCTV64977EB.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonCCTV81184M.flv.png": "placeholder",
-"https://snapshot.vdotcameras.com/thumbs/StauntonCCTV81190M.flv.png": "placeholder",
-"https://snapshot.vdotcameras.com/thumbs/StauntonCCTV81321N.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonCCTVBus17N.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonUS33Skyline.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/TLJamesRiverBridge005MiSouth.flv.png": "placeholder",
