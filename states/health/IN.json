@@ -1,12 +1,13 @@
 {
-"checked_at": "2026-10-25T04:53:47Z",
+"checked_at": "2026-10-25T11:39:06Z",
 "cameras": 711,
 "counts": {
-"placeholder": 3
+"placeholder": 4
 },
 "status": {
 "https://public.carsprogram.org/cameras/IN/INDOT_1048_Z4O30iTCv6QpTVD4.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_230_W7QUyqeuF6bkH_on.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_335__oJD8eesKPxiwUAG.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_707__pX3ybqfXBFgY4kJ.flv.png": "placeholder"
 }
 }
