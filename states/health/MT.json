@@ -1,6 +1,12 @@
 {
-"checked_at": "2026-10-25T11:46:42Z",
+"checked_at": "2026-10-25T16:36:30Z",
 "cameras": 426,
-"counts": {},
-"status": {}
+"counts": {
+"frozen": 3
+},
+"status": {
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Bull-Lake-628011-00-10-24-2026-10-0-3.jpg": "frozen",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Bull-Lake-628011-01-10-24-2026-10-0-3.jpg": "frozen",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Bull-Lake-628011-02-10-24-2026-10-0-3.jpg": "frozen"
+}
 }

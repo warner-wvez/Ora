@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-25T11:44:46Z",
+"checked_at": "2026-10-25T16:35:11Z",
 "cameras": 790,
 "counts": {
 "offline": 3,
-"placeholder": 99
+"placeholder": 98
 },
 "status": {
 "https://micamerasimages.net/thumbs/grand_cam_014.flv.jpg": "placeholder",
@@ -11,7 +11,6 @@
 "https://micamerasimages.net/thumbs/grand_cam_039.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/grand_cam_042.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_003.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_013.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_021.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_026.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_028.flv.jpg": "placeholder",
@@ -38,7 +37,7 @@
 "https://micamerasimages.net/thumbs/internet_cam_108.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_144.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_145.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_156.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_160.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_182.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_188.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_199.flv.jpg": "placeholder",
