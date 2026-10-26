@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-25T21:05:34Z",
+"checked_at": "2026-10-26T04:59:16Z",
 "cameras": 560,
 "counts": {
 "offline": 8,
-"placeholder": 17
+"placeholder": 15
 },
 "status": {
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
@@ -16,8 +16,6 @@
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBC-52.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069SBIPC-66.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K169NBC-01.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M029SBC-03.jpg": "placeholder",
-"https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M049SBIPC-42.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M070EBC-51A-LQ.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M291NBC-03.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/M291SBIPC-01.jpg": "placeholder",
