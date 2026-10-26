@@ -1,41 +1,20 @@
 {
-"checked_at": "2026-10-26T12:56:59Z",
-"cameras": 645,
+"checked_at": "2026-10-26T22:38:43Z",
+"cameras": 636,
 "counts": {
-"placeholder": 32
+"placeholder": 11
 },
 "status": {
-"https://api.algotraffic.com/v4/Cameras/12088/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/1086/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12094/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12096/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/13672/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/17958/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/17992/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/17993/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/17997/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/17998/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30848/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30852/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/30859/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/30867/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30877/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/30918/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/30919/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30968/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31069/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31206/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31254/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31419/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31444/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31464/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31475/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31491/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31492/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31493/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/31222/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31529/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31552/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31555/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31559/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/3222/snapshot.jpg": "placeholder"
 }
 }
