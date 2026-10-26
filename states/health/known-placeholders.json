@@ -5508,5 +5508,10 @@
   "sha": "02c536be058d7fe6",
   "first_seen": "2026-10-26T05:11:06Z",
   "state": "RI"
+ },
+ "20659:537a4c5cdc5c": {
+  "sha": "3884d6929f7e5daf",
+  "first_seen": "2026-10-26T13:14:42Z",
+  "state": "LA"
  }
 }
