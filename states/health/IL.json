@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-10-27T12:24:01Z",
+"checked_at": "2026-10-27T18:15:36Z",
 "cameras": 3636,
 "counts": {
 "placeholder": 582,
 "frozen": 17,
-"offline": 12
+"offline": 13
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_31st_4183209_-8795890_1_E.jpg": "placeholder",
@@ -431,6 +431,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Coles_NB_I-57_3948515_-8832157_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Coles_NB_I-57_3948515_-8832157_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Coles_NB_I-57_3948515_-8832157_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_NB_I-57_3912042_-8856812_1_E.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_NEB_I-57_3897473_-8862099_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_SEB_I-57_3915053_-8850836_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_SWB_I-57_3913492_-8856316_1_E.jpg": "placeholder",
@@ -555,6 +556,10 @@
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_South_Leg.jpg": "frozen",
+"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_South_Leg.jpg": "placeholder",
@@ -597,10 +602,6 @@
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Lewis_@_Sunset_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Lewis_@_Sunset_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Lewis_@_Sunset_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Lewis_@_Sunset_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Portable_PTZ_(Cell)_cctv_East_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Portable_PTZ_(Cell)_cctv_West_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/River_@_Roberts_(Cell)_cctv_North_Leg.jpg": "frozen",

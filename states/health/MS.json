@@ -1,6 +1,19 @@
 {
-"checked_at": "2026-10-27T12:27:59Z",
+"checked_at": "2026-10-27T18:19:15Z",
 "cameras": 934,
-"counts": {},
-"status": {}
+"counts": {
+"offline": 10
+},
+"status": {
+"https://streaminghat1.mdottraffic.com/thumbnail?application=rtplive&streamname=030305.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=041407.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=041408.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=042002.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=042003.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=042004.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=042005.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=042203.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=040901.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
+"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=042808.stream&size=640x480&format=jpg&fitmode=stretch": "offline"
+}
 }
