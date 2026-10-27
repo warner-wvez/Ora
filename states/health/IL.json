@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-10-27T18:15:36Z",
+"checked_at": "2026-10-27T22:25:52Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 582,
+"placeholder": 580,
 "frozen": 17,
-"offline": 13
+"offline": 12
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_31st_4183209_-8795890_1_E.jpg": "placeholder",
@@ -122,13 +122,11 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-190_4198302_-8785886_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-290_4186930_-8788490_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4176052_-8788413_1_NONE.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4176299_-8785852_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-55_4179650_-8780866_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_I-90_4198207_-8780731_1_NONE.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_EB_Van-Buren_4187650_-8764425_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NB_I-290_4204000_-8803040_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NB_I-90_4184335_-8763073_1_NONE.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4177672_-8783951_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-55_4179538_-8781836_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4158749_-8772759_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4159614_-8771628_1_NONE.jpg": "placeholder",
@@ -431,7 +429,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Coles_NB_I-57_3948515_-8832157_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Coles_NB_I-57_3948515_-8832157_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Coles_NB_I-57_3948515_-8832157_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_NB_I-57_3912042_-8856812_1_E.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_NEB_I-57_3897473_-8862099_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_SEB_I-57_3915053_-8850836_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_SWB_I-57_3913492_-8856316_1_E.jpg": "placeholder",
