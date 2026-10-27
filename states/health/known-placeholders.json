@@ -5523,5 +5523,15 @@
   "sha": "2c7638aef7140d88",
   "first_seen": "2026-10-26T22:54:45Z",
   "state": "LA"
+ },
+ "15300:de139ff0074b": {
+  "sha": "8d4e5f89a56e0ebb",
+  "first_seen": "2026-10-27T05:16:48Z",
+  "state": "LA"
+ },
+ "65317:1cb0c094ad6e": {
+  "sha": "8db79bca7a303c5b",
+  "first_seen": "2026-10-27T05:34:10Z",
+  "state": "WI"
  }
 }
