@@ -1,12 +1,13 @@
 {
-"checked_at": "2026-10-28T13:12:44Z",
+"checked_at": "2026-10-28T22:52:03Z",
 "cameras": 564,
 "counts": {
 "offline": 8,
-"placeholder": 12
+"placeholder": 13
 },
 "status": {
 "https://kscam.carsprogram.org/snapshots/5-015-0695-2-K-15&Venture.jpeg": "offline",
+"https://kscam.carsprogram.org/snapshots/GEN_1-010-0095-2-K-10EastofMichiganSt.jpeg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-02.jpg": "offline",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBC-36.jpg": "placeholder",
 "https://www.kcscout.net/TransSuite.VCS.CameraSnapshots/K069NBIPC-64.jpg": "offline",

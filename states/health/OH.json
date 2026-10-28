@@ -1,14 +1,15 @@
 {
-"checked_at": "2026-10-28T13:21:22Z",
+"checked_at": "2026-10-28T23:00:11Z",
 "cameras": 1114,
 "counts": {
-"frozen": 21,
-"offline": 1
+"frozen": 17,
+"offline": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE173-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH055.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/I-71_at_Park_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
@@ -20,13 +21,9 @@
 "https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4169.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4190.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/Montgomery_Crestview.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/Montgomery_The_Village.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Merwin_Ten_Mile.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Thriftway.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Waterford.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/US-22_Columbia.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/US-22_Townsley.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
