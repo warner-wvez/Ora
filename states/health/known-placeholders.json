@@ -5583,5 +5583,20 @@
   "sha": "144e7d0d1b6cdaaf",
   "first_seen": "2026-10-28T22:52:35Z",
   "state": "LA"
+ },
+ "16705:d6617cd9f9b0": {
+  "sha": "0a598eb7656c7bd9",
+  "first_seen": "2026-10-29T13:03:50Z",
+  "state": "CA"
+ },
+ "21268:2d928a894982": {
+  "sha": "3dd2a89175b8c807",
+  "first_seen": "2026-10-29T13:23:34Z",
+  "state": "LA"
+ },
+ "39958:3b96ff840bd5": {
+  "sha": "618e05ea6b711b4c",
+  "first_seen": "2026-10-29T13:39:08Z",
+  "state": "RI"
  }
 }

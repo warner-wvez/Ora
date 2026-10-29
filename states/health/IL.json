@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-29T06:02:58Z",
+"checked_at": "2026-10-29T13:22:19Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 587,
-"frozen": 17,
+"placeholder": 585,
+"frozen": 18,
 "offline": 12
 },
 "status": {
@@ -331,6 +331,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_I-155_4060886_-8947769_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_I-474_4063229_-8961916_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_I-474_4063229_-8961916_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_I-74_4066878_-8957254_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_McClugage_4070651_-8946107_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_McClugage_4070651_-8946107_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_McClugage_4070651_-8946107_1_S.jpg": "placeholder",
@@ -515,6 +516,8 @@
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_DuPage_NB_I-355-CASH_4173299_-8803389_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179840_-8828500_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179840_-8828500_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_Mettel_4179610_-8830870_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_Mettel_4179610_-8830870_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_2_Winnebago_NB_I-39_4231810_-8896400_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_2_Winnebago_NB_I-39_4231810_-8896400_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_EB_Bowes_4200692_-8833897_1_NONE.jpg": "placeholder",
@@ -587,10 +590,6 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_South_Leg.jpg": "placeholder",
