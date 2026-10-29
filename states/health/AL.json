@@ -1,14 +1,12 @@
 {
-"checked_at": "2026-10-29T12:56:55Z",
+"checked_at": "2026-10-29T22:44:00Z",
 "cameras": 636,
 "counts": {
-"placeholder": 18
+"placeholder": 15
 },
 "status": {
-"https://api.algotraffic.com/v4/Cameras/1204/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12080/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12086/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/12088/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12094/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12096/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/13629/snapshot.jpg": "placeholder",
@@ -19,7 +17,6 @@
 "https://api.algotraffic.com/v4/Cameras/30968/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31206/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31315/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/31362/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31393/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31529/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/3222/snapshot.jpg": "placeholder"

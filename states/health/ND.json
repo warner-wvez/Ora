@@ -1,16 +1,11 @@
 {
-"checked_at": "2026-10-29T13:29:20Z",
+"checked_at": "2026-10-29T23:10:17Z",
 "cameras": 814,
 "counts": {
 "offline": 7,
-"placeholder": 33
+"placeholder": 28
 },
 "status": {
-"https://www.dot.nd.gov/travel-info/cameras/I29RP64.261Fargo13thAve36thStEastRampEast.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/I29RP64.261Fargo13thAve36thStEastRampNorth.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/I29RP64.261Fargo13thAve36thStEastRampPavement.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/I29RP64.261Fargo13thAve36thStEastRampSouth.jpg": "placeholder",
-"https://www.dot.nd.gov/travel-info/cameras/I29RP64.261Fargo13thAve36thStEastRampWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94MileRP213TappenWest.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenCenter.jpg": "offline",
