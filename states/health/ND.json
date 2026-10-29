@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-28T22:57:23Z",
+"checked_at": "2026-10-29T06:09:42Z",
 "cameras": 814,
 "counts": {
-"offline": 7,
+"offline": 9,
 "placeholder": 33
 },
 "status": {
@@ -13,6 +13,7 @@
 "https://www.dot.nd.gov/travel-info/cameras/I29RP64.261Fargo13thAve36thStEastRampWest.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94MileRP213TappenWest.jpg": "offline",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP155MidwayWBEast.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenCenter.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenEast.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP213TappenPavement.jpg": "offline",
@@ -20,6 +21,7 @@
 "https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonEast.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonPavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/I94RP31PaintedCanyonWest.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/I94RP350.611Fargo25thStSouth.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/cameras/ND16RP117.5TrottersCenter.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND16RP117.5TrottersNorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/ND16RP117.5TrottersPavement.jpg": "placeholder",
