@@ -1,12 +1,10 @@
 {
-"checked_at": "2026-10-29T23:22:52Z",
+"checked_at": "2026-10-30T06:24:16Z",
 "cameras": 1179,
 "counts": {
-"offline": 1,
 "frozen": 1
 },
 "status": {
-"https://tripcheck.com/RoadCams/cams/Abernethy17th at Washington St_pid4313.jpg": "offline",
 "https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen"
 }
 }

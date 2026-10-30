@@ -1,12 +1,11 @@
 {
-"checked_at": "2026-10-29T23:14:04Z",
+"checked_at": "2026-10-30T06:12:58Z",
 "cameras": 1114,
 "counts": {
-"offline": 2,
-"frozen": 17
+"frozen": 17,
+"offline": 1
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CLE/CLE064.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CLE/CLE173-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH055.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
