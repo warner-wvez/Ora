@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-10-30T06:04:57Z",
+"checked_at": "2026-10-30T13:13:55Z",
 "cameras": 790,
 "counts": {
 "offline": 3,
-"placeholder": 94
+"placeholder": 93
 },
 "status": {
 "https://micamerasimages.net/thumbs/grand_cam_014.flv.jpg": "placeholder",
@@ -12,13 +12,10 @@
 "https://micamerasimages.net/thumbs/grand_cam_042.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/grand_cam_066.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_003.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_021.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_026.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_028.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_031.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_033.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_036.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_043.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_045.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_046.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_047.flv.jpg": "placeholder",
@@ -39,7 +36,8 @@
 "https://micamerasimages.net/thumbs/internet_cam_108.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_144.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_145.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_156.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_166.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_167.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_182.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_188.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_199.flv.jpg": "placeholder",
@@ -92,6 +90,7 @@
 "https://micamerasimages.net/thumbs/semtoc_cam_358.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_369.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_370.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/semtoc_cam_403.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_415.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_430.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/stoc_cam_003.flv.jpg": "offline",

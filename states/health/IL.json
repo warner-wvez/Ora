@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-10-30T06:03:04Z",
+"checked_at": "2026-10-30T13:11:58Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 566,
+"placeholder": 572,
 "frozen": 28,
 "offline": 12
 },
@@ -562,6 +562,9 @@
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_South_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_East_Leg.jpg": "placeholder",
@@ -588,6 +591,9 @@
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Wilson_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Wilson_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_120_@_Wilson_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Fairfield_(Wireless)_cctv_South_Leg.jpg": "placeholder",
