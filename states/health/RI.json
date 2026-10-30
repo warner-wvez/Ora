@@ -1,14 +1,13 @@
 {
-"checked_at": "2026-10-30T13:29:01Z",
+"checked_at": "2026-10-30T22:57:42Z",
 "cameras": 135,
 "counts": {
 "frozen": 7,
 "offline": 3,
-"placeholder": 7
+"placeholder": 5
 },
 "status": {
 "https://www.dot.ri.gov/img/travel/camimages/1-04%20Rt%201%20N%20%40%20Rt%20138%20North%20Kingstown.jpg": "placeholder",
-"https://www.dot.ri.gov/img/travel/camimages/10_00.4_N_CAM%20Exit%201A%20-%20Elmwood%20Ave.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/138_32.9_W_CAM%20Admiral%20Kalbfus%20at%20Halsey%20St.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/195-0%20I-195%20E%20%40%20Point%20St.jpg": "frozen",
 "https://www.dot.ri.gov/img/travel/camimages/195-1%20I-195%20W%20Split%20%40%20I-95.jpg": "frozen",
@@ -20,8 +19,7 @@
 "https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_16.2_S_CAM%20Rt%20116.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/4_04.6_S_CAM%20Exit%205%20-%20Rt%20102%20DMS.jpg": "offline",
-"https://www.dot.ri.gov/img/travel/camimages/95_28.8_S_CAM%20-%20Greenwich%20Ave.jpg": "placeholder",
-"https://www.dot.ri.gov/img/travel/camimages/95_40.6_N_CAM%20-%20Lonsdale%20Ave.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/95_33.6_S_CAM%20-%20Rt%2010.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/95_42.0_S_CAM%20-%20Central%20Ave.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/Rt%20114%20%40%20Mink%20St%20DMS%20and%20Camera.jpg": "offline"
 }
