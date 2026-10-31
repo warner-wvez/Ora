@@ -5633,5 +5633,10 @@
   "sha": "fbde442003499293",
   "first_seen": "2026-10-30T22:57:42Z",
   "state": "RI"
+ },
+ "12397:bdcea4ad444b": {
+  "sha": "61685a1ec6d786ac",
+  "first_seen": "2026-10-31T05:55:45Z",
+  "state": "LA"
  }
 }

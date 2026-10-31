@@ -1,10 +1,6 @@
 {
-"checked_at": "2026-10-30T22:39:23Z",
+"checked_at": "2026-10-31T05:57:44Z",
 "cameras": 934,
-"counts": {
-"offline": 1
-},
-"status": {
-"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=042502.stream&size=640x480&format=jpg&fitmode=stretch": "offline"
-}
+"counts": {},
+"status": {}
 }
