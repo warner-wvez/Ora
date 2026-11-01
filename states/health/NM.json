@@ -1,21 +1,22 @@
 {
-"checked_at": "2026-10-31T12:47:53Z",
+"checked_at": "2026-11-01T06:23:32Z",
 "cameras": 185,
 "counts": {
-"offline": 15,
-"placeholder": 2
+"placeholder": 2,
+"offline": 16
 },
 "status": {
-"http://ss.nmroads.com/snapshots/I25SBBroadaway.jpg": "offline",
+"http://ss.nmroads.com/snapshots/I40-98th.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i-10lordsburgmm9.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_cesarchavez.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25sb_us550.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40wb_lomas.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nb_oldpecos.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25nb_richards.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i25nb_richards.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i25sb-i40wb.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_richards.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25sb_stfrancis.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i40pennsylvania.jpg": "offline",
