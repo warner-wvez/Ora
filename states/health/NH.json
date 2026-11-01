@@ -1,10 +1,11 @@
 {
-"checked_at": "2026-11-01T13:44:48Z",
+"checked_at": "2026-11-01T22:26:03Z",
 "cameras": 183,
 "counts": {
-"placeholder": 2
+"placeholder": 3
 },
 "status": {
+"https://www.newengland511.org/map/Cctv/1332": "placeholder",
 "https://www.newengland511.org/map/Cctv/1379": "placeholder",
 "https://www.newengland511.org/map/Cctv/1400": "placeholder"
 }

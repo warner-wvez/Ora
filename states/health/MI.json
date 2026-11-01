@@ -1,12 +1,11 @@
 {
-"checked_at": "2026-11-01T13:40:19Z",
+"checked_at": "2026-11-01T22:20:33Z",
 "cameras": 790,
 "counts": {
-"offline": 4,
+"offline": 3,
 "placeholder": 96
 },
 "status": {
-"https://mdotjboss.state.mi.us/docs/drive/camfiles/rwis/748.jpg": "offline",
 "https://micamerasimages.net/thumbs/grand_cam_014.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/grand_cam_036.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/grand_cam_039.flv.jpg": "placeholder",

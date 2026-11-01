@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-01T13:17:47Z",
+"checked_at": "2026-11-01T21:59:46Z",
 "cameras": 636,
 "counts": {
-"placeholder": 38
+"placeholder": 43
 },
 "status": {
 "https://api.algotraffic.com/v4/Cameras/1083/snapshot.jpg": "placeholder",
@@ -11,11 +11,13 @@
 "https://api.algotraffic.com/v4/Cameras/12094/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12096/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/13629/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/17991/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/2444/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30848/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30852/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30877/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/30881/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/30882/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/30904/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30924/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30968/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31080/snapshot.jpg": "placeholder",
@@ -27,6 +29,9 @@
 "https://api.algotraffic.com/v4/Cameras/31086/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31206/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31269/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/31277/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/31278/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/31290/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31315/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31393/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31408/snapshot.jpg": "placeholder",

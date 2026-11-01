@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-01T13:38:08Z",
+"checked_at": "2026-11-01T22:18:44Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 577,
-"frozen": 43,
+"placeholder": 575,
+"frozen": 39,
 "offline": 12
 },
 "status": {
@@ -220,10 +220,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_WB_I-74_4092218_-9029658_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_WB_I-74_4092218_-9029658_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_WB_I-74_4092218_-9029658_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Marshall_EB_IL-17_4102447_-8940827_1_E.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Marshall_EB_IL-17_4102447_-8940827_1_N.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Marshall_EB_IL-17_4102447_-8940827_1_S.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Marshall_EB_IL-17_4102447_-8940827_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_EB_US-136_4045860_-9063800_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_EB_US-136_4045860_-9063800_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_McDonough_EB_US-136_4045860_-9063800_1_W.jpg": "placeholder",
@@ -526,8 +522,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_DuPage_NB_I-355-CASH_4173299_-8803389_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179840_-8828500_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179840_-8828500_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179960_-8826570_1_E.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-ISTHA_1_Kane_WB_I-88_4179960_-8826570_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_2_Winnebago_NB_I-39_4231810_-8896400_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-ISTHA_2_Winnebago_NB_I-39_4231810_-8896400_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_EB_Bowes_4200692_-8833897_1_NONE.jpg": "placeholder",

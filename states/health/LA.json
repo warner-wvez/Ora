@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-01T13:39:31Z",
+"checked_at": "2026-11-01T22:19:56Z",
 "cameras": 490,
 "counts": {
-"placeholder": 17
+"placeholder": 13
 },
 "status": {
 "https://511la.org/map/Cctv/178": "placeholder",
@@ -12,15 +12,11 @@
 "https://511la.org/map/Cctv/25": "placeholder",
 "https://511la.org/map/Cctv/250": "placeholder",
 "https://511la.org/map/Cctv/262": "placeholder",
+"https://511la.org/map/Cctv/312": "placeholder",
 "https://511la.org/map/Cctv/318": "placeholder",
 "https://511la.org/map/Cctv/321": "placeholder",
 "https://511la.org/map/Cctv/377": "placeholder",
-"https://511la.org/map/Cctv/398": "placeholder",
-"https://511la.org/map/Cctv/399": "placeholder",
-"https://511la.org/map/Cctv/400": "placeholder",
-"https://511la.org/map/Cctv/401": "placeholder",
 "https://511la.org/map/Cctv/496": "placeholder",
-"https://511la.org/map/Cctv/541": "placeholder",
 "https://511la.org/map/Cctv/74": "placeholder"
 }
 }
