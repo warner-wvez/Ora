@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-01T22:18:44Z",
+"checked_at": "2026-11-02T06:15:39Z",
 "cameras": 3636,
 "counts": {
 "placeholder": 575,
-"frozen": 39,
+"frozen": 34,
 "offline": 12
 },
 "status": {
@@ -259,7 +259,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_Pioneer_4078329_-8960249_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_Pioneer_4078329_-8960249_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_Pioneer_4078329_-8960249_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-150_4073261_-8961285_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_US-24_4056113_-8975138_1_W.jpg": "placeholder",
@@ -287,10 +286,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SB_Sheridan_4071047_-8960353_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-474_4063532_-8962302_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-474_4063532_-8962302_1_W.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-74_4082706_-8987024_1_E.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-74_4082706_-8987024_1_N.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-74_4082706_-8987024_1_S.jpg": "frozen",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SEB_I-74_4082706_-8987024_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SWB_IL-29_4084962_-8953714_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SWB_IL-29_4084962_-8953714_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_SWB_IL-29_4084962_-8953714_1_W.jpg": "placeholder",

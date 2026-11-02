@@ -5698,5 +5698,15 @@
   "sha": "5bf5da2a42506ed3",
   "first_seen": "2026-11-01T22:17:23Z",
   "state": "ID"
+ },
+ "16681:49376e92545e": {
+  "sha": "9c9507d5b10b297c",
+  "first_seen": "2026-11-02T06:05:12Z",
+  "state": "CA"
+ },
+ "32287:f9fae3c106db": {
+  "sha": "e63be13aee55b2c0",
+  "first_seen": "2026-11-02T06:14:18Z",
+  "state": "ID"
  }
 }
