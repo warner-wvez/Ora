@@ -1,12 +1,11 @@
 {
-"checked_at": "2026-11-02T05:58:39Z",
+"checked_at": "2026-11-02T15:44:41Z",
 "cameras": 636,
 "counts": {
-"placeholder": 39
+"placeholder": 40
 },
 "status": {
 "https://api.algotraffic.com/v4/Cameras/1070/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/1094/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12080/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12086/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12094/snapshot.jpg": "placeholder",
@@ -16,8 +15,6 @@
 "https://api.algotraffic.com/v4/Cameras/30848/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30852/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30877/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/30904/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/30924/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30968/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31080/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31081/snapshot.jpg": "placeholder",
@@ -26,8 +23,12 @@
 "https://api.algotraffic.com/v4/Cameras/31084/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31085/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31086/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/31179/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31206/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31269/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/31276/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/31277/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/31290/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31315/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31393/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31408/snapshot.jpg": "placeholder",
