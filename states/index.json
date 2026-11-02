@@ -25,7 +25,7 @@
  "UT": {
   "name": "Utah",
   "file": "states/UT.json",
-  "count": 2086,
+  "count": 2088,
   "center": [
    -111.7,
    39.9
@@ -48,7 +48,7 @@
  "NC": {
   "name": "North Carolina",
   "file": "states/NC.json",
-  "count": 1114,
+  "count": 1025,
   "center": [
    -79.4,
    35.5
@@ -60,7 +60,7 @@
  "NV": {
   "name": "Nevada",
   "file": "states/NV.json",
-  "count": 652,
+  "count": 651,
   "center": [
    -116.9,
    39.3
@@ -82,7 +82,7 @@
  "WI": {
   "name": "Wisconsin",
   "file": "states/WI.json",
-  "count": 491,
+  "count": 495,
   "center": [
    -89.7,
    44.5
@@ -148,7 +148,7 @@
  "CO": {
   "name": "Colorado",
   "file": "states/CO.json",
-  "count": 1026,
+  "count": 1019,
   "center": [
    -105.5,
    39.0
@@ -159,7 +159,7 @@
  "IA": {
   "name": "Iowa",
   "file": "states/IA.json",
-  "count": 865,
+  "count": 867,
   "center": [
    -93.5,
    42.0
@@ -170,7 +170,7 @@
  "NE": {
   "name": "Nebraska",
   "file": "states/NE.json",
-  "count": 341,
+  "count": 342,
   "center": [
    -99.8,
    41.5
@@ -203,7 +203,7 @@
  "MA": {
   "name": "Massachusetts",
   "file": "states/MA.json",
-  "count": 309,
+  "count": 310,
   "center": [
    -71.8,
    42.2
@@ -247,7 +247,7 @@
  "OH": {
   "name": "Ohio",
   "file": "states/OH.json",
-  "count": 1114,
+  "count": 1116,
   "center": [
    -82.8,
    40.3
@@ -270,7 +270,7 @@
  "WA": {
   "name": "Washington",
   "file": "states/WA.json",
-  "count": 1533,
+  "count": 1523,
   "center": [
    -120.5,
    47.4
@@ -281,7 +281,7 @@
  "NY": {
   "name": "New York",
   "file": "states/NY.json",
-  "count": 1742,
+  "count": 1821,
   "center": [
    -75.5,
    42.9
@@ -292,7 +292,7 @@
  "DE": {
   "name": "Delaware",
   "file": "states/DE.json",
-  "count": 364,
+  "count": 367,
   "center": [
    -75.45,
    39.1
@@ -381,7 +381,7 @@
  "AR": {
   "name": "Arkansas",
   "file": "states/AR.json",
-  "count": 531,
+  "count": 533,
   "center": [
    -92.4,
    34.8
@@ -425,7 +425,7 @@
  "AL": {
   "name": "Alabama",
   "file": "states/AL.json",
-  "count": 636,
+  "count": 631,
   "center": [
    -86.8,
    32.8
@@ -447,7 +447,7 @@
  "SC": {
   "name": "South Carolina",
   "file": "states/SC.json",
-  "count": 794,
+  "count": 798,
   "center": [
    -80.9,
    33.9
@@ -513,7 +513,7 @@
  "MD": {
   "name": "Maryland",
   "file": "states/MD.json",
-  "count": 552,
+  "count": 553,
   "center": [
    -77.2,
    39.2
@@ -524,7 +524,7 @@
  "MS": {
   "name": "Mississippi",
   "file": "states/MS.json",
-  "count": 458,
+  "count": 465,
   "center": [
    -89.7,
    32.6
