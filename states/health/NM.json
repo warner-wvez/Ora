@@ -1,19 +1,18 @@
 {
-"checked_at": "2026-11-03T01:22:44Z",
+"checked_at": "2026-11-03T14:38:50Z",
 "cameras": 185,
 "counts": {
 "placeholder": 3,
-"offline": 17
+"offline": 16
 },
 "status": {
 "http://ss.nmroads.com/snapshots/I40-98th.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i-10lordsburgmm9.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25_comanche_onramp.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25n_pdn.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40eb_juantabo.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i10_mesquite.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40_west_edgewood.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25_glorietapass.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i25_ratonpass.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nb_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_richards.jpg": "placeholder",
