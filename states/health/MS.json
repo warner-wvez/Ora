@@ -1,22 +1,6 @@
 {
-"checked_at": "2026-11-02T16:08:43Z",
-"cameras": 934,
-"counts": {
-"offline": 13
-},
-"status": {
-"https://streaminglym3.mdottraffic.com/thumbnail?application=rtplive&streamname=052004.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=040101.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=040102.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=040103.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=040108.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=040201.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn1.mdottraffic.com/thumbnail?application=rtplive&streamname=040202.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=041204.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=041907.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=042806.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=042807.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=042808.stream&size=640x480&format=jpg&fitmode=stretch": "offline",
-"https://streamingshvn2.mdottraffic.com/thumbnail?application=rtplive&streamname=042901.stream&size=640x480&format=jpg&fitmode=stretch": "offline"
-}
+"checked_at": "2026-11-03T01:19:18Z",
+"cameras": 926,
+"counts": {},
+"status": {}
 }

@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-02T16:14:32Z",
-"cameras": 1114,
+"checked_at": "2026-11-03T01:25:30Z",
+"cameras": 1116,
 "counts": {
-"frozen": 19,
+"frozen": 18,
 "offline": 4
 },
 "status": {
@@ -13,21 +13,20 @@
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/dayton/I-675_at_North_Fairfield_Rd.jpg": "offline",
+"https://itscameras.dot.state.oh.us/images/artimis/SR-562_at_Paddock_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/dayton/US-35_at_SR-835_Research_Blvd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3135.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2173.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2210.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/D05-037.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV040a-L.jpg": "offline",
+"https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4167.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4169.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4190.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Merwin_Ten_Mile.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Thriftway.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Waterford.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/SR-48_at_Grandin Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }

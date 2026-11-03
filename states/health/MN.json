@@ -1,5 +1,5 @@
 {
-"checked_at": "2026-11-02T16:07:58Z",
+"checked_at": "2026-11-03T01:18:35Z",
 "cameras": 1916,
 "counts": {
 "offline": 25,
@@ -20,6 +20,7 @@
 "https://public.carsprogram.org/cameras/MN/C30266": "offline",
 "https://public.carsprogram.org/cameras/MN/C30298-v5": "offline",
 "https://public.carsprogram.org/cameras/MN/C30314": "offline",
+"https://public.carsprogram.org/cameras/MN/C30402-v1": "frozen",
 "https://public.carsprogram.org/cameras/MN/C30402-v2": "frozen",
 "https://public.carsprogram.org/cameras/MN/C30466-v3": "offline",
 "https://public.carsprogram.org/cameras/MN/C30477": "offline",
@@ -37,7 +38,6 @@
 "https://public.carsprogram.org/cameras/MN/C9021": "frozen",
 "https://public.carsprogram.org/cameras/MN/C9022": "frozen",
 "https://public.carsprogram.org/cameras/MN/C9023": "frozen",
-"https://public.carsprogram.org/cameras/MN/C905": "frozen",
 "https://public.carsprogram.org/cameras/MN/C9081": "offline",
 "https://public.carsprogram.org/cameras/MN/C9426": "offline",
 "https://public.carsprogram.org/cameras/MN/D6-C103": "frozen"

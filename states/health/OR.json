@@ -1,10 +1,12 @@
 {
-"checked_at": "2026-11-02T16:20:52Z",
+"checked_at": "2026-11-03T01:35:50Z",
 "cameras": 1179,
 "counts": {
+"offline": 1,
 "frozen": 1
 },
 "status": {
+"https://tripcheck.com/RoadCams/cams/ORE34 at Columbus WB_pid4574.jpg": "offline",
 "https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen"
 }
 }
