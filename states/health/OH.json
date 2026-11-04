@@ -1,12 +1,11 @@
 {
-"checked_at": "2026-11-03T14:41:36Z",
+"checked_at": "2026-11-03T23:48:34Z",
 "cameras": 1116,
 "counts": {
-"frozen": 18,
-"offline": 1
+"frozen": 17,
+"offline": 2
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CLE/CLE173-L.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH055.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH070.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
@@ -16,6 +15,7 @@
 "https://itscameras.dot.state.oh.us/images/dayton/US-35_at_SR-835_Research_Blvd.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3135.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2275.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/D05-037.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
