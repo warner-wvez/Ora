@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-03T23:59:00Z",
+"checked_at": "2026-11-04T07:00:37Z",
 "cameras": 1684,
 "counts": {
-"placeholder": 160,
+"placeholder": 162,
 "frozen": 1
 },
 "status": {
@@ -18,7 +18,6 @@
 "https://snapshot.vdotcameras.com/thumbs/COFHAMP007.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/COFHAMP010.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/COFHAMP019.flv.png": "placeholder",
-"https://snapshot.vdotcameras.com/thumbs/ERCTV39.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/ERCTV8.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/F9A5LgN4EQjtUNZ6zz0ZfxeNwCf8SFov.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/FairfaxCCTV0004.flv.png": "placeholder",
@@ -31,6 +30,7 @@
 "https://snapshot.vdotcameras.com/thumbs/FairfaxCCTV344.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/FairfaxCCTV3715.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/FairfaxCCTV4025.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/FairfaxCCTV66MM745.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/FairfaxPCCTV07.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/FairfaxPCCTV14.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/FairfaxVideo0260.flv.png": "placeholder",
@@ -74,6 +74,7 @@
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads781.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads782.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads801.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/HamptonRoads801A.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads806.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads807.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads832.flv.png": "placeholder",
@@ -125,6 +126,7 @@
 "https://snapshot.vdotcameras.com/thumbs/chesapeakestream003.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/chesapeakestream005.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/chesapeakestream018.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/chesapeakestream019.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/chesapeakestream020.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/chesapeakestream021.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/chesapeakestream041.flv.png": "placeholder",

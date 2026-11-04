@@ -1,13 +1,13 @@
 {
-"checked_at": "2026-11-03T23:42:41Z",
+"checked_at": "2026-11-04T06:37:25Z",
 "cameras": 426,
 "counts": {
-"frozen": 4
+"offline": 4
 },
 "status": {
-"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/McGuire-Creek-269006-00-11-1-2026-22-15-7.jpg": "frozen",
-"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/McGuire-Creek-269006-01-11-1-2026-22-15-7.jpg": "frozen",
-"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/McGuire-Creek-269006-02-11-1-2026-22-30-34.jpg": "frozen",
-"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/McGuire-Creek-269006-03-11-1-2026-22-30-34.jpg": "frozen"
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/McGuire-Creek-269006-00-11-1-2026-22-15-7.jpg": "offline",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/McGuire-Creek-269006-01-11-1-2026-22-15-7.jpg": "offline",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/McGuire-Creek-269006-02-11-1-2026-22-30-34.jpg": "offline",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/McGuire-Creek-269006-03-11-1-2026-22-30-34.jpg": "offline"
 }
 }
