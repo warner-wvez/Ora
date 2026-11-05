@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-04T14:47:58Z",
+"checked_at": "2026-11-04T23:51:40Z",
 "cameras": 336,
 "counts": {
-"placeholder": 45
+"placeholder": 41
 },
 "status": {
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0009.jpg": "placeholder",
@@ -15,16 +15,13 @@
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0074.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0086.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0095.jpg": "placeholder",
+"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0118.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0119.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0200.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0217.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0218.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0219.jpg": "placeholder",
-"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0234.jpg": "placeholder",
-"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0237.jpg": "placeholder",
-"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0240.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0258.jpg": "placeholder",
-"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0270.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0272.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0273.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0311.jpg": "placeholder",
@@ -36,7 +33,6 @@
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0328.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0333.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0340.jpg": "placeholder",
-"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0348.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0358.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0368.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0802.jpg": "placeholder",

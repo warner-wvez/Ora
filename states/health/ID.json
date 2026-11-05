@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-04T14:49:24Z",
+"checked_at": "2026-11-04T23:53:03Z",
 "cameras": 730,
 "counts": {
-"placeholder": 11
+"placeholder": 16
 },
 "status": {
 "https://511.idaho.gov/map/Cctv/296": "placeholder",
@@ -15,6 +15,11 @@
 "https://511.idaho.gov/map/Cctv/435": "placeholder",
 "https://511.idaho.gov/map/Cctv/612": "placeholder",
 "https://511.idaho.gov/map/Cctv/613": "placeholder",
-"https://511.idaho.gov/map/Cctv/614": "placeholder"
+"https://511.idaho.gov/map/Cctv/614": "placeholder",
+"https://511.idaho.gov/map/Cctv/829": "placeholder",
+"https://511.idaho.gov/map/Cctv/838": "placeholder",
+"https://511.idaho.gov/map/Cctv/841": "placeholder",
+"https://511.idaho.gov/map/Cctv/844": "placeholder",
+"https://511.idaho.gov/map/Cctv/846": "placeholder"
 }
 }

@@ -1,10 +1,12 @@
 {
-"checked_at": "2026-11-04T14:58:19Z",
+"checked_at": "2026-11-05T00:00:35Z",
 "cameras": 1034,
 "counts": {
 "offline": 32
 },
 "status": {
+"https://dot511.nebraska.gov/images/vid-002006363-00.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-002034465-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-002480001.78.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-004081006-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005071040-02.jpg": "offline",
@@ -28,8 +30,6 @@
 "https://dot511.nebraska.gov/images/vid-006030200-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-05.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080222-03.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080248-03.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-008012029-01.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/images/vid-003030379-02.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/vid-003015127-01.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/vid-003056020-01.jpg": "offline",
