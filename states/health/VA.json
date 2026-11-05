@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-05T00:13:23Z",
+"checked_at": "2026-11-05T07:19:24Z",
 "cameras": 1684,
 "counts": {
-"placeholder": 159,
+"placeholder": 162,
 "frozen": 1
 },
 "status": {
@@ -73,6 +73,7 @@
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads781.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads782.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads801.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/HamptonRoads801A.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads806.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads807.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/HamptonRoads822.flv.png": "placeholder",
@@ -85,8 +86,10 @@
 "https://snapshot.vdotcameras.com/thumbs/NO0128.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0153.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0260.flv.png": "placeholder",
-"https://snapshot.vdotcameras.com/thumbs/NO0339.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/NO0280.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/NO0348.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0374.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/NO0440.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NO0488.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NOVACCTV3850.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/NROCCTVI66E00517.flv.png": "placeholder",
@@ -108,6 +111,7 @@
 "https://snapshot.vdotcameras.com/thumbs/SalemI77N0106.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/SalemI81MM25.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/SalemUS29BusVA130.flv.png": "placeholder",
+"https://snapshot.vdotcameras.com/thumbs/StauntonCCTV29IVYS.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonCCTV6494W.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonCCTV6496W.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/StauntonCCTV64977EB.flv.png": "placeholder",
@@ -129,7 +133,6 @@
 "https://snapshot.vdotcameras.com/thumbs/chesapeakestream043.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/eVsAPSdVpNZ76NstSVXZOxu9Et3y2daY.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/ef3y7pfa6ts498f5gddyrdmxh3w5fzsp.flv.png": "placeholder",
-"https://snapshot.vdotcameras.com/thumbs/fem45ddaf5ifdgms91mxsvkos5e5p86s.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/hgGbWRpZ8ir69avxF08XcaekB4QGPv4y.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/mhElMkOegdES5N1MgPgQbyiaKSOaKwdv.flv.png": "placeholder",
 "https://snapshot.vdotcameras.com/thumbs/newportcam001.flv.png": "placeholder",

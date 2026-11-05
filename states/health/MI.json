@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-04T23:56:33Z",
+"checked_at": "2026-11-05T07:01:43Z",
 "cameras": 790,
 "counts": {
 "offline": 3,
-"placeholder": 86
+"placeholder": 91
 },
 "status": {
 "https://micamerasimages.net/thumbs/grand_cam_014.flv.jpg": "placeholder",
@@ -21,21 +21,23 @@
 "https://micamerasimages.net/thumbs/internet_cam_046.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_047.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_053.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_054.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_058.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_063.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_070.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_072.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_073.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_077.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_081.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_082.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_084.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_092.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_098.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_103.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_105.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_108.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_144.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_145.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_156.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_182.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_188.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_199.flv.jpg": "placeholder",
@@ -48,6 +50,7 @@
 "https://micamerasimages.net/thumbs/semtoc_cam_040.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_048.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_049.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/semtoc_cam_051.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_092.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_094.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_104.flv.jpg": "placeholder",
@@ -80,6 +83,7 @@
 "https://micamerasimages.net/thumbs/semtoc_cam_258.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_260.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_266.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/semtoc_cam_335.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_358.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_369.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/semtoc_cam_370.flv.jpg": "placeholder",
@@ -93,6 +97,7 @@
 "https://micamerasimages.net/thumbs/stoc_cam_067.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/stoc_cam_072.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/stoc_cam_074.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/stoc_cam_077.flv.jpg": "placeholder",
 "https://micamerasimages2.us-east-1.skyvdn.com/image-000705100-00-00.jpg": "offline",
 "https://micamerasimages2.us-east-1.skyvdn.com/image-000705102-00-04.jpg": "offline"
 }

@@ -1,13 +1,11 @@
 {
-"checked_at": "2026-11-05T00:03:13Z",
+"checked_at": "2026-11-05T07:09:18Z",
 "cameras": 1116,
 "counts": {
-"frozen": 28,
-"offline": 4
+"frozen": 27,
+"offline": 1
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CLE/CCTV6074.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CLE/CLE101.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH055.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
@@ -26,7 +24,6 @@
 "https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-4_Enon.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3135.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/CMH/US_23_at_Flint_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/D05-037.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
@@ -36,7 +33,6 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Merwin_Ten_Mile.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Thriftway.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Waterford.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Wood_NB-1.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }
