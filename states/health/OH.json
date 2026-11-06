@@ -1,12 +1,13 @@
 {
-"checked_at": "2026-11-06T07:03:19Z",
+"checked_at": "2026-11-06T19:50:24Z",
 "cameras": 1116,
 "counts": {
 "frozen": 26,
-"offline": 1
+"offline": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CMH/CMH055.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/9mile67.jpg": "frozen",
