@@ -1,14 +1,15 @@
 {
-"checked_at": "2026-11-05T20:18:24Z",
+"checked_at": "2026-11-06T07:00:19Z",
 "cameras": 185,
 "counts": {
-"offline": 14,
-"placeholder": 2
+"placeholder": 3,
+"offline": 14
 },
 "status": {
+"http://ss.nmroads.com/snapshots/528_highresort.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i-10lordsburgmm9.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-25_nm314.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40RioGrandeRiver.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40_zamoraroad.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i10_moteldrive.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",

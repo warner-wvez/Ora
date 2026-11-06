@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-05T19:58:22Z",
+"checked_at": "2026-11-06T06:40:55Z",
 "cameras": 678,
 "counts": {
-"placeholder": 96
+"placeholder": 91
 },
 "status": {
 "https://az511.com/map/Cctv/1010": "placeholder",
@@ -11,6 +11,7 @@
 "https://az511.com/map/Cctv/1014": "placeholder",
 "https://az511.com/map/Cctv/1027": "placeholder",
 "https://az511.com/map/Cctv/1035": "placeholder",
+"https://az511.com/map/Cctv/1041": "placeholder",
 "https://az511.com/map/Cctv/1042": "placeholder",
 "https://az511.com/map/Cctv/1061": "placeholder",
 "https://az511.com/map/Cctv/1068": "placeholder",
@@ -28,12 +29,10 @@
 "https://az511.com/map/Cctv/1242": "placeholder",
 "https://az511.com/map/Cctv/1250": "placeholder",
 "https://az511.com/map/Cctv/1259": "placeholder",
-"https://az511.com/map/Cctv/1260": "placeholder",
 "https://az511.com/map/Cctv/1358": "placeholder",
 "https://az511.com/map/Cctv/1392": "placeholder",
 "https://az511.com/map/Cctv/1422": "placeholder",
 "https://az511.com/map/Cctv/1435": "placeholder",
-"https://az511.com/map/Cctv/1439": "placeholder",
 "https://az511.com/map/Cctv/1443": "placeholder",
 "https://az511.com/map/Cctv/1444": "placeholder",
 "https://az511.com/map/Cctv/1445": "placeholder",
@@ -44,7 +43,6 @@
 "https://az511.com/map/Cctv/1450": "placeholder",
 "https://az511.com/map/Cctv/1470": "placeholder",
 "https://az511.com/map/Cctv/1473": "placeholder",
-"https://az511.com/map/Cctv/1475": "placeholder",
 "https://az511.com/map/Cctv/690": "placeholder",
 "https://az511.com/map/Cctv/712": "placeholder",
 "https://az511.com/map/Cctv/719": "placeholder",
@@ -92,11 +90,8 @@
 "https://az511.com/map/Cctv/873": "placeholder",
 "https://az511.com/map/Cctv/876": "placeholder",
 "https://az511.com/map/Cctv/889": "placeholder",
-"https://az511.com/map/Cctv/890": "placeholder",
 "https://az511.com/map/Cctv/891": "placeholder",
-"https://az511.com/map/Cctv/892": "placeholder",
 "https://az511.com/map/Cctv/893": "placeholder",
-"https://az511.com/map/Cctv/894": "placeholder",
 "https://az511.com/map/Cctv/903": "placeholder",
 "https://az511.com/map/Cctv/939": "placeholder",
 "https://az511.com/map/Cctv/943": "placeholder",

@@ -5823,5 +5823,15 @@
   "sha": "d3dc7cafae71cde7",
   "first_seen": "2026-11-05T20:13:01Z",
   "state": "LA"
+ },
+ "16702:0b3ff0627a43": {
+  "sha": "d1386ff3a045fa8b",
+  "first_seen": "2026-11-06T06:42:43Z",
+  "state": "CA"
+ },
+ "12294:68dd33d41afe": {
+  "sha": "9d11d66ac70bde97",
+  "first_seen": "2026-11-06T06:54:40Z",
+  "state": "LA"
  }
 }

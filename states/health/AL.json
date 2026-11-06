@@ -1,25 +1,14 @@
 {
-"checked_at": "2026-11-05T19:55:49Z",
+"checked_at": "2026-11-06T06:38:58Z",
 "cameras": 631,
 "counts": {
-"placeholder": 28
+"placeholder": 18
 },
 "status": {
 "https://api.algotraffic.com/v4/Cameras/12094/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12096/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/17979/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22931/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22933/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22934/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22935/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/22939/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22940/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22941/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22942/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22949/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22950/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22951/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/22952/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30848/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30852/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30877/snapshot.jpg": "placeholder",
@@ -32,6 +21,7 @@
 "https://api.algotraffic.com/v4/Cameras/31503/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31515/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/31529/snapshot.jpg": "placeholder",
-"https://api.algotraffic.com/v4/Cameras/3222/snapshot.jpg": "placeholder"
+"https://api.algotraffic.com/v4/Cameras/3222/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/7320/snapshot.jpg": "placeholder"
 }
 }
