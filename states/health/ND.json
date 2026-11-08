@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-07T22:08:42Z",
+"checked_at": "2026-11-08T06:19:29Z",
 "cameras": 814,
 "counts": {
 "offline": 7,
-"placeholder": 25
+"placeholder": 29
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
@@ -37,6 +37,10 @@
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeNorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgePavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/bottineaucenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/bottineaunorth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/bottineaupavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/bottineausouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/camerasND13RP308VeronaEast.jpg": "offline"
 }
 }
