@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-08T06:12:29Z",
+"checked_at": "2026-11-08T13:38:30Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 567,
-"frozen": 33,
+"placeholder": 560,
+"frozen": 34,
 "offline": 12
 },
 "status": {
@@ -529,6 +529,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_NB_Randall_4214679_-8833554_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_NEB_I-88_4179652_-8837527_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_NWB_I-90_4208149_-8833582_1_NONE.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_SB_Huntley_4213971_-8834572_1_NONE.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_SB_IL-31_4186411_-8831384_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_SB_Kirk_4182435_-8827990_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-KANECOUNTY_1_Kane_SB_Orchard_4179317_-8837569_1_NONE.jpg": "placeholder",
@@ -561,9 +562,6 @@
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_South_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_East_Leg.jpg": "frozen",
@@ -600,10 +598,6 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "frozen",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_43_@_Lake_Cook_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_43_@_Lake_Cook_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_43_@_Lake_Cook_cctv_South_Leg.jpg": "placeholder",
