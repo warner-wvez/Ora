@@ -1,16 +1,18 @@
 {
-"checked_at": "2026-11-09T06:45:48Z",
+"checked_at": "2026-11-09T22:43:16Z",
 "cameras": 1116,
 "counts": {
-"frozen": 29,
-"offline": 1
+"frozen": 27,
+"offline": 3
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CMH/CMH055.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH081.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/9mile67.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/artimis/CCTV021a.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/Cherry163.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Bennett_Rd.jpg": "frozen",
@@ -22,13 +24,11 @@
 "https://itscameras.dot.state.oh.us/images/artimis/nordyke179.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/tobasco115.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/withamsville3.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/dayton/I-70_at_SR-201.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3135.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/D05-037.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/Dayton/CCTV1113.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4169.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4190.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Britton_Blvd.jpg": "frozen",

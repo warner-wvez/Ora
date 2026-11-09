@@ -1,10 +1,12 @@
 {
-"checked_at": "2026-11-09T06:48:53Z",
-"cameras": 1179,
+"checked_at": "2026-11-09T22:46:16Z",
+"cameras": 1181,
 "counts": {
+"offline": 1,
 "frozen": 1
 },
 "status": {
+"https://tripcheck.com/RoadCams/cams/NE 82nd at Glisan SB_pid5405.jpg": "offline",
 "https://tripcheck.com/RoadCams/cams/Tualatin Sherwood Rd at OR99W_pid3395.JPG": "frozen"
 }
 }
