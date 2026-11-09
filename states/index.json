@@ -93,7 +93,7 @@
  "ID": {
   "name": "Idaho",
   "file": "states/ID.json",
-  "count": 457,
+  "count": 455,
   "center": [
    -114.5,
    44.4
@@ -126,7 +126,7 @@
  "AK": {
   "name": "Alaska",
   "file": "states/AK.json",
-  "count": 128,
+  "count": 129,
   "center": [
    -149.6,
    61.2
@@ -148,7 +148,7 @@
  "CO": {
   "name": "Colorado",
   "file": "states/CO.json",
-  "count": 1019,
+  "count": 992,
   "center": [
    -105.5,
    39.0
@@ -159,7 +159,7 @@
  "IA": {
   "name": "Iowa",
   "file": "states/IA.json",
-  "count": 867,
+  "count": 862,
   "center": [
    -93.5,
    42.0
@@ -181,7 +181,7 @@
  "IN": {
   "name": "Indiana",
   "file": "states/IN.json",
-  "count": 749,
+  "count": 759,
   "center": [
    -86.3,
    39.9
@@ -203,7 +203,7 @@
  "MA": {
   "name": "Massachusetts",
   "file": "states/MA.json",
-  "count": 310,
+  "count": 311,
   "center": [
    -71.8,
    42.2
@@ -225,7 +225,7 @@
  "OR": {
   "name": "Oregon",
   "file": "states/OR.json",
-  "count": 1179,
+  "count": 1181,
   "center": [
    -120.5,
    44.0
@@ -270,7 +270,7 @@
  "WA": {
   "name": "Washington",
   "file": "states/WA.json",
-  "count": 1523,
+  "count": 1525,
   "center": [
    -120.5,
    47.4
@@ -315,7 +315,7 @@
  "TN": {
   "name": "Tennessee",
   "file": "states/TN.json",
-  "count": 669,
+  "count": 673,
   "center": [
    -86.3,
    35.8
@@ -370,7 +370,7 @@
  "SD": {
   "name": "South Dakota",
   "file": "states/SD.json",
-  "count": 179,
+  "count": 176,
   "center": [
    -100.3,
    44.4
@@ -381,7 +381,7 @@
  "AR": {
   "name": "Arkansas",
   "file": "states/AR.json",
-  "count": 533,
+  "count": 529,
   "center": [
    -92.4,
    34.8
@@ -447,7 +447,7 @@
  "SC": {
   "name": "South Carolina",
   "file": "states/SC.json",
-  "count": 798,
+  "count": 803,
   "center": [
    -80.9,
    33.9
@@ -524,7 +524,7 @@
  "MS": {
   "name": "Mississippi",
   "file": "states/MS.json",
-  "count": 465,
+  "count": 468,
   "center": [
    -89.7,
    32.6
