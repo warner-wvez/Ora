@@ -24,7 +24,7 @@ test('routeUrl asks for traffic and alternatives and never for turn instructions
   assert.equal(u.searchParams.get('traffic'), 'true');
   assert.equal(u.searchParams.get('maxAlternatives'), '2');
   assert.equal(u.searchParams.get('instructionsType'), null);
-  assert.deepEqual(u.searchParams.getAll('sectionType'), ['traffic', 'importantRoadStretch', 'tollRoad']);
+  assert.deepEqual(u.searchParams.getAll('sectionType'), ['traffic', 'importantRoadStretch', 'toll']);
 });
 
 test('parseTile accepts real tile coordinates only', () => {
@@ -153,14 +153,15 @@ test('parseAvoid keeps only tolls and highways, once each', () => {
 test('routeUrl passes avoid on to TomTom and asks where the tolls are', () => {
   const u = new URL(t.routeUrl('K', { lat: 47.6, lon: -122.3 }, { lat: 45.5, lon: -122.7 }, { avoid: ['tolls', 'highways'] }));
   assert.deepEqual(u.searchParams.getAll('avoid'), ['tollRoads', 'motorways']);
-  assert.ok(u.searchParams.getAll('sectionType').includes('tollRoad'));
+  assert.ok(u.searchParams.getAll('sectionType').includes('toll'));
+  assert.ok(!u.searchParams.getAll('sectionType').includes('tollRoad'));   // deprecated by TomTom, withdrawal planned 2025-03-15
   const plain = new URL(t.routeUrl('K', { lat: 47.6, lon: -122.3 }, { lat: 45.5, lon: -122.7 }));
   assert.deepEqual(plain.searchParams.getAll('avoid'), []);
 });
 
 test('shapeRoutes marks a route that uses a toll road', () => {
   const route = (sections) => ({ routes: [{ summary: { travelTimeInSeconds: 60, lengthInMeters: 1000 }, legs: [{ points: [] }], sections }] });
-  assert.equal(t.shapeRoutes(route([{ sectionType: 'TOLL_ROAD', startPointIndex: 0, endPointIndex: 3 }]))[0].tolls, true);
+  assert.equal(t.shapeRoutes(route([{ sectionType: 'TOLL', startPointIndex: 0, endPointIndex: 3 }]))[0].tolls, true);
   assert.equal(t.shapeRoutes(route([]))[0].tolls, false);
 });
 

@@ -53,7 +53,7 @@ function routeUrl(key, from, to, opts = {}) {
   // sections say which routes cost money
   p.append('sectionType', 'traffic');
   p.append('sectionType', 'importantRoadStretch');
-  p.append('sectionType', 'tollRoad');
+  p.append('sectionType', 'toll');
   for (const a of opts.avoid || []) if (AVOID[a]) p.append('avoid', AVOID[a]);
   return `${API}/routing/1/calculateRoute/${from.lat},${from.lon}:${to.lat},${to.lon}/json?${p}`;
 }
@@ -140,7 +140,7 @@ function shapeRoutes(json) {
       traffic: sections.filter((x) => x.sectionType === 'TRAFFIC' && x.endPointIndex > x.startPointIndex)
         .map((x) => ({ from: x.startPointIndex, to: x.endPointIndex, level: trafficLevel(x) })),
       via: roadNames(sections),
-      tolls: sections.some((x) => x.sectionType === 'TOLL_ROAD'),
+      tolls: sections.some((x) => x.sectionType === 'TOLL' || x.sectionType === 'TOLL_ROAD'),
     };
   });
 }
