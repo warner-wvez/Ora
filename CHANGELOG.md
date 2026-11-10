@@ -32,6 +32,9 @@ commits are not listed.
 - Offline, a line says so and how old the pictures are, and each camera keeps its last frame
   with its time instead of a broken image. Back online, every camera on screen refreshes at
   once. Place search and routes say "No connection" instead of "TomTom is not answering".
+- "Watch these cameras" gets Pause updates, which holds every picture still until Resume,
+  and Resume asks for the newest pictures at once. It and each camera card say who the feeds
+  are for: before you go, or a passenger, not the driver.
 
 ### Fixed
 - On a phone, "Watch these cameras" fills the screen. Before, it was 90% wide with a strip of
