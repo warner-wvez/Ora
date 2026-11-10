@@ -30,7 +30,8 @@ different file. The relay on the VPS reads its own copy of the same key.
 |---|---|---|
 | `/search?q=&near=lat,lon` | Search API, fuzzy search, US only | 2,500, shared with `/nearby` |
 | `/nearby?cat=&near=lat,lon` | Search API, nearby search by POI category (gas, ev, food, coffee, rest, parking), 10 miles, US only | the same 2,500 |
-| `/route?from=lat,lon&to=lat,lon&avoid=tolls,highways` | Routing API, traffic on, 2 alternatives, traffic, important-road and toll-road sections, optional avoid, no turn instructions | 20,000 |
+| `/along?cat=` (POST `{"points":[[lat,lon],...]}`) | Search API, along-route search by POI category, 15 minute detour, no query text (it would filter by name) | the same 2,500 |
+| `/route?from=lat,lon&to=lat,lon&via=lat,lon;lat,lon&avoid=tolls,highways&optimize=1` | Routing API, traffic on, up to 3 stops, 2 alternatives (none when optimizing), traffic, important-road and toll sections, per-leg times, usual time, no turn instructions | 20,000 |
 | `/traffic/{z}/{x}/{y}.png` | Raster flow tiles, `relative0` style | 200,000 |
 
 TomTom blocks requests at the free limit instead of billing. The relay and this proxy share one

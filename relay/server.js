@@ -6,7 +6,7 @@
 // GET /healthz                                      -> {ok, cameras cached, session age}
 // GET /<state>/<imageId>/<seN>/<chan>/<file>        -> the upstream file, token added, playlist rewritten
 // GET /nj/<w|t>/<upstream path>                     -> the upstream file, 511nj.org's headers added
-// GET /tt/healthz | /tt/search | /tt/nearby | /tt/route | /tt/traffic/{z}/{x}/{y}.png
+// GET /tt/healthz | /tt/search | /tt/nearby | /tt/route | /tt/traffic/{z}/{x}/{y}.png, POST /tt/along
 //                                                   -> TomTom place search, route preview and
 //                                                      traffic tiles, the key added here (see the
 //                                                      TomTom section below)
@@ -189,30 +189,43 @@ function ttUse(kind) {
 }
 const ttHandle = makeHandler({ key: ttKey, use: ttUse, log: (...a) => log('tomtom', ...a) });
 const ttBuckets = new Map();
-const TT_KIND = (sub) => (sub === '/search' || sub === '/nearby' ? 'search' : sub === '/route' ? 'route' : sub.startsWith('/traffic/') ? 'tile' : null);
+const TT_KIND = (sub) => (sub === '/search' || sub === '/nearby' || sub === '/along' ? 'search' : sub === '/route' ? 'route' : sub.startsWith('/traffic/') ? 'tile' : null);
 
 function sendJson(res, status, body, extra = {}) {
   res.writeHead(status, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', ...extra });
   res.end(JSON.stringify(body));
 }
 
+// a request body, capped: the along-route line is a few kilobytes
+function readBody(req, limit = 64 * 1024) {
+  return new Promise((resolve, reject) => {
+    let n = 0; const chunks = [];
+    req.on('data', (c) => { n += c.length; if (n > limit) { const e = new Error('body too large'); e.status = 413; reject(e); req.destroy(); } else chunks.push(c); });
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
+}
+
 async function serveTomTom(req, res, url, origin) {
   if (!origin) return sendJson(res, 403, { error: 'origin required' });
   const sub = url.pathname.slice(3) || '/';
   if (sub === '/healthz') return sendJson(res, 200, { ok: !!ttKey });
-  if (req.method !== 'GET') return sendJson(res, 405, { error: 'GET only' });
+  // GET everywhere, POST only for the along-route search, which carries the route line
+  if (req.method !== 'GET' && !(req.method === 'POST' && sub === '/along')) return sendJson(res, 405, { error: 'method not allowed' });
   const kind = TT_KIND(sub);
   if (!kind) return sendJson(res, 404, { error: 'not found' });
   const lim = tt.rateAllow(ttBuckets, tt.clientIp(req.headers, req.socket.remoteAddress), kind);
   if (!lim.ok) return sendJson(res, 429, { error: 'too many requests from this address, try again later' }, { 'Retry-After': String(lim.retryAfter) });
-  const r = await ttHandle(sub, url.searchParams);
+  const body = req.method === 'POST' ? await readBody(req) : undefined;
+  const r = await ttHandle(sub, url.searchParams, body);
   res.writeHead(r.status, { 'Content-Type': r.type, 'Cache-Control': r.cache });
   return res.end(r.body);
 }
 
 function cors(res, origin) {
   res.setHeader('Access-Control-Allow-Origin', origin || '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Range');
+  res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, POST, OPTIONS');
   res.setHeader('Access-Control-Expose-Headers', 'Content-Length, Content-Range');
   res.setHeader('Vary', 'Origin');
 }

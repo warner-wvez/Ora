@@ -40,18 +40,30 @@ function send(res, r) {
   res.end(r.body);
 }
 
+// a request body, capped: the along-route line is a few kilobytes
+function readBody(req, limit = 64 * 1024) {
+  return new Promise((resolve, reject) => {
+    let n = 0; const chunks = [];
+    req.on('data', (c) => { n += c.length; if (n > limit) { const e = new Error('body too large'); e.status = 413; reject(e); req.destroy(); } else chunks.push(c); });
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
+}
+
 const server = http.createServer(async (req, res) => {
   const origin = req.headers.origin;
   if (!t.originAllowed(origin)) return send(res, { status: 403, type: 'application/json', cache: 'no-store', body: '{"error":"origin not allowed"}' });
-  if (origin) { res.setHeader('Access-Control-Allow-Origin', origin); res.setHeader('Vary', 'Origin'); }
+  if (origin) { res.setHeader('Access-Control-Allow-Origin', origin); res.setHeader('Vary', 'Origin'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); }
   if (req.method === 'OPTIONS') { res.writeHead(204); return res.end(); }
-  if (req.method !== 'GET') return send(res, { status: 405, type: 'application/json', cache: 'no-store', body: '{"error":"GET only"}' });
   const url = new URL(req.url, 'http://127.0.0.1');
+  if (req.method !== 'GET' && !(req.method === 'POST' && url.pathname === '/along')) return send(res, { status: 405, type: 'application/json', cache: 'no-store', body: '{"error":"method not allowed"}' });
   if (url.pathname === '/healthz') {
     return send(res, { status: 200, type: 'application/json', cache: 'no-store', body: JSON.stringify({ ok: !!key, key: !!key, usage, free: t.FREE }) });
   }
   if (!key) return send(res, { status: 503, type: 'application/json', cache: 'no-store', body: JSON.stringify({ error: `no TomTom key in ${KEY_FILE}` }) });
-  return send(res, await handle(url.pathname, url.searchParams));
+  let body;
+  try { body = req.method === 'POST' ? await readBody(req) : undefined; } catch (e) { return send(res, { status: e.status || 400, type: 'application/json', cache: 'no-store', body: JSON.stringify({ error: e.message }) }); }
+  return send(res, await handle(url.pathname, url.searchParams, body));
 });
 
 server.listen(PORT, '127.0.0.1', () => log(`tomtom proxy on http://127.0.0.1:${PORT}, key ${key ? 'loaded' : 'MISSING: ' + KEY_FILE}`));

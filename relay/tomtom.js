@@ -8,7 +8,8 @@
 // Four upstream calls, nothing else:
 //   place search   https://api.tomtom.com/search/2/search/<q>.json
 //   find nearby    https://api.tomtom.com/search/2/nearbySearch/.json?categorySet=<ids>
-//   routes         https://api.tomtom.com/routing/1/calculateRoute/<from>:<to>/json
+//   routes         https://api.tomtom.com/routing/1/calculateRoute/<from>:<stops>:<to>/json
+//   along a route  https://api.tomtom.com/search/2/searchAlongRoute/.json?categorySet=<ids> (POST, the route line)
 //   traffic tiles  https://api.tomtom.com/traffic/map/4/tile/flow/relative0/<z>/<x>/<y>.png
 // No guidance or turn instructions are ever requested: a route here is a preview, not
 // "Navigation Functionality" (live turn-by-turn from the user's position), which the terms
@@ -43,11 +44,28 @@ function parseAvoid(s) {
   return String(s || '').split(',').map((x) => x.trim()).filter((x, i, a) => AVOID[x] && a.indexOf(x) === i);
 }
 
+// Up to three stops between start and end, "lat,lon;lat,lon". Three is the tightest handoff
+// limit (Google Maps links take three stops from a phone browser), and people add one or two.
+const MAX_STOPS = 3;
+function parseVia(s) {
+  if (!s) return [];
+  const parts = String(s).split(';');
+  if (parts.length > MAX_STOPS) return null;
+  const pts = parts.map(parseLatLon);
+  return pts.every(Boolean) ? pts : null;
+}
+
+// opts.via: the stops in order. opts.optimize: let TomTom pick the order of the stops (one call,
+// "a fast heuristic", shortest distance, not guaranteed best). TomTom refuses alternatives with
+// it, so an optimized answer is one route.
 function routeUrl(key, from, to, opts = {}) {
+  const via = opts.via || [];
+  const best = !!opts.optimize && via.length >= 2;
   const p = new URLSearchParams({
-    key, traffic: 'true', maxAlternatives: '2', routeRepresentation: 'polyline',
+    key, traffic: 'true', maxAlternatives: best ? '0' : '2', routeRepresentation: 'polyline',
     computeTravelTimeFor: 'all', travelMode: 'car', departAt: 'now',
   });
+  if (best) p.set('computeBestOrder', 'true');
   // traffic sections colour the line itself (slow and jammed stretches), the important road
   // stretches name the roads that tell one route from another ("via I-5"), and toll road
   // sections say which routes cost money
@@ -55,7 +73,8 @@ function routeUrl(key, from, to, opts = {}) {
   p.append('sectionType', 'importantRoadStretch');
   p.append('sectionType', 'toll');
   for (const a of opts.avoid || []) if (AVOID[a]) p.append('avoid', AVOID[a]);
-  return `${API}/routing/1/calculateRoute/${from.lat},${from.lon}:${to.lat},${to.lon}/json?${p}`;
+  const locs = [from, ...via, to].map((x) => `${x.lat},${x.lon}`).join(':');
+  return `${API}/routing/1/calculateRoute/${locs}/json?${p}`;
 }
 
 // Find Nearby: the stops people make on the way (gas, food, coffee, a rest area, parking),
@@ -69,6 +88,24 @@ const NEARBY = {
   rest: { label: 'Rest areas', ids: '7395' },
   parking: { label: 'Parking', ids: '7313,7369' },
 };
+// Find Nearby along a route: places within a 15 minute detour, spread along the whole line
+// rather than bunched at the start. The page sends a thinned line (2 to 300 points).
+function alongUrl(key, cat) {
+  const c = NEARBY[cat];
+  if (!c) return null;
+  const p = new URLSearchParams({ key, maxDetourTime: '900', limit: '8', categorySet: c.ids, spreadingMode: 'plan' });
+  // no query text: TomTom matches the query against place names ("gas" found no Shell or Exxon),
+  // so the category alone picks the places
+  return `${API}/search/2/searchAlongRoute/.json?${p}`;
+}
+function parseAlongPoints(body) {
+  let j;
+  try { j = JSON.parse(String(body || '')); } catch (e) { return null; }
+  const pts = j && Array.isArray(j.points) ? j.points : null;
+  if (!pts || pts.length < 2 || pts.length > 300) return null;
+  const out = pts.map((q) => (Array.isArray(q) ? parseLatLon(`${q[0]},${q[1]}`) : null));
+  return out.every(Boolean) ? out : null;
+}
 function nearbyUrl(key, cat, near) {
   const c = NEARBY[cat];
   if (!c || !near) return null;
@@ -100,6 +137,7 @@ function shapePlaces(json) {
       type: r.type || '',
       lat: r.position.lat, lon: r.position.lon,
       dist: typeof r.dist === 'number' ? Math.round(r.dist) : null,
+      detour: typeof r.detourTime === 'number' ? r.detourTime : null,
       bbox: vp ? [vp.topLeftPoint.lon, vp.btmRightPoint.lat, vp.btmRightPoint.lon, vp.topLeftPoint.lat] : null,
     };
   });
@@ -135,14 +173,28 @@ function shapeRoutes(json) {
       seconds: s.travelTimeInSeconds || 0,
       delaySeconds: s.trafficDelayInSeconds || 0,
       noTrafficSeconds: s.noTrafficTravelTimeInSeconds || null,
+      // what this trip usually takes at this hour, from TomTom's history (computeTravelTimeFor=all)
+      historicSeconds: s.historicTrafficTravelTimeInSeconds || null,
       meters: s.lengthInMeters || 0,
       coords,
+      // one entry per stretch between stops, for the time and miles under each stop
+      legs: (r.legs || []).map((l) => { const ls = l.summary || {};
+        return { seconds: ls.travelTimeInSeconds || 0, meters: ls.lengthInMeters || 0, delaySeconds: ls.trafficDelayInSeconds || 0, historicSeconds: ls.historicTrafficTravelTimeInSeconds || null }; }),
+      // each slow stretch also says what it is (JAM, ROAD_WORK, ROAD_CLOSURE, OTHER) and what it costs
       traffic: sections.filter((x) => x.sectionType === 'TRAFFIC' && x.endPointIndex > x.startPointIndex)
-        .map((x) => ({ from: x.startPointIndex, to: x.endPointIndex, level: trafficLevel(x) })),
+        .map((x) => ({ from: x.startPointIndex, to: x.endPointIndex, level: trafficLevel(x), cat: x.simpleCategory || 'OTHER', delay: x.delayInSeconds || 0 })),
       via: roadNames(sections),
       tolls: sections.some((x) => x.sectionType === 'TOLL' || x.sectionType === 'TOLL_ROAD'),
     };
   });
+}
+
+// TomTom's optimizedWaypoints [{providedIndex, optimizedIndex}] as the stops' new order: the
+// provided indices sorted by where TomTom put them
+function shapeOrder(json) {
+  const w = json && json.optimizedWaypoints;
+  if (!Array.isArray(w) || !w.length) return null;
+  return [...w].sort((a, b) => a.optimizedIndex - b.optimizedIndex).map((x) => x.providedIndex);
 }
 
 // The key must never reach the page, including inside an upstream error message.
@@ -187,4 +239,4 @@ function rateAllow(buckets, ip, kind, now = Date.now()) {
   return { ok: true, retryAfter: 0 };
 }
 
-module.exports = { FREE, PER_HOUR, AVOID, NEARBY, parseAvoid, nearbyUrl, parseLatLon, searchUrl, routeUrl, parseTile, tileUrl, shapePlaces, shapeRoutes, scrub, originAllowed, countUse, clientIp, rateAllow };
+module.exports = { FREE, PER_HOUR, AVOID, NEARBY, MAX_STOPS, parseAvoid, parseVia, nearbyUrl, alongUrl, parseAlongPoints, shapeOrder, parseLatLon, searchUrl, routeUrl, parseTile, tileUrl, shapePlaces, shapeRoutes, scrub, originAllowed, countUse, clientIp, rateAllow };

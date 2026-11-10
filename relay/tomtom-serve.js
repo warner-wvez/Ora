@@ -9,9 +9,11 @@ const t = require('./tomtom');
 
 // TomTom's place search now and then takes 20 s or more to answer; past 10 s the page is
 // better told so than left waiting
-async function upstream(url) {
+async function upstream(url, body) {
   let r;
-  try { r = await fetch(url, { headers: { accept: '*/*' }, signal: AbortSignal.timeout(10000) }); }
+  const opts = { headers: { accept: '*/*' }, signal: AbortSignal.timeout(10000) };
+  if (body !== undefined) { opts.method = 'POST'; opts.headers['content-type'] = 'application/json'; opts.body = JSON.stringify(body); }
+  try { r = await fetch(url, opts); }
   catch (e) { if (e.name === 'TimeoutError') { const err = new Error('TomTom did not answer within 10 s'); err.status = 504; throw err; } throw e; }
   return { status: r.status, body: Buffer.from(await r.arrayBuffer()) };
 }
@@ -20,9 +22,10 @@ const json = (status, body) => ({ status, type: 'application/json', cache: 'no-s
 
 // use(kind) counts one call against the month and says whether it is allowed.
 // Returns handle(pathname, searchParams) -> {status, type, cache, body}, pathname being one of
-// /search, /nearby, /route or /traffic/{z}/{x}/{y}.png.
+// /search, /nearby, /along (POST body: {"points":[[lat,lon],...]}), /route or
+// /traffic/{z}/{x}/{y}.png.
 function makeHandler({ key, use, log = () => {} }) {
-  return async function handle(pathname, params) {
+  return async function handle(pathname, params, body) {
     if (!key) return json(503, { error: 'no TomTom key' });
     try {
       if (pathname === '/search') {
@@ -44,14 +47,26 @@ function makeHandler({ key, use, log = () => {} }) {
         if (r.status !== 200) return json(502, { error: t.scrub(`nearby ${r.status}: ${r.body.toString().slice(0, 300)}`, key) });
         return json(200, { places: t.shapePlaces(JSON.parse(r.body)) });
       }
+      if (pathname === '/along') {
+        const cat = params.get('cat'), pts = t.parseAlongPoints(body);
+        if (!t.NEARBY[cat]) return json(400, { error: 'unknown category' });
+        if (!pts) return json(400, { error: 'points must be 2 to 300 [lat, lon] pairs' });
+        if (!use('search')) return json(429, { error: 'monthly free search allowance used up' });
+        const r = await upstream(t.alongUrl(key, cat), { route: { points: pts } });
+        log('along', r.status);
+        if (r.status !== 200) return json(502, { error: t.scrub(`along ${r.status}: ${r.body.toString().slice(0, 300)}`, key) });
+        return json(200, { places: t.shapePlaces(JSON.parse(r.body)) });
+      }
       if (pathname === '/route') {
-        const from = t.parseLatLon(params.get('from')), to = t.parseLatLon(params.get('to'));
+        const from = t.parseLatLon(params.get('from')), to = t.parseLatLon(params.get('to')), via = t.parseVia(params.get('via'));
         if (!from || !to) return json(400, { error: 'from and to must be lat,lon' });
+        if (!via) return json(400, { error: `via must be up to ${t.MAX_STOPS} lat,lon stops separated by ;` });
         if (!use('route')) return json(429, { error: 'monthly free route allowance used up' });
-        const r = await upstream(t.routeUrl(key, from, to, { avoid: t.parseAvoid(params.get('avoid')) }));
+        const r = await upstream(t.routeUrl(key, from, to, { avoid: t.parseAvoid(params.get('avoid')), via, optimize: params.get('optimize') === '1' }));
         log('route', r.status);
         if (r.status !== 200) return json(502, { error: t.scrub(`route ${r.status}: ${r.body.toString().slice(0, 300)}`, key) });
-        return json(200, { routes: t.shapeRoutes(JSON.parse(r.body)) });
+        const j = JSON.parse(r.body);
+        return json(200, { routes: t.shapeRoutes(j), order: t.shapeOrder(j) });
       }
       const tile = t.parseTile(pathname);
       if (tile) {
