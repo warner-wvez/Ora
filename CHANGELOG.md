@@ -35,6 +35,9 @@ commits are not listed.
 - "Watch these cameras" gets Pause updates, which holds every picture still until Resume,
   and Resume asks for the newest pictures at once. It and each camera card say who the feeds
   are for: before you go, or a passenger, not the driver.
+- On a phone the link button says Share and opens the phone's share sheet. On a computer Copy
+  link also shows a QR code of the view or trip, so a phone can open it with its camera. The
+  QR encoder is Ora's own, so no third-party script was added.
 
 ### Fixed
 - On a phone, "Watch these cameras" fills the screen. Before, it was 90% wide with a strip of

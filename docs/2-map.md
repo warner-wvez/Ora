@@ -75,8 +75,15 @@ and intersection each camera watches; pin outlines thicken on it so they stay vi
 
 The URL always reflects what you are looking at: position, zoom, basemap, and the Chicago
 ticket map with its filters. States are not in it, because they follow the view: opening
-the link at the same position loads the same states. "Copy link" copies it. Older links
-that name states (`#l=st-WA`) still open on the same view.
+the link at the same position loads the same states. "Copy link" copies it, and on a computer
+it also shows the link as a QR code beside the panel: point a phone's camera at it to open the
+same view or trip there, with no account and nothing sent anywhere. On a phone the button says
+"Share" and opens the phone's own share sheet (Messages, Mail, AirDrop); a phone browser without
+one copies instead. Esc, a click elsewhere or moving the map puts the code away, since the link
+it shows would be out of date. The QR encoder is Ora's own code (byte mode, error correction
+level M, checked against the zxing-cpp decoder for every size from version 1 to 40), so the
+page still loads no third-party script for it. Older links that name states (`#l=st-WA`) still
+open on the same view.
 
 ## Offline
 
