@@ -46,6 +46,11 @@
   #search { width: 100%; height: 40px; font-size: 14px; padding: 0 36px 0 36px; border: 1px solid transparent; border-radius: 10px; outline: none; background: #f2f2f7; color: #1c1c1e; text-overflow: ellipsis; }
   #search:focus { border-color: #0062cc; background: #fff; }
   #search::placeholder { color: #6e6e73; }
+  /* type=search brings the phone's Search key; the browser's own clear button and rounded look stay off (Ora draws its own x) */
+  #search, .dir-field { -webkit-appearance: none; appearance: none; }
+  #search::-webkit-search-cancel-button, .dir-field::-webkit-search-cancel-button, #search::-webkit-search-decoration, .dir-field::-webkit-search-decoration { -webkit-appearance: none; display: none; }
+  /* a 2px ring where the keyboard is, like every other control (the 1px blue border alone was missed) */
+  #search:focus-visible, .dir-field:focus-visible { outline: 2px solid #0062cc; outline-offset: 0; border-color: transparent; }
   .search-wrap > svg { position: absolute; left: 12px; top: 20px; transform: translateY(-50%); opacity: .5; }
   .search-x { position: absolute; right: 6px; top: 6px; width: 28px; height: 28px; border: none; border-radius: 50%; background: transparent; color: #6e6e73; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   .search-x:hover { background: #e5e5ea; }
@@ -216,8 +221,8 @@
   .popup-imgwrap.err img, .popup-imgwrap.err video { display: none; }
   .popup-imgwrap.err .img-offline { display: flex; }
   .popup-rwis { margin: 4px 0 2px; font-size: 11px; line-height: 1.35; color: #1c6e4a; font-weight: 600; }
-  .enlarge-btn { position: absolute; bottom: 8px; right: 8px; z-index: 3; width: 26px; height: 26px; border: none; border-radius: 5px; background: rgba(0,0,0,.5); color: #fff; font-size: 13px; line-height: 1; cursor: zoom-in; display: flex; align-items: center; justify-content: center; }
-  .enlarge-btn:hover { background: rgba(0,0,0,.8); }
+  .enlarge-btn { position: absolute; bottom: 8px; right: 8px; z-index: 3; width: 28px; height: 28px; border: none; border-radius: 8px; background: rgba(242,242,247,.94); color: #1c1c1e; font-size: 14px; line-height: 1; cursor: zoom-in; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,.22); }
+  .enlarge-btn:hover { background: #fff; }
   .enlarge-ov { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,.82); display: flex; align-items: center; justify-content: center; padding: 24px; }
   .enlarge-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 96vw; }
   /* every camera opens at the SAME size, so two scenes can actually be compared. The picture
@@ -303,8 +308,10 @@
   .sheet-grip::before { content: ''; position: absolute; top: -6px; bottom: -6px; left: 0; right: 0; }
   .sheet-grip:focus-visible { outline: 2px solid #0062cc; outline-offset: -4px; }
   .grip-bar { display: block; width: 36px; height: 5px; border-radius: 3px; background: #c7c7cc; }
+  /* a light chip with a dark mark: it reads on any photo and on the white card alike (white on 45%
+     black measured 3.4:1 on a white card) */
   .sheet-close { position: absolute; top: 10px; right: 10px; z-index: 5; width: 28px; height: 28px; border: none; border-radius: 50%;
-    background: rgba(0,0,0,0.45); color: #fff; font-size: 14px; line-height: 1; cursor: pointer; }
+    background: rgba(242,242,247,.94); color: #1c1c1e; font-size: 14px; line-height: 1; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.22); }
   #sheetContent { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
   #sheetContent .popup-inner { width: 100%; }
   #sheetContent .popup-imgwrap { height: min(56vw, 260px); }
@@ -529,7 +536,10 @@
   .rt-watch { margin-top: 10px; height: 36px; padding: 0 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
     color: #0062cc; background: #fff; border: 1.5px solid #0a84ff; border-radius: 999px; cursor: pointer; }
   .rt-watch:hover { background: #e8f1ff; }
-  .dir-msg { font-size: 13px; color: #6e6e73; padding: 14px 6px; }
+  .dir-msg { font-size: 13px; color: #3c3c43; padding: 14px 6px; line-height: 1.4; }
+  .dir-retry { display: flex; align-items: center; margin-top: 10px; min-height: 36px; padding: 0 16px; border: 0; border-radius: 999px; background: #0062cc; color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .dir-retry:hover { background: #0071e3; }
+  @media (max-width: 640px) { .dir-retry { min-height: 44px; } }
   .dir-note { font-size: 11px; color: #6e6e73; padding: 10px 6px 2px; }
 
   /* time bubbles pinned to each route, the selected one filled */
@@ -687,6 +697,20 @@
     .dir-add, .why-cam { min-height: 44px; }
     .go-btn, .go-alt { height: 44px; }
   }
+  @media (max-width: 640px) {
+    /* the map buttons sit just under the top card (its bottom edge is --panelB, kept current by a
+       ResizeObserver); they were under the card, where only the locate button's edge showed. While
+       the card is open full height the map is covered anyway, so they step aside. */
+    .maplibregl-ctrl-top-right { top: calc(var(--panelB, 116px) - 4px); transition: top .2s ease; }
+    #panel.expanded ~ #map .maplibregl-ctrl-top-right { visibility: hidden; }
+    /* the compass only matters once the map is turned or tilted, as in Apple Maps */
+    body:not(.map-turned) .maplibregl-ctrl-compass { display: none; }
+    /* the trip card ends at its last control: the extra padding under Add stop took map room */
+    #panel.nav-dir { padding-bottom: 6px; }
+    #panel.nav-dir #dirBox { margin-bottom: 0; }
+    #panel.nav-dir .dir-top { margin-bottom: 4px; }
+    #panel.nav-dir .dir-add { margin-top: 2px; }
+  }
   /* audit 2026-11-09: touch targets that earlier rules kept under 44px */
   .rv-actions .mini-btn { min-height: 28px; }
   .color-switch .color-btn, #newRoute, .route-item .rx { min-height: 28px; }
@@ -719,7 +743,7 @@
 
   <div class="search-wrap">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-    <input id="search" type="text" placeholder="Search a place or road" autocomplete="off">
+    <input id="search" type="search" enterkeyhint="search" placeholder="Search a place or road" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
     <button id="searchClear" class="search-x" aria-label="Clear search"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     <div id="search-results"></div>
   </div>
@@ -1042,6 +1066,9 @@ function showOverview(){
   map.fitBounds(OVERVIEW_BOUNDS,{padding:pad,duration:700});
 }
 map.addControl(new maplibregl.NavigationControl(),'top-right');
+// phones show the compass only while the map is turned or tilted (see .map-turned)
+const syncTurned=()=>document.body.classList.toggle('map-turned', Math.abs(map.getBearing())>0.5 || map.getPitch()>0.5);
+map.on('rotate',syncTurned); map.on('pitch',syncTurned);
 /* locate me: the blue dot every map app starts from. Asked for only when the button is tapped,
    never on load, and a refusal keeps the map where it is with one plain line saying why.
    MapLibre's own GeolocateControl is not used because it disables itself, silently, for anyone
@@ -2670,6 +2697,14 @@ function placeFailText(m){
   if(/too many/i.test(m)) return 'Too many place searches from here this hour. Camera search still works.';
   return 'TomTom is not answering right now';
 }
+// a route that failed says what happened and, when trying again can help, offers it
+function routeFail(m){
+  if(!navigator.onLine || /no connection/i.test(m)) return {text:'No connection. Routes come back once you are online again.', retry:true};
+  if(/allowance/i.test(m)) return {text:'Route planning is paused for the rest of the month. Cameras and camera search still work.', retry:false};
+  if(/too many/i.test(m)) return {text:'Too many route requests from this address this hour. Try again in a little while.', retry:false};
+  if(/10 s|504/.test(m)) return {text:'TomTom took too long to answer. This usually passes in a moment.', retry:true};
+  return {text:'TomTom could not plan this drive just now. This usually passes in a moment.', retry:true};
+}
 const placeState=(q)=> q.length<3 ? null : placeCache.has(q) ? 'done' : placeFail.has(q) ? 'fail' : 'busy';
 
 /* --- the place card --- */
@@ -2953,7 +2988,7 @@ function legLine(k){
   const l=r.legs[k]; return `<div class="dir-leg">${fmtTime(l.seconds)} · ${fmtMiles(l.meters)}</div>`;
 }
 function dirRowsHTML(){
-  const field=(end,label,ph,aria)=>`<input class="dir-field" data-end="${end}" autocomplete="off" spellcheck="false" placeholder="${ph}" aria-label="${aria}" value="${esc(label||'')}">`;
+  const field=(end,label,ph,aria)=>`<input class="dir-field" type="search" enterkeyhint="search" data-end="${end}" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${ph}" aria-label="${aria}" value="${esc(label||'')}">`;
   const n=nav.stops.length;
   const stops=nav.stops.map((st,i)=>`<div class="dir-row stop" data-i="${i}"><span class="dr-mk num" data-drag="${i}" title="Drag to reorder">${i+1}</span>${field('stop:'+i, st.label, 'Choose a stop', 'Stop '+(i+1))}
       <span class="dr-tools">${n>1?`<button type="button" class="dr-btn" data-up="${i}" aria-label="Move stop ${i+1} up"${i===0?' disabled':''}>${ICON.up}</button><button type="button" class="dr-btn" data-down="${i}" aria-label="Move stop ${i+1} down"${i===n-1?' disabled':''}>${ICON.down}</button>`:''}<button type="button" class="dr-btn" data-rm="${i}" aria-label="Remove stop ${i+1}">${ICON.close}</button></span></div>${legLine(i+1)}`).join('');
@@ -3000,7 +3035,7 @@ async function optimizeStops(){
   renderRoutes('Finding the shortest order for the stops…');
   let j;
   try{ j=await navGet(routeQuery(nav.from.lngLat, nav.to.lngLat, true)); }
-  catch(e){ if(tok===nav.token){ renderRoutes(`Could not optimize the stops: ${e.message}`); announce(`Could not optimize the stops: ${e.message}`); } return; }
+  catch(e){ if(tok===nav.token){ const f=routeFail(e.message); renderRoutes(`Could not reorder the stops. ${f.text}`, f.retry ? optimizeStops : null); announce(`Could not reorder the stops. ${f.text}`); } return; }
   if(tok!==nav.token) return;
   if(!j.routes || !j.routes.length){ renderRoutes('No route found through these stops'); announce('No route found through these stops'); return; }
   const same=!j.order || j.order.every((v,i)=>v===i);
@@ -3102,7 +3137,7 @@ async function planRoutes(){
   if(nav.pre && nav.pre.key===key && Date.now()-nav.pre.at<300000) routes=nav.pre.routes;     // the place card already asked
   else{
     try{ routes=(await navGet(routeQuery(from,to))).routes; }
-    catch(e){ if(tok===nav.token){ renderRoutes(`Could not get routes: ${e.message}`); announce(`Could not get routes: ${e.message}`); } return; }
+    catch(e){ if(tok===nav.token){ const f=routeFail(e.message); renderRoutes(`Could not get routes. ${f.text}`, f.retry ? planRoutes : null); announce(`Could not get routes. ${f.text}`); } return; }
   }
   if(tok!==nav.token) return;
   if(!routes.length){ renderRoutes('No route found between these two points'); announce('No route found between these two points'); return; }
@@ -3248,7 +3283,7 @@ const fmtMiles=(m)=>`${(m/1609.344).toFixed(m<16093?1:0)} mi`;
 // a time is green when traffic adds little, orange when it adds a quarter, red past that,
 // the colours Google uses for the same thing
 function trafficClass(r){ const late=r.delaySeconds, ratio=late/Math.max(1,r.seconds-late); return late<60||ratio<0.1 ? 't-ok' : ratio<0.25 ? 't-slow' : 't-jam'; }
-function renderRoutes(msg){
+function renderRoutes(msg, retry){
   const box=isMobile() ? document.querySelector('#dirSheet .ds-body') : document.getElementById('dirRoutes'); if(!box) return;
   const fastest=nav.routes.length ? Math.min(...nav.routes.map(r=>r.seconds)) : 0;
   // one plain label a route, so the list and the map agree on which is which (the second case
@@ -3259,7 +3294,7 @@ function renderRoutes(msg){
   const tagOf=(r,diff)=> !many ? '' : diff<30 ? '<span class="rt-badge">Fastest</span>'
     : (r.meters===shortM && top.meters-r.meters>=800) ? '<span class="rt-badge alt">Shortest</span>'
     : (r.delaySeconds===calm && top.delaySeconds-r.delaySeconds>=120) ? '<span class="rt-badge alt">Least traffic</span>' : '';
-  const rows=msg ? `<div class="dir-msg">${esc(msg)}</div>` : !nav.from ? `<div class="dir-msg">${nav.locOff ? 'Location is off for this site, so choose a starting point to see routes.' : 'Choose a starting point to see routes.'}</div>` : nav.routes.map((r,i)=>{
+  const rows=msg ? `<div class="dir-msg">${esc(msg)}${retry ? '<button type="button" class="dir-retry" data-retry>Try again</button>' : ''}</div>` : !nav.from ? `<div class="dir-msg">${nav.locOff ? 'Location is off for this site, so choose a starting point to see routes.' : 'Choose a starting point to see routes.'}</div>` : nav.routes.map((r,i)=>{
     const sel=i===nav.sel, tc=trafficClass(r), down=r.cams ? r.cams.filter(c=>c.down).length : 0;
     const diff=r.seconds-fastest;
     const l3=tagOf(r,diff) + (diff>=30 ? `<span class="rt-dim">${fmtTime(diff)} slower</span>` : '')
@@ -3277,10 +3312,11 @@ function renderRoutes(msg){
       ${sel ? `<div class="rt-actions">${r.cams && r.cams.length ? `<button class="rt-watch" data-watch>${ICON.cam}Watch these ${r.cams.length} cameras</button>` : ''}
         <button class="rt-watch rt-preview" data-preview>${ICON.play}Preview</button></div>` : ''}</div>`;
   }).join('');
-  box.innerHTML=rows+`<div class="dir-note">Line colours: orange slow, red stop and go, white dashes closed. A route preview, not turn-by-turn. Places, routes and traffic &copy; TomTom.</div>`;
+  box.innerHTML=rows+(msg || !nav.routes.length ? '' : `<div class="dir-note">Line colours: orange slow, red stop and go, white dashes closed. A route preview, not turn-by-turn. Places, routes and traffic &copy; TomTom.</div>`);
   box.querySelectorAll('[data-rt]').forEach(c=>{ const go=()=>selectRoute(+c.dataset.rt);
     c.addEventListener('click',(e)=>{ if(!e.target.closest('[data-watch],a,.why-cam')) go(); });
     c.addEventListener('keydown',(e)=>{ if(e.target!==c) return; if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } }); });
+  const rt=box.querySelector('[data-retry]'); if(rt) rt.addEventListener('click',()=>retry());
   const w=box.querySelector('[data-watch]'); if(w) w.addEventListener('click',()=>watchRoute(nav.routes[nav.sel]));
   const pv=box.querySelector('[data-preview]'); if(pv) pv.addEventListener('click',(e)=>{ e.stopPropagation(); startPreview(); });
   wireWhy(box);
@@ -3994,6 +4030,8 @@ map.getCanvas().addEventListener('pointerdown',()=>{ if(isMobile()) document.get
 // search + keyboard nav
 const sEl=document.getElementById('search');
 sEl.addEventListener('input',e=>runSearch(e.target.value));
+// Esc in a search field would also wipe the text (type=search does that); Ora's Esc only closes the list
+sEl.addEventListener('keydown',e=>{ if(e.key==='Escape') e.preventDefault(); });
 document.getElementById('previewStop').addEventListener('click',()=>stopPreview(true));
 document.getElementById('searchClear').addEventListener('click',()=>{
   sEl.value=''; runSearch(''); if(nav.mode==='place') closeNav(); sEl.focus(); });

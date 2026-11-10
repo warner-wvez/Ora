@@ -24,6 +24,10 @@ on in its own section of the panel.
 
 ## Find yourself
 
+On a phone the zoom and locate buttons sit just under the top card and step aside while the
+card is open full height; the compass appears only once the map is turned or tilted, and a
+tap on it turns the map back to north.
+
 The locate button under the zoom buttons shows your position as a blue dot with a ring for
 how sure the browser is, and flies there at about city zoom, so the cameras around you load.
 The browser asks for permission only when you tap it, never on load. If location is off for

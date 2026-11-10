@@ -57,6 +57,14 @@ commits are not listed.
   every touch target 44px on phones (locate and zoom buttons were 29px) and at least 24px on
   desktop, a visible focus ring on every control, Tab reaching the panel before the map, no
   text under 11px, and the Layers button saying whether its list is open.
+- From the phone audit against UXCam's mobile UX guide: the zoom buttons sat under the phone's
+  top card (only the locate button's edge showed); they now sit just below it, and the compass
+  shows only once the map is turned. A failed route says what happened in plain words with a
+  Try again button, instead of "Could not get routes: HTTP 502". The phone trip card lost 20px
+  of empty space under Add stop. The close and Enlarge buttons on a camera picture are light
+  chips with a dark mark, readable on any photo (white on grey measured 3.4:1). Search fields
+  bring up the phone's Search key and no longer autocorrect or capitalize, and on a computer
+  the search box shows the same 2px focus ring as every other control.
 
 ## 2026-10
 
