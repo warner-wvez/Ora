@@ -7,7 +7,7 @@
 <title>Ora — Live Traffic Cameras</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+<!-- hls.js (about 100 kB) plays the video cameras only, so it loads when the first one opens (needHls) -->
 <script src="https://cdn.jsdelivr.net/npm/supercluster@8.0.1/dist/supercluster.min.js"></script>
 <style>
   /* one type scale for every scene, named by role. Phones read at arm's length on the move, so
@@ -299,6 +299,8 @@
   .popup-who { margin-top: 8px; }
   #routeView .rv-note { display: flex; align-items: center; gap: 10px; padding: 8px var(--pad); background: #fff; border-bottom: 1px solid #e5e5ea; }
   #routeView .rv-note-txt { flex: 1; min-width: 0; }
+  .rv-pull { flex: none; height: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: var(--fs-meta); font-weight: 600; color: #3c3c43; transition: height .2s ease; }
+  .rv-pull.dragging { transition: none; }
   #rvPause { flex: none; min-height: 32px; font-size: var(--fs-ctl); }
   #rvPause[aria-pressed="true"] { color: #fff; background: #0062cc; }
   .popup-age.stale { color: #b25000; font-weight: 600; }
@@ -391,8 +393,9 @@
   .popup-imgwrap img.poster, .popup-imgwrap #popup-img, .rv-media.has-src img { opacity: 0; transition: opacity .22s ease; position: relative; }
   .popup-imgwrap.loaded img.poster, .popup-imgwrap.loaded #popup-img, .rv-media.loaded img { opacity: 1; }
 
-  /* touch targets: 44px minimum where fingers do the tapping */
-  @media (max-width: 640px) {
+  /* touch targets: 44px minimum where fingers do the tapping, a phone held sideways included
+     (it is wider than 640px, so it gets the computer layout, but it is still a finger) */
+  @media (max-width: 640px), (pointer: coarse) {
     .lyr, .route-item, .sr-item { min-height: 44px; }
     .grp-h { min-height: 40px; align-items: center; }
     .mini-btn, .popup-add, #share, #panelToggle, .dir-btn, .grp-h, .nb-chip, .color-btn { min-height: 44px; }
@@ -1373,9 +1376,21 @@ function wireDirSheet(){
 function destroyPopupHls(){ if(popupTimer){ clearInterval(popupTimer); popupTimer=null; } if(popupWatch){ clearTimeout(popupWatch); popupWatch=null; } if(popupLive){ clearTimeout(popupLive); popupLive=null; } if(popupUnwatch){ try{popupUnwatch();}catch(e){} popupUnwatch=null; } if(popupHls){ try{popupHls.destroy();}catch(e){} popupHls=null; } }
 // video only plays where the state's stream host allows cross-origin playback; that
 // fact lives in the view's status ('live'), computed once in applyStatus
+// hls.js is fetched the first time a video camera opens, so a cold start skips it; if it never
+// arrives (offline, CDN down) the cameras fall back to their still pictures
+const HLS_SRC='https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js';
+let hlsGone=false, hlsP=null;
+function needHls(){
+  if(window.Hls) return Promise.resolve();
+  if(!hlsP) hlsP=new Promise(res=>{ const t=document.createElement('script'); t.src=HLS_SRC;
+    t.onload=res; t.onerror=()=>{ hlsGone=true; hlsP=null; res(); }; document.head.appendChild(t); });
+  return hlsP;
+}
+window.addEventListener('online',()=>{ hlsGone=false; });      // a failed fetch while offline gets another try
 function canPlayVideo(dir, cfg){
   const live = dir.status ? dir.status==='live' : !!(dir.video && cfg && cfg.hasVideo);
-  return !!(live && window.Hls && Hls.isSupported());
+  // before hls.js lands, ask the browser what hls.js would: can it feed video through Media Source
+  return !!(live && (window.Hls ? Hls.isSupported() : !hlsGone && !!(window.MediaSource || window.ManagedMediaSource)));
 }
 // whether a view has a still image is the layer's call (NYC builds its URL from camId
 // at render time and stores snapshot:null), so ask cfg.snap, never the raw field
@@ -1549,6 +1564,7 @@ function watchLiveness(vid, wrap){
 function playDir(dir, cfg, el, token){
   if(!selectionAlive(token)) return;
   destroyPopupHls();
+  if(canPlayVideo(dir, cfg) && !window.Hls){ needHls().then(()=>{ if(selectionAlive(token)) playDir(dir, cfg, el, token); }); return; }
   const wrap=el.querySelector('.popup-imgwrap');
   const live=canPlayVideo(dir, cfg);
   // resolution belongs to the VIEW, not the camera, so it resets every time the view changes.
@@ -1693,6 +1709,7 @@ function morphMedia(ov,from,opening){
 }
 function openEnlarge(dir, cfg, props){
   if(!dir) return;
+  if(canPlayVideo(dir,cfg) && !window.Hls){ needHls().then(()=>openEnlarge(dir, cfg, props)); return; }
   if(!canPlayVideo(dir,cfg) && !snapSrc(dir,cfg)) return;  // nothing to show
   enlargeFrom=reducedMotion()?null:thumbRect();
   switchMode('media-enlarged',{dir,cfg,props,returnTo:{name:store.mode,ctx:modeCtx}});
@@ -4272,6 +4289,22 @@ document.getElementById('rvCopy').addEventListener('click',async ()=>{
 });
 wireSheet(); wireDirSheet();
 document.getElementById('rvPause').addEventListener('click',()=>setRvPaused(!rvPaused));
+// pull to refresh: pulling the camera stack down from its top asks every camera on screen for its
+// newest picture, the gesture every feed on a phone has (UXCam lists its absence as a common
+// miss). A pull while paused means the person wants new pictures, so it resumes.
+(function wirePull(){
+  const body=document.getElementById('rvBody'), tip=document.createElement('div');
+  tip.className='rv-pull'; tip.setAttribute('aria-hidden','true'); body.parentElement.insertBefore(tip, body);
+  const PULL=90; let y0=null, pulled=0;
+  body.addEventListener('touchstart',(e)=>{ y0= body.scrollTop<=0 && e.touches.length===1 ? e.touches[0].clientY : null; pulled=0; },{passive:true});
+  body.addEventListener('touchmove',(e)=>{ if(y0==null) return; pulled=Math.max(0, e.touches[0].clientY-y0);
+    if(pulled>8){ tip.classList.add('dragging'); tip.style.height=Math.min(48, pulled*0.45)+'px'; tip.textContent= pulled>PULL ? 'Release for the newest pictures' : 'Pull for the newest pictures'; } },{passive:true});
+  const end=()=>{ if(y0==null) return; const go=pulled>PULL; y0=null; tip.classList.remove('dragging'); tip.style.height='';
+    if(!go) return;
+    if(rvPaused){ setRvPaused(false); return; }
+    const f=camRefresh.get('route'); if(f){ f(); announce('Getting the newest pictures'); } };
+  body.addEventListener('touchend',end); body.addEventListener('touchcancel',()=>{ y0=null; tip.classList.remove('dragging'); tip.style.height=''; });
+})();
 // mobile expands the collapsed-by-default panel; desktop collapses the always-open one — one
 // button, the gesture that makes sense for the viewport
 const layersBtn=document.getElementById('panelToggle');

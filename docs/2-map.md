@@ -52,6 +52,10 @@ a compass chip says which direction of travel the view covers where the agency p
 that. Click the picture or the enlarge button for a full-screen view; the left and right
 arrow keys cycle to the next camera in spatial order, and F toggles fit and fill.
 
+The video player (hls.js, about 100 kB) loads the first time a video camera opens, not with
+the page, so a cold start on a phone fetches only what the map needs. If it cannot load, the
+camera shows its snapshot instead.
+
 ## Search
 
 The search box matches every loaded camera by name, road, and intersection, instantly and
@@ -119,7 +123,9 @@ The sidebar becomes a bottom sheet with two heights, swipe or tap to change, and
 panel collapses out of the map's way. Every pin has an invisible 44 px touch target. The grip
 at the top of each sheet is a button: tap it, or press Enter or Space on it, to switch between
 the short and the tall sheet, and a screen reader names it ("Expand card", "Collapse route
-list"). It drops out of the Tab order when the sheet already shows everything.
+list"). It drops out of the Tab order when the sheet already shows everything. A phone held
+sideways is wider than the phone layout, so it gets the computer's panel and map side by side,
+but its controls keep the 44 px touch size.
 
 ## Keyboard
 

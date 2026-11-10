@@ -90,6 +90,10 @@ commits are not listed.
   chips with a dark mark, readable on any photo (white on grey measured 3.4:1). Search fields
   bring up the phone's Search key and no longer autocorrect or capitalize, and on a computer
   the search box shows the same 2px focus ring as every other control.
+- The rest of the UXCam phone list: the video player loads when the first video camera opens
+  instead of with every page, about 100 kB less on a cold start; pulling the camera stack down
+  from its top asks for the newest pictures, the gesture every phone feed has; and a phone held
+  sideways keeps 44px touch targets (it is wider than 640px, so it had the computer's 24px).
 
 ## 2026-10
 
