@@ -44,6 +44,11 @@ commits are not listed.
   drive and the cameras on it. Kept in this browser only, like Recents.
 - Find nearby gains Groceries and Pharmacy, the errands on the way home, and its eight
   buttons sit in two rows in the order a commuter reaches for them, coffee first.
+- Leave now, Leave at, Arrive by: the chip at the top of Directions (where a Drive label that
+  did nothing used to sit) plans a one-destination drive for a time up to 60 days out. Arrive
+  by answers with the time to leave ("Leave by 8:28 AM tomorrow"), every route shows when it
+  gets in, and the chosen route says its cameras show the road right now. Copy link carries
+  the time. Trips with stops leave now, as in Google Maps.
 
 ### Changed
 - One type scale for every scene, named by role, in place of 19 separate sizes from 8.5px to

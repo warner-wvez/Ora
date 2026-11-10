@@ -456,7 +456,6 @@
   .place-go .pg-time { font-weight: 600; }
 
   .dir-top { display: flex; align-items: center; gap: 6px; margin: -2px 0 6px -6px; }
-  .dir-mode { display: flex; align-items: center; gap: 6px; font-size: var(--fs-body); font-weight: 600; color: #0062cc; background: #e8f1ff; border-radius: 999px; padding: 6px 12px; }
   /* Avoid sits beside Drive, where the choice is made (the second case study's driver kept
      paying tolls because the setting lived somewhere else) */
   .dir-avoid { position: relative; }
@@ -469,6 +468,19 @@
   .avoid-menu label { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 40px; padding: 0 10px; font-size: var(--fs-row); border-radius: 8px; cursor: pointer; }
   .avoid-menu label:hover { background: #f2f2f7; }
   .avoid-menu input { width: 18px; height: 18px; accent-color: #0062cc; }
+  .dir-chip svg:first-child:not(:last-child) { width: 14px; height: 14px; }
+  .when-menu { min-width: 236px; }
+  .dir-top { flex-wrap: wrap; row-gap: 6px; }
+  .dir-top .dir-chip { white-space: nowrap; }
+  .when-pick { padding: 6px 10px 8px; }
+  .when-pick[hidden] { display: none; }
+  .avoid-menu .when-time { width: 100%; height: 40px; padding: 0 10px; border: 1px solid #c7c7cc; border-radius: 10px; background: #fff; color: #1c1c1e; font: inherit; font-size: var(--fs-row); accent-color: #0062cc; }
+  .when-err:not(:empty) { margin-top: 6px; color: #b3261e; font-size: var(--fs-meta); }
+  .when-go { width: 100%; height: 40px; margin-top: 8px; border: 0; border-radius: 10px; background: #0062cc; color: #fff; font: inherit; font-size: var(--fs-row); font-weight: 600; cursor: pointer; }
+  .when-go:hover { background: #0071e3; }
+  .rt-clock { font-size: var(--fs-body); color: #3c3c43; font-variant-numeric: tabular-nums; }
+  .rt-clock.leave { font-weight: 700; color: #0a4fa8; }
+  .rt-live { margin-top: 8px; font-size: var(--fs-meta); color: #6e6e73; line-height: 1.4; }
   .dir-stack { display: flex; align-items: center; gap: 6px; }
   /* the trip: start, numbered stops, destination, on one dotted rail */
   .dir-rows { flex: 1; min-width: 0; position: relative; display: flex; flex-direction: column; gap: 6px; }
@@ -761,6 +773,7 @@
     body.rv-aside #routeView { visibility: hidden; }
     .rv-tile .rv-rm::before { inset: -12px; }
     .avoid-menu label { min-height: 44px; }
+    .avoid-menu .when-time, .when-go { height: 44px; }
     .color-switch .color-btn, #newRoute, .route-item .rx { min-height: 44px; }
     .route-item .rx { min-width: 44px; }
   }
@@ -2728,7 +2741,7 @@ const placeCache=new Map(), placeBusy=new Set(), placeFail=new Set();
 // from/to: {lngLat, label, me?}. ptok and token guard the place extras and the route calls.
 // stops: up to three places between from and to, in driving order
 const nav={ mode:null, place:null, from:null, to:null, stops:[], routes:[], sel:0, token:0, ptok:0, editing:null,
-  marker:null, origin:null, callouts:[], stopMarkers:[], pre:null, watched:{}, optNote:null };
+  marker:null, origin:null, callouts:[], stopMarkers:[], pre:null, watched:{}, optNote:null, when:null };
 const MAX_STOPS=3;
 function announce(t){ const el=document.getElementById('srLive'); if(!el) return; el.textContent=''; requestAnimationFrame(()=>{ el.textContent=t; }); }
 const ICON={
@@ -2742,6 +2755,7 @@ const ICON={
   plus:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M12 7.5v9M7.5 12h9" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>',
   route:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19a3 3 0 1 0 0-.01M18 5a3 3 0 1 0 0 .01M6 16V9a4 4 0 0 1 4-4h2m6 3v7a4 4 0 0 1-4 4h-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
   chev:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   back:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   swap:'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 4v15M8 4 4.5 7.5M8 4l3.5 3.5M16 20V5M16 20l-3.5-3.5M16 20l3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   close:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
@@ -3023,9 +3037,29 @@ let avoid=loadAvoid();
 const avoidLabel=()=> avoid.length ? 'Avoid '+avoid.join(', ') : 'Avoid';
 const ll=(p)=>`${p[1].toFixed(6)},${p[0].toFixed(6)}`;
 const stopsKey=()=>nav.stops.map(x=>x.lngLat.map(v=>v.toFixed(4)).join(',')).join(';');
-const routeKey=(a,b)=>[...a,...b].map(v=>v.toFixed(4)).join(',')+'|'+stopsKey()+'|'+avoid.join(',');
+/* Leave at / Arrive by: one destination only, as in Google Maps ("only works for routes with one
+   destination"); with stops the chip steps aside and routes leave now. Times are the local clock
+   at that end of the trip, which is how TomTom reads a time with no zone. */
+const whenOn=()=> nav.when && !nav.stops.length ? nav.when : null;
+const pad2=(n)=>String(n).padStart(2,'0');
+const localStamp=(d)=>`${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}T${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+const clock12=(hh,mm)=>`${(+hh%12)||12}:${mm} ${+hh<12?'AM':'PM'}`;
+// the wall clock of an ISO time as written, so a route's times read in the place's own zone
+const isoClock=(iso)=>{ const m=/T(\d{2}):(\d{2})/.exec(iso||''); return m ? clock12(m[1],m[2]) : ''; };
+// the day part of a time, as short as it can be and still be sure: nothing for today, else
+// "tomorrow" in sentences and the weekday on the chip, and a date past the coming week
+function dayWord(ymd, chip){
+  const now=new Date(), d=new Date(+ymd.slice(0,4), +ymd.slice(5,7)-1, +ymd.slice(8,10));
+  const diff=Math.round((d-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);
+  return diff===0 ? '' : diff===1 && !chip ? 'tomorrow' : diff<7 ? d.toLocaleDateString('en-US',{weekday:'short'}) : d.toLocaleDateString('en-US',{month:'short', day:'numeric'});
+}
+const whenWords=(t, chip)=>{ const day=dayWord(t, chip), at=clock12(t.slice(11,13), t.slice(14,16)); return day ? (chip ? `${day} ${at}` : `${at} ${day}`) : at; };
+const whenLabel=()=>{ const w=whenOn(); return !w ? 'Leave now' : `${w.mode==='at' ? 'Leave' : 'Arrive'} ${whenWords(w.t, true)}`; };
+// a sensible first time to offer: the next quarter hour an hour from now
+function whenDefault(){ const d=new Date(Date.now()+3600000); d.setMinutes(Math.ceil(d.getMinutes()/15)*15,0,0); return localStamp(d); }
+const routeKey=(a,b)=>[...a,...b].map(v=>v.toFixed(4)).join(',')+'|'+stopsKey()+'|'+avoid.join(',')+'|'+(whenOn() ? whenOn().mode+whenOn().t : 'now');
 const routeQuery=(a,b,optimize)=>`/route?from=${ll(a)}&to=${ll(b)}`+(nav.stops.length?'&via='+nav.stops.map(x=>ll(x.lngLat)).join(';'):'')
-  +(avoid.length?'&avoid='+avoid.join(','):'')+(optimize?'&optimize=1':'');
+  +(avoid.length?'&avoid='+avoid.join(','):'')+(optimize?'&optimize=1':'')+(whenOn() ? `&${whenOn().mode}=${whenOn().t}` : '');
 function setAvoid(next){
   avoid=['tolls','highways'].filter(x=>next.includes(x));
   try{ localStorage.setItem(AVOID_KEY, JSON.stringify(avoid)); }catch(e){}
@@ -3033,13 +3067,41 @@ function setAvoid(next){
   if(chip){ chip.classList.toggle('on', !!avoid.length); chip.querySelector('span').textContent=avoidLabel(); }
   if(nav.mode==='dir' && nav.from && nav.to) planRoutes();
 }
-// a click anywhere else closes the Avoid menu
-document.addEventListener('click',()=>{ const m=document.querySelector('.avoid-menu');
-  if(m && !m.hidden){ m.hidden=true; const c=document.querySelector('[data-avoid]'); if(c) c.setAttribute('aria-expanded','false'); } });
+// a click anywhere else closes the Avoid and When menus
+document.addEventListener('click',()=>{ document.querySelectorAll('.avoid-menu').forEach(m=>{ if(m.hidden) return; m.hidden=true;
+  const c=m.parentElement.querySelector('.dir-chip'); if(c) c.setAttribute('aria-expanded','false'); }); });
+// the When menu: Leave now applies at once; Leave at and Arrive by wait for a time and Show routes
+function wireWhen(box){
+  const chip=box.querySelector('[data-when]'); if(!chip) return;
+  const menu=chip.parentElement.querySelector('.when-menu'), pick=menu.querySelector('.when-pick'), inp=menu.querySelector('.when-time'), err=menu.querySelector('.when-err');
+  const open=(on)=>{ menu.hidden=!on; chip.setAttribute('aria-expanded', String(on)); };
+  chip.addEventListener('click',(e)=>{ e.stopPropagation(); const am=box.querySelector('.dir-avoid:not(.dir-when) .avoid-menu'); if(am) am.hidden=true; open(menu.hidden); });
+  menu.addEventListener('click',(e)=>e.stopPropagation());
+  menu.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ e.stopPropagation(); open(false); chip.focus(); } });
+  inp.min=localStamp(new Date()); inp.max=localStamp(new Date(Date.now()+60*86400000));
+  menu.querySelectorAll('input[name="when"]').forEach(r=>r.addEventListener('change',()=>{
+    err.textContent='';
+    if(r.value==='now'){ open(false); setWhen(null); chip.focus(); return; }
+    pick.hidden=false; inp.focus();
+  }));
+  const go=()=>{
+    const mode=menu.querySelector('input[name="when"]:checked').value, t=inp.value;
+    if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(t)){ err.textContent='Pick a date and a time.'; return; }
+    if(new Date(t).getTime() < Date.now()-60000){ err.textContent='Pick a time later than now.'; return; }
+    open(false); setWhen({mode, t}); const c=navBox().querySelector('[data-when]'); if(c) c.focus();
+  };
+  menu.querySelector('.when-go').addEventListener('click',go);
+  inp.addEventListener('keydown',(e)=>{ if(e.key==='Enter'){ e.preventDefault(); go(); } });
+}
+function setWhen(w){
+  nav.when=w; renderDir();
+  if(nav.from && nav.to) planRoutes();
+  announce(w ? whenLabel() : 'Leaving now');
+}
 async function startDirections(){
   const p=nav.place; if(!p) return;
   clearSelection();                                   // the phone's place sheet gives way to the route sheet
-  nav.mode='dir'; nav.to={lngLat:[p.lon,p.lat], label:p.name}; nav.stops=[]; nav.optNote=null; nav.phoneEdit=false;
+  nav.mode='dir'; nav.to={lngLat:[p.lon,p.lat], label:p.name}; nav.stops=[]; nav.optNote=null; nav.phoneEdit=false; nav.when=null;
   if(!nav.from){ const me=await myPosition(); nav.from= me ? {lngLat:me, label:'Your location', me:true} : null; nav.locOff=!me; }
   renderDir();
   if(!nav.from){ focusField('from'); return; }
@@ -3047,7 +3109,15 @@ async function startDirections(){
 }
 function renderDir(){
   setPanelMode('dir');
-  navBox().innerHTML=`<div class="dir-top"><button class="nav-ic" data-back aria-label="Back">${ICON.back}</button><div class="dir-mode">${ICON.car}<span>Drive</span></div>
+  const w=whenOn() || {mode:'now', t:''};
+  const whenUI=nav.stops.length ? '' : `<div class="dir-avoid dir-when"><button type="button" class="dir-chip${whenOn()?' on':''}" data-when aria-haspopup="true" aria-expanded="false">${ICON.clock}<span>${esc(whenLabel())}</span>${ICON.chev}</button>
+        <div class="avoid-menu when-menu" hidden><div class="am-h">When</div>
+          <label>Leave now<input type="radio" name="when" value="now"${w.mode==='now'?' checked':''}></label>
+          <label>Leave at<input type="radio" name="when" value="at"${w.mode==='at'?' checked':''}></label>
+          <label>Arrive by<input type="radio" name="when" value="by"${w.mode==='by'?' checked':''}></label>
+          <div class="when-pick"${w.mode==='now'?' hidden':''}><input type="datetime-local" class="when-time" aria-label="Date and time" step="300" value="${w.t || whenDefault()}">
+            <div class="when-err" role="alert"></div><button type="button" class="when-go">Show routes</button></div></div></div>`;
+  navBox().innerHTML=`<div class="dir-top"><button class="nav-ic" data-back aria-label="Back">${ICON.back}</button>${whenUI}
       <div class="dir-avoid"><button type="button" class="dir-chip${avoid.length?' on':''}" data-avoid aria-haspopup="true" aria-expanded="false"><span>${avoidLabel()}</span>${ICON.chev}</button>
         <div class="avoid-menu" hidden><div class="am-h">Avoid on this drive</div>
           <label>Tolls<input type="checkbox" data-av="tolls"${avoid.includes('tolls')?' checked':''}></label>
@@ -3059,12 +3129,13 @@ function renderDir(){
     <div id="dirSuggest"></div>${isMobile()?'':'<div id="dirRoutes"></div>'}`;
   const box=navBox();
   box.querySelector('[data-back]').addEventListener('click',navBack);
-  const chip=box.querySelector('[data-avoid]'), menu=box.querySelector('.avoid-menu');
+  const chip=box.querySelector('[data-avoid]'), menu=chip.parentElement.querySelector('.avoid-menu');
   const openMenu=(open)=>{ menu.hidden=!open; chip.setAttribute('aria-expanded', String(open)); };
   chip.addEventListener('click',(e)=>{ e.stopPropagation(); openMenu(menu.hidden); });
   menu.addEventListener('click',(e)=>e.stopPropagation());
   menu.querySelectorAll('[data-av]').forEach(cb=>cb.addEventListener('change',()=>setAvoid([...menu.querySelectorAll('[data-av]:checked')].map(x=>x.dataset.av))));
   menu.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ e.stopPropagation(); openMenu(false); chip.focus(); } });
+  wireWhen(box);
   // swap turns the whole trip around: the last stop becomes the first
   box.querySelector('[data-swap]').addEventListener('click',()=>{
     if(!nav.from || !nav.to) return;
@@ -3194,7 +3265,8 @@ function routeSummary(){
     usual = Math.abs(d)<120 ? ', usual for this time' : `, ${spokenTime(Math.abs(d))} ${d>0?'slower':'faster'} than usual`; }
   else if(r.delaySeconds>=60) usual=`, ${spokenTime(r.delaySeconds)} added by traffic`;
   const closed=(r.traffic||[]).some(t=>t.level==='closed') ? ' A road on this route is closed.' : '';
-  return `${n} route${n===1?'':'s'}. ${name} ${spokenTime(r.seconds)}${via}${stops}${usual}.${closed}`;
+  const w=whenOn(), dd= w && r.departTime ? dayWord(r.departTime.slice(0,10), false) : '', leave= w && w.mode==='by' && r.departTime ? ` Leave by ${isoClock(r.departTime)}${dd ? ' '+dd : ''}.` : '';
+  return `${n} route${n===1?'':'s'}. ${name} ${spokenTime(r.seconds)}${via}${stops}${usual}.${leave}${closed}`;
 }
 // Find Nearby along the chosen route, for adding a stop: one search, places within a 15 minute
 // detour spread over the whole drive. The route line is thinned to at most about 250 points.
@@ -3349,7 +3421,7 @@ function selectRoute(i){
   frameRoutes(false);
 }
 function closeNav(){
-  stopPreview(false); nav.token++; nav.ptok++; nav.mode=null; nav.place=null; nav.from=null; nav.to=null; nav.routes=[]; nav.editing=null;
+  stopPreview(false); nav.token++; nav.ptok++; nav.mode=null; nav.when=null; nav.place=null; nav.from=null; nav.to=null; nav.routes=[]; nav.editing=null;
   nav.stops=[]; nav.optNote=null; nav.stopMarkers.forEach(m=>m.remove()); nav.stopMarkers=[]; clearNearbyPins();
   nav.phoneEdit=false; document.body.classList.remove('dir-editing');
   clearRouteMap(); if(nav.marker) nav.marker.remove(); if(nav.origin) nav.origin.remove();
@@ -3438,10 +3510,11 @@ function renderRoutes(msg, retry){
       : sel && r.cams.length ? `<button type="button" class="rt-cams rt-cams-go" data-watch>${ICON.cam}<span>Watch the ${camTxt}</span><span class="rt-chev" aria-hidden="true">›</span></button>`
       : `<div class="rt-cams">${ICON.cam}<span>${camTxt}</span></div>`;
     return `<div class="rt-row${sel?' sel':''}" role="button" tabindex="0" data-rt="${i}" aria-pressed="${sel}">
-      <div class="rt-l1"><span class="rt-time ${tc}">${fmtTime(r.seconds)}</span><span class="rt-dist">${fmtMiles(r.meters)}</span></div>
+      <div class="rt-l1"><span class="rt-time ${tc}">${fmtTime(r.seconds)}</span>${clockHTML(r)}<span class="rt-dist">${fmtMiles(r.meters)}</span></div>
       ${r.via && r.via.length || nav.stops.length ? `<div class="rt-via">${[r.via&&r.via.length?'via '+esc(r.via.join(', ')):'', nav.stops.length?nav.stops.length+(nav.stops.length===1?' stop':' stops'):''].filter(Boolean).join(' · ')}</div>` : ''}
       <div class="rt-l3">${l3}</div>${cams}
       ${sel ? whyHTML(r) : ''}
+      ${sel && whenOn() ? `<div class="rt-live">The cameras show the road right now, not at ${esc(whenWords(whenOn().t))}.</div>` : ''}
       ${sel ? goHTML() : ''}</div>`;
   }).join('');
   box.innerHTML=rows+(msg || !nav.routes.length ? '' : `<div class="dir-note">Line colours: orange slow, red stop and go, white dashes closed. A route preview, not turn-by-turn. Places, routes and traffic &copy; TomTom.</div>`);
@@ -3453,6 +3526,13 @@ function renderRoutes(msg, retry){
   const pv=box.querySelector('[data-preview]'); if(pv) pv.addEventListener('click',(e)=>{ e.stopPropagation(); startPreview(); });
   wireWhy(box);
   if(isMobile()) requestAnimationFrame(syncDsGrip);
+}
+// Arrive by gives the time to leave, the thing a commuter is asking; otherwise the arrival time
+function clockHTML(r){
+  const w=whenOn();
+  const day=(iso)=>{ const d=iso ? dayWord(iso.slice(0,10), false) : ''; return d ? ' '+d : ''; };
+  if(w && w.mode==='by' && r.departTime) return `<span class="rt-clock leave">Leave by ${isoClock(r.departTime)}${day(r.departTime)}</span>`;
+  return r.arriveTime ? `<span class="rt-clock">${w ? 'Arrive about' : 'Arrive'} ${isoClock(r.arriveTime)}${day(r.arriveTime)}</span>` : '';
 }
 // what this trip usually takes at this hour, from TomTom's history
 function usualTxt(r, sel){
@@ -3904,6 +3984,7 @@ function serializeState(){ const p=new URLSearchParams();
   if(typeof nav!=='undefined' && nav.mode==='dir' && nav.to){
     const enc=(q)=> !q || q.me ? 'me' : `${q.lngLat[1].toFixed(5)},${q.lngLat[0].toFixed(5)},${String(q.label||'').replace(/[|,]/g,' ').slice(0,48)}`;
     p.set('t',[nav.from, ...nav.stops, nav.to].map(enc).join('|')); if(avoid.length) p.set('av',avoid.join(','));
+    if(whenOn()) p.set(whenOn().mode, whenOn().t);
   }
   if(store.enfFilter.verdicts.size<4) p.set('fv',[...store.enfFilter.verdicts].join(',')); if(store.enfFilter.types.size<2) p.set('ft',[...store.enfFilter.types].join(','));
   return p.toString(); }
@@ -3914,14 +3995,15 @@ function lastView(){ try{ const v=JSON.parse(localStorage.getItem('ora-view')||'
   return (v && Array.isArray(v.c) && v.c.every(Number.isFinite) && Number.isFinite(v.z)) ? v : null; }catch(e){ return null; } }
 // a shared trip: up to 5 points, each "me" or lat,lon,label
 let pendingTrip=null;
-function parseTrip(t, av){
+function parseTrip(t, av, at, by){
   const pts=String(t||'').split('|').slice(0,MAX_STOPS+2).map(x=>{
     if(x==='me') return {me:true};
     const [a,b,...rest]=x.split(','), lat=+a, lon=+b;
     return (Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat)<=90 && Math.abs(lon)<=180) ? {lat, lon, label:rest.join(',').trim()||'Dropped pin'} : null;
   });
   if(pts.length<2 || pts.some(x=>!x)) return null;
-  return {pts, av:String(av||'').split(',').filter(x=>x==='tolls'||x==='highways')};
+  const wt=at||by, when= wt && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(wt) && new Date(wt).getTime()>Date.now() ? {mode: at ? 'at' : 'by', t:wt} : null;
+  return {pts, av:String(av||'').split(',').filter(x=>x==='tolls'||x==='highways'), when};
 }
 async function openTrip(t){
   pendingTrip=null;
@@ -3930,6 +4012,7 @@ async function openTrip(t){
   clearSelection();
   nav.mode='dir'; nav.optNote=null; nav.phoneEdit=false; nav.stops=t.pts.slice(1,-1).filter(q=>!q.me).map(pt);
   if(t.av.length) avoid=t.av;                            // this trip's choice; your saved setting stays as it was
+  nav.when=t.when||null;
   const me=(first.me || last.me) ? await myPosition() : null;
   nav.from= first.me ? (me ? {lngLat:me, label:'Your location', me:true} : null) : pt(first);
   nav.to= last.me ? (me ? {lngLat:me, label:'Your location', me:true} : null) : pt(last);
@@ -3940,7 +4023,7 @@ async function openTrip(t){
 }
 async function restoreState(){
   const p=new URLSearchParams(location.hash.slice(1));
-  pendingTrip=p.has('t') ? parseTrip(p.get('t'), p.get('av')) : null;
+  pendingTrip=p.has('t') ? parseTrip(p.get('t'), p.get('av'), p.get('at'), p.get('by')) : null;
   const layers=(p.get('l')||'').split(',').filter(k=>LAYERS[k]);
   // reconcile the opt-in layers only: a pasted link means exactly its overlays, but states
   // follow the view and a link never switches one off (no-op at boot). An older link that
@@ -4181,8 +4264,8 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) hid
 // results, the open camera, the route view, add-mode, the preview, then directions and the
 // place card. The enlarge overlay and text inputs own their own Esc.
 function layerOpen(){
-  const am=document.querySelector('.avoid-menu');
-  return !!((am && !am.hidden) || document.getElementById('search-results').classList.contains('show') || store.selected
+  const am=document.querySelector('.avoid-menu:not([hidden])');
+  return !!(am || document.getElementById('search-results').classList.contains('show') || store.selected
     || store.mode==='route-view' || store.mode==='add-to-route' || store.mode==='media-enlarged' || preview || nav.mode
     || (isMobile() && document.getElementById('panel').classList.contains('expanded')));
 }
@@ -4215,8 +4298,8 @@ document.addEventListener('keydown',(e)=>{
 });
 function escStep(){
   if(hideQr()){ document.getElementById('share').focus(); return; }
-  const am=document.querySelector('.avoid-menu');
-  if(am && !am.hidden){ am.hidden=true; const c=document.querySelector('[data-avoid]'); if(c){ c.setAttribute('aria-expanded','false'); c.focus(); } return; }
+  const am=document.querySelector('.avoid-menu:not([hidden])');
+  if(am){ am.hidden=true; const c=am.parentElement.querySelector('.dir-chip'); if(c){ c.setAttribute('aria-expanded','false'); c.focus(); } return; }
   const sr=document.getElementById('search-results');
   if(sr.classList.contains('show')){ hideResults(); return; }
   if(store.selected){ clearSelection(); return; }
