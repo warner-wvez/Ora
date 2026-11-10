@@ -61,7 +61,13 @@ group the cameras nearest the middle of the map lead. Results list inside the pa
 lines a row: the name, then where it is. Pick a result and the map flies to it and opens it.
 Only the states loaded right now are searched; when nothing loaded matches, a search offers
 to turn on the state it finds. It also finds places and addresses through TomTom, and an
-empty box opens to Recents and Find nearby (see [route preview](2.3-route-preview.md)).
+empty box opens to Home and Work, Recents and Find nearby (see [route preview](2.3-route-preview.md)).
+
+Text follows one scale named by role (badge, note, small button, row text, row title, title,
+trip time). On a phone the reading text is 14px or more, because small screens read at arm's
+length and on the move; the badges on pictures and the uppercase group heads stay small on
+purpose. Cards, sheets and the camera stack share one inset, 14px on a computer and 16px on a
+phone, so text lines up from one scene to the next.
 
 ## Tap the map
 

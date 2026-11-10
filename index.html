@@ -71,6 +71,18 @@
   .sr-ic.me { background: #e8f1ff; color: #0062cc; }
   .sr-ic.nb { color: #fff; }
   .sr-ic.nb svg { width: 16px; height: 16px; }
+  /* Home and Work: one tap checks the drive; Edit swaps the label for Remove */
+  .sr-ic.home { background: #e8f1ff; color: #0062cc; }
+  .sr-ic.home.off { background: #f2f2f7; color: #6e6e73; }
+  .sr-act { flex: none; font-size: var(--fs-ctl); font-weight: 600; color: #0062cc; background: #eef4ff; border-radius: 999px; padding: 5px 10px; white-space: nowrap; }
+  .sr-act.rm { border: 0; font-family: inherit; color: #b3261e; background: #fdecea; cursor: pointer; min-height: 28px; }
+  .sr-item.unset .sr-t { color: #0062cc; font-weight: 600; }
+  .sr-item.just-set { animation: setFlash 1.2s ease-out; }
+  @keyframes setFlash { from { background: #e8f1ff; } to { background: transparent; } }
+  .sr-pick-note { margin: 2px 0 4px; padding: 8px 10px; border-radius: 8px; background: #eef4ff; color: #0a4fa8; font-size: var(--fs-meta); font-weight: 600; }
+  .pc-save { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .pc-chip svg { width: 14px; height: 14px; }
+  .pc-chip.on { color: #0062cc; background: #e8f1ff; }
   .sr-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
   .sr-t { font-size: var(--fs-row); color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sr-s { font-size: var(--fs-meta); color: #6e6e73; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
@@ -403,8 +415,10 @@
   .sr-grp-row { display: flex; align-items: center; justify-content: space-between; }
   .sr-clear { border: 0; background: none; color: #0062cc; font: inherit; font-size: var(--fs-ctl); font-weight: 600; text-transform: none; letter-spacing: 0; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
   .sr-clear:hover { background: #e8f1ff; }
-  .nb-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 2px 2px 6px; }
-  .nb-chip { display: flex; align-items: center; gap: 7px; min-height: 40px; border: 0; background: #f2f2f7; border-radius: 10px; padding: 6px 8px; font: inherit; font-size: 12.5px; font-weight: 600; color: #1d1d1f; text-align: left; line-height: 1.15; cursor: pointer; transition: background .12s, transform .12s; }
+  /* eight stops in two rows of four, symbol over name, the way Apple Maps lays out its categories */
+  .nb-chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 2px 2px 8px; }
+  .nb-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-height: 64px; border: 0; background: #f2f2f7; border-radius: 12px; padding: 8px 0 7px; font: inherit; font-size: var(--fs-chip); font-weight: 600; color: #1d1d1f; text-align: center; line-height: 1.15; letter-spacing: -.01em; cursor: pointer; transition: background .12s, transform .12s; }
+  .nb-chip > span:last-child { max-width: 100%; padding: 0 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .nb-chip:hover { background: #e7e7ed; }
   .nb-chip:active { transform: scale(.97); }
   .nb-chip:focus-visible { outline: 2px solid #0a84ff; outline-offset: 1px; }
@@ -730,7 +744,8 @@
   .route-item .rx { min-width: 28px; place-items: center; }
   .rv-tile .rv-rm::before { content: ''; position: absolute; inset: -6px; }
   @media (max-width: 640px) {
-    .nb-chip { min-height: 44px; }
+    .nb-chip { min-height: 64px; }
+    .sr-act.rm, .pc-chip { min-height: 44px; }
     #search { height: 44px; }
     .enlarge-btn::before { content: ''; position: absolute; inset: -9px; }
     .rv-tile .rv-rm::before { inset: -8px; }
@@ -2456,14 +2471,18 @@ function runSearch(q){
     if(states.length) html+=`<div class="sr-empty">No camera matches in the states that are on.</div>`+states.map(h=>row(h,i++)).join('');
     else if(!places.length && placeState!=='busy') html+=`<div class="sr-empty">No matches in the states that are on. Try a state name to turn one on.</div>`;
   }
+  if(savedPick) html=`<div class="sr-pick-note">Choosing ${savedPick==='home'?'Home':'Work'}: pick the place below</div>`+html;
   box.innerHTML=html; box.classList.add('show'); document.getElementById('panel').classList.add('searching');
-  box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>pickSearch(searchHits[+it.dataset.i])));
+  box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',(e)=>{ e.stopPropagation(); pickSearch(searchHits[+it.dataset.i]); }));
 }
 // a pick puts the phone keyboard and the expanded panel away, so the map shows what was picked
 function foldSearch(){ document.getElementById('search').blur(); document.getElementById('panel').classList.remove('searching');
   if(isMobile()) document.getElementById('panel').classList.remove('expanded'); }
 async function pickSearch(h){
   if(!h) return;
+  if(h.kind==='saved'){ if(!savedEdit) checkTraffic(h.which); return; }
+  if(h.kind==='setsaved'){ startSavedPick(h.which); return; }
+  if(savedPick && h.kind==='place'){ finishSavedPick(h); return; }
   if(h.kind==='state'){ await enableGroup(h.k); writeUrl(); runSearch(document.getElementById('search').value); return; }  // same request as its checkbox, fly included
   document.getElementById('search-results').classList.remove('show'); document.getElementById('search').value=h.name;
   foldSearch(); clearNearbyPins(); addRecent(h);
@@ -2482,8 +2501,10 @@ async function pickSearch(h){
 const RECENTS_KEY='ora-recents', RECENTS_MAX=6;
 function loadRecents(){ try{ const r=JSON.parse(localStorage.getItem(RECENTS_KEY)||'[]'); return Array.isArray(r) ? r : []; }catch(e){ return []; } }
 const recentId=(x)=>x.kind+'|'+x.name+'|'+(x.kind==='place' ? [x.lon,x.lat] : x.coords).map(v=>(+v).toFixed(4)).join(',');
+// a place as it is kept in this browser (Recents, Home, Work): what the card needs, nothing more
+const placeEntry=(h)=>({kind:'place', name:h.name, address:h.address||'', type:h.type||'', category:h.category||'', lat:h.lat, lon:h.lon, bbox:h.bbox||null});
 function addRecent(h){
-  const e= h.kind==='place' ? {kind:'place', name:h.name, address:h.address||'', type:h.type||'', category:h.category||'', lat:h.lat, lon:h.lon, bbox:h.bbox||null}
+  const e= h.kind==='place' ? placeEntry(h)
          : h.kind==='cam' && h.coords ? {kind:'cam', name:h.name, k:h.k, coords:h.coords} : null;
   if(!e || !e.name) return;
   const list=[e, ...loadRecents().filter(x=>recentId(x)!==recentId(e))].slice(0,RECENTS_MAX);
@@ -2499,26 +2520,117 @@ async function recentCamFeature(h){
   return bd<0.01 ? best : null;
 }
 const NEARBY=[
-  {k:'gas', label:'Gas', color:'#0e7c86', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h8a1 1 0 0 1 1 1v7h.5a2.5 2.5 0 0 1 2.5 2.5V17a1 1 0 0 0 2 0V9.8l-2.4-2.4 1.4-1.4 2.7 2.7c.2.2.3.4.3.7V17a3 3 0 0 1-6 0v-3.5a.5.5 0 0 0-.5-.5H14v8H4V4a1 1 0 0 1 1-1zm1 2v5h6V5H6z"/></svg>'},
-  {k:'ev', label:'EV charging', color:'#2f9e44', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 2 5 13.5h5.5L9.5 22 18 10.5h-5.5z"/></svg>'},
-  {k:'food', label:'Food', color:'#f76707', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h1.3v6h1.4V2H11v6h1.3V2h1.2v7.5a2.5 2.5 0 0 1-2 2.45V22h-2V11.95a2.5 2.5 0 0 1-2-2.45V2H7zm10 0v20h-2v-7h-2V7c0-2.8 1.8-5 4-5z"/></svg>'},
   {k:'coffee', label:'Coffee', color:'#8d6e4f', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 7h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V7zm13 1.5h1.2a2.8 2.8 0 0 1 0 5.6H17v-2h1.2a.8.8 0 0 0 0-1.6H17V8.5zM4 20h13v2H4v-2zM8 2h2v3H8V2zm3.5 0h2v3h-2V2z"/></svg>'},
-  {k:'rest', label:'Rest areas', color:'#7048e8', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 6h16v2.2h-3.6l1.2 3.8H21v2.2h-2.7l1.6 5h-2.3l-1.6-5H8l-1.6 5H4.1l1.6-5H3V12h3.4l1.2-3.8H4V6zm5.9 2.2L8.7 12h6.6l-1.2-3.8H9.9z"/></svg>'},
+  {k:'gas', label:'Gas', color:'#0e7c86', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h8a1 1 0 0 1 1 1v7h.5a2.5 2.5 0 0 1 2.5 2.5V17a1 1 0 0 0 2 0V9.8l-2.4-2.4 1.4-1.4 2.7 2.7c.2.2.3.4.3.7V17a3 3 0 0 1-6 0v-3.5a.5.5 0 0 0-.5-.5H14v8H4V4a1 1 0 0 1 1-1zm1 2v5h6V5H6z"/></svg>'},
+  {k:'grocery', label:'Groceries', color:'#5c940d', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2 3h2.6a1 1 0 0 1 1 .8L6 6h14.2a.8.8 0 0 1 .8 1l-1.6 7.2a1.5 1.5 0 0 1-1.5 1.2H8.2l.3 1.6H19v2H7.7a1 1 0 0 1-1-.8L4 5H2V3zm6 18.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0zm8 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0z"/></svg>'},
+  {k:'pharmacy', label:'Pharmacy', color:'#c2255c', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6V3z"/></svg>'},
+  {k:'food', label:'Food', color:'#f76707', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h1.3v6h1.4V2H11v6h1.3V2h1.2v7.5a2.5 2.5 0 0 1-2 2.45V22h-2V11.95a2.5 2.5 0 0 1-2-2.45V2H7zm10 0v20h-2v-7h-2V7c0-2.8 1.8-5 4-5z"/></svg>'},
   {k:'parking', label:'Parking', color:'#364fc7', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 3h7a6 6 0 0 1 0 12h-3v6H6V3zm4 4v4h3a2 2 0 0 0 0-4h-3z"/></svg>'},
+  {k:'ev', label:'EV charging', color:'#2f9e44', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 2 5 13.5h5.5L9.5 22 18 10.5h-5.5z"/></svg>'},
+  {k:'rest', label:'Rest areas', color:'#7048e8', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 6h16v2.2h-3.6l1.2 3.8H21v2.2h-2.7l1.6 5h-2.3l-1.6-5H8l-1.6 5H4.1l1.6-5H3V12h3.4l1.2-3.8H4V6zm5.9 2.2L8.7 12h6.6l-1.2-3.8H9.9z"/></svg>'},
 ];
+// stopPropagation: a pick can redraw the list, and a click whose target was just replaced would
+// otherwise read as a click outside the search and close it
 function wireResults(box, pick){
-  box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>pick(searchHits[+it.dataset.i])));
+  box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',(e)=>{ e.stopPropagation(); pick(searchHits[+it.dataset.i]); }));
+}
+/* ---------- Home and Work ----------
+   A commuter's two places, kept in this browser like Recents (no account). Each sits above
+   Recents with Check traffic: one route call from where you are, which brings the usual-time
+   line, what is slowing the drive and the cameras on it. Nothing refreshes on its own. Set one
+   from a place's card (Set as Home), or from here: Set Home lists your recent places and the
+   search box looks up the address. */
+const SAVED=[{k:'home', label:'Home'}, {k:'work', label:'Work'}];        // icons come from ICON[k] (defined further down)
+const savedKey=(k)=>'ora-'+k;
+function loadSaved(k){ try{ const v=JSON.parse(localStorage.getItem(savedKey(k))||'null');
+  return v && v.kind==='place' && Number.isFinite(v.lat) && Number.isFinite(v.lon) ? v : null; }catch(e){ return null; } }
+const samePlace=(a,b)=> !!(a && b) && Math.abs(a.lat-b.lat)<1e-4 && Math.abs(a.lon-b.lon)<1e-4;
+function setSaved(k, h){
+  const s=SAVED.find(x=>x.k===k), e=placeEntry(h.orig || h);
+  try{ localStorage.setItem(savedKey(k), JSON.stringify(e)); }catch(err){}
+  announce(`${s.label} set to ${e.name}`);
+}
+function clearSaved(k){ try{ localStorage.removeItem(savedKey(k)); }catch(e){} announce(`${SAVED.find(x=>x.k===k).label} removed`); }
+let savedPick=null, savedEdit=false;          // savedPick: 'home' or 'work' while choosing which place it is
+const savedSub=(v)=>[v.name, v.address].filter(Boolean).join(', ');
+function savedRow(s, i){
+  if(s.v) return `<div class="sr-item saved" data-i="${i}"><span class="sr-ic home">${ICON[s.k]}</span><span class="sr-txt"><span class="sr-t">${s.label}</span><span class="sr-s">${esc(savedSub(s.v))}</span></span>`
+    + (savedEdit ? `<button type="button" class="sr-act rm" data-unsave="${s.k}" aria-label="Remove ${s.label}">Remove</button>` : `<span class="sr-act">Check traffic</span>`) + `</div>`;
+  const anyPlace=loadRecents().some(r=>r.kind==='place');
+  return `<div class="sr-item saved unset" data-i="${i}"><span class="sr-ic home off">${ICON[s.k]}</span><span class="sr-txt"><span class="sr-t">Set ${s.label}</span><span class="sr-s">${anyPlace ? 'Pick a recent place or search the address' : 'Search the address'}</span></span></div>`;
+}
+function startSavedPick(k){
+  savedPick=k; savedEdit=false;
+  const sEl=document.getElementById('search'); sEl.value=''; sEl.placeholder=`Search for your ${k} address`;
+  document.getElementById('searchClear').classList.remove('show');
+  renderSearchHome(); sEl.focus();
+}
+function endSavedPick(){
+  if(!savedPick) return; savedPick=null;
+  document.getElementById('search').placeholder= navOn ? 'Search a place, address or road' : 'Search a place or road';
+}
+function finishSavedPick(h){
+  const k=savedPick; endSavedPick(); setSaved(k, h); addRecent(h);
+  const sEl=document.getElementById('search'); sEl.value=''; document.getElementById('searchClear').classList.remove('show');
+  renderSearchHome(); sEl.focus();
+  const row=document.querySelector('#search-results .sr-item.saved:not(.unset)'); if(row) row.classList.add('just-set');
+}
+function renderSavedPick(){
+  const box=document.getElementById('search-results'), s=SAVED.find(x=>x.k===savedPick), places=loadRecents().filter(r=>r.kind==='place');
+  searchHits=places; kbdIdx=-1;
+  box.innerHTML=`<div class="nb-head"><button type="button" class="nav-ic" data-pick-cancel aria-label="Cancel choosing ${s.label}">${ICON.back}</button><span>Choose ${s.label}</span></div>`
+    + (places.length ? `<div class="sr-grp">Recent places</div>`+places.map((h,i)=>srRow(h,i)).join('') : '')
+    + `<div class="sr-empty">${places.length ? 'Or type the address in the search box.' : 'Type the address in the search box, then pick it from the list.'}</div>`;
+  box.classList.add('show'); document.getElementById('panel').classList.add('searching');
+  wireResults(box, pickSearch);
+  box.querySelector('[data-pick-cancel]').addEventListener('click',(e)=>{ e.stopPropagation(); endSavedPick(); renderSearchHome(); document.getElementById('search').focus(); });
+}
+// Check traffic: the routes from where you are to Home or Work, the same view Directions opens
+async function checkTraffic(k){
+  const v=loadSaved(k), s=SAVED.find(x=>x.k===k); if(!v) return;
+  hideResults(); foldSearch(); closeNav();
+  nav.place={...v, name:s.label, address:savedSub(v), orig:v, saved:k};
+  nav.mode='place'; placeMarker([v.lon,v.lat]);
+  const sEl=document.getElementById('search'); sEl.value=s.label; document.getElementById('searchClear').classList.add('show');
+  startDirections();
+}
+// the place card's Set as Home and Set as Work: a toggle each, on when the card is that place
+function savedChipsHTML(p){
+  if(!navOn) return '';
+  return `<div class="pc-save">`+SAVED.map(s=>{ const on=samePlace(loadSaved(s.k), p.orig || p);
+    return `<button type="button" class="dir-chip pc-chip${on?' on':''}" data-save="${s.k}" aria-pressed="${on}">${ICON[s.k]}<span>${on ? s.label : 'Set as '+s.label}</span></button>`; }).join('')+`</div>`;
+}
+function wireSavedChips(el, p){
+  el.querySelectorAll('[data-save]').forEach(b=>b.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    const k=b.dataset.save, on=b.getAttribute('aria-pressed')==='true';
+    if(on) clearSaved(k); else setSaved(k, p);
+    const wrap=el.querySelector('.pc-save'); wrap.outerHTML=savedChipsHTML(p); wireSavedChips(el, p);
+    const again=el.querySelector(`[data-save="${k}"]`); if(again) again.focus();
+  }));
 }
 function renderSearchHome(){
+  if(savedPick) return renderSavedPick();
   const box=document.getElementById('search-results'), rec=loadRecents();
-  searchHits=rec; let html='';
-  if(rec.length) html+=`<div class="sr-grp sr-grp-row">Recents<button type="button" class="sr-clear" data-clear>Clear</button></div>`+rec.map((h,i)=>srRow(h,i)).join('');
+  const saved=navOn ? SAVED.map(s=>({...s, v:loadSaved(s.k)})) : [];
+  if(!saved.some(s=>s.v)) savedEdit=false;
+  // one list in display order (Home, Work, then Recents), so the arrow keys and Enter pick the row they light
+  searchHits=[...saved.map(s=>({kind: s.v ? 'saved' : 'setsaved', which:s.k, name:s.label})), ...rec];
+  let html='', i=0;
+  if(saved.length){
+    html+=`<div class="sr-grp sr-grp-row">Home and Work${saved.some(s=>s.v) ? `<button type="button" class="sr-clear" data-saved-edit aria-pressed="${savedEdit}">${savedEdit ? 'Done' : 'Edit'}</button>` : ''}</div>`;
+    html+=saved.map(s=>savedRow(s, i++)).join('');
+  }
+  if(rec.length) html+=`<div class="sr-grp sr-grp-row">Recents<button type="button" class="sr-clear" data-clear>Clear</button></div>`+rec.map(h=>srRow(h,i++)).join('');
   if(navOn) html+=`<div class="sr-grp">Find nearby</div><div class="nb-chips">${NEARBY.map(c=>`<button type="button" class="nb-chip" data-nb="${c.k}"><span class="nb-ic" style="background:${c.color}">${c.icon}</span><span>${c.label}</span></button>`).join('')}</div>`;
   if(!html){ box.classList.remove('show'); box.innerHTML=''; document.getElementById('panel').classList.remove('searching'); return; }
   box.innerHTML=html; box.classList.add('show'); document.getElementById('panel').classList.add('searching');
   wireResults(box, pickSearch);
   const clr=box.querySelector('[data-clear]');
   if(clr) clr.addEventListener('click',(e)=>{ e.stopPropagation(); try{ localStorage.removeItem(RECENTS_KEY); }catch(err){} renderSearchHome(); document.getElementById('search').focus(); });
+  const ed=box.querySelector('[data-saved-edit]');
+  if(ed) ed.addEventListener('click',(e)=>{ e.stopPropagation(); savedEdit=!savedEdit; renderSearchHome(); const b=document.querySelector('[data-saved-edit]'); if(b) b.focus(); });
+  box.querySelectorAll('[data-unsave]').forEach(b=>b.addEventListener('click',(e)=>{ e.stopPropagation(); clearSaved(b.dataset.unsave); renderSearchHome(); document.getElementById('search').focus(); }));
   box.querySelectorAll('[data-nb]').forEach(b=>b.addEventListener('click',(e)=>{ e.stopPropagation(); runNearby(b.dataset.nb); }));
 }
 // a result list for one Find Nearby category, with matching pins on the map. Answers are kept
@@ -2633,6 +2745,8 @@ const ICON={
   back:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   swap:'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 4v15M8 4 4.5 7.5M8 4l3.5 3.5M16 20V5M16 20l-3.5-3.5M16 20l3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   close:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+  home:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 3 2.5 11.2l1.3 1.5L5 11.7V20a1 1 0 0 0 1 1h4.5v-6h3v6H18a1 1 0 0 0 1-1v-8.3l1.2 1 1.3-1.5z"/></svg>',
+  work:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 3.5h6A1.5 1.5 0 0 1 16.5 5v1.5H20A2 2 0 0 1 22 8.5V18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.5a2 2 0 0 1 2-2h3.5V5A1.5 1.5 0 0 1 9 3.5zm0 3h6V5.2H9v1.3z"/></svg>',
   play:'<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg>',
   phone:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>',
   web:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm-9 9h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
@@ -2750,12 +2864,14 @@ function showPlace(p){
       ${isMobile()?'':`<button class="nav-ic" data-close aria-label="Close">${ICON.close}</button>`}</div>
     <div class="pc-meta"><span data-drive></span><span data-near></span></div>
     ${navOn ? `<button class="place-go" data-dir>${ICON.car}<span>Directions</span><span class="pg-time" data-gotime></span></button>` : ''}
+    ${savedChipsHTML(p)}
     <div class="pc-rows" data-rows></div><div class="pc-src" data-src></div></div>`;
   let el;
   if(isMobile()){ setPanelMode('place'); openSheet(html); el=document.getElementById('sheetContent'); }
   else { navBox().innerHTML=html; setPanelMode('place'); el=navBox(); }
   const go=el.querySelector('[data-dir]'); if(go) go.addEventListener('click',startDirections);
   const x=el.querySelector('[data-close]'); if(x) x.addEventListener('click',closeNav);
+  wireSavedChips(el, p);
   placeExtras(p);
 }
 function setPlaceMeta(key, html){
@@ -4059,7 +4175,7 @@ sEl.addEventListener('keydown',e=>{ const items=[...document.querySelectorAll('.
   else if(e.key==='Enter'){ e.preventDefault(); const h=searchHits||[]; if(h[kbdIdx<0?0:kbdIdx]) pickSearch(h[kbdIdx<0?0:kbdIdx]); return; }
   else if(e.key==='Escape'){ hideResults(); return; }
   items.forEach((it,i)=>it.classList.toggle('kbd',i===kbdIdx)); if(items[kbdIdx]) items[kbdIdx].scrollIntoView({block:'nearest'}); });
-function hideResults(){ document.getElementById('search-results').classList.remove('show'); document.getElementById('panel').classList.remove('searching'); }
+function hideResults(){ endSavedPick(); savedEdit=false; document.getElementById('search-results').classList.remove('show'); document.getElementById('panel').classList.remove('searching'); }
 document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) hideResults(); });
 // Escape and the phone's Back gesture peel the UI back one layer at a time: a menu, the
 // results, the open camera, the route view, add-mode, the preview, then directions and the

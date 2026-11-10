@@ -38,6 +38,12 @@ commits are not listed.
 - On a phone the link button says Share and opens the phone's share sheet. On a computer Copy
   link also shows a QR code of the view or trip, so a phone can open it with its camera. The
   QR encoder is Ora's own, so no third-party script was added.
+- Home and Work: set them from a place's card (Set as Home, Set as Work) or from the search box
+  (Set Home lists your recent places, or type the address). They sit above Recents, and one
+  tap is Check traffic: one route from where you are, with the usual time, what is slowing the
+  drive and the cameras on it. Kept in this browser only, like Recents.
+- Find nearby gains Groceries and Pharmacy, the errands on the way home, and its eight
+  buttons sit in two rows in the order a commuter reaches for them, coffee first.
 
 ### Changed
 - One type scale for every scene, named by role, in place of 19 separate sizes from 8.5px to
