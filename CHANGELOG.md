@@ -18,6 +18,18 @@ commits are not listed.
   remembered for next time, and each route a plain label (Fastest, Shortest, Least traffic)
   plus a Tolls tag. All of it follows what two Apple Maps case studies found people use most.
 
+### Fixed
+- Camera search reads streets the way people type them, so "42nd street" finds "W42 ST" and
+  "i5" finds "I-5", and the cameras nearest the middle of the map come first. Before, "42nd"
+  found no cameras in Manhattan.
+- Esc with the Avoid menu open closes the menu instead of leaving Directions.
+- A place search refused for the monthly or hourly limit says so instead of "TomTom is not
+  answering", and Directions with location off says why it needs a starting point.
+- From a full phone and desktop audit: grey and blue text raised to at least 4.5:1 contrast,
+  every touch target 44px on phones (locate and zoom buttons were 29px) and at least 24px on
+  desktop, a visible focus ring on every control, Tab reaching the panel before the map, no
+  text under 11px, and the Layers button saying whether its list is open.
+
 ## 2026-10
 
 ### Added

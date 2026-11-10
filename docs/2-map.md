@@ -51,11 +51,13 @@ arrow keys cycle to the next camera in spatial order, and F toggles fit and fill
 ## Search
 
 The search box matches every loaded camera by name, road, and intersection, instantly and
-in the browser. Results list inside the panel, two lines a row: the name, then where it is.
-Pick a result and the map flies to it and opens it. Only the states loaded right now are
-searched; when nothing loaded matches, a search offers to turn on the state it finds. Run on
-your own machine with the [route preview](2.3-route-preview.md) proxy, it also finds places
-and addresses.
+in the browser. It reads streets the way people type them: "42nd street" finds "W42 ST",
+"10th avenue" finds "10Ave", "i5" finds "I-5". Exact text matches come first, and within each
+group the cameras nearest the middle of the map lead. Results list inside the panel, two
+lines a row: the name, then where it is. Pick a result and the map flies to it and opens it.
+Only the states loaded right now are searched; when nothing loaded matches, a search offers
+to turn on the state it finds. It also finds places and addresses through TomTom, and an
+empty box opens to Recents and Find nearby (see [route preview](2.3-route-preview.md)).
 
 ## Tap the map
 
@@ -87,5 +89,5 @@ panel collapses out of the map's way. Every pin has an invisible 44 px touch tar
 |---|---|
 | Left, Right | Previous or next camera, spatial order |
 | Enter in the jump box | Go to camera number N in that order |
-| Esc | Close the enlarged view or the search results |
+| Esc | Step back one layer: a menu, the search results, the open camera, the route view, routes, the place card |
 | F | Fit or fill in the enlarged view |

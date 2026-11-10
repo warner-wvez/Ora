@@ -27,19 +27,27 @@
     border-radius: 12px; padding: 12px 14px 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     width: 340px; max-height: calc(100vh - 24px); overflow-y: auto;
   }
+  /* every control shows where keyboard focus is (WCAG 2.4.7) */
+  :focus-visible { outline: 2px solid #0062cc; outline-offset: 2px; }
+  .maplibregl-canvas:focus-visible { outline: 3px solid #0062cc; outline-offset: -3px; }
+  /* hit areas: at least 24px anywhere (WCAG 2.5.8), 44px on touch (below) */
+  #panelToggle, #share, .popup-add { min-height: 28px; }
+  .maplibregl-popup-close-button { width: 32px; height: 32px; font-size: 20px; line-height: 30px; border-radius: 0 12px 0 8px; }
+  .search-x, .dir-chip, .sheet-close { position: relative; }
+  .search-x::before, .dir-chip::before { content: ''; position: absolute; inset: -8px; }
   #panel .brand-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
   #panel .brand { font-size: 15px; font-weight: 700; color: #1c1c1e; }
-  #share { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+  #share { font-size: 11px; font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
   #share:hover { background: #e0ecff; }
 
   /* a filled field, the way Apple and Google draw search; results flow inside the panel (the
      dropdown used to sit absolutely inside it and the panel cut it off), two lines a row */
   .search-wrap { position: relative; margin-bottom: 10px; }
   #search { width: 100%; height: 40px; font-size: 14px; padding: 0 36px 0 36px; border: 1px solid transparent; border-radius: 10px; outline: none; background: #f2f2f7; color: #1c1c1e; text-overflow: ellipsis; }
-  #search:focus { border-color: #007aff; background: #fff; }
-  #search::placeholder { color: #8e8e93; }
+  #search:focus { border-color: #0062cc; background: #fff; }
+  #search::placeholder { color: #6e6e73; }
   .search-wrap > svg { position: absolute; left: 12px; top: 20px; transform: translateY(-50%); opacity: .5; }
-  .search-x { position: absolute; right: 6px; top: 6px; width: 28px; height: 28px; border: none; border-radius: 50%; background: transparent; color: #8e8e93; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .search-x { position: absolute; right: 6px; top: 6px; width: 28px; height: 28px; border: none; border-radius: 50%; background: transparent; color: #6e6e73; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   .search-x:hover { background: #e5e5ea; }
   .search-x[hidden] { display: none; }
   #search-results { display: none; margin-top: 6px; }
@@ -48,19 +56,19 @@
   .sr-item { display: flex; align-items: center; gap: 10px; padding: 7px 6px; border-radius: 8px; cursor: pointer; }
   .sr-item:hover, .sr-item.kbd { background: #f2f2f7; }
   .sr-ic { width: 30px; height: 30px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; background: #ececf0; color: #6e6e73; }
-  .sr-ic.cam { background: #e8f1ff; color: #0a84ff; }
-  .sr-ic.me { background: #e8f1ff; color: #0a84ff; }
+  .sr-ic.cam { background: #e8f1ff; color: #0062cc; }
+  .sr-ic.me { background: #e8f1ff; color: #0062cc; }
   .sr-ic.nb { color: #fff; }
   .sr-ic.nb svg { width: 16px; height: 16px; }
   .sr-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
   .sr-t { font-size: 14px; color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sr-s { font-size: 12px; color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
-  .sr-empty { padding: 8px 6px; font-size: 12px; color: #8e8e93; }
+  .sr-s { font-size: 12px; color: #6e6e73; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+  .sr-empty { padding: 8px 6px; font-size: 12px; color: #6e6e73; }
 
   .grp { border-top: 1px solid #ececf0; }
   .grp-h { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; background: none; font: inherit; text-align: left; font-size: 12px; font-weight: 600; color: #1c1c1e; cursor: pointer; padding: 8px 0 6px; }
   .grp-h:focus-visible { outline: 2px solid #0062cc; outline-offset: 2px; border-radius: 6px; }
-  .grp-h .caret { font-size: 10px; color: #8e8e93; transition: transform .15s; }
+  .grp-h .caret { font-size: 11px; color: #6e6e73; transition: transform .15s; }
   .grp-h[aria-expanded="false"] .caret { transform: rotate(-90deg); }
   .grp.collapsed .grp-body { display: none; }
   .grp-body { padding-bottom: 6px; }
@@ -70,26 +78,26 @@
   #camList { max-height: 210px; overflow-y: auto; margin: -2px -4px 0; padding: 0 4px; }
 
   .lyr { display: flex; align-items: center; gap: 8px; padding: 4px 2px; cursor: pointer; font-size: 13px; color: #3c3c43; }
-  .lyr input { accent-color: #007aff; width: 15px; height: 15px; cursor: pointer; flex: none; }
+  .lyr input { accent-color: #0062cc; width: 15px; height: 15px; cursor: pointer; flex: none; }
   .lyr .swatch { width: 9px; height: 9px; border-radius: 50%; flex: none; background: #007aff; }
   /* two plain dots, the verdict colours at either end of the scale, not a split gradient */
   .lyr .swatch.pair { background: #34c759; box-shadow: 12px 0 0 #ff2d55; margin-right: 12px; }
   .lyr .nm { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .lyr .live-tag { font-size: 8.5px; font-weight: 800; letter-spacing: .03em; color: #fff; background: #ff2d55; padding: 1px 4px; border-radius: 3px; }
-  .lyr .cnt { font-size: 10px; color: #a0a0a5; }
+  .lyr .cnt { font-size: 11px; color: #6e6e73; }
 
   .btn-row { display: flex; gap: 6px; margin-top: 4px; }
-  .mini-btn { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 5px 9px; cursor: pointer; }
+  .mini-btn { font-size: 11px; font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 5px 9px; cursor: pointer; }
   .mini-btn:hover { background: #e0ecff; }
   .mini-btn.grey { color: #6e6e73; background: #f2f2f7; }
 
   .route-item { display: flex; align-items: center; gap: 6px; padding: 5px 2px; font-size: 13px; color: #1c1c1e; }
   .route-item .rn { flex: 1; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .route-item .rn:hover { color: #007aff; }
-  .route-item .rc { font-size: 10px; color: #a0a0a5; }
-  .route-item .rx { color: #c0c0c5; cursor: pointer; font-size: 14px; padding: 0 2px; }
+  .route-item .rn:hover { color: #0062cc; }
+  .route-item .rc { font-size: 11px; color: #6e6e73; }
+  .route-item .rx { color: #6e6e73; cursor: pointer; font-size: 14px; padding: 0 2px; }
   .route-item .rx:hover { color: #ff3b30; }
-  .route-empty { font-size: 11px; color: #a0a0a5; padding: 2px; }
+  .route-empty { font-size: 11px; color: #6e6e73; padding: 2px; }
 
   .enf-controls { margin-top: 4px; padding-top: 4px; display: none; }
   .enf-controls.show { display: block; }
@@ -98,7 +106,7 @@
   .color-btn { flex: 1; font-size: 11px; font-weight: 600; padding: 4px 8px; border: none; border-radius: 6px; background: transparent; color: #6e6e73; cursor: pointer; }
   .color-btn.active { background: #fff; color: #1c1c1e; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
   .filters { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-  .fchip { font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid #dcdce1; background: #fff; color: #8e8e93; cursor: pointer; user-select: none; }
+  .fchip { font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid #dcdce1; background: #fff; color: #6e6e73; cursor: pointer; user-select: none; }
   .fchip.on { color: #fff; border-color: transparent; }
   .fchip.on[data-v="justified"] { background: #34c759; } .fchip.on[data-v="revenue"] { background: #ff2d55; }
   .fchip.on[data-v="gap"] { background: #ff9500; } .fchip.on[data-v="quiet"] { background: #b0b0b5; }
@@ -110,15 +118,15 @@
   #legend .dot.rl { background: #ff3b30; } #legend .dot.sp { background: #ff9500; }
   #legend .dot.justified { background: #34c759; } #legend .dot.revenue { background: #ff2d55; }
   #legend .dot.gap { background: #ff9500; } #legend .dot.quiet { background: #b0b0b5; }
-  #legend .row .sub { color: #a0a0a5; }
+  #legend .row .sub { color: #6e6e73; }
   #legend .sizes { display: flex; align-items: flex-end; gap: 8px; margin-top: 8px; }
   #legend .sizewrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   #legend .sizedot { border-radius: 50%; background: #b0b0b5; }
-  #legend .sizelbl { font-size: 9px; color: #8e8e93; }
+  #legend .sizelbl { font-size: 9px; color: #6e6e73; }
 
   /* your location: bigger than a camera pin, with a thicker white ring and a shadow, so it never
      reads as one more blue camera in a dense city (MapLibre's stock dot is smaller than our pins) */
-  .maplibregl-user-location-dot, .maplibregl-user-location-dot::before { width: 18px; height: 18px; background-color: #0a84ff; }
+  .maplibregl-user-location-dot, .maplibregl-user-location-dot::before { width: 18px; height: 18px; background-color: #0062cc; }
   .maplibregl-user-location-dot::after { width: 26px; height: 26px; left: -4px; top: -4px; border: 4px solid #fff; box-shadow: 0 1px 7px rgba(0,0,0,.45); }
 
   .basemap { margin-top: 10px; border-top: 1px solid #ececf0; padding-top: 10px; }
@@ -127,7 +135,7 @@
   /* add-to-route banner */
   #addBanner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15; display: none; align-items: center; gap: 12px; background: #007aff; color: #fff; font-size: 13px; font-weight: 600; padding: 9px 10px 9px 16px; border-radius: 999px; box-shadow: 0 3px 14px rgba(0,0,0,0.3); }
   #addBanner.show { display: flex; }
-  #addBanner button { background: #fff; color: #007aff; border: none; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: 12px; cursor: pointer; }
+  #addBanner button { background: #fff; color: #0062cc; border: none; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
   /* transient toast for the cross-state handoff ("End of West Virginia — → for Wyoming") */
   #cycleNote { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 16; display: none;
@@ -151,7 +159,7 @@
   #routeView .rv-actions { display: flex; gap: 6px; align-items: center; flex: none; }
   /* a long route name truncates rather than squeezing the actions off the header */
   #routeView .rv-title { font-size: 16px; font-weight: 700; color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #routeView .rv-sub { font-size: 11px; color: #8e8e93; margin-top: 1px; }
+  #routeView .rv-sub { font-size: 11px; color: #6e6e73; margin-top: 1px; }
   #routeView .rv-close { border: none; background: #f2f2f7; border-radius: 8px; width: 30px; height: 30px; font-size: 16px; cursor: pointer; color: #3c3c43; }
   #routeView .rv-body { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
   /* flex:none so tiles keep their natural height and the list scrolls, instead of the flex column squashing them */
@@ -161,10 +169,10 @@
   .rv-tile .rv-media img, .rv-tile .rv-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .rv-tile .rv-off { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; color: #9a9aa0; font-size: 12px; font-weight: 600; }
   .rv-tile .rv-media.err img { display: none; } .rv-tile .rv-media.err .rv-off { display: flex; }
-  .rv-tile .rv-media .rv-nosnap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px; color: #8e8e93; font-size: 12px; font-weight: 600; }
-  .rv-tile .rv-media .rv-nosnap span { font-size: 10px; font-weight: 500; color: #aeaeb2; }
+  .rv-tile .rv-media .rv-nosnap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px; color: #6e6e73; font-size: 12px; font-weight: 600; }
+  .rv-tile .rv-media .rv-nosnap span { font-size: 10px; font-weight: 500; color: #6e6e73; }
   .rv-live { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; }
-  .rv-live.rv-dead { background: #8e8e93; }
+  .rv-live.rv-dead { background: #6e6e73; }
   /* the resolution you already measured by opening this camera, so a route reads as a
      checklist: which ones you have judged, and which of those clear the 640px bar */
   .rv-res { position: absolute; bottom: 8px; left: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .02em; color: #fff;
@@ -172,8 +180,8 @@
   .rv-res.low { background: rgba(216,27,69,.92); }
   .rv-tile .rv-cap { display: flex; align-items: center; gap: 8px; padding: 8px 11px; }
   .rv-tile .rv-nm { flex: 1; font-size: 12.5px; font-weight: 600; color: #1c1c1e; }
-  .rv-tile .rv-rm { color: #c0c0c5; cursor: pointer; font-size: 15px; border: 0; background: none; font-family: inherit; line-height: 1; border-radius: 6px; } .rv-tile .rv-rm:hover { color: #ff3b30; }
-  .rv-empty { text-align: center; color: #8e8e93; font-size: 13px; padding: 30px 20px; }
+  .rv-tile .rv-rm { position: relative; padding: 4px 6px; color: #6e6e73; cursor: pointer; font-size: 15px; border: 0; background: none; font-family: inherit; line-height: 1; border-radius: 6px; } .rv-tile .rv-rm:hover { color: #ff3b30; }
+  .rv-empty { text-align: center; color: #6e6e73; font-size: 13px; padding: 30px 20px; }
 
   .maplibregl-popup.tip .maplibregl-popup-content { padding: 4px 8px; font-size: 11px; font-weight: 600; color: #1c1c1e; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
   .maplibregl-popup.tip .maplibregl-popup-tip { display: none; }
@@ -187,7 +195,7 @@
   .popup-imgwrap.err .poster { display: none; }
   .popup-imgwrap .live-badge { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; z-index: 2; }
   /* the stream attached but the picture is not moving, so the badge stops claiming it is */
-  .popup-imgwrap.notlive .live-badge { background: #8e8e93; }
+  .popup-imgwrap.notlive .live-badge { background: #6e6e73; }
   .popup-imgwrap .img-offline { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: #9a9aa0; font-size: 12px; font-weight: 600; }
   .popup-imgwrap.err img, .popup-imgwrap.err video { display: none; }
   .popup-imgwrap.err .img-offline { display: flex; }
@@ -204,7 +212,7 @@
     object-fit: contain; border-radius: 8px; background: #000; box-shadow: 0 12px 44px rgba(0,0,0,.55); }
   .enlarge-ov.fill .enlarge-media { object-fit: fill; }
   .enlarge-cap { color: #f2f2f5; font-size: 13px; max-width: 90vw; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
-  .enlarge-hint { color: #8e8e93; font-size: 11px; }
+  .enlarge-hint { color: #6e6e73; font-size: 11px; }
   /* inside the box corner, not hanging off it: at -14px the button sat outside the media and
      the viewport clipped it on smaller screens, which is why it read as broken */
   .enlarge-close { position: absolute; top: 10px; right: 10px; z-index: 5; width: 40px; height: 40px; border-radius: 50%; border: none;
@@ -226,34 +234,34 @@
   /* prev/next pager: the discoverable affordance for the ← / → keys that actually do the work */
   .cam-nav { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #ececf0; }
   .cam-nav[hidden] { display: none; }
-  .cam-arrow { width: 34px; height: 26px; border: none; border-radius: 6px; background: #f2f2f7; color: #007aff; font-size: 16px; line-height: 1; font-weight: 700; cursor: pointer; }
+  .cam-arrow { width: 34px; height: 26px; border: none; border-radius: 6px; background: #f2f2f7; color: #0062cc; font-size: 16px; line-height: 1; font-weight: 700; cursor: pointer; }
   .cam-arrow:hover { background: #e0ecff; }
-  .cam-pos { font-size: 11px; color: #8e8e93; font-variant-numeric: tabular-nums; min-width: 58px; text-align: center; cursor: pointer; }
+  .cam-pos { font-size: 11px; color: #6e6e73; font-variant-numeric: tabular-nums; min-width: 58px; text-align: center; cursor: pointer; }
   .cam-jump { width: 58px; text-align: center; font-size: 11px; padding: 2px 4px; border: 1px solid #007aff; border-radius: 5px; outline: none; font-variant-numeric: tabular-nums; }
   /* the delivered resolution, read off the decoded picture. Green clears the 640px bar a
      detector needs, red cannot. [hidden] needs its own rule here: the author `display`
      below would otherwise beat the browser's default [hidden] { display: none }. */
   .res-chip { display: inline-flex; align-items: center; vertical-align: middle; margin-left: 6px; padding: 2px 5px;
-    border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: .02em; background: #e7f8ed; color: #1a8a3c; }
-  .res-chip.low { background: #ffe9ee; color: #d81b45; }
+    border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: .02em; background: #e7f8ed; color: #137333; }
+  .res-chip.low { background: #ffe9ee; color: #b3123a; }
   .res-chip[hidden] { display: none; }
   .enlarge-cap .res-chip { margin-left: 0; background: rgba(52,199,89,.22); color: #5fdc90; }
   .enlarge-cap .res-chip.low { background: rgba(255,45,85,.22); color: #ff7b9c; }
   .popup-dirs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-  .dir-btn { font-size: 11px; padding: 3px 8px; border-radius: 999px; background: #f2f2f7; color: #007aff; border: none; cursor: pointer; font-weight: 600; }
-  .dir-btn.active { background: #007aff; color: #fff; }
+  .dir-btn { font-size: 11px; padding: 3px 8px; border-radius: 999px; background: #f2f2f7; color: #0062cc; border: none; cursor: pointer; font-weight: 600; }
+  .dir-btn.active { background: #0062cc; color: #fff; }
   .popup-facing { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: #f2f2f7; color: #48484a; }
-  .popup-facing .arrow { font-size: 12px; line-height: 1; color: #8e8e93; }
+  .popup-facing .arrow { font-size: 12px; line-height: 1; color: #6e6e73; }
   .popup-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
   /* the offline line is long enough to wrap; it must never reflow under the button */
-  .popup-age { font-size: 10px; color: #8e8e93; flex: 1; min-width: 0; line-height: 1.35; }
+  .popup-age { font-size: 11px; color: #6e6e73; flex: 1; min-width: 0; line-height: 1.35; }
   .popup-age.stale { color: #b25000; font-weight: 600; }
   .popup-add { flex: 0 0 auto; white-space: nowrap; }
-  .popup-add { font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
+  .popup-add { font-size: 11px; font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
   .rp-menu { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; align-items: center; }
-  .rp-menu .rp-hd { width: 100%; font-size: 10px; font-weight: 600; color: #8e8e93; }
+  .rp-menu .rp-hd { width: 100%; font-size: 11px; font-weight: 600; color: #6e6e73; }
   .rp-input, #nrName { flex: 1; min-width: 0; font-size: 12px; padding: 6px 8px; border: 1px solid #dcdce1; border-radius: 6px; outline: none; }
-  .rp-input:focus, #nrName:focus { border-color: #007aff; }
+  .rp-input:focus, #nrName:focus { border-color: #0062cc; }
   .rx.arm { color: #fff; background: #ff3b30; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
   /* ---------- bottom sheet (mobile selection container) ----------
@@ -276,7 +284,7 @@
   #sheetContent .popup-imgwrap img, #sheetContent .popup-imgwrap video { height: min(56vw, 260px); }
   #sheetContent .enf { width: 100%; }
 
-  #panelToggle { display: inline-block; font-size: 11px; font-weight: 600; color: #007aff; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+  #panelToggle { display: inline-block; font-size: 11px; font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
   /* desktop: the Layers button tucks the panel down to just its header, so the map underneath
      is clear when you're not touching the controls (mobile has its own expand/collapse below) */
   @media (min-width: 641px) { #panel.collapsed > *:not(.brand-row) { display: none; } }
@@ -333,10 +341,12 @@
   @media (max-width: 640px) {
     .lyr, .route-item, .sr-item { min-height: 44px; }
     .grp-h { min-height: 40px; align-items: center; }
-    .mini-btn, .popup-add, #share, #panelToggle, .dir-btn { min-height: 36px; }
-    .rv-close, .sheet-close { width: 38px; height: 38px; }
+    .mini-btn, .popup-add, #share, #panelToggle, .dir-btn, .grp-h, .nb-chip, .color-btn { min-height: 44px; }
+    .sheet-close { width: 44px; height: 44px; }
+    .maplibregl-ctrl-group button { width: 44px; height: 44px; }
+    .rv-close, .sheet-close { width: 44px; height: 44px; }
     .enlarge-close { width: 44px; height: 44px; top: 8px; right: 8px; }
-    .fchip, .color-btn { min-height: 34px; display: inline-flex; align-items: center; justify-content: center; }
+    .fchip, .color-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     .rv-rm, .rx { padding: 10px 10px; font-size: 17px; }
   }
 
@@ -345,11 +355,11 @@
      big Directions button, a From/To pair joined by a rail with a swap button, and route rows
      that lead with a time coloured by traffic, then the roads, then the cameras. On a phone the
      routes sit in a bottom sheet so the map stays in the middle. */
-  .sr-grp { padding: 8px 6px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #8e8e93; }
-  .sr-grp span { font-weight: 500; text-transform: none; letter-spacing: 0; color: #aeaeb2; margin-left: 4px; }
+  .sr-grp { padding: 8px 6px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6e6e73; }
+  .sr-grp span { font-weight: 500; text-transform: none; letter-spacing: 0; color: #6e6e73; margin-left: 4px; }
   /* search home: Recents and Find Nearby, the two tools both Apple Maps case studies put first */
   .sr-grp-row { display: flex; align-items: center; justify-content: space-between; }
-  .sr-clear { border: 0; background: none; color: #0a84ff; font: inherit; font-size: 12px; font-weight: 600; text-transform: none; letter-spacing: 0; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
+  .sr-clear { border: 0; background: none; color: #0062cc; font: inherit; font-size: 12px; font-weight: 600; text-transform: none; letter-spacing: 0; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
   .sr-clear:hover { background: #e8f1ff; }
   .nb-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 2px 2px 6px; }
   .nb-chip { display: flex; align-items: center; gap: 7px; min-height: 40px; border: 0; background: #f2f2f7; border-radius: 10px; padding: 6px 8px; font: inherit; font-size: 12.5px; font-weight: 600; color: #1d1d1f; text-align: left; line-height: 1.15; cursor: pointer; transition: background .12s, transform .12s; }
@@ -373,44 +383,44 @@
   .place-addr { font-size: 13px; color: #6e6e73; line-height: 1.35; }
   .pc-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: 13px; color: #3c3c43; }
   .pc-meta span:empty { display: none; }
-  .pc-meta svg { vertical-align: -3px; color: #0a84ff; margin-right: 3px; }
+  .pc-meta svg { vertical-align: -3px; color: #0062cc; margin-right: 3px; }
   .pc-cat { font-size: 13px; color: #3c3c43; margin: 1px 0 2px; }
   .pc-cat:empty, .place-addr:empty { display: none; }
   .pc-rows:not(:empty) { margin-top: 12px; border-top: 1px solid #ececf0; }
-  .pc-rows a { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: 14px; color: #0a84ff; text-decoration: none; border-bottom: 1px solid #ececf0; }
-  .pc-rows a svg { color: #8e8e93; flex: none; }
+  .pc-rows a { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: 14px; color: #0062cc; text-decoration: none; border-bottom: 1px solid #ececf0; }
+  .pc-rows a svg { color: #6e6e73; flex: none; }
   .pc-rows a span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .pc-src { font-size: 11px; color: #8e8e93; margin-top: 8px; }
+  .pc-src { font-size: 11px; color: #6e6e73; margin-top: 8px; }
   .pc-src a { color: inherit; }
   .place-go { margin-top: 14px; width: 100%; height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px;
-    font-size: 15px; font-weight: 700; color: #fff; background: #0a84ff; border: none; border-radius: 12px; cursor: pointer; }
+    font-size: 15px; font-weight: 700; color: #fff; background: #0062cc; border: none; border-radius: 12px; cursor: pointer; }
   .place-go:hover { background: #0071e3; }
   .place-go .pg-time:not(:empty)::before { content: '\00b7'; margin: 0 6px 0 2px; font-weight: 400; }
   .place-go .pg-time { font-weight: 600; }
 
   .dir-top { display: flex; align-items: center; gap: 6px; margin: -2px 0 6px -6px; }
-  .dir-mode { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #0a84ff; background: #e8f1ff; border-radius: 999px; padding: 6px 12px; }
+  .dir-mode { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #0062cc; background: #e8f1ff; border-radius: 999px; padding: 6px 12px; }
   /* Avoid sits beside Drive, where the choice is made (the second case study's driver kept
      paying tolls because the setting lived somewhere else) */
   .dir-avoid { position: relative; }
   .dir-chip { display: flex; align-items: center; gap: 4px; font: inherit; font-size: 13px; font-weight: 600; color: #3a3a3c; background: #f2f2f7; border: 0; border-radius: 999px; padding: 6px 10px 6px 12px; cursor: pointer; transition: background .12s; }
   .dir-chip:hover { background: #e7e7ed; }
-  .dir-chip.on { color: #0a84ff; background: #e8f1ff; }
+  .dir-chip.on { color: #0062cc; background: #e8f1ff; }
   .dir-chip svg { width: 12px; height: 12px; }
   .avoid-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 180px; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.04); padding: 6px; }
-  .avoid-menu .am-h { padding: 6px 10px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #8e8e93; }
+  .avoid-menu .am-h { padding: 6px 10px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6e6e73; }
   .avoid-menu label { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 40px; padding: 0 10px; font-size: 14px; border-radius: 8px; cursor: pointer; }
   .avoid-menu label:hover { background: #f2f2f7; }
-  .avoid-menu input { width: 18px; height: 18px; accent-color: #0a84ff; }
+  .avoid-menu input { width: 18px; height: 18px; accent-color: #0062cc; }
   .dir-stack { display: flex; align-items: center; gap: 6px; }
   .dir-rail { flex: none; width: 18px; display: flex; flex-direction: column; align-items: center; align-self: stretch; padding: 13px 0 11px; }
   .rail-from { width: 11px; height: 11px; border-radius: 50%; border: 2.5px solid #3c3c43; background: #fff; flex: none; }
-  .rail-dots { flex: 1; width: 0; border-left: 2px dotted #aeaeb2; margin: 4px 0; }
+  .rail-dots { flex: 1; width: 0; border-left: 2px dotted #6e6e73; margin: 4px 0; }
   .rail-to { color: #d93025; line-height: 0; flex: none; }
   .dir-fields { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
   .dir-field { width: 100%; height: 38px; font-size: 14px; color: #1c1c1e; background: #f2f2f7; border: 1px solid transparent; border-radius: 10px; padding: 0 12px; outline: none; text-overflow: ellipsis; }
-  .dir-field:focus { background: #fff; border-color: #0a84ff; }
-  .dir-field::placeholder { color: #8e8e93; }
+  .dir-field:focus { background: #fff; border-color: #0062cc; }
+  .dir-field::placeholder { color: #6e6e73; }
   #dirSuggest:not(:empty) { margin: 8px 0 2px; border-top: 1px solid #ececf0; padding-top: 4px; }
   #dirRoutes { margin-top: 10px; border-top: 1px solid #ececf0; }
 
@@ -421,22 +431,22 @@
   .rt-row:focus-visible { box-shadow: inset 0 0 0 2px #1a73e8; }
   .rt-l1 { display: flex; align-items: baseline; gap: 10px; }
   .rt-time { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
-  .t-ok { color: #188038; } .t-slow { color: #e37400; } .t-jam { color: #d93025; }
+  .t-ok { color: #137333; } .t-slow { color: #b45309; } .t-jam { color: #c5221f; }
   .rt-dist { margin-left: auto; font-size: 13px; color: #6e6e73; }
   .rt-via { font-size: 13px; color: #1c1c1e; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .rt-l3 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; font-size: 12px; }
-  .rt-badge { font-weight: 700; color: #188038; background: #e6f4ea; border-radius: 4px; padding: 1px 6px; }
+  .rt-badge { font-weight: 700; color: #137333; background: #e6f4ea; border-radius: 4px; padding: 1px 6px; }
   .rt-badge.alt { color: #0a5bd3; background: #e8f1ff; }
   .rt-toll { font-weight: 600; color: #8a5300; background: #fff1d6; border-radius: 4px; padding: 1px 6px; }
   .rt-dim { color: #6e6e73; }
   .rt-late { font-weight: 600; }
   .rt-cams { display: flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 12.5px; color: #3c3c43; }
-  .rt-cams svg { color: #0a84ff; flex: none; }
+  .rt-cams svg { color: #0062cc; flex: none; }
   .rt-watch { margin-top: 10px; height: 36px; padding: 0 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
-    color: #0a84ff; background: #fff; border: 1.5px solid #0a84ff; border-radius: 999px; cursor: pointer; }
+    color: #0062cc; background: #fff; border: 1.5px solid #0a84ff; border-radius: 999px; cursor: pointer; }
   .rt-watch:hover { background: #e8f1ff; }
   .dir-msg { font-size: 13px; color: #6e6e73; padding: 14px 6px; }
-  .dir-note { font-size: 11px; color: #8e8e93; padding: 10px 6px 2px; }
+  .dir-note { font-size: 11px; color: #6e6e73; padding: 10px 6px 2px; }
 
   /* time bubbles pinned to each route, the selected one filled */
   .rt-callout { padding: 5px 9px; border-radius: 9px; background: #fff; color: #1c1c1e; font-size: 13px; font-weight: 700; line-height: 1.1; white-space: nowrap;
@@ -490,10 +500,10 @@
   .enf-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px; }
   .enf-stat { background: #f7f7f9; border-radius: 8px; padding: 7px 9px; }
   .enf-stat .num { font-size: 18px; font-weight: 700; color: #1c1c1e; line-height: 1.1; }
-  .enf-stat .lbl { font-size: 10px; color: #6e6e73; margin-top: 2px; line-height: 1.25; }
-  .enf-stat .cmp { font-size: 9px; color: #a0a0a5; margin-top: 2px; }
+  .enf-stat .lbl { font-size: 11px; color: #6e6e73; margin-top: 2px; line-height: 1.25; }
+  .enf-stat .cmp { font-size: 11px; color: #6e6e73; margin-top: 2px; }
   .enf-stat.hi .num { color: #d81b45; }
-  .enf-meta { font-size: 11px; color: #8e8e93; margin-top: 9px; padding-top: 8px; border-top: 1px solid #ececf0; }
+  .enf-meta { font-size: 11px; color: #6e6e73; margin-top: 9px; padding-top: 8px; border-top: 1px solid #ececf0; }
 
   /* ---------- micro-interactions: values from TypeUI's micro-interaction specs (read 2026-10-22).
      Springs are sampled into linear() easings so they run as plain CSS; older browsers get the
@@ -573,31 +583,27 @@
     .color-switch .seg-pill, .search-x, .rx > span, .fchip::before, .undo-toast, .undo-toast.show, .grp-h .caret, #share .cf-ic svg { transition-duration: 0s !important; }
     .lyr input.pop, .spring-num, .shake { animation: none !important; }
   }
+  /* audit 2026-11-09: touch targets that earlier rules kept under 44px */
+  .rv-actions .mini-btn { min-height: 28px; }
+  .color-switch .color-btn, #newRoute, .route-item .rx { min-height: 28px; }
+  .route-item .rx { min-width: 28px; place-items: center; }
+  .rv-tile .rv-rm::before { content: ''; position: absolute; inset: -6px; }
+  @media (max-width: 640px) {
+    .nb-chip { min-height: 44px; }
+    #search { height: 44px; }
+    .enlarge-btn::before { content: ''; position: absolute; inset: -9px; }
+    .rv-tile .rv-rm::before { inset: -8px; }
+    .rv-actions .mini-btn { min-height: 44px; }
+    #routeView .rv-close { width: 44px; height: 44px; }
+    .rv-tile .rv-rm::before { inset: -12px; }
+    .avoid-menu label { min-height: 44px; }
+    .color-switch .color-btn, #newRoute, .route-item .rx { min-height: 44px; }
+    .route-item .rx { min-width: 44px; }
+  }
 </style>
 </head>
 <body>
-<div id="map"></div>
-<div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
-<div id="cycleNote"></div>
-<div id="previewBar"><span id="previewTxt"></span><button id="previewStop">Stop</button></div>
-
-<div id="sheet">
-  <div class="sheet-grip"><div class="grip-bar"></div></div>
-  <button class="sheet-close" id="sheetClose" title="Close">&#10005;</button>
-  <div id="sheetContent"></div>
-</div>
-
-<!-- route options on a phone, under the map (route preview) -->
-<div id="dirSheet"><div class="ds-grip"><div class="grip-bar"></div></div><div class="ds-body"></div></div>
-
-<div id="routeView">
-  <div class="rv-head">
-    <div class="rv-headtxt"><div class="rv-title" id="rvTitle"></div><div class="rv-sub" id="rvSub"></div></div>
-    <div class="rv-actions"><button class="mini-btn grey" id="rvCopy" title="Copy this route's cameras as JSON">Copy list</button><button class="mini-btn" id="rvAdd">+ Add cameras</button><button class="rv-close" id="rvClose">&times;</button></div>
-  </div>
-  <div class="rv-body" id="rvBody"></div>
-</div>
-
+<!-- the panel comes first so Tab reaches search before the map; z-index keeps it on top -->
 <div id="panel">
   <div class="brand-row"><div class="brand">Ora</div><div style="display:flex;gap:6px"><button id="panelToggle" title="Show routes, map style and sources">Layers &#9662;</button><button id="share" title="Copy a link to exactly this view"><span class="cf-ic" aria-hidden="true"><svg class="cp" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="2"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg><svg class="ok" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="cf-lab" aria-live="polite"><span class="idle">Copy link</span><span class="done" aria-hidden="true">Copied</span></span></button></div></div>
 
@@ -654,6 +660,28 @@
     </div>
   </div>
 </div>
+<div id="map"></div>
+<div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
+<div id="cycleNote"></div>
+<div id="previewBar"><span id="previewTxt"></span><button id="previewStop">Stop</button></div>
+
+<div id="sheet">
+  <div class="sheet-grip"><div class="grip-bar"></div></div>
+  <button class="sheet-close" id="sheetClose" title="Close">&#10005;</button>
+  <div id="sheetContent"></div>
+</div>
+
+<!-- route options on a phone, under the map (route preview) -->
+<div id="dirSheet"><div class="ds-grip"><div class="grip-bar"></div></div><div class="ds-body"></div></div>
+
+<div id="routeView">
+  <div class="rv-head">
+    <div class="rv-headtxt"><div class="rv-title" id="rvTitle"></div><div class="rv-sub" id="rvSub"></div></div>
+    <div class="rv-actions"><button class="mini-btn grey" id="rvCopy" title="Copy this route's cameras as JSON">Copy list</button><button class="mini-btn" id="rvAdd">+ Add cameras</button><button class="rv-close" id="rvClose">&times;</button></div>
+  </div>
+  <div class="rv-body" id="rvBody"></div>
+</div>
+
 
 <script>
 /* ---------- layer catalog (states injected at load from states/index.json) ---------- */
@@ -2109,8 +2137,28 @@ let autoLoadT=null;
 function scheduleAutoLoad(){ clearTimeout(autoLoadT); autoLoadT=setTimeout(autoLoadView,250); }
 
 /* ---------- search ---------- */
+// Camera names are written the way agencies write them ("W42 ST", "I-5 @ MP 16"); people type
+// "42nd street" or "i5". Both sides are folded to one form: numbers split from letters,
+// ordinals and common words shortened, punctuation dropped. Every typed word must appear,
+// the last one as a prefix so results keep up while typing.
+const STREET_FOLD=[[/\bstreet\b/g,'st'],[/\bavenue\b/g,'ave'],[/\bboulevard\b/g,'blvd'],[/\bhighway\b/g,'hwy'],[/\bexpressway\b/g,'expy'],
+  [/\bparkway\b/g,'pkwy'],[/\broad\b/g,'rd'],[/\bdrive\b/g,'dr'],[/\bwest\b/g,'w'],[/\beast\b/g,'e'],[/\bnorth\b/g,'n'],[/\bsouth\b/g,'s'],
+  [/\binterstate\b/g,'i'],[/\bmile ?post\b/g,'mp'],[/\bexit\b/g,'exit']];
+function foldText(t){
+  t=String(t||'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9 ]+/g,' ').replace(/([a-z])(\d)/g,'$1 $2').replace(/(\d)([a-z])/g,'$1 $2')
+    .replace(/\b(\d+) (st|nd|rd|th)\b/g,'$1');
+  for(const [re,to] of STREET_FOLD) t=t.replace(re,to);
+  // "st" is noise either way: an ordinal ("31st") or street ("W31 ST", "Main St")
+  return t.split(' ').filter(w=>w && w!=='st').join(' ');
+}
+function foldMatch(words, hay){
+  if(!words.length) return false;
+  const toks=hay.split(' ');
+  return words.every((w,i)=> i===words.length-1 ? toks.some(t=>t.startsWith(w)) : toks.includes(w));
+}
 function rebuildSearchIndex(){ searchIndex=[]; store.activeLayers.forEach(k=>{ const d=dataCache[k]; if(!d) return;
-  d.features.forEach(f=>searchIndex.push({name:f.properties.name,road:f.properties.roadway||'',coords:f.geometry.coordinates,k,feature:f})); }); }
+  d.features.forEach(f=>searchIndex.push({name:f.properties.name,road:f.properties.roadway||'',coords:f.geometry.coordinates,k,feature:f,
+    fold:foldText((f.properties.name||'')+' '+(f.properties.roadway||''))})); }); }
 // one list of hits in display order, places first, so the mouse, the arrow keys and Enter all
 // pick from the same thing. A hit is {kind:'place'|'cam'|'state', ...}.
 const esc=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2133,7 +2181,17 @@ function runSearch(q){
     // an empty box that has focus opens to Recents and Find Nearby, the way Apple Maps' does
     if(document.activeElement===document.getElementById('search')){ renderSearchHome(); return; }
     box.classList.remove('show'); box.innerHTML=''; searchHits=[]; document.getElementById('panel').classList.remove('searching'); return; }
-  const cams=searchIndex.filter(e=>(e.name&&e.name.toLowerCase().includes(q))||(e.road&&e.road.toLowerCase().includes(q))).slice(0,8).map(e=>({kind:'cam',...e}));
+  // exact text first, then the folded match ("42nd street" finding "W42 ST"); inside each, the
+  // cameras nearest the middle of the map lead, the way every map app ranks a search
+  const words=foldText(raw).split(' ').filter(Boolean), ctr=map.getCenter(), kx=Math.cos(ctr.lat*Math.PI/180);
+  const near=(e)=>{ const dx=(e.coords[0]-ctr.lng)*kx, dy=e.coords[1]-ctr.lat; return dx*dx+dy*dy; };
+  const exact=[], folded=[];
+  for(const e of searchIndex){
+    if((e.name&&e.name.toLowerCase().includes(q))||(e.road&&e.road.toLowerCase().includes(q))) exact.push(e);
+    else if(foldMatch(words,e.fold)) folded.push(e);
+  }
+  exact.sort((x,y)=>near(x)-near(y)); folded.sort((x,y)=>near(x)-near(y));
+  const cams=[...exact, ...folded].slice(0,8).map(e=>({kind:'cam',...e}));
   // the searcher knows the camera, not the layer model: when nothing matches in what's
   // on, offer the states whose names match — one tap turns the state on and re-searches
   // one hit per sidebar row; match on any name in the group so "new york city" still turns on
@@ -2155,7 +2213,7 @@ function runSearch(q){
   let html='', i=0;
   const placeHTML=()=> places.length ? `<div class="sr-grp">Places <span>TomTom</span></div>`+places.map(h=>row(h,i++)).join('')
     : placeState==='busy' ? `<div class="sr-grp">Places <span>searching…</span></div>`
-    : placeState==='fail' ? `<div class="sr-grp">Places <span>TomTom is not answering right now</span></div>` : '';
+    : placeState==='fail' ? `<div class="sr-grp">Places</div><div class="sr-empty">${esc(placeFailWhy.get(raw)||'TomTom is not answering right now')}</div>` : '';
   const camHTML=()=> cams.length ? ((places.length||placeState)?`<div class="sr-grp">Cameras</div>`:'')+cams.map(h=>row(h,i++)).join('') : '';
   html+=roadish ? camHTML()+placeHTML() : placeHTML()+camHTML();
   if(!cams.length){
@@ -2250,7 +2308,7 @@ async function runNearby(k){
   if(nearbyCache.has(key)) places=nearbyCache.get(key);
   else{
     try{ places=(await navGet(`/nearby?cat=${k}&near=${near}`)).places; nearbyCache.set(key, places); }
-    catch(e){ if(tok===nearbyTok) renderNearby(c, null, /allowance|too many/i.test(e.message) ? e.message.replace(/^./,ch=>ch.toUpperCase()) : 'TomTom is not answering right now'); return; }
+    catch(e){ if(tok===nearbyTok) renderNearby(c, null, placeFailText(e.message).replace('Camera search still works.','')); return; }
   }
   if(tok!==nearbyTok) return;
   renderNearby(c, places.map(p=>({...p, kind:'place', category:c.label, nb:c})));
@@ -2388,13 +2446,20 @@ function schedulePlaces(q){
     placeBusy.add(q);
     const c=map.getCenter();
     try{ placeCache.set(q, (await navGet(`/search?q=${encodeURIComponent(q)}&near=${c.lat.toFixed(5)},${c.lng.toFixed(5)}`)).places.map(p=>({...p, kind:'place'}))); }
-    catch(e){ placeFail.add(q); console.warn('place search failed:', e.message); }
+    catch(e){ placeFail.add(q); placeFailWhy.set(q, placeFailText(e.message)); console.warn('place search failed:', e.message); }
     placeBusy.delete(q);
     // whichever box asked, the main search or a From/To field, redraws if it still shows this query
     const a=document.activeElement;
     if(a && a.id==='search' && a.value.trim()===q) runSearch(a.value);
     if(a && a.classList.contains('dir-field') && a.value.trim()===q) renderSuggest(a);
   }, 350);
+}
+const placeFailWhy=new Map();
+// a refusal from the monthly cap or the hourly budget says so; anything else is TomTom not answering
+function placeFailText(m){
+  if(/allowance/i.test(m)) return 'Place search is paused for the rest of the month. Camera search still works.';
+  if(/too many/i.test(m)) return 'Too many place searches from here this hour. Camera search still works.';
+  return 'TomTom is not answering right now';
 }
 const placeState=(q)=> q.length<3 ? null : placeCache.has(q) ? 'done' : placeFail.has(q) ? 'fail' : 'busy';
 
@@ -2597,7 +2662,7 @@ async function startDirections(){
   const p=nav.place; if(!p) return;
   clearSelection();                                   // the phone's place sheet gives way to the route sheet
   nav.mode='dir'; nav.to={lngLat:[p.lon,p.lat], label:p.name};
-  if(!nav.from){ const me=await myPosition(); nav.from= me ? {lngLat:me, label:'Your location', me:true} : null; }
+  if(!nav.from){ const me=await myPosition(); nav.from= me ? {lngLat:me, label:'Your location', me:true} : null; nav.locOff=!me; }
   renderDir();
   if(!nav.from){ focusField('from'); return; }
   planRoutes();
@@ -2650,7 +2715,7 @@ function renderSuggest(field){
   if(st==='done') hits.push(...placeCache.get(q)); else if(st==='busy') schedulePlaces(q);
   box.innerHTML=hits.map((h,i)=>`<div class="sr-item" data-i="${i}"><span class="sr-ic${h.kind==='me'?' me':''}">${h.kind==='me'?ICON.me:ICON.pin}</span>
       <span class="sr-txt"><span class="sr-t">${esc(h.name)}</span>${h.address?`<span class="sr-s">${esc(h.address)}</span>`:''}</span></div>`).join('')
-    + (st==='busy' ? `<div class="sr-empty">Searching places…</div>` : st==='fail' ? `<div class="sr-empty">TomTom is not answering right now</div>` : '');
+    + (st==='busy' ? `<div class="sr-empty">Searching places…</div>` : st==='fail' ? `<div class="sr-empty">${esc(placeFailWhy.get(q)||'TomTom is not answering right now')}</div>` : '');
   // pointerdown, not click: picking must win the race with the field's blur
   box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('pointerdown',(e)=>{ e.preventDefault(); setEnd(end, hits[+it.dataset.i]); }));
 }
@@ -2821,7 +2886,7 @@ function renderRoutes(msg){
   const tagOf=(r,diff)=> !many ? '' : diff<30 ? '<span class="rt-badge">Fastest</span>'
     : (r.meters===shortM && top.meters-r.meters>=800) ? '<span class="rt-badge alt">Shortest</span>'
     : (r.delaySeconds===calm && top.delaySeconds-r.delaySeconds>=120) ? '<span class="rt-badge alt">Least traffic</span>' : '';
-  const rows=msg ? `<div class="dir-msg">${esc(msg)}</div>` : !nav.from ? `<div class="dir-msg">Choose a starting point to see routes.</div>` : nav.routes.map((r,i)=>{
+  const rows=msg ? `<div class="dir-msg">${esc(msg)}</div>` : !nav.from ? `<div class="dir-msg">${nav.locOff ? 'Location is off for this site, so choose a starting point to see routes.' : 'Choose a starting point to see routes.'}</div>` : nav.routes.map((r,i)=>{
     const sel=i===nav.sel, tc=trafficClass(r), down=r.cams ? r.cams.filter(c=>c.down).length : 0;
     const diff=r.seconds-fastest;
     const l3=tagOf(r,diff) + (diff>=30 ? `<span class="rt-dim">${fmtTime(diff)} slower</span>` : '')
@@ -3287,10 +3352,15 @@ document.getElementById('rvCopy').addEventListener('click',async ()=>{
 wireSheet();
 // mobile expands the collapsed-by-default panel; desktop collapses the always-open one — one
 // button, the gesture that makes sense for the viewport
-document.getElementById('panelToggle').addEventListener('click',()=>{
+const layersBtn=document.getElementById('panelToggle');
+function syncLayersBtn(){ const p=document.getElementById('panel'), open=isMobile() ? p.classList.contains('expanded') : !p.classList.contains('collapsed');
+  layersBtn.setAttribute('aria-expanded', String(open)); layersBtn.innerHTML='Layers '+(open?'&#9652;':'&#9662;'); }
+layersBtn.addEventListener('click',()=>{
   const p=document.getElementById('panel');
-  p.classList.toggle(isMobile()?'expanded':'collapsed');
+  p.classList.toggle(isMobile()?'expanded':'collapsed'); syncLayersBtn();
 });
+new MutationObserver(syncLayersBtn).observe(document.getElementById('panel'),{attributes:true, attributeFilter:['class']});
+syncLayersBtn();
 // touching the map puts the drawer away, the way every phone map app does
 map.getCanvas().addEventListener('pointerdown',()=>{ if(isMobile()) document.getElementById('panel').classList.remove('expanded'); });
 // search + keyboard nav
@@ -3314,6 +3384,8 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.search-wrap')) hid
 document.addEventListener('keydown',(e)=>{
   if(e.key!=='Escape' || (e.target.matches && e.target.matches('input'))) return;
   if(store.mode==='media-enlarged') return;
+  const am=document.querySelector('.avoid-menu');
+  if(am && !am.hidden){ am.hidden=true; const c=document.querySelector('[data-avoid]'); if(c){ c.setAttribute('aria-expanded','false'); c.focus(); } return; }
   const sr=document.getElementById('search-results');
   if(sr.classList.contains('show')){ hideResults(); return; }
   if(store.selected){ clearSelection(); return; }
