@@ -53,7 +53,7 @@ test('shapeRoutes joins every leg into one [lon, lat] line with its time and del
     summary: { travelTimeInSeconds: 1500, trafficDelayInSeconds: 360, noTrafficTravelTimeInSeconds: 1140, lengthInMeters: 29000 },
     legs: [{ points: [{ latitude: 47.6, longitude: -122.3 }, { latitude: 47.5, longitude: -122.31 }] }, { points: [{ latitude: 47.4, longitude: -122.32 }] }],
   }] });
-  assert.deepEqual(routes, [{ seconds: 1500, delaySeconds: 360, noTrafficSeconds: 1140, historicSeconds: null, meters: 29000, coords: [[-122.3, 47.6], [-122.31, 47.5], [-122.32, 47.4]], legs: [{ seconds: 0, meters: 0, delaySeconds: 0, historicSeconds: null }, { seconds: 0, meters: 0, delaySeconds: 0, historicSeconds: null }], traffic: [], via: [], tolls: false }]);
+  assert.deepEqual(routes, [{ seconds: 1500, delaySeconds: 360, noTrafficSeconds: 1140, historicSeconds: null, meters: 29000, departTime: null, arriveTime: null, coords: [[-122.3, 47.6], [-122.31, 47.5], [-122.32, 47.4]], legs: [{ seconds: 0, meters: 0, delaySeconds: 0, historicSeconds: null }, { seconds: 0, meters: 0, delaySeconds: 0, historicSeconds: null }], traffic: [], via: [], tolls: false }]);
 });
 
 test('shapeRoutes grades traffic sections and names the roads by importance', () => {
@@ -172,7 +172,7 @@ test('nearbyUrl searches one Find Nearby category around a point, US only', () =
   assert.equal(u.searchParams.get('lat'), '47.6');
   assert.equal(u.searchParams.get('countrySet'), 'US');
   assert.equal(t.nearbyUrl('K', 'casino', { lat: 47.6, lon: -122.3 }), null);
-  assert.deepEqual(Object.keys(t.NEARBY), ['gas', 'ev', 'food', 'coffee', 'rest', 'parking']);
+  assert.deepEqual(Object.keys(t.NEARBY), ['gas', 'ev', 'food', 'coffee', 'rest', 'parking', 'grocery', 'pharmacy']);
 });
 
 test('shapePlaces carries the distance TomTom measured from the search point', () => {
@@ -295,4 +295,55 @@ test('the shared handler searches along a route posted by the page', async () =>
     assert.deepEqual(used, ['search']);
     assert.equal((await h('/along', new URLSearchParams('cat=gas'), 'nope')).status, 400);
   } finally { global.fetch = real; }
+});
+
+test('parseWhen reads one local time to leave at or arrive by, and refuses anything else', () => {
+  assert.deepEqual(t.parseWhen(null, null), {});
+  assert.deepEqual(t.parseWhen('2026-11-11T08:00', null), { departAt: '2026-11-11T08:00:00' });
+  assert.deepEqual(t.parseWhen(null, '2026-11-11T09:30'), { arriveAt: '2026-11-11T09:30:00' });
+  assert.equal(t.parseWhen('2026-11-11T08:00', '2026-11-11T09:00'), null);   // never both
+  for (const bad of ['2026-02-30T08:00', '2026-11-11T24:00', '2026-11-11T08:60', '2026-11-11 08:00', 'now', '2026-11-11T08:00:00Z', '2026-11-11T08:00-05:00'])
+    assert.equal(t.parseWhen(bad, null), null, bad);
+});
+
+test('routeUrl leaves now by default, or at a set time, or arrives by one, never both', () => {
+  const a = { lat: 40.7, lon: -74 }, b = { lat: 40.8, lon: -73.9 };
+  const now = new URL(t.routeUrl('K', a, b));
+  assert.equal(now.searchParams.get('departAt'), 'now');
+  assert.equal(now.searchParams.get('arriveAt'), null);
+  const at = new URL(t.routeUrl('K', a, b, { when: { departAt: '2026-11-11T08:00:00' } }));
+  assert.equal(at.searchParams.get('departAt'), '2026-11-11T08:00:00');
+  const by = new URL(t.routeUrl('K', a, b, { when: { arriveAt: '2026-11-11T09:00:00' } }));
+  assert.equal(by.searchParams.get('arriveAt'), '2026-11-11T09:00:00');
+  assert.equal(by.searchParams.get('departAt'), null);
+  assert.equal(by.searchParams.get('maxAlternatives'), '2');
+});
+
+test('shapeRoutes carries when the drive leaves and gets in', () => {
+  const [r] = t.shapeRoutes({ routes: [{ summary: { travelTimeInSeconds: 1500, departureTime: '2026-11-11T08:35:00-05:00', arrivalTime: '2026-11-11T09:00:00-05:00' }, legs: [], sections: [] }] });
+  assert.equal(r.departTime, '2026-11-11T08:35:00-05:00');
+  assert.equal(r.arriveTime, '2026-11-11T09:00:00-05:00');
+});
+
+test('the shared handler passes Arrive by on to TomTom and refuses a bad time without a call', async () => {
+  const { makeHandler } = require('./tomtom-serve');
+  let asked = '', calls = 0;
+  const real = global.fetch;
+  global.fetch = async (url) => { calls++; asked = String(url); return new Response(JSON.stringify({ routes: [] })); };
+  try {
+    const h = makeHandler({ key: 'K', use: () => true });
+    await h('/route', new URLSearchParams('from=47.6,-122.3&to=47.2,-122.4&by=2026-11-11T09:00'));
+    assert.ok(asked.includes('arriveAt=2026-11-11T09%3A00%3A00'));
+    assert.ok(!asked.includes('departAt'));
+    const bad = await h('/route', new URLSearchParams('from=47.6,-122.3&to=47.2,-122.4&at=tomorrow'));
+    assert.equal(bad.status, 400);
+    assert.equal(calls, 1);
+  } finally { global.fetch = real; }
+});
+
+test('Find Nearby has the errands on the way home: groceries and a pharmacy', () => {
+  const g = new URL(t.nearbyUrl('K', 'grocery', { lat: 40.7, lon: -74 }));
+  assert.equal(g.searchParams.get('categorySet'), '7332005,9361023');
+  const p = new URL(t.alongUrl('K', 'pharmacy'));
+  assert.equal(p.searchParams.get('categorySet'), '7326,9361051');
 });

@@ -55,9 +55,28 @@ function parseVia(s) {
   return pts.every(Boolean) ? pts : null;
 }
 
+// Leave at / Arrive by: the page sends at=<local time> to leave then, or by=<local time> to
+// arrive then, never both, as YYYY-MM-DDTHH:MM with no zone. TomTom reads a time with no
+// offset in the origin's zone (departAt) or the destination's (arriveAt), which is the clock the
+// driver means. Returns {} for now, {departAt} or {arriveAt}, or null when the value is not a
+// real date and time.
+const WHEN = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/;
+function parseWhen(at, by) {
+  if (at && by) return null;
+  const v = at || by;
+  if (!v) return {};
+  const m = WHEN.exec(String(v));
+  if (!m) return null;
+  const [y, mo, d, h, mi] = m.slice(1).map(Number);
+  const dt = new Date(Date.UTC(y, mo - 1, d, h, mi));
+  if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== mo - 1 || dt.getUTCDate() !== d || h > 23 || mi > 59) return null;
+  const t = `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:00`;
+  return at ? { departAt: t } : { arriveAt: t };
+}
+
 // opts.via: the stops in order. opts.optimize: let TomTom pick the order of the stops (one call,
 // "a fast heuristic", shortest distance, not guaranteed best). TomTom refuses alternatives with
-// it, so an optimized answer is one route.
+// it, so an optimized answer is one route. opts.when: parseWhen's answer.
 function routeUrl(key, from, to, opts = {}) {
   const via = opts.via || [];
   const best = !!opts.optimize && via.length >= 2;
@@ -66,6 +85,9 @@ function routeUrl(key, from, to, opts = {}) {
     computeTravelTimeFor: 'all', travelMode: 'car', departAt: 'now',
   });
   if (best) p.set('computeBestOrder', 'true');
+  const when = opts.when || {};
+  if (when.departAt) p.set('departAt', when.departAt);
+  else if (when.arriveAt) { p.delete('departAt'); p.set('arriveAt', when.arriveAt); }
   // traffic sections colour the line itself (slow and jammed stretches), the important road
   // stretches name the roads that tell one route from another ("via I-5"), and toll road
   // sections say which routes cost money
@@ -79,7 +101,10 @@ function routeUrl(key, from, to, opts = {}) {
 
 // Find Nearby: the stops people make on the way (gas, food, coffee, a rest area, parking),
 // which both Apple Maps case studies found are what an in-app search is mostly used for.
-// TomTom POI category ids, checked against /search/2/poiCategories on 2026-11-09.
+// TomTom POI category ids, checked against /search/2/poiCategories on 2026-11-09. Groceries and
+// Pharmacy are the errands on the way home; their ids are TomTom's own (SUPERMARKET 7332005,
+// GROCERY_STORE 9361023, PHARMACY 7326, DRUG_STORE 9361051 in @tomtom-org/maps-sdk 1.0.0's
+// category table, read 2026-11-10).
 const NEARBY = {
   gas: { label: 'Gas', ids: '7311' },
   ev: { label: 'EV charging', ids: '7309' },
@@ -87,6 +112,8 @@ const NEARBY = {
   coffee: { label: 'Coffee', ids: '9376002,9376006' },
   rest: { label: 'Rest areas', ids: '7395' },
   parking: { label: 'Parking', ids: '7313,7369' },
+  grocery: { label: 'Groceries', ids: '7332005,9361023' },
+  pharmacy: { label: 'Pharmacy', ids: '7326,9361051' },
 };
 // Find Nearby along a route: places within a 15 minute detour, spread along the whole line
 // rather than bunched at the start. The page sends a thinned line (2 to 300 points).
@@ -176,6 +203,9 @@ function shapeRoutes(json) {
       // what this trip usually takes at this hour, from TomTom's history (computeTravelTimeFor=all)
       historicSeconds: s.historicTrafficTravelTimeInSeconds || null,
       meters: s.lengthInMeters || 0,
+      // when this drive leaves and gets in, in the local time of each end ("2026-11-11T08:21:40-05:00")
+      departTime: s.departureTime || null,
+      arriveTime: s.arrivalTime || null,
       coords,
       // one entry per stretch between stops, for the time and miles under each stop
       legs: (r.legs || []).map((l) => { const ls = l.summary || {};
@@ -239,4 +269,4 @@ function rateAllow(buckets, ip, kind, now = Date.now()) {
   return { ok: true, retryAfter: 0 };
 }
 
-module.exports = { FREE, PER_HOUR, AVOID, NEARBY, MAX_STOPS, parseAvoid, parseVia, nearbyUrl, alongUrl, parseAlongPoints, shapeOrder, parseLatLon, searchUrl, routeUrl, parseTile, tileUrl, shapePlaces, shapeRoutes, scrub, originAllowed, countUse, clientIp, rateAllow };
+module.exports = { FREE, PER_HOUR, AVOID, NEARBY, MAX_STOPS, parseAvoid, parseVia, parseWhen, nearbyUrl, alongUrl, parseAlongPoints, shapeOrder, parseLatLon, searchUrl, routeUrl, parseTile, tileUrl, shapePlaces, shapeRoutes, scrub, originAllowed, countUse, clientIp, rateAllow };
