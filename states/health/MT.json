@@ -1,6 +1,12 @@
 {
-"checked_at": "2026-11-10T07:33:02Z",
+"checked_at": "2026-11-10T19:58:43Z",
 "cameras": 422,
-"counts": {},
-"status": {}
+"counts": {
+"frozen": 3
+},
+"status": {
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Sioux-Pass-302004-00-11-9-2026-7-30-3.jpg": "frozen",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Sioux-Pass-302004-01-11-9-2026-7-30-3.jpg": "frozen",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Sioux-Pass-302004-02-11-9-2026-7-15-6.jpg": "frozen"
+}
 }

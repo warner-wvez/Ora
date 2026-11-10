@@ -1,14 +1,12 @@
 {
-"checked_at": "2026-11-10T07:39:04Z",
+"checked_at": "2026-11-10T20:05:02Z",
 "cameras": 1116,
 "counts": {
-"frozen": 27,
-"offline": 2
+"frozen": 25,
+"offline": 1
 },
 "status": {
-"https://itscameras.dot.state.oh.us/images/CMH/CMH055.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH081.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH092.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/9mile67.jpg": "frozen",
@@ -27,7 +25,6 @@
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/D05-037.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4169.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4190.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Britton_Blvd.jpg": "frozen",
