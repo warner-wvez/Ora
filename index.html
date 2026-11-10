@@ -147,8 +147,19 @@
     background: rgba(28,28,30,0.92); color: #fff; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 999px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; white-space: nowrap; }
   #keyHint.show { display: block; }
+  /* offline: one line says so and how old the pictures are; each camera keeps its last frame
+     with the time it arrived instead of turning into a broken image */
+  #netBanner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 45; display: none;
+    background: #1c1c1e; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 999px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; width: max-content; max-width: calc(100vw - 32px); text-align: center; }
+  #netBanner.show { display: block; animation: fadeSlide .2s cubic-bezier(.2,.8,.2,1); }
+  #netBanner.back { background: #1a7f37; }
+  .frame-at { position: absolute; right: 8px; top: 8px; z-index: 3; font-size: 11px; font-weight: 700; color: #fff; background: rgba(0,0,0,.72); padding: 2px 7px; border-radius: 4px; }
+  .popup-imgwrap .frame-at { top: auto; right: auto; bottom: 8px; left: 8px; }   /* clear of the sheet's close button and Enlarge */
+  .off-net { display: none; } .net .off-cam { display: none; } .net .off-net { display: inline; }
   @media (max-width: 640px) {
     #cycleNote { top: 96px; }                 /* clear of the collapsed phone panel */
+    #netBanner { position: fixed; top: calc(var(--panelB, 116px) + 8px); }
     .cam-arrow { min-height: 40px; min-width: 46px; }
   }
 
@@ -740,6 +751,7 @@
 <div id="map"></div>
 <div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
 <div id="cycleNote"></div>
+<div id="netBanner" role="status"></div>
 <div id="keyHint" aria-hidden="true">Arrow keys move the map · + and - zoom</div>
 <div id="previewBar"><span id="previewTxt"></span><button id="previewStop">Stop</button></div>
 
@@ -957,6 +969,38 @@ const map=new maplibregl.Map({ container:'map', style:`https://api.maptiler.com/
 { const cv=map.getCanvas(), hint=document.getElementById('keyHint');
   cv.addEventListener('focus',()=>{ if(cv.matches(':focus-visible')) hint.classList.add('show'); });
   cv.addEventListener('blur',()=>hint.classList.remove('show')); }
+
+/* ---------- offline ----------
+   While the connection is down nothing asks for a new image, so each camera keeps its last
+   frame, stamped with the time it arrived, instead of turning into a broken image. One line
+   says Ora is offline and how old the pictures are. Back online, every camera on screen
+   (the open one, the enlarged one, the route view) asks for its newest image at once. */
+let netOff=!navigator.onLine, netBackT=null;
+const camRefresh=new Map();          // name -> redraw the cameras it shows, now
+const clockTime=(t)=>new Date(+t).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+function frameOk(im){ im.dataset.ok=im.src; im.dataset.okAt=Date.now(); }
+function imgLoad(im){ frameOk(im); const w=im.parentElement; w.classList.remove('err','net'); w.classList.add('loaded'); }
+function imgFail(im){
+  const w=im.parentElement, off=netOff || !navigator.onLine;
+  // a request that was already out when the connection dropped: put the last good frame back
+  if(off && im.dataset.ok && im.src!==im.dataset.ok){ im.src=im.dataset.ok; return; }
+  w.classList.add('err'); w.classList.toggle('net', off);
+}
+function setNetBanner(){
+  const b=document.getElementById('netBanner');
+  clearTimeout(netBackT); b.classList.remove('back');
+  document.querySelectorAll('.frame-at').forEach(x=>x.remove());
+  if(!netOff){ b.textContent='Back online. Getting the newest images.'; b.classList.add('show','back');
+    netBackT=setTimeout(()=>b.classList.remove('show','back'), 2500); return; }
+  const shown=[...document.querySelectorAll('img[data-ok-at]')].filter(im=>im.isConnected && im.offsetParent && im.closest('.popup-imgwrap, .rv-media'));
+  shown.forEach(im=>{ if(!im.parentElement.classList.contains('err')) im.parentElement.insertAdjacentHTML('beforeend', `<span class="frame-at">${clockTime(im.dataset.okAt)}</span>`); });
+  const newest=Math.max(0, ...shown.map(im=>+im.dataset.okAt));
+  b.textContent = newest ? `Offline. Images are from ${clockTime(newest)}.` : 'Offline. Cameras and search come back when you reconnect.';
+  b.classList.add('show');
+}
+window.addEventListener('offline',()=>{ netOff=true; setNetBanner(); });
+window.addEventListener('online',()=>{ netOff=false; setNetBanner(); camRefresh.forEach(f=>{ try{ f(); }catch(e){} }); });
+if(netOff) requestAnimationFrame(setNetBanner);
 /* Momentum after a drag, closer to how Apple's maps glide. MapLibre's glide starts at
    linearity x 1.67 of the finger's speed (its default 0.3 starts at half speed, a brake at
    release) and runs speed/deceleration seconds. At 0.6 the glide starts at the finger's speed,
@@ -1290,14 +1334,14 @@ function mediaHTML(dir, cfg){
   // video cameras show the snapshot instantly as a poster, then the live video fades in over it
   // Texas streams have no snapshot at all, so the video fades in over a dark backdrop instead
   if(live) return `<div class="popup-imgwrap${src?'':' noposter'}"><span class="live-badge">● LIVE</span>
-    ${src?`<img class="poster" src="${src}" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('err')">`:''}
+    ${src?`<img class="poster" src="${src}" onload="frameOk(this);this.parentElement.classList.add('loaded')" onerror="imgFail(this)">`:''}
     <video id="popup-vid" class="vid" muted autoplay playsinline></video>
-    <div class="img-offline">&#9888;<span>Camera offline</span></div>
+    <div class="img-offline">&#9888;<span class="off-cam">Camera offline</span><span class="off-net">No connection</span></div>
     <button class="enlarge-btn" title="Enlarge" data-enlarge>&#10530;</button></div>`;
   // no still to fall back on: either a video-only camera this browser cannot play, or a
   // location-only pin (camera exists, no feed published) — say which, do not imply it is broken
   if(!src) return `<div class="popup-imgwrap err noposter"><div class="img-offline">&#9888;<span>${dir.video?'Live video unsupported here':'No live image at this camera'}</span></div></div>`;
-  return `<div class="popup-imgwrap"><img id="popup-img" src="${src}" onload="this.parentElement.classList.remove('err');this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('err')"><div class="img-offline">&#9888;<span>Camera offline</span></div>
+  return `<div class="popup-imgwrap"><img id="popup-img" src="${src}" onload="imgLoad(this)" onerror="imgFail(this)"><div class="img-offline">&#9888;<span class="off-cam">Camera offline</span><span class="off-net">No connection</span></div>
     <button class="enlarge-btn" title="Enlarge" data-enlarge>&#10530;</button></div>`;
 }
 // WSDOT is the only source that publishes which way a camera looks, and the only one
@@ -1444,7 +1488,7 @@ function wireCameraUI(el, props, cfg, token){
   let idx=0;
   // snapshot refresh runs through the single global popupTimer that destroyPopupHls owns
   const snapLoop=(dir)=>{ if(canPlayVideo(dir,cfg)) return;
-    popupTimer=setInterval(()=>{ if(!selectionAlive(token)) return; const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg)); };
+    popupTimer=setInterval(()=>{ if(!selectionAlive(token) || netOff) return; const im=el.querySelector('#popup-img'); if(im) im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg)); };
   const render=()=>{ // rebuild media element for current dir
     if(!selectionAlive(token)) return;                  // a newer tap owns the selection now
     const dir=props.directions[idx];
@@ -1460,6 +1504,9 @@ function wireCameraUI(el, props, cfg, token){
   };
   playDir(props.directions[0],cfg,el,token);
   snapLoop(props.directions[0]);
+  // back online: a still swaps in its newest frame, a video starts over
+  camRefresh.set('popup', ()=>{ if(!selectionAlive(token)) return; const dir=props.directions[idx], im=el.querySelector('#popup-img');
+    if(im && !canPlayVideo(dir,cfg)) im.src=cfg.snap(dir); else render(); });
   el.querySelectorAll('.dir-btn').forEach(btn=>btn.addEventListener('click',()=>{
     idx=parseInt(btn.dataset.idx,10);
     el.querySelectorAll('.dir-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
@@ -1627,8 +1674,8 @@ function buildEnlarge({dir, cfg, props}){
     const im=ov.querySelector('img');
     watchRes(im, ov, RES_SNAP, resKey(dir));
     im.addEventListener('load', ready);
-    im.addEventListener('error',()=>showEnlargeFail(ov,'This camera is not answering right now'));
-    timer=setInterval(()=>{ im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg));
+    im.addEventListener('error',()=>showEnlargeFail(ov, netOff ? 'No connection. The picture comes back when you reconnect.' : 'This camera is not answering right now'));
+    timer=setInterval(()=>{ if(!netOff) im.src=cfg.snap(dir); }, refreshMsFor(dir,cfg));
   }
   const onkey=(e)=>{
     if(e.key==='Escape'){ closeEnlarge(); return; }
@@ -2522,7 +2569,10 @@ const ICON={
 };
 const FC=(features)=>({type:'FeatureCollection',features});
 async function navGet(path){
-  const r=await fetch(NAV_BASE+path), j=await r.json().catch(()=>({}));
+  let r;
+  try{ r=await fetch(NAV_BASE+path); }
+  catch(e){ throw new Error(navigator.onLine ? 'TomTom is not answering right now' : 'no connection. Try again once you are back online'); }
+  const j=await r.json().catch(()=>({}));
   if(!r.ok) throw new Error(j.error||`HTTP ${r.status}`);
   return j;
 }
@@ -2587,6 +2637,7 @@ function schedulePlaces(q){
 const placeFailWhy=new Map();
 // a refusal from the monthly cap or the hourly budget says so; anything else is TomTom not answering
 function placeFailText(m){
+  if(!navigator.onLine || /no connection/i.test(m)) return 'No connection. Place search works again once you are back online.';
   if(/allowance/i.test(m)) return 'Place search is paused for the rest of the month. Camera search still works.';
   if(/too many/i.test(m)) return 'Too many place searches from here this hour. Camera search still works.';
   return 'TomTom is not answering right now';
@@ -3543,9 +3594,9 @@ function renderRouteView(ctx){
       // legacy routes saved before camId was persisted fall back to any stored snapshot, else the placeholder
       const src = c.k==='nyc-cam' ? (c.camId ? `https://webcams.nyctmc.org/api/cameras/${c.camId}/image` : (c.snapshot||null)) : c.snapshot;
       return `<div class="rv-tile" title="Show on the map"><div class="rv-media${src?' has-src':''}" data-src="${src||''}">${c.video?'<span class="rv-live">● LIVE</span>':''}
-        ${src?`<img loading="lazy" onload="this.parentElement.classList.remove('err');this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('err')">`
+        ${src?`<img loading="lazy" onload="imgLoad(this)" onerror="imgFail(this)">`
              :`<div class="rv-nosnap">Live video<span>tap to watch on the map</span></div>`}
-        <div class="rv-off">&#9888; Offline</div></div>
+        <div class="rv-off">&#9888;&nbsp;<span class="off-cam">Offline</span><span class="off-net">No connection</span></div></div>
         <div class="rv-cap"><span class="rv-nm">${c.name}</span><button type="button" class="rv-rm" title="Remove" aria-label="Remove ${String(c.name).replace(/"/g,'&quot;')} from this route">&times;</button></div></div>`;
     }).join('');
     rvRenderedFor=id;
@@ -3595,8 +3646,12 @@ function installRvLoader(body){
   const pump=()=>{ while(inFlight<6 && queue.length){ const m=queue.shift(), img=m.querySelector('img'); if(!img) continue;
       inFlight++; const done=()=>{ inFlight--; img.removeEventListener('load',done); img.removeEventListener('error',done); pump(); };
       img.addEventListener('load',done); img.addEventListener('error',done); bust(m); } };
-  const enqueue=(m)=>{ if(m.dataset.src && !queue.includes(m)) queue.push(m); pump(); };
+  const enqueue=(m)=>{
+    // offline: ask for nothing; a tile that never loaded says so, the rest keep their last frame
+    if(netOff){ const img=m.querySelector('img'); if(img && !img.dataset.ok) m.classList.add('err','net'); return; }
+    if(m.dataset.src && !queue.includes(m)) queue.push(m); pump(); };
   const refresh=()=>visible.forEach(enqueue);
+  camRefresh.set('route', ()=>{ if(rvIO) refresh(); });
   if(rvIO) rvIO.disconnect();
   rvIO=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ visible.add(e.target); enqueue(e.target); } else visible.delete(e.target); }), {rootMargin:'150px'});
   body.querySelectorAll('.rv-media[data-src]').forEach(m=>rvIO.observe(m));

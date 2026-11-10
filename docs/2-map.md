@@ -78,6 +78,16 @@ ticket map with its filters. States are not in it, because they follow the view:
 the link at the same position loads the same states. "Copy link" copies it. Older links
 that name states (`#l=st-WA`) still open on the same view.
 
+## Offline
+
+When the connection drops, one line at the top says so and how old the pictures are
+("Offline. Images are from 4:12 PM."). Nothing asks for a new image while offline, so each
+camera keeps its last frame, with the time it arrived in a corner, instead of turning into a
+broken image. A camera that never loaded says "No connection" rather than "Camera offline",
+and place search says it needs a connection. Back online, the line says so for a moment and
+every camera on screen (the open one, the enlarged one, the route view) gets its newest image
+at once. Slow answers already say what is happening: "Finding routes...", "Searching...".
+
 ## On a phone
 
 The sidebar becomes a bottom sheet with two heights, swipe or tap to change, and the top

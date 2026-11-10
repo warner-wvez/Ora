@@ -29,6 +29,9 @@ commits are not listed.
   usual for this time."), and failed route requests too. The grip on each phone sheet is a
   real button with a name: tap it, or press Enter, to switch the sheet's height. The map tells
   keyboard users that arrows pan and + and - zoom.
+- Offline, a line says so and how old the pictures are, and each camera keeps its last frame
+  with its time instead of a broken image. Back online, every camera on screen refreshes at
+  once. Place search and routes say "No connection" instead of "TomTom is not answering".
 
 ### Fixed
 - The tall phone route sheet stops under the trip card. Before, the card's height was read
