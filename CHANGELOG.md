@@ -4,6 +4,15 @@ All notable changes to Ora. The format follows keepachangelog.com; dates are the
 change landed on main, and each line ends with its commit. The six-hourly health-sweep
 commits are not listed.
 
+## 2026-11
+
+### Added
+- Place search and route preview are on the live site: search a place or an address, open
+  its card, and compare two or three routes by trip time, traffic delay and the cameras on
+  each, with traffic colours on the roads. TomTom's APIs answer through the relay, which
+  holds the key on the VPS, caps each month inside TomTom's free allowance and gives each
+  address an hourly budget. Still a preview, not turn-by-turn.
+
 ## 2026-10
 
 ### Added

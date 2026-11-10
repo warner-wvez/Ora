@@ -338,7 +338,7 @@
     .rv-rm, .rx { padding: 10px 10px; font-size: 17px; }
   }
 
-  /* ---------- route preview (TomTom evaluation, this machine only) ----------
+  /* ---------- route preview (TomTom) ----------
      Laid out the way Google Maps (desktop) and Apple Maps (phone) do it: a place card with one
      big Directions button, a From/To pair joined by a rail with a swap button, and route rows
      that lead with a time coloured by traffic, then the roads, then the cameras. On a phone the
@@ -559,7 +559,7 @@
   <div id="sheetContent"></div>
 </div>
 
-<!-- route options on a phone, under the map (route preview, this machine only) -->
+<!-- route options on a phone, under the map (route preview) -->
 <div id="dirSheet"><div class="ds-grip"><div class="grip-bar"></div></div><div class="ds-body"></div></div>
 
 <div id="routeView">
@@ -579,7 +579,7 @@
     <button id="searchClear" class="search-x" aria-label="Clear search"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
     <div id="search-results"></div>
   </div>
-  <!-- the place card and directions (route preview), filled by showPlace and renderDir; only ever shown on this machine (see NAV_BASE) -->
+  <!-- the place card and directions (route preview), filled by showPlace and renderDir; shown only when the TomTom server answers (see NAV_BASE) -->
   <div id="dirBox" hidden></div>
 
   <div class="grp collapsed" data-region="routes">
@@ -2143,14 +2143,14 @@ async function pickSearch(h){
   // a search pick navigates and shows — it never silently adds to a route mid-add-mode
   map.flyTo({center:h.coords,zoom:15,duration:800}); selectFeature(h.k,h.feature,{noAutoAdd:true}); }
 
-/* ---------- route preview (TomTom evaluation, this machine only) ----------
+/* ---------- route preview (TomTom) ----------
    Search a place or an address, open its card, ask for directions, and compare two or three
    routes by trip time, traffic delay and how many of Ora's cameras sit on each. It is a
-   preview: no turn-by-turn, no following your position, no rerouting. Everything here is for
-   testing on this machine under TomTom's evaluation terms. It turns on only when the page
-   itself is served from localhost and the local proxy (tools/tomtom-eval/proxy.js, which holds
-   the key) answers, so the live site never calls TomTom. The proxy hands back Ora's own small
-   shapes, so another provider can replace it.
+   preview: no turn-by-turn, no following your position, no rerouting. The page never holds a
+   TomTom key: the live site calls the relay (relay.wvez.org/tt) and a page served from this
+   machine calls the local proxy (tools/tomtom-eval/proxy.js), and each adds the key on its
+   side. The features turn on only when that server's /healthz says it has a key. Both hand
+   back Ora's own small shapes, so another provider can replace TomTom.
 
    The flow and the map copy what people already know from Google Maps, Apple Maps and Waze:
    a place card with one Directions button; a From/To pair with a swap button; routes listed by
@@ -2158,7 +2158,8 @@ async function pickSearch(h){
    drawn thick and blue with its slow stretches coloured, the others grey; a time bubble pinned
    to each route, tap one to choose it; and the map zooming to the chosen route clear of the
    panel and the sheet. While routes are up, only the chosen route's cameras show. */
-const NAV_BASE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8792' : null;
+const NAV_BASE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8792'
+  : location.hostname==='warner-wvez.github.io' ? 'https://relay.wvez.org/tt' : null;
 // place answers are kept per query for the session, so a late reply or a retyped query never costs a second request
 let navOn=false, placeT=null, camFocus=null;
 const placeCache=new Map(), placeBusy=new Set(), placeFail=new Set();

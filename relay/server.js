@@ -6,6 +6,10 @@
 // GET /healthz                                      -> {ok, cameras cached, session age}
 // GET /<state>/<imageId>/<seN>/<chan>/<file>        -> the upstream file, token added, playlist rewritten
 // GET /nj/<w|t>/<upstream path>                     -> the upstream file, 511nj.org's headers added
+// GET /tt/healthz | /tt/search | /tt/route | /tt/traffic/{z}/{x}/{y}.png
+//                                                   -> TomTom place search, route preview and
+//                                                      traffic tiles, the key added here (see the
+//                                                      TomTom section below)
 //
 // Three states, one shape. Each locks the stream behind a per-camera token minted through
 // the agency's site, and all are on the same vendor platform, so the token dance is the same
@@ -38,7 +42,10 @@
 // in a loop. Never warm a whole state.
 
 const http = require('node:http');
+const fs = require('node:fs');
 const { Readable } = require('node:stream');
+const tt = require('./tomtom');
+const { makeHandler } = require('./tomtom-serve');
 const { parsePath, upstreamUrl, rewritePlaylist, isPlaylist, originAllowed, PASS, parsePassPath, passUrl, rewritePassPlaylist } = require('./relay');
 
 const PORT = Number(process.env.PORT || 8791);
@@ -158,6 +165,51 @@ function tokenFor(state, imageId, force) {
   return p;
 }
 
+// TomTom, for the map's place search and route preview. The key is a file mounted read-only
+// from the VPS: it is read once here, goes only into the upstream URLs, and is scrubbed from
+// every error, so neither the page nor a log ever holds it. Every call needs an allowed
+// Origin (a page on the map; curl and other sites get 403), each address gets an hourly
+// budget (tomtom.js PER_HOUR), and the month's counts persist in /data so the cap survives a
+// redeploy. TOMTOM_SHARE leaves the rest of each free allowance for testing on a laptop with
+// the same key. Nothing TomTom returns is cached here for other visitors (Portal terms 11.4).
+const TT_KEY_FILE = process.env.TOMTOM_KEY_FILE || '/run/secrets/tomtom.key';
+const TT_USAGE_FILE = process.env.TOMTOM_USAGE_FILE || '/data/tomtom-usage.json';
+const TT_SHARE = Number(process.env.TOMTOM_SHARE || 0.9);
+let ttKey = '';
+try { ttKey = fs.readFileSync(TT_KEY_FILE, 'utf8').trim(); } catch (e) {}
+let ttUsage = null;
+try { ttUsage = JSON.parse(fs.readFileSync(TT_USAGE_FILE, 'utf8')); } catch (e) {}
+let ttSaveWarned = false;
+function ttUse(kind) {
+  const r = tt.countUse(ttUsage, kind, new Date(), TT_SHARE);
+  ttUsage = r.usage;
+  try { fs.writeFileSync(TT_USAGE_FILE, JSON.stringify(ttUsage)); }
+  catch (e) { if (!ttSaveWarned) { ttSaveWarned = true; log(`tomtom usage not saved to ${TT_USAGE_FILE}: ${e.code || e.message}; counts reset on restart`); } }
+  return r.allowed;
+}
+const ttHandle = makeHandler({ key: ttKey, use: ttUse, log: (...a) => log('tomtom', ...a) });
+const ttBuckets = new Map();
+const TT_KIND = (sub) => (sub === '/search' ? 'search' : sub === '/route' ? 'route' : sub.startsWith('/traffic/') ? 'tile' : null);
+
+function sendJson(res, status, body, extra = {}) {
+  res.writeHead(status, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', ...extra });
+  res.end(JSON.stringify(body));
+}
+
+async function serveTomTom(req, res, url, origin) {
+  if (!origin) return sendJson(res, 403, { error: 'origin required' });
+  const sub = url.pathname.slice(3) || '/';
+  if (sub === '/healthz') return sendJson(res, 200, { ok: !!ttKey });
+  if (req.method !== 'GET') return sendJson(res, 405, { error: 'GET only' });
+  const kind = TT_KIND(sub);
+  if (!kind) return sendJson(res, 404, { error: 'not found' });
+  const lim = tt.rateAllow(ttBuckets, tt.clientIp(req.headers, req.socket.remoteAddress), kind);
+  if (!lim.ok) return sendJson(res, 429, { error: 'too many requests from this address, try again later' }, { 'Retry-After': String(lim.retryAfter) });
+  const r = await ttHandle(sub, url.searchParams);
+  res.writeHead(r.status, { 'Content-Type': r.type, 'Cache-Control': r.cache });
+  return res.end(r.body);
+}
+
 function cors(res, origin) {
   res.setHeader('Access-Control-Allow-Origin', origin || '*');
   res.setHeader('Access-Control-Allow-Headers', 'Range');
@@ -205,6 +257,7 @@ async function serve(req, res) {
   if (!originAllowed(origin, ALLOWED)) { res.writeHead(403); return res.end('origin not allowed'); }
   cors(res, origin);
   if (req.method === 'OPTIONS') { res.writeHead(204); return res.end(); }
+  if (url.pathname === '/tt' || url.pathname.startsWith('/tt/')) return serveTomTom(req, res, url, origin);
   if (url.pathname === '/healthz') {
     res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
     return res.end(JSON.stringify({ ok: true, cameras: tokens.size, sessionAgeMin: session.at ? Math.round((Date.now() - session.at) / 60000) : null }));
@@ -234,4 +287,4 @@ const server = http.createServer((req, res) => {
   });
 });
 server.keepAliveTimeout = 65000;
-server.listen(PORT, () => log(`ora relay listening on ${PORT}, allowed origins: ${ALLOWED.join(' ')}`));
+server.listen(PORT, () => log(`ora relay listening on ${PORT}, allowed origins: ${ALLOWED.join(' ')}, tomtom key ${ttKey ? 'loaded' : 'missing'}`));

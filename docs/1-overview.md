@@ -26,7 +26,7 @@ Every state is on the map. [New Jersey](3.31-new-jersey.md), the last, joined on
 | Use the map: layers, search, routes, sharing a view | [The map](2-map.md) |
 | Save the cameras on my commute and scroll through them | [Routes](2.1-routes.md) |
 | See whether Chicago's ticket cameras sit on real danger | [Chicago tickets](2.2-chicago-tickets.md) |
-| Try a route preview with the cameras on each route (this machine only) | [Route preview](2.3-route-preview.md) |
+| Find a place and compare routes with the cameras on each | [Route preview](2.3-route-preview.md) |
 | Know where a state's cameras come from and what they give | [Sources](3-sources.md) |
 | Understand how dead cameras are found | [Camera health](4-camera-health.md) |
 | See why Florida plays through a relay | [The stream relay](1.4-stream-relay.md) |

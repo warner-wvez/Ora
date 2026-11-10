@@ -91,3 +91,54 @@ test('countUse counts per month and stops just short of the free allowance', () 
   r = t.countUse({ month: '2026-10', search: 2450, route: 0, tile: 0 }, 'search', nov);
   assert.deepEqual(r.usage, { month: '2026-11', search: 1, route: 0, tile: 0 });
 });
+
+test('countUse stops at a smaller share when the relay asks for one', () => {
+  const now = new Date('2026-11-09T12:00:00Z');
+  const cap = Math.floor(t.FREE.search * 0.9);
+  assert.equal(t.countUse({ month: '2026-11', search: cap - 1, route: 0, tile: 0 }, 'search', now, 0.9).allowed, true);
+  assert.equal(t.countUse({ month: '2026-11', search: cap, route: 0, tile: 0 }, 'search', now, 0.9).allowed, false);
+});
+
+test('clientIp takes the address Traefik added, not one the caller wrote', () => {
+  assert.equal(t.clientIp({ 'x-forwarded-for': '6.6.6.6, 203.0.113.9' }, '10.0.1.5'), '203.0.113.9');
+  assert.equal(t.clientIp({ 'x-forwarded-for': '203.0.113.9' }, '10.0.1.5'), '203.0.113.9');
+  assert.equal(t.clientIp({}, '10.0.1.5'), '10.0.1.5');
+});
+
+test('rateAllow gives each address an hourly budget per kind of call', () => {
+  const b = new Map(), now = 1_000_000;
+  for (let i = 0; i < t.PER_HOUR.search; i++) assert.equal(t.rateAllow(b, '1.2.3.4', 'search', now).ok, true);
+  const over = t.rateAllow(b, '1.2.3.4', 'search', now + 1000);
+  assert.equal(over.ok, false);
+  assert.equal(over.retryAfter, 3599);
+  assert.equal(t.rateAllow(b, '1.2.3.4', 'route', now).ok, true);       // another kind
+  assert.equal(t.rateAllow(b, '5.6.7.8', 'search', now).ok, true);      // another address
+  assert.equal(t.rateAllow(b, '1.2.3.4', 'search', now + 3600 * 1000).ok, true);  // next hour
+});
+
+test('the shared handler never lets the key out, even in an upstream error', async () => {
+  const { makeHandler } = require('./tomtom-serve');
+  const KEY = 'SECRET-KEY-123';
+  const real = global.fetch;
+  global.fetch = async (url) => new Response(`bad request for ${url}`, { status: 400 });
+  try {
+    const handle = makeHandler({ key: KEY, use: () => true });
+    for (const [p, q] of [['/search', 'q=pike+place'], ['/route', 'from=47.6,-122.3&to=47.2,-122.4'], ['/traffic/10/163/357.png', '']]) {
+      const r = await handle(p, new URLSearchParams(q));
+      assert.ok(r.status >= 400, p);
+      assert.ok(!String(r.body).includes(KEY), `${p} leaked the key`);
+    }
+  } finally { global.fetch = real; }
+});
+
+test('the shared handler refuses to call TomTom once the month is used up', async () => {
+  const { makeHandler } = require('./tomtom-serve');
+  let called = 0;
+  const real = global.fetch;
+  global.fetch = async () => { called++; return new Response('{}'); };
+  try {
+    const r = await makeHandler({ key: 'K', use: () => false })('/search', new URLSearchParams('q=pike+place'));
+    assert.equal(r.status, 429);
+    assert.equal(called, 0);
+  } finally { global.fetch = real; }
+});

@@ -1,10 +1,9 @@
-// Pure logic for the local TomTom evaluation proxy: no network, no state, unit-tested.
+// Pure logic for Ora's TomTom calls: no network, no state, unit-tested.
 //
-// This is for testing a route preview on one laptop, which TomTom's Portal terms call
-// Evaluation Use. It never runs on the live site: the proxy listens on 127.0.0.1 only and holds
-// the key, and the page turns these features on only when it is itself served from localhost
-// and the proxy answers. Production will use another provider, which is why the page sees
-// Ora's own small shapes below and never TomTom's.
+// Two servers use it, and each holds the key so the page never does: the relay
+// (relay.wvez.org/tt, which the live site calls) and the local proxy in tools/tomtom-eval
+// (this machine). The page sees Ora's own small shapes below and never TomTom's, so another
+// provider could replace TomTom without touching the page.
 //
 // Three upstream calls, nothing else:
 //   place search   https://api.tomtom.com/search/2/search/<q>.json
@@ -117,16 +116,43 @@ function shapeRoutes(json) {
 // The key must never reach the page, including inside an upstream error message.
 function scrub(text, key) { return key ? String(text).split(key).join('<key>') : String(text); }
 
-// Only pages served from this machine may call the proxy.
+// Only pages served from this machine may call the local proxy.
 function originAllowed(origin) { return !origin || /^http:\/\/(localhost|127\.0\.0\.1)(:\d{1,5})?$/.test(origin); }
 
-// usage = { month: 'YYYY-MM', search, route, tile }; a new month starts the counts again
-function countUse(usage, kind, now = new Date()) {
+// usage = { month: 'YYYY-MM', search, route, tile }; a new month starts the counts again.
+// share is the part of each free allowance this server may spend: the relay takes less than
+// all of it, so testing on this machine with the same key cannot push the month over.
+function countUse(usage, kind, now = new Date(), share = 0.98) {
   const month = now.toISOString().slice(0, 7);
   const u = (usage && usage.month === month) ? { ...usage } : { month, search: 0, route: 0, tile: 0 };
-  if (u[kind] >= Math.floor(FREE[kind] * 0.98)) return { usage: u, allowed: false };
+  if (u[kind] >= Math.floor(FREE[kind] * share)) return { usage: u, allowed: false };
   u[kind] += 1;
   return { usage: u, allowed: true };
 }
 
-module.exports = { FREE, parseLatLon, searchUrl, routeUrl, parseTile, tileUrl, shapePlaces, shapeRoutes, scrub, originAllowed, countUse };
+// The caller's address behind Traefik, which adds the address it was connected from as the
+// last X-Forwarded-For entry; any earlier entry came from the caller and can say anything.
+function clientIp(headers, remote) {
+  const xff = String((headers && headers['x-forwarded-for']) || '').split(',').map((s) => s.trim()).filter(Boolean);
+  return xff.length ? xff[xff.length - 1] : String(remote || '');
+}
+
+// Calls one address may make in an hour, so one visitor or one script cannot spend the
+// month's free allowance for everyone. Planning a trip takes a few searches and a few routes;
+// panning with traffic on takes a few hundred tiles an hour.
+const PER_HOUR = { search: 60, route: 60, tile: 2000 };
+const HOUR_MS = 3600 * 1000;
+// buckets = Map("<ip>|<kind>" -> {start, n}); returns {ok, retryAfter} with retryAfter in seconds
+function rateAllow(buckets, ip, kind, now = Date.now()) {
+  const k = `${ip}|${kind}`, b = buckets.get(k);
+  if (!b || now - b.start >= HOUR_MS) {
+    if (buckets.size > 20000) for (const [key, v] of buckets) if (now - v.start >= HOUR_MS) buckets.delete(key);
+    buckets.set(k, { start: now, n: 1 });
+    return { ok: true, retryAfter: 0 };
+  }
+  if (b.n >= PER_HOUR[kind]) return { ok: false, retryAfter: Math.ceil((b.start + HOUR_MS - now) / 1000) };
+  b.n += 1;
+  return { ok: true, retryAfter: 0 };
+}
+
+module.exports = { FREE, PER_HOUR, parseLatLon, searchUrl, routeUrl, parseTile, tileUrl, shapePlaces, shapeRoutes, scrub, originAllowed, countUse, clientIp, rateAllow };
