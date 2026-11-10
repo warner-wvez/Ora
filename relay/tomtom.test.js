@@ -24,7 +24,7 @@ test('routeUrl asks for traffic and alternatives and never for turn instructions
   assert.equal(u.searchParams.get('traffic'), 'true');
   assert.equal(u.searchParams.get('maxAlternatives'), '2');
   assert.equal(u.searchParams.get('instructionsType'), null);
-  assert.deepEqual(u.searchParams.getAll('sectionType'), ['traffic', 'importantRoadStretch']);
+  assert.deepEqual(u.searchParams.getAll('sectionType'), ['traffic', 'importantRoadStretch', 'tollRoad']);
 });
 
 test('parseTile accepts real tile coordinates only', () => {
@@ -43,7 +43,7 @@ test('shapePlaces names a POI by its name and an address by its address line', (
     { type: 'POI', poi: { name: 'No position' } },
   ] });
   assert.equal(places.length, 2);
-  assert.deepEqual(places[0], { name: 'Pike Place Market', address: '85 Pike St, Seattle, WA 98101', type: 'POI', lat: 47.609, lon: -122.341, bbox: [-122.343, 47.608, -122.339, 47.61] });
+  assert.deepEqual(places[0], { name: 'Pike Place Market', address: '85 Pike St, Seattle, WA 98101', type: 'POI', lat: 47.609, lon: -122.341, dist: null, bbox: [-122.343, 47.608, -122.339, 47.61] });
   assert.equal(places[1].name, '400 Broad St, Seattle, WA 98109');
   assert.equal(places[1].address, 'Seattle, WA');
 });
@@ -53,7 +53,7 @@ test('shapeRoutes joins every leg into one [lon, lat] line with its time and del
     summary: { travelTimeInSeconds: 1500, trafficDelayInSeconds: 360, noTrafficTravelTimeInSeconds: 1140, lengthInMeters: 29000 },
     legs: [{ points: [{ latitude: 47.6, longitude: -122.3 }, { latitude: 47.5, longitude: -122.31 }] }, { points: [{ latitude: 47.4, longitude: -122.32 }] }],
   }] });
-  assert.deepEqual(routes, [{ seconds: 1500, delaySeconds: 360, noTrafficSeconds: 1140, meters: 29000, coords: [[-122.3, 47.6], [-122.31, 47.5], [-122.32, 47.4]], traffic: [], via: [] }]);
+  assert.deepEqual(routes, [{ seconds: 1500, delaySeconds: 360, noTrafficSeconds: 1140, meters: 29000, coords: [[-122.3, 47.6], [-122.31, 47.5], [-122.32, 47.4]], traffic: [], via: [], tolls: false }]);
 });
 
 test('shapeRoutes grades traffic sections and names the roads by importance', () => {
@@ -140,5 +140,73 @@ test('the shared handler refuses to call TomTom once the month is used up', asyn
     const r = await makeHandler({ key: 'K', use: () => false })('/search', new URLSearchParams('q=pike+place'));
     assert.equal(r.status, 429);
     assert.equal(called, 0);
+  } finally { global.fetch = real; }
+});
+
+test('parseAvoid keeps only tolls and highways, once each', () => {
+  assert.deepEqual(t.parseAvoid('tolls,highways'), ['tolls', 'highways']);
+  assert.deepEqual(t.parseAvoid('highways,tolls,tolls,ferries,<x>'), ['highways', 'tolls']);
+  assert.deepEqual(t.parseAvoid(''), []);
+  assert.deepEqual(t.parseAvoid(null), []);
+});
+
+test('routeUrl passes avoid on to TomTom and asks where the tolls are', () => {
+  const u = new URL(t.routeUrl('K', { lat: 47.6, lon: -122.3 }, { lat: 45.5, lon: -122.7 }, { avoid: ['tolls', 'highways'] }));
+  assert.deepEqual(u.searchParams.getAll('avoid'), ['tollRoads', 'motorways']);
+  assert.ok(u.searchParams.getAll('sectionType').includes('tollRoad'));
+  const plain = new URL(t.routeUrl('K', { lat: 47.6, lon: -122.3 }, { lat: 45.5, lon: -122.7 }));
+  assert.deepEqual(plain.searchParams.getAll('avoid'), []);
+});
+
+test('shapeRoutes marks a route that uses a toll road', () => {
+  const route = (sections) => ({ routes: [{ summary: { travelTimeInSeconds: 60, lengthInMeters: 1000 }, legs: [{ points: [] }], sections }] });
+  assert.equal(t.shapeRoutes(route([{ sectionType: 'TOLL_ROAD', startPointIndex: 0, endPointIndex: 3 }]))[0].tolls, true);
+  assert.equal(t.shapeRoutes(route([]))[0].tolls, false);
+});
+
+test('nearbyUrl searches one Find Nearby category around a point, US only', () => {
+  const u = new URL(t.nearbyUrl('K', 'coffee', { lat: 47.6, lon: -122.3 }));
+  assert.equal(u.pathname, '/search/2/nearbySearch/.json');
+  assert.equal(u.searchParams.get('categorySet'), '9376002,9376006');
+  assert.equal(u.searchParams.get('lat'), '47.6');
+  assert.equal(u.searchParams.get('countrySet'), 'US');
+  assert.equal(t.nearbyUrl('K', 'casino', { lat: 47.6, lon: -122.3 }), null);
+  assert.deepEqual(Object.keys(t.NEARBY), ['gas', 'ev', 'food', 'coffee', 'rest', 'parking']);
+});
+
+test('shapePlaces carries the distance TomTom measured from the search point', () => {
+  const p = t.shapePlaces({ results: [{ type: 'POI', poi: { name: 'Shell' }, address: { freeformAddress: '1 Main St' }, position: { lat: 1, lon: 2 }, dist: 812.4 }] });
+  assert.equal(p[0].dist, 812);
+  assert.equal(t.shapePlaces({ results: [{ position: { lat: 1, lon: 2 }, address: {} }] })[0].dist, null);
+});
+
+test('the shared handler answers Find Nearby and counts it as a search', async () => {
+  const { makeHandler } = require('./tomtom-serve');
+  const used = [];
+  let asked = '';
+  const real = global.fetch;
+  global.fetch = async (url) => { asked = String(url); return new Response(JSON.stringify({ results: [{ poi: { name: 'Shell' }, address: { freeformAddress: '1 Main St' }, position: { lat: 1, lon: 2 }, dist: 100 }] })); };
+  try {
+    const handle = makeHandler({ key: 'K', use: (k) => { used.push(k); return true; } });
+    const ok = await handle('/nearby', new URLSearchParams('cat=gas&near=47.6,-122.3'));
+    assert.equal(ok.status, 200);
+    assert.equal(JSON.parse(ok.body).places[0].name, 'Shell');
+    assert.ok(asked.includes('categorySet=7311'));
+    assert.deepEqual(used, ['search']);
+    assert.equal((await handle('/nearby', new URLSearchParams('cat=casino&near=47.6,-122.3'))).status, 400);
+    assert.equal((await handle('/nearby', new URLSearchParams('cat=gas'))).status, 400);
+    assert.deepEqual(used, ['search']);   // refused before counting
+  } finally { global.fetch = real; }
+});
+
+test('the shared handler passes avoid from the page to the route call', async () => {
+  const { makeHandler } = require('./tomtom-serve');
+  let asked = '';
+  const real = global.fetch;
+  global.fetch = async (url) => { asked = String(url); return new Response(JSON.stringify({ routes: [] })); };
+  try {
+    await makeHandler({ key: 'K', use: () => true })('/route', new URLSearchParams('from=47.6,-122.3&to=47.2,-122.4&avoid=tolls'));
+    assert.ok(asked.includes('avoid=tollRoads'));
+    assert.ok(!asked.includes('motorways'));
   } finally { global.fetch = real; }
 });

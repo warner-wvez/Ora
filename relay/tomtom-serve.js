@@ -20,7 +20,7 @@ const json = (status, body) => ({ status, type: 'application/json', cache: 'no-s
 
 // use(kind) counts one call against the month and says whether it is allowed.
 // Returns handle(pathname, searchParams) -> {status, type, cache, body}, pathname being one of
-// /search, /route or /traffic/{z}/{x}/{y}.png.
+// /search, /nearby, /route or /traffic/{z}/{x}/{y}.png.
 function makeHandler({ key, use, log = () => {} }) {
   return async function handle(pathname, params) {
     if (!key) return json(503, { error: 'no TomTom key' });
@@ -34,11 +34,21 @@ function makeHandler({ key, use, log = () => {} }) {
         if (r.status !== 200) return json(502, { error: t.scrub(`search ${r.status}: ${r.body.toString().slice(0, 300)}`, key) });
         return json(200, { places: t.shapePlaces(JSON.parse(r.body)) });
       }
+      if (pathname === '/nearby') {
+        const cat = params.get('cat'), near = t.parseLatLon(params.get('near'));
+        if (!t.NEARBY[cat]) return json(400, { error: 'unknown category' });
+        if (!near) return json(400, { error: 'near must be lat,lon' });
+        if (!use('search')) return json(429, { error: 'monthly free search allowance used up' });
+        const r = await upstream(t.nearbyUrl(key, cat, near));
+        log('nearby', r.status);
+        if (r.status !== 200) return json(502, { error: t.scrub(`nearby ${r.status}: ${r.body.toString().slice(0, 300)}`, key) });
+        return json(200, { places: t.shapePlaces(JSON.parse(r.body)) });
+      }
       if (pathname === '/route') {
         const from = t.parseLatLon(params.get('from')), to = t.parseLatLon(params.get('to'));
         if (!from || !to) return json(400, { error: 'from and to must be lat,lon' });
         if (!use('route')) return json(429, { error: 'monthly free route allowance used up' });
-        const r = await upstream(t.routeUrl(key, from, to));
+        const r = await upstream(t.routeUrl(key, from, to, { avoid: t.parseAvoid(params.get('avoid')) }));
         log('route', r.status);
         if (r.status !== 200) return json(502, { error: t.scrub(`route ${r.status}: ${r.body.toString().slice(0, 300)}`, key) });
         return json(200, { routes: t.shapeRoutes(JSON.parse(r.body)) });

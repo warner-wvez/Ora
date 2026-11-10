@@ -12,6 +12,11 @@ commits are not listed.
   each, with traffic colours on the roads. TomTom's APIs answer through the relay, which
   holds the key on the VPS, caps each month inside TomTom's free allowance and gives each
   address an hourly budget. Still a preview, not turn-by-turn.
+- Search opens to Recents and Find nearby. Recents are your last six places and cameras;
+  Find nearby lists gas, EV charging, food, coffee, rest areas or parking within 10 miles, as
+  pins with the category's symbol. Directions gain an Avoid chip for tolls and highways,
+  remembered for next time, and each route a plain label (Fastest, Shortest, Least traffic)
+  plus a Tolls tag. All of it follows what two Apple Maps case studies found people use most.
 
 ## 2026-10
 

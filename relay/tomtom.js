@@ -5,8 +5,9 @@
 // (this machine). The page sees Ora's own small shapes below and never TomTom's, so another
 // provider could replace TomTom without touching the page.
 //
-// Three upstream calls, nothing else:
+// Four upstream calls, nothing else:
 //   place search   https://api.tomtom.com/search/2/search/<q>.json
+//   find nearby    https://api.tomtom.com/search/2/nearbySearch/.json?categorySet=<ids>
 //   routes         https://api.tomtom.com/routing/1/calculateRoute/<from>:<to>/json
 //   traffic tiles  https://api.tomtom.com/traffic/map/4/tile/flow/relative0/<z>/<x>/<y>.png
 // No guidance or turn instructions are ever requested: a route here is a preview, not
@@ -34,16 +35,45 @@ function searchUrl(key, q, near) {
   return `${API}/search/2/search/${encodeURIComponent(q)}.json?${p}`;
 }
 
-function routeUrl(key, from, to) {
+// What the page may ask a route to avoid, in its words, and TomTom's word for each. Only the
+// two people reach for while planning a drive (the second Apple Maps case study's driver kept
+// paying tolls because the setting was out of reach).
+const AVOID = { tolls: 'tollRoads', highways: 'motorways' };
+function parseAvoid(s) {
+  return String(s || '').split(',').map((x) => x.trim()).filter((x, i, a) => AVOID[x] && a.indexOf(x) === i);
+}
+
+function routeUrl(key, from, to, opts = {}) {
   const p = new URLSearchParams({
     key, traffic: 'true', maxAlternatives: '2', routeRepresentation: 'polyline',
     computeTravelTimeFor: 'all', travelMode: 'car', departAt: 'now',
   });
-  // traffic sections colour the line itself (slow and jammed stretches), and the important road
-  // stretches name the roads that tell one route from another ("via I-5")
+  // traffic sections colour the line itself (slow and jammed stretches), the important road
+  // stretches name the roads that tell one route from another ("via I-5"), and toll road
+  // sections say which routes cost money
   p.append('sectionType', 'traffic');
   p.append('sectionType', 'importantRoadStretch');
+  p.append('sectionType', 'tollRoad');
+  for (const a of opts.avoid || []) if (AVOID[a]) p.append('avoid', AVOID[a]);
   return `${API}/routing/1/calculateRoute/${from.lat},${from.lon}:${to.lat},${to.lon}/json?${p}`;
+}
+
+// Find Nearby: the stops people make on the way (gas, food, coffee, a rest area, parking),
+// which both Apple Maps case studies found are what an in-app search is mostly used for.
+// TomTom POI category ids, checked against /search/2/poiCategories on 2026-11-09.
+const NEARBY = {
+  gas: { label: 'Gas', ids: '7311' },
+  ev: { label: 'EV charging', ids: '7309' },
+  food: { label: 'Food', ids: '7315' },
+  coffee: { label: 'Coffee', ids: '9376002,9376006' },
+  rest: { label: 'Rest areas', ids: '7395' },
+  parking: { label: 'Parking', ids: '7313,7369' },
+};
+function nearbyUrl(key, cat, near) {
+  const c = NEARBY[cat];
+  if (!c || !near) return null;
+  const p = new URLSearchParams({ key, lat: String(near.lat), lon: String(near.lon), radius: '16000', limit: '8', countrySet: 'US', categorySet: c.ids });
+  return `${API}/search/2/nearbySearch/.json?${p}`;
 }
 
 const TILE = /^\/traffic\/(\d{1,2})\/(\d{1,7})\/(\d{1,7})\.png$/;
@@ -69,6 +99,7 @@ function shapePlaces(json) {
       address: name === addr ? [r.address && r.address.municipality, r.address && r.address.countrySubdivision].filter(Boolean).join(', ') : addr,
       type: r.type || '',
       lat: r.position.lat, lon: r.position.lon,
+      dist: typeof r.dist === 'number' ? Math.round(r.dist) : null,
       bbox: vp ? [vp.topLeftPoint.lon, vp.btmRightPoint.lat, vp.btmRightPoint.lon, vp.topLeftPoint.lat] : null,
     };
   });
@@ -109,6 +140,7 @@ function shapeRoutes(json) {
       traffic: sections.filter((x) => x.sectionType === 'TRAFFIC' && x.endPointIndex > x.startPointIndex)
         .map((x) => ({ from: x.startPointIndex, to: x.endPointIndex, level: trafficLevel(x) })),
       via: roadNames(sections),
+      tolls: sections.some((x) => x.sectionType === 'TOLL_ROAD'),
     };
   });
 }
@@ -155,4 +187,4 @@ function rateAllow(buckets, ip, kind, now = Date.now()) {
   return { ok: true, retryAfter: 0 };
 }
 
-module.exports = { FREE, PER_HOUR, parseLatLon, searchUrl, routeUrl, parseTile, tileUrl, shapePlaces, shapeRoutes, scrub, originAllowed, countUse, clientIp, rateAllow };
+module.exports = { FREE, PER_HOUR, AVOID, NEARBY, parseAvoid, nearbyUrl, parseLatLon, searchUrl, routeUrl, parseTile, tileUrl, shapePlaces, shapeRoutes, scrub, originAllowed, countUse, clientIp, rateAllow };

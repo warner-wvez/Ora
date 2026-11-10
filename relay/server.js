@@ -6,7 +6,7 @@
 // GET /healthz                                      -> {ok, cameras cached, session age}
 // GET /<state>/<imageId>/<seN>/<chan>/<file>        -> the upstream file, token added, playlist rewritten
 // GET /nj/<w|t>/<upstream path>                     -> the upstream file, 511nj.org's headers added
-// GET /tt/healthz | /tt/search | /tt/route | /tt/traffic/{z}/{x}/{y}.png
+// GET /tt/healthz | /tt/search | /tt/nearby | /tt/route | /tt/traffic/{z}/{x}/{y}.png
 //                                                   -> TomTom place search, route preview and
 //                                                      traffic tiles, the key added here (see the
 //                                                      TomTom section below)
@@ -189,7 +189,7 @@ function ttUse(kind) {
 }
 const ttHandle = makeHandler({ key: ttKey, use: ttUse, log: (...a) => log('tomtom', ...a) });
 const ttBuckets = new Map();
-const TT_KIND = (sub) => (sub === '/search' ? 'search' : sub === '/route' ? 'route' : sub.startsWith('/traffic/') ? 'tile' : null);
+const TT_KIND = (sub) => (sub === '/search' || sub === '/nearby' ? 'search' : sub === '/route' ? 'route' : sub.startsWith('/traffic/') ? 'tile' : null);
 
 function sendJson(res, status, body, extra = {}) {
   res.writeHead(status, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', ...extra });

@@ -50,6 +50,8 @@
   .sr-ic { width: 30px; height: 30px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; background: #ececf0; color: #6e6e73; }
   .sr-ic.cam { background: #e8f1ff; color: #0a84ff; }
   .sr-ic.me { background: #e8f1ff; color: #0a84ff; }
+  .sr-ic.nb { color: #fff; }
+  .sr-ic.nb svg { width: 16px; height: 16px; }
   .sr-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
   .sr-t { font-size: 14px; color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sr-s { font-size: 12px; color: #8e8e93; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
@@ -345,6 +347,18 @@
      routes sit in a bottom sheet so the map stays in the middle. */
   .sr-grp { padding: 8px 6px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #8e8e93; }
   .sr-grp span { font-weight: 500; text-transform: none; letter-spacing: 0; color: #aeaeb2; margin-left: 4px; }
+  /* search home: Recents and Find Nearby, the two tools both Apple Maps case studies put first */
+  .sr-grp-row { display: flex; align-items: center; justify-content: space-between; }
+  .sr-clear { border: 0; background: none; color: #0a84ff; font: inherit; font-size: 12px; font-weight: 600; text-transform: none; letter-spacing: 0; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
+  .sr-clear:hover { background: #e8f1ff; }
+  .nb-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 2px 2px 6px; }
+  .nb-chip { display: flex; align-items: center; gap: 7px; min-height: 40px; border: 0; background: #f2f2f7; border-radius: 10px; padding: 6px 8px; font: inherit; font-size: 12.5px; font-weight: 600; color: #1d1d1f; text-align: left; line-height: 1.15; cursor: pointer; transition: background .12s, transform .12s; }
+  .nb-chip:hover { background: #e7e7ed; }
+  .nb-chip:active { transform: scale(.97); }
+  .nb-chip:focus-visible { outline: 2px solid #0a84ff; outline-offset: 1px; }
+  .nb-ic { width: 24px; height: 24px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; color: #fff; }
+  .nb-ic svg { width: 14px; height: 14px; }
+  .nb-head { display: flex; align-items: center; gap: 2px; margin: 0 0 2px -6px; font-size: 14px; font-weight: 700; color: #1d1d1f; }
   #dirBox { margin: 0 0 4px; }
   #dirBox[hidden] { display: none; }
   #panel.nav-place > .grp, #panel.nav-dir > .grp, #panel.nav-dir .search-wrap { display: none; }
@@ -376,6 +390,18 @@
 
   .dir-top { display: flex; align-items: center; gap: 6px; margin: -2px 0 6px -6px; }
   .dir-mode { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #0a84ff; background: #e8f1ff; border-radius: 999px; padding: 6px 12px; }
+  /* Avoid sits beside Drive, where the choice is made (the second case study's driver kept
+     paying tolls because the setting lived somewhere else) */
+  .dir-avoid { position: relative; }
+  .dir-chip { display: flex; align-items: center; gap: 4px; font: inherit; font-size: 13px; font-weight: 600; color: #3a3a3c; background: #f2f2f7; border: 0; border-radius: 999px; padding: 6px 10px 6px 12px; cursor: pointer; transition: background .12s; }
+  .dir-chip:hover { background: #e7e7ed; }
+  .dir-chip.on { color: #0a84ff; background: #e8f1ff; }
+  .dir-chip svg { width: 12px; height: 12px; }
+  .avoid-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 180px; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.04); padding: 6px; }
+  .avoid-menu .am-h { padding: 6px 10px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #8e8e93; }
+  .avoid-menu label { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 40px; padding: 0 10px; font-size: 14px; border-radius: 8px; cursor: pointer; }
+  .avoid-menu label:hover { background: #f2f2f7; }
+  .avoid-menu input { width: 18px; height: 18px; accent-color: #0a84ff; }
   .dir-stack { display: flex; align-items: center; gap: 6px; }
   .dir-rail { flex: none; width: 18px; display: flex; flex-direction: column; align-items: center; align-self: stretch; padding: 13px 0 11px; }
   .rail-from { width: 11px; height: 11px; border-radius: 50%; border: 2.5px solid #3c3c43; background: #fff; flex: none; }
@@ -400,6 +426,8 @@
   .rt-via { font-size: 13px; color: #1c1c1e; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .rt-l3 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; font-size: 12px; }
   .rt-badge { font-weight: 700; color: #188038; background: #e6f4ea; border-radius: 4px; padding: 1px 6px; }
+  .rt-badge.alt { color: #0a5bd3; background: #e8f1ff; }
+  .rt-toll { font-weight: 600; color: #8a5300; background: #fff1d6; border-radius: 4px; padding: 1px 6px; }
   .rt-dim { color: #6e6e73; }
   .rt-late { font-weight: 600; }
   .rt-cams { display: flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 12.5px; color: #3c3c43; }
@@ -2086,10 +2114,25 @@ function rebuildSearchIndex(){ searchIndex=[]; store.activeLayers.forEach(k=>{ c
 // one list of hits in display order, places first, so the mouse, the arrow keys and Enter all
 // pick from the same thing. A hit is {kind:'place'|'cam'|'state', ...}.
 const esc=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// two lines a row, the way every map app lists results: what it is, then where it is
+function srRow(h,i,sub){
+  const dot= h.k==='chi-enf' && h.feature ? (VERDICT[h.feature.properties.quad]||VERDICT.quiet).color : '#007aff';
+  const ic= h.kind==='place' && h.nb ? `<span class="sr-ic nb" style="background:${h.nb.color}">${h.nb.icon}</span>`
+          : h.kind==='place' ? `<span class="sr-ic">${ICON.pin}</span>`
+          : h.kind==='state' ? `<span class="sr-ic">${ICON.state}</span>`
+          : `<span class="sr-ic cam" style="color:${dot}">${ICON.cam}</span>`;
+  const t= h.kind==='state' ? `Turn on ${esc(h.name)}` : esc(h.name);
+  if(sub==null) sub= h.kind==='place' ? esc(h.address) : h.kind==='state' ? `${groupCount(h.k).toLocaleString()} cameras` : esc(LAYERS[h.k]?.name || h.k);
+  return `<div class="sr-item" data-i="${i}">${ic}<span class="sr-txt"><span class="sr-t">${t}</span>${sub?`<span class="sr-s">${sub}</span>`:''}</span></div>`;
+}
 function runSearch(q){
   const box=document.getElementById('search-results'), raw=q.trim(); q=raw.toLowerCase(); kbdIdx=-1;
   document.getElementById('searchClear').classList.toggle('show',!!raw);
-  if(q.length<2){ box.classList.remove('show'); box.innerHTML=''; searchHits=[]; document.getElementById('panel').classList.remove('searching'); return; }
+  clearNearbyPins();
+  if(q.length<2){
+    // an empty box that has focus opens to Recents and Find Nearby, the way Apple Maps' does
+    if(document.activeElement===document.getElementById('search')){ renderSearchHome(); return; }
+    box.classList.remove('show'); box.innerHTML=''; searchHits=[]; document.getElementById('panel').classList.remove('searching'); return; }
   const cams=searchIndex.filter(e=>(e.name&&e.name.toLowerCase().includes(q))||(e.road&&e.road.toLowerCase().includes(q))).slice(0,8).map(e=>({kind:'cam',...e}));
   // the searcher knows the camera, not the layer model: when nothing matches in what's
   // on, offer the states whose names match — one tap turns the state on and re-searches
@@ -2108,16 +2151,7 @@ function runSearch(q){
   if(roadish) places=places.slice(0,3);
   if(navOn) schedulePlaces(raw);
   searchHits=roadish ? [...cams, ...places, ...states] : [...places, ...cams, ...states];
-  const dot=(e)=> e.k==='chi-enf' ? (VERDICT[e.feature.properties.quad]||VERDICT.quiet).color : '#007aff';
-  // two lines a row, the way every map app lists results: what it is, then where it is
-  const row=(h,i)=>{
-    const ic= h.kind==='place' ? `<span class="sr-ic">${ICON.pin}</span>`
-            : h.kind==='state' ? `<span class="sr-ic">${ICON.state}</span>`
-            : `<span class="sr-ic cam" style="color:${dot(h)}">${ICON.cam}</span>`;
-    const t= h.kind==='state' ? `Turn on ${esc(h.name)}` : esc(h.name);
-    const sub= h.kind==='place' ? esc(h.address) : h.kind==='state' ? `${groupCount(h.k).toLocaleString()} cameras` : esc(LAYERS[h.k]?.name || h.k);
-    return `<div class="sr-item" data-i="${i}">${ic}<span class="sr-txt"><span class="sr-t">${t}</span>${sub?`<span class="sr-s">${sub}</span>`:''}</span></div>`;
-  };
+  const row=(h,i)=>srRow(h,i);
   let html='', i=0;
   const placeHTML=()=> places.length ? `<div class="sr-grp">Places <span>TomTom</span></div>`+places.map(h=>row(h,i++)).join('')
     : placeState==='busy' ? `<div class="sr-grp">Places <span>searching…</span></div>`
@@ -2138,10 +2172,131 @@ async function pickSearch(h){
   if(!h) return;
   if(h.kind==='state'){ await enableGroup(h.k); writeUrl(); runSearch(document.getElementById('search').value); return; }  // same request as its checkbox, fly included
   document.getElementById('search-results').classList.remove('show'); document.getElementById('search').value=h.name;
-  foldSearch();
+  foldSearch(); clearNearbyPins(); addRecent(h);
   if(h.kind==='place'){ pickPlace(h); return; }
   // a search pick navigates and shows — it never silently adds to a route mid-add-mode
-  map.flyTo({center:h.coords,zoom:15,duration:800}); selectFeature(h.k,h.feature,{noAutoAdd:true}); }
+  map.flyTo({center:h.coords,zoom:15,duration:800});
+  const f=h.feature || await recentCamFeature(h);       // a recent camera is found again by name and place
+  if(f) selectFeature(h.k,f,{noAutoAdd:true}); }
+
+/* ---------- search home: Recents and Find Nearby ----------
+   Both Apple Maps case studies put these first. In the second, every user ranked the search bar
+   and Recents as the most important tools and 83% wanted Nearby places added; in the first,
+   in-app search was mostly for the stops on the way: gas, food, coffee, a rest area. Recents
+   live in this browser only. Reopening a recent place costs no TomTom search; each Find Nearby
+   tap is one, near the middle of the map. */
+const RECENTS_KEY='ora-recents', RECENTS_MAX=6;
+function loadRecents(){ try{ const r=JSON.parse(localStorage.getItem(RECENTS_KEY)||'[]'); return Array.isArray(r) ? r : []; }catch(e){ return []; } }
+const recentId=(x)=>x.kind+'|'+x.name+'|'+(x.kind==='place' ? [x.lon,x.lat] : x.coords).map(v=>(+v).toFixed(4)).join(',');
+function addRecent(h){
+  const e= h.kind==='place' ? {kind:'place', name:h.name, address:h.address||'', type:h.type||'', category:h.category||'', lat:h.lat, lon:h.lon, bbox:h.bbox||null}
+         : h.kind==='cam' && h.coords ? {kind:'cam', name:h.name, k:h.k, coords:h.coords} : null;
+  if(!e || !e.name) return;
+  const list=[e, ...loadRecents().filter(x=>recentId(x)!==recentId(e))].slice(0,RECENTS_MAX);
+  try{ localStorage.setItem(RECENTS_KEY, JSON.stringify(list)); }catch(err){}
+}
+async function recentCamFeature(h){
+  if(!LAYERS[h.k] || !h.coords) return null;
+  if(!store.activeLayers.has(h.k)){ await enableGroup(h.k,false); writeUrl(); }
+  const d=dataCache[h.k]; if(!d) return null;
+  let best=null, bd=Infinity;
+  for(const f of d.features){ const c=f.geometry.coordinates, dd=Math.abs(c[0]-h.coords[0])+Math.abs(c[1]-h.coords[1]);
+    if(dd<bd && (f.properties.name===h.name || dd<0.0002)){ bd=dd; best=f; } }
+  return bd<0.01 ? best : null;
+}
+const NEARBY=[
+  {k:'gas', label:'Gas', color:'#0e7c86', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h8a1 1 0 0 1 1 1v7h.5a2.5 2.5 0 0 1 2.5 2.5V17a1 1 0 0 0 2 0V9.8l-2.4-2.4 1.4-1.4 2.7 2.7c.2.2.3.4.3.7V17a3 3 0 0 1-6 0v-3.5a.5.5 0 0 0-.5-.5H14v8H4V4a1 1 0 0 1 1-1zm1 2v5h6V5H6z"/></svg>'},
+  {k:'ev', label:'EV charging', color:'#2f9e44', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 2 5 13.5h5.5L9.5 22 18 10.5h-5.5z"/></svg>'},
+  {k:'food', label:'Food', color:'#f76707', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h1.3v6h1.4V2H11v6h1.3V2h1.2v7.5a2.5 2.5 0 0 1-2 2.45V22h-2V11.95a2.5 2.5 0 0 1-2-2.45V2H7zm10 0v20h-2v-7h-2V7c0-2.8 1.8-5 4-5z"/></svg>'},
+  {k:'coffee', label:'Coffee', color:'#8d6e4f', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 7h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V7zm13 1.5h1.2a2.8 2.8 0 0 1 0 5.6H17v-2h1.2a.8.8 0 0 0 0-1.6H17V8.5zM4 20h13v2H4v-2zM8 2h2v3H8V2zm3.5 0h2v3h-2V2z"/></svg>'},
+  {k:'rest', label:'Rest areas', color:'#7048e8', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 6h16v2.2h-3.6l1.2 3.8H21v2.2h-2.7l1.6 5h-2.3l-1.6-5H8l-1.6 5H4.1l1.6-5H3V12h3.4l1.2-3.8H4V6zm5.9 2.2L8.7 12h6.6l-1.2-3.8H9.9z"/></svg>'},
+  {k:'parking', label:'Parking', color:'#364fc7', icon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 3h7a6 6 0 0 1 0 12h-3v6H6V3zm4 4v4h3a2 2 0 0 0 0-4h-3z"/></svg>'},
+];
+function wireResults(box, pick){
+  box.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>pick(searchHits[+it.dataset.i])));
+}
+function renderSearchHome(){
+  const box=document.getElementById('search-results'), rec=loadRecents();
+  searchHits=rec; let html='';
+  if(rec.length) html+=`<div class="sr-grp sr-grp-row">Recents<button type="button" class="sr-clear" data-clear>Clear</button></div>`+rec.map((h,i)=>srRow(h,i)).join('');
+  if(navOn) html+=`<div class="sr-grp">Find nearby</div><div class="nb-chips">${NEARBY.map(c=>`<button type="button" class="nb-chip" data-nb="${c.k}"><span class="nb-ic" style="background:${c.color}">${c.icon}</span><span>${c.label}</span></button>`).join('')}</div>`;
+  if(!html){ box.classList.remove('show'); box.innerHTML=''; document.getElementById('panel').classList.remove('searching'); return; }
+  box.innerHTML=html; box.classList.add('show'); document.getElementById('panel').classList.add('searching');
+  wireResults(box, pickSearch);
+  const clr=box.querySelector('[data-clear]');
+  if(clr) clr.addEventListener('click',(e)=>{ e.stopPropagation(); try{ localStorage.removeItem(RECENTS_KEY); }catch(err){} renderSearchHome(); document.getElementById('search').focus(); });
+  box.querySelectorAll('[data-nb]').forEach(b=>b.addEventListener('click',(e)=>{ e.stopPropagation(); runNearby(b.dataset.nb); }));
+}
+// a result list for one Find Nearby category, with matching pins on the map. Answers are kept
+// per category and spot for the session, so going back and forth costs nothing.
+const nearbyCache=new Map(); let nearbyTok=0, nearbyShown=[];
+// Near what: your blue dot when it is on screen, else the middle of a map zoomed in to a city or
+// closer, else (a whole-country view) your location, asked for only now because you tapped
+async function nearbyCenter(){
+  if(meMarker && map.getBounds().contains(meMarker.getLngLat())){ const l=meMarker.getLngLat(); return {lat:l.lat, lon:l.lng, me:true}; }
+  if(map.getZoom()>=9){ const c=map.getCenter(); return {lat:c.lat, lon:c.lng, me:false}; }
+  const me=await myPosition(); return me ? {lat:me[1], lon:me[0], me:true} : null;
+}
+async function runNearby(k){
+  const c=NEARBY.find(x=>x.k===k); if(!c) return;
+  const tok=++nearbyTok;
+  renderNearby(c, null, 'Searching…');
+  const at=await nearbyCenter(); if(tok!==nearbyTok) return;
+  if(!at){ renderNearby(c, null, 'Zoom the map in to the area you want, then tap again.'); return; }
+  c.near=at.me ? 'near you' : 'near here';
+  const near=`${at.lat.toFixed(3)},${at.lon.toFixed(3)}`, key=k+'|'+near;
+  renderNearby(c, null, 'Searching…');
+  let places;
+  if(nearbyCache.has(key)) places=nearbyCache.get(key);
+  else{
+    try{ places=(await navGet(`/nearby?cat=${k}&near=${near}`)).places; nearbyCache.set(key, places); }
+    catch(e){ if(tok===nearbyTok) renderNearby(c, null, /allowance|too many/i.test(e.message) ? e.message.replace(/^./,ch=>ch.toUpperCase()) : 'TomTom is not answering right now'); return; }
+  }
+  if(tok!==nearbyTok) return;
+  renderNearby(c, places.map(p=>({...p, kind:'place', category:c.label, nb:c})));
+}
+function renderNearby(c, places, msg){
+  const box=document.getElementById('search-results');
+  searchHits=places||[]; kbdIdx=-1;
+  const rows=places ? (places.length ? places.map((h,i)=>srRow(h,i, esc([h.address, h.dist!=null ? fmtMiles(h.dist) : ''].filter(Boolean).join(' · ')))).join('')
+      : `<div class="sr-empty">No ${esc(c.label.toLowerCase())} within 10 miles ${c.near==='near you'?'of you':'of the middle of the map'}. Move the map and try again.</div>`)
+    : `<div class="sr-empty">${esc(msg||'')}</div>`;
+  box.innerHTML=`<div class="nb-head"><button type="button" class="nav-ic" data-nb-back aria-label="Back to Recents and Find Nearby">${ICON.back}</button><span>${esc(c.label)} ${c.near||'near here'}</span></div>`+rows;
+  box.classList.add('show'); document.getElementById('panel').classList.add('searching');
+  wireResults(box, pickSearch);
+  box.querySelector('[data-nb-back]').addEventListener('click',(e)=>{ e.stopPropagation(); nearbyTok++; clearNearbyPins(); renderSearchHome(); });
+  // pointing at a row grows its pin, so the list and the map say the same thing
+  box.querySelectorAll('.sr-item').forEach(it=>{ const i=+it.dataset.i;
+    it.addEventListener('mouseenter',()=>drawNearbyPins(c,i)); it.addEventListener('mouseleave',()=>drawNearbyPins(c,-1)); });
+  setNearbyPins(c, places||[]);
+}
+// a 32 px pin drawn once per category: white ring, soft shadow, the category colour, its symbol
+function nearbyPinImage(c){
+  return new Promise((res)=>{
+    const sz=64, cv=document.createElement('canvas'); cv.width=cv.height=sz; const g=cv.getContext('2d');
+    g.shadowColor='rgba(0,0,0,.35)'; g.shadowBlur=6; g.shadowOffsetY=2;
+    g.beginPath(); g.arc(32,31,26,0,Math.PI*2); g.fillStyle='#fff'; g.fill();
+    g.shadowColor='transparent'; g.beginPath(); g.arc(32,31,21.5,0,Math.PI*2); g.fillStyle=c.color; g.fill();
+    const img=new Image();
+    img.onload=()=>{ g.drawImage(img,19,18,26,26); res(g.getImageData(0,0,sz,sz)); };
+    img.onerror=()=>res(g.getImageData(0,0,sz,sz));
+    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(c.icon.replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" ').replace(/currentColor/g,'#fff'));
+  });
+}
+function drawNearbyPins(c, hl){
+  const src=map.getSource('nearby-pins'); if(!src) return;
+  src.setData(FC(nearbyShown.map((p,i)=>({type:'Feature', geometry:{type:'Point', coordinates:[p.lon,p.lat]}, properties:{i, img:'nb-'+c.k, hl:i===hl?1:0}}))));
+}
+function setNearbyPins(c, places){
+  nearbyShown=places;
+  if(!map.getSource('nearby-pins')) return;
+  drawNearbyPins(c,-1);
+  if(places.length){
+    const b=new maplibregl.LngLatBounds(); places.forEach(p=>b.extend([p.lon,p.lat]));
+    map.fitBounds(b,{padding:framePad(), maxZoom:15, duration:700});
+  }
+}
+function clearNearbyPins(){ nearbyShown=[]; try{ const src=map.getSource('nearby-pins'); if(src) src.setData(FC([])); }catch(e){} }
 
 /* ---------- route preview (TomTom) ----------
    Search a place or an address, open its card, ask for directions, and compare two or three
@@ -2173,6 +2328,7 @@ const ICON={
   state:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M9 3.5 3 5.6v14.9l6-2.1 6 2.1 6-2.1V3.5l-6 2.1-6-2.1zm.9 2.3 4.2 1.5v11l-4.2-1.5v-11z"/></svg>',
   me:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21 3 3 10.5l7.4 2.1L12.5 20z"/></svg>',
   car:'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M18.9 6.4A2 2 0 0 0 17 5H7a2 2 0 0 0-1.9 1.4L3 12v7a1 1 0 0 0 1 1h1.5a1 1 0 0 0 1-1v-1.5h11V19a1 1 0 0 0 1 1H20a1 1 0 0 0 1-1v-7l-2.1-5.6zM7.2 7h9.6l1.5 4H5.7l1.5-4zM6.5 15.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>',
+  chev:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   back:'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   swap:'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 4v15M8 4 4.5 7.5M8 4l3.5 3.5M16 20V5M16 20l-3.5-3.5M16 20l3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   close:'<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
@@ -2212,6 +2368,16 @@ async function navInit(){
     if(f && !map.queryRenderedFeatures(e.point,{layers:['cams__hit']}).length) selectRoute(f.properties.i); });
   map.on('mouseenter','nav-hit',()=>{ map.getCanvas().style.cursor='pointer'; });
   map.on('mouseleave','nav-hit',()=>{ map.getCanvas().style.cursor=''; });
+  // Find Nearby answers as pins: the category's symbol on its colour, larger than a camera dot,
+  // so the two never mix; a tap opens the place's card
+  NEARBY.forEach(c=>nearbyPinImage(c).then(img=>{ if(!map.hasImage('nb-'+c.k)) map.addImage('nb-'+c.k, img, {pixelRatio:2}); }));
+  map.addSource('nearby-pins',{type:'geojson',data:FC([])});
+  map.addLayer({id:'nearby-pins',type:'symbol',source:'nearby-pins',layout:{'icon-image':['get','img'],
+    'icon-size':['case',['==',['get','hl'],1],1.35,1],'icon-allow-overlap':true,'icon-ignore-placement':true,
+    'symbol-sort-key':['get','hl']}});
+  map.on('click','nearby-pins',(e)=>{ const f=e.features[0]; const p=f && nearbyShown[f.properties.i]; if(p) pickSearch(p); });
+  map.on('mouseenter','nearby-pins',()=>{ map.getCanvas().style.cursor='pointer'; });
+  map.on('mouseleave','nearby-pins',()=>{ map.getCanvas().style.cursor=''; });
 }
 // wait for a pause in typing (the free allowance for place search is 2,500 a month), and
 // search near the middle of the map so "main st" means the one you are looking at
@@ -2383,7 +2549,7 @@ function poiAt(point){
   }
   return best;
 }
-const OWN_LAYERS=['cams__hit','chi-enf__hit','coverage-hit','coverage-label','nav-hit'];
+const OWN_LAYERS=['cams__hit','chi-enf__hit','coverage-hit','coverage-label','nav-hit','nearby-pins'];
 const ownAt=(point)=>map.queryRenderedFeatures(point,{layers:OWN_LAYERS.filter(id=>map.getLayer(id))}).length>0;
 function bindMapTaps(){
   map.on('click',(e)=>{
@@ -2410,8 +2576,23 @@ function myPosition(){
     (pos)=>{ showMe(pos,false); res([pos.coords.longitude,pos.coords.latitude]); }, ()=>res(null),
     {enableHighAccuracy:true, timeout:10000, maximumAge:60000}));
 }
-const routeKey=(a,b)=>[...a,...b].map(v=>v.toFixed(4)).join(',');
-const routeQuery=(a,b)=>`/route?from=${a[1].toFixed(6)},${a[0].toFixed(6)}&to=${b[1].toFixed(6)},${b[0].toFixed(6)}`;
+// what routes should stay off (tolls, highways), remembered in this browser like a setting
+const AVOID_KEY='ora-avoid';
+function loadAvoid(){ try{ const a=JSON.parse(localStorage.getItem(AVOID_KEY)||'[]'); return Array.isArray(a) ? a.filter(x=>x==='tolls'||x==='highways') : []; }catch(e){ return []; } }
+let avoid=loadAvoid();
+const avoidLabel=()=> avoid.length ? 'Avoid '+avoid.join(', ') : 'Avoid';
+const routeKey=(a,b)=>[...a,...b].map(v=>v.toFixed(4)).join(',')+'|'+avoid.join(',');
+const routeQuery=(a,b)=>`/route?from=${a[1].toFixed(6)},${a[0].toFixed(6)}&to=${b[1].toFixed(6)},${b[0].toFixed(6)}${avoid.length?'&avoid='+avoid.join(','):''}`;
+function setAvoid(next){
+  avoid=['tolls','highways'].filter(x=>next.includes(x));
+  try{ localStorage.setItem(AVOID_KEY, JSON.stringify(avoid)); }catch(e){}
+  const chip=navBox().querySelector('[data-avoid]');
+  if(chip){ chip.classList.toggle('on', !!avoid.length); chip.querySelector('span').textContent=avoidLabel(); }
+  if(nav.mode==='dir' && nav.from && nav.to) planRoutes();
+}
+// a click anywhere else closes the Avoid menu
+document.addEventListener('click',()=>{ const m=document.querySelector('.avoid-menu');
+  if(m && !m.hidden){ m.hidden=true; const c=document.querySelector('[data-avoid]'); if(c) c.setAttribute('aria-expanded','false'); } });
 async function startDirections(){
   const p=nav.place; if(!p) return;
   clearSelection();                                   // the phone's place sheet gives way to the route sheet
@@ -2423,7 +2604,11 @@ async function startDirections(){
 }
 function renderDir(){
   setPanelMode('dir');
-  navBox().innerHTML=`<div class="dir-top"><button class="nav-ic" data-back aria-label="Back">${ICON.back}</button><div class="dir-mode">${ICON.car}<span>Drive</span></div></div>
+  navBox().innerHTML=`<div class="dir-top"><button class="nav-ic" data-back aria-label="Back">${ICON.back}</button><div class="dir-mode">${ICON.car}<span>Drive</span></div>
+      <div class="dir-avoid"><button type="button" class="dir-chip${avoid.length?' on':''}" data-avoid aria-haspopup="true" aria-expanded="false"><span>${avoidLabel()}</span>${ICON.chev}</button>
+        <div class="avoid-menu" hidden><div class="am-h">Avoid on this drive</div>
+          <label>Tolls<input type="checkbox" data-av="tolls"${avoid.includes('tolls')?' checked':''}></label>
+          <label>Highways<input type="checkbox" data-av="highways"${avoid.includes('highways')?' checked':''}></label></div></div></div>
     <div class="dir-stack"><div class="dir-rail"><span class="rail-from"></span><span class="rail-dots"></span><span class="rail-to">${ICON.pin}</span></div>
       <div class="dir-fields">
         <input class="dir-field" data-end="from" autocomplete="off" spellcheck="false" placeholder="Choose a starting point" aria-label="Start" value="${esc(nav.from?nav.from.label:'')}">
@@ -2432,6 +2617,12 @@ function renderDir(){
     <div id="dirSuggest"></div>${isMobile()?'':'<div id="dirRoutes"></div>'}`;
   const box=navBox();
   box.querySelector('[data-back]').addEventListener('click',navBack);
+  const chip=box.querySelector('[data-avoid]'), menu=box.querySelector('.avoid-menu');
+  const openMenu=(open)=>{ menu.hidden=!open; chip.setAttribute('aria-expanded', String(open)); };
+  chip.addEventListener('click',(e)=>{ e.stopPropagation(); openMenu(menu.hidden); });
+  menu.addEventListener('click',(e)=>e.stopPropagation());
+  menu.querySelectorAll('[data-av]').forEach(cb=>cb.addEventListener('change',()=>setAvoid([...menu.querySelectorAll('[data-av]:checked')].map(x=>x.dataset.av))));
+  menu.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ e.stopPropagation(); openMenu(false); chip.focus(); } });
   box.querySelector('[data-swap]').addEventListener('click',()=>{
     if(!nav.from || !nav.to) return;
     [nav.from, nav.to]=[nav.to, nav.from]; renderDir(); planRoutes(); });
@@ -2470,6 +2661,7 @@ async function setEnd(end, hit){
   else v={lngLat:[hit.lon,hit.lat], label:hit.name};
   nav[end]=v; nav.editing=null; document.body.classList.remove('dir-editing');
   if(end==='to' && hit.kind==='place') nav.place=hit;
+  if(hit.kind==='place') addRecent(hit);
   renderDir();
   if(nav.from && nav.to) planRoutes(); else focusField(nav.from ? 'to' : 'from');
 }
@@ -2621,10 +2813,19 @@ function trafficClass(r){ const late=r.delaySeconds, ratio=late/Math.max(1,r.sec
 function renderRoutes(msg){
   const box=isMobile() ? document.querySelector('#dirSheet .ds-body') : document.getElementById('dirRoutes'); if(!box) return;
   const fastest=nav.routes.length ? Math.min(...nav.routes.map(r=>r.seconds)) : 0;
+  // one plain label a route, so the list and the map agree on which is which (the second case
+  // study's users lost track of routes while switching between the two): Fastest, else
+  // Shortest when it saves at least half a mile, else Least traffic when it dodges two minutes
+  const top=nav.routes.find(r=>r.seconds===fastest), many=nav.routes.length>1;
+  const shortM=many ? Math.min(...nav.routes.map(r=>r.meters)) : 0, calm=many ? Math.min(...nav.routes.map(r=>r.delaySeconds)) : 0;
+  const tagOf=(r,diff)=> !many ? '' : diff<30 ? '<span class="rt-badge">Fastest</span>'
+    : (r.meters===shortM && top.meters-r.meters>=800) ? '<span class="rt-badge alt">Shortest</span>'
+    : (r.delaySeconds===calm && top.delaySeconds-r.delaySeconds>=120) ? '<span class="rt-badge alt">Least traffic</span>' : '';
   const rows=msg ? `<div class="dir-msg">${esc(msg)}</div>` : !nav.from ? `<div class="dir-msg">Choose a starting point to see routes.</div>` : nav.routes.map((r,i)=>{
     const sel=i===nav.sel, tc=trafficClass(r), down=r.cams ? r.cams.filter(c=>c.down).length : 0;
     const diff=r.seconds-fastest;
-    const l3=(nav.routes.length>1 && diff<30 ? '<span class="rt-badge">Fastest</span>' : diff>=30 ? `<span class="rt-dim">${fmtTime(diff)} slower</span>` : '')
+    const l3=tagOf(r,diff) + (diff>=30 ? `<span class="rt-dim">${fmtTime(diff)} slower</span>` : '')
+      + (r.tolls ? '<span class="rt-toll">Tolls</span>' : '')
       + (r.delaySeconds>=60 ? `<span class="rt-late ${tc}">+${fmtTime(r.delaySeconds)} from traffic</span>` : '<span class="rt-dim">No traffic delays</span>');
     const cams=r.cams==null ? `${ICON.cam}<span class="rt-dim">Finding cameras on this route…</span>`
       : `${ICON.cam}<span>${r.cams.length} camera${r.cams.length===1?'':'s'} on this route${down?` · ${down} not working`:''}</span>`;
@@ -3099,7 +3300,7 @@ document.getElementById('previewStop').addEventListener('click',()=>stopPreview(
 document.getElementById('searchClear').addEventListener('click',()=>{
   sEl.value=''; runSearch(''); if(nav.mode==='place') closeNav(); sEl.focus(); });
 sEl.addEventListener('focus',e=>{ if(isMobile()) document.getElementById('panel').classList.add('expanded');   // results need room below the collapsed fold
-  if(e.target.value.trim().length>=2) runSearch(e.target.value); });
+  runSearch(e.target.value); });
 sEl.addEventListener('keydown',e=>{ const items=[...document.querySelectorAll('.sr-item')]; if(!items.length) return;
   if(e.key==='ArrowDown'){ e.preventDefault(); kbdIdx=Math.min(kbdIdx+1,items.length-1); }
   else if(e.key==='ArrowUp'){ e.preventDefault(); kbdIdx=Math.max(kbdIdx-1,0); }
