@@ -34,6 +34,9 @@ commits are not listed.
   once. Place search and routes say "No connection" instead of "TomTom is not answering".
 
 ### Fixed
+- On a phone, "Watch these cameras" fills the screen. Before, it was 90% wide with a strip of
+  map beside it and the route sheet covered its bottom half. Tapping one of its cameras now
+  shows that camera on the map instead of stacking a second copy of the picture on top.
 - The tall phone route sheet stops under the trip card. Before, the card's height was read
   while it was still opening, so the sheet could slide over it.
 - Camera search reads streets the way people type them, so "42nd street" finds "W42 ST" and

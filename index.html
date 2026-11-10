@@ -682,6 +682,11 @@
     .rv-tile .rv-rm::before { inset: -8px; }
     .rv-actions .mini-btn { min-height: 44px; }
     #routeView .rv-close { width: 44px; height: 44px; }
+    /* a phone gets the camera stack full screen, above the route sheet (z 28) and under the
+       camera sheet (z 30) that a tapped tile opens. At 90vw a sliver of map showed beside it and
+       the route sheet covered its bottom half. */
+    #routeView { width: 100%; max-width: none; z-index: 29; box-shadow: none; }
+    body.rv-aside #routeView { visibility: hidden; }
     .rv-tile .rv-rm::before { inset: -12px; }
     .avoid-menu label { min-height: 44px; }
     .color-switch .color-btn, #newRoute, .route-item .rx { min-height: 44px; }
@@ -1173,6 +1178,7 @@ function clearSelection(){
   if(popup){ const p=popup; popup=null; p.remove(); }
   closeSheet();
   store.selected=null;
+  document.body.classList.remove('rv-aside');          // a phone's route view comes back when its camera closes
 }
 
 /* ---------- bottom sheet ---------- */
@@ -3574,7 +3580,13 @@ async function jumpToRouteCam(c){
   const d=dataCache[k];
   const feat=d && d.features.find(f=>Math.abs(f.geometry.coordinates[0]-c.coords[0])<1e-6 && Math.abs(f.geometry.coordinates[1]-c.coords[1])<1e-6);
   // the tap is the request to go there; offset keeps the pin out from under the route panel
-  map.easeTo({center:c.coords, zoom:Math.max(map.getZoom(),14), duration:600, offset:isMobile()?[0,0]:[-190,0]});
+  // a phone's route view covers the map, so it steps aside while this camera is open on the map,
+  // and the pin sits in the strip between the top card and the camera sheet's peek
+  let off=[-190,0];
+  if(isMobile()){ document.body.classList.add('rv-aside');
+    const top=document.getElementById('panel').getBoundingClientRect().bottom, peek=36+Math.min(innerWidth*0.56,260)+90;
+    off=[0, Math.round((top + innerHeight - peek)/2 - innerHeight/2)]; }
+  map.easeTo({center:c.coords, zoom:Math.max(map.getZoom(),14), duration:600, offset:off});
   if(feat) selectFeature(k,feat);
   else selectFeature(k,{geometry:{type:'Point',coordinates:c.coords.slice()},
     properties:{name:c.name, directions:[{snapshot:c.snapshot, video:c.video, camId:c.camId,
@@ -3657,7 +3669,7 @@ function installRvLoader(body){
   body.querySelectorAll('.rv-media[data-src]').forEach(m=>rvIO.observe(m));
   clearInterval(rvTimer); rvTimer=setInterval(refresh,30000);
 }
-function teardownRouteView(){ document.getElementById('routeView').classList.remove('show'); clearInterval(rvTimer); rvTimer=null; if(rvIO){ rvIO.disconnect(); rvIO=null; } }
+function teardownRouteView(){ document.body.classList.remove('rv-aside'); document.getElementById('routeView').classList.remove('show'); clearInterval(rvTimer); rvTimer=null; if(rvIO){ rvIO.disconnect(); rvIO=null; } }
 
 /* ---------- handlers ---------- */
 function bindLayerHandlers(k){
