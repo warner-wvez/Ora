@@ -89,5 +89,5 @@ panel collapses out of the map's way. Every pin has an invisible 44 px touch tar
 |---|---|
 | Left, Right | Previous or next camera, spatial order |
 | Enter in the jump box | Go to camera number N in that order |
-| Esc | Step back one layer: a menu, the search results, the open camera, the route view, routes, the place card |
+| Esc, or the phone's Back | Step back one layer: a menu, the search results, the open camera, the route view, routes, the place card |
 | F | Fit or fill in the enlarged view |

@@ -17,12 +17,22 @@ commits are not listed.
   pins with the category's symbol. Directions gain an Avoid chip for tolls and highways,
   remembered for next time, and each route a plain label (Fastest, Shortest, Least traffic)
   plus a Tolls tag. All of it follows what two Apple Maps case studies found people use most.
+- Trips with stops: add up to three stops (Find nearby along the route, or any place), reorder
+  them by dragging or with Move up and Move down, let TomTom optimize the order, and see the
+  time and miles of each stretch. Drive in Google Maps or Apple Maps hands the whole trip over,
+  stops and Avoid included, and Copy link shares it.
+- Each route says how it compares with the usual time for this hour, and the chosen route
+  names what is slowing it (closure, jam, road work) with the camera nearest each slowdown.
+- A traffic legend under the Traffic switch, and white dashes on closed stretches of a route.
+- The phone's Back gesture closes the top card instead of leaving the site.
 
 ### Fixed
 - Camera search reads streets the way people type them, so "42nd street" finds "W42 ST" and
   "i5" finds "I-5", and the cameras nearest the middle of the map come first. Before, "42nd"
   found no cameras in Manhattan.
 - Esc with the Avoid menu open closes the menu instead of leaving Directions.
+- The Tolls tag asks TomTom for `toll` sections; `tollRoad` is deprecated and may start failing.
+- Enter on a button inside a route row presses that button instead of selecting the row.
 - A place search refused for the monthly or hourly limit says so instead of "TomTom is not
   answering", and Directions with location off says why it needs a starting point.
 - From a full phone and desktop audit: grey and blue text raised to at least 4.5:1 contrast,
