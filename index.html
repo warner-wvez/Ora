@@ -142,6 +142,11 @@
     background: rgba(28,28,30,0.92); color: #fff; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 999px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; max-width: calc(100vw - 32px); text-align: center; }
   #cycleNote.show { display: block; animation: fadeSlide .2s cubic-bezier(.2,.8,.2,1); }
+  /* shown while the map has keyboard focus: MapLibre already pans on arrows and zooms on + and - */
+  #keyHint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 16; display: none;
+    background: rgba(28,28,30,0.92); color: #fff; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 999px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; white-space: nowrap; }
+  #keyHint.show { display: block; }
   @media (max-width: 640px) {
     #cycleNote { top: 96px; }                 /* clear of the collapsed phone panel */
     .cam-arrow { min-height: 40px; min-width: 46px; }
@@ -273,8 +278,13 @@
     max-height: 85vh; max-height: 85dvh; transform: translateY(100%);
     transition: transform .24s cubic-bezier(.2,.8,.2,1); }
   #sheet.dragging { transition: none; }
-  .sheet-grip { flex: none; padding: 8px 0 6px; display: flex; justify-content: center; cursor: grab; touch-action: none; }
-  .grip-bar { width: 36px; height: 4px; border-radius: 2px; background: #d1d1d6; }
+  /* the grip is a real button: tap or Enter/Space switches peek and expanded, a drag still
+     works. The strip is 32px; ::before grows the hit area to 44px past both edges. */
+  .sheet-grip { flex: none; position: relative; z-index: 2; width: 100%; height: 32px; padding: 10px 0 0; margin: 0; border: none; background: none;
+    display: flex; justify-content: center; align-items: flex-start; cursor: grab; touch-action: none; border-radius: 16px 16px 0 0; }
+  .sheet-grip::before { content: ''; position: absolute; top: -6px; bottom: -6px; left: 0; right: 0; }
+  .sheet-grip:focus-visible { outline: 2px solid #0062cc; outline-offset: -4px; }
+  .grip-bar { display: block; width: 36px; height: 5px; border-radius: 3px; background: #c7c7cc; }
   .sheet-close { position: absolute; top: 10px; right: 10px; z-index: 5; width: 28px; height: 28px; border: none; border-radius: 50%;
     background: rgba(0,0,0,0.45); color: #fff; font-size: 14px; line-height: 1; cursor: pointer; }
   #sheetContent { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
@@ -528,7 +538,7 @@
   #dirSheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 28; display: none; flex-direction: column; max-height: 44vh; max-height: min(44dvh, calc(100dvh - var(--panelB, 0px) - 12px));
     background: #fff; border-radius: 16px 16px 0 0; box-shadow: 0 -6px 28px rgba(0,0,0,0.22); }
   #dirSheet.open { display: flex; animation: fadeIn .18s ease-out; }
-  #dirSheet .ds-grip { flex: none; display: flex; justify-content: center; padding: 8px 0 4px; }
+  #dirSheet.tall { max-height: calc(100vh - 24px); max-height: calc(100dvh - var(--panelB, 0px) - 12px); }
   #dirSheet .ds-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 6px 10px; }
   @media (max-width: 640px) {
     #panel.nav-dir { max-height: 70vh; max-height: 70dvh; overflow-y: auto; }
@@ -730,16 +740,17 @@
 <div id="map"></div>
 <div id="addBanner"><span id="addBannerTxt"></span><button id="addDone">Done</button></div>
 <div id="cycleNote"></div>
+<div id="keyHint" aria-hidden="true">Arrow keys move the map · + and - zoom</div>
 <div id="previewBar"><span id="previewTxt"></span><button id="previewStop">Stop</button></div>
 
 <div id="sheet">
-  <div class="sheet-grip"><div class="grip-bar"></div></div>
+  <button type="button" class="sheet-grip" aria-label="Expand card"><span class="grip-bar"></span></button>
   <button class="sheet-close" id="sheetClose" title="Close">&#10005;</button>
   <div id="sheetContent"></div>
 </div>
 
 <!-- route options on a phone, under the map (route preview) -->
-<div id="dirSheet"><div class="ds-grip"><div class="grip-bar"></div></div><div class="ds-body"></div></div>
+<div id="dirSheet"><button type="button" class="sheet-grip ds-grip" aria-label="Expand route list"><span class="grip-bar"></span></button><div class="ds-body"></div></div>
 
 <div id="routeView">
   <div class="rv-head">
@@ -941,7 +952,11 @@ const OVERVIEW_BOUNDS=[[-124.5,24.5],[-67,48.5]]; // frames the lower-48 states 
 const MAPTILER_KEY='dtmplMa5VK2EtReQ2Ug8'; // origin-locked to warner-wvez.github.io + localhost in the MapTiler dashboard
 // pixelRatio: a 3x phone screen draws 9 pixels for every 1; 2x draws 4 and still looks sharp
 const map=new maplibregl.Map({ container:'map', style:`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`, center:US_VIEW.center, zoom:US_VIEW.zoom, pitch:0,
-  pixelRatio:Math.min(window.devicePixelRatio||1, 2) });
+  pixelRatio:Math.min(window.devicePixelRatio||1, 2),
+  locale:{'Map.Title':'Map. Arrow keys move it, plus and minus zoom.'} });   // the canvas's name, read when it gets focus
+{ const cv=map.getCanvas(), hint=document.getElementById('keyHint');
+  cv.addEventListener('focus',()=>{ if(cv.matches(':focus-visible')) hint.classList.add('show'); });
+  cv.addEventListener('blur',()=>hint.classList.remove('show')); }
 /* Momentum after a drag, closer to how Apple's maps glide. MapLibre's glide starts at
    linearity x 1.67 of the finger's speed (its default 0.3 starts at half speed, a brake at
    release) and runs speed/deceleration seconds. At 0.6 the glide starts at the finger's speed,
@@ -1123,12 +1138,21 @@ function sheetPeekOffset(){
   if(c.querySelector('.place-card')) return 0;          // a place card is short; show all of it, Directions included
   const media=c.querySelector('.popup-imgwrap'), head=c.querySelector('.popup-body h3, .enf h3');
   // peek shows the grip, the picture and the title line; the rest waits below the fold
-  const visible=22 + (media?media.offsetHeight:0) + (head?head.offsetHeight+64:120);
+  const visible=36 + (media?media.offsetHeight:0) + (head?head.offsetHeight+64:120);
   return Math.max(0, s.offsetHeight - Math.min(visible, s.offsetHeight));
 }
 function setSheetDetent(d){
   sheetDetent=d;
-  document.getElementById('sheet').style.transform = d==='expanded' ? 'translateY(0)' : `translateY(${sheetPeekOffset()}px)`;
+  const s=document.getElementById('sheet'), off=sheetPeekOffset();
+  s.style.transform = d==='expanded' ? 'translateY(0)' : `translateY(${off}px)`;
+  syncGrip(s.querySelector('.sheet-grip'), d==='expanded', off>0, 'card');
+}
+// a grip only speaks to screen readers and the Tab key when tapping it would change something
+function syncGrip(g, expanded, useful, what){
+  if(!g) return;
+  g.setAttribute('aria-label', `${expanded?'Collapse':'Expand'} ${what}`);
+  g.tabIndex=useful ? 0 : -1;
+  if(useful) g.removeAttribute('aria-hidden'); else g.setAttribute('aria-hidden','true');
 }
 function openSheet(html){
   const s=document.getElementById('sheet');
@@ -1146,14 +1170,20 @@ function closeSheet(){
 function wireSheet(){
   const s=document.getElementById('sheet'), grip=s.querySelector('.sheet-grip');
   document.getElementById('sheetClose').addEventListener('click',clearSelection);
-  let startY=0, startT=0, curT=0, t0=0, dragging=false;
+  let startY=0, startT=0, curT=0, t0=0, dragging=false, moved=false, dragged=false;
   const getT=()=>{ const m=/translateY\(([-\d.]+)px\)/.exec(s.style.transform); return m?parseFloat(m[1]):0; };
-  grip.addEventListener('pointerdown',(e)=>{ dragging=true; startY=e.clientY; startT=getT(); curT=startT; t0=performance.now();
+  grip.addEventListener('pointerdown',(e)=>{ dragging=true; moved=false; dragged=false; startY=e.clientY; startT=getT(); curT=startT; t0=performance.now();
     s.classList.add('dragging'); grip.setPointerCapture(e.pointerId); });
   grip.addEventListener('pointermove',(e)=>{ if(!dragging) return;
+    if(Math.abs(e.clientY-startY)>6) moved=true;
     curT=Math.max(0, startT+(e.clientY-startY)); s.style.transform=`translateY(${curT}px)`; });
+  // a tap (or Enter/Space) switches peek and expanded; a drag already settled the sheet, so
+  // the click that follows it is ignored
+  grip.addEventListener('click',()=>{ if(dragged){ dragged=false; return; } setSheetDetent(sheetDetent==='expanded'?'peek':'expanded'); });
   const settle=(e)=>{
     if(!dragging) return; dragging=false; s.classList.remove('dragging');
+    if(!moved){ setSheetDetent(sheetDetent); return; }            // a tap: the click handler decides
+    dragged=true;
     const v=(e.clientY-startY)/Math.max(1,performance.now()-t0);          // px per ms, + is downward
     const peekY=sheetPeekOffset(), h=s.offsetHeight;
     let d;
@@ -1165,6 +1195,28 @@ function wireSheet(){
   };
   grip.addEventListener('pointerup',settle);
   grip.addEventListener('pointercancel',()=>{ if(dragging){ dragging=false; s.classList.remove('dragging'); setSheetDetent(sheetDetent); } });
+}
+// the phone route sheet: tap the grip (or swipe it up/down) to switch between its usual height
+// and all the room under the trip card
+function setDsTall(on){
+  const s=document.getElementById('dirSheet'); s.classList.toggle('tall', on); syncDsGrip();
+}
+function syncDsGrip(){
+  const s=document.getElementById('dirSheet'), b=s.querySelector('.ds-body'), tall=s.classList.contains('tall');
+  syncGrip(s.querySelector('.ds-grip'), tall, tall || b.scrollHeight>b.clientHeight+2, 'route list');
+}
+function wireDirSheet(){
+  const s=document.getElementById('dirSheet'), grip=s.querySelector('.ds-grip'), panel=document.getElementById('panel');
+  // the route sheet never covers the trip card above it. The card animates its height on a
+  // phone, so a one-off measure caught it halfway; watch its size instead.
+  new ResizeObserver(()=>{ document.documentElement.style.setProperty('--panelB', Math.round(panel.getBoundingClientRect().bottom)+'px');
+    if(s.classList.contains('open')) syncDsGrip(); }).observe(panel);
+  let y0=null, swiped=false;
+  grip.addEventListener('pointerdown',(e)=>{ y0=e.clientY; swiped=false; grip.setPointerCapture(e.pointerId); });
+  grip.addEventListener('pointerup',(e)=>{ if(y0==null) return; const dy=e.clientY-y0; y0=null;
+    if(Math.abs(dy)>24){ swiped=true; setDsTall(dy<0); } });
+  grip.addEventListener('pointercancel',()=>{ y0=null; });
+  grip.addEventListener('click',()=>{ if(swiped){ swiped=false; return; } setDsTall(!s.classList.contains('tall')); });
 }
 
 /* ---------- live popup (snapshot or HLS video) ---------- */
@@ -2798,10 +2850,9 @@ function renderDir(){
       if(f.dataset.end==='add'){ renderDir(); return; }          // left the new-stop field without picking
       const v=endValue(f.dataset.end); f.value=v?v.label:''; document.getElementById('dirSuggest').innerHTML=''; clearNearbyPins(); },120));
   });
-  const sheet=document.getElementById('dirSheet'); sheet.classList.toggle('open', isMobile());
+  const sheet=document.getElementById('dirSheet'); if(!sheet.classList.contains('open')) sheet.classList.remove('tall');   // a new trip starts at the usual height
+  sheet.classList.toggle('open', isMobile());
   renderRoutes();
-  // the route sheet never covers the trip card above it
-  requestAnimationFrame(()=>document.documentElement.style.setProperty('--panelB', Math.round(document.getElementById('panel').getBoundingClientRect().bottom)+'px'));
 }
 const phoneCompact=()=> isMobile() && nav.stops.length>0 && !nav.phoneEdit && nav.editing!=='add';
 // phone: editing the trip gets the whole screen; the route sheet steps aside until Done
@@ -2870,9 +2921,9 @@ async function optimizeStops(){
   renderRoutes('Finding the shortest order for the stops…');
   let j;
   try{ j=await navGet(routeQuery(nav.from.lngLat, nav.to.lngLat, true)); }
-  catch(e){ if(tok===nav.token) renderRoutes(`Could not optimize the stops: ${e.message}`); return; }
+  catch(e){ if(tok===nav.token){ renderRoutes(`Could not optimize the stops: ${e.message}`); announce(`Could not optimize the stops: ${e.message}`); } return; }
   if(tok!==nav.token) return;
-  if(!j.routes || !j.routes.length){ renderRoutes('No route found through these stops'); return; }
+  if(!j.routes || !j.routes.length){ renderRoutes('No route found through these stops'); announce('No route found through these stops'); return; }
   const same=!j.order || j.order.every((v,i)=>v===i);
   if(!same && j.order.length===nav.stops.length) nav.stops=j.order.map(i=>nav.stops[i]);
   const r=j.routes[0];
@@ -2882,7 +2933,23 @@ async function optimizeStops(){
   else nav.optNote='Stops reordered for the shortest drive.';
   nav.routes=j.routes.map(x=>({...x, cams:null})); nav.sel=0;
   renderDir(); drawStopMarkers(); drawRouteMap(); renderRoutes(); frameRoutes(true); routeCameras(tok); writeUrl();
-  announce(nav.optNote);
+  announce(nav.optNote+' '+routeSummary());
+}
+// what a screen reader hears once routes arrive (WCAG 4.1.3), said once, not on every redraw:
+// "3 routes. Fastest 34 minutes via I-5, 12 minutes slower than usual."
+const spokenTime=(s)=>{ const m=Math.max(1,Math.round(s/60)), h=Math.floor(m/60), r=m%60, mm=(n)=>`${n} minute${n===1?'':'s'}`;
+  return h ? `${h} hour${h===1?'':'s'}${r?' '+mm(r):''}` : mm(m); };
+function routeSummary(){
+  const n=nav.routes.length, r=nav.routes[nav.sel]; if(!r) return '';
+  const fastest=Math.min(...nav.routes.map(x=>x.seconds));
+  const name=n>1 && r.seconds===fastest ? 'Fastest' : n>1 ? 'Chosen route' : 'Route';
+  const via=r.via && r.via.length ? ` via ${r.via[0]}` : '', stops=nav.stops.length ? ` with ${nav.stops.length} stop${nav.stops.length===1?'':'s'}` : '';
+  let usual='';
+  if(r.historicSeconds){ const d=r.seconds-r.historicSeconds;
+    usual = Math.abs(d)<120 ? ', usual for this time' : `, ${spokenTime(Math.abs(d))} ${d>0?'slower':'faster'} than usual`; }
+  else if(r.delaySeconds>=60) usual=`, ${spokenTime(r.delaySeconds)} added by traffic`;
+  const closed=(r.traffic||[]).some(t=>t.level==='closed') ? ' A road on this route is closed.' : '';
+  return `${n} route${n===1?'':'s'}. ${name} ${spokenTime(r.seconds)}${via}${stops}${usual}.${closed}`;
 }
 // Find Nearby along the chosen route, for adding a stop: one search, places within a 15 minute
 // detour spread over the whole drive. The route line is thinned to at most about 250 points.
@@ -2956,15 +3023,16 @@ async function planRoutes(){
   if(nav.pre && nav.pre.key===key && Date.now()-nav.pre.at<300000) routes=nav.pre.routes;     // the place card already asked
   else{
     try{ routes=(await navGet(routeQuery(from,to))).routes; }
-    catch(e){ if(tok===nav.token) renderRoutes(`Could not get routes: ${e.message}`); return; }
+    catch(e){ if(tok===nav.token){ renderRoutes(`Could not get routes: ${e.message}`); announce(`Could not get routes: ${e.message}`); } return; }
   }
   if(tok!==nav.token) return;
-  if(!routes.length){ renderRoutes('No route found between these two points'); return; }
+  if(!routes.length){ renderRoutes('No route found between these two points'); announce('No route found between these two points'); return; }
   const fastest=Math.min(...routes.map(r=>r.seconds));
   nav.routes=routes.map(r=>({...r, cams:null}));
   nav.sel=nav.routes.findIndex(r=>r.seconds===fastest);
   drawRouteMap(); renderRoutes(); frameRoutes(true); renderDirLegs();
   routeCameras(tok); writeUrl();
+  announce(routeSummary());
 }
 // the leg lines under each stop follow the chosen route without rebuilding the fields
 function renderDirLegs(){
@@ -3137,6 +3205,7 @@ function renderRoutes(msg){
   const w=box.querySelector('[data-watch]'); if(w) w.addEventListener('click',()=>watchRoute(nav.routes[nav.sel]));
   const pv=box.querySelector('[data-preview]'); if(pv) pv.addEventListener('click',(e)=>{ e.stopPropagation(); startPreview(); });
   wireWhy(box);
+  if(isMobile()) requestAnimationFrame(syncDsGrip);
 }
 // what this trip usually takes at this hour, from TomTom's history
 function usualTxt(r, sel){
@@ -3693,7 +3762,7 @@ document.getElementById('rvCopy').addEventListener('click',async ()=>{
   b.textContent = ok ? `Copied ${r.cams.length} ✓` : 'Copy failed';
   setTimeout(()=>{ b.textContent='Copy list'; },1700);
 });
-wireSheet();
+wireSheet(); wireDirSheet();
 // mobile expands the collapsed-by-default panel; desktop collapses the always-open one — one
 // button, the gesture that makes sense for the viewport
 const layersBtn=document.getElementById('panelToggle');

@@ -81,13 +81,17 @@ that name states (`#l=st-WA`) still open on the same view.
 ## On a phone
 
 The sidebar becomes a bottom sheet with two heights, swipe or tap to change, and the top
-panel collapses out of the map's way. Every pin has an invisible 44 px touch target.
+panel collapses out of the map's way. Every pin has an invisible 44 px touch target. The grip
+at the top of each sheet is a button: tap it, or press Enter or Space on it, to switch between
+the short and the tall sheet, and a screen reader names it ("Expand card", "Collapse route
+list"). It drops out of the Tab order when the sheet already shows everything.
 
 ## Keyboard
 
 | Key | What |
 |---|---|
-| Left, Right | Previous or next camera, spatial order |
+| Arrows, + and - (map focused) | Pan and zoom the map. A one-line hint shows while the map has keyboard focus, and a screen reader hears the same when it lands there |
+| Left, Right (a camera open) | Previous or next camera, spatial order |
 | Enter in the jump box | Go to camera number N in that order |
 | Esc, or the phone's Back | Step back one layer: a menu, the search results, the open camera, the route view, routes, the place card |
 | F | Fit or fill in the enlarged view |

@@ -25,8 +25,14 @@ commits are not listed.
   names what is slowing it (closure, jam, road work) with the camera nearest each slowdown.
 - A traffic legend under the Traffic switch, and white dashes on closed stretches of a route.
 - The phone's Back gesture closes the top card instead of leaving the site.
+- Screen readers hear the routes once they arrive ("3 routes. Fastest 31 minutes via I-95 S,
+  usual for this time."), and failed route requests too. The grip on each phone sheet is a
+  real button with a name: tap it, or press Enter, to switch the sheet's height. The map tells
+  keyboard users that arrows pan and + and - zoom.
 
 ### Fixed
+- The tall phone route sheet stops under the trip card. Before, the card's height was read
+  while it was still opening, so the sheet could slide over it.
 - Camera search reads streets the way people type them, so "42nd street" finds "W42 ST" and
   "i5" finds "I-5", and the cameras nearest the middle of the map come first. Before, "42nd"
   found no cameras in Manhattan.
