@@ -1,18 +1,17 @@
 {
-"checked_at": "2026-11-09T22:43:16Z",
+"checked_at": "2026-11-10T07:39:04Z",
 "cameras": 1116,
 "counts": {
 "frozen": 27,
-"offline": 3
+"offline": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CMH/CMH055.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/CMH/CMH057-L.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH081.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH092.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/9mile67.jpg": "frozen",
-"https://itscameras.dot.state.oh.us/images/artimis/CCTV021a.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/Cherry163.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_at_Bennett_Rd.jpg": "frozen",
