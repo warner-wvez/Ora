@@ -650,6 +650,11 @@
   @supports (transition-timing-function: linear(0, 1)) {
     .color-switch .seg-pill { transition-timing-function: linear(0, 0.075, 0.213, 0.373, 0.527, 0.662, 0.772, 0.856, 0.918, 0.96, 0.988, 1.004, 1.013, 1.016, 1.015, 1.012, 1.009, 1.007, 1.005, 1.003, 1.002, 1.001, 1, 1, 1); } }
   .color-switch:has(.color-btn:last-of-type.active) .seg-pill { transform: translateX(calc(100% + 2px)); }
+  /* three options: the pill is a third wide and slides one or two widths */
+  .color-switch.three .seg-pill { width: calc((100% - 4px) / 3); }
+  .color-switch.three:has(.color-btn:nth-of-type(2).active) .seg-pill { transform: translateX(100%); }
+  .color-switch.three:has(.color-btn:nth-of-type(3).active) .seg-pill { transform: translateX(200%); }
+  .night-hd { margin: 12px 0 6px; font-size: var(--fs-meta); font-weight: 600; color: #6e6e73; }
   .color-switch .color-btn { position: relative; z-index: 1; transition: color .15s ease; }
   .color-switch .color-btn.active { background: transparent; box-shadow: none; }
 
@@ -805,6 +810,8 @@
     <button type="button" class="grp-h" aria-expanded="false" aria-controls="grp-mapstyle"><span>Map style</span><span class="caret" aria-hidden="true">&#9660;</span></button>
     <div class="grp-body" id="grp-mapstyle">
       <div class="color-switch"><span class="seg-pill" aria-hidden="true"></span><button class="color-btn active" data-base="light">Map</button><button class="color-btn" data-base="satellite">Satellite</button></div>
+      <div class="hd night-hd" id="nightHd">Night map</div>
+      <div class="color-switch three" role="group" aria-labelledby="nightHd"><span class="seg-pill" aria-hidden="true"></span><button class="color-btn" data-night="auto" aria-pressed="true">Auto</button><button class="color-btn" data-night="light" aria-pressed="false">Light</button><button class="color-btn" data-night="dark" aria-pressed="false">Dark</button></div>
       <div id="srLive" class="sr-only" aria-live="polite"></div><label class="lyr" id="trafficRow" hidden style="margin-top:6px"><input type="checkbox" id="trafficOn"><span class="nm">Traffic</span><span class="cnt">TomTom</span></label>
       <div class="traffic-key" id="trafficKey" hidden aria-label="Traffic colours"><span><i style="background:#2EAB30"></i>Moving</span><span><i style="background:#F1BF40"></i>Slower</span><span><i style="background:#F18237"></i>Slow</span><span><i style="background:#E70704"></i>Stop and go</span><span><i class="closed"></i>Closed</span></div>
     </div>
@@ -2050,6 +2057,40 @@ function syncEnfControls(){ document.getElementById('enfControls').classList.tog
 function applyContrast(){ const w=store.basemap==='satellite';
   ['cams__points','cams__clusters'].forEach(id=>{ if(map.getLayer(id)) map.setPaintProperty(id,'circle-stroke-width', w?3:2.5); });
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-stroke-width', w?2:1.5); }
+/* ---------- night map ----------
+   Auto follows the device's own light or dark setting; Light and Dark fix it. The dark map is
+   MapTiler's own streets-v2-dark, which has the same 90 layers on the same tiles as the day map,
+   so the switch repaints those layers in place and Ora's cameras, routes and pins stay put
+   (loading a whole new style would drop them). The panel stays light. */
+const NIGHT_KEY='ora-night', mqDark=matchMedia('(prefers-color-scheme: dark)');
+let nightPref=(()=>{ try{ const v=localStorage.getItem(NIGHT_KEY); return ['auto','light','dark'].includes(v) ? v : 'auto'; }catch(e){ return 'auto'; } })();
+const nightWanted=()=> nightPref==='dark' || (nightPref==='auto' && mqDark.matches);
+const nightStyles={day:null, night:null}; let nightShown=false, nightBusy=null;
+function syncNightButtons(){ document.querySelectorAll('.color-btn[data-night]').forEach(b=>{ const on=b.dataset.night===nightPref; b.classList.toggle('active',on); b.setAttribute('aria-pressed',String(on)); }); }
+async function applyNight(){
+  const want=nightWanted(); if(want===nightShown || !nightStyles.day) return;
+  if(want && !nightStyles.night){
+    if(!nightBusy) nightBusy=fetch(`https://api.maptiler.com/maps/streets-v2-dark/style.json?key=${MAPTILER_KEY}`).then(r=>r.ok ? r.json() : null).catch(()=>null);
+    nightStyles.night=await nightBusy; nightBusy=null;
+    if(!nightStyles.night) return;                       // no dark style today: the day map stays
+    if(nightWanted()!==want) return;
+  }
+  const to=want ? nightStyles.night : nightStyles.day, from=want ? nightStyles.day : nightStyles.night;
+  const fromBy=new Map((from ? from.layers : []).map(l=>[l.id,l]));
+  for(const l of to.layers){
+    if(!map.getLayer(l.id)) continue;
+    const old=fromBy.get(l.id)||{};
+    for(const k of Object.keys(old.paint||{})) if(!(l.paint && k in l.paint)) try{ map.setPaintProperty(l.id,k,undefined); }catch(e){}
+    for(const [k,v] of Object.entries(l.paint||{})) try{ map.setPaintProperty(l.id,k,v); }catch(e){}
+    for(const [k,v] of Object.entries(l.layout||{})) if(k!=='visibility') try{ map.setLayoutProperty(l.id,k,v); }catch(e){}
+    if(l.filter) try{ map.setFilter(l.id,l.filter); }catch(e){}
+  }
+  try{ if(to.sprite) map.setSprite(to.sprite); }catch(e){}
+  nightShown=want; document.body.classList.toggle('night-map', want);
+}
+function setNight(pref){ nightPref=pref; try{ localStorage.setItem(NIGHT_KEY, pref); }catch(e){} syncNightButtons(); applyNight();
+  announce(pref==='auto' ? 'Night map follows this device' : pref==='dark' ? 'Night map on' : 'Day map'); }
+mqDark.addEventListener('change', ()=>{ if(nightPref==='auto') applyNight(); });
 function setBasemap(mode){ store.basemap=mode; map.setLayoutProperty('sat-layer','visibility', mode==='satellite'?'visible':'none'); applyContrast(); }
 
 /* ---------- one morphing camera pipeline (all live layers share it) ----------
@@ -4067,6 +4108,8 @@ document.querySelectorAll('.grp-h').forEach(h=>h.addEventListener('click',()=>se
 document.querySelectorAll('.color-btn[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{ store.enfColorMode=btn.dataset.mode;
   document.querySelectorAll('.color-btn[data-mode]').forEach(b=>b.classList.toggle('active',b===btn));
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr()); renderLegend(); writeUrl(); }));
+document.querySelectorAll('.color-btn[data-night]').forEach(btn=>btn.addEventListener('click',()=>setNight(btn.dataset.night)));
+syncNightButtons();
 document.querySelectorAll('.color-btn[data-base]').forEach(btn=>btn.addEventListener('click',()=>{ document.querySelectorAll('.color-btn[data-base]').forEach(b=>b.classList.toggle('active',b===btn)); setBasemap(btn.dataset.base); writeUrl(); }));
 document.querySelectorAll('#fltVerdict .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const v=ch.dataset.v; ch.classList.toggle('on'); ch.setAttribute('aria-pressed',String(ch.classList.contains('on'))); ch.classList.contains('on')?store.enfFilter.verdicts.add(v):store.enfFilter.verdicts.delete(v); applyEnfFilter(); writeUrl(); }));
 document.querySelectorAll('#fltType .fchip').forEach(ch=>ch.addEventListener('click',()=>{ const t=ch.dataset.t; ch.classList.toggle('on'); ch.setAttribute('aria-pressed',String(ch.classList.contains('on'))); ch.classList.contains('on')?store.enfFilter.types.add(t):store.enfFilter.types.delete(t); applyEnfFilter(); writeUrl(); }));
@@ -4324,6 +4367,8 @@ document.addEventListener('keydown',(e)=>{
 // started now so it runs alongside the basemap style
 const outlineP=fetch('states-outline.json').then(r=>r.json()).catch(e=>{ console.warn('state outline failed', e); return null; });
 map.on('load', async ()=>{
+  nightStyles.day={layers: map.getStyle().layers.map(l=>({id:l.id, paint:l.paint, layout:l.layout, filter:l.filter})), sprite: map.getStyle().sprite};
+  applyNight();
   map.addSource('sat',{type:'raster',tiles:['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics'});
   const firstSymbol=(map.getStyle().layers.find(l=>l.type==='symbol')||{}).id;
   map.addLayer({id:'sat-layer',type:'raster',source:'sat',layout:{visibility:'none'}}, firstSymbol);

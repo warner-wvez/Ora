@@ -44,6 +44,9 @@ commits are not listed.
   drive and the cameras on it. Kept in this browser only, like Recents.
 - Find nearby gains Groceries and Pharmacy, the errands on the way home, and its eight
   buttons sit in two rows in the order a commuter reaches for them, coffee first.
+- Night map: Auto, Light or Dark under Map style. Auto follows the device's own setting, for
+  drives that start or end in the dark. It is MapTiler's dark Streets map, swapped in place so
+  the cameras, routes and pins stay; the panel stays light.
 - Leave now, Leave at, Arrive by: the chip at the top of Directions (where a Drive label that
   did nothing used to sit) plans a one-destination drive for a time up to 60 days out. Arrive
   by answers with the time to leave ("Leave by 8:28 AM tomorrow"), every route shows when it

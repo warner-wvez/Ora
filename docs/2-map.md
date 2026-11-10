@@ -81,6 +81,14 @@ phone and website from Overture Maps Places (see the [route preview](2.3-route-p
 Switch between the street style and satellite imagery. Satellite shows the actual road
 and intersection each camera watches; pin outlines thicken on it so they stay visible.
 
+Night map, under Map style, is Auto, Light or Dark. Auto follows the device's own light or
+dark setting, so a drive checked before dawn gets a dark map without a trip to the settings;
+Light and Dark fix it, remembered in this browser. The dark map is MapTiler's streets-v2-dark,
+which has the same 90 layers on the same tiles as the day map, so Ora repaints those layers in
+place rather than loading a new style, and its cameras, routes and pins stay where they were.
+The panel stays light. Traffic colours still come from TomTom's day style, which reads on
+both.
+
 ## Share a view
 
 The URL always reflects what you are looking at: position, zoom, basemap, and the Chicago
