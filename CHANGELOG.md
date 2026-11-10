@@ -39,6 +39,17 @@ commits are not listed.
   link also shows a QR code of the view or trip, so a phone can open it with its camera. The
   QR encoder is Ora's own, so no third-party script was added.
 
+### Changed
+- One type scale for every scene, named by role, in place of 19 separate sizes from 8.5px to
+  30px. On a phone the reading text is 14px or more (route details, addresses, notes) and row
+  titles 16px; badges on pictures stay small. Cards, sheets and the camera stack share one
+  inset, so text lines up from one scene to the next.
+- The chosen route shows its cameras once: the camera line is the button into them ("Watch
+  the 36 cameras on this route"), and Preview is a quiet text button under Drive in Google Maps.
+  Before, the count and a second Watch button both showed, and the buttons wrapped onto
+  ragged lines in the computer's panel. On a phone the camera stack's header drops Copy list,
+  a desk tool, so the route's name has room.
+
 ### Fixed
 - On a phone, "Watch these cameras" fills the screen. Before, it was 90% wide with a strip of
   map beside it and the route sheet covered its bottom half. Tapping one of its cameras now

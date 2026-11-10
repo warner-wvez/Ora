@@ -10,6 +10,12 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/supercluster@8.0.1/dist/supercluster.min.js"></script>
 <style>
+  /* one type scale for every scene, named by role. Phones read at arm's length on the move, so
+     their reading text is 14px or more (UXCam: under 14pt is hard to read on small screens);
+     badges on pictures and the uppercase group heads stay small on purpose. */
+  :root { --fs-badge: 11px; --fs-meta: 12px; --fs-ctl: 12px; --fs-chip: 12px; --fs-body: 13px; --fs-row: 14px; --fs-title: 17px; --fs-time: 20px;
+    --pad: 14px; }
+  @media (max-width: 640px) { :root { --fs-meta: 14px; --fs-ctl: 14px; --fs-chip: 13px; --fs-body: 15px; --fs-row: 16px; --fs-title: 20px; --fs-time: 24px; --pad: 16px; } }
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
   /* The app is a single full-viewport map, so the page itself must never scroll. Off-canvas
@@ -24,8 +30,8 @@
     position: absolute; top: 12px; left: 12px; z-index: 10;
     /* solid, not frosted: a backdrop blur over the map is recomputed on every frame the map moves */
     background: #fff;
-    border-radius: 12px; padding: 12px 14px 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    width: 340px; max-height: calc(100vh - 24px); overflow-y: auto;
+    border-radius: 12px; padding: 12px var(--pad) var(--pad); box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    width: 360px; max-height: calc(100vh - 24px); overflow-y: auto;
   }
   /* every control shows where keyboard focus is (WCAG 2.4.7) */
   :focus-visible { outline: 2px solid #0062cc; outline-offset: 2px; }
@@ -36,14 +42,14 @@
   .search-x, .dir-chip, .sheet-close { position: relative; }
   .search-x::before, .dir-chip::before { content: ''; position: absolute; inset: -8px; }
   #panel .brand-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-  #panel .brand { font-size: 15px; font-weight: 700; color: #1c1c1e; }
-  #share { font-size: 11px; font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+  #panel .brand { font-size: calc(var(--fs-row) + 2px); font-weight: 700; color: #1c1c1e; }
+  #share { font-size: var(--fs-ctl); font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
   #share:hover { background: #e0ecff; }
 
   /* a filled field, the way Apple and Google draw search; results flow inside the panel (the
      dropdown used to sit absolutely inside it and the panel cut it off), two lines a row */
   .search-wrap { position: relative; margin-bottom: 10px; }
-  #search { width: 100%; height: 40px; font-size: 14px; padding: 0 36px 0 36px; border: 1px solid transparent; border-radius: 10px; outline: none; background: #f2f2f7; color: #1c1c1e; text-overflow: ellipsis; }
+  #search { width: 100%; height: 40px; font-size: var(--fs-row); padding: 0 36px 0 36px; border: 1px solid transparent; border-radius: 10px; outline: none; background: #f2f2f7; color: #1c1c1e; text-overflow: ellipsis; }
   #search:focus { border-color: #0062cc; background: #fff; }
   #search::placeholder { color: #6e6e73; }
   /* type=search brings the phone's Search key; the browser's own clear button and rounded look stay off (Ora draws its own x) */
@@ -66,12 +72,12 @@
   .sr-ic.nb { color: #fff; }
   .sr-ic.nb svg { width: 16px; height: 16px; }
   .sr-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-  .sr-t { font-size: 14px; color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sr-s { font-size: 12px; color: #6e6e73; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
-  .sr-empty { padding: 8px 6px; font-size: 12px; color: #6e6e73; }
+  .sr-t { font-size: var(--fs-row); color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sr-s { font-size: var(--fs-meta); color: #6e6e73; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+  .sr-empty { padding: 8px 6px; font-size: var(--fs-meta); color: #6e6e73; line-height: 1.4; }
 
   .grp { border-top: 1px solid #ececf0; }
-  .grp-h { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; background: none; font: inherit; text-align: left; font-size: 12px; font-weight: 600; color: #1c1c1e; cursor: pointer; padding: 8px 0 6px; }
+  .grp-h { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; background: none; font: inherit; text-align: left; font-size: var(--fs-body); font-weight: 600; color: #1c1c1e; cursor: pointer; padding: 8px 0 6px; }
   .grp-h:focus-visible { outline: 2px solid #0062cc; outline-offset: 2px; border-radius: 6px; }
   .grp-h .caret { font-size: 11px; color: #6e6e73; transition: transform .15s; }
   .grp-h[aria-expanded="false"] .caret { transform: rotate(-90deg); }
@@ -82,43 +88,43 @@
   .cam-tools .mini-btn { flex: none; }
   #camList { max-height: 210px; overflow-y: auto; margin: -2px -4px 0; padding: 0 4px; }
 
-  .lyr { display: flex; align-items: center; gap: 8px; padding: 4px 2px; cursor: pointer; font-size: 13px; color: #3c3c43; }
+  .lyr { display: flex; align-items: center; gap: 8px; padding: 4px 2px; cursor: pointer; font-size: var(--fs-body); color: #3c3c43; }
   .lyr input { accent-color: #0062cc; width: 15px; height: 15px; cursor: pointer; flex: none; }
   .lyr .swatch { width: 9px; height: 9px; border-radius: 50%; flex: none; background: #007aff; }
   /* two plain dots, the verdict colours at either end of the scale, not a split gradient */
   .lyr .swatch.pair { background: #34c759; box-shadow: 12px 0 0 #ff2d55; margin-right: 12px; }
   .lyr .nm { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .lyr .live-tag { font-size: 8.5px; font-weight: 800; letter-spacing: .03em; color: #fff; background: #ff2d55; padding: 1px 4px; border-radius: 3px; }
-  .lyr .cnt { font-size: 11px; color: #6e6e73; }
+  .lyr .live-tag { font-size: var(--fs-badge); font-weight: 800; letter-spacing: .03em; color: #fff; background: #ff2d55; padding: 1px 4px; border-radius: 3px; }
+  .lyr .cnt { font-size: var(--fs-meta); color: #6e6e73; }
 
   .btn-row { display: flex; gap: 6px; margin-top: 4px; }
-  .mini-btn { font-size: 11px; font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 5px 9px; cursor: pointer; }
+  .mini-btn { font-size: var(--fs-ctl); font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 5px 9px; cursor: pointer; }
   .mini-btn:hover { background: #e0ecff; }
   .mini-btn.grey { color: #6e6e73; background: #f2f2f7; }
 
-  .route-item { display: flex; align-items: center; gap: 6px; padding: 5px 2px; font-size: 13px; color: #1c1c1e; }
+  .route-item { display: flex; align-items: center; gap: 6px; padding: 5px 2px; font-size: var(--fs-body); color: #1c1c1e; }
   .route-item .rn { flex: 1; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .route-item .rn:hover { color: #0062cc; }
-  .route-item .rc { font-size: 11px; color: #6e6e73; }
+  .route-item .rc { font-size: var(--fs-meta); color: #6e6e73; }
   .route-item .rx { color: #6e6e73; cursor: pointer; font-size: 14px; padding: 0 2px; }
   .route-item .rx:hover { color: #ff3b30; }
-  .route-empty { font-size: 11px; color: #6e6e73; padding: 2px; }
+  .route-empty { font-size: var(--fs-meta); color: #6e6e73; padding: 2px; }
 
   .enf-controls { margin-top: 4px; padding-top: 4px; display: none; }
   .enf-controls.show { display: block; }
-  .enf-controls .hd { font-size: 11px; font-weight: 600; color: #6e6e73; margin: 2px 0 6px; }
+  .enf-controls .hd { font-size: var(--fs-meta); font-weight: 600; color: #6e6e73; margin: 2px 0 6px; }
   .color-switch { display: flex; gap: 2px; background: #f2f2f7; border-radius: 8px; padding: 2px; }
-  .color-btn { flex: 1; font-size: 11px; font-weight: 600; padding: 4px 8px; border: none; border-radius: 6px; background: transparent; color: #6e6e73; cursor: pointer; }
+  .color-btn { flex: 1; font-size: var(--fs-ctl); font-weight: 600; padding: 4px 8px; border: none; border-radius: 6px; background: transparent; color: #6e6e73; cursor: pointer; }
   .color-btn.active { background: #fff; color: #1c1c1e; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
   .filters { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-  .fchip { font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid #dcdce1; background: #fff; color: #6e6e73; cursor: pointer; user-select: none; }
+  .fchip { font-size: var(--fs-ctl); font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid #dcdce1; background: #fff; color: #6e6e73; cursor: pointer; user-select: none; }
   .fchip.on { color: #fff; border-color: transparent; }
   .fchip.on[data-v="justified"] { background: #34c759; } .fchip.on[data-v="revenue"] { background: #ff2d55; }
   .fchip.on[data-v="gap"] { background: #ff9500; } .fchip.on[data-v="quiet"] { background: #b0b0b5; }
   .fchip.on[data-t="redlight"] { background: #ff3b30; } .fchip.on[data-t="speed"] { background: #ff9500; }
 
   #legend { margin-top: 10px; }
-  #legend .row { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #3c3c43; margin-top: 4px; }
+  #legend .row { display: flex; align-items: center; gap: 6px; font-size: var(--fs-meta); color: #3c3c43; margin-top: 4px; }
   #legend .dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.15); flex: none; }
   #legend .dot.rl { background: #ff3b30; } #legend .dot.sp { background: #ff9500; }
   #legend .dot.justified { background: #34c759; } #legend .dot.revenue { background: #ff2d55; }
@@ -127,7 +133,7 @@
   #legend .sizes { display: flex; align-items: flex-end; gap: 8px; margin-top: 8px; }
   #legend .sizewrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   #legend .sizedot { border-radius: 50%; background: #b0b0b5; }
-  #legend .sizelbl { font-size: 9px; color: #6e6e73; }
+  #legend .sizelbl { font-size: var(--fs-badge); color: #6e6e73; }
 
   /* your location: bigger than a camera pin, with a thicker white ring and a shadow, so it never
      reads as one more blue camera in a dense city (MapLibre's stock dot is smaller than our pins) */
@@ -135,31 +141,31 @@
   .maplibregl-user-location-dot::after { width: 26px; height: 26px; left: -4px; top: -4px; border: 4px solid #fff; box-shadow: 0 1px 7px rgba(0,0,0,.45); }
 
   .basemap { margin-top: 10px; border-top: 1px solid #ececf0; padding-top: 10px; }
-  .basemap .hd { font-size: 11px; font-weight: 600; color: #6e6e73; margin-bottom: 6px; }
+  .basemap .hd { font-size: var(--fs-meta); font-weight: 600; color: #6e6e73; margin-bottom: 6px; }
 
   /* add-to-route banner */
-  #addBanner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15; display: none; align-items: center; gap: 12px; background: #007aff; color: #fff; font-size: 13px; font-weight: 600; padding: 9px 10px 9px 16px; border-radius: 999px; box-shadow: 0 3px 14px rgba(0,0,0,0.3); }
+  #addBanner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15; display: none; align-items: center; gap: 12px; background: #007aff; color: #fff; font-size: var(--fs-body); font-weight: 600; padding: 9px 10px 9px 16px; border-radius: 999px; box-shadow: 0 3px 14px rgba(0,0,0,0.3); }
   #addBanner.show { display: flex; }
-  #addBanner button { background: #fff; color: #0062cc; border: none; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: 12px; cursor: pointer; }
+  #addBanner button { background: #fff; color: #0062cc; border: none; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: var(--fs-ctl); cursor: pointer; }
 
   /* transient toast for the cross-state handoff ("End of West Virginia — → for Wyoming") */
   #cycleNote { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 16; display: none;
-    background: rgba(28,28,30,0.92); color: #fff; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 999px;
+    background: rgba(28,28,30,0.92); color: #fff; font-size: var(--fs-meta); font-weight: 600; padding: 7px 14px; border-radius: 999px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; max-width: calc(100vw - 32px); text-align: center; }
   #cycleNote.show { display: block; animation: fadeSlide .2s cubic-bezier(.2,.8,.2,1); }
   /* shown while the map has keyboard focus: MapLibre already pans on arrows and zooms on + and - */
   #keyHint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 16; display: none;
-    background: rgba(28,28,30,0.92); color: #fff; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 999px;
+    background: rgba(28,28,30,0.92); color: #fff; font-size: var(--fs-meta); font-weight: 600; padding: 7px 14px; border-radius: 999px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; white-space: nowrap; }
   #keyHint.show { display: block; }
   /* offline: one line says so and how old the pictures are; each camera keeps its last frame
      with the time it arrived instead of turning into a broken image */
   #netBanner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 45; display: none;
-    background: #1c1c1e; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 999px;
+    background: #1c1c1e; color: #fff; font-size: var(--fs-body); font-weight: 600; padding: 8px 16px; border-radius: 999px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.3); pointer-events: none; width: max-content; max-width: calc(100vw - 32px); text-align: center; }
   #netBanner.show { display: block; animation: fadeSlide .2s cubic-bezier(.2,.8,.2,1); }
   #netBanner.back { background: #1a7f37; }
-  .frame-at { position: absolute; right: 8px; top: 8px; z-index: 3; font-size: 11px; font-weight: 700; color: #fff; background: rgba(0,0,0,.72); padding: 2px 7px; border-radius: 4px; }
+  .frame-at { position: absolute; right: 8px; top: 8px; z-index: 3; font-size: var(--fs-badge); font-weight: 700; color: #fff; background: rgba(0,0,0,.72); padding: 2px 7px; border-radius: 4px; }
   .popup-imgwrap .frame-at { top: auto; right: auto; bottom: 8px; left: 8px; }   /* clear of the sheet's close button and Enlarge */
   .off-net { display: none; } .net .off-cam { display: none; } .net .off-net { display: inline; }
   @media (max-width: 640px) {
@@ -175,12 +181,12 @@
   #routeView { position: fixed; top: 0; right: 0; bottom: 0; width: 380px; max-width: 90vw; z-index: 25; background: #f5f5f7; box-shadow: -4px 0 24px rgba(0,0,0,0.2); display: flex; flex-direction: column;
     transform: translateX(calc(100% + 28px)); visibility: hidden; transition: transform .26s cubic-bezier(.2,.8,.2,1), visibility 0s .26s; }
   #routeView.show { transform: translateX(0); visibility: visible; transition: transform .26s cubic-bezier(.2,.8,.2,1); }
-  #routeView .rv-head { padding: 14px 16px; background: #fff; border-bottom: 1px solid #e5e5ea; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  #routeView .rv-head { padding: 14px var(--pad); background: #fff; border-bottom: 1px solid #e5e5ea; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   #routeView .rv-headtxt { flex: 1; min-width: 0; }
   #routeView .rv-actions { display: flex; gap: 6px; align-items: center; flex: none; }
   /* a long route name truncates rather than squeezing the actions off the header */
-  #routeView .rv-title { font-size: 16px; font-weight: 700; color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #routeView .rv-sub { font-size: 11px; color: #6e6e73; margin-top: 1px; }
+  #routeView .rv-title { font-size: calc(var(--fs-row) + 2px); font-weight: 700; color: #1c1c1e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #routeView .rv-sub { font-size: var(--fs-meta); color: #6e6e73; margin-top: 1px; }
   #routeView .rv-close { border: none; background: #f2f2f7; border-radius: 8px; width: 30px; height: 30px; font-size: 16px; cursor: pointer; color: #3c3c43; }
   #routeView .rv-body { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
   /* flex:none so tiles keep their natural height and the list scrolls, instead of the flex column squashing them */
@@ -188,23 +194,23 @@
   .rv-tile:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
   .rv-tile .rv-media { position: relative; width: 100%; aspect-ratio: 16/10; background: #e7e7ec; }
   .rv-tile .rv-media img, .rv-tile .rv-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .rv-tile .rv-off { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; color: #9a9aa0; font-size: 12px; font-weight: 600; }
+  .rv-tile .rv-off { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; color: #9a9aa0; font-size: var(--fs-meta); font-weight: 600; }
   .rv-tile .rv-media.err img { display: none; } .rv-tile .rv-media.err .rv-off { display: flex; }
-  .rv-tile .rv-media .rv-nosnap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px; color: #6e6e73; font-size: 12px; font-weight: 600; }
-  .rv-tile .rv-media .rv-nosnap span { font-size: 10px; font-weight: 500; color: #6e6e73; }
-  .rv-live { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; }
+  .rv-tile .rv-media .rv-nosnap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 2px; color: #6e6e73; font-size: var(--fs-meta); font-weight: 600; }
+  .rv-tile .rv-media .rv-nosnap span { font-size: var(--fs-meta); font-weight: 500; color: #6e6e73; }
+  .rv-live { position: absolute; top: 8px; left: 8px; font-size: var(--fs-badge); font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; }
   .rv-live.rv-dead { background: #6e6e73; }
   /* the resolution you already measured by opening this camera, so a route reads as a
      checklist: which ones you have judged, and which of those clear the 640px bar */
-  .rv-res { position: absolute; bottom: 8px; left: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .02em; color: #fff;
+  .rv-res { position: absolute; bottom: 8px; left: 8px; font-size: var(--fs-badge); font-weight: 800; letter-spacing: .02em; color: #fff;
     background: rgba(26,138,60,.92); padding: 2px 6px; border-radius: 4px; }
   .rv-res.low { background: rgba(216,27,69,.92); }
   .rv-tile .rv-cap { display: flex; align-items: center; gap: 8px; padding: 8px 11px; }
-  .rv-tile .rv-nm { flex: 1; font-size: 12.5px; font-weight: 600; color: #1c1c1e; }
+  .rv-tile .rv-nm { flex: 1; font-size: var(--fs-body); font-weight: 600; color: #1c1c1e; }
   .rv-tile .rv-rm { position: relative; padding: 4px 6px; color: #6e6e73; cursor: pointer; font-size: 15px; border: 0; background: none; font-family: inherit; line-height: 1; border-radius: 6px; } .rv-tile .rv-rm:hover { color: #ff3b30; }
-  .rv-empty { text-align: center; color: #6e6e73; font-size: 13px; padding: 30px 20px; }
+  .rv-empty { text-align: center; color: #6e6e73; font-size: var(--fs-body); padding: 30px 20px; }
 
-  .maplibregl-popup.tip .maplibregl-popup-content { padding: 4px 8px; font-size: 11px; font-weight: 600; color: #1c1c1e; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .maplibregl-popup.tip .maplibregl-popup-content { padding: 4px 8px; font-size: var(--fs-meta); font-weight: 600; color: #1c1c1e; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
   .maplibregl-popup.tip .maplibregl-popup-tip { display: none; }
   .maplibregl-popup-content { border-radius: 14px; padding: 0; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
   .popup-inner { width: 264px; }
@@ -214,13 +220,13 @@
   .popup-imgwrap.ready .vid { opacity: 1; }
   .popup-imgwrap.noposter { background: #15151a; }
   .popup-imgwrap.err .poster { display: none; }
-  .popup-imgwrap .live-badge { position: absolute; top: 8px; left: 8px; font-size: 9px; font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; z-index: 2; }
+  .popup-imgwrap .live-badge { position: absolute; top: 8px; left: 8px; font-size: var(--fs-badge); font-weight: 800; letter-spacing: .04em; color: #fff; background: #ff2d55; padding: 2px 6px; border-radius: 4px; z-index: 2; }
   /* the stream attached but the picture is not moving, so the badge stops claiming it is */
   .popup-imgwrap.notlive .live-badge { background: #6e6e73; }
-  .popup-imgwrap .img-offline { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: #9a9aa0; font-size: 12px; font-weight: 600; }
+  .popup-imgwrap .img-offline { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 3px; color: #9a9aa0; font-size: var(--fs-meta); font-weight: 600; }
   .popup-imgwrap.err img, .popup-imgwrap.err video { display: none; }
   .popup-imgwrap.err .img-offline { display: flex; }
-  .popup-rwis { margin: 4px 0 2px; font-size: 11px; line-height: 1.35; color: #1c6e4a; font-weight: 600; }
+  .popup-rwis { margin: 4px 0 2px; font-size: var(--fs-meta); line-height: 1.35; color: #1c6e4a; font-weight: 600; }
   .enlarge-btn { position: absolute; bottom: 8px; right: 8px; z-index: 3; width: 28px; height: 28px; border: none; border-radius: 8px; background: rgba(242,242,247,.94); color: #1c1c1e; font-size: 14px; line-height: 1; cursor: zoom-in; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,.22); }
   .enlarge-btn:hover { background: #fff; }
   .enlarge-ov { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,.82); display: flex; align-items: center; justify-content: center; padding: 24px; }
@@ -232,8 +238,8 @@
   .enlarge-media { width: min(1600px, calc(100vw - 56px), calc((100vh - 132px) * 16 / 9)); aspect-ratio: 16 / 9;
     object-fit: contain; border-radius: 8px; background: #000; box-shadow: 0 12px 44px rgba(0,0,0,.55); }
   .enlarge-ov.fill .enlarge-media { object-fit: fill; }
-  .enlarge-cap { color: #f2f2f5; font-size: 13px; max-width: 90vw; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
-  .enlarge-hint { color: #6e6e73; font-size: 11px; }
+  .enlarge-cap { color: #f2f2f5; font-size: var(--fs-body); max-width: 90vw; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .enlarge-hint { color: #6e6e73; font-size: var(--fs-meta); }
   /* inside the box corner, not hanging off it: at -14px the button sat outside the media and
      the viewport clipped it on smaller screens, which is why it read as broken */
   .enlarge-close { position: absolute; top: 10px; right: 10px; z-index: 5; width: 40px; height: 40px; border-radius: 50%; border: none;
@@ -246,51 +252,51 @@
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
   .enlarge-nav:hover { background: rgba(0,0,0,.85); }
   .enlarge-nav.prev { left: 10px; } .enlarge-nav.next { right: 10px; }
-  .enlarge-pos { color: #9a9aa0; font-size: 11px; font-variant-numeric: tabular-nums; }
+  .enlarge-pos { color: #9a9aa0; font-size: var(--fs-meta); font-variant-numeric: tabular-nums; }
   /* three-dot loader centred on the black box until the feed paints; SMIL animates on its own */
   .enlarge-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; color: rgba(255,255,255,0.8); pointer-events: none; }
   .enlarge-ov.media-ready .enlarge-loading, .enlarge-ov.media-fail .enlarge-loading { display: none; }
   .popup-body { padding: 10px 12px 12px; }
-  .popup-body h3 { font-size: 13px; margin: 0 0 4px; color: #1c1c1e; line-height: 1.3; }
+  .popup-body h3 { font-size: var(--fs-row); margin: 0 0 4px; color: #1c1c1e; line-height: 1.3; }
   /* prev/next pager: the discoverable affordance for the ← / → keys that actually do the work */
   .cam-nav { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #ececf0; }
   .cam-nav[hidden] { display: none; }
   .cam-arrow { width: 34px; height: 26px; border: none; border-radius: 6px; background: #f2f2f7; color: #0062cc; font-size: 16px; line-height: 1; font-weight: 700; cursor: pointer; }
   .cam-arrow:hover { background: #e0ecff; }
-  .cam-pos { font-size: 11px; color: #6e6e73; font-variant-numeric: tabular-nums; min-width: 58px; text-align: center; cursor: pointer; }
-  .cam-jump { width: 58px; text-align: center; font-size: 11px; padding: 2px 4px; border: 1px solid #007aff; border-radius: 5px; outline: none; font-variant-numeric: tabular-nums; }
+  .cam-pos { font-size: var(--fs-meta); color: #6e6e73; font-variant-numeric: tabular-nums; min-width: 58px; text-align: center; cursor: pointer; }
+  .cam-jump { width: 58px; text-align: center; font-size: var(--fs-ctl); padding: 2px 4px; border: 1px solid #007aff; border-radius: 5px; outline: none; font-variant-numeric: tabular-nums; }
   /* the delivered resolution, read off the decoded picture. Green clears the 640px bar a
      detector needs, red cannot. [hidden] needs its own rule here: the author `display`
      below would otherwise beat the browser's default [hidden] { display: none }. */
   .res-chip { display: inline-flex; align-items: center; vertical-align: middle; margin-left: 6px; padding: 2px 5px;
-    border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: .02em; background: #e7f8ed; color: #137333; }
+    border-radius: 4px; font-size: var(--fs-badge); font-weight: 700; letter-spacing: .02em; background: #e7f8ed; color: #137333; }
   .res-chip.low { background: #ffe9ee; color: #b3123a; }
   .res-chip[hidden] { display: none; }
   .enlarge-cap .res-chip { margin-left: 0; background: rgba(52,199,89,.22); color: #5fdc90; }
   .enlarge-cap .res-chip.low { background: rgba(255,45,85,.22); color: #ff7b9c; }
   .popup-dirs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-  .dir-btn { font-size: 11px; padding: 3px 8px; border-radius: 999px; background: #f2f2f7; color: #0062cc; border: none; cursor: pointer; font-weight: 600; }
+  .dir-btn { font-size: var(--fs-ctl); padding: 3px 8px; border-radius: 999px; background: #f2f2f7; color: #0062cc; border: none; cursor: pointer; font-weight: 600; }
   .dir-btn.active { background: #0062cc; color: #fff; }
-  .popup-facing { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: #f2f2f7; color: #48484a; }
+  .popup-facing { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; font-size: var(--fs-meta); font-weight: 600; padding: 3px 9px; border-radius: 999px; background: #f2f2f7; color: #48484a; }
   .popup-facing .arrow { font-size: 12px; line-height: 1; color: #6e6e73; }
   .popup-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
   /* the offline line is long enough to wrap; it must never reflow under the button */
-  .popup-age { font-size: 11px; color: #6e6e73; flex: 1; min-width: 0; line-height: 1.35; }
+  .popup-age { font-size: var(--fs-meta); color: #6e6e73; flex: 1; min-width: 0; line-height: 1.35; }
   /* who the feeds are for (NHTSA and Android for Cars keep video away from the driver) */
-  .popup-who, .rv-note-txt { font-size: 12px; line-height: 1.35; color: #6e6e73; }
+  .popup-who, .rv-note-txt { font-size: var(--fs-meta); line-height: 1.35; color: #6e6e73; }
   .popup-who { margin-top: 8px; }
-  #routeView .rv-note { display: flex; align-items: center; gap: 10px; padding: 8px 16px; background: #fff; border-bottom: 1px solid #e5e5ea; }
+  #routeView .rv-note { display: flex; align-items: center; gap: 10px; padding: 8px var(--pad); background: #fff; border-bottom: 1px solid #e5e5ea; }
   #routeView .rv-note-txt { flex: 1; min-width: 0; }
-  #rvPause { flex: none; min-height: 32px; font-size: 12px; }
+  #rvPause { flex: none; min-height: 32px; font-size: var(--fs-ctl); }
   #rvPause[aria-pressed="true"] { color: #fff; background: #0062cc; }
   .popup-age.stale { color: #b25000; font-weight: 600; }
   .popup-add { flex: 0 0 auto; white-space: nowrap; }
-  .popup-add { font-size: 11px; font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
+  .popup-add { font-size: var(--fs-ctl); font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 8px; cursor: pointer; }
   .rp-menu { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; align-items: center; }
-  .rp-menu .rp-hd { width: 100%; font-size: 11px; font-weight: 600; color: #6e6e73; }
-  .rp-input, #nrName { flex: 1; min-width: 0; font-size: 12px; padding: 6px 8px; border: 1px solid #dcdce1; border-radius: 6px; outline: none; }
+  .rp-menu .rp-hd { width: 100%; font-size: var(--fs-meta); font-weight: 600; color: #6e6e73; }
+  .rp-input, #nrName { flex: 1; min-width: 0; font-size: var(--fs-row); padding: 6px 8px; border: 1px solid #dcdce1; border-radius: 6px; outline: none; }
   .rp-input:focus, #nrName:focus { border-color: #0062cc; }
-  .rx.arm { color: #fff; background: #ff3b30; border-radius: 6px; font-size: 11px; font-weight: 600; }
+  .rx.arm { color: #fff; background: #ff3b30; border-radius: 6px; font-size: var(--fs-ctl); font-weight: 600; }
 
   /* ---------- bottom sheet (mobile selection container) ----------
      Same content as the desktop popup, presented the way every phone map app does:
@@ -314,12 +320,13 @@
     background: rgba(242,242,247,.94); color: #1c1c1e; font-size: 14px; line-height: 1; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.22); }
   #sheetContent { flex: 1; overflow-y: auto; overscroll-behavior: contain; }
   #sheetContent .popup-inner { width: 100%; }
+  #sheetContent .popup-body { padding: 12px var(--pad) 16px; }
   #sheetContent .popup-imgwrap { height: min(56vw, 260px); }
   #sheetContent .popup-inner img, #sheetContent .popup-inner video { height: 100%; }
   #sheetContent .popup-imgwrap img, #sheetContent .popup-imgwrap video { height: min(56vw, 260px); }
   #sheetContent .enf { width: 100%; }
 
-  #panelToggle { display: inline-block; font-size: 11px; font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+  #panelToggle { display: inline-block; font-size: var(--fs-ctl); font-weight: 600; color: #0062cc; background: #eef4ff; border: none; border-radius: 6px; padding: 4px 9px; cursor: pointer; }
   /* desktop: the Layers button tucks the panel down to just its header, so the map underneath
      is clear when you're not touching the controls (mobile has its own expand/collapse below) */
   @media (min-width: 641px) { #panel.collapsed > *:not(.brand-row) { display: none; } }
@@ -356,7 +363,7 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   .enlarge-ov { animation: fadeIn .18s ease-out; }
   .enlarge-ov.closing { opacity: 0; transition: opacity .16s ease; }
-  .enlarge-fail { color: #e8e8ec; background: #1c1c1e; padding: 46px 56px; border-radius: 8px; font-size: 14px; }
+  .enlarge-fail { color: #e8e8ec; background: #1c1c1e; padding: 46px 56px; border-radius: 8px; font-size: var(--fs-row); }
 
   /* panel groups ease open and shut: setGroupOpen measures the real height (a fixed max-height
      eased wrong and clipped tall groups), and the caret turns on the same 250ms clock */
@@ -390,11 +397,11 @@
      big Directions button, a From/To pair joined by a rail with a swap button, and route rows
      that lead with a time coloured by traffic, then the roads, then the cameras. On a phone the
      routes sit in a bottom sheet so the map stays in the middle. */
-  .sr-grp { padding: 8px 6px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6e6e73; }
+  .sr-grp { padding: 8px 6px 4px; font-size: var(--fs-badge); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6e6e73; }
   .sr-grp span { font-weight: 500; text-transform: none; letter-spacing: 0; color: #6e6e73; margin-left: 4px; }
   /* search home: Recents and Find Nearby, the two tools both Apple Maps case studies put first */
   .sr-grp-row { display: flex; align-items: center; justify-content: space-between; }
-  .sr-clear { border: 0; background: none; color: #0062cc; font: inherit; font-size: 12px; font-weight: 600; text-transform: none; letter-spacing: 0; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
+  .sr-clear { border: 0; background: none; color: #0062cc; font: inherit; font-size: var(--fs-ctl); font-weight: 600; text-transform: none; letter-spacing: 0; cursor: pointer; padding: 2px 4px; border-radius: 6px; }
   .sr-clear:hover { background: #e8f1ff; }
   .nb-chips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 2px 2px 6px; }
   .nb-chip { display: flex; align-items: center; gap: 7px; min-height: 40px; border: 0; background: #f2f2f7; border-radius: 10px; padding: 6px 8px; font: inherit; font-size: 12.5px; font-weight: 600; color: #1d1d1f; text-align: left; line-height: 1.15; cursor: pointer; transition: background .12s, transform .12s; }
@@ -403,7 +410,7 @@
   .nb-chip:focus-visible { outline: 2px solid #0a84ff; outline-offset: 1px; }
   .nb-ic { width: 24px; height: 24px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; color: #fff; }
   .nb-ic svg { width: 14px; height: 14px; }
-  .nb-head { display: flex; align-items: center; gap: 2px; margin: 0 0 2px -6px; font-size: 14px; font-weight: 700; color: #1d1d1f; }
+  .nb-head { display: flex; align-items: center; gap: 2px; margin: 0 0 2px -6px; font-size: var(--fs-row); font-weight: 700; color: #1d1d1f; }
   #dirBox { margin: 0 0 4px; }
   #dirBox[hidden] { display: none; }
   #panel.nav-place > .grp, #panel.nav-dir > .grp, #panel.nav-dir .search-wrap { display: none; }
@@ -411,40 +418,41 @@
   .nav-ic:hover { background: #f2f2f7; }
 
   .place-card { padding: 2px 0 4px; }
-  #sheetContent .place-card { padding: 4px 18px 20px; }
+  #sheetContent .place-card { padding: 4px var(--pad) 20px; }
+  #sheetContent .pc-head { padding-right: 40px; }   /* clear of the sheet's round close button */
   .pc-head { display: flex; align-items: flex-start; gap: 8px; }
   .pc-txt { flex: 1; min-width: 0; }
-  .place-card h3 { font-size: 18px; font-weight: 700; margin: 2px 0 3px; color: #1c1c1e; line-height: 1.25; }
-  .place-addr { font-size: 13px; color: #6e6e73; line-height: 1.35; }
-  .pc-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: 13px; color: #3c3c43; }
+  .place-card h3 { font-size: var(--fs-title); font-weight: 700; margin: 2px 0 3px; color: #1c1c1e; line-height: 1.25; }
+  .place-addr { font-size: var(--fs-body); color: #6e6e73; line-height: 1.35; }
+  .pc-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: var(--fs-body); color: #3c3c43; }
   .pc-meta span:empty { display: none; }
   .pc-meta svg { vertical-align: -3px; color: #0062cc; margin-right: 3px; }
-  .pc-cat { font-size: 13px; color: #3c3c43; margin: 1px 0 2px; }
+  .pc-cat { font-size: var(--fs-body); color: #3c3c43; margin: 1px 0 2px; }
   .pc-cat:empty, .place-addr:empty { display: none; }
   .pc-rows:not(:empty) { margin-top: 12px; border-top: 1px solid #ececf0; }
-  .pc-rows a { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: 14px; color: #0062cc; text-decoration: none; border-bottom: 1px solid #ececf0; }
+  .pc-rows a { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: var(--fs-row); color: #0062cc; text-decoration: none; border-bottom: 1px solid #ececf0; }
   .pc-rows a svg { color: #6e6e73; flex: none; }
   .pc-rows a span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .pc-src { font-size: 11px; color: #6e6e73; margin-top: 8px; }
+  .pc-src { font-size: var(--fs-meta); color: #6e6e73; margin-top: 8px; }
   .pc-src a { color: inherit; }
   .place-go { margin-top: 14px; width: 100%; height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px;
-    font-size: 15px; font-weight: 700; color: #fff; background: #0062cc; border: none; border-radius: 12px; cursor: pointer; }
+    font-size: var(--fs-row); font-weight: 700; color: #fff; background: #0062cc; border: none; border-radius: 12px; cursor: pointer; }
   .place-go:hover { background: #0071e3; }
   .place-go .pg-time:not(:empty)::before { content: '\00b7'; margin: 0 6px 0 2px; font-weight: 400; }
   .place-go .pg-time { font-weight: 600; }
 
   .dir-top { display: flex; align-items: center; gap: 6px; margin: -2px 0 6px -6px; }
-  .dir-mode { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #0062cc; background: #e8f1ff; border-radius: 999px; padding: 6px 12px; }
+  .dir-mode { display: flex; align-items: center; gap: 6px; font-size: var(--fs-body); font-weight: 600; color: #0062cc; background: #e8f1ff; border-radius: 999px; padding: 6px 12px; }
   /* Avoid sits beside Drive, where the choice is made (the second case study's driver kept
      paying tolls because the setting lived somewhere else) */
   .dir-avoid { position: relative; }
-  .dir-chip { display: flex; align-items: center; gap: 4px; font: inherit; font-size: 13px; font-weight: 600; color: #3a3a3c; background: #f2f2f7; border: 0; border-radius: 999px; padding: 6px 10px 6px 12px; cursor: pointer; transition: background .12s; }
+  .dir-chip { display: flex; align-items: center; gap: 4px; font: inherit; font-size: var(--fs-body); font-weight: 600; color: #3a3a3c; background: #f2f2f7; border: 0; border-radius: 999px; padding: 6px 10px 6px 12px; cursor: pointer; transition: background .12s; }
   .dir-chip:hover { background: #e7e7ed; }
   .dir-chip.on { color: #0062cc; background: #e8f1ff; }
   .dir-chip svg { width: 12px; height: 12px; }
   .avoid-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 180px; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.04); padding: 6px; }
-  .avoid-menu .am-h { padding: 6px 10px 4px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6e6e73; }
-  .avoid-menu label { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 40px; padding: 0 10px; font-size: 14px; border-radius: 8px; cursor: pointer; }
+  .avoid-menu .am-h { padding: 6px 10px 4px; font-size: var(--fs-badge); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6e6e73; }
+  .avoid-menu label { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 40px; padding: 0 10px; font-size: var(--fs-row); border-radius: 8px; cursor: pointer; }
   .avoid-menu label:hover { background: #f2f2f7; }
   .avoid-menu input { width: 18px; height: 18px; accent-color: #0062cc; }
   .dir-stack { display: flex; align-items: center; gap: 6px; }
@@ -457,7 +465,7 @@
   .dr-mk { flex: none; width: 20px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
   .dr-mk.from::before { content: ''; width: 11px; height: 11px; border-radius: 50%; border: 2.5px solid #3c3c43; background: #fff; }
   .dr-mk.to { color: #c5221f; line-height: 0; }
-  .dr-mk.num { height: 20px; border-radius: 50%; background: #1c1c1e; color: #fff; font-size: 11px; font-weight: 700; cursor: grab; touch-action: none; user-select: none; }
+  .dr-mk.num { height: 20px; border-radius: 50%; background: #1c1c1e; color: #fff; font-size: var(--fs-badge); font-weight: 700; cursor: grab; touch-action: none; user-select: none; }
   .dr-mk.num:active { cursor: grabbing; }
   .dr-mk.num.add { background: #0062cc; cursor: default; }
   .dr-tools { display: flex; flex: none; }
@@ -468,38 +476,38 @@
   /* phone: a trip with stops shows as a short summary until you tap Edit trip */
   .trip-sum { flex: 1; min-width: 0; position: relative; display: flex; flex-direction: column; gap: 2px; padding: 2px 0; }
   .trip-sum::before { content: ''; position: absolute; left: 9px; top: 14px; bottom: 14px; border-left: 2px dotted #6e6e73; }
-  .ts-line { display: flex; align-items: center; gap: 8px; min-height: 26px; font-size: 14px; color: #1c1c1e; }
+  .ts-line { display: flex; align-items: center; gap: 8px; min-height: 26px; font-size: var(--fs-row); color: #1c1c1e; }
   .ts-line .dr-mk.num { cursor: default; }
   .ts-lab { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .dir-chip.on { color: #fff; background: #0062cc; }
-  .dir-leg { margin: -2px 0 -2px 28px; font-size: 11.5px; color: #6e6e73; font-variant-numeric: tabular-nums; }
+  .dir-leg { margin: -2px 0 -2px 28px; font-size: var(--fs-meta); color: #6e6e73; font-variant-numeric: tabular-nums; }
   .dir-add, .dir-opt .dir-chip { margin-top: 8px; }
-  .dir-add { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 10px 0 4px; border: 0; background: none; color: #0062cc; font: inherit; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer; }
+  .dir-add { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 10px 0 4px; border: 0; background: none; color: #0062cc; font: inherit; font-size: var(--fs-body); font-weight: 600; border-radius: 8px; cursor: pointer; }
   .dir-add:hover { background: #eef4ff; }
   .dir-add svg { width: 18px; height: 18px; }
   .dir-opt { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; }
   .dir-opt .dir-chip svg { width: 14px; height: 14px; }
-  .opt-note { margin-top: 8px; font-size: 12px; color: #3c3c43; }
+  .opt-note { margin-top: 8px; font-size: var(--fs-meta); color: #3c3c43; line-height: 1.4; }
   .nav-stop { width: 22px; height: 22px; border-radius: 50%; background: #1c1c1e; color: #fff; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.35); font: 700 12px/18px system-ui, -apple-system, sans-serif; text-align: center; }
   /* GO: the drive itself happens in Google Maps or Apple Maps */
   .rt-go { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .go-btn { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; border-radius: 10px; background: #137333; color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; }
+  .go-btn { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 10px; background: #137333; color: #fff; font-size: var(--fs-row); font-weight: 700; text-decoration: none; }
   .go-btn:hover { background: #0f5f2a; }
-  .go-alt { display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border-radius: 10px; background: #f2f2f7; color: #1c1c1e; font-size: 13px; font-weight: 600; text-decoration: none; }
+  .go-alt { display: inline-flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 10px; background: #f2f2f7; color: #1c1c1e; font-size: var(--fs-body); font-weight: 600; text-decoration: none; }
   .go-alt:hover { background: #e7e7ed; }
-  .go-note { margin-top: 6px; font-size: 11.5px; color: #6e6e73; }
+  .go-note { margin-top: 6px; font-size: var(--fs-meta); color: #6e6e73; line-height: 1.4; }
   /* what is slowing a route, and the camera nearest it */
   .rt-why { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
-  .why-row { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: 12.5px; }
+  .why-row { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: var(--fs-body); }
   .why-tag { font-weight: 700; border-radius: 4px; padding: 1px 6px; }
   .why-tag.slow { color: #8a4b00; background: #fff1d6; }
   .why-tag.jam { color: #a50e0e; background: #fde7e7; }
   .why-tag.closed { color: #fff; background: #7a1712; }
-  .why-cam { display: inline-flex; align-items: center; gap: 5px; min-height: 28px; padding: 0 8px; border: 0; border-radius: 6px; background: #eef4ff; color: #0062cc; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; max-width: 100%; }
+  .why-cam { display: inline-flex; align-items: center; gap: 5px; min-height: 28px; padding: 0 8px; border: 0; border-radius: 6px; background: #eef4ff; color: #0062cc; font: inherit; font-size: var(--fs-ctl); font-weight: 600; cursor: pointer; max-width: 100%; }
   .why-cam span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .why-cam:hover { background: #e2edff; }
   /* the traffic colours spelled out, in TomTom's relative-speed bands */
-  .traffic-key { display: flex; flex-wrap: wrap; gap: 4px 10px; padding: 4px 4px 2px 28px; font-size: 11.5px; color: #3c3c43; }
+  .traffic-key { display: flex; flex-wrap: wrap; gap: 4px 10px; padding: 4px 4px 2px 28px; font-size: var(--fs-meta); color: #3c3c43; }
   .traffic-key span { display: inline-flex; align-items: center; gap: 5px; }
   .traffic-key i { width: 16px; height: 4px; border-radius: 2px; display: inline-block; }
   .traffic-key i.closed { height: 5px; background: repeating-linear-gradient(90deg, #C1272D 0 4px, #F2F2F2 4px 7px); }
@@ -509,7 +517,7 @@
   .rail-dots { flex: 1; width: 0; border-left: 2px dotted #6e6e73; margin: 4px 0; }
   .rail-to { color: #d93025; line-height: 0; flex: none; }
   .dir-fields { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-  .dir-field { width: 100%; height: 38px; font-size: 14px; color: #1c1c1e; background: #f2f2f7; border: 1px solid transparent; border-radius: 10px; padding: 0 12px; outline: none; text-overflow: ellipsis; }
+  .dir-field { width: 100%; height: 38px; font-size: var(--fs-row); color: #1c1c1e; background: #f2f2f7; border: 1px solid transparent; border-radius: 10px; padding: 0 12px; outline: none; text-overflow: ellipsis; }
   .dir-field:focus { background: #fff; border-color: #0062cc; }
   .dir-field::placeholder { color: #6e6e73; }
   #dirSuggest:not(:empty) { margin: 8px 0 2px; border-top: 1px solid #ececf0; padding-top: 4px; }
@@ -521,26 +529,32 @@
   .rt-row.sel::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 4px; border-radius: 0 3px 3px 0; background: #1a73e8; }
   .rt-row:focus-visible { box-shadow: inset 0 0 0 2px #1a73e8; }
   .rt-l1 { display: flex; align-items: baseline; gap: 10px; }
-  .rt-time { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+  .rt-time { font-size: var(--fs-time); font-weight: 700; letter-spacing: -.01em; }
   .t-ok { color: #137333; } .t-slow { color: #b45309; } .t-jam { color: #c5221f; }
-  .rt-dist { margin-left: auto; font-size: 13px; color: #6e6e73; }
-  .rt-via { font-size: 13px; color: #1c1c1e; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .rt-l3 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; font-size: 12px; }
+  .rt-dist { margin-left: auto; font-size: var(--fs-body); color: #6e6e73; }
+  .rt-via { font-size: var(--fs-body); color: #1c1c1e; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rt-l3 { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; font-size: var(--fs-meta); }
   .rt-badge { font-weight: 700; color: #137333; background: #e6f4ea; border-radius: 4px; padding: 1px 6px; }
   .rt-badge.alt { color: #0a5bd3; background: #e8f1ff; }
   .rt-toll { font-weight: 600; color: #8a5300; background: #fff1d6; border-radius: 4px; padding: 1px 6px; }
   .rt-dim { color: #6e6e73; }
   .rt-late { font-weight: 600; }
-  .rt-cams { display: flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 12.5px; color: #3c3c43; }
+  .rt-cams { display: flex; align-items: center; gap: 5px; margin-top: 6px; font-size: var(--fs-body); color: #3c3c43; }
   .rt-cams svg { color: #0062cc; flex: none; }
-  .rt-watch { margin-top: 10px; height: 36px; padding: 0 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
-    color: #0062cc; background: #fff; border: 1.5px solid #0a84ff; border-radius: 999px; cursor: pointer; }
-  .rt-watch:hover { background: #e8f1ff; }
-  .dir-msg { font-size: 13px; color: #3c3c43; padding: 14px 6px; line-height: 1.4; }
-  .dir-retry { display: flex; align-items: center; margin-top: 10px; min-height: 36px; padding: 0 16px; border: 0; border-radius: 999px; background: #0062cc; color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+  /* the chosen route's camera line is a button into the camera stack */
+  .rt-cams-go { width: 100%; min-height: 36px; margin-top: 8px; padding: 0 10px; border: 0; border-radius: 10px; background: #eef4ff; color: #0a4fa8; font-family: inherit; font-weight: 600; text-align: left; cursor: pointer; }
+  .rt-cams-go:hover { background: #e2edff; }
+  .rt-cams-go span:not(.rt-chev) { flex: 1; min-width: 0; }
+  .rt-chev { font-size: 18px; line-height: 1; color: #0062cc; }
+  .rt-link { display: inline-flex; align-items: center; gap: 4px; vertical-align: baseline; margin: 0; padding: 2px 0; border: 0; background: none; color: #0062cc; font: inherit; font-weight: 600; cursor: pointer; }
+  .rt-link svg { width: 11px; height: 11px; }
+  .rt-link:hover { text-decoration: underline; }
+  .rt-link { position: relative; } .rt-link::before { content: ''; position: absolute; inset: -4px -4px; }
+  .dir-msg { font-size: var(--fs-body); color: #3c3c43; padding: 14px 6px; line-height: 1.4; }
+  .dir-retry { display: flex; align-items: center; margin-top: 10px; min-height: 36px; padding: 0 16px; border: 0; border-radius: 999px; background: #0062cc; color: #fff; font: inherit; font-size: var(--fs-row); font-weight: 600; cursor: pointer; }
   .dir-retry:hover { background: #0071e3; }
   @media (max-width: 640px) { .dir-retry { min-height: 44px; } }
-  .dir-note { font-size: 11px; color: #6e6e73; padding: 10px 6px 2px; }
+  .dir-note { font-size: var(--fs-meta); color: #6e6e73; padding: 10px 6px 2px; line-height: 1.4; }
 
   /* time bubbles pinned to each route, the selected one filled */
   .rt-callout { padding: 5px 9px; border-radius: 9px; background: #fff; color: #1c1c1e; font-size: 13px; font-weight: 700; line-height: 1.1; white-space: nowrap;
@@ -548,18 +562,14 @@
   .rt-callout::after { content: ''; position: absolute; left: 50%; bottom: -5px; margin-left: -6px; border: 6px solid transparent; border-bottom: 0; border-top-color: #fff; }
   .rt-callout.sel { background: #1a73e8; color: #fff; }
   .rt-callout.sel::after { border-top-color: #1a73e8; }
-  .rt-callout small { display: block; font-size: 10.5px; font-weight: 600; opacity: .85; margin-top: 1px; }
-  .rt-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .rt-actions .rt-watch { margin-top: 0; }
-  .rt-preview { color: #3c3c43; border-color: #c7c7cc; }
-  .rt-preview:hover { background: #f2f2f7; }
+  .rt-callout small { display: block; font-size: var(--fs-badge); font-weight: 600; opacity: .85; margin-top: 1px; }
   /* preview: the lists step aside and one pill says what is happening and how to stop it */
   body.previewing #panel, body.previewing #dirSheet, body.previewing .maplibregl-ctrl-top-right { display: none !important; }
   #previewBar { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 16; display: none; align-items: center; gap: 12px;
-    background: rgba(28,28,30,.92); color: #fff; font-size: 13px; font-weight: 600; padding: 8px 8px 8px 16px; border-radius: 999px; box-shadow: 0 3px 14px rgba(0,0,0,.3); max-width: calc(100vw - 24px); }
+    background: rgba(28,28,30,.92); color: #fff; font-size: var(--fs-body); font-weight: 600; padding: 8px 8px 8px 16px; border-radius: 999px; box-shadow: 0 3px 14px rgba(0,0,0,.3); max-width: calc(100vw - 24px); }
   body.previewing #previewBar { display: flex; }
   #previewBar span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #previewBar button { flex: none; height: 36px; padding: 0 16px; border: none; border-radius: 999px; background: #fff; color: #1c1c1e; font-weight: 700; font-size: 13px; cursor: pointer; }
+  #previewBar button { flex: none; height: 36px; padding: 0 16px; border: none; border-radius: 999px; background: #fff; color: #1c1c1e; font-weight: 700; font-size: var(--fs-body); cursor: pointer; }
   .nav-origin { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 4px solid #1c1c1e; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
 
   /* phone: the routes live in a bottom sheet under the map */
@@ -567,7 +577,9 @@
     background: #fff; border-radius: 16px 16px 0 0; box-shadow: 0 -6px 28px rgba(0,0,0,0.22); }
   #dirSheet.open { display: flex; animation: fadeIn .18s ease-out; }
   #dirSheet.tall { max-height: calc(100vh - 24px); max-height: calc(100dvh - var(--panelB, 0px) - 12px); }
-  #dirSheet .ds-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 6px 10px; }
+  #dirSheet .ds-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 0 10px; }
+  #dirSheet .rt-row { padding: 12px var(--pad); }
+  #dirSheet .dir-msg, #dirSheet .dir-note { padding-left: var(--pad); padding-right: var(--pad); }
   @media (max-width: 640px) {
     #panel.nav-dir { max-height: 70vh; max-height: 70dvh; overflow-y: auto; }
     body.dir-editing #panel.nav-dir { max-height: calc(100vh - 20px); max-height: calc(100dvh - 20px); }   /* the route sheet is aside while editing */
@@ -577,28 +589,29 @@
     .dir-field, #search { font-size: 16px; }          /* 16px keeps iOS from zooming the page on focus */
     .dir-field { height: 44px; }
     .place-go { height: 50px; }
-    .rt-watch { height: 44px; }
+    .rt-cams-go { min-height: 44px; }
+    .rt-link::before { inset: -12px -4px; }
   }
 
   .enf { width: 258px; padding: 12px 14px 14px; }
-  .enf-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; color: #fff; margin-right: 5px; }
+  .enf-badge { display: inline-block; font-size: var(--fs-badge); font-weight: 700; letter-spacing: .02em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; color: #fff; margin-right: 5px; }
   .enf-badge.rl { background: #ff3b30; } .enf-badge.sp { background: #ff9500; }
   .enf-tophdr { margin-bottom: 8px; }
-  .enf h3 { font-size: 14px; margin: 0 0 10px; color: #1c1c1e; line-height: 1.3; }
+  .enf h3 { font-size: var(--fs-row); margin: 0 0 10px; color: #1c1c1e; line-height: 1.3; }
   .enf-verdict { border-radius: 10px; padding: 8px 10px; margin-bottom: 10px; }
   .enf-verdict.justified { background: #e7f8ed; } .enf-verdict.revenue { background: #ffe9ee; }
   .enf-verdict.gap { background: #fff2e0; } .enf-verdict.quiet { background: #f2f2f7; }
-  .enf-vlabel { font-size: 13px; font-weight: 700; }
+  .enf-vlabel { font-size: var(--fs-body); font-weight: 700; }
   .enf-verdict.justified .enf-vlabel { color: #1a8a3c; } .enf-verdict.revenue .enf-vlabel { color: #d81b45; }
   .enf-verdict.gap .enf-vlabel { color: #c26a00; } .enf-verdict.quiet .enf-vlabel { color: #6e6e73; }
-  .enf-vwhy { font-size: 11px; color: #3c3c43; margin-top: 3px; line-height: 1.35; }
+  .enf-vwhy { font-size: var(--fs-meta); color: #3c3c43; margin-top: 3px; line-height: 1.35; }
   .enf-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 2px; }
   .enf-stat { background: #f7f7f9; border-radius: 8px; padding: 7px 9px; }
-  .enf-stat .num { font-size: 18px; font-weight: 700; color: #1c1c1e; line-height: 1.1; }
-  .enf-stat .lbl { font-size: 11px; color: #6e6e73; margin-top: 2px; line-height: 1.25; }
-  .enf-stat .cmp { font-size: 11px; color: #6e6e73; margin-top: 2px; }
+  .enf-stat .num { font-size: var(--fs-title); font-weight: 700; color: #1c1c1e; line-height: 1.1; }
+  .enf-stat .lbl { font-size: var(--fs-meta); color: #6e6e73; margin-top: 2px; line-height: 1.25; }
+  .enf-stat .cmp { font-size: var(--fs-meta); color: #6e6e73; margin-top: 2px; }
   .enf-stat.hi .num { color: #d81b45; }
-  .enf-meta { font-size: 11px; color: #6e6e73; margin-top: 9px; padding-top: 8px; border-top: 1px solid #ececf0; }
+  .enf-meta { font-size: var(--fs-meta); color: #6e6e73; margin-top: 9px; padding-top: 8px; border-top: 1px solid #ececf0; }
 
   /* ---------- micro-interactions: values from TypeUI's micro-interaction specs (read 2026-10-22).
      Springs are sampled into linear() easings so they run as plain CSS; older browsers get the
@@ -621,8 +634,8 @@
   #qrPop { position: absolute; z-index: 40; width: 228px; padding: 14px 14px 12px; background: #fff; border-radius: 14px;
     box-shadow: 0 6px 28px rgba(0,0,0,0.22); text-align: center; }
   #qrPop[hidden] { display: none; }
-  #qrPop .qr-hd { font-size: 13px; font-weight: 700; color: #1c1c1e; margin: 0 22px 2px; }
-  #qrPop .qr-sub { font-size: 12px; line-height: 1.35; color: #6e6e73; margin: 0 0 8px; }
+  #qrPop .qr-hd { font-size: var(--fs-row); font-weight: 700; color: #1c1c1e; margin: 0 22px 2px; }
+  #qrPop .qr-sub { font-size: var(--fs-meta); line-height: 1.35; color: #6e6e73; margin: 0 0 8px; }
   #qrPop svg { display: block; margin: 0 auto; }
   #qrPop .qr-x { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border: none; border-radius: 50%; background: #f2f2f7;
     color: #3c3c43; font-size: 14px; line-height: 1; cursor: pointer; }
@@ -661,15 +674,15 @@
   /* Confirm reveal: the route x slides out left as "Delete?" slides in (200ms); left alone, it settles back */
   .route-item .rx { display: inline-grid; overflow: hidden; border: 0; background: none; font-family: inherit; line-height: 1.4; border-radius: 6px;
     transition: background-color .2s cubic-bezier(.25,1,.5,1), color .2s cubic-bezier(.25,1,.5,1); }
-  .route-item .rx.arm { font-size: 14px; color: #fff; background: #d70015; }
+  .route-item .rx.arm { font-size: var(--fs-ctl); color: #fff; background: #d70015; }
   .rx > span { grid-area: 1 / 1; text-align: center; transition: transform .2s cubic-bezier(.25,1,.5,1), opacity .2s cubic-bezier(.25,1,.5,1); }
-  .rx .rx-b { opacity: 0; transform: translateX(16px); font-size: 11px; font-weight: 600; }
+  .rx .rx-b { opacity: 0; transform: translateX(16px); font-size: var(--fs-ctl); font-weight: 600; }
   .rx.arm .rx-a { opacity: 0; transform: translateX(-16px); }
   .rx.arm .rx-b { opacity: 1; transform: none; }
 
   /* Archive with undo: a camera removed from a route closes its slot (200ms) and leaves a 4s Undo that pauses on hover or focus */
   .undo-toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 9000; display: flex; align-items: center; gap: 12px;
-    padding: 8px 8px 8px 14px; border-radius: 12px; background: #1c1c1e; color: #fff; font-size: 13px; overflow: hidden;
+    padding: 8px 8px 8px 14px; border-radius: 12px; background: #1c1c1e; color: #fff; font-size: var(--fs-body); overflow: hidden;
     box-shadow: 0 10px 24px -6px rgba(0,0,0,.35), 0 3px 6px rgba(0,0,0,.2);
     transform: translate(-50%, 8px); opacity: 0; visibility: hidden; transition: transform .15s ease, opacity .15s ease, visibility 0s .15s; }
   .undo-toast.show { transform: translate(-50%, 0); opacity: 1; visibility: visible; transition: transform .42s cubic-bezier(.2,.8,.2,1), opacity .2s ease-out; }
@@ -728,6 +741,8 @@
        camera sheet (z 30) that a tapped tile opens. At 90vw a sliver of map showed beside it and
        the route sheet covered its bottom half. */
     #routeView { width: 100%; max-width: none; z-index: 29; box-shadow: none; }
+    /* Copy list (the cameras as JSON) is a desk tool; on a phone the route's name gets the room */
+    #rvCopy { display: none; }
     body.rv-aside #routeView { visibility: hidden; }
     .rv-tile .rv-rm::before { inset: -12px; }
     .avoid-menu label { min-height: 44px; }
@@ -3301,16 +3316,17 @@ function renderRoutes(msg, retry){
       + (r.tolls ? '<span class="rt-toll">Tolls</span>' : '')
       + (r.delaySeconds>=60 ? `<span class="rt-late ${tc}">+${fmtTime(r.delaySeconds)} from traffic</span>` : '<span class="rt-dim">No traffic delays</span>')
       + usualTxt(r, sel);
-    const cams=r.cams==null ? `${ICON.cam}<span class="rt-dim">Finding cameras on this route…</span>`
-      : `${ICON.cam}<span>${r.cams.length} camera${r.cams.length===1?'':'s'} on this route${down?` · ${down} not working`:''}</span>`;
+    // on the chosen route the camera line is the way in: one button, not a count plus a second button
+    const camTxt=r.cams==null ? '' : `${r.cams.length} camera${r.cams.length===1?'':'s'} on this route${down?` · ${down} not working`:''}`;
+    const cams=r.cams==null ? `<div class="rt-cams">${ICON.cam}<span class="rt-dim">Finding cameras on this route…</span></div>`
+      : sel && r.cams.length ? `<button type="button" class="rt-cams rt-cams-go" data-watch>${ICON.cam}<span>Watch the ${camTxt}</span><span class="rt-chev" aria-hidden="true">›</span></button>`
+      : `<div class="rt-cams">${ICON.cam}<span>${camTxt}</span></div>`;
     return `<div class="rt-row${sel?' sel':''}" role="button" tabindex="0" data-rt="${i}" aria-pressed="${sel}">
       <div class="rt-l1"><span class="rt-time ${tc}">${fmtTime(r.seconds)}</span><span class="rt-dist">${fmtMiles(r.meters)}</span></div>
       ${r.via && r.via.length || nav.stops.length ? `<div class="rt-via">${[r.via&&r.via.length?'via '+esc(r.via.join(', ')):'', nav.stops.length?nav.stops.length+(nav.stops.length===1?' stop':' stops'):''].filter(Boolean).join(' · ')}</div>` : ''}
-      <div class="rt-l3">${l3}</div><div class="rt-cams">${cams}</div>
+      <div class="rt-l3">${l3}</div>${cams}
       ${sel ? whyHTML(r) : ''}
-      ${sel ? goHTML() : ''}
-      ${sel ? `<div class="rt-actions">${r.cams && r.cams.length ? `<button class="rt-watch" data-watch>${ICON.cam}Watch these ${r.cams.length} cameras</button>` : ''}
-        <button class="rt-watch rt-preview" data-preview>${ICON.play}Preview</button></div>` : ''}</div>`;
+      ${sel ? goHTML() : ''}</div>`;
   }).join('');
   box.innerHTML=rows+(msg || !nav.routes.length ? '' : `<div class="dir-note">Line colours: orange slow, red stop and go, white dashes closed. A route preview, not turn-by-turn. Places, routes and traffic &copy; TomTom.</div>`);
   box.querySelectorAll('[data-rt]').forEach(c=>{ const go=()=>selectRoute(+c.dataset.rt);
@@ -3400,7 +3416,7 @@ function goHTML(){
   if(!nav.from || !nav.to) return '';
   const a=appleUrl(), carries=[nav.stops.length?'stops':'', avoid.length?'avoid settings':''].filter(Boolean).join(' and ');
   return `<div class="rt-go"><a class="go-btn" href="${esc(googleUrl())}" target="_blank" rel="noopener">${ICON.car}Drive in Google Maps</a><a class="go-alt" href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.label)}</a></div>
-    <div class="go-note">Google and Apple pick their own roads${carries?`; your ${carries} carry over`:''}.</div>`;
+    <div class="go-note">Google and Apple pick their own roads${carries?`; your ${carries} carry over`:''}. <button type="button" class="rt-link" data-preview>${ICON.play}Preview the drive here</button></div>`;
 }
 
 /* Preview: the close-up the big apps show once you set off, without following anyone. The map
