@@ -6008,5 +6008,20 @@
   "sha": "cf937ffdbf6eb6f6",
   "first_seen": "2026-11-10T20:13:14Z",
   "state": "WI"
+ },
+ "16803:0c2c63477996": {
+  "sha": "edbeb5dae4f97a0e",
+  "first_seen": "2026-11-11T06:14:16Z",
+  "state": "CA"
+ },
+ "13796:81bc595d60a3": {
+  "sha": "b75e123ea184524e",
+  "first_seen": "2026-11-11T06:27:50Z",
+  "state": "LA"
+ },
+ "39816:3b96ff840bd5": {
+  "sha": "c41ba0ef524102b2",
+  "first_seen": "2026-11-11T06:38:33Z",
+  "state": "RI"
  }
 }

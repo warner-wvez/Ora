@@ -1,6 +1,13 @@
 {
-"checked_at": "2026-11-10T20:10:06Z",
+"checked_at": "2026-11-11T06:39:26Z",
 "cameras": 712,
-"counts": {},
-"status": {}
+"counts": {
+"frozen": 4
+},
+"status": {
+"https://sd.cdn.iteris-atis.com/camera_images/SDBVD/0/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/SDBVD/1/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/SDBVD/2/latest.jpg": "frozen",
+"https://sd.cdn.iteris-atis.com/camera_images/SDBVD/3/latest.jpg": "frozen"
+}
 }

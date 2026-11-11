@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-11-10T19:46:37Z",
+"checked_at": "2026-11-11T06:14:16Z",
 "cameras": 3261,
 "counts": {
 "frozen": 106,
 "offline": 2,
-"placeholder": 3
+"placeholder": 4
 },
 "status": {
 "https://cwwp2.dot.ca.gov/data/d1/cctv/image/dn1015thllookingn/dn1015thllookingn.jpg": "frozen",
@@ -115,6 +115,7 @@
 "https://cwwp2.dot.ca.gov/data/d7/cctv/image/i405377w105tos405text/i405377w105tos405text.jpg": "placeholder",
 "https://cwwp2.dot.ca.gov/data/d7/cctv/image/i405378e105tolacienega/i405378e105tolacienega.jpg": "placeholder",
 "https://cwwp2.dot.ca.gov/data/d7/cctv/image/i405380e105ton405loc2/i405380e105ton405loc2.jpg": "placeholder",
+"https://cwwp2.dot.ca.gov/data/d7/cctv/image/i405381e105ton405loc3/i405381e105ton405loc3.jpg": "placeholder",
 "https://cwwp2.dot.ca.gov/data/d8/cctv/image/490eoperrisblvd/490eoperrisblvd.jpg": "frozen",
 "https://cwwp2.dot.ca.gov/data/d8/cctv/image/491atnasonst/491atnasonst.jpg": "frozen",
 "https://cwwp2.dot.ca.gov/data/d8/cctv/image/496wowlcparkway/496wowlcparkway.jpg": "frozen"
