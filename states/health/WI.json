@@ -1,6 +1,12 @@
 {
-"checked_at": "2026-11-11T06:44:04Z",
+"checked_at": "2026-11-11T14:56:41Z",
 "cameras": 495,
-"counts": {},
-"status": {}
+"counts": {
+"placeholder": 3
+},
+"status": {
+"https://511wi.gov/map/Cctv/1415": "placeholder",
+"https://511wi.gov/map/Cctv/1416": "placeholder",
+"https://511wi.gov/map/Cctv/1417": "placeholder"
+}
 }

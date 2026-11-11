@@ -1,12 +1,14 @@
 {
-"checked_at": "2026-11-11T06:32:30Z",
+"checked_at": "2026-11-11T14:44:31Z",
 "cameras": 185,
 "counts": {
-"offline": 13,
+"offline": 15,
 "placeholder": 2
 },
 "status": {
 "http://ss.nmroads.com/snapshots/i-10lordsburgmm9.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25sb_us550.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40_zamoraroad.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-40w_atriscovista.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",

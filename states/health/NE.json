@@ -1,10 +1,11 @@
 {
-"checked_at": "2026-11-11T06:32:19Z",
+"checked_at": "2026-11-11T14:44:22Z",
 "cameras": 1034,
 "counts": {
-"offline": 29
+"offline": 38
 },
 "status": {
+"https://dot511.nebraska.gov/images/VID-00208044505-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-002480001.78.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-004080285-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-004081006-00.jpg": "offline",
@@ -20,13 +21,21 @@
 "https://dot511.nebraska.gov/images/vid-005080101-07.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080101-08.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080101-09.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-005385132-02.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006030190-01.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006030190-02.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006030190-05.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006030190-06.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-03.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-05.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006080190-01.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006080190-02.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006080190-03.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006080190-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080222-03.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006080248-03.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/images/vid-003030379-02.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/vid-003015127-01.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/vid-003056020-01.jpg": "offline",
