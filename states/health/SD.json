@@ -1,12 +1,10 @@
 {
-"checked_at": "2026-11-12T01:09:29Z",
+"checked_at": "2026-11-12T15:42:12Z",
 "cameras": 712,
 "counts": {
-"frozen": 6
+"frozen": 4
 },
 "status": {
-"https://sd.cdn.iteris-atis.com/camera_images/SDARL/1/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/SDARL/3/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/SDBVD/0/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/SDBVD/1/latest.jpg": "frozen",
 "https://sd.cdn.iteris-atis.com/camera_images/SDBVD/2/latest.jpg": "frozen",
