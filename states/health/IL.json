@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-11T14:37:12Z",
+"checked_at": "2026-11-12T00:53:35Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 535,
-"frozen": 26,
+"placeholder": 538,
+"frozen": 28,
 "offline": 12
 },
 "status": {
@@ -128,6 +128,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4158749_-8772759_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4159614_-8771628_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_NEB_I-57_4160161_-8770909_1_NONE.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-290_4200110_-8802662_1_NONE.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-290_4201220_-8802991_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-57_4156839_-8774291_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_SB_I-94_4162060_-8757920_1_NONE.jpg": "placeholder",
@@ -417,6 +418,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_NEB_I-72_3999252_-8878312_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Macon_SWB_I-72_3998832_-8878706_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_EB_I-270_3875217_-8993100_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_8_Madison_EB_I-270_3875217_-8993100_1_W.jpg": "placeholder",
@@ -533,6 +535,9 @@
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_South_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_East_Leg.jpg": "frozen",

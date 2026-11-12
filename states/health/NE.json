@@ -1,13 +1,13 @@
 {
-"checked_at": "2026-11-11T14:44:22Z",
+"checked_at": "2026-11-12T01:01:17Z",
 "cameras": 1034,
 "counts": {
-"offline": 38
+"offline": 29
 },
 "status": {
-"https://dot511.nebraska.gov/images/VID-00208044505-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-002480001.78.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-004080285-00.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-004080348-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-004081006-00.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080008-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080039-01.jpg": "offline",
@@ -21,21 +21,12 @@
 "https://dot511.nebraska.gov/images/vid-005080101-07.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080101-08.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080101-09.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030190-01.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030190-02.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030190-05.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006030190-06.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-03.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006030200-05.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080190-01.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080190-02.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080190-03.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080190-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080222-03.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-006080248-03.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/images/vid-003030379-02.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/vid-003015127-01.jpg": "offline",
 "https://public.carsprogram.org/cameras/NE/Snapshots/vid-003056020-01.jpg": "offline",
