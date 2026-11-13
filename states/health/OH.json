@@ -1,12 +1,14 @@
 {
-"checked_at": "2026-11-13T00:01:00Z",
+"checked_at": "2026-11-13T07:04:20Z",
 "cameras": 1116,
 "counts": {
-"frozen": 14,
-"offline": 1
+"frozen": 15,
+"offline": 2
 },
 "status": {
+"https://itscameras.dot.state.oh.us/images/CLE/CCTV6074.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/CMH081.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/CMH/CMH090.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
