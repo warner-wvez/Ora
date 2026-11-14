@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-11-14T06:45:11Z",
+"checked_at": "2026-11-14T14:05:25Z",
 "cameras": 135,
 "counts": {
 "frozen": 7,
 "offline": 4,
-"placeholder": 4
+"placeholder": 5
 },
 "status": {
 "https://www.dot.ri.gov/img/travel/camimages/1-04%20Rt%201%20N%20%40%20Rt%20138%20North%20Kingstown.jpg": "placeholder",
@@ -19,6 +19,7 @@
 "https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_16.2_S_CAM%20Rt%20116.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/4_04.6_S_CAM%20Exit%205%20-%20Rt%20102%20DMS.jpg": "offline",
+"https://www.dot.ri.gov/img/travel/camimages/95_28.8_S_CAM%20-%20Greenwich%20Ave.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/95_34.4_S_CAM%20-%20Detriot%20Ave.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/95_42.0_S_CAM%20-%20Central%20Ave.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/Rt%20114%20%40%20Mink%20St%20DMS%20and%20Camera.jpg": "offline"

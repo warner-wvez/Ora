@@ -1,13 +1,13 @@
 {
-"checked_at": "2026-11-14T06:36:33Z",
-"cameras": 423,
+"checked_at": "2026-11-14T13:54:52Z",
+"cameras": 419,
 "counts": {
 "frozen": 4
 },
 "status": {
-"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Inverness-629000-00-11-12-2026-10-30-12.jpg": "frozen",
-"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Inverness-629000-01-11-12-2026-10-0-12.jpg": "frozen",
-"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Inverness-629000-02-11-12-2026-10-0-12.jpg": "frozen",
-"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Inverness-629000-03-11-12-2026-10-0-12.jpg": "frozen"
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Bowmans-301002-00-11-13-2026-3-45-3.jpg": "frozen",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Bowmans-301002-01-11-13-2026-4-0-7.jpg": "frozen",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Bowmans-301002-02-11-13-2026-4-0-7.jpg": "frozen",
+"https://mdt.mt.gov/other/WebAppData/External/RRS/RWIS/Bowmans-301002-03-11-13-2026-3-45-3.jpg": "frozen"
 }
 }

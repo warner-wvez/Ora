@@ -1,9 +1,10 @@
 {
-"checked_at": "2026-11-14T06:41:13Z",
+"checked_at": "2026-11-14T14:00:45Z",
 "cameras": 1824,
 "counts": {
-"offline": 3,
-"placeholder": 182
+"placeholder": 185,
+"frozen": 3,
+"offline": 3
 },
 "status": {
 "https://public.carsprogram.org/cameras/NYSDOT/F128637.flv.png": "placeholder",
@@ -35,6 +36,8 @@
 "https://public.carsprogram.org/cameras/NYSDOT/R10_220.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R10_330.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R10_334.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/NYSDOT/R10_340.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/NYSDOT/R10_341.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R10_354.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R10_368.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R10_400.flv.png": "placeholder",
@@ -87,6 +90,8 @@
 "https://public.carsprogram.org/cameras/NYSDOT/R1_054.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R1_066.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R1_072.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/NYSDOT/R1_073.flv.png": "frozen",
+"https://public.carsprogram.org/cameras/NYSDOT/R1_083.flv.png": "frozen",
 "https://public.carsprogram.org/cameras/NYSDOT/R1_090.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R2_017.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R2_022.flv.png": "placeholder",
@@ -101,6 +106,7 @@
 "https://public.carsprogram.org/cameras/NYSDOT/R3_038.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R3_040.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R3_068.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/NYSDOT/R3_077.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R3_078.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R3_079.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/R3_081.flv.png": "placeholder",
@@ -187,6 +193,7 @@
 "https://public.carsprogram.org/cameras/NYSDOT/other/1.jpg": "offline",
 "https://public.carsprogram.org/cameras/NYSDOT/other/2.jpg": "offline",
 "https://public.carsprogram.org/cameras/NYSDOT/other/28.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/NYSDOT/other/43.jpg": "frozen",
 "https://public.carsprogram.org/cameras/NYSDOT/other/49.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/other/50.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/NYSDOT/other/68.jpg": "offline",
