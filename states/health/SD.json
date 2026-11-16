@@ -1,11 +1,6 @@
 {
-"checked_at": "2026-11-16T06:54:58Z",
-"cameras": 712,
-"counts": {
-"frozen": 2
-},
-"status": {
-"https://sd.cdn.iteris-atis.com/camera_images/SDARL/1/latest.jpg": "frozen",
-"https://sd.cdn.iteris-atis.com/camera_images/SDARL/3/latest.jpg": "frozen"
-}
+"checked_at": "2026-11-16T22:30:59Z",
+"cameras": 719,
+"counts": {},
+"status": {}
 }

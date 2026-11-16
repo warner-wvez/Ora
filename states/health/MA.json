@@ -1,16 +1,18 @@
 {
-"checked_at": "2026-11-16T06:41:47Z",
+"checked_at": "2026-11-16T22:18:02Z",
 "cameras": 311,
 "counts": {
-"placeholder": 145
+"placeholder": 146,
+"frozen": 1
 },
 "status": {
 "https://public.carsprogram.org/cameras/MA/1119-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1187-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1188-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/1226-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/1215-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1231-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1239-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/1279-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1302-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1340-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/1413-fullJpeg.jpg": "placeholder",
@@ -35,18 +37,17 @@
 "https://public.carsprogram.org/cameras/MA/406430-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406446-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406456-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/406457-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406458-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406497-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406498-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406499-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/406548-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406556-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406561-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406567-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406569-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406571-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406572-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/406576-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406578-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406579-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/406580-fullJpeg.jpg": "placeholder",
@@ -60,6 +61,7 @@
 "https://public.carsprogram.org/cameras/MA/407725-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/407728-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/407729-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/407731-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/407733-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/407735-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/407957-fullJpeg.jpg": "placeholder",
@@ -76,6 +78,7 @@
 "https://public.carsprogram.org/cameras/MA/432506-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432507-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432520-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/432523-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432525-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432527-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/432542-fullJpeg.jpg": "placeholder",
@@ -83,7 +86,7 @@
 "https://public.carsprogram.org/cameras/MA/432545-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435420-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435426-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/435439-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/435441-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435453-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435455-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435460-fullJpeg.jpg": "placeholder",
@@ -108,7 +111,6 @@
 "https://public.carsprogram.org/cameras/MA/435520-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435521-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435522-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/435523-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435530-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435533-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435535-fullJpeg.jpg": "placeholder",
@@ -149,6 +151,7 @@
 "https://public.carsprogram.org/cameras/MA/435586-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435588-fullJpeg.jpg": "placeholder",
 "https://public.carsprogram.org/cameras/MA/435589-fullJpeg.jpg": "placeholder",
-"https://public.carsprogram.org/cameras/MA/455433-fullJpeg.jpg": "placeholder"
+"https://public.carsprogram.org/cameras/MA/455433-fullJpeg.jpg": "placeholder",
+"https://public.carsprogram.org/cameras/MA/ma-unavailable.png": "frozen"
 }
 }
