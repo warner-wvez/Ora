@@ -1,22 +1,22 @@
 {
-"checked_at": "2026-11-15T19:14:50Z",
+"checked_at": "2026-11-16T06:47:44Z",
 "cameras": 185,
 "counts": {
-"offline": 18,
-"placeholder": 3
+"offline": 19,
+"placeholder": 2
 },
 "status": {
-"http://ss.nmroads.com/snapshots/I25NBUS550.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-10lordsburgmm9.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-25_sunport.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40_west_edgewood.jpg": "offline",
-"http://ss.nmroads.com/snapshots/i-40eb_juantabo.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-25n_bigi.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40_riopuerco.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-40w_atriscovista.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i-40wb_juantabo.jpg": "offline",
+"http://ss.nmroads.com/snapshots/i-40wb_lomas.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i10eastus70.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_cerrillos.jpg": "placeholder",
-"http://ss.nmroads.com/snapshots/i25nb_lohman.jpg": "placeholder",
+"http://ss.nmroads.com/snapshots/i25nb_lohman.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_oldpecos.jpg": "offline",
 "http://ss.nmroads.com/snapshots/i25nb_richards.jpg": "placeholder",
 "http://ss.nmroads.com/snapshots/i25nbstfrancis.jpg": "offline",
