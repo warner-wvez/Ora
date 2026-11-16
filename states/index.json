@@ -25,7 +25,7 @@
  "UT": {
   "name": "Utah",
   "file": "states/UT.json",
-  "count": 2088,
+  "count": 2090,
   "center": [
    -111.7,
    39.9
@@ -60,7 +60,7 @@
  "NV": {
   "name": "Nevada",
   "file": "states/NV.json",
-  "count": 651,
+  "count": 650,
   "center": [
    -116.9,
    39.3
@@ -148,7 +148,7 @@
  "CO": {
   "name": "Colorado",
   "file": "states/CO.json",
-  "count": 992,
+  "count": 995,
   "center": [
    -105.5,
    39.0
@@ -159,7 +159,7 @@
  "IA": {
   "name": "Iowa",
   "file": "states/IA.json",
-  "count": 862,
+  "count": 860,
   "center": [
    -93.5,
    42.0
@@ -170,7 +170,7 @@
  "NE": {
   "name": "Nebraska",
   "file": "states/NE.json",
-  "count": 342,
+  "count": 343,
   "center": [
    -99.8,
    41.5
@@ -181,7 +181,7 @@
  "IN": {
   "name": "Indiana",
   "file": "states/IN.json",
-  "count": 759,
+  "count": 782,
   "center": [
    -86.3,
    39.9
@@ -214,7 +214,7 @@
  "CA": {
   "name": "California",
   "file": "states/CA.json",
-  "count": 3261,
+  "count": 3300,
   "center": [
    -119.6,
    37.3
@@ -247,7 +247,7 @@
  "OH": {
   "name": "Ohio",
   "file": "states/OH.json",
-  "count": 1116,
+  "count": 1117,
   "center": [
    -82.8,
    40.3
@@ -292,7 +292,7 @@
  "DE": {
   "name": "Delaware",
   "file": "states/DE.json",
-  "count": 367,
+  "count": 372,
   "center": [
    -75.45,
    39.1
@@ -370,7 +370,7 @@
  "SD": {
   "name": "South Dakota",
   "file": "states/SD.json",
-  "count": 176,
+  "count": 178,
   "center": [
    -100.3,
    44.4
@@ -403,7 +403,7 @@
  "WV": {
   "name": "West Virginia",
   "file": "states/WV.json",
-  "count": 133,
+  "count": 132,
   "center": [
    -80.4,
    38.8
@@ -425,7 +425,7 @@
  "AL": {
   "name": "Alabama",
   "file": "states/AL.json",
-  "count": 631,
+  "count": 650,
   "center": [
    -86.8,
    32.8
@@ -447,7 +447,7 @@
  "SC": {
   "name": "South Carolina",
   "file": "states/SC.json",
-  "count": 803,
+  "count": 801,
   "center": [
    -80.9,
    33.9
@@ -524,7 +524,7 @@
  "MS": {
   "name": "Mississippi",
   "file": "states/MS.json",
-  "count": 468,
+  "count": 472,
   "center": [
    -89.7,
    32.6
