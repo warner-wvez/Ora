@@ -25,9 +25,14 @@ def split_shifts(tickets):
 
 
 def _pt(x):
+    """The ticket's map point, or None. About 0.7% of the source's points are misread addresses
+    ("2811 S ST") geocoded far outside the city; those publish as no map point, like a blank one."""
     if x.get("latitude") in (None, "") or x.get("longitude") in (None, ""):
         return None
-    return [round(float(x["longitude"]), 5), round(float(x["latitude"]), 5)]
+    p = [round(float(x["longitude"]), 5), round(float(x["latitude"]), 5)]
+    if not (CHICAGO[0] <= p[0] <= CHICAGO[2] and CHICAGO[1] <= p[1] <= CHICAGO[3]):
+        return None
+    return p
 
 
 def area_center(tickets):

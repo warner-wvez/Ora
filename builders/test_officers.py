@@ -105,3 +105,13 @@ def test_write_then_read_round_trips_and_carries_no_real_numbers():
         assert back["days"] == out["days"] and offs == officers and meta["last"] == "2026-11-12"
         blob = "".join(open(os.path.join(r, f)).read() for r, _, fs in os.walk(d) for f in fs)
         assert "2213" not in blob
+
+
+def test_points_outside_chicago_publish_as_no_map_point():
+    # about 0.7% of the source's points are misread addresses geocoded to South Africa or downstate
+    fake = of.FakeIds({"2213": 731}, b"k", {})
+    out = of.build({"2213": [t("2026-11-12T08:00:00", 28.05, -25.87, loc="2811 S ST")]}, fake, "2026-11-01", "2026-11-12", [])
+    row = out["days"]["2026-11-12"][0]
+    assert row[2] is None and row[3] is None and row[4] == "2811 S ST"
+    assert out["by_officer"] == {} and out["daily"]["731"][0][5] is None
+    assert of.check(out, {731}, "2026-11-01", "2026-11-12") == []
