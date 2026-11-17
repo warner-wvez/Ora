@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-16T22:22:56Z",
+"checked_at": "2026-11-17T08:13:25Z",
 "cameras": 814,
 "counts": {
 "offline": 7,
-"placeholder": 25
+"placeholder": 29
 },
 "status": {
 "https://www.dot.nd.gov/travel-info/cameras/I29RP68.237Fargo19th&40thAveNPavement.jpg": "offline",
@@ -37,6 +37,10 @@
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeNorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgePavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/mottcenter.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/mottnorth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/mottpavement.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/mottsouth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/camerasND13RP308VeronaEast.jpg": "offline"
 }
 }

@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-16T22:25:57Z",
+"checked_at": "2026-11-17T08:17:05Z",
 "cameras": 1117,
 "counts": {
 "frozen": 21,
-"offline": 1
+"offline": 2
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE173-L.jpg": "frozen",
@@ -27,6 +27,7 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Waterford.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_PortUnion_Quad.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-747_Smith_Quad.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/rest_area/I-75_Hancock_SB-3.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }

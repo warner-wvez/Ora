@@ -1,19 +1,18 @@
 {
-"checked_at": "2026-11-16T22:16:31Z",
+"checked_at": "2026-11-17T08:07:39Z",
 "cameras": 765,
 "counts": {
-"placeholder": 54,
-"frozen": 1
+"placeholder": 55
 },
 "status": {
 "https://public.carsprogram.org/cameras/IN/INDOT_101_epH0qAOMlaMwntWf.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_1048_Z4O30iTCv6QpTVD4.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_1070_2WWQGO8zqjLjWG0a.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_1071_QWQghYfjHzL1siae.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_1102_Y7Leb3abPLbVEh1t.flv.png": "frozen",
 "https://public.carsprogram.org/cameras/IN/INDOT_1124_OaNczMEK6IFwRzXX.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_144_8_kfKOt0IQvA1RPT.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_145_GsEVz2Iaz9awVYZI.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_158_1uWZSXga4AuesoeQ.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_159_AA1RWSrwkYhfVmy8.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_166_cWmaHGs3o7mGdusK.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_176_ixrpDXCMB_z5Pv7_.flv.png": "placeholder",
@@ -52,10 +51,10 @@
 "https://public.carsprogram.org/cameras/IN/INDOT_728_2A0gfy2QXGvqzLN1.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_740_uHWumeBmnoFkxqGM.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_762_1xIrjJf2K6A8wLbE.flv.png": "placeholder",
-"https://public.carsprogram.org/cameras/IN/INDOT_763_iyLYz9vTze60Fp7V.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_774_g7CYS6B6ZxPNsbqB.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_775_cIgYrrMUE5pHAMan.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_776_DTZhM3DqRADDNloY.flv.png": "placeholder",
+"https://public.carsprogram.org/cameras/IN/INDOT_783_OH7T3wx6qYRQMkAe.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_786_PBDtDphT95KO3a06.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_787_Mbc7e33NCab8GaH0.flv.png": "placeholder",
 "https://public.carsprogram.org/cameras/IN/INDOT_79_41j6mZks_E8JmE2I.flv.png": "placeholder",
