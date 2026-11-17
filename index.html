@@ -4158,6 +4158,8 @@ function serializeState(){ const p=new URLSearchParams();
     if(whenOn()) p.set(whenOn().mode, whenOn().t);
   }
   if(store.enfFilter.verdicts.size<4) p.set('fv',[...store.enfFilter.verdicts].join(',')); if(store.enfFilter.types.size<2) p.set('ft',[...store.enfFilter.types].join(','));
+  if(store.mode==='officers'){ const d=OFF.mode==='day'?OFF.day:(OFF.preset==='custom'?`${OFF.from}~${OFF.to}`:OFF.preset);
+    p.set('o', OFF.sel?`${OFF.sel}|${d}|${OFF.show?1:0}`:''); }
   return p.toString(); }
 function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+serializeState());
   // the last view, so opening the bare address returns where you left off rather than the overview
@@ -4211,6 +4213,7 @@ async function restoreState(){
   for(const k of layers) await enableLayer(k,false);
   if(map.getLayer('chi-enf__circle')) map.setPaintProperty('chi-enf__circle','circle-color',enfColorExpr());
   syncEnfControls(); setBasemap(store.basemap);
+  if(p.has('o')) offFromUrl(p.get('o'));
   if(p.has('c')&&p.has('z')){ const [lng,lat]=p.get('c').split(',').map(Number); map.jumpTo({center:[lng,lat],zoom:Number(p.get('z'))}); }
   else { const v=lastView(); if(v) map.jumpTo({center:v.c, zoom:v.z}); else showOverview(); }
   syncMaster();
@@ -4593,6 +4596,7 @@ async function offOn(){
   if(!localStorage.getItem('ora-officer-intro')) document.getElementById('offIntro').classList.add('show');
   offRenderAll();
   map.easeTo({padding:offPad(), duration:300});   // room for the panel (computer) or the list sheet (phone)
+  writeUrl();
 }
 function offOff(){
   document.getElementById('obtn').setAttribute('aria-pressed','false');
@@ -4603,6 +4607,7 @@ function offOff(){
   if(typeof offTeardownMap==='function') offTeardownMap();
   if(typeof offRenderCard==='function') offRenderCard();
   if(typeof offSizeSheets==='function') offSizeSheets();
+  writeUrl();
 }
 function offIntroClose(){ localStorage.setItem('ora-officer-intro','1'); document.getElementById('offIntro').classList.remove('show'); }
 document.getElementById('obtn').addEventListener('click',()=>switchMode(store.mode==='officers'?'browse':'officers'));
@@ -4645,12 +4650,14 @@ async function offPick(id){
   const r=offRows().find(x=>x.o.id===id), s=r&&offLatest(r.sh);
   if(s&&s[5]!=null) map.easeTo({center:[s[5],s[6]], zoom:14.5, padding:offPad(), duration:600});
   if(typeof offLoadTickets==='function'){ await offLoadTickets(); if(OFF.sel!==id) return; offRenderCard(); }
+  writeUrl();
 }
 function offClose(){
   OFF.sel=null; OFF.show=false; OFF.hl=null; OFF.tk=[]; if(offPopup) offPopup.remove();
   if(typeof offDrawRoute==='function') offDrawRoute();
   if(isMobile()) OFF.lh=50;
   offRenderAll(); map.easeTo({padding:offPad(), duration:300});
+  writeUrl();
 }
 function offTeardownMap(){
   for(const m of offMarkers.values()) m.remove(); offMarkers.clear();
@@ -4712,8 +4719,8 @@ function offRenderCard(){
   card.innerHTML=OFF.sel?`<div class="off-head">${C.head}</div><div class="off-body">${C.body}</div>`:'';
   const nb=card.querySelector('.off-tl'); if(nb){ nb.scrollTop=top; offFade(nb); }
 }
-async function offSetDates(fn){ fn(); OFF.hl=null; if(offPopup) offPopup.remove(); OFF.tk=[]; offRenderAll(); await offLoadTickets(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); }
-function offToggleShow(){ OFF.show=!OFF.show; OFF.hl=null; if(offPopup) offPopup.remove(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); if(!OFF.show) map.easeTo({padding:offPad(), duration:600}); }
+async function offSetDates(fn){ fn(); OFF.hl=null; if(offPopup) offPopup.remove(); OFF.tk=[]; offRenderAll(); await offLoadTickets(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); writeUrl(); }
+function offToggleShow(){ OFF.show=!OFF.show; OFF.hl=null; if(offPopup) offPopup.remove(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); if(!OFF.show) map.easeTo({padding:offPad(), duration:600}); writeUrl(); }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-off-close],[data-off-step],[data-off-mode],[data-off-preset],[data-off-show],[data-off-sort],[data-off-day]'); if(!t) return;
   if(t.dataset.offClose!==undefined) return offClose();
@@ -4829,6 +4836,16 @@ function offSheetDrag(sheet, key){
 }
 offSheetDrag(document.getElementById('offListSheet'),'lh'); offSheetDrag(document.getElementById('offCardSheet'),'oh');
 mqMobile.addEventListener('change',()=>{ if(store.mode==='officers'){ offRenderAll(); map.easeTo({padding:offPad(), duration:0}); } });
+
+async function offFromUrl(v){
+  if(store.mode!=='officers') switchMode('officers'); await offLoad();
+  const [id,d,sh]=String(v).split('|'); if(!id) return;
+  if(d&&/^\d{4}-\d\d-\d\d$/.test(d)){ OFF.mode='day'; OFF.day=d; }
+  else if(d&&d.includes('~')){ OFF.mode='range'; OFF.preset='custom'; [OFF.from,OFF.to]=d.split('~'); }
+  else if(['week','month','ytd'].includes(d)){ OFF.mode='range'; OFF.preset=d; }
+  if(!OFF.by.has(+id)) return;
+  await offPick(+id); if(sh==='1') offToggleShow();
+}
 
 /* ---------- boot ---------- */
 // one fetch of the outline serves both the drawn borders and the boxes that decide what loads,
