@@ -4557,7 +4557,9 @@ function offRows(){
     out.push({o, sh, n:sh.reduce((a,s)=>a+s[1],0), f:sh.reduce((a,s)=>a+s[2],0)}); }
   return out.sort((a,b)=>b.f-a.f||b.n-a.n);
 }
-const offShiftOn=(id,k)=>(OFF.shifts[id]||[]).find(s=>s[0]===k);
+// an officer can work two shifts on one date (a gap over 4 hours); the day view adds them together
+const offShiftOn=(id,k)=>{ const sh=(OFF.shifts[id]||[]).filter(s=>s[0]===k); if(!sh.length) return undefined;
+  return [k, sh.reduce((a,s)=>a+s[1],0), sh.reduce((a,s)=>a+s[2],0), sh[0][3], sh.at(-1)[4], sh[0][5], sh[0][6], sh.length]; };
 const offLatest=sh=>sh.reduce((b,s)=>s[0]>b[0]?s:b);
 function offFade(el){ const w=el&&el.parentElement; if(!w||!w.classList.contains('off-fade')) return;
   const f=()=>w.classList.toggle('end', el.scrollTop+el.clientHeight>=el.scrollHeight-2); f(); el.onscroll=f; }
@@ -4680,7 +4682,7 @@ async function offLoadTickets(){
 }
 function offCardHTML(){
   const o=OFF.by.get(OFF.sel); if(!o) return {head:'', body:''};
-  const mine=(OFF.shifts[o.id]||[]).map(s=>s[0]), i=mine.indexOf(OFF.day), prev=mine[i-1], next=mine[i+1];
+  const mine=[...new Set((OFF.shifts[o.id]||[]).map(s=>s[0]))], i=mine.indexOf(OFF.day), prev=mine[i-1], next=mine[i+1];
   const head=`${offAv(o,isMobile()?44:40)}<div style="flex:1;min-width:0"><div class="off-title">Officer ${o.id}</div><div class="off-meta">${o.c||''} · ${offLabel()}</div></div><button type="button" class="off-x" data-off-close aria-label="Close">&times;</button>`;
   const sw=(a,b,attr,cur,va,vb)=>`<div class="color-switch"><span class="seg-pill" aria-hidden="true"></span><button type="button" class="color-btn${cur===va?' active':''}" ${attr}="${va}">${a}</button><button type="button" class="color-btn${cur===vb?' active':''}" ${attr}="${vb}">${b}</button></div>`;
   const dateUI = OFF.mode==='day'
@@ -4692,7 +4694,7 @@ function offCardHTML(){
   if(OFF.mode==='day'){
     const s=offShiftOn(o.id,OFF.day);
     body+=`<div class="off-box"><div class="off-stats"><div class="enf-stat"><div class="num">${offNum(s[1])}</div><div class="lbl">tickets</div></div><div class="enf-stat"><div class="num">${offMoney(s[2])}</div><div class="lbl">in fines</div></div></div>
-      <div class="off-meta" style="margin-top:9px">Shift ran about ${offT12(s[3])} to ${offT12(s[4])} (first to last ticket).</div>
+      <div class="off-meta" style="margin-top:9px">${s[7]>1?`${s[7]} shifts this day, from about`:'Shift ran about'} ${offT12(s[3])} to ${offT12(s[4])} (first to last ticket).</div>
       <button type="button" class="off-go${OFF.show?' off':''}" data-off-show>${OFF.show?'Hide route':'View shift route'}</button></div>`;
     if(!OFF.tk.length) return {head, body:body+'<div class="off-box"><div class="off-spin" aria-label="Loading"></div></div>'};
     const n=OFF.tk.length, list=OFF.tk.slice().sort(OFF.sort==='new'?(a,b)=>b.n-a.n:(a,b)=>b.fine-a.fine||b.n-a.n);
