@@ -4706,6 +4706,70 @@ document.addEventListener('change',e=>{
     if(a&&b&&a<=b) offSetDates(()=>{ OFF.from=a<OFF.first?OFF.first:a; OFF.to=b>OFF.last?OFF.last:b; }); }
 });
 
+const OFF_FC=f=>({type:'FeatureCollection',features:f});
+function offInitLayers(){
+  for(const id of ['off-line','off-pts','off-hl','off-dots']) map.addSource(id,{type:'geojson',data:OFF_FC([])});
+  map.addLayer({id:'off-casing',type:'line',source:'off-line',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#0b4fb3','line-width':5,'line-opacity':.9}});
+  map.addLayer({id:'off-line',type:'line',source:'off-line',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#1a73e8','line-width':3}});
+  map.addLayer({id:'off-dots',type:'circle',source:'off-dots',paint:{'circle-radius':4.5,'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':1.5,'circle-opacity':.85}});
+  // long routes (approved 11-16): every ticket keeps a dot; numbers hide where they would overlap; first and last always numbered
+  map.addLayer({id:'off-dot',type:'circle',source:'off-pts',paint:{'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':2,
+    'circle-radius':['interpolate',['linear'],['zoom'],11,['case',['get','end'],10,4.5],13.5,10]}});
+  map.addLayer({id:'off-num',type:'symbol',source:'off-pts',layout:{'text-field':['step',['zoom'],['case',['get','end'],['to-string',['get','n']],''],13.5,['to-string',['get','n']]],
+    'text-font':['Noto Sans Bold'],'text-size':10,'text-allow-overlap':false,'text-padding':1,'symbol-sort-key':['get','pri']},paint:{'text-color':'#fff'}});
+  map.addLayer({id:'off-hl',type:'circle',source:'off-hl',paint:{'circle-radius':13,'circle-color':'#0b4fb3','circle-stroke-color':'#fff','circle-stroke-width':3}});
+  map.addLayer({id:'off-hl-num',type:'symbol',source:'off-hl',layout:{'text-field':['to-string',['get','n']],'text-font':['Noto Sans Bold'],'text-size':11,'text-allow-overlap':true},paint:{'text-color':'#fff'}});
+  map.on('click','off-dot',e=>{ e.preventDefault(); offHighlight(e.features[0].properties.n,false); });
+  map.on('mouseenter','off-dot',()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave','off-dot',()=>map.getCanvas().style.cursor='');
+}
+function offTrim(ll){   // fit to where the officer worked: drop only spots beyond twice the 97th-percentile distance
+  const med=i=>ll.map(p=>p[i]).sort((a,b)=>a-b)[ll.length>>1], m=[med(0),med(1)];
+  const d=p=>Math.hypot((p[0]-m[0])*74.5,(p[1]-m[1])*111), cut=ll.map(d).sort((a,b)=>a-b)[Math.floor(ll.length*.97)]*2;
+  return ll.filter(p=>d(p)<=cut);
+}
+// MapLibre adds the map's own padding (set by every easeTo with padding) to fitBounds' padding, so pass a small one
+function offFit(ll){ if(!ll.length) return; const b=new maplibregl.LngLatBounds(ll[0],ll[0]); ll.forEach(p=>b.extend(p)); map.fitBounds(b,{padding:24, maxZoom:16, duration:600}); }
+function offDrawRoute(){
+  if(!map.getSource('off-pts')) return;
+  const set=(id,f)=>map.getSource(id).setData(OFF_FC(f));
+  if(offRouteMarker){ offRouteMarker.remove(); offRouteMarker=null; }
+  if(store.mode!=='officers' || !OFF.show || !OFF.tk.length){ ['off-line','off-pts','off-hl','off-dots'].forEach(id=>set(id,[])); return; }
+  const pts=OFF.tk.filter(t=>t.ll);
+  if(OFF.mode==='day'){
+    set('off-dots',[]);
+    set('off-line', pts.length>1?[{type:'Feature',geometry:{type:'LineString',coordinates:pts.map(t=>t.ll)}}]:[]);
+    set('off-pts', pts.map((t,i)=>({type:'Feature',properties:{n:t.n, end:i===0||i===pts.length-1, pri:(i===0||i===pts.length-1)?0:1+i},geometry:{type:'Point',coordinates:t.ll}})));
+    const el=document.createElement('div'), o=OFF.by.get(OFF.sel); el.className='off-mav sel'; el.setAttribute('style', offAvStyle(o,40).replace(/width:40px;height:40px;?/,'')+';cursor:default');
+    if(pts.length) offRouteMarker=new maplibregl.Marker({element:el, offset:[0,-34]}).setLngLat(pts.at(-1).ll).addTo(map);
+    offFit(pts.map(t=>t.ll));
+  } else {
+    ['off-line','off-pts','off-hl'].forEach(id=>set(id,[]));
+    set('off-dots', pts.map(t=>({type:'Feature',geometry:{type:'Point',coordinates:t.ll}})));
+    offFit(offTrim(pts.map(t=>t.ll)));
+  }
+}
+function offHighlight(n, fromRow){
+  if(OFF.mode!=='day') return;
+  const t=OFF.tk.find(x=>x.n===n); if(!t) return;
+  const fresh=!OFF.show;   // a row click with the route hidden draws it; its fit already brings this ticket into view
+  if(fresh){ OFF.show=true; offDrawMarkers(); offDrawRoute(); }
+  OFF.hl=n;
+  if(isMobile() && fromRow && OFF.oh>50){ OFF.oh=50; if(typeof offSizeSheets==='function') offSizeSheets(); }   // a tapped ticket drops the sheet so its pin shows
+  map.getSource('off-hl').setData(OFF_FC(t.ll?[{type:'Feature',properties:{n},geometry:{type:'Point',coordinates:t.ll}}]:[]));
+  if(offPopup) offPopup.remove();
+  if(t.ll){
+    offPopup=new maplibregl.Popup({offset:16, closeButton:false}).setLngLat(t.ll).setHTML(`<strong>Ticket ${n}</strong><br>${offAddr(t.addr)} · ${offT12(t.time)}`).addTo(map);
+    const p=map.project(t.ll), P=offPad();
+    if(fresh) {}
+    else if(p.x<P.left||p.x>innerWidth-P.right||p.y<P.top||p.y>innerHeight-P.bottom) map.easeTo({center:t.ll, padding:P, duration:600});
+    else if(isMobile()) map.easeTo({padding:P, duration:300});
+  }
+  offRenderCard();
+  const row=document.querySelector(`#offCard .off-tr[data-off-n="${n}"], #offCardSheet .off-tr[data-off-n="${n}"]`); if(row) row.scrollIntoView({block:'nearest', behavior:'smooth'});
+}
+document.addEventListener('click',e=>{ const r=e.target.closest('[data-off-n]'); if(r) offHighlight(+r.dataset.offN,true); });
+
 /* ---------- boot ---------- */
 // one fetch of the outline serves both the drawn borders and the boxes that decide what loads,
 // started now so it runs alongside the basemap style
@@ -4726,6 +4790,7 @@ map.on('load', async ()=>{
   map.addLayer({id:'me-accuracy',type:'fill',source:'me-accuracy',paint:{'fill-color':'#007aff','fill-opacity':0.12}});
   map.addLayer({id:'me-accuracy-edge',type:'line',source:'me-accuracy',paint:{'line-color':'#007aff','line-opacity':0.35,'line-width':1}});
   addCamsLayers(); bindCamsHandlers();
+  offInitLayers();   // before the officer map click below: MapLibre runs click listeners in the order added
   map.on('click',e=>{ if(store.mode!=='officers'||!OFF.sel||e.defaultPrevented) return; offClose(); });
   map.addSource('hl-hover',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});
