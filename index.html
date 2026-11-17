@@ -828,6 +828,8 @@
     #offSec { display: none !important; }
     .off-list { --rowh: 56px; max-height: none; overflow: visible; }
   }
+  .off-mav { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,.25); background-color: #fff; background-repeat: no-repeat; cursor: pointer; padding: 0; }
+  .off-mav.sel { box-shadow: 0 0 0 3px rgba(0,98,204,.55), 0 2px 4px rgba(0,0,0,.25); }
 </style>
 </head>
 <body>
@@ -2282,7 +2284,7 @@ function bindCamsHandlers(){
   // against nothing. If the tile hit-test misses but OUR index (the source of truth we
   // render from) has a pin or cluster under the finger, trust the index and resync.
   map.on('click',(e)=>{
-    if(!camsIndex) return;
+    if(!camsIndex || store.mode==='officers') return;   // officer shifts hide the cameras; a tap there is about officers
     const layers=['cams__hit','chi-enf__hit','coverage-hit','coverage-label'].filter(id=>map.getLayer(id));
     if(map.queryRenderedFeatures(e.point,{layers}).length) return;   // normal per-layer handlers took it
     const f=camsAtPoint(e.point);
@@ -3120,7 +3122,7 @@ const OWN_LAYERS=['cams__hit','chi-enf__hit','coverage-hit','coverage-label','na
 const ownAt=(point)=>map.queryRenderedFeatures(point,{layers:OWN_LAYERS.filter(id=>map.getLayer(id))}).length>0;
 function bindMapTaps(){
   map.on('click',(e)=>{
-    if(preview || nav.mode==='dir' || ownAt(e.point)) return;
+    if(preview || nav.mode==='dir' || store.mode==='officers' || ownAt(e.point)) return;   // officer shifts own the map taps
     const f=poiAt(e.point);
     if(!f){ if(nav.mode==='place') closeNav(); return; }
     const pr=f.properties, [lon,lat]=f.geometry.coordinates;
@@ -3130,7 +3132,7 @@ function bindMapTaps(){
   // the pointer turns into a hand over anything a tap would open
   let raf=0, onPoi=false;
   map.on('mousemove',(e)=>{ if(raf) return; raf=requestAnimationFrame(()=>{ raf=0;
-    const hit=nav.mode!=='dir' && !ownAt(e.point) && !!poiAt(e.point);
+    const hit=nav.mode!=='dir' && store.mode!=='officers' && !ownAt(e.point) && !!poiAt(e.point);
     if(hit!==onPoi){ onPoi=hit; map.getCanvas().style.cursor=hit ? 'pointer' : ''; } }); });
 }
 
@@ -4545,11 +4547,61 @@ function offOff(){
   if(typeof offRenderCard==='function') offRenderCard();
 }
 function offIntroClose(){ localStorage.setItem('ora-officer-intro','1'); document.getElementById('offIntro').classList.remove('show'); }
-function offClose(){ OFF.sel=null; offRenderAll(); }   // replaced in Task 7
 document.getElementById('obtn').addEventListener('click',()=>switchMode(store.mode==='officers'?'browse':'officers'));
 document.getElementById('offIntroGo').addEventListener('click',offIntroClose);
 document.getElementById('offIntro').addEventListener('click',e=>{ if(e.target.id==='offIntro') offIntroClose(); });
 document.addEventListener('click',e=>{ if(e.target.closest('[data-off-about]')) document.getElementById('offIntro').classList.add('show'); });
+
+const offMarkers=new Map(); let offRouteMarker=null, offPopup=null;
+function offPad(){
+  if(isMobile()){ const h=OFF.sel?OFF.oh:OFF.lh; return {top:140, left:30, right:30, bottom:Math.round(innerHeight*h/100)+16}; }
+  return {top:30, bottom:30, left:400, right:OFF.sel?420:30};
+}
+function offDrawMarkers(){
+  const want=new Map();
+  if(store.mode==='officers' && !OFF.show) for(const r of offRows()){ const s=offLatest(r.sh); if(s[5]!=null) want.set(r.o.id,[s[5],s[6]]); }
+  for(const [id,m] of offMarkers) if(!want.has(id)){ m.remove(); offMarkers.delete(id); }
+  for(const [id,ll] of want){
+    let m=offMarkers.get(id);
+    if(!m){ const o=OFF.by.get(id), el=document.createElement('button');
+      el.type='button'; el.className='off-mav'; el.setAttribute('style', offAvStyle(o,40).replace(/width:40px;height:40px;?/,''));
+      el.setAttribute('aria-label',`Officer ${id}`); el.title=`Officer ${id} · ${o.c||''}`;
+      el.addEventListener('click',e=>{ e.stopPropagation(); offPick(id); });
+      m=new maplibregl.Marker({element:el}).setLngLat(ll).addTo(map); offMarkers.set(id,m);
+      el.setAttribute('aria-label',`Officer ${id}`); }   // MapLibre sets its own "Map marker" label
+    else m.setLngLat(ll);
+    m.getElement().classList.toggle('sel', id===OFF.sel);
+  }
+}
+function offScrollTo(id){
+  const box=document.querySelector('#offSec .off-list'), row=box&&box.querySelector(`.off-row[data-off-id="${id}"]`); if(!row||isMobile()) return;
+  box.scrollBy({top: row.getBoundingClientRect().top-box.getBoundingClientRect().top-box.clientHeight/2+row.offsetHeight/2, behavior:'smooth'});
+}
+async function offPick(id){
+  if(OFF.sel===id) return;
+  OFF.sel=id; OFF.hl=null; OFF.show=false; if(offPopup) offPopup.remove();   // like SF: a new pick clears the route
+  if(OFF.mode==='day' && !offShiftOn(id,OFF.day)) OFF.day=offLatest(OFF.shifts[id])[0];
+  if(isMobile()){ OFF.lh=15; OFF.oh=50; }
+  OFF.tk=[]; if(typeof offDrawRoute==='function') offDrawRoute();
+  offRenderAll(); offScrollTo(id);
+  const r=offRows().find(x=>x.o.id===id), s=r&&offLatest(r.sh);
+  if(s&&s[5]!=null) map.easeTo({center:[s[5],s[6]], zoom:14.5, padding:offPad(), duration:600});
+  if(typeof offLoadTickets==='function'){ await offLoadTickets(); if(OFF.sel!==id) return; offRenderCard(); }
+}
+function offClose(){
+  OFF.sel=null; OFF.show=false; OFF.hl=null; OFF.tk=[]; if(offPopup) offPopup.remove();
+  if(typeof offDrawRoute==='function') offDrawRoute();
+  if(isMobile()) OFF.lh=50;
+  offRenderAll(); map.easeTo({padding:offPad(), duration:300});
+}
+function offTeardownMap(){
+  for(const m of offMarkers.values()) m.remove(); offMarkers.clear();
+  if(offRouteMarker){ offRouteMarker.remove(); offRouteMarker=null; } if(offPopup){ offPopup.remove(); offPopup=null; }
+  if(typeof offDrawRoute==='function') offDrawRoute();
+  map.easeTo({padding:{top:0,bottom:0,left:0,right:0}, duration:300});
+}
+document.addEventListener('click',e=>{ const r=e.target.closest('[data-off-id]'); if(r) offPick(+r.dataset.offId); });
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'){ const r=e.target.closest&&e.target.closest('[data-off-id]'); if(r) offPick(+r.dataset.offId); } });
 
 /* ---------- boot ---------- */
 // one fetch of the outline serves both the drawn borders and the boxes that decide what loads,
@@ -4571,6 +4623,7 @@ map.on('load', async ()=>{
   map.addLayer({id:'me-accuracy',type:'fill',source:'me-accuracy',paint:{'fill-color':'#007aff','fill-opacity':0.12}});
   map.addLayer({id:'me-accuracy-edge',type:'line',source:'me-accuracy',paint:{'line-color':'#007aff','line-opacity':0.35,'line-width':1}});
   addCamsLayers(); bindCamsHandlers();
+  map.on('click',e=>{ if(store.mode!=='officers'||!OFF.sel||e.defaultPrevented) return; offClose(); });
   map.addSource('hl-hover',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
   map.addLayer({id:'hl-hover',type:'circle',source:'hl-hover',paint:{'circle-radius':['get','r'],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#fff','circle-stroke-width':2.5,'circle-stroke-opacity':0.9}});
 
