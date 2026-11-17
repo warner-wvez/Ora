@@ -138,6 +138,17 @@ def assign_characters(officers, fakes_in_order, characters):
     return out
 
 
+def types_from_days(days):
+    """Each officer's tickets and fines by violation type, per shift date, from the day files.
+    Lets the map rank officers by one ticket type over any dates without loading every day."""
+    out = {}
+    for d, rows in days.items():
+        for r in rows:
+            t = out.setdefault(str(r[0]), {}).setdefault(d, {}).setdefault(str(r[5]), [0, 0.0])
+            t[0] += 1; t[1] = round(t[1] + r[6], 2)
+    return out
+
+
 def check(out, fakes, first, last):
     probs = []
     def where(lng, lat, at):
@@ -169,6 +180,15 @@ def check(out, fakes, first, last):
         n = sum(s[1] for v in out["daily"].values() for s in v if s[0] == d)
         if n != len(rows):
             probs.append(f"days {d}: {len(rows)} tickets do not tie out with {n} in daily")
+    for k, per in out.get("types", {}).items():
+        if int(k) not in fakes:
+            probs.append(f"types {k}: not a fake officer number")
+        have = {s[0]: 0 for s in out["daily"].get(k, [])}
+        for s in out["daily"].get(k, []):
+            have[s[0]] += s[1]
+        for d, by in per.items():
+            if sum(v[0] for v in by.values()) != have.get(d, 0):
+                probs.append(f"types {k} {d}: counts do not tie out with daily")
     for k, pts in out["by_officer"].items():
         if int(k) not in fakes:
             probs.append(f"by_officer {k}: not a fake officer number")

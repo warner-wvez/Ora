@@ -115,3 +115,31 @@ def test_points_outside_chicago_publish_as_no_map_point():
     assert row[2] is None and row[3] is None and row[4] == "2811 S ST"
     assert out["by_officer"] == {} and out["daily"]["731"][0][5] is None
     assert of.check(out, {731}, "2026-11-01", "2026-11-12") == []
+
+
+def test_types_count_each_officers_tickets_by_type_per_day():
+    days = {"2026-11-12": [[731, "08:00", -87.6, 41.8, "A", 0, 60.0], [731, "09:00", -87.6, 41.8, "B", 1, 75.0],
+                           [731, "10:00", None, None, "C", 0, 60.0], [118, "08:30", -87.6, 41.8, "D", 1, 75.0]],
+            "2026-11-13": [[731, "08:00", -87.6, 41.8, "A", 1, 75.0]]}
+    ty = of.types_from_days(days)
+    assert ty["731"] == {"2026-11-12": {"0": [2, 120.0], "1": [1, 75.0]}, "2026-11-13": {"1": [1, 75.0]}}
+    assert ty["118"] == {"2026-11-12": {"1": [1, 75.0]}}
+
+def test_check_ties_types_to_daily():
+    out = {"daily": {"731": [["2026-11-12", 2, 120.0, "08:00", "09:00", -87.6, 41.8]]}, "totals": {"2026-11-12": [2, 120.0, 0]},
+           "days": {"2026-11-12": [[731, "08:00", -87.6, 41.8, "A", 0, 60.0], [731, "09:00", -87.6, 41.8, "A", 0, 60.0]]},
+           "by_officer": {"731": [["2026-11-12", -87.6, 41.8]]}, "violations": ["A"]}
+    out["types"] = of.types_from_days(out["days"])
+    assert of.check(out, {731}, "2026-11-01", "2026-11-12") == []
+    out["types"]["731"]["2026-11-12"]["0"][0] = 3
+    assert any("types" in p for p in of.check(out, {731}, "2026-11-01", "2026-11-12"))
+
+
+def test_write_all_writes_the_type_counts():
+    bco = load_cmd()
+    fake = of.FakeIds({"2213": 731}, b"k", {})
+    out = of.build({"2213": [t("2026-11-12T08:00:00")]}, fake, "2026-11-01", "2026-11-12", [])
+    out["types"] = of.types_from_days(out["days"])
+    with tempfile.TemporaryDirectory() as d:
+        bco.write_all(d, out, [{"id": 731, "c": "Mordecai", "s": 0, "k": None}], {"first": "2026-11-01", "last": "2026-11-12"})
+        assert json.load(open(os.path.join(d, "types.json"))) == {"731": {"2026-11-12": {"0": [1, 60.0]}}}

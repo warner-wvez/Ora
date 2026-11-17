@@ -61,6 +61,8 @@ def write_all(d, out, officers, meta):
     w("officers.json", {"updated": datetime.date.today().isoformat(), "first": meta["first"], "last": meta["last"],
                         "violations": out["violations"], "officers": sorted(officers, key=lambda o: o["id"])})
     w("daily.json", {"shifts": out["daily"], "totals": out["totals"]})
+    if "types" in out:
+        w("types.json", out["types"])
     for day, rows in out["days"].items():
         w(f"days/{day}.json", rows)
     for k, pts in out["by_officer"].items():
@@ -131,6 +133,7 @@ def main():
         for o in officers:
             if o["id"] == f:
                 o["k"] = kk
+    out["types"] = of.types_from_days(out["days"])   # per officer, date and ticket type, for ranking by type
     probs = of.check(out, {o["id"] for o in officers}, first, last)
     if probs:
         print("CHECKS FAILED, nothing written:\n  " + "\n  ".join(probs[:40]))
