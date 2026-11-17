@@ -29,15 +29,24 @@ async def desktop(b, night):
     report[f"{tag} day tiles equal tickets listed"] = await page.evaluate("() => document.querySelector('#offCard .enf-stat .num').textContent.replace(/,/g,'')==String(OFF.tk.length)")
     await page.click("[data-off-show]"); await shot(page, f"{tag}04-route")
     await page.locator("#offCard .off-tr").nth(2).click(); await shot(page, f"{tag}05-ticket")
-    prev = await page.evaluate("() => { const m=[...new Set(OFF.shifts[OFF.sel].map(s=>s[0]))]; return m[m.indexOf(OFF.day)-1]||null; }")
-    await page.locator("[data-off-step]").first.click(); await page.wait_for_timeout(700)
-    report[f"{tag} arrow went to previous shift"] = (await st(page))["day"] == prev
+    prev = await page.evaluate("() => { const m=[...new Set(OFF.shifts[OFF.sel].map(s=>s[0]))]; return [...m].reverse().find(d=>d<OFF.day)||null; }")
+    await page.locator("#offCard [data-off-jump]").first.click(); await page.wait_for_timeout(900)
+    report[f"{tag} Previous shift link went to the previous shift"] = (await st(page))["day"] == prev
     # every officer-day on the last day: tiles equal tickets in the day file
     report[f"{tag} all officers tie out on the last day"] = await page.evaluate("async () => { const d=await offGet(`chicago-officers/days/${OFF.last}.json`, offDayCache, OFF.last); const by={}; d.forEach(t=>by[t[0]]=(by[t[0]]||0)+1); return Object.entries(by).every(([id,n])=>offShiftOn(+id,OFF.last)[1]===n); }")
     await page.click("[data-off-mode=range]"); await page.wait_for_timeout(700); await shot(page, f"{tag}06-range")
     ok = await page.evaluate("() => { const ds=new Set(offDates()); const sh=OFF.shifts[OFF.sel].filter(s=>ds.has(s[0])); const n=sh.reduce((a,s)=>a+s[1],0); return document.querySelector('#offCard .enf-stat .num').textContent.replace(/,/g,'')==String(n); }")
     report[f"{tag} range total equals its days"] = ok
     await page.click("[data-off-show]"); await shot(page, f"{tag}07-dots")
+    # ticket type: the list ranks by that type and its numbers come from types.json; the card matches its tickets
+    await page.click("[data-off-mode=day]"); await page.wait_for_timeout(700)
+    top = await page.evaluate("() => OFF.typeOrder[0]")
+    await page.select_option("[data-off-type]", top); await page.wait_for_timeout(1200); await shot(page, f"{tag}09-type")
+    report[f"{tag} type list ranked and tied to types.json"] = await page.evaluate("() => { const R=offRows(); const ok=R.every((r,i)=>i===0||R[i-1].f>=r.f); const tie=R.every(r=>{ const v=((OFF.types[r.o.id]||{})[OFF.day]||{})[OFF.type]; return v && v[0]===r.n; }); return ok && tie && R.length>0; }")
+    await page.locator("#offSec .off-row").nth(0).click(); await page.wait_for_timeout(1400); await shot(page, f"{tag}10-type-card")
+    report[f"{tag} type card equals its tickets"] = await page.evaluate("() => document.querySelector('#offCard .enf-stat .num').textContent.replace(/,/g,'')==String(offTk().length) && offTk().every(t=>String(t.v)===OFF.type)")
+    await page.click("[data-off-rank=tickets]"); await page.wait_for_timeout(600)
+    report[f"{tag} rank by tickets"] = await page.evaluate("() => { const R=offRows(); return R.every((r,i)=>i===0||R[i-1].n>=r.n); }")
     await page.keyboard.press("Escape"); await shot(page, f"{tag}08-escape")
     await ctx.close()
 
