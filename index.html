@@ -830,6 +830,40 @@
   }
   .off-mav { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,.25); background-color: #fff; background-repeat: no-repeat; cursor: pointer; padding: 0; }
   .off-mav.sel { box-shadow: 0 0 0 3px rgba(0,98,204,.55), 0 2px 4px rgba(0,0,0,.25); }
+  #offCard { position: absolute; top: 12px; right: 12px; z-index: 10; width: 380px; max-height: calc(100vh - 24px); background: #f5f5f7; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.15); display: none; flex-direction: column; overflow: hidden; }
+  #offCard.show { display: flex; }
+  .off-head { display: flex; align-items: center; gap: 10px; padding: 14px var(--pad); background: #fff; border-bottom: 1px solid #e5e5ea; }
+  .off-title { font-size: calc(var(--fs-row) + 2px); font-weight: 700; color: #1c1c1e; }
+  .off-x { flex: none; width: 30px; height: 30px; border-radius: 8px; border: 0; background: #f2f2f7; color: #3c3c43; font-size: 16px; cursor: pointer; }
+  .off-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+  .off-box { background: #fff; border-radius: 12px; box-shadow: 0 1px 5px rgba(0,0,0,.08); padding: 12px; }
+  .off-step { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .off-step button { width: 30px; height: 30px; border-radius: 6px; border: 0; background: #f2f2f7; color: #3c3c43; font-size: 16px; cursor: pointer; }
+  .off-step button:disabled { opacity: .35; cursor: default; }
+  .off-step .d { flex: 1; text-align: center; font-size: var(--fs-body); font-weight: 600; color: #1c1c1e; }
+  .off-hint { font-size: var(--fs-meta); color: #6e6e73; text-align: center; margin-top: 6px; }
+  .fchip.on[data-off-preset] { color: #fff; background: #0062cc; border-color: transparent; }
+  .off-custom { display: flex; gap: 6px; margin-top: 8px; }
+  .off-custom input { flex: 1; min-width: 0; font: inherit; font-size: var(--fs-ctl); padding: 4px 6px; border: 1px solid #dcdce1; border-radius: 6px; }
+  .off-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .off-stats.three { grid-template-columns: 1fr 1fr 1fr; }
+  .off-lhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+  .off-lhead .color-switch { width: 190px; }
+  .off-sec { font-size: var(--fs-body); font-weight: 600; color: #1c1c1e; }
+  .off-tl { --trh: 50px; max-height: calc(var(--trh) * 5); overflow-y: auto; scrollbar-width: none; margin: 0 -12px; padding: 0 12px; }
+  .off-tr { display: flex; gap: 10px; align-items: center; height: var(--trh); border-top: 1px solid #ececf0; cursor: pointer; margin: 0 -12px; padding: 0 12px; transition: background .15s; }
+  .off-tr:first-child { border-top: 0; }
+  .off-tr:hover { background: #f7f7f9; } .off-tr.hl { background: #e8f1ff; }
+  .off-tn { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #007aff; color: #fff; font-size: var(--fs-badge); font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .off-tn.last { background: #0b4fb3; }
+  .off-tt { flex: 1; min-width: 0; }
+  .off-tt .a { font-size: var(--fs-body); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #1c1c1e; }
+  .off-tt .b { font-size: var(--fs-meta); color: #6e6e73; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .off-tf { font-size: var(--fs-body); font-weight: 600; flex: none; color: #1c1c1e; }
+  .off-chev { color: #c7c7cc; font-size: 18px; flex: none; }
+  .off-spin { width: 20px; height: 20px; border: 2px solid #d1d1d6; border-top-color: transparent; border-radius: 50%; animation: offspin .8s linear infinite; margin: 14px auto; }
+  @keyframes offspin { to { transform: rotate(360deg); } }
+  @media (max-width: 640px) { #offCard { display: none !important; } }
 </style>
 </head>
 <body>
@@ -927,6 +961,7 @@
   <p>Officer numbers are made up. Avatars are Regular Show characters; the officers with the most fines this year get the main cast.</p>
   <p>Tickets come from Second City Citation and update every night, starting Aug 1. A few tickets have no readable officer and only count in the day's totals.</p>
   <button type="button" class="off-go" id="offIntroGo">Show officers</button></div></div>
+<div id="offCard" role="region" aria-label="Officer"></div>
 
 
 <script>
@@ -4602,6 +4637,74 @@ function offTeardownMap(){
 }
 document.addEventListener('click',e=>{ const r=e.target.closest('[data-off-id]'); if(r) offPick(+r.dataset.offId); });
 document.addEventListener('keydown',e=>{ if(e.key==='Enter'){ const r=e.target.closest&&e.target.closest('[data-off-id]'); if(r) offPick(+r.dataset.offId); } });
+
+async function offLoadTickets(){
+  const id=OFF.sel; if(!id){ OFF.tk=[]; return; }
+  if(OFF.mode==='day'){
+    const day=await offGet(`chicago-officers/days/${OFF.day}.json`, offDayCache, OFF.day);
+    OFF.tk=day.filter(t=>t[0]===id).map((t,i)=>({n:i+1, date:OFF.day, time:t[1], ll:t[2]!=null?[t[2],t[3]]:null, addr:t[4], v:t[5], fine:t[6]}));
+  } else {
+    const ds=new Set(offDates()), pts=await offGet(`chicago-officers/by-officer/${id}.json`, offPtCache, id);
+    OFF.tk=pts.filter(p=>ds.has(p[0])).map(p=>({date:p[0], ll:[p[1],p[2]]}));
+  }
+}
+function offCardHTML(){
+  const o=OFF.by.get(OFF.sel); if(!o) return {head:'', body:''};
+  const mine=(OFF.shifts[o.id]||[]).map(s=>s[0]), i=mine.indexOf(OFF.day), prev=mine[i-1], next=mine[i+1];
+  const head=`${offAv(o,isMobile()?44:40)}<div style="flex:1;min-width:0"><div class="off-title">Officer ${o.id}</div><div class="off-meta">${o.c||''} · ${offLabel()}</div></div><button type="button" class="off-x" data-off-close aria-label="Close">&times;</button>`;
+  const sw=(a,b,attr,cur,va,vb)=>`<div class="color-switch"><span class="seg-pill" aria-hidden="true"></span><button type="button" class="color-btn${cur===va?' active':''}" ${attr}="${va}">${a}</button><button type="button" class="color-btn${cur===vb?' active':''}" ${attr}="${vb}">${b}</button></div>`;
+  const dateUI = OFF.mode==='day'
+    ? `<div class="off-step"><button type="button" data-off-step="${prev||''}" ${prev?'':'disabled'} aria-label="Previous shift">&lsaquo;</button><span class="d">${offFmtDay(OFF.day)}</span><button type="button" data-off-step="${next||''}" ${next?'':'disabled'} aria-label="Next shift">&rsaquo;</button></div>
+       <div class="off-hint">${prev?'Previous shift: '+offFmtDay(prev):'No earlier shift since '+offShort(OFF.first)}</div>`
+    : `<div class="filters" style="margin-top:8px">${[['week','Last 7 days'],['month','This month'],['ytd','Year to date'],['custom','Pick dates']].map(([v,l])=>`<button type="button" class="fchip${OFF.preset===v?' on':''}" data-off-preset="${v}" aria-pressed="${OFF.preset===v}">${l}</button>`).join('')}</div>
+       ${OFF.preset==='custom'?`<div class="off-custom"><input type="date" data-off-from min="${OFF.first}" max="${OFF.last}" value="${OFF.from}" aria-label="From"><input type="date" data-off-to min="${OFF.first}" max="${OFF.last}" value="${OFF.to}" aria-label="To"></div>`:''}`;
+  let body=`<div class="off-box">${sw('One day','Range','data-off-mode',OFF.mode,'day','range')}${dateUI}</div>`;
+  if(OFF.mode==='day'){
+    const s=offShiftOn(o.id,OFF.day);
+    body+=`<div class="off-box"><div class="off-stats"><div class="enf-stat"><div class="num">${offNum(s[1])}</div><div class="lbl">tickets</div></div><div class="enf-stat"><div class="num">${offMoney(s[2])}</div><div class="lbl">in fines</div></div></div>
+      <div class="off-meta" style="margin-top:9px">Shift ran about ${offT12(s[3])} to ${offT12(s[4])} (first to last ticket).</div>
+      <button type="button" class="off-go${OFF.show?' off':''}" data-off-show>${OFF.show?'Hide route':'View shift route'}</button></div>`;
+    if(!OFF.tk.length) return {head, body:body+'<div class="off-box"><div class="off-spin" aria-label="Loading"></div></div>'};
+    const n=OFF.tk.length, list=OFF.tk.slice().sort(OFF.sort==='new'?(a,b)=>b.n-a.n:(a,b)=>b.fine-a.fine||b.n-a.n);
+    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">Tickets this shift</div>${sw('Newest first','Biggest fine','data-off-sort',OFF.sort,'new','fine')}</div>
+      <div class="off-fade"><div class="off-tl">${list.map(t=>`<div class="off-tr${t.n===OFF.hl?' hl':''}" data-off-n="${t.n}"><span class="off-tn${t.n===n?' last':''}">${t.n}</span><div class="off-tt"><div class="a">${offAddr(t.addr)}</div><div class="b">${offT12(t.time)} · ${offVio(t.v)}${t.ll?'':' · no map point'}</div></div><span class="off-tf">${offMoney(t.fine)}</span></div>`).join('')}</div></div></div>`;
+  } else {
+    const ds=new Set(offDates()), sh=(OFF.shifts[o.id]||[]).filter(s=>ds.has(s[0]));
+    const n=sh.reduce((a,s)=>a+s[1],0), f=sh.reduce((a,s)=>a+s[2],0);
+    const mid=k=>{ if(!sh.length) return ''; const m=sh.map(s=>+s[k].slice(0,2)*60+ +s[k].slice(3)).sort((a,b)=>a-b); const v=Math.round(m[m.length>>1]/5)*5; return offT12(`${String(Math.floor(v/60)%24).padStart(2,'0')}:${String(v%60).padStart(2,'0')}`); };
+    body+=`<div class="off-box"><div class="off-stats three"><div class="enf-stat"><div class="num">${offNum(n)}</div><div class="lbl">tickets</div></div><div class="enf-stat"><div class="num">${offMoney(f)}</div><div class="lbl">in fines</div></div><div class="enf-stat"><div class="num">${sh.length}</div><div class="lbl">shifts</div></div></div>
+      ${sh.length?`<div class="off-meta" style="margin-top:9px">Usually starts around ${mid(3)} and ends around ${mid(4)} (middle of ${sh.length} shift${sh.length>1?'s':''}).</div>`:'<div class="off-meta" style="margin-top:9px">No shifts in these dates.</div>'}
+      <button type="button" class="off-go${OFF.show?' off':''}" data-off-show ${sh.length?'':'disabled'}>${OFF.show?'Hide tickets':'View tickets on map'}</button></div>`;
+    const list=sh.slice().sort(OFF.sort==='new'?(a,b)=>a[0]<b[0]?1:-1:(a,b)=>b[2]-a[2]);
+    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">Shifts</div>${sw('Newest first','Biggest fine','data-off-sort',OFF.sort,'new','fine')}</div>
+      <div class="off-fade"><div class="off-tl">${list.map(s=>`<div class="off-tr" data-off-day="${s[0]}"><div class="off-tt"><div class="a">${offFmtDay(s[0])}</div><div class="b">${offT12(s[3])} to ${offT12(s[4])}</div></div><div class="off-num"><b>${offMoney(s[2])}</b><span>${offNum(s[1])} tickets</span></div><span class="off-chev">&rsaquo;</span></div>`).join('')}</div></div></div>`;
+  }
+  return {head, body};
+}
+function offRenderCard(){
+  const C=OFF.sel?offCardHTML():{head:'',body:''}, card=document.getElementById('offCard');
+  if(typeof offRenderSheetCard==='function') offRenderSheetCard(C);
+  card.classList.toggle('show', !!OFF.sel && store.mode==='officers');
+  const old=card.querySelector('.off-tl'), top=old?old.scrollTop:0;
+  card.innerHTML=OFF.sel?`<div class="off-head">${C.head}</div><div class="off-body">${C.body}</div>`:'';
+  const nb=card.querySelector('.off-tl'); if(nb){ nb.scrollTop=top; offFade(nb); }
+}
+async function offSetDates(fn){ fn(); OFF.hl=null; if(offPopup) offPopup.remove(); OFF.tk=[]; offRenderAll(); await offLoadTickets(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); }
+function offToggleShow(){ OFF.show=!OFF.show; OFF.hl=null; if(offPopup) offPopup.remove(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); if(!OFF.show) map.easeTo({padding:offPad(), duration:600}); }
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-off-close],[data-off-step],[data-off-mode],[data-off-preset],[data-off-show],[data-off-sort],[data-off-day]'); if(!t) return;
+  if(t.dataset.offClose!==undefined) return offClose();
+  if(t.dataset.offStep) return offSetDates(()=>{ OFF.day=t.dataset.offStep; });
+  if(t.dataset.offMode){ if(t.dataset.offMode===OFF.mode) return; return offSetDates(()=>{ OFF.mode=t.dataset.offMode; if(OFF.mode==='day') OFF.day=offLatest(OFF.shifts[OFF.sel])[0]; }); }
+  if(t.dataset.offPreset) return offSetDates(()=>{ OFF.preset=t.dataset.offPreset; if(OFF.preset==='custom'){ OFF.to=OFF.to||OFF.last; OFF.from=OFF.from||offAdd(OFF.last,-13); } });
+  if(t.dataset.offShow!==undefined) return offToggleShow();
+  if(t.dataset.offSort){ OFF.sort=t.dataset.offSort; return offRenderCard(); }
+  if(t.dataset.offDay) return offSetDates(()=>{ OFF.mode='day'; OFF.day=t.dataset.offDay; });
+});
+document.addEventListener('change',e=>{
+  if(e.target.matches('[data-off-from],[data-off-to]')){ const a=document.querySelector('[data-off-from]').value, b=document.querySelector('[data-off-to]').value;
+    if(a&&b&&a<=b) offSetDates(()=>{ OFF.from=a<OFF.first?OFF.first:a; OFF.to=b>OFF.last?OFF.last:b; }); }
+});
 
 /* ---------- boot ---------- */
 // one fetch of the outline serves both the drawn borders and the boxes that decide what loads,
