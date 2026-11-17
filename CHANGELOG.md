@@ -8,10 +8,10 @@ commits are not listed.
 
 ### Added
 - Officer shifts: a shield button at the end of the search bar shows where each Chicago
-  officer worked on their last shift, most fines first. Pick one for their day, totals and
-  tickets; "View shift route" draws the shift in time order; Range shows their shifts and
-  every ticket over the last 7 days, this month, year to date or picked dates. Rebuilt every
-  night. (8327db7)
+  officer worked on their last shift, most fines first. Pick a day or a range first (last 7
+  days, this month, year to date or picked dates), narrow it to one ticket type and rank by
+  fines or tickets, then pick an officer for their totals and tickets; "View shift route"
+  draws the shift in time order. Rebuilt every night. (8327db7)
 - Place search and route preview are on the live site: search a place or an address, open
   its card, and compare two or three routes by trip time, traffic delay and the cameras on
   each, with traffic colours on the roads. TomTom's APIs answer through the relay, which
