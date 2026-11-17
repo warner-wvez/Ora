@@ -785,6 +785,49 @@
     .color-switch .color-btn, #newRoute, .route-item .rx { min-height: 44px; }
     .route-item .rx { min-width: 44px; }
   }
+  /* ---------- officer shifts (spec 2026-11-16; motion from walzr.com/sf-parking) ---------- */
+  #search { width: calc(100% - 48px); }
+  .search-x { right: 54px; }
+  #obtn { position: absolute; right: 0; top: 0; width: 40px; height: 40px; border: 0; border-radius: 10px; background: #eef4ff; color: #0062cc;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .15s, color .15s; }
+  #obtn[aria-pressed="true"] { background: #0062cc; color: #fff; }
+  #obtn:active { transform: scale(.94); }
+  #panel.officers > .grp, #panel.officers #dirBox { display: none; }
+  #panel.searching #offSec { display: none; }
+  #offSec .sechead { display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid #ececf0; padding: 9px 0 2px; }
+  #offSec .sechead b { font-size: var(--fs-body); font-weight: 600; color: #1c1c1e; }
+  .off-meta { font-size: var(--fs-meta); color: #6e6e73; line-height: 1.35; }
+  .off-about { font-size: var(--fs-meta); color: #0062cc; font-weight: 600; padding: 6px 0 0; background: none; border: 0; cursor: pointer; font-family: inherit; }
+  .off-fade { position: relative; }
+  .off-fade::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 16px; background: linear-gradient(rgba(255,255,255,0), #fff); pointer-events: none; transition: opacity .15s; }
+  .off-fade.end::after { opacity: 0; }
+  .off-list { --rowh: 50px; max-height: calc(var(--rowh) * 9); overflow-y: auto; margin: 4px -6px 0; padding: 0 2px; scrollbar-width: none; }
+  .off-list::-webkit-scrollbar, .off-tl::-webkit-scrollbar { display: none; }
+  .off-row { display: flex; align-items: center; gap: 10px; height: var(--rowh); padding: 0 6px; border-radius: 8px; cursor: pointer; transition: background .15s; }
+  .off-row:hover { background: #f2f2f7; }
+  .off-row.sel { background: #0062cc; color: #fff; }
+  .off-row.sel .off-os, .off-row.sel .off-num span { color: rgba(255,255,255,.82); }
+  .off-av { flex: none; border-radius: 50%; background-color: #f2f2f7; background-repeat: no-repeat; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+  .off-txt { flex: 1; min-width: 0; }
+  .off-ot { font-size: var(--fs-row); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .off-os { font-size: var(--fs-meta); color: #6e6e73; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+  .off-num { text-align: right; flex: none; }
+  .off-num b { display: block; font-size: var(--fs-body); font-weight: 700; }
+  .off-num span { font-size: var(--fs-meta); color: #6e6e73; }
+  #offIntro { position: fixed; inset: 0; z-index: 40; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.35); }
+  #offIntro.show { display: flex; }
+  #offIntro .ic { width: min(92vw, 400px); background: #fff; border-radius: 14px; box-shadow: 0 10px 40px rgba(0,0,0,.25); padding: 20px; }
+  #offIntro h3 { margin: 0 0 10px; font-size: var(--fs-title); color: #1c1c1e; }
+  #offIntro p { margin: 0 0 8px; font-size: var(--fs-body); color: #3c3c43; line-height: 1.4; }
+  .off-go { width: 100%; margin-top: 10px; border: 0; border-radius: 10px; background: #0062cc; color: #fff; font-family: inherit; font-size: var(--fs-body); font-weight: 600; padding: 9px; cursor: pointer; }
+  .off-go.off { background: #eef4ff; color: #0062cc; }
+  @media (max-width: 640px) {
+    #obtn { width: 44px; height: 44px; }
+    #search { width: calc(100% - 52px); }
+    .search-x { right: 58px; }
+    #offSec { display: none !important; }
+    .off-list { --rowh: 56px; max-height: none; overflow: visible; }
+  }
 </style>
 </head>
 <body>
@@ -796,10 +839,13 @@
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
     <input id="search" type="search" enterkeyhint="search" placeholder="Search a place or road" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
     <button id="searchClear" class="search-x" aria-label="Clear search"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+    <button type="button" id="obtn" aria-pressed="false" aria-label="Officer shifts" title="Officer shifts"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M12 2.2 4.2 5.1v5.8c0 4.9 3.3 9.2 7.8 10.9 4.5-1.7 7.8-6 7.8-10.9V5.1z M12.00 7.00 L13.03 9.88 L16.09 9.97 L13.66 11.84 L14.53 14.78 L12.00 13.05 L9.47 14.78 L10.34 11.84 L7.91 9.97 L10.97 9.88z"/></svg></button>
     <div id="search-results"></div>
   </div>
   <!-- the place card and directions (route preview), filled by showPlace and renderDir; shown only when the TomTom server answers (see NAV_BASE) -->
   <div id="dirBox" hidden></div>
+  <!-- officer shifts: the officer list takes the Layers list's place while the officer button is on -->
+  <div id="offSec" hidden></div>
 
   <div class="grp collapsed" data-region="routes">
     <button type="button" class="grp-h" aria-expanded="false" aria-controls="grp-routes"><span>My routes</span><span class="caret" aria-hidden="true">&#9660;</span></button>
@@ -874,6 +920,11 @@
   <div class="rv-note"><span class="rv-note-txt" id="rvNote"></span><button type="button" class="mini-btn grey" id="rvPause" aria-pressed="false">Pause updates</button></div>
   <div class="rv-body" id="rvBody"></div>
 </div>
+<div id="offIntro" role="dialog" aria-label="Officer shifts"><div class="ic"><h3>Officer shifts</h3>
+  <p>See where each Chicago parking officer wrote tickets, one shift at a time, and their totals over a day or a range of days.</p>
+  <p>Officer numbers are made up. Avatars are Regular Show characters; the officers with the most fines this year get the main cast.</p>
+  <p>Tickets come from Second City Citation and update every night, starting Aug 1. A few tickets have no readable officer and only count in the day's totals.</p>
+  <button type="button" class="off-go" id="offIntroGo">Show officers</button></div></div>
 
 
 <script>
@@ -1200,6 +1251,10 @@ const MODES={
   'media-enlarged': {
     enter(ctx){ buildEnlarge(ctx); },
     exit(){ teardownEnlarge(); }
+  },
+  'officers': {
+    enter(){ offOn(); },
+    exit(){ offOff(); }
   }
 };
 function switchMode(name, ctx){
@@ -4311,6 +4366,7 @@ const layersBtn=document.getElementById('panelToggle');
 function syncLayersBtn(){ const p=document.getElementById('panel'), open=isMobile() ? p.classList.contains('expanded') : !p.classList.contains('collapsed');
   layersBtn.setAttribute('aria-expanded', String(open)); layersBtn.innerHTML='Layers '+(open?'&#9652;':'&#9662;'); }
 layersBtn.addEventListener('click',()=>{
+  if(store.mode==='officers'){ switchMode('browse'); syncLayersBtn(); return; }   // back to the Layers list, panel stays open
   const p=document.getElementById('panel');
   p.classList.toggle(isMobile()?'expanded':'collapsed'); syncLayersBtn();
 });
@@ -4343,7 +4399,8 @@ function layerOpen(){
   const am=document.querySelector('.avoid-menu:not([hidden])');
   return !!(am || document.getElementById('search-results').classList.contains('show') || store.selected
     || store.mode==='route-view' || store.mode==='add-to-route' || store.mode==='media-enlarged' || preview || nav.mode
-    || (isMobile() && document.getElementById('panel').classList.contains('expanded')));
+    || (isMobile() && document.getElementById('panel').classList.contains('expanded'))
+    || (store.mode==='officers' && !!(OFF.sel || document.getElementById('offIntro').classList.contains('show'))));
 }
 function escPeel(fromBack){
   if(store.mode==='media-enlarged'){ if(fromBack) closeEnlarge(); return; }
@@ -4374,6 +4431,7 @@ document.addEventListener('keydown',(e)=>{
 });
 function escStep(){
   if(hideQr()){ document.getElementById('share').focus(); return; }
+  if(store.mode==='officers'){ if(document.getElementById('offIntro').classList.contains('show')){ offIntroClose(); return; } if(OFF.sel){ offClose(); return; } }
   const am=document.querySelector('.avoid-menu:not([hidden])');
   if(am){ am.hidden=true; const c=am.parentElement.querySelector('.dir-chip'); if(c){ c.setAttribute('aria-expanded','false'); c.focus(); } return; }
   const sr=document.getElementById('search-results');
@@ -4394,6 +4452,104 @@ document.addEventListener('keydown',(e)=>{
   e.preventDefault();
   cycleCamera(e.key==='ArrowRight' ? 1 : -1);
 });
+
+/* ---------- officer shifts (spec 2026-11-16) ----------
+   One owner: the 'officers' mode. Data are static files from builders/build-chicago-officers.py:
+   officers.json (who), daily.json (shifts + day totals), days/<date>.json (one day's tickets),
+   by-officer/<id>.json (an officer's points, for range dots). Fake officer numbers only. */
+const OFF={ data:false, by:new Map(), shifts:{}, totals:{}, viol:[], first:null, last:null,
+  mode:'day', day:null, preset:'month', from:null, to:null, sel:null, show:false, sort:'new', hl:null, lh:35, oh:50, tk:[] };
+const offDayCache=new Map(), offPtCache=new Map();
+const offGet=(url,cache,key)=>{ if(!cache.has(key)) cache.set(key, fetch(url).then(r=>r.ok?r.json():[]).catch(()=>[])); return cache.get(key); };
+const offMoney=n=>'$'+Math.round(n).toLocaleString('en-US');
+const offNum=n=>n.toLocaleString('en-US');
+const offT12=s=>{ let [h,m]=s.split(':').map(Number); const ap=h>=12?'PM':'AM'; h=h%12||12; return `${h}:${String(m).padStart(2,'0')} ${ap}`; };
+const OFF_SUF={ST:'St',AVE:'Ave',RD:'Rd',BLVD:'Blvd',PL:'Pl',DR:'Dr',CT:'Ct',PKWY:'Pkwy',TER:'Ter',HWY:'Hwy'};
+const offAddr=a=>String(a||'').split(' ').map(w=>OFF_SUF[w]||(/^[NSEW]$/.test(w)?w:/^\d/.test(w)?w.toLowerCase():w.charAt(0)+w.slice(1).toLowerCase())).join(' ');
+const OFF_SHORT={'EXPIRED PLATE OR TEMPORARY REGISTRATION':'Expired plate','RESIDENTIAL PERMIT PARKING':'Residential permit',
+  'MISSING/NONCOMPLIANT FRONT AND/OR REAR PLATE':'Missing plate','NO CITY STICKER VEHICLE UNDER/EQUAL TO 16,000 LBS.':'No city sticker',
+  'PARKING/STANDING PROHIBITED ANYTIME':'No parking anytime',"WITHIN 15' OF FIRE HYDRANT":'Too close to a hydrant',
+  'EXPIRED METER OR OVERSTAY':'Expired meter','STREET CLEANING':'Street cleaning','RUSH HOUR PARKING':'Rush hour parking'};
+const offVio=i=>{ const v=OFF.viol[i]||''; return OFF_SHORT[v]||(v.charAt(0)+v.slice(1).toLowerCase()); };
+const OFF_DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], OFF_MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const offFmtDay=k=>{ const d=new Date(k+'T12:00:00Z'); return `${OFF_DOW[d.getUTCDay()]}, ${OFF_MON[d.getUTCMonth()]} ${d.getUTCDate()}`; };
+const offShort=k=>offFmtDay(k).slice(5);
+const offAdd=(k,n)=>new Date(Date.parse(k+'T12:00:00Z')+n*864e5).toISOString().slice(0,10);
+// avatars come from one sprite: 80px cells, 20 columns (scripts/build-officer-sprite.py)
+function offAvStyle(o,s){ if(o.s==null) return `width:${s}px;height:${s}px`;
+  return `width:${s}px;height:${s}px;background-image:url(chicago-officers/avatars.webp);background-size:${20*s}px auto;background-position:-${(o.s%20)*s}px -${Math.floor(o.s/20)*s}px`; }
+const offAv=(o,s)=>`<span class="off-av" style="${offAvStyle(o,s)}"></span>`;
+function offDates(){
+  if(OFF.mode==='day') return [OFF.day];
+  const from = OFF.preset==='week' ? offAdd(OFF.last,-6) : OFF.preset==='month' ? OFF.last.slice(0,8)+'01' : OFF.preset==='ytd' ? OFF.first : OFF.from;
+  const to = OFF.preset==='custom' ? OFF.to : OFF.last, out=[];
+  for(let k=from<OFF.first?OFF.first:from; k<=to; k=offAdd(k,1)) out.push(k);
+  return out;
+}
+function offLabel(){
+  if(OFF.mode==='day') return offFmtDay(OFF.day);
+  const ds=offDates(); return OFF.preset==='ytd' ? `Year to date (since ${offShort(OFF.first)})` : `${offShort(ds[0])} to ${offShort(ds.at(-1))}`;
+}
+function offRows(){
+  const ds=new Set(offDates()), out=[];
+  for(const o of OFF.by.values()){ const sh=(OFF.shifts[o.id]||[]).filter(s=>ds.has(s[0])); if(!sh.length) continue;
+    out.push({o, sh, n:sh.reduce((a,s)=>a+s[1],0), f:sh.reduce((a,s)=>a+s[2],0)}); }
+  return out.sort((a,b)=>b.f-a.f||b.n-a.n);
+}
+const offShiftOn=(id,k)=>(OFF.shifts[id]||[]).find(s=>s[0]===k);
+const offLatest=sh=>sh.reduce((b,s)=>s[0]>b[0]?s:b);
+function offFade(el){ const w=el&&el.parentElement; if(!w||!w.classList.contains('off-fade')) return;
+  const f=()=>w.classList.toggle('end', el.scrollTop+el.clientHeight>=el.scrollHeight-2); f(); el.onscroll=f; }
+function offListHTML(){
+  const R=offRows(), total=offDates().reduce((a,k)=>a+((OFF.totals[k]||[0])[0]),0), s=isMobile()?40:34;
+  const sub=r=>OFF.mode==='day' ? `${r.o.c||'Officer'} · ${offT12(r.sh[0][3])} to ${offT12(r.sh.at(-1)[4])}` : `${r.o.c||'Officer'} · ${r.sh.length} shift${r.sh.length>1?'s':''}`;
+  return { meta:`${offLabel()} · ${R.length} officers · ${offNum(total)} tickets`,
+    rows:R.map(r=>`<div class="off-row${r.o.id===OFF.sel?' sel':''}" data-off-id="${r.o.id}" role="button" tabindex="0">${offAv(r.o,s)}<div class="off-txt"><div class="off-ot">Officer ${r.o.id}</div><div class="off-os">${sub(r)}</div></div><div class="off-num"><b>${offMoney(r.f)}</b><span>${offNum(r.n)} tickets</span></div></div>`).join('') };
+}
+function offRenderList(){
+  const L=offListHTML(), sec=document.getElementById('offSec');
+  const box=sec.querySelector('.off-list'), keep=box?box.scrollTop:0;
+  sec.innerHTML=`<div class="sechead"><b>Officer shifts</b><span class="off-meta">most fines first</span></div><div class="off-meta" style="margin:1px 0 2px">${L.meta}</div>
+    <div class="off-fade"><div class="off-list">${L.rows}</div></div><button type="button" class="off-about" data-off-about>About this data</button>`;
+  const nb=sec.querySelector('.off-list'); nb.scrollTop=keep; offFade(nb);
+  if(typeof offRenderSheetList==='function') offRenderSheetList(L);
+}
+function offRenderAll(){ offRenderList(); if(typeof offDrawMarkers==='function') offDrawMarkers(); if(typeof offRenderCard==='function') offRenderCard(); }
+async function offLoad(){
+  if(OFF.data) return;
+  const [o,d]=await Promise.all([fetch('chicago-officers/officers.json').then(r=>r.json()), fetch('chicago-officers/daily.json').then(r=>r.json())]);
+  OFF.by=new Map(o.officers.map(x=>[x.id,x])); OFF.viol=o.violations; OFF.first=o.first; OFF.last=o.last;
+  OFF.shifts=d.shifts; OFF.totals=d.totals; for(const k in OFF.shifts) OFF.shifts[k].sort((a,b)=>a[0]<b[0]?-1:1);
+  OFF.day=OFF.day||OFF.last; OFF.data=true;
+}
+const OFF_HIDE=id=>/^(cams__|coverage|chi-enf__)/.test(id);   // a calm map while officers are on (the SF map shows officers only)
+let offHidden=[];
+async function offOn(){
+  clearSelection();
+  document.getElementById('obtn').setAttribute('aria-pressed','true');
+  document.getElementById('panel').classList.add('officers'); document.getElementById('panel').classList.remove('collapsed');
+  document.getElementById('offSec').hidden=false;
+  offHidden=map.getStyle().layers.filter(l=>OFF_HIDE(l.id) && map.getLayoutProperty(l.id,'visibility')!=='none').map(l=>l.id);
+  offHidden.forEach(id=>map.setLayoutProperty(id,'visibility','none'));
+  await offLoad();
+  if(!localStorage.getItem('ora-officer-intro')) document.getElementById('offIntro').classList.add('show');
+  offRenderAll();
+}
+function offOff(){
+  document.getElementById('obtn').setAttribute('aria-pressed','false');
+  document.getElementById('panel').classList.remove('officers');
+  document.getElementById('offSec').hidden=true;
+  offHidden.forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility','visible'); }); offHidden=[];
+  Object.assign(OFF,{sel:null, show:false, hl:null, mode:'day', day:OFF.last, tk:[], lh:35});
+  if(typeof offTeardownMap==='function') offTeardownMap();
+  if(typeof offRenderCard==='function') offRenderCard();
+}
+function offIntroClose(){ localStorage.setItem('ora-officer-intro','1'); document.getElementById('offIntro').classList.remove('show'); }
+function offClose(){ OFF.sel=null; offRenderAll(); }   // replaced in Task 7
+document.getElementById('obtn').addEventListener('click',()=>switchMode(store.mode==='officers'?'browse':'officers'));
+document.getElementById('offIntroGo').addEventListener('click',offIntroClose);
+document.getElementById('offIntro').addEventListener('click',e=>{ if(e.target.id==='offIntro') offIntroClose(); });
+document.addEventListener('click',e=>{ if(e.target.closest('[data-off-about]')) document.getElementById('offIntro').classList.add('show'); });
 
 /* ---------- boot ---------- */
 // one fetch of the outline serves both the drawn borders and the boxes that decide what loads,
