@@ -86,3 +86,22 @@ def test_check_ties_day_files_to_daily():
     out = {"daily": {"731": [["2026-11-12", 2, 120.0, "08:00", "09:00", -87.6, 41.8]]}, "totals": {"2026-11-12": [2, 120.0, 0]},
            "days": {"2026-11-12": [[731, "08:00", -87.6, 41.8, "A", 0, 60.0]]}, "by_officer": {"731": [["2026-11-12", -87.6, 41.8]]}, "violations": ["A"]}
     assert any("tie out" in p for p in of.check(out, {731}, "2026-11-01", "2026-11-12"))
+
+
+import importlib.util, json, tempfile
+
+def load_cmd():
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "build-chicago-officers.py")
+    spec = importlib.util.spec_from_file_location("bco", p); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
+
+def test_write_then_read_round_trips_and_carries_no_real_numbers():
+    bco = load_cmd()
+    fake = of.FakeIds({"2213": 731}, b"k", {})
+    out = of.build({"2213": [t("2026-11-12T08:00:00")]}, fake, "2026-11-01", "2026-11-12", [])
+    officers = [{"id": 731, "c": "Mordecai", "s": 0, "k": None}]
+    with tempfile.TemporaryDirectory() as d:
+        bco.write_all(d, out, officers, {"first": "2026-11-01", "last": "2026-11-12"})
+        back, offs, meta = bco.read_existing(d)
+        assert back["days"] == out["days"] and offs == officers and meta["last"] == "2026-11-12"
+        blob = "".join(open(os.path.join(r, f)).read() for r, _, fs in os.walk(d) for f in fs)
+        assert "2213" not in blob
