@@ -143,3 +143,11 @@ def test_write_all_writes_the_type_counts():
     with tempfile.TemporaryDirectory() as d:
         bco.write_all(d, out, [{"id": 731, "c": "Mordecai", "s": 0, "k": None}], {"first": "2026-11-01", "last": "2026-11-12"})
         assert json.load(open(os.path.join(d, "types.json"))) == {"731": {"2026-11-12": {"0": [1, 60.0]}}}
+
+
+def test_points_from_days_carry_the_ticket_type_and_skip_blank_points():
+    days = {"2026-11-13": [[731, "08:00", -87.6, 41.8, "A", 1, 75.0]],
+            "2026-11-12": [[731, "09:00", -87.61, 41.81, "B", 0, 60.0], [731, "10:00", None, None, "C", 0, 60.0], [118, "08:30", -87.6, 41.8, "D", 1, 75.0]]}
+    pts = of.points_from_days(days)
+    assert pts["731"] == [["2026-11-12", -87.61, 41.81, 0], ["2026-11-13", -87.6, 41.8, 1]]
+    assert pts["118"] == [["2026-11-12", -87.6, 41.8, 1]]

@@ -149,6 +149,17 @@ def types_from_days(days):
     return out
 
 
+def points_from_days(days):
+    """Each officer's ticket points with their date and ticket type, in date order, from the day
+    files. Range views show these as dots and narrow them to one ticket type."""
+    out = {}
+    for d in sorted(days):
+        for r in days[d]:
+            if r[2] is not None and r[3] is not None:
+                out.setdefault(str(r[0]), []).append([d, r[2], r[3], r[5]])
+    return out
+
+
 def check(out, fakes, first, last):
     probs = []
     def where(lng, lat, at):

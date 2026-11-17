@@ -134,6 +134,7 @@ def main():
             if o["id"] == f:
                 o["k"] = kk
     out["types"] = of.types_from_days(out["days"])   # per officer, date and ticket type, for ranking by type
+    out["by_officer"] = of.points_from_days(out["days"])   # dots for ranges, with each ticket's type
     probs = of.check(out, {o["id"] for o in officers}, first, last)
     if probs:
         print("CHECKS FAILED, nothing written:\n  " + "\n  ".join(probs[:40]))
