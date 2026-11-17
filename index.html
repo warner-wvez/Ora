@@ -864,6 +864,25 @@
   .off-spin { width: 20px; height: 20px; border: 2px solid #d1d1d6; border-top-color: transparent; border-radius: 50%; animation: offspin .8s linear infinite; margin: 14px auto; }
   @keyframes offspin { to { transform: rotate(360deg); } }
   @media (max-width: 640px) { #offCard { display: none !important; } }
+  .off-sheet { display: none; }
+  @media (max-width: 640px) {
+    .off-sheet { display: flex; flex-direction: column; position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-radius: 16px 16px 0 0;
+      box-shadow: 0 -6px 28px rgba(0,0,0,.22); transition: height .3s ease-out; overflow: hidden; z-index: 28; }
+    .off-sheet[hidden] { display: none; }
+    .off-sheet.dragging { transition: none; }
+    #offCardSheet { z-index: 29; }
+    .off-shead { flex: none; padding: 8px var(--pad) 6px; touch-action: none; cursor: grab; }
+    .off-grip { width: 36px; height: 5px; border-radius: 3px; background: #c7c7cc; margin: 0 auto 8px; }
+    .off-shead .row { display: flex; align-items: center; gap: 10px; }
+    .off-shead h2 { margin: 0; font-size: var(--fs-title); color: #1c1c1e; }
+    .off-sbody { flex: 1; min-height: 0; padding: 0 var(--pad) 20px; overflow: hidden; }
+    .off-sheet.full .off-sbody { overflow-y: auto; }
+    .off-sbody .off-body { padding: 0; overflow: visible; }
+    .off-sbody .off-box { box-shadow: none; border: 1px solid #ececf0; }
+    .off-x { width: 44px; height: 44px; border-radius: 50%; }
+    .off-step button { width: 44px; height: 44px; }
+    .off-tl { --trh: 56px; }
+  }
 </style>
 </head>
 <body>
@@ -962,6 +981,8 @@
   <p>Tickets come from Second City Citation and update every night, starting Aug 1. A few tickets have no readable officer and only count in the day's totals.</p>
   <button type="button" class="off-go" id="offIntroGo">Show officers</button></div></div>
 <div id="offCard" role="region" aria-label="Officer"></div>
+<div id="offListSheet" class="off-sheet" hidden><div class="off-shead"><div class="off-grip"></div><h2>Officer shifts</h2><div class="off-meta" id="offLsMeta"></div></div><div class="off-sbody" id="offLsBody"></div></div>
+<div id="offCardSheet" class="off-sheet" hidden><div class="off-shead" id="offCsHead"></div><div class="off-sbody" id="offCsBody"></div></div>
 
 
 <script>
@@ -4571,6 +4592,7 @@ async function offOn(){
   await offLoad();
   if(!localStorage.getItem('ora-officer-intro')) document.getElementById('offIntro').classList.add('show');
   offRenderAll();
+  map.easeTo({padding:offPad(), duration:300});   // room for the panel (computer) or the list sheet (phone)
 }
 function offOff(){
   document.getElementById('obtn').setAttribute('aria-pressed','false');
@@ -4580,6 +4602,7 @@ function offOff(){
   Object.assign(OFF,{sel:null, show:false, hl:null, mode:'day', day:OFF.last, tk:[], lh:35});
   if(typeof offTeardownMap==='function') offTeardownMap();
   if(typeof offRenderCard==='function') offRenderCard();
+  if(typeof offSizeSheets==='function') offSizeSheets();
 }
 function offIntroClose(){ localStorage.setItem('ora-officer-intro','1'); document.getElementById('offIntro').classList.remove('show'); }
 document.getElementById('obtn').addEventListener('click',()=>switchMode(store.mode==='officers'?'browse':'officers'));
@@ -4769,6 +4792,43 @@ function offHighlight(n, fromRow){
   const row=document.querySelector(`#offCard .off-tr[data-off-n="${n}"], #offCardSheet .off-tr[data-off-n="${n}"]`); if(row) row.scrollIntoView({block:'nearest', behavior:'smooth'});
 }
 document.addEventListener('click',e=>{ const r=e.target.closest('[data-off-n]'); if(r) offHighlight(+r.dataset.offN,true); });
+
+function offRenderSheetList(L){
+  document.getElementById('offLsMeta').textContent=L.meta+' · most fines first';
+  document.getElementById('offLsBody').innerHTML=`<div class="off-list">${L.rows}</div><button type="button" class="off-about" data-off-about>About this data</button>`;
+  offSizeSheets();
+}
+function offRenderSheetCard(C){
+  document.getElementById('offCsHead').innerHTML=`<div class="off-grip"></div><div class="row">${C.head}</div>`;
+  document.getElementById('offCsBody').innerHTML=`<div class="off-body">${C.body}</div>`;
+  offSizeSheets();
+}
+function offSizeSheets(){
+  const on=store.mode==='officers' && isMobile(), ls=document.getElementById('offListSheet'), cs=document.getElementById('offCardSheet');
+  ls.hidden=!on; cs.hidden=!(on && OFF.sel);
+  ls.style.height=OFF.lh+'%'; cs.style.height=OFF.oh+'%';
+  ls.classList.toggle('full', OFF.lh>=90); cs.classList.toggle('full', OFF.oh>=90);
+}
+// SF heights: 20 / 50 / 90 %, snap on release (past 70 to 90, past 35 to 50, else 20); the list scrolls only at 90
+function offSheetDrag(sheet, key){
+  const head=sheet.querySelector('.off-shead'), body=sheet.querySelector('.off-sbody');
+  let y0=0, h0=0, active=false, fromBody=false, top0=0;
+  const snap=()=>{ OFF[key]=OFF[key]>70?90:OFF[key]>35?50:20; sheet.classList.remove('dragging'); offSizeSheets(); map.easeTo({padding:offPad(), duration:300}); };
+  const move=y=>{ OFF[key]=Math.max(20,Math.min(90,h0+(y0-y)/innerHeight*100)); sheet.style.height=OFF[key]+'%'; };
+  head.addEventListener('pointerdown',e=>{ if(e.target.closest('button')) return; active=true; y0=e.clientY; h0=OFF[key]; sheet.classList.add('dragging'); head.setPointerCapture(e.pointerId); });
+  head.addEventListener('pointermove',e=>{ if(active) move(e.clientY); });
+  head.addEventListener('pointerup',()=>{ if(active){ active=false; snap(); } });
+  head.addEventListener('pointercancel',()=>{ if(active){ active=false; snap(); } });
+  body.addEventListener('touchstart',e=>{ y0=e.touches[0].clientY; h0=OFF[key]; top0=body.scrollTop; fromBody=true; },{passive:true});
+  body.addEventListener('touchmove',e=>{
+    const dy=e.touches[0].clientY-y0;
+    if(h0<90){ e.preventDefault(); sheet.classList.add('dragging'); move(e.touches[0].clientY); body.scrollTop=top0; return; }
+    if(body.scrollTop<=0 && dy>0){ e.preventDefault(); sheet.classList.add('dragging'); OFF[key]=Math.max(20,Math.min(90,90-dy/innerHeight*100)); sheet.style.height=OFF[key]+'%'; }
+  },{passive:false});
+  body.addEventListener('touchend',()=>{ if(fromBody && sheet.classList.contains('dragging')) snap(); fromBody=false; });
+}
+offSheetDrag(document.getElementById('offListSheet'),'lh'); offSheetDrag(document.getElementById('offCardSheet'),'oh');
+mqMobile.addEventListener('change',()=>{ if(store.mode==='officers'){ offRenderAll(); map.easeTo({padding:offPad(), duration:0}); } });
 
 /* ---------- boot ---------- */
 // one fetch of the outline serves both the drawn borders and the boxes that decide what loads,
