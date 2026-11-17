@@ -1,0 +1,1222 @@
+[
+{
+"character": "Mordecai",
+"s": 0
+},
+{
+"character": "Rigby",
+"s": 1
+},
+{
+"character": "Benson",
+"s": 2
+},
+{
+"character": "Pops",
+"s": 3
+},
+{
+"character": "Skips",
+"s": 4
+},
+{
+"character": "Muscle Man",
+"s": 5
+},
+{
+"character": "Hi Five Ghost",
+"s": 6
+},
+{
+"character": "Eileen",
+"s": 7
+},
+{
+"character": "Margaret",
+"s": 8
+},
+{
+"character": "Starla",
+"s": 9
+},
+{
+"character": "CJ",
+"s": 10
+},
+{
+"character": "Mr. Maellard",
+"s": 11
+},
+{
+"character": "Audrey",
+"s": 12
+},
+{
+"character": "Baby Ducks",
+"s": 13
+},
+{
+"character": "Guardians of Eternal Youth",
+"s": 14
+},
+{
+"character": "Gary",
+"s": 15
+},
+{
+"character": "Death",
+"s": 16
+},
+{
+"character": "Low Five Ghost",
+"s": 17
+},
+{
+"character": "God of Basketball",
+"s": 18
+},
+{
+"character": "Techmo",
+"s": 19
+},
+{
+"character": "Dr. Henry",
+"s": 20
+},
+{
+"character": "RGB2",
+"s": 21
+},
+{
+"character": "Chance Sureshot",
+"s": 22
+},
+{
+"character": "Toothpick Sally",
+"s": 23
+},
+{
+"character": "Recap Robot",
+"s": 24
+},
+{
+"character": "Colonel Rawls",
+"s": 25
+},
+{
+"character": "Earl",
+"s": 26
+},
+{
+"character": "The Seer",
+"s": 27
+},
+{
+"character": "Father Time",
+"s": 28
+},
+{
+"character": "Archie the Archivist",
+"s": 29
+},
+{
+"character": "HD-DVD",
+"s": 30
+},
+{
+"character": "Blu-ray",
+"s": 31
+},
+{
+"character": "Guardians of Obsolete Formats",
+"s": 32
+},
+{
+"character": "Microwave",
+"s": 33
+},
+{
+"character": "White Elephant",
+"s": 34
+},
+{
+"character": "Johnny Crasher",
+"s": 35
+},
+{
+"character": "Guardian of Lolliland",
+"s": 36
+},
+{
+"character": "Pam",
+"s": 37
+},
+{
+"character": "Del Hanlon",
+"s": 38
+},
+{
+"character": "Party Horse 42699",
+"s": 39
+},
+{
+"character": "Lemon Chef",
+"s": 40
+},
+{
+"character": "Guardian of the Friend Zone",
+"s": 41
+},
+{
+"character": "Anti-Pops",
+"s": 42
+},
+{
+"character": "Garrett Bobby Ferguson",
+"s": 43
+},
+{
+"character": "Gene",
+"s": 44
+},
+{
+"character": "Susan",
+"s": 45
+},
+{
+"character": "Chong",
+"s": 46
+},
+{
+"character": "Capicola Gang",
+"s": 47
+},
+{
+"character": "Duck Collector",
+"s": 48
+},
+{
+"character": "Klorgbane the Destroyer",
+"s": 49
+},
+{
+"character": "Death's Wife",
+"s": 50
+},
+{
+"character": "Rich Steve",
+"s": 51
+},
+{
+"character": "Wrassle Frassle Wrestlers",
+"s": 52
+},
+{
+"character": "Huge Head",
+"s": 53
+},
+{
+"character": "Garrett Bobby Ferguson, Jr.",
+"s": 54
+},
+{
+"character": "Natalia",
+"s": 55
+},
+{
+"character": "Jackie Carmichael",
+"s": 56
+},
+{
+"character": "Streaming",
+"s": 57
+},
+{
+"character": "Stream Box Bots",
+"s": 58
+},
+{
+"character": "Bring 'Em Back Jack",
+"s": 59
+},
+{
+"character": "Ancient Order of the VHS",
+"s": 60
+},
+{
+"character": "David",
+"s": 61
+},
+{
+"character": "Chuck",
+"s": 62
+},
+{
+"character": "Geese",
+"s": 63
+},
+{
+"character": "Hot Dogs",
+"s": 64
+},
+{
+"character": "The Hammer",
+"s": 65
+},
+{
+"character": "Blondes",
+"s": 66
+},
+{
+"character": "Destroyer of Worlds",
+"s": 67
+},
+{
+"character": "Zombies",
+"s": 68
+},
+{
+"character": "Carlocks",
+"s": 69
+},
+{
+"character": "Were-Skunk",
+"s": 70
+},
+{
+"character": "The Urge",
+"s": 71
+},
+{
+"character": "Zingos",
+"s": 72
+},
+{
+"character": "Master Prank Caller",
+"s": 73
+},
+{
+"character": "Huggstables",
+"s": 74
+},
+{
+"character": "Doug McFarland",
+"s": 75
+},
+{
+"character": "Soul-Sucking Death Worm",
+"s": 76
+},
+{
+"character": "Demon Gophers",
+"s": 77
+},
+{
+"character": "Warden of the Internet",
+"s": 78
+},
+{
+"character": "Unicorns",
+"s": 79
+},
+{
+"character": "Matchmaker McIntyre",
+"s": 80
+},
+{
+"character": "Buttonwillow McButtonwillow",
+"s": 81
+},
+{
+"character": "Game Store Manager",
+"s": 82
+},
+{
+"character": "Mr. Ross",
+"s": 83
+},
+{
+"character": "Halloween Wizard",
+"s": 84
+},
+{
+"character": "Percy",
+"s": 85
+},
+{
+"character": "Skull Punch",
+"s": 86
+},
+{
+"character": "Party Bus Driver",
+"s": 87
+},
+{
+"character": "Jan the Wallpaper Man",
+"s": 88
+},
+{
+"character": "Johnny Allenwrench",
+"s": 89
+},
+{
+"character": "Scarecrow",
+"s": 90
+},
+{
+"character": "Jebediah Townhouse",
+"s": 91
+},
+{
+"character": "Ghost Mordecai & Rigby",
+"s": 92
+},
+{
+"character": "John Wolfhard",
+"s": 93
+},
+{
+"character": "Barbera",
+"s": 94
+},
+{
+"character": "School Girl Villain",
+"s": 95
+},
+{
+"character": "Racki the Wishmaker",
+"s": 96
+},
+{
+"character": "Elevator Repairman",
+"s": 97
+},
+{
+"character": "Chocolate Witch",
+"s": 98
+},
+{
+"character": "Shannon Acidbutt",
+"s": 99
+},
+{
+"character": "CrewCrew",
+"s": 100
+},
+{
+"character": "Future Mordecai and Future Rigby",
+"s": 101
+},
+{
+"character": "Happy Birthday",
+"s": 102
+},
+{
+"character": "Coffee Bean & Translator",
+"s": 103
+},
+{
+"character": "Reaperbots",
+"s": 104
+},
+{
+"character": "Grand Master of Death Kwon Do",
+"s": 105
+},
+{
+"character": "Guardian of Margaret's Secrets",
+"s": 106
+},
+{
+"character": "Bert Coleman",
+"s": 107
+},
+{
+"character": "Angus",
+"s": 108
+},
+{
+"character": "British Taxi",
+"s": 109
+},
+{
+"character": "Limosaurus",
+"s": 110
+},
+{
+"character": "Snowballs the Ice Monster",
+"s": 111
+},
+{
+"character": "Stag-Man",
+"s": 112
+},
+{
+"character": "Country Club Manager",
+"s": 113
+},
+{
+"character": "Milk Creatures",
+"s": 114
+},
+{
+"character": "Mitsuru Shinehara",
+"s": 115
+},
+{
+"character": "Barry",
+"s": 116
+},
+{
+"character": "Knitted Muscle Man",
+"s": 117
+},
+{
+"character": "Broseph Chillaxton",
+"s": 118
+},
+{
+"character": "President of Tants Co.",
+"s": 119
+},
+{
+"character": "Hector",
+"s": 120
+},
+{
+"character": "Doug Shablowski",
+"s": 121
+},
+{
+"character": "Vince and Tommy",
+"s": 122
+},
+{
+"character": "Park Avenue",
+"s": 123
+},
+{
+"character": "Warlock",
+"s": 124
+},
+{
+"character": "Cat Masterson",
+"s": 125
+},
+{
+"character": "Carrey O'Key",
+"s": 126
+},
+{
+"character": "Frank Jones",
+"s": 127
+},
+{
+"character": "Quillgin",
+"s": 128
+},
+{
+"character": "Rocker Caroler",
+"s": 129
+},
+{
+"character": "Promise Pie",
+"s": 130
+},
+{
+"character": "Principal Party Horse",
+"s": 131
+},
+{
+"character": "Joanne Hanatronic",
+"s": 132
+},
+{
+"character": "Cash Bankis",
+"s": 133
+},
+{
+"character": "Hurl, Merle & Burl",
+"s": 134
+},
+{
+"character": "Stress Monster",
+"s": 135
+},
+{
+"character": "Party Zoe",
+"s": 136
+},
+{
+"character": "Hair to the Throne",
+"s": 137
+},
+{
+"character": "Grease Monster",
+"s": 138
+},
+{
+"character": "Wally Tharah",
+"s": 139
+},
+{
+"character": "Ladonna",
+"s": 140
+},
+{
+"character": "Moon Monster",
+"s": 141
+},
+{
+"character": "Doom Ma Geddon",
+"s": 142
+},
+{
+"character": "Muscle Bro",
+"s": 143
+},
+{
+"character": "Muscle Dad",
+"s": 144
+},
+{
+"character": "Johnny Skydiver",
+"s": 145
+},
+{
+"character": "Suit",
+"s": 146
+},
+{
+"character": "Mona",
+"s": 147
+},
+{
+"character": "Muscle Mom",
+"s": 148
+},
+{
+"character": "John",
+"s": 149
+},
+{
+"character": "Headmaster Bennett",
+"s": 150
+},
+{
+"character": "Stef",
+"s": 151
+},
+{
+"character": "Andy",
+"s": 152
+},
+{
+"character": "Simon Lamprey",
+"s": 153
+},
+{
+"character": "Lake Monsters",
+"s": 154
+},
+{
+"character": "Gregg",
+"s": 155
+},
+{
+"character": "Leon",
+"s": 156
+},
+{
+"character": "Principal Dean",
+"s": 157
+},
+{
+"character": "Mr. Sengley",
+"s": 158
+},
+{
+"character": "Francis Jablonski",
+"s": 159
+},
+{
+"character": "Benny Harris",
+"s": 160
+},
+{
+"character": "Carl Putter",
+"s": 161
+},
+{
+"character": "Turtles",
+"s": 162
+},
+{
+"character": "Ace Balthazar",
+"s": 163
+},
+{
+"character": "Aiden Jablonski",
+"s": 164
+},
+{
+"character": "Ajay Maldonaldo",
+"s": 165
+},
+{
+"character": "Animal Spirits",
+"s": 166
+},
+{
+"character": "Announcer Bot",
+"s": 167
+},
+{
+"character": "Apollo & Koko",
+"s": 168
+},
+{
+"character": "Apple",
+"s": 169
+},
+{
+"character": "Apple Sauce",
+"s": 170
+},
+{
+"character": "Armando",
+"s": 171
+},
+{
+"character": "Australian Prime Minister",
+"s": 172
+},
+{
+"character": "Ballroom Ghosts",
+"s": 173
+},
+{
+"character": "Barry & Jones",
+"s": 174
+},
+{
+"character": "Barry Sliceman",
+"s": 175
+},
+{
+"character": "Basketball Body",
+"s": 176
+},
+{
+"character": "Beef Burrito",
+"s": 177
+},
+{
+"character": "Benjamin Franklin",
+"s": 178
+},
+{
+"character": "Blade Games Contestants",
+"s": 179
+},
+{
+"character": "Blake",
+"s": 180
+},
+{
+"character": "Bloodshed & Manslaughter",
+"s": 181
+},
+{
+"character": "Boba Casanova (character)",
+"s": 182
+},
+{
+"character": "Bobby",
+"s": 183
+},
+{
+"character": "Bolt Keeper",
+"s": 184
+},
+{
+"character": "Bounty Hunter",
+"s": 185
+},
+{
+"character": "Broc Stettman",
+"s": 186
+},
+{
+"character": "Bruce Rock",
+"s": 187
+},
+{
+"character": "Carlton Tanner",
+"s": 188
+},
+{
+"character": "Cart",
+"s": 189
+},
+{
+"character": "Carter and Briggs (characters)",
+"s": 190
+},
+{
+"character": "Cassowary",
+"s": 191
+},
+{
+"character": "Caveman (character)",
+"s": 192
+},
+{
+"character": "Celia",
+"s": 193
+},
+{
+"character": "Chad & Jeremy",
+"s": 194
+},
+{
+"character": "Chrissy",
+"s": 195
+},
+{
+"character": "Classic Meal Goddesses",
+"s": 196
+},
+{
+"character": "Coffee Shop Manager",
+"s": 197
+},
+{
+"character": "Commander Romanoff",
+"s": 198
+},
+{
+"character": "Cool Court Prosecutor",
+"s": 199
+},
+{
+"character": "Cool Cubed & Translator",
+"s": 200
+},
+{
+"character": "Corny",
+"s": 201
+},
+{
+"character": "Costello",
+"s": 202
+},
+{
+"character": "Country Folk",
+"s": 203
+},
+{
+"character": "Curtis Montgomery",
+"s": 204
+},
+{
+"character": "Daisuke",
+"s": 205
+},
+{
+"character": "Dale",
+"s": 206
+},
+{
+"character": "Dale (assistant director)",
+"s": 207
+},
+{
+"character": "Dan Diggs",
+"s": 208
+},
+{
+"character": "Death Bear (character)",
+"s": 209
+},
+{
+"character": "Denise Smith",
+"s": 210
+},
+{
+"character": "Diane",
+"s": 211
+},
+{
+"character": "Diego Montez",
+"s": 212
+},
+{
+"character": "Doghouse Jenkins",
+"s": 213
+},
+{
+"character": "Dom Denunzio",
+"s": 214
+},
+{
+"character": "Don (character)",
+"s": 215
+},
+{
+"character": "Donny G",
+"s": 216
+},
+{
+"character": "Dr. Dome",
+"s": 217
+},
+{
+"character": "Dr. Langer",
+"s": 218
+},
+{
+"character": "Dr. Matthews",
+"s": 219
+},
+{
+"character": "Drumotron VI",
+"s": 220
+},
+{
+"character": "Dunwoody Family",
+"s": 221
+},
+{
+"character": "Eggscellent Knight",
+"s": 222
+},
+{
+"character": "Eggscellent Manager",
+"s": 223
+},
+{
+"character": "El Diablo",
+"s": 224
+},
+{
+"character": "Evil Brain",
+"s": 225
+},
+{
+"character": "Farmer Jimmy",
+"s": 226
+},
+{
+"character": "FBI Agents",
+"s": 227
+},
+{
+"character": "Filbert & Mulligan",
+"s": 228
+},
+{
+"character": "Fist Pump",
+"s": 229
+},
+{
+"character": "Flobot 2000",
+"s": 230
+},
+{
+"character": "Frank Smith",
+"s": 231
+},
+{
+"character": "Future Mordecai",
+"s": 232
+},
+{
+"character": "Future Rigby",
+"s": 233
+},
+{
+"character": "Gail",
+"s": 234
+},
+{
+"character": "Garage Door Salesman",
+"s": 235
+},
+{
+"character": "Gl\u00f6mb",
+"s": 236
+},
+{
+"character": "God of Breaking",
+"s": 237
+},
+{
+"character": "God of Street Performing",
+"s": 238
+},
+{
+"character": "Goddesses of Fusion",
+"s": 239
+},
+{
+"character": "Grandpa Hanatronic",
+"s": 240
+},
+{
+"character": "Gretchen",
+"s": 241
+},
+{
+"character": "Hans & Lars",
+"s": 242
+},
+{
+"character": "Harry Roughauser",
+"s": 243
+},
+{
+"character": "Herb & Rose",
+"s": 244
+},
+{
+"character": "Hi Five Ghost's Father",
+"s": 245
+},
+{
+"character": "Hilary",
+"s": 246
+},
+{
+"character": "Holo-Mordecai and Holo-Rigby",
+"s": 247
+},
+{
+"character": "Humongoose",
+"s": 248
+},
+{
+"character": "Icedrom and Igbir",
+"s": 249
+},
+{
+"character": "Jampft",
+"s": 250
+},
+{
+"character": "JampftCo Guards",
+"s": 251
+},
+{
+"character": "Japanese Fighters",
+"s": 252
+},
+{
+"character": "Jefferson",
+"s": 253
+},
+{
+"character": "Jerry",
+"s": 254
+},
+{
+"character": "Jimmy Jamzz",
+"s": 255
+},
+{
+"character": "Joan Kranden",
+"s": 256
+},
+{
+"character": "Joel, Fi, & Kai",
+"s": 257
+},
+{
+"character": "Johnathan Kimble",
+"s": 258
+},
+{
+"character": "Jumpin' Jim",
+"s": 259
+},
+{
+"character": "K.I.L.I.T. DJ 3000",
+"s": 260
+},
+{
+"character": "Kaiju",
+"s": 261
+},
+{
+"character": "Kangaroo Wranglers",
+"s": 262
+},
+{
+"character": "Keepers of the Voicemail",
+"s": 263
+},
+{
+"character": "Keith",
+"s": 264
+},
+{
+"character": "Kessler",
+"s": 265
+},
+{
+"character": "Krampus (character)",
+"s": 266
+},
+{
+"character": "Kyle Garrity",
+"s": 267
+},
+{
+"character": "Lazy Dave",
+"s": 268
+},
+{
+"character": "List of Minor Characters",
+"s": 269
+},
+{
+"character": "Maellard's Tiger",
+"s": 270
+},
+{
+"character": "Maitre d'",
+"s": 271
+},
+{
+"character": "Mama Duck",
+"s": 272
+},
+{
+"character": "Manny",
+"s": 273
+},
+{
+"character": "Mantis King and Mantis Princess",
+"s": 274
+},
+{
+"character": "Mary Stone",
+"s": 275
+},
+{
+"character": "Matt",
+"s": 276
+},
+{
+"character": "Maury Moto",
+"s": 277
+},
+{
+"character": "Mercury Heat",
+"s": 278
+},
+{
+"character": "Milton",
+"s": 279
+},
+{
+"character": "Mississippi Queen",
+"s": 280
+},
+{
+"character": "Mr. Bossman (character)",
+"s": 281
+},
+{
+"character": "Mr. Zhang",
+"s": 282
+},
+{
+"character": "Negative Rigby",
+"s": 283
+},
+{
+"character": "Night Owl",
+"s": 284
+},
+{
+"character": "Nightmare Alien",
+"s": 285
+},
+{
+"character": "No Rules Guy",
+"s": 286
+},
+{
+"character": "Officer Hank & Officer Glenn",
+"s": 287
+},
+{
+"character": "Old Bat",
+"s": 288
+},
+{
+"character": "Party Pete (character)",
+"s": 289
+},
+{
+"character": "Party Robert",
+"s": 290
+},
+{
+"character": "Peeps (character)",
+"s": 291
+},
+{
+"character": "Peggy",
+"s": 292
+},
+{
+"character": "Playco Businessmen",
+"s": 293
+},
+{
+"character": "Poetry Teacher",
+"s": 294
+},
+{
+"character": "Premier Koshkov",
+"s": 295
+},
+{
+"character": "President Davis",
+"s": 296
+},
+{
+"character": "Quips (character)",
+"s": 297
+},
+{
+"character": "Randy, Andy & Gill",
+"s": 298
+},
+{
+"character": "Ranger",
+"s": 299
+},
+{
+"character": "Raymond",
+"s": 300
+},
+{
+"character": "Spacey McSpaceTree (character)",
+"s": 301
+},
+{
+"character": "Summertime Song (character)",
+"s": 302
+},
+{
+"character": "Thomas (demon)",
+"s": 303
+},
+{
+"character": "Wall Buddy (object)",
+"s": 304
+}
+]
