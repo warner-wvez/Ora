@@ -883,6 +883,16 @@
     .off-step button { width: 44px; height: 44px; }
     .off-tl { --trh: 56px; }
   }
+  .off-ctrls { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .off-ctrls .off-step { margin-top: 0; }
+  .off-crow { display: flex; align-items: center; gap: 8px; }
+  .off-crow > span { flex: none; width: 76px; font-size: var(--fs-meta); font-weight: 600; color: #6e6e73; }
+  .off-crow > .color-switch, .off-crow > select { flex: 1; min-width: 0; }
+  .off-type { height: 30px; font: inherit; font-size: var(--fs-ctl); color: #1c1c1e; padding: 0 8px; border: 1px solid #dcdce1; border-radius: 8px; background: #fff; }
+  .off-link { border: 0; background: none; padding: 4px 0; font: inherit; font-size: var(--fs-meta); font-weight: 600; color: #0062cc; cursor: pointer; text-align: left; }
+  .off-jump { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .off-only { font-size: var(--fs-meta); color: #3c3c43; padding: 9px 12px; }
+  @media (max-width: 640px) { .off-type { height: 44px; } .off-link { min-height: 44px; } .off-ctrls .off-step button { width: 44px; height: 44px; } }
 </style>
 </head>
 <body>
@@ -4159,7 +4169,7 @@ function serializeState(){ const p=new URLSearchParams();
   }
   if(store.enfFilter.verdicts.size<4) p.set('fv',[...store.enfFilter.verdicts].join(',')); if(store.enfFilter.types.size<2) p.set('ft',[...store.enfFilter.types].join(','));
   if(store.mode==='officers'){ const d=OFF.mode==='day'?OFF.day:(OFF.preset==='custom'?`${OFF.from}~${OFF.to}`:OFF.preset);
-    p.set('o', OFF.sel?`${OFF.sel}|${d}|${OFF.show?1:0}`:''); }
+    p.set('o', `${OFF.sel||''}|${d||''}|${OFF.show?1:0}|${OFF.type??''}|${OFF.rank==='tickets'?'t':''}`); }
   return p.toString(); }
 function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+serializeState());
   // the last view, so opening the bare address returns where you left off rather than the overview
@@ -4519,7 +4529,8 @@ document.addEventListener('keydown',(e)=>{
    officers.json (who), daily.json (shifts + day totals), days/<date>.json (one day's tickets),
    by-officer/<id>.json (an officer's points, for range dots). Fake officer numbers only. */
 const OFF={ data:false, by:new Map(), shifts:{}, totals:{}, viol:[], first:null, last:null,
-  mode:'day', day:null, preset:'month', from:null, to:null, sel:null, show:false, sort:'new', hl:null, lh:35, oh:50, tk:[] };
+  mode:'day', day:null, preset:'month', from:null, to:null, sel:null, show:false, sort:'new', hl:null, lh:35, oh:50, tk:[], tkKey:null,
+  type:null, rank:'fines', types:{}, typeOrder:[] };   // type: a violation index as a string, or null for all tickets
 const offDayCache=new Map(), offPtCache=new Map();
 const offGet=(url,cache,key)=>{ if(!cache.has(key)) cache.set(key, fetch(url).then(r=>r.ok?r.json():[]).catch(()=>[])); return cache.get(key); };
 const offMoney=n=>'$'+Math.round(n).toLocaleString('en-US');
@@ -4530,7 +4541,8 @@ const offAddr=a=>String(a||'').split(' ').map(w=>OFF_SUF[w]||(/^[NSEW]$/.test(w)
 const OFF_SHORT={'EXPIRED PLATE OR TEMPORARY REGISTRATION':'Expired plate','RESIDENTIAL PERMIT PARKING':'Residential permit',
   'MISSING/NONCOMPLIANT FRONT AND/OR REAR PLATE':'Missing plate','NO CITY STICKER VEHICLE UNDER/EQUAL TO 16,000 LBS.':'No city sticker',
   'PARKING/STANDING PROHIBITED ANYTIME':'No parking anytime',"WITHIN 15' OF FIRE HYDRANT":'Too close to a hydrant',
-  'EXPIRED METER OR OVERSTAY':'Expired meter','STREET CLEANING':'Street cleaning','RUSH HOUR PARKING':'Rush hour parking'};
+  'EXPIRED METER OR OVERSTAY':'Expired meter or overstay','EXP. METER NON-CENTRAL BUSINESS DISTRICT':'Expired meter',
+  'EXPIRED METER CENTRAL BUSINESS DISTRICT':'Expired meter, downtown','NO STANDING/PARKING TIME RESTRICTED':'Time-limited parking','STREET CLEANING':'Street cleaning','RUSH HOUR PARKING':'Rush hour parking'};
 const offVio=i=>{ const v=OFF.viol[i]||''; return OFF_SHORT[v]||(v.charAt(0)+v.slice(1).toLowerCase()); };
 const OFF_DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], OFF_MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const offFmtDay=k=>{ const d=new Date(k+'T12:00:00Z'); return `${OFF_DOW[d.getUTCDay()]}, ${OFF_MON[d.getUTCMonth()]} ${d.getUTCDate()}`; };
@@ -4552,10 +4564,12 @@ function offLabel(){
   const ds=offDates(); return OFF.preset==='ytd' ? `Year to date (since ${offShort(OFF.first)})` : `${offShort(ds[0])} to ${offShort(ds.at(-1))}`;
 }
 function offRows(){
-  const ds=new Set(offDates()), out=[];
+  const ds=new Set(offDates()), out=[], ty=OFF.type!=null ? OFF.types : null;
   for(const o of OFF.by.values()){ const sh=(OFF.shifts[o.id]||[]).filter(s=>ds.has(s[0])); if(!sh.length) continue;
-    out.push({o, sh, n:sh.reduce((a,s)=>a+s[1],0), f:sh.reduce((a,s)=>a+s[2],0)}); }
-  return out.sort((a,b)=>b.f-a.f||b.n-a.n);
+    let n=sh.reduce((a,s)=>a+s[1],0), f=sh.reduce((a,s)=>a+s[2],0);
+    if(ty){ const per=ty[o.id]||{}; n=0; f=0; for(const d of new Set(sh.map(s=>s[0]))){ const v=(per[d]||{})[OFF.type]; if(v){ n+=v[0]; f+=v[1]; } } if(!n) continue; }
+    out.push({o, sh, n, f}); }
+  return out.sort(OFF.rank==='tickets' ? (a,b)=>b.n-a.n||b.f-a.f : (a,b)=>b.f-a.f||b.n-a.n);
 }
 // an officer can work two shifts on one date (a gap over 4 hours); the day view adds them together
 const offShiftOn=(id,k)=>{ const sh=(OFF.shifts[id]||[]).filter(s=>s[0]===k); if(!sh.length) return undefined;
@@ -4563,16 +4577,32 @@ const offShiftOn=(id,k)=>{ const sh=(OFF.shifts[id]||[]).filter(s=>s[0]===k); if
 const offLatest=sh=>sh.reduce((b,s)=>s[0]>b[0]?s:b);
 function offFade(el){ const w=el&&el.parentElement; if(!w||!w.classList.contains('off-fade')) return;
   const f=()=>w.classList.toggle('end', el.scrollTop+el.clientHeight>=el.scrollHeight-2); f(); el.onscroll=f; }
+const offSw=(a,b,attr,cur,va,vb)=>`<div class="color-switch"><span class="seg-pill" aria-hidden="true"></span><button type="button" class="color-btn${cur===va?' active':''}" ${attr}="${va}">${a}</button><button type="button" class="color-btn${cur===vb?' active':''}" ${attr}="${vb}">${b}</button></div>`;
+const offDataDays=()=>Object.keys(OFF.totals).filter(k=>k>=OFF.first && k<=OFF.last && OFF.totals[k][0]>0).sort();
+function offControlsHTML(){
+  const days=offDataDays(), i=days.indexOf(OFF.day), prev=days[i-1], next=days[i+1];
+  const dateUI = OFF.mode==='day'
+    ? `<div class="off-step"><button type="button" data-off-step="${prev||''}" ${prev?'':'disabled'} aria-label="Previous day">&lsaquo;</button><span class="d">${offFmtDay(OFF.day)}</span><button type="button" data-off-step="${next||''}" ${next?'':'disabled'} aria-label="Next day">&rsaquo;</button></div>`
+    : `<div class="filters" style="margin-top:8px">${[['week','Last 7 days'],['month','This month'],['ytd','Year to date'],['custom','Pick dates']].map(([v,l])=>`<button type="button" class="fchip${OFF.preset===v?' on':''}" data-off-preset="${v}" aria-pressed="${OFF.preset===v}">${l}</button>`).join('')}</div>
+       ${OFF.preset==='custom'?`<div class="off-custom"><input type="date" data-off-from min="${OFF.first}" max="${OFF.last}" value="${OFF.from}" aria-label="From"><input type="date" data-off-to min="${OFF.first}" max="${OFF.last}" value="${OFF.to}" aria-label="To"></div>`:''}`;
+  const opt=i=>`<option value="${i}"${OFF.type===String(i)?' selected':''}>${offVio(i)}</option>`;
+  const top=OFF.typeOrder.slice(0,8), rest=OFF.typeOrder.slice(8).sort((a,b)=>offVio(a).localeCompare(offVio(b)));
+  return `<div class="off-ctrls">${offSw('One day','Range','data-off-mode',OFF.mode,'day','range')}${dateUI}
+    <label class="off-crow"><span>Ticket type</span><select class="off-type" data-off-type><option value=""${OFF.type==null?' selected':''}>All tickets</option><optgroup label="Most common">${top.map(opt).join('')}</optgroup><optgroup label="Other types">${rest.map(opt).join('')}</optgroup></select></label>
+    <div class="off-crow"><span>Rank by</span>${offSw('Fines','Tickets','data-off-rank',OFF.rank,'fines','tickets')}</div></div>`;
+}
 function offListHTML(){
-  const R=offRows(), total=offDates().reduce((a,k)=>a+((OFF.totals[k]||[0])[0]),0), s=isMobile()?40:34;
+  const R=offRows(), s=isMobile()?40:34;
+  const total=OFF.type!=null ? R.reduce((a,r)=>a+r.n,0) : offDates().reduce((a,k)=>a+((OFF.totals[k]||[0])[0]),0);
+  const what=OFF.type!=null ? offVio(OFF.type).toLowerCase()+' tickets' : 'tickets';
   const sub=r=>OFF.mode==='day' ? `${r.o.c||'Officer'} · ${offT12(r.sh[0][3])} to ${offT12(r.sh.at(-1)[4])}` : `${r.o.c||'Officer'} · ${r.sh.length} shift${r.sh.length>1?'s':''}`;
-  return { meta:`${offLabel()} · ${R.length} officers · ${offNum(total)} tickets`,
+  return { controls:offControlsHTML(), meta:`${offLabel()} · ${R.length} officers · ${offNum(total)} ${what}`, order:OFF.rank==='tickets'?'most tickets first':'most fines first',
     rows:R.map(r=>`<div class="off-row${r.o.id===OFF.sel?' sel':''}" data-off-id="${r.o.id}" role="button" tabindex="0">${offAv(r.o,s)}<div class="off-txt"><div class="off-ot">Officer ${r.o.id}</div><div class="off-os">${sub(r)}</div></div><div class="off-num"><b>${offMoney(r.f)}</b><span>${offNum(r.n)} tickets</span></div></div>`).join('') };
 }
 function offRenderList(){
   const L=offListHTML(), sec=document.getElementById('offSec');
   const box=sec.querySelector('.off-list'), keep=box?box.scrollTop:0;
-  sec.innerHTML=`<div class="sechead"><b>Officer shifts</b><span class="off-meta">most fines first</span></div><div class="off-meta" style="margin:1px 0 2px">${L.meta}</div>
+  sec.innerHTML=`<div class="sechead"><b>Officer shifts</b></div>${L.controls}<div class="off-meta" style="margin:8px 0 2px">${L.meta} · ${L.order}</div>
     <div class="off-fade"><div class="off-list">${L.rows}</div></div><button type="button" class="off-about" data-off-about>About this data</button>`;
   const nb=sec.querySelector('.off-list'); nb.scrollTop=keep; offFade(nb);
   if(typeof offRenderSheetList==='function') offRenderSheetList(L);
@@ -4580,7 +4610,10 @@ function offRenderList(){
 function offRenderAll(){ offRenderList(); if(typeof offDrawMarkers==='function') offDrawMarkers(); if(typeof offRenderCard==='function') offRenderCard(); }
 async function offLoad(){
   if(OFF.data) return;
-  const [o,d]=await Promise.all([fetch('chicago-officers/officers.json').then(r=>r.json()), fetch('chicago-officers/daily.json').then(r=>r.json())]);
+  const [o,d,ty]=await Promise.all([fetch('chicago-officers/officers.json').then(r=>r.json()), fetch('chicago-officers/daily.json').then(r=>r.json()),
+    fetch('chicago-officers/types.json').then(r=>r.ok?r.json():{}).catch(()=>({}))]);
+  OFF.types=ty; const cnt={}; for(const per of Object.values(ty)) for(const by of Object.values(per)) for(const [v,x] of Object.entries(by)) cnt[v]=(cnt[v]||0)+x[0];
+  OFF.typeOrder=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]);
   OFF.by=new Map(o.officers.map(x=>[x.id,x])); OFF.viol=o.violations; OFF.first=o.first; OFF.last=o.last;
   OFF.shifts=d.shifts; OFF.totals=d.totals; for(const k in OFF.shifts) OFF.shifts[k].sort((a,b)=>a[0]<b[0]?-1:1);
   OFF.day=OFF.day||OFF.last; OFF.data=true;
@@ -4670,45 +4703,53 @@ function offTeardownMap(){
 document.addEventListener('click',e=>{ const r=e.target.closest('[data-off-id]'); if(r) offPick(+r.dataset.offId); });
 document.addEventListener('keydown',e=>{ if(e.key==='Enter'){ const r=e.target.closest&&e.target.closest('[data-off-id]'); if(r) offPick(+r.dataset.offId); } });
 
+const offTkKey=()=>`${OFF.sel}|${OFF.mode}|${offDates().join(',')}`;
+const offTk=()=>OFF.type!=null ? OFF.tk.filter(t=>String(t.v)===OFF.type) : OFF.tk;
 async function offLoadTickets(){
-  const id=OFF.sel; if(!id){ OFF.tk=[]; return; }
+  const id=OFF.sel; if(!id){ OFF.tk=[]; OFF.tkKey=null; return; }
+  const key=offTkKey();
   if(OFF.mode==='day'){
-    const day=await offGet(`chicago-officers/days/${OFF.day}.json`, offDayCache, OFF.day);
+    if(!offShiftOn(id,OFF.day)){ OFF.tk=[]; OFF.tkKey=key; return; }
+    const day=await offGet(`chicago-officers/days/${OFF.day}.json`, offDayCache, OFF.day); if(offTkKey()!==key) return;
     OFF.tk=day.filter(t=>t[0]===id).map((t,i)=>({n:i+1, date:OFF.day, time:t[1], ll:t[2]!=null?[t[2],t[3]]:null, addr:t[4], v:t[5], fine:t[6]}));
   } else {
-    const ds=new Set(offDates()), pts=await offGet(`chicago-officers/by-officer/${id}.json`, offPtCache, id);
-    OFF.tk=pts.filter(p=>ds.has(p[0])).map(p=>({date:p[0], ll:[p[1],p[2]]}));
+    const ds=new Set(offDates()), pts=await offGet(`chicago-officers/by-officer/${id}.json`, offPtCache, id); if(offTkKey()!==key) return;
+    OFF.tk=pts.filter(p=>ds.has(p[0])).map(p=>({date:p[0], ll:[p[1],p[2]], v:p[3]}));
   }
+  OFF.tkKey=key;
 }
 function offCardHTML(){
   const o=OFF.by.get(OFF.sel); if(!o) return {head:'', body:''};
-  const mine=[...new Set((OFF.shifts[o.id]||[]).map(s=>s[0]))], i=mine.indexOf(OFF.day), prev=mine[i-1], next=mine[i+1];
   const head=`${offAv(o,isMobile()?44:40)}<div style="flex:1;min-width:0"><div class="off-title">Officer ${o.id}</div><div class="off-meta">${o.c||''} · ${offLabel()}</div></div><button type="button" class="off-x" data-off-close aria-label="Close">&times;</button>`;
-  const sw=(a,b,attr,cur,va,vb)=>`<div class="color-switch"><span class="seg-pill" aria-hidden="true"></span><button type="button" class="color-btn${cur===va?' active':''}" ${attr}="${va}">${a}</button><button type="button" class="color-btn${cur===vb?' active':''}" ${attr}="${vb}">${b}</button></div>`;
-  const dateUI = OFF.mode==='day'
-    ? `<div class="off-step"><button type="button" data-off-step="${prev||''}" ${prev?'':'disabled'} aria-label="Previous shift">&lsaquo;</button><span class="d">${offFmtDay(OFF.day)}</span><button type="button" data-off-step="${next||''}" ${next?'':'disabled'} aria-label="Next shift">&rsaquo;</button></div>
-       <div class="off-hint">${prev?'Previous shift: '+offFmtDay(prev):'No earlier shift since '+offShort(OFF.first)}</div>`
-    : `<div class="filters" style="margin-top:8px">${[['week','Last 7 days'],['month','This month'],['ytd','Year to date'],['custom','Pick dates']].map(([v,l])=>`<button type="button" class="fchip${OFF.preset===v?' on':''}" data-off-preset="${v}" aria-pressed="${OFF.preset===v}">${l}</button>`).join('')}</div>
-       ${OFF.preset==='custom'?`<div class="off-custom"><input type="date" data-off-from min="${OFF.first}" max="${OFF.last}" value="${OFF.from}" aria-label="From"><input type="date" data-off-to min="${OFF.first}" max="${OFF.last}" value="${OFF.to}" aria-label="To"></div>`:''}`;
-  let body=`<div class="off-box">${sw('One day','Range','data-off-mode',OFF.mode,'day','range')}${dateUI}</div>`;
+  const tyName=OFF.type!=null ? offVio(OFF.type).toLowerCase() : null, per=(OFF.types||{})[o.id]||{};
+  let body=tyName ? `<div class="off-box off-only">Showing ${tyName} tickets only. <button type="button" class="off-link" data-off-type-clear>Show all types</button></div>` : '';
+  const loading=OFF.tkKey!==offTkKey(), spin='<div class="off-box"><div class="off-spin" aria-label="Loading"></div></div>';
+  const tiles=(cells)=>`<div class="off-stats${cells.length>2?' three':''}">${cells.map(([n,l])=>`<div class="enf-stat"><div class="num">${n}</div><div class="lbl">${l}</div></div>`).join('')}</div>`;
   if(OFF.mode==='day'){
+    const mine=[...new Set((OFF.shifts[o.id]||[]).map(s=>s[0]))], prev=[...mine].reverse().find(d=>d<OFF.day), next=mine.find(d=>d>OFF.day);
+    const jump=`<div class="off-jump">${prev?`<button type="button" class="off-link" data-off-jump="${prev}">&lsaquo; Previous shift: ${offFmtDay(prev)}</button>`:''}${next?`<button type="button" class="off-link" data-off-jump="${next}">Next shift: ${offFmtDay(next)} &rsaquo;</button>`:''}</div>`;
     const s=offShiftOn(o.id,OFF.day);
-    body+=`<div class="off-box"><div class="off-stats"><div class="enf-stat"><div class="num">${offNum(s[1])}</div><div class="lbl">tickets</div></div><div class="enf-stat"><div class="num">${offMoney(s[2])}</div><div class="lbl">in fines</div></div></div>
-      <div class="off-meta" style="margin-top:9px">${s[7]>1?`${s[7]} shifts this day, from about`:'Shift ran about'} ${offT12(s[3])} to ${offT12(s[4])} (first to last ticket).</div>
-      <button type="button" class="off-go${OFF.show?' off':''}" data-off-show>${OFF.show?'Hide route':'View shift route'}</button></div>`;
-    if(!OFF.tk.length) return {head, body:body+'<div class="off-box"><div class="off-spin" aria-label="Loading"></div></div>'};
-    const n=OFF.tk.length, list=OFF.tk.slice().sort(OFF.sort==='new'?(a,b)=>b.n-a.n:(a,b)=>b.fine-a.fine||b.n-a.n);
-    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">Tickets this shift</div>${sw('Newest first','Biggest fine','data-off-sort',OFF.sort,'new','fine')}</div>
-      <div class="off-fade"><div class="off-tl">${list.map(t=>`<div class="off-tr${t.n===OFF.hl?' hl':''}" data-off-n="${t.n}"><span class="off-tn${t.n===n?' last':''}">${t.n}</span><div class="off-tt"><div class="a">${offAddr(t.addr)}</div><div class="b">${offT12(t.time)} · ${offVio(t.v)}${t.ll?'':' · no map point'}</div></div><span class="off-tf">${offMoney(t.fine)}</span></div>`).join('')}</div></div></div>`;
+    if(!s) return {head, body:body+`<div class="off-box"><div class="off-meta">No shift on ${offFmtDay(OFF.day)}.</div>${jump}</div>`};
+    const tv=OFF.type!=null ? ((per[OFF.day]||{})[OFF.type]||[0,0]) : [s[1],s[2]];
+    body+=`<div class="off-box">${tiles([[offNum(tv[0]), tyName?tyName+' tickets':'tickets'],[offMoney(tv[1]),'in fines']])}
+      <div class="off-meta" style="margin-top:9px">${s[7]>1?`${s[7]} shifts this day, from about`:'Shift ran about'} ${offT12(s[3])} to ${offT12(s[4])} (first to last ticket).</div>${jump}
+      <button type="button" class="off-go${OFF.show?' off':''}" data-off-show ${tv[0]?'':'disabled'}>${OFF.show?'Hide route':'View shift route'}</button></div>`;
+    if(loading) return {head, body:body+spin};
+    const tk=offTk(); if(!tk.length) return {head, body};
+    const last=OFF.tk.length, list=tk.slice().sort(OFF.sort==='new'?(a,b)=>b.n-a.n:(a,b)=>b.fine-a.fine||b.n-a.n);
+    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">Tickets this shift</div>${offSw('Newest first','Biggest fine','data-off-sort',OFF.sort,'new','fine')}</div>
+      <div class="off-fade"><div class="off-tl">${list.map(t=>`<div class="off-tr${t.n===OFF.hl?' hl':''}" data-off-n="${t.n}"><span class="off-tn${t.n===last?' last':''}">${t.n}</span><div class="off-tt"><div class="a">${offAddr(t.addr)}</div><div class="b">${offT12(t.time)} · ${offVio(t.v)}${t.ll?'':' · no map point'}</div></div><span class="off-tf">${offMoney(t.fine)}</span></div>`).join('')}</div></div></div>`;
   } else {
     const ds=new Set(offDates()), sh=(OFF.shifts[o.id]||[]).filter(s=>ds.has(s[0]));
-    const n=sh.reduce((a,s)=>a+s[1],0), f=sh.reduce((a,s)=>a+s[2],0);
     const mid=k=>{ if(!sh.length) return ''; const m=sh.map(s=>+s[k].slice(0,2)*60+ +s[k].slice(3)).sort((a,b)=>a-b); const v=Math.round(m[m.length>>1]/5)*5; return offT12(`${String(Math.floor(v/60)%24).padStart(2,'0')}:${String(v%60).padStart(2,'0')}`); };
-    body+=`<div class="off-box"><div class="off-stats three"><div class="enf-stat"><div class="num">${offNum(n)}</div><div class="lbl">tickets</div></div><div class="enf-stat"><div class="num">${offMoney(f)}</div><div class="lbl">in fines</div></div><div class="enf-stat"><div class="num">${sh.length}</div><div class="lbl">shifts</div></div></div>
+    // with a type picked, rows are the dates that officer wrote that type; otherwise one row per shift
+    const rows=OFF.type!=null ? [...new Set(sh.map(s=>s[0]))].map(d=>{ const v=(per[d]||{})[OFF.type]; const z=sh.filter(s=>s[0]===d); return v?[d, v[0], v[1], z[0][3], z.at(-1)[4]]:null; }).filter(Boolean) : sh;
+    const n=rows.reduce((a,s)=>a+s[1],0), f=rows.reduce((a,s)=>a+s[2],0);
+    body+=`<div class="off-box">${tiles([[offNum(n), tyName?tyName+' tickets':'tickets'],[offMoney(f),'in fines'],[rows.length, tyName?(rows.length===1?'day':'days'):(rows.length===1?'shift':'shifts')]])}
       ${sh.length?`<div class="off-meta" style="margin-top:9px">Usually starts around ${mid(3)} and ends around ${mid(4)} (middle of ${sh.length} shift${sh.length>1?'s':''}).</div>`:'<div class="off-meta" style="margin-top:9px">No shifts in these dates.</div>'}
-      <button type="button" class="off-go${OFF.show?' off':''}" data-off-show ${sh.length?'':'disabled'}>${OFF.show?'Hide tickets':'View tickets on map'}</button></div>`;
-    const list=sh.slice().sort(OFF.sort==='new'?(a,b)=>a[0]<b[0]?1:-1:(a,b)=>b[2]-a[2]);
-    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">Shifts</div>${sw('Newest first','Biggest fine','data-off-sort',OFF.sort,'new','fine')}</div>
+      <button type="button" class="off-go${OFF.show?' off':''}" data-off-show ${n?'':'disabled'}>${OFF.show?'Hide tickets':'View tickets on map'}</button></div>`;
+    const list=rows.slice().sort(OFF.sort==='new'?(a,b)=>a[0]<b[0]?1:-1:(a,b)=>b[2]-a[2]);
+    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">${tyName?'Days':'Shifts'}</div>${offSw('Newest first','Biggest fine','data-off-sort',OFF.sort,'new','fine')}</div>
       <div class="off-fade"><div class="off-tl">${list.map(s=>`<div class="off-tr" data-off-day="${s[0]}"><div class="off-tt"><div class="a">${offFmtDay(s[0])}</div><div class="b">${offT12(s[3])} to ${offT12(s[4])}</div></div><div class="off-num"><b>${offMoney(s[2])}</b><span>${offNum(s[1])} tickets</span></div><span class="off-chev">&rsaquo;</span></div>`).join('')}</div></div></div>`;
   }
   return {head, body};
@@ -4721,19 +4762,23 @@ function offRenderCard(){
   card.innerHTML=OFF.sel?`<div class="off-head">${C.head}</div><div class="off-body">${C.body}</div>`:'';
   const nb=card.querySelector('.off-tl'); if(nb){ nb.scrollTop=top; offFade(nb); }
 }
-async function offSetDates(fn){ fn(); OFF.hl=null; if(offPopup) offPopup.remove(); OFF.tk=[]; offRenderAll(); await offLoadTickets(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); writeUrl(); }
+async function offSetDates(fn){ fn(); OFF.hl=null; if(offPopup) offPopup.remove(); OFF.tk=[]; OFF.tkKey=null; offRenderAll(); await offLoadTickets(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); writeUrl(); }
 function offToggleShow(){ OFF.show=!OFF.show; OFF.hl=null; if(offPopup) offPopup.remove(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); if(!OFF.show) map.easeTo({padding:offPad(), duration:600}); writeUrl(); }
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-off-close],[data-off-step],[data-off-mode],[data-off-preset],[data-off-show],[data-off-sort],[data-off-day]'); if(!t) return;
+  const t=e.target.closest('[data-off-close],[data-off-step],[data-off-mode],[data-off-preset],[data-off-show],[data-off-sort],[data-off-day],[data-off-jump],[data-off-rank],[data-off-type-clear]'); if(!t) return;
+  if(t.dataset.offJump) return offSetDates(()=>{ OFF.mode='day'; OFF.day=t.dataset.offJump; });
+  if(t.dataset.offRank){ OFF.rank=t.dataset.offRank; offRenderAll(); return writeUrl(); }
+  if(t.dataset.offTypeClear!==undefined) return offSetDates(()=>{ OFF.type=null; });
   if(t.dataset.offClose!==undefined) return offClose();
   if(t.dataset.offStep) return offSetDates(()=>{ OFF.day=t.dataset.offStep; });
-  if(t.dataset.offMode){ if(t.dataset.offMode===OFF.mode) return; return offSetDates(()=>{ OFF.mode=t.dataset.offMode; if(OFF.mode==='day') OFF.day=offLatest(OFF.shifts[OFF.sel])[0]; }); }
+  if(t.dataset.offMode){ if(t.dataset.offMode===OFF.mode) return; return offSetDates(()=>{ OFF.mode=t.dataset.offMode; if(OFF.mode==='day' && !OFF.day) OFF.day=OFF.last; }); }
   if(t.dataset.offPreset) return offSetDates(()=>{ OFF.preset=t.dataset.offPreset; if(OFF.preset==='custom'){ OFF.to=OFF.to||OFF.last; OFF.from=OFF.from||offAdd(OFF.last,-13); } });
   if(t.dataset.offShow!==undefined) return offToggleShow();
   if(t.dataset.offSort){ OFF.sort=t.dataset.offSort; return offRenderCard(); }
   if(t.dataset.offDay) return offSetDates(()=>{ OFF.mode='day'; OFF.day=t.dataset.offDay; });
 });
 document.addEventListener('change',e=>{
+  if(e.target.matches('[data-off-type]')){ const v=e.target.value; return offSetDates(()=>{ OFF.type=v===''?null:v; }); }
   if(e.target.matches('[data-off-from],[data-off-to]')){ const a=document.querySelector('[data-off-from]').value, b=document.querySelector('[data-off-to]').value;
     if(a&&b&&a<=b) offSetDates(()=>{ OFF.from=a<OFF.first?OFF.first:a; OFF.to=b>OFF.last?OFF.last:b; }); }
 });
@@ -4766,8 +4811,8 @@ function offDrawRoute(){
   if(!map.getSource('off-pts')) return;
   const set=(id,f)=>map.getSource(id).setData(OFF_FC(f));
   if(offRouteMarker){ offRouteMarker.remove(); offRouteMarker=null; }
-  if(store.mode!=='officers' || !OFF.show || !OFF.tk.length){ ['off-line','off-pts','off-hl','off-dots'].forEach(id=>set(id,[])); return; }
-  const pts=OFF.tk.filter(t=>t.ll);
+  if(store.mode!=='officers' || !OFF.show || !offTk().length){ ['off-line','off-pts','off-hl','off-dots'].forEach(id=>set(id,[])); return; }
+  const pts=offTk().filter(t=>t.ll);
   if(OFF.mode==='day'){
     set('off-dots',[]);
     set('off-line', pts.length>1?[{type:'Feature',geometry:{type:'LineString',coordinates:pts.map(t=>t.ll)}}]:[]);
@@ -4803,8 +4848,8 @@ function offHighlight(n, fromRow){
 document.addEventListener('click',e=>{ const r=e.target.closest('[data-off-n]'); if(r) offHighlight(+r.dataset.offN,true); });
 
 function offRenderSheetList(L){
-  document.getElementById('offLsMeta').textContent=L.meta+' · most fines first';
-  document.getElementById('offLsBody').innerHTML=`<div class="off-list">${L.rows}</div><button type="button" class="off-about" data-off-about>About this data</button>`;
+  document.getElementById('offLsMeta').textContent=L.meta+' · '+L.order;
+  document.getElementById('offLsBody').innerHTML=`${L.controls}<div class="off-list" style="margin-top:8px">${L.rows}</div><button type="button" class="off-about" data-off-about>About this data</button>`;
   offSizeSheets();
 }
 function offRenderSheetCard(C){
@@ -4841,11 +4886,12 @@ mqMobile.addEventListener('change',()=>{ if(store.mode==='officers'){ offRenderA
 
 async function offFromUrl(v){
   if(store.mode!=='officers') switchMode('officers'); await offLoad();
-  const [id,d,sh]=String(v).split('|'); if(!id) return;
+  const [id,d,sh,ty,rk]=String(v).split('|');
   if(d&&/^\d{4}-\d\d-\d\d$/.test(d)){ OFF.mode='day'; OFF.day=d; }
   else if(d&&d.includes('~')){ OFF.mode='range'; OFF.preset='custom'; [OFF.from,OFF.to]=d.split('~'); }
   else if(['week','month','ytd'].includes(d)){ OFF.mode='range'; OFF.preset=d; }
-  if(!OFF.by.has(+id)) return;
+  OFF.type=ty&&OFF.viol[+ty]!=null?String(+ty):null; OFF.rank=rk==='t'?'tickets':'fines';
+  if(!id||!OFF.by.has(+id)){ offRenderAll(); return; }
   await offPick(+id); if(sh==='1') offToggleShow();
 }
 
