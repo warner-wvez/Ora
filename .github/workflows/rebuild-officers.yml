@@ -1,0 +1,70 @@
+name: Rebuild officer shifts
+
+# Second City Citation fills in late: November had 5.6% unreadable officer numbers on fresh
+# days against about 1% on older ones. So every night the last 7 days are pulled again and
+# rebuilt; older days stay as committed. A night that fails its checks writes nothing.
+on:
+  schedule:
+    - cron: '17 10 * * *'    # 4:17 AM Central in winter, 5:17 AM in summer
+  workflow_dispatch:
+
+concurrency:
+  group: rebuild-officers
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pytest==8.3.3
+      - run: pytest builders/test_officers.py -q
+      - name: Rebuild
+        id: build
+        env:
+          OFFICER_MAP: ${{ secrets.OFFICER_MAP }}
+          OFFICER_KEY: ${{ secrets.OFFICER_KEY }}
+        run: python3 builders/build-chicago-officers.py
+        continue-on-error: true
+      - name: Record the night
+        run: |
+          python3 - <<'EOF'
+          import json, datetime
+          p = "chicago-officers/health.json"
+          try: h = json.load(open(p))
+          except Exception: h = {"last_good": None, "fail_streak": 0}
+          if "${{ steps.build.outcome }}" == "success":
+              h = {"last_good": datetime.date.today().isoformat(), "fail_streak": 0}
+          else:
+              h["fail_streak"] = h.get("fail_streak", 0) + 1
+          json.dump(h, open(p, "w"))
+          print(h)
+          EOF
+      - name: Open an issue after 3 failed nights
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          streak=$(python3 -c "import json;print(json.load(open('chicago-officers/health.json'))['fail_streak'])")
+          if [ "$streak" -ge 3 ]; then
+            gh label create officer-shifts --color B60205 --description 'The nightly officer-shift rebuild is failing' --force
+            open=$(gh issue list --label officer-shifts --state open --json number -q '.[0].number')
+            body="The officer-shift rebuild has failed $streak nights in a row (run ${{ github.run_id }}). The map shows the last good day. Check the run log for the failed checks or the source's errors."
+            if [ -z "$open" ]; then gh issue create --title 'Officer shifts: the nightly rebuild keeps failing' --label officer-shifts --body "$body"; else gh issue comment "$open" --body "$body"; fi
+          fi
+      - name: Commit
+        run: |
+          git config user.name  'ora-rebuild-bot'
+          git config user.email 'ora-rebuild-bot@users.noreply.github.com'
+          git add chicago-officers
+          if git diff --cached --quiet; then echo 'no change'; exit 0; fi
+          git commit -m "officers: Rebuild the last 7 days of officer shifts"
+          git pull --rebase origin main
+          git push
