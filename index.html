@@ -923,6 +923,7 @@
   .all-pop { max-height: min(220px, var(--pop-room, 220px)); overflow-y: auto; }
   .all-pi { margin-top: 6px; padding-top: 6px; border-top: 1px solid #ececf0; }
   .all-pi .off-link { padding: 2px 0 0; }
+  .all-pa { font-weight: 600; color: #1c1c1e; }
   .off-pop .maplibregl-popup-content { padding: 8px 10px; font-size: var(--fs-meta); line-height: 1.35; border-radius: 8px; overflow: visible; }
   @media (max-width: 640px) {
     .off-type { height: 44px; } .off-fbtn { min-height: 44px; } .off-link { min-height: 44px; }
@@ -4629,7 +4630,7 @@ function offControlsHTML(){
   const on=all ? ty : `${ty} · ${OFF.rank==='tickets'?'most tickets':'most fines'}`;
   const menu=OFF.fo ? `<div class="off-fbody"><select class="off-type" data-off-type aria-label="Ticket type"><option value=""${OFF.type==null?' selected':''}>All ticket types</option><optgroup label="Most common">${top.map(opt).join('')}</optgroup><optgroup label="Other types">${rest.map(opt).join('')}</optgroup></select>
       ${all?'':offSw('Most fines','Most tickets','data-off-rank',OFF.rank,'fines','tickets')}</div>` : '';
-  return `<div class="off-ctrls">${offSw('Officers','All tickets','data-off-view',OFF.view,'officers','all')}${all?'':offSw('One day','Range','data-off-mode',OFF.mode,'day','range')}${dateUI}
+  return `<div class="off-ctrls">${offSw('Officers','All tickets','data-off-view',OFF.view,'officers','all')}${offSw('One day','Range','data-off-mode',OFF.mode,'day','range')}${dateUI}
     <div class="off-filter"><button type="button" class="off-fbtn" data-off-filter aria-expanded="${OFF.fo}"><span>Filter</span><b>${on}</b><i><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>${menu}</div></div>`;
 }
 function offListHTML(){
@@ -4866,16 +4867,20 @@ document.addEventListener('change',e=>{
 });
 
 const OFF_FC=f=>({type:'FeatureCollection',features:f});
+// a single spot's dot grows a little with its tickets per day (1 a day: 1x, 10: 1.7x, 100 or more: 2.5x), so a long range
+// reads on the same scale as one day; merged dots stay small so the heat shows
+const OFF_GROW=['case',['has','point_count'],1,['min',2.5,['+',1,['*',0.3,['ln',['max',1,['get','g']]]]]]];
 function offInitLayers(){
-  for(const id of ['off-line','off-pts','off-hl','off-dots','all-pts','all-sel']) map.addSource(id,{type:'geojson',data:OFF_FC([])});
+  for(const id of ['off-line','off-pts','off-hl','off-dots','all-sel','all-heat']) map.addSource(id,{type:'geojson',data:OFF_FC([])});
+  map.addSource('all-pts',{type:'geojson',data:OFF_FC([]),cluster:true,clusterRadius:12,clusterMaxZoom:14,clusterProperties:{n:['+',['get','n']]}});
   const firstSym=(map.getStyle().layers.find(l=>l.type==='symbol')||{}).id;
-  map.addLayer({id:'all-heat',type:'heatmap',source:'all-pts',paint:{'heatmap-weight':1,
+  map.addLayer({id:'all-heat',type:'heatmap',source:'all-heat',paint:{'heatmap-weight':['get','w'],
     'heatmap-intensity':['interpolate',['linear'],['zoom'],10,0.3,12,0.6,14,0.9,16,1],
     'heatmap-color':['interpolate',['linear'],['heatmap-density'],0,'rgba(50, 50, 255, 0)',0.2,'rgb(0, 204, 255)',0.4,'rgb(128, 255, 128)',0.6,'rgb(255, 255, 102)',0.8,'rgb(255, 128, 0)',1,'rgb(204, 0, 0)'],
     'heatmap-radius':['interpolate',['linear'],['zoom'],10,8,12,14,14,22,16,30],
     'heatmap-opacity':['interpolate',['linear'],['zoom'],14,0.9,16.5,0]}}, firstSym);   // street level: the heat is gone, the dots carry it
-  map.addLayer({id:'all-dot',type:'circle',source:'all-pts',paint:{'circle-color':'rgb(54, 174, 255)','circle-stroke-color':'#fff',
-    'circle-radius':['interpolate',['linear'],['zoom'],10,1.2,12,2,13,3,15,5,17,7],'circle-stroke-width':['interpolate',['linear'],['zoom'],11,0,12,0.5,13,1,16,1.5]}});
+  map.addLayer({id:'all-dot',type:'circle',source:'all-pts',paint:{'circle-color':'rgb(54, 174, 255)','circle-stroke-color':'#fff','circle-opacity':['case',['has','point_count'],0.7,1],
+    'circle-radius':['interpolate',['linear'],['zoom'],10,['*',1.2,OFF_GROW],12,['*',2,OFF_GROW],13,['*',3,OFF_GROW],15,['*',5,OFF_GROW],17,['*',7,OFF_GROW]],'circle-stroke-width':['interpolate',['linear'],['zoom'],11,0,12,0.5,13,1,16,1.5]}});
   map.addLayer({id:'all-sel',type:'circle',source:'all-sel',paint:{'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#0b4fb3','circle-stroke-width':2.5,
     'circle-radius':['interpolate',['linear'],['zoom'],10,4,14,7,16,10,18,12]}});
   map.on('click',e=>{ if(store.mode!=='officers' || OFF.view!=='all' || !offAllReady()) return; e.preventDefault(); offAllTap(e.point); });
@@ -4997,64 +5002,98 @@ function offSheetDrag(sheet, key){
 offSheetDrag(document.getElementById('offListSheet'),'lh'); offSheetDrag(document.getElementById('offCardSheet'),'oh');
 mqMobile.addEventListener('change',()=>{ if(store.mode==='officers'){ offRenderAll(); map.easeTo({padding:offPad(), duration:0}); } });
 
-/* ---------- all tickets in a day (approved 11-18) ----------
-   Every ticket that day, whoever wrote it, as a heat map (colors and layer setup from Geoapify's MapLibre heat map
-   example) with each ticket also a dot above it at every zoom, so any one can be seen and tapped. Reads the same
-   days/<date>.json as the officer view; tickets with an unreadable officer number are not in those files (about 1%). */
-const offAllTk=()=>OFF.all ? (OFF.type!=null ? OFF.all.tk.filter(t=>String(t.v)===OFF.type) : OFF.all.tk) : [];
-const offAllReady=()=>!!OFF.all && OFF.all.day===OFF.day;
+/* ---------- all tickets, one day or a range (approved 11-18) ----------
+   Every ticket in the dates picked, whoever wrote it, as a heat map (colors and layer setup from Geoapify's MapLibre
+   heat map example) with every spot also a dot above it at every zoom, so any ticket can be seen and tapped. Reads the
+   same days/<date>.json the officer view uses, newest day first, and draws as they arrive. Tickets with an unreadable
+   officer number are not in those files (about 1%). A ticket is its day file row [officer, time, lng, lat, address,
+   type, fine] with its date added as item 7; a spot is one map point and every ticket written there. Zoomed out, nearby
+   spots merge into one point (MapLibre clustering), so a year of tickets stays light to draw; at street level every
+   spot is its own dot again. */
+const offAllKey=()=>offDates().join(',');
+const offAllReady=()=>!!OFF.all && OFF.all.key===offAllKey() && (OFF.all.loaded>0 || !OFF.all.dates.length);
+const offAllTk=()=>!OFF.all ? [] : OFF.type!=null ? OFF.all.tk.filter(t=>String(t[5])===OFF.type) : OFF.all.tk;
 // a block is the hundred-number run of one street: 2152 N DAMEN AVE and 2108 N DAMEN AVE are both "2100 to 2199 N Damen Ave"
 function offBlockOf(a){ const m=/^(\d+) (.+)$/.exec(String(a||'')); if(!m) return a?{key:'|'+a, name:offAddr(a)}:null;
   const lo=Math.floor(+m[1]/100)*100; return {key:lo+'|'+m[2], name:`${lo||1} to ${lo+99} ${offAddr(m[2])}`}; }
+// spots, rebuilt only when more days arrive or the ticket type changes; new tickets only add to the end, so a spot keeps its index
+function offAllAgg(){
+  const A=OFF.all, k=`${A.tk.length}|${OFF.type}`; if(A.agg && A.agg.k===k) return A.agg;
+  const by=new Map();
+  for(const r of offAllTk()){ if(r[2]==null) continue; const key=r[2]+','+r[3]; let s=by.get(key); if(!s){ s={ll:[r[2],r[3]], tk:[]}; by.set(key,s); } s.tk.push(r); }
+  const spots=[...by.values()];
+  return A.agg={k, spots, onMap:spots.reduce((a,s)=>a+s.tk.length,0)};
+}
+// each ticket counts on the block of its own address: about 6% of tickets share a map point with an address on another block
 function offAllBlocks(){
   const by=new Map();
-  for(const t of offAllTk()){ if(!t.ll) continue; const k=offBlockOf(t.addr); if(!k) continue;
-    let b=by.get(k.key); if(!b){ b={key:k.key, name:k.name, n:0, f:0, tk:[], ty:{}}; by.set(k.key,b); }
-    b.n++; b.f+=t.fine; b.tk.push(t); b.ty[t.v]=(b.ty[t.v]||0)+1; }
+  for(const s of offAllAgg().spots) for(const t of s.tk){ const k=offBlockOf(t[4]); if(!k) continue;
+    let b=by.get(k.key); if(!b){ b={key:k.key, name:k.name, n:0, f:0, tk:[], spots:new Set()}; by.set(k.key,b); }
+    b.n++; b.f+=t[6]; b.tk.push(t); b.spots.add(s); }
   return [...by.values()].sort((a,b)=>b.n-a.n||b.f-a.f);
 }
 function offAllListHTML(){
-  const ready=offAllReady(), tk=offAllTk(), what=OFF.type!=null ? offVio(OFF.type).toLowerCase()+' tickets' : 'tickets';
+  const ready=offAllReady(), A=OFF.all, what=OFF.type!=null ? offVio(OFF.type).toLowerCase()+' tickets' : 'tickets';
   // the total matches the officer view (it includes tickets with an unreadable officer number); "on the map" is what is drawn
-  const total=OFF.type!=null ? offRows().reduce((a,r)=>a+r.n,0) : ((OFF.totals[OFF.day]||[0])[0]);
-  const meta=`${offNum(total)} ${what}`+(ready?` · ${offNum(tk.filter(t=>t.ll).length)} on the map`:'');
+  const total=OFF.type!=null ? offRows().reduce((a,r)=>a+r.n,0) : offDates().reduce((a,k)=>a+((OFF.totals[k]||[0])[0]),0);
+  const loading=A && A.key===offAllKey() && A.loaded<A.dates.length ? ` · loading ${A.loaded} of ${A.dates.length} days` : '';
+  const meta=`${OFF.mode==='day'?'':offLabel()+' · '}${offNum(total)} ${what}`+(ready && !loading?` · ${offNum(offAllAgg().onMap)} on the map`:'')+loading;
   if(!ready) return {controls:offControlsHTML(), meta, head:'', rows:'<div class="off-spin" aria-label="Loading"></div>'};
   const B=OFF.allB=offAllBlocks().slice(0,25);
-  const sub=b=>{ if(OFF.type!=null){ const ts=b.tk.map(t=>t.time).sort(); return ts.length>1?`${offT12(ts[0])} to ${offT12(ts.at(-1))}`:offT12(ts[0]); }
-    const top=Object.entries(b.ty).sort((x,y)=>y[1]-x[1])[0]; return `Most often: ${offVio(top[0])}`; };
+  const sub=b=>{ const tk=b.tk;
+    if(OFF.type==null){ const ty={}; for(const t of tk) ty[t[5]]=(ty[t[5]]||0)+1; return `Most often: ${offVio(Object.entries(ty).sort((x,y)=>y[1]-x[1])[0][0])}`; }
+    if(OFF.mode==='range'){ const n=new Set(tk.map(t=>t[7])).size; return `On ${n} day${n>1?'s':''}`; }
+    const ts=tk.map(t=>t[1]).sort(); return ts.length>1?`${offT12(ts[0])} to ${offT12(ts.at(-1))}`:offT12(ts[0]); };
   return {controls:offControlsHTML(), meta, head:B.length?'<div class="off-sec all-head">Most ticketed blocks</div>':'',
     rows:B.length ? B.map((b,i)=>`<div class="off-row${b.key===OFF.blk?' sel':''}" data-all-blk="${i}" role="button" tabindex="0"><span class="all-rank">${i+1}</span><div class="off-txt"><div class="off-ot">${b.name}</div><div class="off-os">${sub(b)}</div></div><div class="off-num"><b>${offNum(b.n)} ticket${b.n>1?'s':''}</b><span>${offMoney(b.f)}</span></div></div>`).join('')
-      : '<div class="off-meta">No tickets with a map point this day.</div>'};
+      : `<div class="off-meta">No tickets with a map point ${OFF.mode==='day'?'this day':'in these dates'}.</div>`};
 }
 async function offAllLoad(){
-  const day=OFF.day;
-  if(!offAllReady()){
-    const d=await offGet(`chicago-officers/days/${day}.json`, offDayCache, day);
-    if(OFF.view!=='all' || OFF.day!==day) return;
-    OFF.all={day, tk:d.map((t,i)=>({i, o:t[0], time:t[1], ll:t[2]!=null?[t[2],t[3]]:null, addr:t[4], v:t[5], fine:t[6]}))};
-    offRenderList();
-  }
-  offAllDraw();
+  const key=offAllKey();
+  if(OFF.all && OFF.all.key===key) return offAllDraw();   // loaded, or loading now
+  const dates=offDates().filter(k=>((OFF.totals[k]||[0])[0])>0).reverse();   // newest first; days with no tickets have no file
+  const A=OFF.all={key, dates, tk:[], loaded:0, agg:null};
+  offRenderList(); offAllDraw();
+  // draw after the first day, then about every quarter of the range, then at the end
+  let next=0, drawn=0; const step=Math.max(4, Math.ceil(dates.length/4));
+  const worker=async()=>{ while(next<dates.length){ const d=dates[next++];
+    const rows=await offGet(`chicago-officers/days/${d}.json`, offDayCache, d); if(OFF.all!==A) return;
+    for(const r of rows){ r[7]=d; A.tk.push(r); } A.loaded++;
+    if(A.loaded===1 || A.loaded===dates.length || A.loaded-drawn>=step){ drawn=A.loaded; offRenderList(); offAllDraw(); } } };
+  await Promise.all(Array.from({length:Math.min(6, dates.length)}, worker));
 }
 function offAllDraw(){
   if(!map.getSource('all-pts')) return;
   const on=store.mode==='officers' && OFF.view==='all' && offAllReady();
-  map.getSource('all-pts').setData(OFF_FC(on ? offAllTk().filter(t=>t.ll).map(t=>({type:'Feature',properties:{i:t.i},geometry:{type:'Point',coordinates:t.ll}})) : []));
+  // weight = tickets per day at that spot, so a month reads on the same color scale as one day
+  const days=on ? Math.max(1, OFF.all.loaded) : 1, spots=on ? offAllAgg().spots : [];
+  map.getSource('all-pts').setData(OFF_FC(spots.map((s,i)=>({type:'Feature',properties:{s:i, n:s.tk.length, g:s.tk.length/days},geometry:{type:'Point',coordinates:s.ll}}))));
+  // the heat reads from squares about 40m wide, each at the middle of its tickets: a year of tickets is about 90,000 squares
+  // instead of 215,000 spots, and it stays one smooth surface, where merged dots would draw a grid of rings
+  const cells=new Map(), q=0.0004;
+  for(const s of spots){ const k=Math.round(s.ll[0]/q)+','+Math.round(s.ll[1]/q), n=s.tk.length; let c=cells.get(k);
+    if(!c){ c={x:0, y:0, n:0}; cells.set(k,c); } c.x+=s.ll[0]*n; c.y+=s.ll[1]*n; c.n+=n; }
+  map.getSource('all-heat').setData(OFF_FC([...cells.values()].map(c=>({type:'Feature',properties:{w:c.n/days},geometry:{type:'Point',coordinates:[c.x/c.n, c.y/c.n]}}))));
   map.getSource('all-sel').setData(OFF_FC(on ? OFF.ring.map(ll=>({type:'Feature',geometry:{type:'Point',coordinates:ll}})) : []));
 }
 function offAllClear(){
   const had=OFF.blk!=null; OFF.blk=null; OFF.ring=[]; if(offPopup){ offPopup.remove(); offPopup=null; } offPopAt=null;
   offAllDraw(); if(had) offRenderList();
 }
-// a tap takes the nearest ticket within reach (22px on a phone, so the tap area is 44px) and lists every ticket at that spot
+// a tap takes the nearest spot within reach (22px on a phone, so the tap area is 44px) and lists its tickets, newest first
 function offAllTap(pt){
   const r=isMobile()?22:10, fs=map.queryRenderedFeatures([[pt.x-r,pt.y-r],[pt.x+r,pt.y+r]],{layers:['all-dot']});
   if(!fs.length) return offAllClear();
-  let best=null, bd=Infinity;
-  for(const f of fs){ const t=OFF.all.tk[f.properties.i], q=map.project(t.ll), d=Math.hypot(q.x-pt.x,q.y-pt.y); if(d<bd){ bd=d; best=t; } }
-  const here=offAllTk().filter(t=>t.ll && t.ll[0]===best.ll[0] && t.ll[1]===best.ll[1]).sort((a,b)=>a.time<b.time?-1:1);
-  const line=t=>{ const o=OFF.by.get(t.o); return `<div class="all-pi"><div>${offT12(t.time)} · ${offVio(t.v)} · ${offMoney(t.fine)}</div>${o?`<button type="button" class="off-link" data-all-off="${t.o}">Officer ${t.o}${o.c?' · '+o.c:''}&nbsp;&rsaquo;</button>`:''}</div>`; };
-  const html=`<div class="all-pop"><strong>${offAddr(best.addr)||'Ticket'}</strong>${here.length>1?`<div class="off-meta">${here.length} tickets at this spot</div>`:''}${here.map(line).join('')}</div>`;
+  let near=null, bd=Infinity;
+  for(const f of fs){ const q=map.project(f.geometry.coordinates), d=Math.hypot(q.x-pt.x,q.y-pt.y); if(d<bd){ bd=d; near=f; } }
+  if(near.properties.cluster){   // several spots merged at this zoom: zoom in until they split
+    map.getSource('all-pts').getClusterExpansionZoom(near.properties.cluster_id).then(z=>map.easeTo({center:near.geometry.coordinates, zoom:Math.min(z+0.5,17), padding:offPad(), duration:500})).catch(()=>{});
+    return; }
+  const best=offAllAgg().spots[near.properties.s]; if(!best) return offAllClear();
+  const tk=best.tk.slice().sort((a,b)=>a[7]!==b[7] ? (a[7]<b[7]?1:-1) : (a[1]<b[1]?1:-1)), range=OFF.mode==='range', MAX=30;
+  const many=new Set(tk.map(t=>t[4])).size>1;
+  const line=t=>{ const o=OFF.by.get(t[0]); return `<div class="all-pi">${many?`<div class="all-pa">${offAddr(t[4])}</div>`:''}<div>${range?offShort(t[7])+' · ':''}${offT12(t[1])} · ${offVio(t[5])} · ${offMoney(t[6])}</div>${o?`<button type="button" class="off-link" data-all-off="${t[0]}|${t[7]}">Officer ${t[0]}${o.c?' · '+o.c:''}&nbsp;&rsaquo;</button>`:''}</div>`; };
+  const html=`<div class="all-pop"><strong>${many?'Tickets at this spot':offAddr(tk[0][4])||'Ticket'}</strong>${tk.length>1?`<div class="off-meta">${offNum(tk.length)} ticket${tk.length>1?'s':''}${many?' on '+new Set(tk.map(t=>t[4])).size+' addresses':' at this spot'}${range?', newest first':''}</div>`:''}${tk.slice(0,MAX).map(line).join('')}${tk.length>MAX?`<div class="off-meta all-more">and ${offNum(tk.length-MAX)} more</div>`:''}</div>`;
   const had=OFF.blk!=null; OFF.blk=null; OFF.ring=[best.ll]; offAllDraw(); if(had) offRenderList();
   offPopupOpen(best.ll, html);
   if(isMobile()) map.easeTo({center:best.ll, padding:offPad(), duration:500});
@@ -5062,14 +5101,14 @@ function offAllTap(pt){
 function offAllPickBlock(i){
   const b=(OFF.allB||[])[i]; if(!b) return;
   if(offPopup){ offPopup.remove(); offPopup=null; } offPopAt=null;
-  OFF.blk=b.key; OFF.ring=b.tk.map(t=>t.ll);
+  OFF.blk=b.key; OFF.ring=[...b.spots].map(s=>s.ll);
   if(isMobile() && OFF.lh>50){ OFF.lh=50; offSizeSheets(); }   // the map has to show for the block to be seen
   offRenderList(); offAllDraw(); offFit(OFF.ring);
 }
 function offSetView(v){
   if(v===OFF.view) return;
   OFF.view=v; offAllClear();
-  if(v==='all'){ OFF.sel=null; OFF.show=false; OFF.hl=null; OFF.tk=[]; OFF.mode='day'; OFF.day=OFF.day||OFF.last; }
+  if(v==='all'){ OFF.sel=null; OFF.show=false; OFF.hl=null; OFF.tk=[]; OFF.day=OFF.day||OFF.last; }
   offDrawRoute(); offRenderAll(); map.easeTo({padding:offPad(), duration:300});
   if(v==='all') offAllLoad(); else offAllDraw();
   writeUrl();
@@ -5078,7 +5117,7 @@ document.addEventListener('click',e=>{
   const t=e.target.closest('[data-off-view],[data-all-blk],[data-all-off]'); if(!t) return;
   if(t.dataset.offView) return offSetView(t.dataset.offView);
   if(t.dataset.allBlk!==undefined) return offAllPickBlock(+t.dataset.allBlk);
-  if(t.dataset.allOff){ const id=+t.dataset.allOff; offSetView('officers'); offPick(id); }   // the officer's card and route, same day
+  if(t.dataset.allOff){ const [id,d]=t.dataset.allOff.split('|'); OFF.mode='day'; OFF.day=d; offSetView('officers'); offPick(+id); }   // that officer's route on that ticket's day
 });
 document.addEventListener('keydown',e=>{ if(e.key==='Enter'){ const r=e.target.closest&&e.target.closest('[data-all-blk]'); if(r) offAllPickBlock(+r.dataset.allBlk); } });
 
@@ -5089,7 +5128,7 @@ async function offFromUrl(v){
   else if(d&&d.includes('~')){ OFF.mode='range'; OFF.preset='custom'; [OFF.from,OFF.to]=d.split('~'); }
   else if(['week','month','ytd'].includes(d)){ OFF.mode='range'; OFF.preset=d; }
   OFF.type=ty&&OFF.viol[+ty]!=null?String(+ty):null; OFF.rank=rk==='t'?'tickets':'fines';
-  if(vw==='a'){ OFF.view='all'; OFF.mode='day'; OFF.day=OFF.day||OFF.last; offRenderAll(); map.easeTo({padding:offPad(), duration:0}); return offAllLoad(); }
+  if(vw==='a'){ OFF.view='all'; OFF.day=OFF.day||OFF.last; offRenderAll(); map.easeTo({padding:offPad(), duration:0}); return offAllLoad(); }
   if(!id||!OFF.by.has(+id)){ offRenderAll(); return; }
   await offPick(+id); if(sh==='0' && OFF.show) offToggleShow();   // a link made with the route hidden keeps it hidden
 }

@@ -11,11 +11,11 @@ errors, report = [], {}
 PINS = """() => { const f=map.getSource('off-pts')._data.features, tk=offTk(), pos=new Map(tk.map((t,i)=>[t.n,i+1]));
   const timesUp=tk.every((t,i)=>i===0||tk[i-1].time<=t.time);
   return f.length>0 && timesUp && f.every(x=>x.properties.img.replace(/^off-n-|-l$/g,'')===String(pos.get(x.properties.n))); }"""
-ALL_DRAWN = "() => offAllTk().length>0 && map.getSource('all-pts')._data.features.length===offAllTk().filter(t=>t.ll).length"
-ON_SCREEN_DOT = """() => { const P=offPad(); for(const x of map.queryRenderedFeatures({layers:['all-dot']})){ const t=OFF.all.tk[x.properties.i], q=map.project(t.ll);
-  if(q.x>P.left+30&&q.x<innerWidth-P.right-30&&q.y>P.top+30&&q.y<innerHeight-P.bottom-30) return [q.x,q.y,t.i]; } return null; }"""
-SPOT_LISTED = """(i) => { const t=OFF.all.tk[i], here=offAllTk().filter(x=>x.ll&&x.ll[0]===t.ll[0]&&x.ll[1]===t.ll[1]).length;
-  return document.querySelectorAll('.maplibregl-popup .all-pi').length===here; }"""
+ALL_DRAWN = "() => { const f=map.getSource('all-pts')._data.features, on=offAllTk().filter(t=>t[2]!=null).length; return on>0 && f.reduce((a,x)=>a+x.properties.n,0)===on && f.length===offAllAgg().spots.length; }"
+ON_SCREEN_DOT = """() => { const P=offPad(); for(const x of map.queryRenderedFeatures({layers:['all-dot']})){ if(x.properties.cluster) continue; const s=offAllAgg().spots[x.properties.s], q=map.project(s.ll);
+  if(q.x>P.left+30&&q.x<innerWidth-P.right-30&&q.y>P.top+30&&q.y<innerHeight-P.bottom-30) return [q.x,q.y,x.properties.s]; } return null; }"""
+SPOT_LISTED = """(i) => { const s=offAllAgg().spots[i], here=offAllTk().filter(t=>t[2]===s.ll[0]&&t[3]===s.ll[1]).length;
+  return document.querySelectorAll('.maplibregl-popup .all-pi').length===Math.min(here,30); }"""
 # nothing in the officer UI is cut off or sticks out of its box
 CUT = """() => { const out=[]; for(const root of document.querySelectorAll('#offSec,#offCard,#offListSheet,#offCardSheet')){
   const R=root.getBoundingClientRect(); if(!R.width||getComputedStyle(root).display==='none') continue;
@@ -74,12 +74,18 @@ async def desktop(b, night):
     # all tickets: every ticket that day with a map point is drawn, the top block ties out to its tickets, a dot tap lists its spot
     await page.click("#offSec [data-off-view=all]"); await page.wait_for_function("offAllReady()"); await page.wait_for_timeout(1200); await shot(page, f"{tag}11-all")
     report[f"{tag} all tickets drawn"] = await page.evaluate(ALL_DRAWN)
-    report[f"{tag} top block ties out"] = await page.evaluate("() => { const b=OFF.allB[0]; return !!b && b.n===offAllTk().filter(t=>t.ll && offBlockOf(t.addr) && offBlockOf(t.addr).key===b.key).length; }")
+    report[f"{tag} top block ties out"] = await page.evaluate("() => { const b=OFF.allB[0]; return !!b && b.n===offAllTk().filter(t=>t[2]!=null && offBlockOf(t[4]) && offBlockOf(t[4]).key===b.key).length; }")
     await page.locator("#offSec [data-all-blk='0']").click(); await page.wait_for_timeout(1200); await shot(page, f"{tag}12-block")
+    await page.evaluate("map.jumpTo({zoom:Math.max(map.getZoom(),15.5)})"); await page.wait_for_timeout(1500)
     xy = await page.evaluate(ON_SCREEN_DOT)
     await page.mouse.click(xy[0] + 4, xy[1] + 3); await page.wait_for_timeout(1000); await shot(page, f"{tag}13-dot")
     report[f"{tag} dot tap lists every ticket at its spot"] = await page.evaluate(SPOT_LISTED, xy[2])
     report[f"{tag} all tickets nothing cut off"] = await page.evaluate(CUT)
+    await page.click("#offSec [data-off-mode=range]"); await page.click("#offSec [data-off-preset=ytd]")
+    await page.wait_for_function("offAllReady() && OFF.all.loaded===OFF.all.dates.length", timeout=300000); await page.wait_for_timeout(2500); await shot(page, f"{tag}14-all-ytd")
+    report[f"{tag} all tickets year to date drawn"] = await page.evaluate(ALL_DRAWN)
+    report[f"{tag} year to date total matches the officer view"] = await page.evaluate("() => { const want=OFF.type!=null ? offRows().reduce((a,r)=>a+r.n,0) : offDates().reduce((a,k)=>a+((OFF.totals[k]||[0])[0]),0); return document.querySelector('#offSec .off-sum').textContent.includes(offNum(want)); }")
+    await page.click("#offSec [data-off-mode=day]"); await page.wait_for_timeout(800)
     await page.click("#offSec [data-off-view=officers]"); await page.wait_for_timeout(600)
     await ctx.close()
 
@@ -113,7 +119,7 @@ async def phone(b):
     await page.tap("#offCardSheet [data-off-close]"); await shot(page, "p08-closed")
     await page.tap("#offLsBody [data-off-view=all]"); await page.wait_for_function("offAllReady()"); await page.wait_for_timeout(1200); await shot(page, "p09-all")
     report["phone all tickets drawn"] = await page.evaluate(ALL_DRAWN)
-    await page.evaluate("map.jumpTo({center:OFF.allB[0].tk[0].ll, zoom:16})"); await page.wait_for_timeout(1200)
+    await page.evaluate("map.jumpTo({center:[OFF.allB[0].tk[0][2],OFF.allB[0].tk[0][3]], zoom:16})"); await page.wait_for_timeout(1500)
     xy = await page.evaluate(ON_SCREEN_DOT)
     await page.touchscreen.tap(xy[0] + 12, xy[1] + 8); await page.wait_for_timeout(1200); await shot(page, "p10-dot")
     report["phone dot tap (12px off) lists its spot"] = await page.evaluate(SPOT_LISTED, xy[2])
