@@ -918,6 +918,11 @@
   .off-lhead .mini-btn { flex: none; white-space: nowrap; }
   .mini-btn.on { color: #fff; background: #0062cc; }
   .off-selbar { display: flex; gap: 10px; align-items: center; background: #e8f1ff !important; border: 0 !important; }
+  .all-rank { flex: none; width: 22px; text-align: center; font-size: var(--fs-meta); font-weight: 700; color: #6e6e73; }
+  .all-head { margin: 12px 0 0; }
+  .all-pop { max-height: min(220px, var(--pop-room, 220px)); overflow-y: auto; }
+  .all-pi { margin-top: 6px; padding-top: 6px; border-top: 1px solid #ececf0; }
+  .all-pi .off-link { padding: 2px 0 0; }
   .off-pop .maplibregl-popup-content { padding: 8px 10px; font-size: var(--fs-meta); line-height: 1.35; border-radius: 8px; overflow: visible; }
   @media (max-width: 640px) {
     .off-type { height: 44px; } .off-fbtn { min-height: 44px; } .off-link { min-height: 44px; }
@@ -4201,7 +4206,7 @@ function serializeState(){ const p=new URLSearchParams();
   }
   if(store.enfFilter.verdicts.size<4) p.set('fv',[...store.enfFilter.verdicts].join(',')); if(store.enfFilter.types.size<2) p.set('ft',[...store.enfFilter.types].join(','));
   if(store.mode==='officers'){ const d=OFF.mode==='day'?OFF.day:(OFF.preset==='custom'?`${OFF.from}~${OFF.to}`:OFF.preset);
-    p.set('o', `${OFF.sel||''}|${d||''}|${OFF.show?1:0}|${OFF.type??''}|${OFF.rank==='tickets'?'t':''}`); }
+    p.set('o', `${OFF.sel||''}|${d||''}|${OFF.show?1:0}|${OFF.type??''}|${OFF.rank==='tickets'?'t':''}${OFF.view==='all'?'|a':''}`); }
   return p.toString(); }
 function writeUrl(){ if(restoring) return; history.replaceState(null,'','#'+serializeState());
   // the last view, so opening the bare address returns where you left off rather than the overview
@@ -4534,7 +4539,7 @@ document.addEventListener('keydown',(e)=>{
 });
 function escStep(){
   if(hideQr()){ document.getElementById('share').focus(); return; }
-  if(store.mode==='officers'){ if(document.getElementById('offIntro').classList.contains('show')){ offIntroClose(); return; } if(OFF.sel){ offClose(); return; } }
+  if(store.mode==='officers'){ if(document.getElementById('offIntro').classList.contains('show')){ offIntroClose(); return; } if(OFF.sel){ offClose(); return; } if(OFF.view==='all' && (OFF.ring.length || (offPopup && offPopup.isOpen()))){ offAllClear(); return; } }
   const am=document.querySelector('.avoid-menu:not([hidden])');
   if(am){ am.hidden=true; const c=am.parentElement.querySelector('.dir-chip'); if(c){ c.setAttribute('aria-expanded','false'); c.focus(); } return; }
   const sr=document.getElementById('search-results');
@@ -4562,7 +4567,7 @@ document.addEventListener('keydown',(e)=>{
    by-officer/<id>.json (an officer's points, for range dots). Fake officer numbers only. */
 const OFF={ data:false, by:new Map(), shifts:{}, totals:{}, viol:[], first:null, last:null,
   mode:'day', day:null, preset:'month', from:null, to:null, sel:null, show:false, fo:false, hl:null, lh:35, oh:50, tk:[], tkKey:null,
-  type:null, rank:'fines', types:{}, typeOrder:[] };   // type: a violation index as a string, or null for all tickets
+  type:null, rank:'fines', types:{}, typeOrder:[], view:'officers', all:null, allB:[], blk:null, ring:[] };   // view: 'officers' or 'all' (every ticket that day)   // type: a violation index as a string, or null for all tickets
 const offDayCache=new Map(), offPtCache=new Map();
 const offGet=(url,cache,key)=>{ if(!cache.has(key)) cache.set(key, fetch(url).then(r=>r.ok?r.json():[]).catch(()=>[])); return cache.get(key); };
 const offMoney=n=>'$'+Math.round(n).toLocaleString('en-US');
@@ -4620,13 +4625,15 @@ function offControlsHTML(){
   const opt=i=>`<option value="${i}"${OFF.type===String(i)?' selected':''}>${offVio(i)}</option>`;
   const top=OFF.typeOrder.slice(0,8), rest=OFF.typeOrder.slice(8).sort((a,b)=>offVio(a).localeCompare(offVio(b)));
   // ticket type and ranking sit behind one Filter button that names what is on (Hick's law: fewer choices in view)
-  const on=`${OFF.type!=null?offVio(OFF.type):'All ticket types'} · ${OFF.rank==='tickets'?'most tickets':'most fines'}`;
+  const all=OFF.view==='all', ty=OFF.type!=null?offVio(OFF.type):'All ticket types';
+  const on=all ? ty : `${ty} · ${OFF.rank==='tickets'?'most tickets':'most fines'}`;
   const menu=OFF.fo ? `<div class="off-fbody"><select class="off-type" data-off-type aria-label="Ticket type"><option value=""${OFF.type==null?' selected':''}>All ticket types</option><optgroup label="Most common">${top.map(opt).join('')}</optgroup><optgroup label="Other types">${rest.map(opt).join('')}</optgroup></select>
-      ${offSw('Most fines','Most tickets','data-off-rank',OFF.rank,'fines','tickets')}</div>` : '';
-  return `<div class="off-ctrls">${offSw('One day','Range','data-off-mode',OFF.mode,'day','range')}${dateUI}
+      ${all?'':offSw('Most fines','Most tickets','data-off-rank',OFF.rank,'fines','tickets')}</div>` : '';
+  return `<div class="off-ctrls">${offSw('Officers','All tickets','data-off-view',OFF.view,'officers','all')}${all?'':offSw('One day','Range','data-off-mode',OFF.mode,'day','range')}${dateUI}
     <div class="off-filter"><button type="button" class="off-fbtn" data-off-filter aria-expanded="${OFF.fo}"><span>Filter</span><b>${on}</b><i><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>${menu}</div></div>`;
 }
 function offListHTML(){
+  if(OFF.view==='all') return offAllListHTML();
   const R=offRows(), s=isMobile()?40:34;
   const total=OFF.type!=null ? R.reduce((a,r)=>a+r.n,0) : offDates().reduce((a,k)=>a+((OFF.totals[k]||[0])[0]),0);
   const what=OFF.type!=null ? offVio(OFF.type).toLowerCase()+' tickets' : 'tickets';
@@ -4637,7 +4644,7 @@ function offListHTML(){
 function offRenderList(){
   const L=offListHTML(), sec=document.getElementById('offSec');
   const box=sec.querySelector('.off-list'), keep=box?box.scrollTop:0;
-  sec.innerHTML=`<div class="sechead"><b>Officer shifts</b></div>${L.controls}<div class="off-meta off-sum">${L.meta}</div>
+  sec.innerHTML=`<div class="sechead"><b>Officer shifts</b></div>${L.controls}<div class="off-meta off-sum">${L.meta}</div>${L.head||''}
     <div class="off-fade"><div class="off-list">${L.rows}</div></div><button type="button" class="off-about" data-off-about>About this data</button>`;
   const nb=sec.querySelector('.off-list'); nb.scrollTop=keep; offFade(nb);
   if(typeof offRenderSheetList==='function') offRenderSheetList(L);
@@ -4673,7 +4680,8 @@ function offOff(){
   document.getElementById('panel').classList.remove('officers');
   document.getElementById('offSec').hidden=true;
   offHidden.forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility','visible'); }); offHidden=[];
-  Object.assign(OFF,{sel:null, show:false, hl:null, mode:'day', day:OFF.last, tk:[], lh:35});
+  Object.assign(OFF,{sel:null, show:false, hl:null, mode:'day', day:OFF.last, tk:[], lh:35, view:'officers', blk:null, ring:[]});
+  offAllDraw();
   if(typeof offTeardownMap==='function') offTeardownMap();
   if(typeof offRenderCard==='function') offRenderCard();
   if(typeof offSizeSheets==='function') offSizeSheets();
@@ -4697,24 +4705,31 @@ const offTopEdge=()=>isMobile() ? document.querySelector('#panel .search-wrap').
 // computer's side panel and officer card so no part of it sits under them
 let offPopAt=null;
 function offPopupOpen(ll, html){ if(offPopup) offPopup.remove(); offPopAt={ll, html}; offPopup=null; offPopupPlace(true); }
+// the side above or below the pin with more room wins, and a long list scrolls inside that room
 function offPopupAnchor(){
-  const q=map.project(offPopAt.ll), w=offPopup&&offPopup.isOpen() ? offPopup.getElement().offsetWidth : 240;
+  const q=map.project(offPopAt.ll), el=offPopup&&offPopup.isOpen() ? offPopup.getElement() : null, w=el ? el.offsetWidth : 240;
   const card=document.getElementById('offCard'), panel=document.getElementById('panel');
   const L=isMobile() ? 8 : panel.getBoundingClientRect().right+8, R=(!isMobile() && card.classList.contains('show')) ? card.getBoundingClientRect().left-8 : innerWidth-8;
-  const v=q.y-offTopEdge()<96 ? 'top' : 'bottom', h=q.x-w/2<L ? '-left' : q.x+w/2>R ? '-right' : '';
-  return v+h;
+  const top=offTopEdge()+8, bottom=isMobile() ? innerHeight-offPad().bottom+16 : innerHeight-8;
+  // above the pin when it fits there, else below when it fits there, else whichever side has more room
+  const need=el ? Math.min(el.querySelector('.maplibregl-popup-content').scrollHeight, 250) : 80;
+  const up=q.y-16-top, down=bottom-(q.y+16), v=up>=need ? 'bottom' : down>=need ? 'top' : up>=down ? 'bottom' : 'top';
+  return {a:v+(q.x-w/2<L ? '-left' : q.x+w/2>R ? '-right' : ''), room:Math.max(90, (v==='bottom'?up:down)-24)};
 }
 function offPopupPlace(force){
   if(!offPopAt || (!force && !(offPopup && offPopup.isOpen()))) return;
-  const a=offPopupAnchor();
-  if(!force && offPopup.offA===a) return;
+  const {a, room}=offPopupAnchor();
+  if(!force && offPopup.offA===a){ offPopup.getElement().style.setProperty('--pop-room', room+'px'); return; }
   if(offPopup) offPopup.remove();
-  offPopup=new maplibregl.Popup({offset:16, closeButton:false, className:'off-pop', anchor:a}).setLngLat(offPopAt.ll).setHTML(offPopAt.html).addTo(map); offPopup.offA=a;
+  const make=(a,room)=>{ offPopup=new maplibregl.Popup({offset:16, closeButton:false, className:'off-pop', anchor:a}).setLngLat(offPopAt.ll).setHTML(offPopAt.html).addTo(map);
+    offPopup.offA=a; offPopup.getElement().style.setProperty('--pop-room', room+'px'); };
+  make(a, room);
+  const m=offPopupAnchor(); if(m.a!==a){ offPopup.remove(); make(m.a, m.room); }   // placed again once its real height is known
 }
 map.on('move',()=>offPopupPlace(false));
 function offDrawMarkers(){
   const want=new Map();
-  if(store.mode==='officers' && !OFF.show) for(const r of offRows()){ const s=offLatest(r.sh); if(s[5]!=null) want.set(r.o.id,[s[5],s[6]]); }
+  if(store.mode==='officers' && OFF.view==='officers' && !OFF.show) for(const r of offRows()){ const s=offLatest(r.sh); if(s[5]!=null) want.set(r.o.id,[s[5],s[6]]); }
   for(const [id,m] of offMarkers) if(!want.has(id)){ m.remove(); offMarkers.delete(id); }
   for(const [id,ll] of want){
     let m=offMarkers.get(id);
@@ -4829,7 +4844,7 @@ function offRenderCard(){
   card.innerHTML=OFF.sel?`<div class="off-head">${C.head}</div><div class="off-body">${C.body}</div>`:'';
   const nb=card.querySelector('.off-tl'); if(nb){ nb.scrollTop=top; offFade(nb); }
 }
-async function offSetDates(fn){ fn(); OFF.hl=null; if(offPopup) offPopup.remove(); OFF.tk=[]; OFF.tkKey=null; offRenderAll(); await offLoadTickets(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); writeUrl(); }
+async function offSetDates(fn){ fn(); OFF.hl=null; if(offPopup) offPopup.remove(); OFF.blk=null; OFF.ring=[]; OFF.tk=[]; OFF.tkKey=null; offRenderAll(); await offLoadTickets(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); if(OFF.view==='all') await offAllLoad(); writeUrl(); }
 function offToggleShow(){ OFF.show=!OFF.show; OFF.hl=null; if(offPopup) offPopup.remove(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); if(!OFF.show) map.easeTo({padding:offPad(), duration:600}); writeUrl(); }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-off-close],[data-off-step],[data-off-mode],[data-off-preset],[data-off-show],[data-off-day],[data-off-jump],[data-off-rank],[data-off-type-clear],[data-off-filter]'); if(!t) return;
@@ -4852,7 +4867,20 @@ document.addEventListener('change',e=>{
 
 const OFF_FC=f=>({type:'FeatureCollection',features:f});
 function offInitLayers(){
-  for(const id of ['off-line','off-pts','off-hl','off-dots']) map.addSource(id,{type:'geojson',data:OFF_FC([])});
+  for(const id of ['off-line','off-pts','off-hl','off-dots','all-pts','all-sel']) map.addSource(id,{type:'geojson',data:OFF_FC([])});
+  const firstSym=(map.getStyle().layers.find(l=>l.type==='symbol')||{}).id;
+  map.addLayer({id:'all-heat',type:'heatmap',source:'all-pts',paint:{'heatmap-weight':1,
+    'heatmap-intensity':['interpolate',['linear'],['zoom'],10,0.3,12,0.6,14,0.9,16,1],
+    'heatmap-color':['interpolate',['linear'],['heatmap-density'],0,'rgba(50, 50, 255, 0)',0.2,'rgb(0, 204, 255)',0.4,'rgb(128, 255, 128)',0.6,'rgb(255, 255, 102)',0.8,'rgb(255, 128, 0)',1,'rgb(204, 0, 0)'],
+    'heatmap-radius':['interpolate',['linear'],['zoom'],10,8,12,14,14,22,16,30],
+    'heatmap-opacity':['interpolate',['linear'],['zoom'],14,0.9,16.5,0]}}, firstSym);   // street level: the heat is gone, the dots carry it
+  map.addLayer({id:'all-dot',type:'circle',source:'all-pts',paint:{'circle-color':'rgb(54, 174, 255)','circle-stroke-color':'#fff',
+    'circle-radius':['interpolate',['linear'],['zoom'],10,1.2,12,2,13,3,15,5,17,7],'circle-stroke-width':['interpolate',['linear'],['zoom'],11,0,12,0.5,13,1,16,1.5]}});
+  map.addLayer({id:'all-sel',type:'circle',source:'all-sel',paint:{'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#0b4fb3','circle-stroke-width':2.5,
+    'circle-radius':['interpolate',['linear'],['zoom'],10,4,14,7,16,10,18,12]}});
+  map.on('click',e=>{ if(store.mode!=='officers' || OFF.view!=='all' || !offAllReady()) return; e.preventDefault(); offAllTap(e.point); });
+  map.on('mouseenter','all-dot',()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave','all-dot',()=>map.getCanvas().style.cursor='');
   map.addLayer({id:'off-casing',type:'line',source:'off-line',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#0b4fb3','line-width':5,'line-opacity':.9}});
   map.addLayer({id:'off-line',type:'line',source:'off-line',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#1a73e8','line-width':3}});
   map.addLayer({id:'off-dots',type:'circle',source:'off-dots',paint:{'circle-radius':4.5,'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':1.5,'circle-opacity':.85}});
@@ -4933,7 +4961,7 @@ document.addEventListener('click',e=>{ const r=e.target.closest('[data-off-n]');
 
 function offRenderSheetList(L){
   document.getElementById('offLsMeta').textContent=L.meta;
-  document.getElementById('offLsBody').innerHTML=`${L.controls}<div class="off-list" style="margin-top:8px">${L.rows}</div><button type="button" class="off-about" data-off-about>About this data</button>`;
+  document.getElementById('offLsBody').innerHTML=`${L.controls}${L.head||''}<div class="off-list" style="margin-top:8px">${L.rows}</div><button type="button" class="off-about" data-off-about>About this data</button>`;
   offSizeSheets();
 }
 function offRenderSheetCard(C){
@@ -4969,13 +4997,99 @@ function offSheetDrag(sheet, key){
 offSheetDrag(document.getElementById('offListSheet'),'lh'); offSheetDrag(document.getElementById('offCardSheet'),'oh');
 mqMobile.addEventListener('change',()=>{ if(store.mode==='officers'){ offRenderAll(); map.easeTo({padding:offPad(), duration:0}); } });
 
+/* ---------- all tickets in a day (approved 11-18) ----------
+   Every ticket that day, whoever wrote it, as a heat map (colors and layer setup from Geoapify's MapLibre heat map
+   example) with each ticket also a dot above it at every zoom, so any one can be seen and tapped. Reads the same
+   days/<date>.json as the officer view; tickets with an unreadable officer number are not in those files (about 1%). */
+const offAllTk=()=>OFF.all ? (OFF.type!=null ? OFF.all.tk.filter(t=>String(t.v)===OFF.type) : OFF.all.tk) : [];
+const offAllReady=()=>!!OFF.all && OFF.all.day===OFF.day;
+// a block is the hundred-number run of one street: 2152 N DAMEN AVE and 2108 N DAMEN AVE are both "2100 to 2199 N Damen Ave"
+function offBlockOf(a){ const m=/^(\d+) (.+)$/.exec(String(a||'')); if(!m) return a?{key:'|'+a, name:offAddr(a)}:null;
+  const lo=Math.floor(+m[1]/100)*100; return {key:lo+'|'+m[2], name:`${lo||1} to ${lo+99} ${offAddr(m[2])}`}; }
+function offAllBlocks(){
+  const by=new Map();
+  for(const t of offAllTk()){ if(!t.ll) continue; const k=offBlockOf(t.addr); if(!k) continue;
+    let b=by.get(k.key); if(!b){ b={key:k.key, name:k.name, n:0, f:0, tk:[], ty:{}}; by.set(k.key,b); }
+    b.n++; b.f+=t.fine; b.tk.push(t); b.ty[t.v]=(b.ty[t.v]||0)+1; }
+  return [...by.values()].sort((a,b)=>b.n-a.n||b.f-a.f);
+}
+function offAllListHTML(){
+  const ready=offAllReady(), tk=offAllTk(), what=OFF.type!=null ? offVio(OFF.type).toLowerCase()+' tickets' : 'tickets';
+  // the total matches the officer view (it includes tickets with an unreadable officer number); "on the map" is what is drawn
+  const total=OFF.type!=null ? offRows().reduce((a,r)=>a+r.n,0) : ((OFF.totals[OFF.day]||[0])[0]);
+  const meta=`${offNum(total)} ${what}`+(ready?` · ${offNum(tk.filter(t=>t.ll).length)} on the map`:'');
+  if(!ready) return {controls:offControlsHTML(), meta, head:'', rows:'<div class="off-spin" aria-label="Loading"></div>'};
+  const B=OFF.allB=offAllBlocks().slice(0,25);
+  const sub=b=>{ if(OFF.type!=null){ const ts=b.tk.map(t=>t.time).sort(); return ts.length>1?`${offT12(ts[0])} to ${offT12(ts.at(-1))}`:offT12(ts[0]); }
+    const top=Object.entries(b.ty).sort((x,y)=>y[1]-x[1])[0]; return `Most often: ${offVio(top[0])}`; };
+  return {controls:offControlsHTML(), meta, head:B.length?'<div class="off-sec all-head">Most ticketed blocks</div>':'',
+    rows:B.length ? B.map((b,i)=>`<div class="off-row${b.key===OFF.blk?' sel':''}" data-all-blk="${i}" role="button" tabindex="0"><span class="all-rank">${i+1}</span><div class="off-txt"><div class="off-ot">${b.name}</div><div class="off-os">${sub(b)}</div></div><div class="off-num"><b>${offNum(b.n)} ticket${b.n>1?'s':''}</b><span>${offMoney(b.f)}</span></div></div>`).join('')
+      : '<div class="off-meta">No tickets with a map point this day.</div>'};
+}
+async function offAllLoad(){
+  const day=OFF.day;
+  if(!offAllReady()){
+    const d=await offGet(`chicago-officers/days/${day}.json`, offDayCache, day);
+    if(OFF.view!=='all' || OFF.day!==day) return;
+    OFF.all={day, tk:d.map((t,i)=>({i, o:t[0], time:t[1], ll:t[2]!=null?[t[2],t[3]]:null, addr:t[4], v:t[5], fine:t[6]}))};
+    offRenderList();
+  }
+  offAllDraw();
+}
+function offAllDraw(){
+  if(!map.getSource('all-pts')) return;
+  const on=store.mode==='officers' && OFF.view==='all' && offAllReady();
+  map.getSource('all-pts').setData(OFF_FC(on ? offAllTk().filter(t=>t.ll).map(t=>({type:'Feature',properties:{i:t.i},geometry:{type:'Point',coordinates:t.ll}})) : []));
+  map.getSource('all-sel').setData(OFF_FC(on ? OFF.ring.map(ll=>({type:'Feature',geometry:{type:'Point',coordinates:ll}})) : []));
+}
+function offAllClear(){
+  const had=OFF.blk!=null; OFF.blk=null; OFF.ring=[]; if(offPopup){ offPopup.remove(); offPopup=null; } offPopAt=null;
+  offAllDraw(); if(had) offRenderList();
+}
+// a tap takes the nearest ticket within reach (22px on a phone, so the tap area is 44px) and lists every ticket at that spot
+function offAllTap(pt){
+  const r=isMobile()?22:10, fs=map.queryRenderedFeatures([[pt.x-r,pt.y-r],[pt.x+r,pt.y+r]],{layers:['all-dot']});
+  if(!fs.length) return offAllClear();
+  let best=null, bd=Infinity;
+  for(const f of fs){ const t=OFF.all.tk[f.properties.i], q=map.project(t.ll), d=Math.hypot(q.x-pt.x,q.y-pt.y); if(d<bd){ bd=d; best=t; } }
+  const here=offAllTk().filter(t=>t.ll && t.ll[0]===best.ll[0] && t.ll[1]===best.ll[1]).sort((a,b)=>a.time<b.time?-1:1);
+  const line=t=>{ const o=OFF.by.get(t.o); return `<div class="all-pi"><div>${offT12(t.time)} · ${offVio(t.v)} · ${offMoney(t.fine)}</div>${o?`<button type="button" class="off-link" data-all-off="${t.o}">Officer ${t.o}${o.c?' · '+o.c:''}&nbsp;&rsaquo;</button>`:''}</div>`; };
+  const html=`<div class="all-pop"><strong>${offAddr(best.addr)||'Ticket'}</strong>${here.length>1?`<div class="off-meta">${here.length} tickets at this spot</div>`:''}${here.map(line).join('')}</div>`;
+  const had=OFF.blk!=null; OFF.blk=null; OFF.ring=[best.ll]; offAllDraw(); if(had) offRenderList();
+  offPopupOpen(best.ll, html);
+  if(isMobile()) map.easeTo({center:best.ll, padding:offPad(), duration:500});
+}
+function offAllPickBlock(i){
+  const b=(OFF.allB||[])[i]; if(!b) return;
+  if(offPopup){ offPopup.remove(); offPopup=null; } offPopAt=null;
+  OFF.blk=b.key; OFF.ring=b.tk.map(t=>t.ll);
+  if(isMobile() && OFF.lh>50){ OFF.lh=50; offSizeSheets(); }   // the map has to show for the block to be seen
+  offRenderList(); offAllDraw(); offFit(OFF.ring);
+}
+function offSetView(v){
+  if(v===OFF.view) return;
+  OFF.view=v; offAllClear();
+  if(v==='all'){ OFF.sel=null; OFF.show=false; OFF.hl=null; OFF.tk=[]; OFF.mode='day'; OFF.day=OFF.day||OFF.last; }
+  offDrawRoute(); offRenderAll(); map.easeTo({padding:offPad(), duration:300});
+  if(v==='all') offAllLoad(); else offAllDraw();
+  writeUrl();
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-off-view],[data-all-blk],[data-all-off]'); if(!t) return;
+  if(t.dataset.offView) return offSetView(t.dataset.offView);
+  if(t.dataset.allBlk!==undefined) return offAllPickBlock(+t.dataset.allBlk);
+  if(t.dataset.allOff){ const id=+t.dataset.allOff; offSetView('officers'); offPick(id); }   // the officer's card and route, same day
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Enter'){ const r=e.target.closest&&e.target.closest('[data-all-blk]'); if(r) offAllPickBlock(+r.dataset.allBlk); } });
+
 async function offFromUrl(v){
   if(store.mode!=='officers') switchMode('officers'); await offLoad();
-  const [id,d,sh,ty,rk]=String(v).split('|');
+  const [id,d,sh,ty,rk,vw]=String(v).split('|');
   if(d&&/^\d{4}-\d\d-\d\d$/.test(d)){ OFF.mode='day'; OFF.day=d; }
   else if(d&&d.includes('~')){ OFF.mode='range'; OFF.preset='custom'; [OFF.from,OFF.to]=d.split('~'); }
   else if(['week','month','ytd'].includes(d)){ OFF.mode='range'; OFF.preset=d; }
   OFF.type=ty&&OFF.viol[+ty]!=null?String(+ty):null; OFF.rank=rk==='t'?'tickets':'fines';
+  if(vw==='a'){ OFF.view='all'; OFF.mode='day'; OFF.day=OFF.day||OFF.last; offRenderAll(); map.easeTo({padding:offPad(), duration:0}); return offAllLoad(); }
   if(!id||!OFF.by.has(+id)){ offRenderAll(); return; }
   await offPick(+id); if(sh==='0' && OFF.show) offToggleShow();   // a link made with the route hidden keeps it hidden
 }

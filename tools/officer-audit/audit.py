@@ -11,6 +11,11 @@ errors, report = [], {}
 PINS = """() => { const f=map.getSource('off-pts')._data.features, tk=offTk(), pos=new Map(tk.map((t,i)=>[t.n,i+1]));
   const timesUp=tk.every((t,i)=>i===0||tk[i-1].time<=t.time);
   return f.length>0 && timesUp && f.every(x=>x.properties.img.replace(/^off-n-|-l$/g,'')===String(pos.get(x.properties.n))); }"""
+ALL_DRAWN = "() => offAllTk().length>0 && map.getSource('all-pts')._data.features.length===offAllTk().filter(t=>t.ll).length"
+ON_SCREEN_DOT = """() => { const P=offPad(); for(const x of map.queryRenderedFeatures({layers:['all-dot']})){ const t=OFF.all.tk[x.properties.i], q=map.project(t.ll);
+  if(q.x>P.left+30&&q.x<innerWidth-P.right-30&&q.y>P.top+30&&q.y<innerHeight-P.bottom-30) return [q.x,q.y,t.i]; } return null; }"""
+SPOT_LISTED = """(i) => { const t=OFF.all.tk[i], here=offAllTk().filter(x=>x.ll&&x.ll[0]===t.ll[0]&&x.ll[1]===t.ll[1]).length;
+  return document.querySelectorAll('.maplibregl-popup .all-pi').length===here; }"""
 # nothing in the officer UI is cut off or sticks out of its box
 CUT = """() => { const out=[]; for(const root of document.querySelectorAll('#offSec,#offCard,#offListSheet,#offCardSheet')){
   const R=root.getBoundingClientRect(); if(!R.width||getComputedStyle(root).display==='none') continue;
@@ -66,6 +71,16 @@ async def desktop(b, night):
     report[f"{tag} rank by tickets"] = await page.evaluate("() => { const R=offRows(); return R.every((r,i)=>i===0||R[i-1].n>=r.n); }")
     report[f"{tag} nothing cut off"] = await page.evaluate(CUT)
     await page.keyboard.press("Escape"); await shot(page, f"{tag}08-escape")
+    # all tickets: every ticket that day with a map point is drawn, the top block ties out to its tickets, a dot tap lists its spot
+    await page.click("#offSec [data-off-view=all]"); await page.wait_for_function("offAllReady()"); await page.wait_for_timeout(1200); await shot(page, f"{tag}11-all")
+    report[f"{tag} all tickets drawn"] = await page.evaluate(ALL_DRAWN)
+    report[f"{tag} top block ties out"] = await page.evaluate("() => { const b=OFF.allB[0]; return !!b && b.n===offAllTk().filter(t=>t.ll && offBlockOf(t.addr) && offBlockOf(t.addr).key===b.key).length; }")
+    await page.locator("#offSec [data-all-blk='0']").click(); await page.wait_for_timeout(1200); await shot(page, f"{tag}12-block")
+    xy = await page.evaluate(ON_SCREEN_DOT)
+    await page.mouse.click(xy[0] + 4, xy[1] + 3); await page.wait_for_timeout(1000); await shot(page, f"{tag}13-dot")
+    report[f"{tag} dot tap lists every ticket at its spot"] = await page.evaluate(SPOT_LISTED, xy[2])
+    report[f"{tag} all tickets nothing cut off"] = await page.evaluate(CUT)
+    await page.click("#offSec [data-off-view=officers]"); await page.wait_for_timeout(600)
     await ctx.close()
 
 async def phone(b):
@@ -96,6 +111,13 @@ async def phone(b):
     small = await page.evaluate("() => [...document.querySelectorAll('#obtn,.off-x,.off-step button,.color-btn,.fchip,.off-fbtn,.off-chip,.off-type')].filter(e=>e.offsetParent).map(e=>e.getBoundingClientRect()).filter(r=>r.height<44||r.width<44).length")
     report["phone targets under 44px"] = small
     await page.tap("#offCardSheet [data-off-close]"); await shot(page, "p08-closed")
+    await page.tap("#offLsBody [data-off-view=all]"); await page.wait_for_function("offAllReady()"); await page.wait_for_timeout(1200); await shot(page, "p09-all")
+    report["phone all tickets drawn"] = await page.evaluate(ALL_DRAWN)
+    await page.evaluate("map.jumpTo({center:OFF.allB[0].tk[0].ll, zoom:16})"); await page.wait_for_timeout(1200)
+    xy = await page.evaluate(ON_SCREEN_DOT)
+    await page.touchscreen.tap(xy[0] + 12, xy[1] + 8); await page.wait_for_timeout(1200); await shot(page, "p10-dot")
+    report["phone dot tap (12px off) lists its spot"] = await page.evaluate(SPOT_LISTED, xy[2])
+    report["phone popup clear of the header card (all tickets)"] = await page.evaluate("() => { const p=document.querySelector('.maplibregl-popup'); return !!p && p.getBoundingClientRect().top >= document.getElementById('panel').getBoundingClientRect().bottom; }")
     await ctx.close()
 
 async def main():
