@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-18T07:48:31Z",
+"checked_at": "2026-11-18T20:58:26Z",
 "cameras": 1117,
 "counts": {
 "frozen": 15,
-"offline": 1
+"offline": 3
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CLE173-L.jpg": "frozen",
@@ -16,6 +16,8 @@
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/D05-037.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/D09/US-35_SR-104_WB.jpg": "offline",
+"https://itscameras.dot.state.oh.us:443/images/D09/US-50_Lancaster.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4169.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4190.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Merwin_Ten_Mile.jpg": "frozen",
