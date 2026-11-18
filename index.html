@@ -4734,14 +4734,15 @@ function offScrollTo(id){
 }
 async function offPick(id){
   if(OFF.sel===id) return;
-  OFF.sel=id; OFF.hl=null; OFF.show=false; if(offPopup) offPopup.remove();   // like SF: a new pick clears the route
+  // picking an officer, from the list or their avatar on the map, shows their tickets right away (approved 11-18):
+  // the route in day view, every ticket as a dot in a range. The fit to the route is the one map move.
+  OFF.sel=id; OFF.hl=null; OFF.show=true; if(offPopup) offPopup.remove();
   if(OFF.mode==='day' && !offShiftOn(id,OFF.day)) OFF.day=offLatest(OFF.shifts[id])[0];
   if(isMobile()){ OFF.lh=15; OFF.oh=50; }
-  OFF.tk=[]; if(typeof offDrawRoute==='function') offDrawRoute();
+  OFF.tk=[]; offDrawRoute();
   offRenderAll(); offScrollTo(id);
-  const r=offRows().find(x=>x.o.id===id), s=r&&offLatest(r.sh);
-  if(s&&s[5]!=null) map.easeTo({center:[s[5],s[6]], zoom:14.5, padding:offPad(), duration:600});
-  if(typeof offLoadTickets==='function'){ await offLoadTickets(); if(OFF.sel!==id) return; offRenderCard(); }
+  await offLoadTickets(); if(OFF.sel!==id) return;
+  offDrawMarkers(); offDrawRoute(); offRenderCard();
   writeUrl();
 }
 function offClose(){
@@ -4855,7 +4856,7 @@ function offInitLayers(){
   map.addLayer({id:'off-casing',type:'line',source:'off-line',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#0b4fb3','line-width':5,'line-opacity':.9}});
   map.addLayer({id:'off-line',type:'line',source:'off-line',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#1a73e8','line-width':3}});
   map.addLayer({id:'off-dots',type:'circle',source:'off-dots',paint:{'circle-radius':4.5,'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':1.5,'circle-opacity':.85}});
-  // every ticket on the route is a numbered badge (Warner, 11-18: numbers in the order written, on every pin). Each badge is
+  // every ticket on the route is a numbered badge, numbered in the order written (approved 11-18). Each badge is
   // one image with its number drawn in, so where badges stack the top one reads cleanly instead of digits mixing.
   map.addLayer({id:'off-num',type:'symbol',source:'off-pts',layout:{'icon-image':['get','img'],'icon-allow-overlap':true,'icon-ignore-placement':true,
     'symbol-sort-key':['get','key']}});
@@ -4976,7 +4977,7 @@ async function offFromUrl(v){
   else if(['week','month','ytd'].includes(d)){ OFF.mode='range'; OFF.preset=d; }
   OFF.type=ty&&OFF.viol[+ty]!=null?String(+ty):null; OFF.rank=rk==='t'?'tickets':'fines';
   if(!id||!OFF.by.has(+id)){ offRenderAll(); return; }
-  await offPick(+id); if(sh==='1') offToggleShow();
+  await offPick(+id); if(sh==='0' && OFF.show) offToggleShow();   // a link made with the route hidden keeps it hidden
 }
 
 /* ---------- boot ---------- */

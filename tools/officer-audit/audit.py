@@ -38,7 +38,8 @@ async def desktop(b, night):
     report[f"{tag} day file ms"] = ms
     # the day tiles must match the tickets listed (an officer can work two shifts on one date)
     report[f"{tag} day tiles equal tickets listed"] = await page.evaluate("() => document.querySelector('#offCard .enf-stat .num').textContent.replace(/,/g,'')==String(OFF.tk.length)")
-    await page.click("[data-off-show]"); await shot(page, f"{tag}04-route")
+    await page.wait_for_timeout(1200); await shot(page, f"{tag}04-route")
+    report[f"{tag} picking an officer draws their route"] = (await st(page))["show"] is True
     # every pin carries its number, counting 1, 2, 3 in the order the officer wrote the tickets
     report[f"{tag} route pins numbered in time order"] = await page.evaluate(PINS)
     await page.locator("#offCard .off-tr").nth(2).click(); await shot(page, f"{tag}05-ticket")
@@ -50,7 +51,8 @@ async def desktop(b, night):
     await page.click("[data-off-mode=range]"); await page.wait_for_timeout(700); await shot(page, f"{tag}06-range")
     ok = await page.evaluate("() => { const ds=new Set(offDates()); const sh=OFF.shifts[OFF.sel].filter(s=>ds.has(s[0])); const n=sh.reduce((a,s)=>a+s[1],0); return document.querySelector('#offCard .enf-stat .num').textContent.replace(/,/g,'')==String(n); }")
     report[f"{tag} range total equals its days"] = ok
-    await page.click("[data-off-show]"); await shot(page, f"{tag}07-dots")
+    await shot(page, f"{tag}07-dots")
+    report[f"{tag} range shows the officer's dots"] = await page.evaluate("() => OFF.show && map.getSource('off-dots')._data.features.length>0")
     # ticket type: the list ranks by that type and its numbers come from types.json; the card matches its tickets
     await page.click("[data-off-mode=day]"); await page.wait_for_timeout(700)
     top = await page.evaluate("() => OFF.typeOrder[0]")
@@ -58,7 +60,6 @@ async def desktop(b, night):
     await page.select_option("#offSec [data-off-type]", top); await page.wait_for_timeout(1200); await shot(page, f"{tag}09-type")
     report[f"{tag} type list ranked and tied to types.json"] = await page.evaluate("() => { const R=offRows(); const ok=R.every((r,i)=>i===0||R[i-1].f>=r.f); const tie=R.every(r=>{ const v=((OFF.types[r.o.id]||{})[OFF.day]||{})[OFF.type]; return v && v[0]===r.n; }); return ok && tie && R.length>0; }")
     await page.locator("#offSec .off-row").nth(0).click(); await page.wait_for_timeout(1400); await shot(page, f"{tag}10-type-card")
-    await page.click("#offCard [data-off-show]"); await page.wait_for_timeout(1200)
     report[f"{tag} type pins count 1, 2, 3"] = await page.evaluate(PINS)
     report[f"{tag} type card equals its tickets"] = await page.evaluate("() => document.querySelector('#offCard .enf-stat .num').textContent.replace(/,/g,'')==String(offTk().length) && offTk().every(t=>String(t.v)===OFF.type)")
     await page.click("#offSec [data-off-rank=tickets]"); await page.wait_for_timeout(600)
@@ -85,7 +86,8 @@ async def phone(b):
     report["phone full sheet stops under the header card"] = await page.evaluate("() => document.getElementById('offListSheet').getBoundingClientRect().top >= document.getElementById('panel').getBoundingClientRect().bottom")
     await drag("#offListSheet .off-shead", 480); await shot(page, "p03-list-50")
     await page.locator("#offLsBody .off-row").nth(2).tap(); await page.wait_for_timeout(700); await shot(page, "p04-picked")
-    await page.tap("#offCardSheet [data-off-show]"); await shot(page, "p05-route")
+    await shot(page, "p05-route")
+    report["phone picking an officer draws their route"] = (await st(page))["show"] is True
     await drag("#offCardSheet .off-shead", 100); await shot(page, "p06-card-90")
     await page.locator("#offCardSheet .off-tr").nth(1).tap(); await shot(page, "p07-ticket")
     report["phone tapped ticket shows in the bar"] = await page.evaluate("() => { const b=document.querySelector('#offCardSheet .off-selbar .off-tn'); return !!b && b.textContent===String(offLabels().get(OFF.hl)); }")
