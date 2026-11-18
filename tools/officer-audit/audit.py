@@ -7,6 +7,17 @@ from playwright.async_api import async_playwright
 OUT = sys.argv[1]; os.makedirs(OUT, exist_ok=True)
 URL = "http://localhost:8934/#c=-87.68,41.87&z=10.6"
 errors, report = [], {}
+# pins: image off-n-K for the K-th ticket in time order of the tickets shown (all, or the picked type)
+PINS = """() => { const f=map.getSource('off-pts')._data.features, tk=offTk(), pos=new Map(tk.map((t,i)=>[t.n,i+1]));
+  const timesUp=tk.every((t,i)=>i===0||tk[i-1].time<=t.time);
+  return f.length>0 && timesUp && f.every(x=>x.properties.img.replace(/^off-n-|-l$/g,'')===String(pos.get(x.properties.n))); }"""
+# nothing in the officer UI is cut off or sticks out of its box
+CUT = """() => { const out=[]; for(const root of document.querySelectorAll('#offSec,#offCard,#offListSheet,#offCardSheet')){
+  const R=root.getBoundingClientRect(); if(!R.width||getComputedStyle(root).display==='none') continue;
+  for(const e of root.querySelectorAll('*')){ const r=e.getBoundingClientRect(), c=getComputedStyle(e); if(!r.width||c.display==='none') continue;
+    if(!e.closest('.off-tl,.off-list,.filters') && (r.right>R.right+1||r.left<R.left-1)) out.push('sticks out: '+(e.className||e.tagName));
+    if(!e.children.length && e.scrollWidth>e.clientWidth+1 && /hidden|clip/.test(c.overflow+c.overflowX)) out.push('cut: '+(e.innerText||'').slice(0,30)); } }
+  return out; }"""
 
 async def st(page):
     return await page.evaluate("() => ({sel:OFF.sel, mode:OFF.mode, day:OFF.day, show:OFF.show, hl:OFF.hl, lh:OFF.lh, oh:OFF.oh, tk:OFF.tk.length, markers:document.querySelectorAll('.off-mav').length})")
@@ -28,6 +39,8 @@ async def desktop(b, night):
     # the day tiles must match the tickets listed (an officer can work two shifts on one date)
     report[f"{tag} day tiles equal tickets listed"] = await page.evaluate("() => document.querySelector('#offCard .enf-stat .num').textContent.replace(/,/g,'')==String(OFF.tk.length)")
     await page.click("[data-off-show]"); await shot(page, f"{tag}04-route")
+    # every pin carries its number, counting 1, 2, 3 in the order the officer wrote the tickets
+    report[f"{tag} route pins numbered in time order"] = await page.evaluate(PINS)
     await page.locator("#offCard .off-tr").nth(2).click(); await shot(page, f"{tag}05-ticket")
     prev = await page.evaluate("() => { const m=[...new Set(OFF.shifts[OFF.sel].map(s=>s[0]))]; return [...m].reverse().find(d=>d<OFF.day)||null; }")
     await page.locator("#offCard [data-off-jump]").first.click(); await page.wait_for_timeout(900)
@@ -41,12 +54,16 @@ async def desktop(b, night):
     # ticket type: the list ranks by that type and its numbers come from types.json; the card matches its tickets
     await page.click("[data-off-mode=day]"); await page.wait_for_timeout(700)
     top = await page.evaluate("() => OFF.typeOrder[0]")
-    await page.select_option("[data-off-type]", top); await page.wait_for_timeout(1200); await shot(page, f"{tag}09-type")
+    await page.click("#offSec [data-off-filter]"); await page.wait_for_timeout(300)
+    await page.select_option("#offSec [data-off-type]", top); await page.wait_for_timeout(1200); await shot(page, f"{tag}09-type")
     report[f"{tag} type list ranked and tied to types.json"] = await page.evaluate("() => { const R=offRows(); const ok=R.every((r,i)=>i===0||R[i-1].f>=r.f); const tie=R.every(r=>{ const v=((OFF.types[r.o.id]||{})[OFF.day]||{})[OFF.type]; return v && v[0]===r.n; }); return ok && tie && R.length>0; }")
     await page.locator("#offSec .off-row").nth(0).click(); await page.wait_for_timeout(1400); await shot(page, f"{tag}10-type-card")
+    await page.click("#offCard [data-off-show]"); await page.wait_for_timeout(1200)
+    report[f"{tag} type pins count 1, 2, 3"] = await page.evaluate(PINS)
     report[f"{tag} type card equals its tickets"] = await page.evaluate("() => document.querySelector('#offCard .enf-stat .num').textContent.replace(/,/g,'')==String(offTk().length) && offTk().every(t=>String(t.v)===OFF.type)")
-    await page.click("[data-off-rank=tickets]"); await page.wait_for_timeout(600)
+    await page.click("#offSec [data-off-rank=tickets]"); await page.wait_for_timeout(600)
     report[f"{tag} rank by tickets"] = await page.evaluate("() => { const R=offRows(); return R.every((r,i)=>i===0||R[i-1].n>=r.n); }")
+    report[f"{tag} nothing cut off"] = await page.evaluate(CUT)
     await page.keyboard.press("Escape"); await shot(page, f"{tag}08-escape")
     await ctx.close()
 
@@ -63,13 +80,18 @@ async def phone(b):
     await page.add_init_script("localStorage.setItem('ora-officer-intro','1')")
     await page.goto(URL); await page.wait_for_function("typeof map!=='undefined' && map.loaded()", timeout=60000); await page.wait_for_timeout(1500)
     await page.tap("#obtn"); await shot(page, "p01-list")
+    report["phone search bar inside the header card"] = await page.evaluate("() => document.querySelector('#search').getBoundingClientRect().bottom <= document.getElementById('panel').getBoundingClientRect().bottom-8")
     await drag("#offListSheet .off-shead", 120); await shot(page, "p02-list-90")
+    report["phone full sheet stops under the header card"] = await page.evaluate("() => document.getElementById('offListSheet').getBoundingClientRect().top >= document.getElementById('panel').getBoundingClientRect().bottom")
     await drag("#offListSheet .off-shead", 480); await shot(page, "p03-list-50")
     await page.locator("#offLsBody .off-row").nth(2).tap(); await page.wait_for_timeout(700); await shot(page, "p04-picked")
     await page.tap("#offCardSheet [data-off-show]"); await shot(page, "p05-route")
     await drag("#offCardSheet .off-shead", 100); await shot(page, "p06-card-90")
     await page.locator("#offCardSheet .off-tr").nth(1).tap(); await shot(page, "p07-ticket")
-    small = await page.evaluate("() => [...document.querySelectorAll('#obtn,.off-x,.off-step button,.color-btn,.fchip')].filter(e=>e.offsetParent).map(e=>e.getBoundingClientRect()).filter(r=>r.height<44||r.width<44).length")
+    report["phone tapped ticket shows in the bar"] = await page.evaluate("() => { const b=document.querySelector('#offCardSheet .off-selbar .off-tn'); return !!b && b.textContent===String(offLabels().get(OFF.hl)); }")
+    report["phone popup clear of the header card"] = await page.evaluate("() => { const p=document.querySelector('.maplibregl-popup'); return !p || p.getBoundingClientRect().top >= document.getElementById('panel').getBoundingClientRect().bottom; }")
+    report["phone nothing cut off"] = await page.evaluate(CUT)
+    small = await page.evaluate("() => [...document.querySelectorAll('#obtn,.off-x,.off-step button,.color-btn,.fchip,.off-fbtn,.off-chip,.off-type')].filter(e=>e.offsetParent).map(e=>e.getBoundingClientRect()).filter(r=>r.height<44||r.width<44).length")
     report["phone targets under 44px"] = small
     await page.tap("#offCardSheet [data-off-close]"); await shot(page, "p08-closed")
     await ctx.close()

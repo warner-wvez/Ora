@@ -794,7 +794,8 @@
   #obtn:active { transform: scale(.94); }
   #panel.officers > .grp, #panel.officers #dirBox { display: none; }
   #panel.searching #offSec { display: none; }
-  #offSec .sechead { display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid #ececf0; padding: 9px 0 2px; }
+  #panel.officers .search-wrap { margin-bottom: 14px; }
+  #offSec .sechead { display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid #ececf0; padding: 14px 0 0; }
   #offSec .sechead b { font-size: var(--fs-body); font-weight: 600; color: #1c1c1e; }
   .off-meta { font-size: var(--fs-meta); color: #6e6e73; line-height: 1.35; }
   .off-about { font-size: var(--fs-meta); color: #0062cc; font-weight: 600; padding: 6px 0 0; background: none; border: 0; cursor: pointer; font-family: inherit; }
@@ -803,14 +804,15 @@
   .off-fade.end::after { opacity: 0; }
   .off-list { --rowh: 50px; max-height: calc(var(--rowh) * 9); overflow-y: auto; margin: 4px -6px 0; padding: 0 2px; scrollbar-width: none; }
   .off-list::-webkit-scrollbar, .off-tl::-webkit-scrollbar { display: none; }
-  .off-row { display: flex; align-items: center; gap: 10px; height: var(--rowh); padding: 0 6px; border-radius: 8px; cursor: pointer; transition: background .15s; }
+  .off-row { display: flex; align-items: center; gap: 10px; min-height: var(--rowh); padding: 6px; box-sizing: border-box; border-radius: 8px; cursor: pointer; transition: background .15s; }
   .off-row:hover { background: #f2f2f7; }
-  .off-row.sel { background: #0062cc; color: #fff; }
-  .off-row.sel .off-os, .off-row.sel .off-num span { color: rgba(255,255,255,.82); }
+  .off-row.sel { background: #e8f1ff; }
+  .off-row.sel .off-ot { color: #0062cc; font-weight: 600; }
   .off-av { flex: none; border-radius: 50%; background-color: #f2f2f7; background-repeat: no-repeat; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
   .off-txt { flex: 1; min-width: 0; }
-  .off-ot { font-size: var(--fs-row); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .off-os { font-size: var(--fs-meta); color: #6e6e73; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+  .off-ot { font-size: var(--fs-row); line-height: 1.25; }
+  .off-oc { font-size: var(--fs-meta); color: #6e6e73; font-weight: 400; }
+  .off-os { font-size: var(--fs-meta); color: #6e6e73; white-space: nowrap; margin-top: 2px; }
   .off-num { text-align: right; flex: none; }
   .off-num b { display: block; font-size: var(--fs-body); font-weight: 700; }
   .off-num span { font-size: var(--fs-meta); color: #6e6e73; }
@@ -848,17 +850,17 @@
   .off-custom input { flex: 1; min-width: 0; font: inherit; font-size: var(--fs-ctl); padding: 4px 6px; border: 1px solid #dcdce1; border-radius: 6px; }
   .off-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .off-stats.three { grid-template-columns: 1fr 1fr 1fr; }
   .off-lhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
-  .off-lhead .color-switch { width: 190px; }
   .off-sec { font-size: var(--fs-body); font-weight: 600; color: #1c1c1e; }
   .off-tl { --trh: 50px; max-height: calc(var(--trh) * 3); overflow-y: auto; scrollbar-width: none; margin: 0 -12px; padding: 0 12px; }
-  .off-tr { display: flex; gap: 10px; align-items: center; height: var(--trh); border-top: 1px solid #ececf0; cursor: pointer; margin: 0 -12px; padding: 0 12px; transition: background .15s; }
+  .off-tr { display: flex; gap: 10px; align-items: center; min-height: var(--trh); box-sizing: border-box; border-top: 1px solid #ececf0; cursor: pointer; margin: 0 -12px; padding: 6px 12px; transition: background .15s; }
   .off-tr:first-child { border-top: 0; }
   .off-tr:hover { background: #f7f7f9; } .off-tr.hl { background: #e8f1ff; }
   .off-tn { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #007aff; color: #fff; font-size: var(--fs-badge); font-weight: 700; display: flex; align-items: center; justify-content: center; }
   .off-tn.last { background: #0b4fb3; }
+  .off-tn.w3 { font-size: 9.5px; letter-spacing: -.2px; }   /* 100 and up stay inside the circle */
   .off-tt { flex: 1; min-width: 0; }
   .off-tt .a { font-size: var(--fs-body); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #1c1c1e; }
-  .off-tt .b { font-size: var(--fs-meta); color: #6e6e73; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .off-tt .b { font-size: var(--fs-meta); color: #6e6e73; margin-top: 1px; line-height: 1.3; }
   .off-tf { font-size: var(--fs-body); font-weight: 600; flex: none; color: #1c1c1e; }
   .off-chev { color: #c7c7cc; font-size: 18px; flex: none; }
   .off-spin { width: 20px; height: 20px; border: 2px solid #d1d1d6; border-top-color: transparent; border-radius: 50%; animation: offspin .8s linear infinite; margin: 14px auto; }
@@ -877,22 +879,52 @@
     .off-shead h2 { margin: 0; font-size: var(--fs-title); color: #1c1c1e; }
     .off-sbody { flex: 1; min-height: 0; padding: 0 var(--pad) 20px; overflow: hidden; }
     .off-sheet.full .off-sbody { overflow-y: auto; }
+    .off-sheet.full .off-tl { max-height: none; overflow: visible; }   /* a full sheet shows every ticket; the sheet scrolls, no empty space under 3 rows */
     .off-sbody .off-body { padding: 0; overflow: visible; }
     .off-sbody .off-box { box-shadow: none; border: 1px solid #ececf0; }
     .off-x { width: 44px; height: 44px; border-radius: 50%; }
     .off-step button { width: 44px; height: 44px; }
     .off-tl { --trh: 56px; }
   }
-  .off-ctrls { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .off-ctrls { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
   .off-ctrls .off-step { margin-top: 0; }
-  .off-crow { display: flex; align-items: center; gap: 8px; }
-  .off-crow > span { flex: none; width: 76px; font-size: var(--fs-meta); font-weight: 600; color: #6e6e73; }
-  .off-crow > .color-switch, .off-crow > select { flex: 1; min-width: 0; }
-  .off-type { height: 30px; font: inherit; font-size: var(--fs-ctl); color: #1c1c1e; padding: 0 8px; border: 1px solid #dcdce1; border-radius: 8px; background: #fff; }
+  .off-ctrls .filters { margin-top: 0; }
+  @media (min-width: 641px) { .off-ctrls .color-switch .color-btn { min-height: 32px; } }
+  .off-ctrls .off-step button { width: 36px; height: 36px; }
+  .off-filter { border: 1px solid #dcdce1; border-radius: 10px; background: #fff; }
+  .off-fbtn { width: 100%; min-height: 36px; display: flex; align-items: center; gap: 8px; border: 0; border-radius: 10px; background: none;
+    font: inherit; font-size: var(--fs-ctl); line-height: 1.3; color: #1c1c1e; padding: 7px 12px; cursor: pointer; text-align: left; }
+  .off-fbtn span { flex: none; color: #6e6e73; font-weight: 600; }
+  .off-fbtn b { flex: 1; min-width: 0; font-weight: 600; }
+  .off-fbtn i { flex: none; display: flex; color: #6e6e73; transition: transform .2s ease-out; }
+  .off-fbtn[aria-expanded="true"] i { transform: rotate(180deg); }
+  .off-fbody { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px 12px; border-top: 1px solid #ececf0; }
+  .off-type { width: 100%; height: 36px; font: inherit; font-size: var(--fs-ctl); color: #1c1c1e; padding: 0 34px 0 12px; border: 1px solid #dcdce1; border-radius: 8px;
+    -webkit-appearance: none; appearance: none; cursor: pointer; text-overflow: ellipsis;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%236e6e73' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center; }
+  .off-sum { margin: 10px 0 2px; }
   .off-link { border: 0; background: none; padding: 4px 0; font: inherit; font-size: var(--fs-meta); font-weight: 600; color: #0062cc; cursor: pointer; text-align: left; }
-  .off-jump { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
   .off-only { font-size: var(--fs-meta); color: #3c3c43; padding: 9px 12px; }
-  @media (max-width: 640px) { .off-type { height: 44px; } .off-link { min-height: 44px; } .off-ctrls .off-step button { width: 44px; height: 44px; } }
+  .off-only .off-link { display: inline; min-height: 0; padding: 0; }
+  /* officer card, day view: who on top; the day, its totals and its shift times in one box; the tickets in the next */
+  .off-hd { flex: 1; min-width: 0; }
+  .off-daynav { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+  .off-daynav .off-step { margin-top: 0; width: 100%; }
+  .off-daynav .off-step button { width: 36px; height: 36px; }
+  .off-chip { max-width: 100%; display: inline-flex; align-items: center; gap: 4px; font: inherit; font-size: var(--fs-ctl); font-weight: 600;
+    color: #0062cc; background: #eef4ff; border: 0; border-radius: 999px; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+  .off-chip:hover { background: #e0ecff; }
+  .off-ran { margin-top: 9px; }
+  .off-lhead .mini-btn { flex: none; white-space: nowrap; }
+  .mini-btn.on { color: #fff; background: #0062cc; }
+  .off-selbar { display: flex; gap: 10px; align-items: center; background: #e8f1ff !important; border: 0 !important; }
+  .off-pop .maplibregl-popup-content { padding: 8px 10px; font-size: var(--fs-meta); line-height: 1.35; border-radius: 8px; overflow: visible; }
+  @media (max-width: 640px) {
+    .off-type { height: 44px; } .off-fbtn { min-height: 44px; } .off-link { min-height: 44px; }
+    .off-ctrls .off-step button, .off-daynav .off-step button { width: 44px; height: 44px; }
+    .off-chip, .off-about { min-height: 44px; }
+    #offCsBody .off-body { padding-top: 10px; }
+  }
 </style>
 </head>
 <body>
@@ -4529,7 +4561,7 @@ document.addEventListener('keydown',(e)=>{
    officers.json (who), daily.json (shifts + day totals), days/<date>.json (one day's tickets),
    by-officer/<id>.json (an officer's points, for range dots). Fake officer numbers only. */
 const OFF={ data:false, by:new Map(), shifts:{}, totals:{}, viol:[], first:null, last:null,
-  mode:'day', day:null, preset:'month', from:null, to:null, sel:null, show:false, sort:'new', hl:null, lh:35, oh:50, tk:[], tkKey:null,
+  mode:'day', day:null, preset:'month', from:null, to:null, sel:null, show:false, fo:false, hl:null, lh:35, oh:50, tk:[], tkKey:null,
   type:null, rank:'fines', types:{}, typeOrder:[] };   // type: a violation index as a string, or null for all tickets
 const offDayCache=new Map(), offPtCache=new Map();
 const offGet=(url,cache,key)=>{ if(!cache.has(key)) cache.set(key, fetch(url).then(r=>r.ok?r.json():[]).catch(()=>[])); return cache.get(key); };
@@ -4583,26 +4615,29 @@ function offControlsHTML(){
   const days=offDataDays(), i=days.indexOf(OFF.day), prev=days[i-1], next=days[i+1];
   const dateUI = OFF.mode==='day'
     ? `<div class="off-step"><button type="button" data-off-step="${prev||''}" ${prev?'':'disabled'} aria-label="Previous day">&lsaquo;</button><span class="d">${offFmtDay(OFF.day)}</span><button type="button" data-off-step="${next||''}" ${next?'':'disabled'} aria-label="Next day">&rsaquo;</button></div>`
-    : `<div class="filters" style="margin-top:8px">${[['week','Last 7 days'],['month','This month'],['ytd','Year to date'],['custom','Pick dates']].map(([v,l])=>`<button type="button" class="fchip${OFF.preset===v?' on':''}" data-off-preset="${v}" aria-pressed="${OFF.preset===v}">${l}</button>`).join('')}</div>
+    : `<div class="filters">${[['week','Last 7 days'],['month','This month'],['ytd','Year to date'],['custom','Pick dates']].map(([v,l])=>`<button type="button" class="fchip${OFF.preset===v?' on':''}" data-off-preset="${v}" aria-pressed="${OFF.preset===v}">${l}</button>`).join('')}</div>
        ${OFF.preset==='custom'?`<div class="off-custom"><input type="date" data-off-from min="${OFF.first}" max="${OFF.last}" value="${OFF.from}" aria-label="From"><input type="date" data-off-to min="${OFF.first}" max="${OFF.last}" value="${OFF.to}" aria-label="To"></div>`:''}`;
   const opt=i=>`<option value="${i}"${OFF.type===String(i)?' selected':''}>${offVio(i)}</option>`;
   const top=OFF.typeOrder.slice(0,8), rest=OFF.typeOrder.slice(8).sort((a,b)=>offVio(a).localeCompare(offVio(b)));
+  // ticket type and ranking sit behind one Filter button that names what is on (Hick's law: fewer choices in view)
+  const on=`${OFF.type!=null?offVio(OFF.type):'All ticket types'} · ${OFF.rank==='tickets'?'most tickets':'most fines'}`;
+  const menu=OFF.fo ? `<div class="off-fbody"><select class="off-type" data-off-type aria-label="Ticket type"><option value=""${OFF.type==null?' selected':''}>All ticket types</option><optgroup label="Most common">${top.map(opt).join('')}</optgroup><optgroup label="Other types">${rest.map(opt).join('')}</optgroup></select>
+      ${offSw('Most fines','Most tickets','data-off-rank',OFF.rank,'fines','tickets')}</div>` : '';
   return `<div class="off-ctrls">${offSw('One day','Range','data-off-mode',OFF.mode,'day','range')}${dateUI}
-    <label class="off-crow"><span>Ticket type</span><select class="off-type" data-off-type><option value=""${OFF.type==null?' selected':''}>All tickets</option><optgroup label="Most common">${top.map(opt).join('')}</optgroup><optgroup label="Other types">${rest.map(opt).join('')}</optgroup></select></label>
-    <div class="off-crow"><span>Rank by</span>${offSw('Fines','Tickets','data-off-rank',OFF.rank,'fines','tickets')}</div></div>`;
+    <div class="off-filter"><button type="button" class="off-fbtn" data-off-filter aria-expanded="${OFF.fo}"><span>Filter</span><b>${on}</b><i><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>${menu}</div></div>`;
 }
 function offListHTML(){
   const R=offRows(), s=isMobile()?40:34;
   const total=OFF.type!=null ? R.reduce((a,r)=>a+r.n,0) : offDates().reduce((a,k)=>a+((OFF.totals[k]||[0])[0]),0);
   const what=OFF.type!=null ? offVio(OFF.type).toLowerCase()+' tickets' : 'tickets';
-  const sub=r=>OFF.mode==='day' ? `${r.o.c||'Officer'} · ${offT12(r.sh[0][3])} to ${offT12(r.sh.at(-1)[4])}` : `${r.o.c||'Officer'} · ${r.sh.length} shift${r.sh.length>1?'s':''}`;
-  return { controls:offControlsHTML(), meta:`${offLabel()} · ${R.length} officers · ${offNum(total)} ${what}`, order:OFF.rank==='tickets'?'most tickets first':'most fines first',
-    rows:R.map(r=>`<div class="off-row${r.o.id===OFF.sel?' sel':''}" data-off-id="${r.o.id}" role="button" tabindex="0">${offAv(r.o,s)}<div class="off-txt"><div class="off-ot">Officer ${r.o.id}</div><div class="off-os">${sub(r)}</div></div><div class="off-num"><b>${offMoney(r.f)}</b><span>${offNum(r.n)} tickets</span></div></div>`).join('') };
+  const sub=r=>OFF.mode==='day' ? `${offT12(r.sh[0][3])} to ${offT12(r.sh.at(-1)[4])}` : `${r.sh.length} shift${r.sh.length>1?'s':''}`;
+  return { controls:offControlsHTML(), meta:`${OFF.mode==='day'?'':offLabel()+' · '}${R.length} officers · ${offNum(total)} ${what}`,
+    rows:R.map(r=>`<div class="off-row${r.o.id===OFF.sel?' sel':''}" data-off-id="${r.o.id}" role="button" tabindex="0">${offAv(r.o,s)}<div class="off-txt"><div class="off-ot">Officer ${r.o.id}${r.o.c?` <span class="off-oc">· ${r.o.c}</span>`:''}</div><div class="off-os">${sub(r)}</div></div><div class="off-num"><b>${offMoney(r.f)}</b><span>${offNum(r.n)} tickets</span></div></div>`).join('') };
 }
 function offRenderList(){
   const L=offListHTML(), sec=document.getElementById('offSec');
   const box=sec.querySelector('.off-list'), keep=box?box.scrollTop:0;
-  sec.innerHTML=`<div class="sechead"><b>Officer shifts</b></div>${L.controls}<div class="off-meta" style="margin:8px 0 2px">${L.meta} · ${L.order}</div>
+  sec.innerHTML=`<div class="sechead"><b>Officer shifts</b></div>${L.controls}<div class="off-meta off-sum">${L.meta}</div>
     <div class="off-fade"><div class="off-list">${L.rows}</div></div><button type="button" class="off-about" data-off-about>About this data</button>`;
   const nb=sec.querySelector('.off-list'); nb.scrollTop=keep; offFade(nb);
   if(typeof offRenderSheetList==='function') offRenderSheetList(L);
@@ -4650,11 +4685,33 @@ document.getElementById('offIntroGo').addEventListener('click',offIntroClose);
 document.getElementById('offIntro').addEventListener('click',e=>{ if(e.target.id==='offIntro') offIntroClose(); });
 document.addEventListener('click',e=>{ if(e.target.closest('[data-off-about]')) document.getElementById('offIntro').classList.add('show'); });
 
-const offMarkers=new Map(); let offRouteMarker=null, offPopup=null;
+const offMarkers=new Map(); let offPopup=null;
 function offPad(){
-  if(isMobile()){ const h=OFF.sel?OFF.oh:OFF.lh; return {top:140, left:30, right:30, bottom:Math.round(innerHeight*h/100)+16}; }
+  // phone: pins stay clear of the header card (top) and the zoom buttons (right)
+  if(isMobile()){ const h=Math.min(OFF.sel?OFF.oh:OFF.lh, offMaxH()); return {top:Math.round(offTopEdge())+16, left:24, right:60, bottom:Math.round(innerHeight*h/100)+16}; }
   return {top:30, bottom:30, left:400, right:OFF.sel?420:30};
 }
+// phone: the bottom of the header card (brand row and search bar), even while its Layers menu is open
+const offTopEdge=()=>isMobile() ? document.querySelector('#panel .search-wrap').getBoundingClientRect().bottom+10 : 0;
+// the ticket popup opens above its pin, or below it near the phone's header card, and leans away from the
+// computer's side panel and officer card so no part of it sits under them
+let offPopAt=null;
+function offPopupOpen(ll, html){ if(offPopup) offPopup.remove(); offPopAt={ll, html}; offPopup=null; offPopupPlace(true); }
+function offPopupAnchor(){
+  const q=map.project(offPopAt.ll), w=offPopup&&offPopup.isOpen() ? offPopup.getElement().offsetWidth : 240;
+  const card=document.getElementById('offCard'), panel=document.getElementById('panel');
+  const L=isMobile() ? 8 : panel.getBoundingClientRect().right+8, R=(!isMobile() && card.classList.contains('show')) ? card.getBoundingClientRect().left-8 : innerWidth-8;
+  const v=q.y-offTopEdge()<96 ? 'top' : 'bottom', h=q.x-w/2<L ? '-left' : q.x+w/2>R ? '-right' : '';
+  return v+h;
+}
+function offPopupPlace(force){
+  if(!offPopAt || (!force && !(offPopup && offPopup.isOpen()))) return;
+  const a=offPopupAnchor();
+  if(!force && offPopup.offA===a) return;
+  if(offPopup) offPopup.remove();
+  offPopup=new maplibregl.Popup({offset:16, closeButton:false, className:'off-pop', anchor:a}).setLngLat(offPopAt.ll).setHTML(offPopAt.html).addTo(map); offPopup.offA=a;
+}
+map.on('move',()=>offPopupPlace(false));
 function offDrawMarkers(){
   const want=new Map();
   if(store.mode==='officers' && !OFF.show) for(const r of offRows()){ const s=offLatest(r.sh); if(s[5]!=null) want.set(r.o.id,[s[5],s[6]]); }
@@ -4696,7 +4753,7 @@ function offClose(){
 }
 function offTeardownMap(){
   for(const m of offMarkers.values()) m.remove(); offMarkers.clear();
-  if(offRouteMarker){ offRouteMarker.remove(); offRouteMarker=null; } if(offPopup){ offPopup.remove(); offPopup=null; }
+  if(offPopup){ offPopup.remove(); offPopup=null; }
   if(typeof offDrawRoute==='function') offDrawRoute();
   map.easeTo({padding:{top:0,bottom:0,left:0,right:0}, duration:300});
 }
@@ -4718,40 +4775,49 @@ async function offLoadTickets(){
   }
   OFF.tkKey=key;
 }
+// pins and rows count 1, 2, 3 in the order the officer wrote them; with a ticket type picked, that type's tickets only
+function offLabels(){ const m=new Map(); offTk().forEach((t,i)=>m.set(t.n,i+1)); return m; }
 function offCardHTML(){
   const o=OFF.by.get(OFF.sel); if(!o) return {head:'', body:''};
-  const head=`${offAv(o,isMobile()?44:40)}<div style="flex:1;min-width:0"><div class="off-title">Officer ${o.id}</div><div class="off-meta">${o.c||''} · ${offLabel()}</div></div><button type="button" class="off-x" data-off-close aria-label="Close">&times;</button>`;
   const tyName=OFF.type!=null ? offVio(OFF.type).toLowerCase() : null, per=(OFF.types||{})[o.id]||{};
-  let body=tyName ? `<div class="off-box off-only">Showing ${tyName} tickets only. <button type="button" class="off-link" data-off-type-clear>Show all types</button></div>` : '';
   const loading=OFF.tkKey!==offTkKey(), spin='<div class="off-box"><div class="off-spin" aria-label="Loading"></div></div>';
   const tiles=(cells)=>`<div class="off-stats${cells.length>2?' three':''}">${cells.map(([n,l])=>`<div class="enf-stat"><div class="num">${n}</div><div class="lbl">${l}</div></div>`).join('')}</div>`;
+  const close=`<button type="button" class="off-x" data-off-close aria-label="Close">&times;</button>`;
   if(OFF.mode==='day'){
+    // two parts: the day (date arrows, totals, shift times), then its tickets; the date lives in the day row, not the header
+    const head=`${offAv(o,isMobile()?44:40)}<div class="off-hd"><div class="off-title">Officer ${o.id}</div><div class="off-meta">${o.c||''}</div></div>${close}`;
     const mine=[...new Set((OFF.shifts[o.id]||[]).map(s=>s[0]))], prev=[...mine].reverse().find(d=>d<OFF.day), next=mine.find(d=>d>OFF.day);
-    const jump=`<div class="off-jump">${prev?`<button type="button" class="off-link" data-off-jump="${prev}">&lsaquo; Previous shift: ${offFmtDay(prev)}</button>`:''}${next?`<button type="button" class="off-link" data-off-jump="${next}">Next shift: ${offFmtDay(next)} &rsaquo;</button>`:''}</div>`;
+    const chip=tyName ? `<button type="button" class="off-chip" data-off-type-clear aria-label="Show all ticket types">${offVio(OFF.type)} <span aria-hidden="true">&times;</span></button>` : '';
+    const nav=`<div class="off-daynav"><div class="off-step"><button type="button" data-off-jump="${prev||''}" ${prev?'':'disabled'} aria-label="Previous shift">&lsaquo;</button><span class="d">${offFmtDay(OFF.day)}</span><button type="button" data-off-jump="${next||''}" ${next?'':'disabled'} aria-label="Next shift">&rsaquo;</button></div>${chip}</div>`;
     const s=offShiftOn(o.id,OFF.day);
-    if(!s) return {head, body:body+`<div class="off-box"><div class="off-meta">No shift on ${offFmtDay(OFF.day)}.</div>${jump}</div>`};
+    if(!s) return {head, body:`<div class="off-box">${nav}<div class="off-meta">No shift on ${offFmtDay(OFF.day)}.</div></div>`};
     const tv=OFF.type!=null ? ((per[OFF.day]||{})[OFF.type]||[0,0]) : [s[1],s[2]];
-    body+=`<div class="off-box">${tiles([[offNum(tv[0]), tyName?tyName+' tickets':'tickets'],[offMoney(tv[1]),'in fines']])}
-      <div class="off-meta" style="margin-top:9px">${s[7]>1?`${s[7]} shifts this day, from about`:'Shift ran about'} ${offT12(s[3])} to ${offT12(s[4])} (first to last ticket).</div>${jump}
-      <button type="button" class="off-go${OFF.show?' off':''}" data-off-show ${tv[0]?'':'disabled'}>${OFF.show?'Hide route':'View shift route'}</button></div>`;
+    const lab=offLabels(), tk=offTk(), L=t=>lab.get(t.n)||t.n;
+    const hlT=OFF.hl!=null && tk.find(t=>t.n===OFF.hl);
+    const row=t=>`<span class="off-tn${L(t)===tk.length?' last':''}${L(t)>99?' w3':''}">${L(t)}</span><div class="off-tt"><div class="a">${offAddr(t.addr)}</div><div class="b">${offT12(t.time)} · ${offVio(t.v)}${t.ll?'':' · no map point'}</div></div><span class="off-tf">${offMoney(t.fine)}</span>`;
+    // phone: the tapped ticket shows at the top of the sheet, right under its pin
+    let body=(isMobile() && hlT) ? `<div class="off-box off-selbar" aria-live="polite">${row(hlT)}</div>` : '';
+    body+=`<div class="off-box">${nav}${tiles([[offNum(tv[0]), tyName?tyName+' tickets':'tickets'],[offMoney(tv[1]),'in fines']])}
+      <div class="off-meta off-ran">${s[7]>1?`${s[7]} shifts this day, from about`:'Shift ran about'} ${offT12(s[3])} to ${offT12(s[4])}.</div></div>`;
     if(loading) return {head, body:body+spin};
-    const tk=offTk(); if(!tk.length) return {head, body};
-    const last=OFF.tk.length, list=tk.slice().sort(OFF.sort==='new'?(a,b)=>b.n-a.n:(a,b)=>b.fine-a.fine||b.n-a.n);
-    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">Tickets this shift</div>${offSw('Newest first','Biggest fine','data-off-sort',OFF.sort,'new','fine')}</div>
-      <div class="off-fade"><div class="off-tl">${list.map(t=>`<div class="off-tr${t.n===OFF.hl?' hl':''}" data-off-n="${t.n}"><span class="off-tn${t.n===last?' last':''}">${t.n}</span><div class="off-tt"><div class="a">${offAddr(t.addr)}</div><div class="b">${offT12(t.time)} · ${offVio(t.v)}${t.ll?'':' · no map point'}</div></div><span class="off-tf">${offMoney(t.fine)}</span></div>`).join('')}</div></div></div>`;
-  } else {
-    const ds=new Set(offDates()), sh=(OFF.shifts[o.id]||[]).filter(s=>ds.has(s[0]));
-    const mid=k=>{ if(!sh.length) return ''; const m=sh.map(s=>+s[k].slice(0,2)*60+ +s[k].slice(3)).sort((a,b)=>a-b); const v=Math.round(m[m.length>>1]/5)*5; return offT12(`${String(Math.floor(v/60)%24).padStart(2,'0')}:${String(v%60).padStart(2,'0')}`); };
-    // with a type picked, rows are the dates that officer wrote that type; otherwise one row per shift
-    const rows=OFF.type!=null ? [...new Set(sh.map(s=>s[0]))].map(d=>{ const v=(per[d]||{})[OFF.type]; const z=sh.filter(s=>s[0]===d); return v?[d, v[0], v[1], z[0][3], z.at(-1)[4]]:null; }).filter(Boolean) : sh;
-    const n=rows.reduce((a,s)=>a+s[1],0), f=rows.reduce((a,s)=>a+s[2],0);
-    body+=`<div class="off-box">${tiles([[offNum(n), tyName?tyName+' tickets':'tickets'],[offMoney(f),'in fines'],[rows.length, tyName?(rows.length===1?'day':'days'):(rows.length===1?'shift':'shifts')]])}
-      ${sh.length?`<div class="off-meta" style="margin-top:9px">Usually starts around ${mid(3)} and ends around ${mid(4)} (middle of ${sh.length} shift${sh.length>1?'s':''}).</div>`:'<div class="off-meta" style="margin-top:9px">No shifts in these dates.</div>'}
-      <button type="button" class="off-go${OFF.show?' off':''}" data-off-show ${n?'':'disabled'}>${OFF.show?'Hide tickets':'View tickets on map'}</button></div>`;
-    const list=rows.slice().sort(OFF.sort==='new'?(a,b)=>a[0]<b[0]?1:-1:(a,b)=>b[2]-a[2]);
-    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">${tyName?'Days':'Shifts'}</div>${offSw('Newest first','Biggest fine','data-off-sort',OFF.sort,'new','fine')}</div>
-      <div class="off-fade"><div class="off-tl">${list.map(s=>`<div class="off-tr" data-off-day="${s[0]}"><div class="off-tt"><div class="a">${offFmtDay(s[0])}</div><div class="b">${offT12(s[3])} to ${offT12(s[4])}</div></div><div class="off-num"><b>${offMoney(s[2])}</b><span>${offNum(s[1])} tickets</span></div><span class="off-chev">&rsaquo;</span></div>`).join('')}</div></div></div>`;
+    if(!tk.length) return {head, body};
+    body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">Tickets</div><button type="button" class="mini-btn${OFF.show?' on':''}" data-off-show aria-pressed="${OFF.show}">${OFF.show?'Hide from map':'Show on map'}</button></div>
+      <div class="off-fade"><div class="off-tl">${tk.slice().reverse().map(t=>`<div class="off-tr${t.n===OFF.hl?' hl':''}" data-off-n="${t.n}">${row(t)}</div>`).join('')}</div></div></div>`;
+    return {head, body};
   }
+  const head=`${offAv(o,isMobile()?44:40)}<div class="off-hd"><div class="off-title">Officer ${o.id}</div><div class="off-meta">${o.c||''} · ${offLabel()}</div></div>${close}`;
+  let body=tyName ? `<div class="off-box off-only">Showing ${tyName} tickets only. <button type="button" class="off-link" data-off-type-clear>Show all types</button></div>` : '';
+  const ds=new Set(offDates()), sh=(OFF.shifts[o.id]||[]).filter(s=>ds.has(s[0]));
+  const mid=k=>{ if(!sh.length) return ''; const m=sh.map(s=>+s[k].slice(0,2)*60+ +s[k].slice(3)).sort((a,b)=>a-b); const v=Math.round(m[m.length>>1]/5)*5; return offT12(`${String(Math.floor(v/60)%24).padStart(2,'0')}:${String(v%60).padStart(2,'0')}`); };
+  // with a type picked, rows are the dates that officer wrote that type; otherwise one row per shift
+  const rows=OFF.type!=null ? [...new Set(sh.map(s=>s[0]))].map(d=>{ const v=(per[d]||{})[OFF.type]; const z=sh.filter(s=>s[0]===d); return v?[d, v[0], v[1], z[0][3], z.at(-1)[4]]:null; }).filter(Boolean) : sh;
+  const n=rows.reduce((a,s)=>a+s[1],0), f=rows.reduce((a,s)=>a+s[2],0);
+  body+=`<div class="off-box">${tiles([[offNum(n), tyName?tyName+' tickets':'tickets'],[offMoney(f),'in fines'],[rows.length, tyName?(rows.length===1?'day':'days'):(rows.length===1?'shift':'shifts')]])}
+    ${sh.length?`<div class="off-meta off-ran">Usually starts around ${mid(3)} and ends around ${mid(4)} (middle of ${sh.length} shift${sh.length>1?'s':''}).</div>`:'<div class="off-meta off-ran">No shifts in these dates.</div>'}
+    <button type="button" class="off-go${OFF.show?' off':''}" data-off-show ${n?'':'disabled'}>${OFF.show?'Hide tickets':'View tickets on map'}</button></div>`;
+  const list=rows.slice().sort((a,b)=>a[0]<b[0]?1:-1);   // newest first
+  body+=`<div class="off-box"><div class="off-lhead"><div class="off-sec">${tyName?'Days':'Shifts'}</div></div>
+    <div class="off-fade"><div class="off-tl">${list.map(s=>`<div class="off-tr" data-off-day="${s[0]}"><div class="off-tt"><div class="a">${offFmtDay(s[0])}</div><div class="b">${offT12(s[3])} to ${offT12(s[4])}</div></div><div class="off-num"><b>${offMoney(s[2])}</b><span>${offNum(s[1])} tickets</span></div><span class="off-chev">&rsaquo;</span></div>`).join('')}</div></div></div>`;
   return {head, body};
 }
 function offRenderCard(){
@@ -4765,7 +4831,8 @@ function offRenderCard(){
 async function offSetDates(fn){ fn(); OFF.hl=null; if(offPopup) offPopup.remove(); OFF.tk=[]; OFF.tkKey=null; offRenderAll(); await offLoadTickets(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); writeUrl(); }
 function offToggleShow(){ OFF.show=!OFF.show; OFF.hl=null; if(offPopup) offPopup.remove(); offDrawMarkers(); if(typeof offDrawRoute==='function') offDrawRoute(); offRenderCard(); if(!OFF.show) map.easeTo({padding:offPad(), duration:600}); writeUrl(); }
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-off-close],[data-off-step],[data-off-mode],[data-off-preset],[data-off-show],[data-off-sort],[data-off-day],[data-off-jump],[data-off-rank],[data-off-type-clear]'); if(!t) return;
+  const t=e.target.closest('[data-off-close],[data-off-step],[data-off-mode],[data-off-preset],[data-off-show],[data-off-day],[data-off-jump],[data-off-rank],[data-off-type-clear],[data-off-filter]'); if(!t) return;
+  if(t.dataset.offFilter!==undefined){ OFF.fo=!OFF.fo; offRenderList(); return document.querySelector(isMobile()?'#offLsBody [data-off-filter]':'#offSec [data-off-filter]').focus(); }
   if(t.dataset.offJump) return offSetDates(()=>{ OFF.mode='day'; OFF.day=t.dataset.offJump; });
   if(t.dataset.offRank){ OFF.rank=t.dataset.offRank; offRenderAll(); return writeUrl(); }
   if(t.dataset.offTypeClear!==undefined) return offSetDates(()=>{ OFF.type=null; });
@@ -4774,7 +4841,6 @@ document.addEventListener('click',e=>{
   if(t.dataset.offMode){ if(t.dataset.offMode===OFF.mode) return; return offSetDates(()=>{ OFF.mode=t.dataset.offMode; if(OFF.mode==='day' && !OFF.day) OFF.day=OFF.last; }); }
   if(t.dataset.offPreset) return offSetDates(()=>{ OFF.preset=t.dataset.offPreset; if(OFF.preset==='custom'){ OFF.to=OFF.to||OFF.last; OFF.from=OFF.from||offAdd(OFF.last,-13); } });
   if(t.dataset.offShow!==undefined) return offToggleShow();
-  if(t.dataset.offSort){ OFF.sort=t.dataset.offSort; return offRenderCard(); }
   if(t.dataset.offDay) return offSetDates(()=>{ OFF.mode='day'; OFF.day=t.dataset.offDay; });
 });
 document.addEventListener('change',e=>{
@@ -4789,36 +4855,52 @@ function offInitLayers(){
   map.addLayer({id:'off-casing',type:'line',source:'off-line',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#0b4fb3','line-width':5,'line-opacity':.9}});
   map.addLayer({id:'off-line',type:'line',source:'off-line',layout:{'line-join':'round','line-cap':'round'},paint:{'line-color':'#1a73e8','line-width':3}});
   map.addLayer({id:'off-dots',type:'circle',source:'off-dots',paint:{'circle-radius':4.5,'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':1.5,'circle-opacity':.85}});
-  // long routes (approved 11-16): every ticket keeps a dot; numbers hide where they would overlap; first and last always numbered
-  map.addLayer({id:'off-dot',type:'circle',source:'off-pts',paint:{'circle-color':'#007aff','circle-stroke-color':'#fff','circle-stroke-width':2,
-    'circle-radius':['interpolate',['linear'],['zoom'],11,['case',['get','end'],10,4.5],13.5,10]}});
-  map.addLayer({id:'off-num',type:'symbol',source:'off-pts',layout:{'text-field':['step',['zoom'],['case',['get','end'],['to-string',['get','n']],''],13.5,['to-string',['get','n']]],
-    'text-font':['Noto Sans Bold'],'text-size':10,'text-allow-overlap':false,'text-padding':1,'symbol-sort-key':['get','pri']},paint:{'text-color':'#fff'}});
+  // every ticket on the route is a numbered badge (Warner, 11-18: numbers in the order written, on every pin). Each badge is
+  // one image with its number drawn in, so where badges stack the top one reads cleanly instead of digits mixing.
+  map.addLayer({id:'off-num',type:'symbol',source:'off-pts',layout:{'icon-image':['get','img'],'icon-allow-overlap':true,'icon-ignore-placement':true,
+    'symbol-sort-key':['get','key']}});
   map.addLayer({id:'off-hl',type:'circle',source:'off-hl',paint:{'circle-radius':13,'circle-color':'#0b4fb3','circle-stroke-color':'#fff','circle-stroke-width':3}});
-  map.addLayer({id:'off-hl-num',type:'symbol',source:'off-hl',layout:{'text-field':['to-string',['get','n']],'text-font':['Noto Sans Bold'],'text-size':11,'text-allow-overlap':true},paint:{'text-color':'#fff'}});
-  map.on('click','off-dot',e=>{ e.preventDefault(); offHighlight(e.features[0].properties.n,false); });
-  map.on('mouseenter','off-dot',()=>map.getCanvas().style.cursor='pointer');
-  map.on('mouseleave','off-dot',()=>map.getCanvas().style.cursor='');
+  map.addLayer({id:'off-hl-num',type:'symbol',source:'off-hl',layout:{'text-field':['to-string',['get','label']],'text-font':['Noto Sans Bold'],'text-size':11,'text-allow-overlap':true},paint:{'text-color':'#fff'}});
+  // a tap picks the badge drawn on top (the query does not return stacked symbols in drawn order); the picked ticket's
+  // own circle wins over badges under it, and tapping it again brings its popup back
+  map.on('click',e=>{ if(store.mode!=='officers' || !OFF.show || OFF.mode!=='day') return;
+    const fs=map.queryRenderedFeatures(e.point,{layers:['off-hl','off-num']}); if(!fs.length) return;
+    e.preventDefault();
+    const f=fs.find(x=>x.layer.id==='off-hl') || fs.reduce((a,b)=>b.properties.key>a.properties.key?b:a);
+    offHighlight(f.properties.n,false); });
+  map.on('mouseenter','off-num',()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave','off-num',()=>map.getCanvas().style.cursor='');
 }
+// draws badge images on demand: off-n-12 (blue) and off-n-12-l (the last ticket, darker, like the list)
+function offBadge(k, last){
+  const c=document.createElement('canvas'); c.width=c.height=44; const g=c.getContext('2d');
+  g.fillStyle='#fff'; g.beginPath(); g.arc(22,22,22,0,7); g.fill();
+  g.fillStyle=last?'#0b4fb3':'#007aff'; g.beginPath(); g.arc(22,22,18,0,7); g.fill();
+  g.fillStyle='#fff'; g.textAlign='center'; g.textBaseline='middle';
+  g.font=`700 ${k.length>2?17:20}px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif`; g.fillText(k,22,23);
+  return g.getImageData(0,0,44,44);
+}
+map.on('styleimagemissing',e=>{ const m=/^off-n-(\d+)(-l)?$/.exec(e.id); if(m && !map.hasImage(e.id)) map.addImage(e.id, offBadge(m[1],!!m[2]), {pixelRatio:2}); });
 function offTrim(ll){   // fit to where the officer worked: drop only spots beyond twice the 97th-percentile distance
   const med=i=>ll.map(p=>p[i]).sort((a,b)=>a-b)[ll.length>>1], m=[med(0),med(1)];
   const d=p=>Math.hypot((p[0]-m[0])*74.5,(p[1]-m[1])*111), cut=ll.map(d).sort((a,b)=>a-b)[Math.floor(ll.length*.97)]*2;
   return ll.filter(p=>d(p)<=cut);
 }
 // MapLibre adds the map's own padding (set by every easeTo with padding) to fitBounds' padding, so pass a small one
-function offFit(ll){ if(!ll.length) return; const b=new maplibregl.LngLatBounds(ll[0],ll[0]); ll.forEach(p=>b.extend(p)); map.fitBounds(b,{padding:24, maxZoom:16, duration:600}); }
+// set the full padding first: an ease still running (a pick, a sheet change) leaves it half applied, and pins land under the panel
+function offFit(ll){ if(!ll.length) return; const b=new maplibregl.LngLatBounds(ll[0],ll[0]); ll.forEach(p=>b.extend(p)); map.stop(); map.setPadding(offPad()); map.fitBounds(b,{padding:24, maxZoom:16, duration:600}); }
 function offDrawRoute(){
   if(!map.getSource('off-pts')) return;
   const set=(id,f)=>map.getSource(id).setData(OFF_FC(f));
-  if(offRouteMarker){ offRouteMarker.remove(); offRouteMarker=null; }
   if(store.mode!=='officers' || !OFF.show || !offTk().length){ ['off-line','off-pts','off-hl','off-dots'].forEach(id=>set(id,[])); return; }
   const pts=offTk().filter(t=>t.ll);
   if(OFF.mode==='day'){
     set('off-dots',[]);
     set('off-line', pts.length>1?[{type:'Feature',geometry:{type:'LineString',coordinates:pts.map(t=>t.ll)}}]:[]);
-    set('off-pts', pts.map((t,i)=>({type:'Feature',properties:{n:t.n, end:i===0||i===pts.length-1, pri:(i===0||i===pts.length-1)?0:1+i},geometry:{type:'Point',coordinates:t.ll}})));
-    const el=document.createElement('div'), o=OFF.by.get(OFF.sel); el.className='off-mav sel'; el.setAttribute('style', offAvStyle(o,40).replace(/width:40px;height:40px;?/,'')+';cursor:default');
-    if(pts.length) offRouteMarker=new maplibregl.Marker({element:el, offset:[0,-34]}).setLngLat(pts.at(-1).ll).addTo(map);
+    // every pin is a whole numbered badge; where pins stack, the earlier ticket sits on top, and first and last sit above all
+    const lab=offLabels(), last=offTk().length;
+    set('off-pts', pts.map((t,i)=>{ const k=lab.get(t.n), end=i===0||i===pts.length-1;
+      return {type:'Feature',properties:{n:t.n, img:`off-n-${k}${k===last?'-l':''}`, key:end?1e6:-i},geometry:{type:'Point',coordinates:t.ll}}; }));
     offFit(pts.map(t=>t.ll));
   } else {
     ['off-line','off-pts','off-hl'].forEach(id=>set(id,[]));
@@ -4832,23 +4914,24 @@ function offHighlight(n, fromRow){
   const fresh=!OFF.show;   // a row click with the route hidden draws it; its fit already brings this ticket into view
   if(fresh){ OFF.show=true; offDrawMarkers(); offDrawRoute(); }
   OFF.hl=n;
-  if(isMobile() && fromRow && OFF.oh>50){ OFF.oh=50; if(typeof offSizeSheets==='function') offSizeSheets(); }   // a tapped ticket drops the sheet so its pin shows
-  map.getSource('off-hl').setData(OFF_FC(t.ll?[{type:'Feature',properties:{n},geometry:{type:'Point',coordinates:t.ll}}]:[]));
-  if(offPopup) offPopup.remove();
+  if(isMobile() && OFF.oh>50){ OFF.oh=50; if(typeof offSizeSheets==='function') offSizeSheets(); }   // a tapped ticket drops the sheet so its pin shows
+  const label=offLabels().get(n)||n;
+  map.getSource('off-hl').setData(OFF_FC(t.ll?[{type:'Feature',properties:{n, label},geometry:{type:'Point',coordinates:t.ll}}]:[]));
+  if(offPopup){ offPopup.remove(); offPopup=null; }
   if(t.ll){
-    offPopup=new maplibregl.Popup({offset:16, closeButton:false}).setLngLat(t.ll).setHTML(`<strong>Ticket ${n}</strong><br>${offAddr(t.addr)} · ${offT12(t.time)}`).addTo(map);
+    offPopupOpen(t.ll, `<strong>Ticket ${label}</strong><br>${offAddr(t.addr)} · ${offT12(t.time)}`);
     const p=map.project(t.ll), P=offPad();
-    if(fresh) {}
-    else if(p.x<P.left||p.x>innerWidth-P.right||p.y<P.top||p.y>innerHeight-P.bottom) map.easeTo({center:t.ll, padding:P, duration:600});
-    else if(isMobile()) map.easeTo({padding:P, duration:300});
+    // phone: the map always eases to the tapped ticket; computer: only when it is out of view
+    if(!fresh && (isMobile() || p.x<P.left||p.x>innerWidth-P.right||p.y<P.top||p.y>innerHeight-P.bottom)) map.easeTo({center:t.ll, padding:P, duration:500});
   }
   offRenderCard();
-  const row=document.querySelector(`#offCard .off-tr[data-off-n="${n}"], #offCardSheet .off-tr[data-off-n="${n}"]`); if(row) row.scrollIntoView({block:'nearest', behavior:'smooth'});
+  if(isMobile()){ const b=document.getElementById('offCsBody'); if(b) b.scrollTop=0; return; }   // the bar at the top of the sheet shows it
+  const row=document.querySelector(`#offCard .off-tr[data-off-n="${n}"]`); if(row) row.scrollIntoView({block:'nearest', behavior:'smooth'});
 }
 document.addEventListener('click',e=>{ const r=e.target.closest('[data-off-n]'); if(r) offHighlight(+r.dataset.offN,true); });
 
 function offRenderSheetList(L){
-  document.getElementById('offLsMeta').textContent=L.meta+' · '+L.order;
+  document.getElementById('offLsMeta').textContent=L.meta;
   document.getElementById('offLsBody').innerHTML=`${L.controls}<div class="off-list" style="margin-top:8px">${L.rows}</div><button type="button" class="off-about" data-off-about>About this data</button>`;
   offSizeSheets();
 }
@@ -4857,10 +4940,11 @@ function offRenderSheetCard(C){
   document.getElementById('offCsBody').innerHTML=`<div class="off-body">${C.body}</div>`;
   offSizeSheets();
 }
+const offMaxH=()=>Math.min(90, (innerHeight-offTopEdge()-8)/innerHeight*100);   // a full sheet tops out just under the header card
 function offSizeSheets(){
   const on=store.mode==='officers' && isMobile(), ls=document.getElementById('offListSheet'), cs=document.getElementById('offCardSheet');
   ls.hidden=!on; cs.hidden=!(on && OFF.sel);
-  ls.style.height=OFF.lh+'%'; cs.style.height=OFF.oh+'%';
+  ls.style.height=Math.min(OFF.lh,offMaxH())+'%'; cs.style.height=Math.min(OFF.oh,offMaxH())+'%';
   ls.classList.toggle('full', OFF.lh>=90); cs.classList.toggle('full', OFF.oh>=90);
 }
 // SF heights: 20 / 50 / 90 %, snap on release (past 70 to 90, past 35 to 50, else 20); the list scrolls only at 90
@@ -4868,7 +4952,7 @@ function offSheetDrag(sheet, key){
   const head=sheet.querySelector('.off-shead'), body=sheet.querySelector('.off-sbody');
   let y0=0, h0=0, active=false, fromBody=false, top0=0;
   const snap=()=>{ OFF[key]=OFF[key]>70?90:OFF[key]>35?50:20; sheet.classList.remove('dragging'); offSizeSheets(); map.easeTo({padding:offPad(), duration:300}); };
-  const move=y=>{ OFF[key]=Math.max(20,Math.min(90,h0+(y0-y)/innerHeight*100)); sheet.style.height=OFF[key]+'%'; };
+  const move=y=>{ OFF[key]=Math.max(20,Math.min(90,h0+(y0-y)/innerHeight*100)); sheet.style.height=Math.min(OFF[key],offMaxH())+'%'; };
   head.addEventListener('pointerdown',e=>{ if(e.target.closest('button')) return; active=true; y0=e.clientY; h0=OFF[key]; sheet.classList.add('dragging'); head.setPointerCapture(e.pointerId); });
   head.addEventListener('pointermove',e=>{ if(active) move(e.clientY); });
   head.addEventListener('pointerup',()=>{ if(active){ active=false; snap(); } });
@@ -4877,7 +4961,7 @@ function offSheetDrag(sheet, key){
   body.addEventListener('touchmove',e=>{
     const dy=e.touches[0].clientY-y0;
     if(h0<90){ e.preventDefault(); sheet.classList.add('dragging'); move(e.touches[0].clientY); body.scrollTop=top0; return; }
-    if(body.scrollTop<=0 && dy>0){ e.preventDefault(); sheet.classList.add('dragging'); OFF[key]=Math.max(20,Math.min(90,90-dy/innerHeight*100)); sheet.style.height=OFF[key]+'%'; }
+    if(body.scrollTop<=0 && dy>0){ e.preventDefault(); sheet.classList.add('dragging'); OFF[key]=Math.max(20,Math.min(90,90-dy/innerHeight*100)); sheet.style.height=Math.min(OFF[key],offMaxH())+'%'; }
   },{passive:false});
   body.addEventListener('touchend',()=>{ if(fromBody && sheet.classList.contains('dragging')) snap(); fromBody=false; });
 }
