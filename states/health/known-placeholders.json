@@ -6298,5 +6298,10 @@
   "sha": "f13d9a62dd8e13d5",
   "first_seen": "2026-11-19T07:37:26Z",
   "state": "LA"
+ },
+ "20614:d3ccdff6ffad": {
+  "sha": "c2649fee33442666",
+  "first_seen": "2026-11-19T20:49:44Z",
+  "state": "LA"
  }
 }
