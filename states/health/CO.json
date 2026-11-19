@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-18T20:34:53Z",
+"checked_at": "2026-11-19T07:25:46Z",
 "cameras": 1271,
 "counts": {
 "frozen": 8,
-"placeholder": 11
+"placeholder": 14
 },
 "status": {
 "https://cocam.carsprogram.org/Cellular/040E21905CAM1RHS-E.jpg": "placeholder",
@@ -22,8 +22,11 @@
 "https://cocam.carsprogram.org/Douglas/64_Linc_Keystone-cotripSouth-DO-NOT-DELETE.jpg": "frozen",
 "https://cocam.carsprogram.org/Douglas/64_Linc_Keystone-cotripWest-DO-NOT-DELETE.jpg": "frozen",
 "https://cocam.carsprogram.org/Snapshots/009S08600CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E04915CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W28280CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/083N05425CAM1NEC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/085N20530CAM1NEC.flv.png": "placeholder"
+"https://cocam.carsprogram.org/Snapshots/085N20530CAM1NEC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/224W00065CAM1RHS.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/287N29835CAM1SEC.flv.png": "placeholder"
 }
 }

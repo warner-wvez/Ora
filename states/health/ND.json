@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-18T20:54:59Z",
+"checked_at": "2026-11-19T07:41:47Z",
 "cameras": 814,
 "counts": {
-"offline": 7,
+"offline": 8,
 "placeholder": 25
 },
 "status": {
@@ -37,6 +37,7 @@
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeNorth.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgePavement.jpg": "placeholder",
 "https://www.dot.nd.gov/travel-info/cameras/US85RP126.3LongxBridgeSouth.jpg": "placeholder",
+"https://www.dot.nd.gov/travel-info/cameras/fargotrileveleast.jpg": "offline",
 "https://www.dot.nd.gov/travel-info/camerasND13RP308VeronaEast.jpg": "offline"
 }
 }
