@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-20T07:27:59Z",
+"checked_at": "2026-11-20T20:36:06Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 525,
-"frozen": 21,
+"placeholder": 531,
+"frozen": 25,
 "offline": 12
 },
 "status": {
@@ -174,7 +174,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_SWB_I-55_4164583_-8814507_1_NONE.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_SWB_I-80_4153051_-8798685_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_WB_I-80_4151180_-8811160_1_NONE.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_WB_I-80_4151947_-8799049_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_2_Henry_SB_I-74_4118011_-9033269_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_2_Henry_SB_I-74_4118011_-9033269_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_2_Henry_SB_I-74_4118011_-9033269_1_S.jpg": "placeholder",
@@ -258,6 +257,10 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_Pioneer_4078329_-8960249_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_EB_Pioneer_4078329_-8960249_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_I-74_4069272_-8958489_1_N.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-29_4090762_-8949253_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-29_4090762_-8949253_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-29_4090762_-8949253_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-29_4090762_-8949253_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-40_4083438_-8961798_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NB_IL-40_4083438_-8961798_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Peoria_NEB_Water_4069124_-8958313_1_E.jpg": "placeholder",
@@ -502,9 +505,6 @@
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Arlington_Heights_@_Checker_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/Bonner_@_Darrell_(Wireless)_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Cedar_Lake_@_Monaville_(Cellular)_cctv_South_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Deep_Lake_@_Grass_Lake_(Wireless)_cctv_East_Leg.jpg": "frozen",
@@ -518,6 +518,13 @@
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Gilmer_@_Fremont_Center_(Wireless)_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Gilmer_@_Fremont_Center_(Wireless)_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Gilmer_@_Fremont_Center_(Wireless)_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Gilmer_@_Hawley_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Gilmer_@_Hawley_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Gilmer_@_Hawley_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Gilmer_@_Hawley_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Grass_Lake_@_Eagle_Way_(Wireless)_cctv_East_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Grass_Lake_@_Eagle_Way_(Wireless)_cctv_West_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/Hunt_Club_@_Millburn_(Wireless)_cctv_North_Leg.jpg": "placeholder",
@@ -549,6 +556,11 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "frozen",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_176_@_Gilmer_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_176_@_Gilmer_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_176_@_Gilmer_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_176_@_Gilmer_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_60_@_Fish_Lake_Rd_(Wireless)_cctv_South_Leg.jpg": "placeholder",
@@ -562,8 +574,6 @@
 "https://www.lakecountypassage.com/snapshots/US_12_@_Volo_Village_Rd_(Wireless)_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_12_@_Volo_Village_Rd_(Wireless)_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/US_12_@_Volo_Village_Rd_(Wireless)_cctv_South_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_12_@_Volo_Village_Rd_(Wireless)_cctv_West_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_45_@_IL_137_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/US_45_@_IL_137_cctv_West_Leg.jpg": "placeholder"
+"https://www.lakecountypassage.com/snapshots/US_12_@_Volo_Village_Rd_(Wireless)_cctv_West_Leg.jpg": "placeholder"
 }
 }
