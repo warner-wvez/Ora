@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-19T20:46:02Z",
+"checked_at": "2026-11-20T07:25:16Z",
 "cameras": 336,
 "counts": {
-"placeholder": 46
+"placeholder": 43
 },
 "status": {
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0023.jpg": "placeholder",
@@ -13,7 +13,6 @@
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0086.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0095.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0102.jpg": "placeholder",
-"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0118.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0119.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0200.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0217.jpg": "placeholder",
@@ -24,14 +23,12 @@
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0270.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0272.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0273.jpg": "placeholder",
-"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0275.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0311.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0320.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0322.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0323.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0324.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0325.jpg": "placeholder",
-"https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0328.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0331.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0333.jpg": "placeholder",
 "https://cctv.cdn.goakamai.org/SnapShot/320x240/TL-0335.jpg": "placeholder",
