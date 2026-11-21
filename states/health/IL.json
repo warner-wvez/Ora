@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-20T20:36:06Z",
+"checked_at": "2026-11-21T07:17:21Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 531,
+"placeholder": 534,
 "frozen": 25,
 "offline": 12
 },
@@ -556,6 +556,9 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "frozen",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Gilmer_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Gilmer_cctv_North_Leg.jpg": "placeholder",

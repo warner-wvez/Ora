@@ -1,6 +1,10 @@
 {
-"checked_at": "2026-11-20T20:50:36Z",
+"checked_at": "2026-11-21T07:31:38Z",
 "cameras": 719,
-"counts": {},
-"status": {}
+"counts": {
+"frozen": 1
+},
+"status": {
+"https://sd.cdn.iteris-atis.com/camera_images/CSDSFW/1/latest.jpg": "frozen"
+}
 }
