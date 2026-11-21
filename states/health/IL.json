@@ -1,5 +1,5 @@
 {
-"checked_at": "2026-11-21T07:17:21Z",
+"checked_at": "2026-11-21T19:28:17Z",
 "cameras": 3636,
 "counts": {
 "placeholder": 534,
@@ -514,6 +514,9 @@
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Diamond_Lake_@_Gilmer_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Diamond_Lake_@_Gilmer_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Diamond_Lake_@_Gilmer_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_South_Leg.jpg": "placeholder",
@@ -556,9 +559,6 @@
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_North_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_South_Leg.jpg": "frozen",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Deep_Lake_(Wireless)_cctv_West_Leg.jpg": "frozen",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_East_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_North_Leg.jpg": "placeholder",
-"https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_South_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_173_@_Savage_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Gilmer_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/IL_176_@_Gilmer_cctv_North_Leg.jpg": "placeholder",
