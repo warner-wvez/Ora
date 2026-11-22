@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-22T06:46:57Z",
+"checked_at": "2026-11-22T19:38:50Z",
 "cameras": 1271,
 "counts": {
 "frozen": 6,
-"placeholder": 16
+"placeholder": 14
 },
 "status": {
 "https://cocam.carsprogram.org/Cellular/001E00000CAM1POR-N.jpg": "frozen",
@@ -24,9 +24,7 @@
 "https://cocam.carsprogram.org/Snapshots/036E04915CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E27565CAM1MED.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W27590CAM1MED.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/070W28280CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/083N05425CAM1NEC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/085N20530CAM1NEC.flv.png": "placeholder",
-"https://cocam.carsprogram.org/Snapshots/470E01250CAM1MED.flv.png": "placeholder"
+"https://cocam.carsprogram.org/Snapshots/085N20530CAM1NEC.flv.png": "placeholder"
 }
 }

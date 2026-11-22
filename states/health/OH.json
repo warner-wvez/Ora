@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-22T07:09:44Z",
+"checked_at": "2026-11-22T20:00:36Z",
 "cameras": 1117,
 "counts": {
 "frozen": 18,
-"offline": 1
+"offline": 4
 },
 "status": {
 "https://itscameras.dot.state.oh.us/images/CLE/CCTV6074.jpg": "frozen",
@@ -11,14 +11,17 @@
 "https://itscameras.dot.state.oh.us/images/CMH/CMH081.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/CMH/I-70_at_Kelton_Ave.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/D09/SR-7_E_Huntington_Bridge.jpg": "frozen",
+"https://itscameras.dot.state.oh.us/images/Dayton/I-75_at_South_of_Dryden_Rd.jpg": "offline",
 "https://itscameras.dot.state.oh.us/images/artimis/CCTV042a.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3135.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/CMH/US_23_at_Campus_View_Blvd.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D05/D05-037.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D10/D10-004.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/Dayton/CCTV1126.jpg": "offline",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4169.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/CCTV4190.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Merwin_Ten_Mile.jpg": "frozen",
