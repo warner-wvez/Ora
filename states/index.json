@@ -25,7 +25,7 @@
  "UT": {
   "name": "Utah",
   "file": "states/UT.json",
-  "count": 2090,
+  "count": 2091,
   "center": [
    -111.7,
    39.9
@@ -60,7 +60,7 @@
  "NV": {
   "name": "Nevada",
   "file": "states/NV.json",
-  "count": 650,
+  "count": 649,
   "center": [
    -116.9,
    39.3
@@ -93,7 +93,7 @@
  "ID": {
   "name": "Idaho",
   "file": "states/ID.json",
-  "count": 455,
+  "count": 456,
   "center": [
    -114.5,
    44.4
@@ -126,7 +126,7 @@
  "AK": {
   "name": "Alaska",
   "file": "states/AK.json",
-  "count": 129,
+  "count": 169,
   "center": [
    -149.6,
    61.2
@@ -148,7 +148,7 @@
  "CO": {
   "name": "Colorado",
   "file": "states/CO.json",
-  "count": 995,
+  "count": 1001,
   "center": [
    -105.5,
    39.0
@@ -159,7 +159,7 @@
  "IA": {
   "name": "Iowa",
   "file": "states/IA.json",
-  "count": 860,
+  "count": 854,
   "center": [
    -93.5,
    42.0
@@ -192,7 +192,7 @@
  "KS": {
   "name": "Kansas",
   "file": "states/KS.json",
-  "count": 603,
+  "count": 612,
   "center": [
    -98.3,
    38.5
@@ -225,7 +225,7 @@
  "OR": {
   "name": "Oregon",
   "file": "states/OR.json",
-  "count": 1181,
+  "count": 1182,
   "center": [
    -120.5,
    44.0
@@ -247,7 +247,7 @@
  "OH": {
   "name": "Ohio",
   "file": "states/OH.json",
-  "count": 1117,
+  "count": 1123,
   "center": [
    -82.8,
    40.3
@@ -270,7 +270,7 @@
  "WA": {
   "name": "Washington",
   "file": "states/WA.json",
-  "count": 1525,
+  "count": 1527,
   "center": [
    -120.5,
    47.4
@@ -292,7 +292,7 @@
  "DE": {
   "name": "Delaware",
   "file": "states/DE.json",
-  "count": 372,
+  "count": 374,
   "center": [
    -75.45,
    39.1
@@ -315,7 +315,7 @@
  "TN": {
   "name": "Tennessee",
   "file": "states/TN.json",
-  "count": 673,
+  "count": 674,
   "center": [
    -86.3,
    35.8
@@ -370,7 +370,7 @@
  "SD": {
   "name": "South Dakota",
   "file": "states/SD.json",
-  "count": 178,
+  "count": 175,
   "center": [
    -100.3,
    44.4
@@ -381,7 +381,7 @@
  "AR": {
   "name": "Arkansas",
   "file": "states/AR.json",
-  "count": 529,
+  "count": 532,
   "center": [
    -92.4,
    34.8
@@ -403,7 +403,7 @@
  "WV": {
   "name": "West Virginia",
   "file": "states/WV.json",
-  "count": 132,
+  "count": 131,
   "center": [
    -80.4,
    38.8
