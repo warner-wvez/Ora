@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-22T19:36:10Z",
+"checked_at": "2026-11-23T07:34:06Z",
 "cameras": 678,
 "counts": {
-"placeholder": 89
+"placeholder": 90
 },
 "status": {
 "https://az511.com/map/Cctv/1010": "placeholder",
@@ -41,6 +41,7 @@
 "https://az511.com/map/Cctv/1450": "placeholder",
 "https://az511.com/map/Cctv/1470": "placeholder",
 "https://az511.com/map/Cctv/1473": "placeholder",
+"https://az511.com/map/Cctv/1475": "placeholder",
 "https://az511.com/map/Cctv/690": "placeholder",
 "https://az511.com/map/Cctv/712": "placeholder",
 "https://az511.com/map/Cctv/719": "placeholder",

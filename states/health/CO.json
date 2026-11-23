@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-22T19:38:50Z",
+"checked_at": "2026-11-23T07:35:58Z",
 "cameras": 1271,
 "counts": {
 "frozen": 6,
-"placeholder": 14
+"placeholder": 15
 },
 "status": {
 "https://cocam.carsprogram.org/Cellular/001E00000CAM1POR-N.jpg": "frozen",
@@ -21,6 +21,7 @@
 "https://cocam.carsprogram.org/Douglas/46_Linc_Chambers-cotripWest-DO-NOT-DELETE.jpg": "frozen",
 "https://cocam.carsprogram.org/Snapshots/009S08600CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/025N19940CAM1NWC.flv.png": "placeholder",
+"https://cocam.carsprogram.org/Snapshots/036E04715CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/036E04915CAM1RHS.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070E27565CAM1MED.flv.png": "placeholder",
 "https://cocam.carsprogram.org/Snapshots/070W27590CAM1MED.flv.png": "placeholder",

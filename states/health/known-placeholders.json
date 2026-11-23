@@ -6398,5 +6398,15 @@
   "sha": "15edd4eaa02194e3",
   "first_seen": "2026-11-22T20:08:09Z",
   "state": "WI"
+ },
+ "32475:3a04a3c7e5ba": {
+  "sha": "7d03f2968c61cfa6",
+  "first_seen": "2026-11-23T07:47:48Z",
+  "state": "ID"
+ },
+ "12274:8dfe65357ff8": {
+  "sha": "f7f47fd7e2825f31",
+  "first_seen": "2026-11-23T07:50:23Z",
+  "state": "LA"
  }
 }
