@@ -6433,5 +6433,20 @@
   "sha": "fdca90800c3ec2d7",
   "first_seen": "2026-11-24T10:22:53Z",
   "state": "WI"
+ },
+ "20485:1ea7ad68c25d": {
+  "sha": "493e9d25b97fd136",
+  "first_seen": "2026-11-24T22:48:51Z",
+  "state": "LA"
+ },
+ "39923:3b96ff840bd5": {
+  "sha": "c79d789d23e987a4",
+  "first_seen": "2026-11-24T23:02:42Z",
+  "state": "RI"
+ },
+ "64886:1cb0c094ad6e": {
+  "sha": "bb5d65f8462b5fd4",
+  "first_seen": "2026-11-24T23:07:43Z",
+  "state": "WI"
  }
 }
