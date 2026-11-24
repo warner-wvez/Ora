@@ -1,10 +1,6 @@
 {
-"checked_at": "2026-11-24T00:09:35Z",
+"checked_at": "2026-11-24T10:06:23Z",
 "cameras": 710,
-"counts": {
-"placeholder": 1
-},
-"status": {
-"https://public.carsprogram.org/cameras/IN/INDOT_79_41j6mZks_E8JmE2I.flv.png": "placeholder"
-}
+"counts": {},
+"status": {}
 }
