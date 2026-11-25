@@ -1,29 +1,15 @@
 {
-"checked_at": "2026-11-24T22:48:23Z",
+"checked_at": "2026-11-25T08:45:41Z",
 "cameras": 247,
 "counts": {
-"offline": 25
+"offline": 11
 },
 "status": {
 "https://www.trimarc.org/images/milestone/CCTV_02_KY911_0001.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_05_64_0054-1.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_05_65_1359.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_275_0020.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_275_0037.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_275_0048.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_275_0748.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_275_0762.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_275_0788.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_275_0812.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_275_0823.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_471_0006.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_471_0014.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_471_0023.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_471_0029.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_471_0045.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_06_71_0770.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_06_75_1725.jpg": "offline",
-"https://www.trimarc.org/images/milestone/CCTV_06_75_1847.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_06_75_1908.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_07_64_1095.jpg": "offline",
 "https://www.trimarc.org/images/milestone/CCTV_07_75_1120.jpg": "offline",

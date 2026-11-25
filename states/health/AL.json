@@ -1,11 +1,14 @@
 {
-"checked_at": "2026-11-24T22:24:38Z",
+"checked_at": "2026-11-25T08:28:31Z",
 "cameras": 650,
 "counts": {
-"placeholder": 14
+"placeholder": 17
 },
 "status": {
+"https://api.algotraffic.com/v4/Cameras/1083/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/12096/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/1248/snapshot.jpg": "placeholder",
+"https://api.algotraffic.com/v4/Cameras/2450/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/2459/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30848/snapshot.jpg": "placeholder",
 "https://api.algotraffic.com/v4/Cameras/30852/snapshot.jpg": "placeholder",

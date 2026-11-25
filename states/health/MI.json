@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-24T22:49:33Z",
+"checked_at": "2026-11-25T08:50:13Z",
 "cameras": 790,
 "counts": {
 "offline": 4,
-"placeholder": 90
+"placeholder": 89
 },
 "status": {
 "https://mdotjboss.state.mi.us/docs/drive/camfiles/rwis/2684.jpg": "offline",
@@ -16,6 +16,7 @@
 "https://micamerasimages.net/thumbs/internet_cam_026.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_031.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_036.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_041.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_045.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_046.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_047.flv.jpg": "placeholder",
@@ -25,19 +26,17 @@
 "https://micamerasimages.net/thumbs/internet_cam_070.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_072.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_073.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_075.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_077.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_082.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_084.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_092.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_098.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_112.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_119.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_142.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_144.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_145.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_151.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_156.flv.jpg": "placeholder",
-"https://micamerasimages.net/thumbs/internet_cam_168.flv.jpg": "placeholder",
+"https://micamerasimages.net/thumbs/internet_cam_173.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_182.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_188.flv.jpg": "placeholder",
 "https://micamerasimages.net/thumbs/internet_cam_199.flv.jpg": "placeholder",

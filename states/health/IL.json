@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-24T22:46:35Z",
+"checked_at": "2026-11-25T08:44:20Z",
 "cameras": 3636,
 "counts": {
 "placeholder": 538,
-"frozen": 49,
+"frozen": 50,
 "offline": 12
 },
 "status": {
@@ -317,6 +317,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_I-155_4060886_-8947769_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_I-155_4060886_-8947769_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_I-155_4060886_-8947769_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_I-74_4066878_-8957254_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_McClugage_4070651_-8946107_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_McClugage_4070651_-8946107_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Tazewell_NWB_McClugage_4070651_-8946107_1_S.jpg": "placeholder",
