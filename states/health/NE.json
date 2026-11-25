@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-25T08:54:45Z",
+"checked_at": "2026-11-25T22:01:57Z",
 "cameras": 1040,
 "counts": {
-"offline": 39
+"offline": 48
 },
 "status": {
 "https://dot511.nebraska.gov/images/vid-002680001-00.jpg": "offline",
@@ -11,9 +11,17 @@
 "https://dot511.nebraska.gov/images/vid-005020074-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005020074-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005020074-05.jpg": "offline",
-"https://dot511.nebraska.gov/images/vid-005026042-04.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080008-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-005080085-04.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-01.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-02.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-03.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-04.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-05.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-06.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-07.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-08.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-005080101-09.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006026125-01.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006026125-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006026125-05.jpg": "offline",
@@ -29,6 +37,7 @@
 "https://dot511.nebraska.gov/images/vid-006080193-05.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080193-07.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080206-01.jpg": "offline",
+"https://dot511.nebraska.gov/images/vid-006080206-02.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080206-05.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080222-03.jpg": "offline",
 "https://dot511.nebraska.gov/images/vid-006080227-01.jpg": "offline",

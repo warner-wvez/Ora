@@ -1,10 +1,10 @@
 {
-"checked_at": "2026-11-25T08:44:20Z",
+"checked_at": "2026-11-25T21:55:57Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 538,
+"placeholder": 539,
 "frozen": 50,
-"offline": 12
+"offline": 14
 },
 "status": {
 "https://cctv.travelmidwest.com/snapshots/IL-DUPAGECOUNTY_1_DuPage_EB_31st_4183209_-8795890_1_E.jpg": "placeholder",
@@ -197,6 +197,8 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_LaSalle_NWB_I-39_4136695_-8905979_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_LaSalle_SB_I-39_4135098_-8906390_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_LaSalle_SB_I-39_4135098_-8906390_1_S.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_LaSalle_SB_I-39_4150656_-8905131_1_N.jpg": "offline",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_LaSalle_SB_I-39_4150656_-8905131_1_S.jpg": "offline",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_LaSalle_SB_I-39_4158449_-8906125_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_LaSalle_SB_I-39_4158449_-8906125_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_3_LaSalle_WB_I-80_4137553_-8872710_1_E.jpg": "placeholder",
@@ -408,6 +410,7 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Coles_NB_I-57_3948515_-8832157_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Cumberland_SB_I-57_3935647_-8842158_1_N.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_NEB_I-57_3897473_-8862099_1_E.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_NWB_I-57_3909441_-8858167_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_SEB_I-57_3915053_-8850836_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_SWB_I-57_3913492_-8856316_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_7_Effingham_SWB_I-57_3919931_-8850204_1_E.jpg": "placeholder",
