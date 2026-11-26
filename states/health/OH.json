@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-25T22:04:23Z",
+"checked_at": "2026-11-26T08:37:28Z",
 "cameras": 1123,
 "counts": {
-"frozen": 17,
+"frozen": 18,
 "offline": 2
 },
 "status": {
@@ -15,6 +15,7 @@
 "https://itscameras.dot.state.oh.us/images/artimis/SR-125_Bach_Buxton.jpg": "frozen",
 "https://itscameras.dot.state.oh.us/images/artimis/SR-28_at_I-275_NB.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CLE/CCTV3135.jpg": "frozen",
+"https://itscameras.dot.state.oh.us:443/images/CLE/CCTV6085.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/CCTV2191.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/CMH/I-70 at MM 88.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/D03/D03-033.jpg": "frozen",
