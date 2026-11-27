@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-27T08:50:32Z",
+"checked_at": "2026-11-27T21:42:16Z",
 "cameras": 1123,
 "counts": {
-"frozen": 20,
+"frozen": 19,
 "offline": 1
 },
 "status": {
@@ -25,7 +25,6 @@
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Merwin_Ten_Mile.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Thriftway.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/artimis/SR-125_Waterford.jpg": "frozen",
-"https://itscameras.dot.state.oh.us:443/images/artimis/US-27_Redskin.jpg": "frozen",
 "https://itscameras.dot.state.oh.us:443/images/toledo/SR2-WB-EastSign.jpg": "offline"
 }
 }

@@ -1,9 +1,9 @@
 {
-"checked_at": "2026-11-27T08:41:45Z",
+"checked_at": "2026-11-27T21:32:13Z",
 "cameras": 3636,
 "counts": {
-"placeholder": 538,
-"frozen": 51,
+"placeholder": 542,
+"frozen": 54,
 "offline": 12
 },
 "status": {
@@ -154,7 +154,6 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Cook_WB_I-80_4157827_-8753297_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_EB_I-290_4190625_-8792395_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SEB_I-290_4194200_-8798801_1_NONE.jpg": "placeholder",
-"https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SWB_I-55_4174829_-8793456_1_NONE.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_DuPage_SWB_I-55_4175009_-8793150_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_EB_I-80_4151323_-8802721_1_NONE.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD1_1_Will_EB_I-80_4155053_-8781258_1_NONE.jpg": "placeholder",
@@ -210,6 +209,10 @@
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Fulton_NB_IL-78_4055711_-9002738_1_S.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Fulton_NB_IL-78_4055711_-9002738_1_W.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Fulton_NB_IL-97_4070591_-9015759_1_W.jpg": "placeholder",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_EB_US-150_4094741_-9035405_1_E.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_EB_US-150_4094741_-9035405_1_N.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_EB_US-150_4094741_-9035405_1_S.jpg": "frozen",
+"https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_EB_US-150_4094741_-9035405_1_W.jpg": "frozen",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_NB_IL-41_4093366_-9040282_1_E.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_NB_IL-41_4093366_-9040282_1_N.jpg": "placeholder",
 "https://cctv.travelmidwest.com/snapshots/IL-IDOTD4_4_Knox_NB_IL-41_4093366_-9040282_1_S.jpg": "placeholder",
@@ -544,6 +547,10 @@
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Delany_@_Sunset_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Fairfield_@_Nippersink_cctv_East_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Fairfield_@_Nippersink_cctv_North_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Fairfield_@_Nippersink_cctv_South_Leg.jpg": "placeholder",
+"https://www.lakecountypassage.com/snapshots/Fairfield_@_Nippersink_cctv_West_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_East_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_North_Leg.jpg": "placeholder",
 "https://www.lakecountypassage.com/snapshots/Gages_Lake_@_Hunt_Club_cctv_South_Leg.jpg": "placeholder",
