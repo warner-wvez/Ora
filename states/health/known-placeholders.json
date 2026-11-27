@@ -6493,5 +6493,25 @@
   "sha": "6e90a7f018fed1f2",
   "first_seen": "2026-11-26T22:02:11Z",
   "state": "WI"
+ },
+ "5342:6fa42b502cb3": {
+  "sha": "44114e94dfa4b1d4",
+  "first_seen": "2026-11-27T08:23:57Z",
+  "state": "AK"
+ },
+ "32241:aa8270a3b1d9": {
+  "sha": "352798fb58c5a593",
+  "first_seen": "2026-11-27T08:40:36Z",
+  "state": "ID"
+ },
+ "32239:aa8270a3b1d9": {
+  "sha": "b816349e6b7c3e5e",
+  "first_seen": "2026-11-27T08:40:36Z",
+  "state": "ID"
+ },
+ "12345:cb867b1bdfa4": {
+  "sha": "14cfbad1ceeb2f3c",
+  "first_seen": "2026-11-27T08:42:47Z",
+  "state": "LA"
  }
 }

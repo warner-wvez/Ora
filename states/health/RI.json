@@ -1,14 +1,16 @@
 {
-"checked_at": "2026-11-26T21:59:11Z",
+"checked_at": "2026-11-27T08:54:47Z",
 "cameras": 135,
 "counts": {
 "frozen": 7,
 "offline": 4,
-"placeholder": 5
+"placeholder": 8
 },
 "status": {
+"https://www.dot.ri.gov/img/travel/camimages/1-03%20Rt%201%20N%20%40%20Rt%20403%20Devils%20Foot%20Road.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/1-04%20Rt%201%20N%20%40%20Rt%20138%20North%20Kingstown.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/138_32.9_W_CAM%20Admiral%20Kalbfus%20at%20Halsey%20St.jpg": "placeholder",
+"https://www.dot.ri.gov/img/travel/camimages/146_05.6_N_CAM%20Exit%206%20-%20Sherman%20Ave.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/195-0%20I-195%20E%20%40%20Point%20St.jpg": "frozen",
 "https://www.dot.ri.gov/img/travel/camimages/195-1%20I-195%20W%20Split%20%40%20I-95.jpg": "frozen",
 "https://www.dot.ri.gov/img/travel/camimages/195-2%20I-195%20E%20%40%20India%20St.jpg": "frozen",
@@ -19,6 +21,7 @@
 "https://www.dot.ri.gov/img/travel/camimages/295_01.2_M_CAM%20Exit%201B%20-%20Rt%202.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/295_16.2_S_CAM%20Rt%20116.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/4_04.6_S_CAM%20Exit%205%20-%20Rt%20102%20DMS.jpg": "offline",
+"https://www.dot.ri.gov/img/travel/camimages/95_17.0_M_CAM%20-%20Weaver%20Hill%20Rd.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/95_28.8_S_CAM%20-%20Greenwich%20Ave.jpg": "placeholder",
 "https://www.dot.ri.gov/img/travel/camimages/95_34.4_S_CAM%20-%20Detriot%20Ave.jpg": "offline",
 "https://www.dot.ri.gov/img/travel/camimages/95_42.0_S_CAM%20-%20Central%20Ave.jpg": "offline",
