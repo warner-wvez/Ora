@@ -1,8 +1,8 @@
 {
-"checked_at": "2026-11-27T21:29:48Z",
+"checked_at": "2026-11-28T07:58:20Z",
 "cameras": 1251,
 "counts": {
-"offline": 137
+"offline": 135
 },
 "status": {
 "https://atmsqf.iowadot.gov/SNAPSHOTS/PUBLIC/Metro/80TV196hd.jpeg": "offline",
@@ -79,10 +79,8 @@
 "https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80EB19-01-CENTER.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80EB19-01-ENTRY.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80EB19-01-EXIT.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80WB148-01-CENTER.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80WB148-01-ENTRY.jpg": "offline",
-"https://atmsqf.iowadot.gov/snapshots/Public/RestAreas/RA80WB148-01-EXIT.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/Rural/D1TV13.jpg": "offline",
+"https://atmsqf.iowadot.gov/snapshots/Public/Rural/D3TV01Q.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/WWD/WWD47MIC.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/WWD/WWDDMTT01.jpg": "offline",
 "https://atmsqf.iowadot.gov/snapshots/Public/WWD/WWDDMTT02.jpg": "offline",
